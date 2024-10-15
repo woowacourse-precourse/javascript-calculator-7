@@ -31,6 +31,8 @@
 - 과제 진행 요구 사항, 기능 요구 사항, 프로그래밍 요구 사항 만족시키기
 - 기능 요구 사항에 기재되지 않은 내용은 스스로 판단하여 구현
 - Git 커밋 단위 목록은 기능 단위이며, [AngularJS Git Commit Message Convention](https://gist.github.com/stephenparish/9941e89d80e2bc58a153) 참고한다.
+- @woowacourse/mission-utils에서 제공하는 Console API를 사용하여 구현해야 한다.
+  - 사용자의 값을 입력 및 출력하려면 `Console.readLineAsync()`와 `Console.print()`를 활용한다.
 
 ### 제출 전 체크리스트
 
