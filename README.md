@@ -1,1 +1,25 @@
-# javascript-calculator-precourse
+# 🚀week1_javascript-calculator🚀
+
+## 📝기능 명세서
+
+### 📌 feat1. **사용자** 입력 받기
+
+- Console로 사용자 입력값 받기
+  - 빈 str 입력이면 바로 0 반환
+- 입력값 검증
+  - Error Case1\_ 문자열 맨 앞 값이 숫자 or //이 아닌 경우
+
+### 📌 feat2. 구분자 추출
+
+- Case1\_ 문자열이 '//'로 시작하는 경우
+  - 커스텀 구분자 ('//', '\n' 사이 str) 추출해 저장
+- Case2\_ 그외
+  - 구분자는 : or , 로 저장
+- Error Case2\_ 저장한 구분자와 숫자(양수)외 다른 값이 포함된 경우
+
+### 📌 feat3. 숫자 더하기
+
+- 구분자 기준 숫자 추출
+- 숫자 더해 반환
+
+> Error Case 들은 메세지 출력 후 종료
