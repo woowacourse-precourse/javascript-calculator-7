@@ -2,6 +2,7 @@ import { Console } from "@woowacourse/mission-utils";
 
 class App {
   defaultSeparator = ",;";
+  customSeparatorRegExr = /\/\/.+\\n/;
   async run() {
     const userInput = await this.getUserInput();
     const separator = this.getSeparator(userInput);
@@ -10,8 +11,7 @@ class App {
     return await Console.readLineAsync("문자열을 입력해주세요.");
   }
   getSeparator(str) {
-    const customSeparatorRegExr = /\/\/.+\\n/;
-    const customSeparatorMatchedString = str.match(customSeparatorRegExr);
+    const customSeparatorMatchedString = str.match(this.customSeparatorRegExr);
     if (
       customSeparatorMatchedString &&
       customSeparatorMatchedString.index === 0
