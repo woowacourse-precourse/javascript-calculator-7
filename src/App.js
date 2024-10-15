@@ -37,6 +37,7 @@ class App {
       Console.print(sum);
     } catch (error) {
       Console.print(error.message);
+      throw error;
     }
   }
 }
