@@ -1,9 +1,11 @@
-import InputView from "./view/inputView.js";
+import StringSumCalController from "./controller/StringSumCalController.js";
 
 class App {
+  constructor() {
+    this.controller = new StringSumCalController();
+  }
   async run() {
-    const inputView = new InputView();
-    inputView.getInputText();
+    await this.controller.getDelimeterType();
   }
 }
 
