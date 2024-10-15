@@ -6,14 +6,16 @@ class App {
   async run() {
     const userInput = await this.getUserInput();
     const separator = this.getSeparator(userInput);
+    const separatorRegExp = this.getSeparatorRegExp(separator);
 
     let separatedUserInput;
     if (this.customSeparatorRegExr.test(userInput))
       separatedUserInput = this.getSeparatedString(
         userInput.split(this.customSeparatorRegExr)[1],
-        separator
+        separatorRegExp
       );
-    else separatedUserInput = this.getSeparatedString(userInput, separator);
+    else
+      separatedUserInput = this.getSeparatedString(userInput, separatorRegExp);
 
     const separatedUserInputsNumberArray = separatedUserInput.map((it) =>
       Number(it)
@@ -35,6 +37,9 @@ class App {
       return customSeparatorMatchedString[0].slice(2, -2);
 
     return this.defaultSeparator;
+  }
+  getSeparatorRegExp(separator) {
+    return new RegExp(`[${separator}]`);
   }
   getSeparatedString(str, separator) {
     return str.split(separator);
