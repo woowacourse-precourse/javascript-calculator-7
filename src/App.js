@@ -15,7 +15,7 @@ class App {
       const nums = splited.map(Number);
 
       const addRes = this.add(nums);
-      Console.print(addRes);
+      Console.print(`결과 : ${addRes}`);
     } catch (error) {
       // Todo... error 처리
       // console.error(error);
