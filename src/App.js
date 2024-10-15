@@ -11,6 +11,7 @@ class App {
     await this.input();
     this.analysis(this.str);
     const arr = this.stringSpliter(this.str, this.seperator);
+    this.output(arr);
   }
 
   async input() {
@@ -34,6 +35,11 @@ class App {
     const filterArr = str.split(regexp).filter((item) => item.length);
 
     return filterArr;
+  }
+
+  output(value) {
+    const answer = value.reduce((prev, cur) => prev + Number(cur), 0);
+    Console.print(RESULT_PREFIX + answer);
   }
 }
 
