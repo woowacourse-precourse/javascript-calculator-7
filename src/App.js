@@ -6,6 +6,14 @@ class App {
   async run() {
     const userInput = await this.getUserInput();
     const separator = this.getSeparator(userInput);
+
+    let separatedUserInput;
+    if (this.customSeparatorRegExr.test(userInput))
+      separatedUserInput = this.getSeparatedString(
+        userInput.split(this.customSeparatorRegExr)[1],
+        separator
+      );
+    else separatedUserInput = this.getSeparatedString(userInput, separator);
   }
   async getUserInput() {
     return await Console.readLineAsync("문자열을 입력해주세요.");
