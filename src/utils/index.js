@@ -1,4 +1,4 @@
-import { CUSTOM_SEPARATOR, MESSAGES } from "../constants/index.js";
+import { CUSTOM_SEPARATOR } from "../constants/index.js";
 
 const DIGIT_REGEXP = /[0-9]/;
 
@@ -18,12 +18,5 @@ export const getCustomSeparator = (customString) => {
   }
 
   const matches = customString.matchAll(CUSTOM_SEPARATOR);
-  const results = Array.from(matches, (match) => match[1]);
-
-  // 커스텀 문자열이 있는데 형식이 맞지 않다면 예외 처리
-  if (results.length === 0) {
-    throw new Error(MESSAGES.INVALID_CUSTOM_SEPARATOR);
-  }
-
-  return results;
+  return Array.from(matches, (match) => match[1]);
 };
