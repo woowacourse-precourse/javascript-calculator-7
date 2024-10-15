@@ -18,6 +18,10 @@ class App {
     const separatedUserInputsNumberArray = separatedUserInput.map((it) =>
       Number(it)
     );
+
+    const sumOfUserInput = this.getSum(separatedUserInputsNumberArray);
+
+    Console.print(`결과 : ${sumOfUserInput}`);
   }
   async getUserInput() {
     return await Console.readLineAsync("문자열을 입력해주세요.");
