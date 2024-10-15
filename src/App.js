@@ -1,5 +1,12 @@
 import { Console } from "@woowacourse/mission-utils";
 
+// 에러 메세지 태그 자동화 클래스
+class ValidationError extends Error {
+  constructor(message) {
+    super(`[ERROR] ${message}`); // [ERROR]를 메시지 앞에 자동으로 추가
+  }
+}
+
 class App {
   async run() {
     try {
@@ -35,7 +42,7 @@ class App {
     // 4번 기능: 음수가 포함된 경우 에러를 발생
     const negatives = numbers.filter((num) => num < 0);
     if (negatives.length > 0) {
-      throw new Error("[ERROR] 음수는 입력할 수 없습니다");
+      throw new ValidationError("음수는 입력할 수 없습니다.");
     }
 
     return numbers.reduce((acc, current) => acc + current, 0); // reduce 메서드를 이용해 숫자 합산
