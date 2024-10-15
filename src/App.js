@@ -31,6 +31,9 @@ class App {
   getSeparatedString(str, separator) {
     return str.split(separator);
   }
+  getSum(numberArray) {
+    return numberArray.reduce((prev, cur) => prev + cur, 0);
+  }
 }
 
 export default App;
