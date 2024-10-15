@@ -13,7 +13,8 @@
 ## 테스트 실행 가이드
 - 터미널에서 node --version 을 실행하여 Node.js 버전이 20.17.0 이상인지 확인한다.
 - 아래 명령을 입력하여 패키지를 설치한 후 실행하는 데 문제가 없어야 한다.
-```npm install
+```
+npm install
 npm run test
 npm run start
 ```
