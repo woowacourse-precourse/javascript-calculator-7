@@ -1,9 +1,9 @@
 import { Console } from "@woowacourse/mission-utils";
-import { GAME_MESSAGE } from "./constants/message.js";
+import { PROMT_MESSAGE } from "./constants/message.js";
 
 export default class Input {
   async getUserInput() {
-    Console.print(GAME_MESSAGE.inputPrompt);
+    Console.print(PROMT_MESSAGE.inputPrompt);
     const userInput = await Console.readLineAsync("");
 
     return userInput;

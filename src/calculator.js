@@ -1,5 +1,5 @@
 import { Console } from "@woowacourse/mission-utils";
-import { GAME_MESSAGE, ERROR_MESSAGE } from "./constants/message.js";
+import { PROMT_MESSAGE, ERROR_MESSAGE } from "./constants/message.js";
 
 export default class Calculator {
   constructor(input) {
@@ -8,19 +8,20 @@ export default class Calculator {
   }
 
   calculate() {
+    this.checkInputValidation();
     const nums = this.parseNumber();
-    Console.print(`${GAME_MESSAGE.result} ${nums.reduce((a, c) => a + c)}`);
+    Console.print(`${PROMT_MESSAGE.result} ${nums.reduce((a, c) => a + c)}`);
   }
 
   parseNumber() {
-    this.checkInputValidation();
-    const separatorReg = new RegExp(`[${this.separator.join("")}]`);
+    const separatorReg = this.createSeparatorRegEx();
     return this.inputString.split(separatorReg).map(Number);
   }
 
   checkInputValidation() {
     this.validateCustomSeparator();
     this.validateAllowedChars();
+    this.validateSeparatorUsage();
   }
 
   validateCustomSeparator() {
@@ -57,5 +58,28 @@ export default class Calculator {
     if (!validCharactersRegEx.test(this.inputString)) {
       throw new Error(ERROR_MESSAGE.invalidInput);
     }
+  }
+
+  // separator가 연속적으로 오는지, separator로 끝나지는 않는지 확인
+  validateSeparatorUsage() {
+    const separatorReg = this.createSeparatorRegEx();
+    const tokens = this.inputString.split(separatorReg);
+
+    // separator로 끝나는지 확인
+    const isEndingWithSeparator = tokens[tokens.length - 1] === "";
+    if (isEndingWithSeparator) {
+      throw new Error(ERROR_MESSAGE.endsWithSeparator);
+    }
+
+    // separator가 연속적으로 오는지 확인
+    const hasConsecutiveSeparators = tokens.filter((v) => v === "").length > 0;
+    if (hasConsecutiveSeparators) {
+      throw new Error(ERROR_MESSAGE.consecutiveSeparators);
+    }
+  }
+
+  createSeparatorRegEx() {
+    // separator 배열을 기반으로 정규식을 생성하는 함수
+    return new RegExp(`[${this.separator.join("")}]`);
   }
 }
