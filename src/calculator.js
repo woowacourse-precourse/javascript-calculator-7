@@ -1,5 +1,5 @@
 import { Console } from "@woowacourse/mission-utils";
-import { ERROR_MESSAGE } from "./constants/message.js";
+import { GAME_MESSAGE, ERROR_MESSAGE } from "./constants/message.js";
 
 export default class Calculator {
   constructor(input) {
@@ -7,7 +7,12 @@ export default class Calculator {
     this.separator = [",", ":"];
   }
 
-  async parseNumber() {
+  calculate() {
+    const nums = this.parseNumber();
+    Console.print(`${GAME_MESSAGE.result} ${nums.reduce((a, c) => a + c)}`);
+  }
+
+  parseNumber() {
     this.checkInputValidation();
 
     let separatorReg = new RegExp(`[${this.separator.join("")}]`);

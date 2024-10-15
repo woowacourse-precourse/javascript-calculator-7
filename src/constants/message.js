@@ -1,6 +1,6 @@
 export const GAME_MESSAGE = Object.freeze({
   inputPrompt: "덧셈할 문자열을 입력해 주세요.",
-  result: "결과: ",
+  result: "결과 :",
 });
 
 export const ERROR_MESSAGE = Object.freeze({

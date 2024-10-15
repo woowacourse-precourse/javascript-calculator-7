@@ -9,7 +9,7 @@ class App {
   async run() {
     const input = await this.userInput.getUserInput();
     const calculator = new Calculator(input);
-    calculator.parseNumber();
+    calculator.calculate();
   }
 }
 
