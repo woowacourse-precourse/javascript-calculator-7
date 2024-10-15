@@ -11,9 +11,10 @@ class App {
     const STR = await this.readLine('덧셈할 문자열을 입력해 주세요.\n');
     // 2. 입력받은 문자열을 처리한다.
     this.processString(STR);
-    // this.printResult(this.numbers); // 테스트용
     // 3. 배열의 숫자를 모두 더해 반환한다.
+    const RESULT = this.numbers.reduce((sum, cur) => sum + cur, 0);
     // 4. 반환된 숫자를 출력한다.
+    this.printResult(`결과 : ${RESULT}`);
   }
 
   /**
@@ -100,7 +101,7 @@ class App {
   checkValidNumber() {
     this.numbers.forEach(number => {
       if (number <= 0 || !number) this.throwError(); // 양수가 아니거나 NaN인 경우 throw
-    })
+    });
   }
 
   /**
