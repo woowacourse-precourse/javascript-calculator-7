@@ -13,6 +13,9 @@ class App {
       this.seperators
     );
     const validInputArray = this.validateInput(processedInput);
+
+    const sum = this.sumAll(validInputArray);
+    this.print(`결과 : ${sum}`);
   }
 
   async read(input) {
@@ -74,6 +77,16 @@ class App {
     }
 
     return inputArray;
+  }
+
+  sumAll(inputArray) {
+    let sum = 0;
+
+    for (let num of inputArray) {
+      sum += num;
+    }
+
+    return sum;
   }
 }
 
