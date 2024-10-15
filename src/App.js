@@ -39,6 +39,12 @@ class App {
       numbers = input.split(/[,|:]/).map(Number); // 쉼표 또는 콜론을 기준으로 분리 후 숫자들을 numbers 배열로 변환
     }
 
+    // 5번 기능: 숫자가 아닌 값이 포함된 경우 에러 발생
+    const invalidValues = numbers.filter((num) => isNaN(num)); // isNaN 함수로 숫자가 아닌 값이 있는지 확인후 필터링
+    if (invalidValues.length > 0) {
+      throw new ValidationError("숫자가 아닌 값이 포함되어 있습니다.");
+    }
+
     // 4번 기능: 음수가 포함된 경우 에러를 발생
     const negatives = numbers.filter((num) => num < 0);
     if (negatives.length > 0) {
