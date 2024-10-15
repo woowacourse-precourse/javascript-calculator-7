@@ -1,13 +1,20 @@
 import {Console} from "@woowacourse/mission-utils";
 
 class App {
-  inputValue = ""
-  async run() {
-    this.inputValue = this.input()
-
+  sum = 0
+  async run() { //풀이 결과 반환 담당
+    const input = await Console.readLineAsync("덧셈할 문자열을 입력해 주세요.\n")
+    this.calculator([...input])
   }
-  input(){
-    return Console.readLineAsync("덧셈할 문자열을 입력해 주세요.\n")
+
+  isSeparator(value){//구분자 판단
+    return value === "," || ";" ? 0 : value
+  }
+
+  calculator(arr){ //계산 담당
+    for (const element of arr) {
+      this.sum += this.isSeparator(element)
+    }
   }
 
 }
