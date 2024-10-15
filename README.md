@@ -288,7 +288,7 @@ const regex = new RegExp(/^\/\/([^0-9\n]+)\n/gm);
 <details open>
 <summary>자세히 보기</summary>
 
-- [ ] 유저 입력 받기
+- [x] 유저 입력 받기
 
 - [ ] 입력 받은 문자열에서 커스텀 구분자 파싱하기
 
