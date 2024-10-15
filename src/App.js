@@ -21,6 +21,10 @@ class App {
     this.#plusResult = this.#plusNumberArray.reduce((acc, curr) => acc + curr);
   }
 
+  printPlusResult() {
+    Console.print(`결과 : ${this.#plusResult}`);
+  }
+
   isContainBasicSeparator(partString) {
     if (partString === "," || partString === ":") {
       return true;
@@ -52,6 +56,7 @@ class App {
     this.splitPlusString();
     Console.print(this.#plusNumberArray);
     this.generatePlusResult();
+    this.printPlusResult();
   }
 }
 

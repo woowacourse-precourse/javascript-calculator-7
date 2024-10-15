@@ -22,8 +22,8 @@
 
 ### 출력 부분(outputView)
 
-- [] `결과 : ${숫자}` 문구를 출력한다.
-  - [] @woowacourse/mission-urils에서 제공하는 Console.print()를 사용한다.
+- [x] `결과 : ${숫자}` 문구를 출력한다.
+  - [x] @woowacourse/mission-urils에서 제공하는 Console.print()를 사용한다.
 
 ## 예외 처리
 
