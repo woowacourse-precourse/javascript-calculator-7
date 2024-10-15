@@ -1,6 +1,6 @@
 import { Console } from "@woowacourse/mission-utils";
 import { MESSAGES, DEFAULT_SEPARATORS } from "./constants/index.js";
-import { parseUserInput, getCustomSeparator, isAllPositive } from "./utils/index.js";
+import { parseUserInput, extractCustomSeparators, isAllPositive } from "./utils/index.js";
 
 class App {
   async run() {
@@ -13,7 +13,7 @@ class App {
       const { customString, numberString } = parseUserInput(userInputString);
 
       // 커스텀 문자열을 기준으로 커스텀 구분자를 추출한다.
-      const customSeparators = getCustomSeparator(customString);
+      const customSeparators = extractCustomSeparators(customString);
 
       // 커스텀 문자열이 있는데 형식에 맞지 않다면 예외 처리
       if (customString !== "" && customSeparators.length === 0) {

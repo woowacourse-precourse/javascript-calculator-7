@@ -11,7 +11,7 @@ export const parseUserInput = (userInput) => {
   return { customString, numberString };
 };
 
-export const getCustomSeparator = (customString) => {
+export const extractCustomSeparators = (customString) => {
   // 커스텀 문자열이 없다면 빈 배열 early return
   if (customString === "") {
     return [];
