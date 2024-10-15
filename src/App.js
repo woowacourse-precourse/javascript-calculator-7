@@ -1,5 +1,9 @@
+import Calculator from "./controller/Calculator";
+
 class App {
-  async run() {}
+  constructor() {
+    this.calculator = new Calculator();
+  }
 }
 
 export default App;
