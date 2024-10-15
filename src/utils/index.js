@@ -12,7 +12,7 @@ export const parseUserInput = (userInput) => {
 };
 
 export const getCustomSeparator = (customString) => {
-  // 커스텀 문자열이 없다면 early return
+  // 커스텀 문자열이 없다면 빈 배열 early return
   if (customString === "") {
     return [];
   }
