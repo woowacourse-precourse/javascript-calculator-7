@@ -18,7 +18,22 @@ class StringCalculator {
 
   // 문자열을 숫자로 변환하는 메서드
   parseNumbers(numberStrings) {
-    return numberStrings.map((number) => parseInt(number, 10));
+    return numberStrings.map((number) => {
+      const parsedNumber = parseInt(number, 10);
+
+      // 숫자가 아닌 값이 포함되어 있는 경우
+      if (isNaN(parsedNumber)) {
+        throw new Error(
+          `[ERROR] 숫자가 아닌 값이 포함되어 있습니다: ${number}`
+        );
+      }
+      // 음수가 포함되어 있는 경우
+      if (parsedNumber < 0) {
+        throw new Error(`[ERROR] 음수는 허용되지 않습니다: ${parsedNumber}`);
+      }
+
+      return parsedNumber;
+    });
   }
 
   // 커스텀 구분자를 포함한 모든 구분자 파싱 메서드

@@ -61,4 +61,34 @@ describe("문자열 계산기", () => {
       expect(logSpy).toHaveBeenCalledWith(expect.stringContaining(output));
     });
   });
+
+  test("숫자가 아닌 값이 포함된 경우", async () => {
+    const inputs = ["1,2,3,a"];
+    mockQuestions(inputs);
+
+    const logSpy = getLogSpy();
+    const outputs = ["[ERROR] 숫자가 아닌 값이 포함되어 있습니다: a"];
+
+    const app = new App();
+    await app.run();
+
+    outputs.forEach((output) => {
+      expect(logSpy).toHaveBeenCalledWith(expect.stringContaining(output));
+    });
+  });
+
+  test("음수가 포함된 경우", async () => {
+    const inputs = ["1,2,-3"];
+    mockQuestions(inputs);
+
+    const logSpy = getLogSpy();
+    const outputs = ["[ERROR] 음수는 허용되지 않습니다: -3"];
+
+    const app = new App();
+    await app.run();
+
+    outputs.forEach((output) => {
+      expect(logSpy).toHaveBeenCalledWith(expect.stringContaining(output));
+    });
+  });
 });
