@@ -8,4 +8,27 @@ const isPositiveNumber = (arr) => {
 }
 
 
+async function getUserNumbers(){
 
+    try{
+        const userInput = await Console.readLineAsync(INPUT_PROMPT);
+        let userInputArray = userInput.split(/[,:]/);
+        
+        const isValid = isPositiveNumber(userInputArray);
+        Console.print(userInputArray);
+
+
+        if(!isValid){
+            throw new Error('[ERROR]: 입력한 숫자가 양수가 아닙니다.');
+        }
+        return userInputArray.map(Number);
+
+    }
+    catch (e) {
+        Console.print(e.message);
+    }
+
+
+}
+
+getUserNumbers();
