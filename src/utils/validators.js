@@ -3,6 +3,8 @@ const NUMBER_AND_SEPARATOR_REGEX = /^-?\d+([,:]|-?\d+)*$/;
 
 const Validators = {
     validateInput(input) {
+        input = input.replace('\\n', '\n');
+
         // 1. 빈 입력 검사
         if (input.trim() === '') {
             throw new Error('입력값이 비어 있습니다.');
