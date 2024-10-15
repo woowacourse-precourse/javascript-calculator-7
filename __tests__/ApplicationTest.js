@@ -17,6 +17,21 @@ const getLogSpy = () => {
 };
 
 describe("문자열 계산기", () => {
+  test("빈 문자열 입력", async () => {
+    const inputs = [""];
+    mockQuestions(inputs);
+
+    const logSpy = getLogSpy();
+    const outputs = ["결과: 0"];
+
+    const app = new App();
+    await app.run();
+
+    outputs.forEach((output) => {
+      expect(logSpy).toHaveBeenCalledWith(expect.stringContaining(output));
+    });
+  });
+
   test("단일 숫자 입력", async () => {
     const inputs = ["5"];
     mockQuestions(inputs);
