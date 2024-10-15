@@ -20,6 +20,9 @@ class App {
 
     return this.defaultSeparator;
   }
+  getSeparatedString(str, separator) {
+    return str.split(separator);
+  }
 }
 
 export default App;
