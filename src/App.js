@@ -4,17 +4,22 @@ class App {
   #plusString;
   #plusNumberArray;
   #plusResult;
+  #customSeparator;
 
   constructor() {
     this.#plusString = "";
     this.#plusNumberArray = [];
+    this.#customSeparator = [];
   }
 
-  async generatePlusString() {
+  async printPlusString() {
     const plusString = await Console.readLineAsync(
       "덧셈할 문자열을 입력해 주세요.\n"
     );
     this.#plusString = plusString;
+  }
+  printPlusResult() {
+    Console.print(`결과 : ${this.#plusResult}`);
   }
 
   generateArrayPlusResult() {
@@ -25,8 +30,10 @@ class App {
     this.#plusResult = 0;
   }
 
-  printPlusResult() {
-    Console.print(`결과 : ${this.#plusResult}`);
+  generateCustomSeparator(partString) {
+    if (typeof partString !== Number) {
+      this.#customSeparator.push(partString);
+    }
   }
 
   isEmptyPlusString() {
@@ -43,6 +50,20 @@ class App {
     return false;
   }
 
+  isGenerateCustomSeparator(index) {
+    if (
+      this.#plusString[index] === "/" &&
+      this.#plusString[index + 1] === "/" &&
+      this.#plusString[index + 3] === "\\" &&
+      this.#plusString[index + 4] === "n"
+    ) {
+      return true;
+    }
+    return false;
+  }
+
+  isContainCustomSeparator() {}
+
   pushPlusNumberArray(tmpPlusNumber) {
     this.#plusNumberArray.push(Number(tmpPlusNumber));
   }
@@ -50,6 +71,13 @@ class App {
   splitPlusString() {
     let tmpPlusNumber = "";
     for (let i = 0; i < this.#plusString.length; i++) {
+      if (this.isGenerateCustomSeparator(i)) {
+        this.generateCustomSeparator(this.#plusString[i + 2]);
+        i += 4;
+        continue;
+      }
+      if (this.isContainCustomSeparator()) {
+      }
       if (this.isContainBasicSeparator(this.#plusString[i])) {
         this.pushPlusNumberArray(tmpPlusNumber);
         tmpPlusNumber = "";
@@ -68,11 +96,12 @@ class App {
     } else {
       this.splitPlusString();
       Console.print(this.#plusNumberArray);
+      Console.print(this.#customSeparator);
       this.generateArrayPlusResult();
     }
   }
   async run() {
-    await this.generatePlusString();
+    await this.printPlusString();
     this.generatePlusResult();
     this.printPlusResult();
   }
