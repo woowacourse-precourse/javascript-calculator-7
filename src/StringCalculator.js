@@ -23,7 +23,7 @@ class StringCalculator {
 
   // ,와 :를 구분자로 사용하여 숫자 배열을 반환하는 메서드
   parseDelimiter(input) {
-    return input.split(",").map((item) => item.trim());
+    return input.split(/[,:]/).map((item) => item.trim());
   }
 
   // 숫자 배열을 받아 합을 구하는 메서드
