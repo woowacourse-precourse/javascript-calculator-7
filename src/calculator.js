@@ -1,20 +1,38 @@
+import { ERROR_MESSAGE } from "./constants/message.js";
+
 export default class Calculator {
   constructor(input) {
     this.inputString = input;
+    this.separator = [",", ":"];
   }
 
   async parseNumber() {
-    // 커스텀 구분자 확인
-    let customSeparator = "";
-    const regex = /^\/\/.*\\n$/;
+    this.checkInputValidation(this.inputString);
 
-    if (regex.test(this.inputString.toString().slice(0, 5))) {
-      customSeparator = this.inputString[2];
-      this.inputString = this.inputString.substring(5);
-    }
-
-    let separatorReg = new RegExp(`[,:${customSeparator}]`);
+    let separatorReg = new RegExp(`[${this.separator.join("")}]`);
 
     return this.inputString.split(separatorReg).map(Number);
   }
+
+  checkInputValidation(input) {
+    this.validateCustomSeparator(input);
+  }
+
+  validateCustomSeparator(input) {
+    if (input.startsWith("//")) {
+      const separatorEndIndex = input.indexOf("\\n");
+
+      if (separatorEndIndex === -1) {
+        throw new Error(ERROR_MESSAGE.invalidCustomSeparator);
+      }
+      const customSeparator = input.substring(2, separatorEndIndex);
+      if (customSeparator.length === 0) {
+        throw new Error(ERROR_MESSAGE.invalidCustomSeparator);
+      }
+      this.separator.push(customSeparator);
+      this.inputString = input.substring(separatorEndIndex + 2);
+    }
+  }
+  validateCharIncluded(input) {}
+  validateSeparatorInSeries(input) {}
 }
