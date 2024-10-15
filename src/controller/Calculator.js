@@ -9,7 +9,7 @@ class Calculator {
   }
 
   start() {
-    this.printMessage(GAME_MESSAGE.START);
+    this.user.readAnswer();
   }
 
   printMessage(message) {
