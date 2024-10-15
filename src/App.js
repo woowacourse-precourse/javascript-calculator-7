@@ -43,7 +43,10 @@ class App {
         throw new Error("[ERROR] 커스텀 구분자의 길이는 0일 수 없습니다.");
       }
 
-      this.seperators.unshift(customSeperator);
+      this.seperators.unshift(
+        CUSTOM_SEPERATOR_START + customSeperator + CUSTOM_SEPERATOR_END,
+        customSeperator
+      );
     }
   }
 
