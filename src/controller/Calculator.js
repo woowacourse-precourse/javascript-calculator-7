@@ -1,6 +1,5 @@
-import { Console } from "@woowacourse/mission-utils";
-import User from "../user/User.js";
-import { GAME_MESSAGE } from "../constants/gameMessages.js";
+import { Console } from '@woowacourse/mission-utils';
+import User from '../user/User.js';
 
 //덧셈기 게임 관리
 class Calculator {

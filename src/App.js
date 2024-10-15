@@ -1,4 +1,4 @@
-import Calculator from "./controller/Calculator.js";
+import Calculator from './controller/Calculator.js';
 
 class App {
   constructor() {
