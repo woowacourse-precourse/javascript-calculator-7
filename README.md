@@ -49,3 +49,13 @@
 
 - `@woowacourse/mission-utils`에서 제공하는 `Console` API를 사용하여 구현해야 한다.
 - 사용자의 값을 입력 및 출력하려면 `Console.readLineAsync()`와 `Console.print()`를 활용한다.
+
+---
+
+### 입력 validation
+
+-[x] 1,2,3 (valid)  
+-[x] 1,2:3 (valid)  
+-[x] //;\n1;2,3:4 (valid)  
+-[] 1,:3 (invalid)  
+-[] 1,2,3sdf (invalid)

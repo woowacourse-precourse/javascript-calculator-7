@@ -4,7 +4,7 @@ import { GAME_MESSAGE } from "./constants/message.js";
 export default class Input {
   async getUserInput() {
     Console.print(GAME_MESSAGE.inputPrompt);
-    const userInput = Console.readLineAsync("");
+    const userInput = await Console.readLineAsync("");
 
     return userInput;
   }
