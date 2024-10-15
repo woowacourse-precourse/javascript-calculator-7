@@ -12,6 +12,7 @@ class App {
       userInput,
       this.seperators
     );
+    const validInputArray = this.validateInput(processedInput);
   }
 
   async read(input) {
@@ -59,6 +60,20 @@ class App {
     });
 
     return processedInput;
+  }
+
+  validateInput(input) {
+    const inputArray = input.split(",").filter(Boolean).map(Number);
+
+    if (inputArray.some(isNaN)) {
+      throw new Error("[ERROR] 정의되지 않은 구분자가 포함되어 있습니다.");
+    }
+
+    if (inputArray.some((num) => num <= 0)) {
+      throw new Error("[ERROR] 숫자는 자연수만 입력할 수 있습니다.");
+    }
+
+    return inputArray;
   }
 }
 
