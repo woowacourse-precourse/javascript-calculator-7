@@ -10,6 +10,7 @@ class App {
   async run() {
     await this.input();
     this.analysis(this.str);
+    const arr = this.stringSpliter(this.str, this.seperator);
   }
 
   async input() {
@@ -26,6 +27,13 @@ class App {
     });
 
     this.str = str;
+  }
+
+  stringSpliter(str, seperator) {
+    const regexp = new RegExp(`[${seperator.join('')}]`);
+    const filterArr = str.split(regexp).filter((item) => item.length);
+
+    return filterArr;
   }
 }
 
