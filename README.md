@@ -2,11 +2,11 @@
 
 ## 기능 구현
 
-### 입력 부분
+### 입력 부분(inputView)
 
-- [] `덧셈할 문자열을 입력해 주세요.` 문구를 출력한다.
-- [] 문구 출력과 동시에 덧셈할 문자열을 입력받는다.
-  - [] @woowacourse/mission-utils에서 제공하는 Console.readlineAsync()를 사용한다.
+- [x] `덧셈할 문자열을 입력해 주세요.` 문구를 출력한다.
+- [x] 문구 출력과 동시에 덧셈할 문자열을 입력받는다.
+  - [x] @woowacourse/mission-utils에서 제공하는 Console.readlineAsync()를 사용한다.
 
 ### 기능 수행 부분
 
@@ -20,7 +20,7 @@
 
 - [] 구분자와 분리된 숫자를 모두 더한다.
 
-### 출력 부분
+### 출력 부분(outputView)
 
 - [] `결과 : ${숫자}` 문구를 출력한다.
   - [] @woowacourse/mission-urils에서 제공하는 Console.print()를 사용한다.
