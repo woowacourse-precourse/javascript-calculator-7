@@ -10,8 +10,14 @@ class App {
     return await Console.readLineAsync("문자열을 입력해주세요.");
   }
   getSeparator(str) {
-    const separatorRegExr = /\/\/.\\n/;
-    if (separatorRegExr.test(str.slice(0, 5))) return str.at(2);
+    const customSeparatorRegExr = /\/\/.+\\n/;
+    const customSeparatorMatchedString = str.match(customSeparatorRegExr);
+    if (
+      customSeparatorMatchedString &&
+      customSeparatorMatchedString.index === 0
+    )
+      return customSeparatorMatchedString[0].slice(2, -2);
+
     return this.defaultSeperator;
   }
 }
