@@ -24,7 +24,15 @@ class App {
         newInput = parts[1];
       }
 
-      const NUMBERS = newInput.split(delimiter).map(Number);
+      const NUMBERS = newInput.split(delimiter).map((Number) => {
+        if(isNaN(Number)) throw new Error("[ERROR] 숫자가 아닌 값이 포함되었습니다.");
+        return Number(Number);
+      });
+
+      const minusNumbers = NUMBERS.filter((num) => num < 0);
+      if(minusNumbers.length > 0){
+        throw new Error("[ERROR] 음수는 입력할 수 없습니다.");
+      }
       return NUMBERS.reduce((a,b) => a+b, 0);
     }
 }
