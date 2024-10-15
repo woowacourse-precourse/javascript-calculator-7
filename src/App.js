@@ -14,9 +14,7 @@ class App {
   }
 
   stringSplitSumCalc(string, customSeparator) {
-    let separatedArray = customSeparator
-      ? string.slice(5).split(/[,:]/g)
-      : string.split(/[,:]/g);
+    let separatedArray = string.slice(customSeparator ? 5 : 0).split(/[,:]/g);
 
     if (customSeparator) {
       separatedArray = separatedArray
