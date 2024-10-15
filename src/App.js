@@ -14,6 +14,8 @@ class App {
         separator
       );
     else separatedUserInput = this.getSeparatedString(userInput, separator);
+
+    separatedUserInputsNumberArray = separatedUserInput.map((it) => Number(it));
   }
   async getUserInput() {
     return await Console.readLineAsync("문자열을 입력해주세요.");
