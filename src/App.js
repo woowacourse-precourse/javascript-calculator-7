@@ -23,6 +23,8 @@ class App {
       if (!isAllPositive(numbers)) {
         throw new Error(MESSAGES.INVALID_ALL_POSITIVE);
       }
+
+      const sum = numbers.reduce((acc, cur) => acc + cur, 0);
     } catch (error) {
       Console.print(error.message);
     }
