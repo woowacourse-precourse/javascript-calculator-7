@@ -1,5 +1,13 @@
+import Input from "./input.js";
+
 class App {
-  async run() {}
+  constructor() {
+    this.userInput = new Input();
+  }
+
+  async run() {
+    const input = this.userInput.getUserInput();
+  }
 }
 
 export default App;
