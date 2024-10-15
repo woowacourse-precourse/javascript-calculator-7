@@ -6,7 +6,7 @@ class App {
   }
 
   async run() {
-    const userInput = await getUserInput();
+    const userInput = await this.getUserInput();
     this.getCustomSeperator(userInput);
     const processedInput = this.replaceAllSeperators(
       userInput,
