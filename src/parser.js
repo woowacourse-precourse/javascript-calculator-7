@@ -15,32 +15,37 @@ function checkFormattingIsValid(replacedString, splitter) {
     new RegExp(`[${splitters.join('')}]`),
   );
 
-  // 숫자인 요소들의 개수를 셉니다.
+  // 숫자 수를 셉니다.
   const numberCount = splitString.filter(
-    element => !isNaN(Number(element.trim())),
+    element => !isNaN(Number(element.trim())) && element.trim() !== '',
   ).length;
 
-  // 공백이 있는 요소들의 개수를 셉니다.
-  const spaceCount = splitString.filter(
-    element => element.trim() === '',
-  ).length;
+  // splitter의 수는 split한 결과에서 나온 배열 길이에서 1을 뺀 값이 됩니다.
+  const splitterCount = splitString.length - 1;
 
-  console.log(splitString);
-  console.log(`numberCount: ${numberCount}, spaceCount: ${spaceCount}`);
+  console.log(`numberCount: ${numberCount}, splitterCount: ${splitterCount}`);
 
-  // 숫자 개수가 공백 개수보다 정확히 1개 많으면 true를 반환합니다.
-  return numberCount === spaceCount + 1;
+  // 숫자 수가 splitter 수보다 정확히 1개 많으면 true를 반환합니다.
+  return numberCount === splitterCount + 1;
 }
 
-function parseCustomNumber(str) {
+function getCustomDelimiter(str) {
   const customDelimiterPattern = /^\/\/(.)\n/;
   const isCustomDelimiter = str.match(customDelimiterPattern);
+
+  // 매칭되지 않으면 false를 반환
+  if (!isCustomDelimiter) {
+    return false;
+  }
+
+  // 매칭되면 캡처된 구분자를 반환
+  return isCustomDelimiter[1];
 }
 function parseNormalNumber(str) {
   const replacedString = replaceCommaOrClone(str).split('');
   if (replacedString.length === 0) return 0;
 
-  if (!isValid(replacedString)) {
+  if (!checkFormattingIsValid(str)) {
     console.log('No!');
     return;
   }
@@ -59,3 +64,4 @@ console.log(checkAndChooseParsingStat(''));
 console.log(checkAndChooseParsingStat('1,2'));
 console.log(checkAndChooseParsingStat('1,2,3'));
 console.log(checkAndChooseParsingStat('1123414::,::,124::,,,:::124,2:3'));
+console.log(parseCustomNumber('//;\n1;2;3'));
