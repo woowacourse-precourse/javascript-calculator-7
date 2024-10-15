@@ -9,7 +9,7 @@ class App {
   }
 
   isSeparator(value){//구분자 판단
-    return value === "," || value === ";" ? 0 : value
+    return value === "," || value === ":" ? 0 : value
   }
 
   resultOutput(){
