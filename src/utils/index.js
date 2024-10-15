@@ -14,9 +14,13 @@ export const parseUserInput = (userInput) => {
 export const getCustomSeparator = (customString) => {
   // 커스텀 문자열이 없다면 early return
   if (customString === "") {
-    return;
+    return [];
   }
 
   const matches = customString.matchAll(CUSTOM_SEPARATOR);
   return Array.from(matches, (match) => match[1]);
+};
+
+export const isAllPositive = (numbers) => {
+  return numbers.every((num) => num > 0);
 };
