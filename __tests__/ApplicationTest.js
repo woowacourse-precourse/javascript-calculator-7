@@ -47,12 +47,12 @@ describe("문자열 계산기", () => {
     });
   });
 
-  test("쉼표와 콜론 구분자 사용", async () => {
-    const inputs = ["1,2:3"];
+  test("쉼표와 콜론에 이은 커스텀 구분자 사용", async () => {
+    const inputs = ["//[\n1[2,3:4"];
     mockQuestions(inputs);
 
     const logSpy = getLogSpy();
-    const outputs = ["결과: 6"];
+    const outputs = ["결과: 10"];
 
     const app = new App();
     await app.run();
