@@ -17,7 +17,7 @@ class App {
     this.#plusString = plusString;
   }
 
-  generatePlusResult() {
+  generateArrayPlusResult() {
     this.#plusResult = this.#plusNumberArray.reduce((acc, curr) => acc + curr);
   }
 
@@ -62,15 +62,18 @@ class App {
     }
   }
 
-  async run() {
-    await this.generatePlusString();
+  generatePlusResult() {
     if (this.isEmptyPlusString()) {
       this.generateZeroPlusResult();
     } else {
       this.splitPlusString();
       Console.print(this.#plusNumberArray);
-      this.generatePlusResult();
+      this.generateArrayPlusResult();
     }
+  }
+  async run() {
+    await this.generatePlusString();
+    this.generatePlusResult();
     this.printPlusResult();
   }
 }
