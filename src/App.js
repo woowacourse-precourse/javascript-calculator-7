@@ -1,9 +1,13 @@
 import { MissionUtils } from "@woowacourse/mission-utils";
 
 class App {
+  constructor() {
+    this.seperators = [",", ":"];
+  }
+
   async run() {
     const userInput = await getUserInput();
-    const customSeperator = this.getCustomSeperator(userInput);
+    this.getCustomSeperator(userInput);
   }
 
   async read(input) {
@@ -35,7 +39,7 @@ class App {
         throw new Error("[ERROR] 커스텀 구분자의 길이는 0일 수 없습니다.");
       }
 
-      return customSeperator;
+      this.seperators.push(customSeperator);
     }
   }
 }
