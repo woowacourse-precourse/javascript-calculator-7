@@ -20,11 +20,19 @@ class App {
   generatePlusResult() {
     this.#plusResult = this.#plusNumberArray.reduce((acc, curr) => acc + curr);
   }
-
+  generateZeroPlusResult() {
+    this.#plusResult = 0;
+  }
   printPlusResult() {
     Console.print(`결과 : ${this.#plusResult}`);
   }
 
+  isEmptyPlusString() {
+    if (this.#plusResult === "") {
+      return true;
+    }
+    return false;
+  }
   isContainBasicSeparator(partString) {
     if (partString === "," || partString === ":") {
       return true;
@@ -53,9 +61,13 @@ class App {
 
   async run() {
     await this.generatePlusString();
-    this.splitPlusString();
-    Console.print(this.#plusNumberArray);
-    this.generatePlusResult();
+    if (this.isEmptyPlusString) {
+      this.generateZeroPlusResult();
+    } else {
+      this.splitPlusString();
+      Console.print(this.#plusNumberArray);
+      this.generatePlusResult();
+    }
     this.printPlusResult();
   }
 }
