@@ -8,6 +8,10 @@ class App {
   async run() {
     const userInput = await getUserInput();
     this.getCustomSeperator(userInput);
+    const processedInput = this.replaceAllSeperators(
+      userInput,
+      this.seperators
+    );
   }
 
   async read(input) {
@@ -41,6 +45,17 @@ class App {
 
       this.seperators.push(customSeperator);
     }
+  }
+
+  replaceAllSeperators(input, seperators) {
+    let processedInput = input;
+    const DEFAULT_SEPERATOR = ",";
+
+    seperators.forEach((seperator) => {
+      processedInput = processedInput.replaceAll(seperator, DEFAULT_SEPERATOR);
+    });
+
+    return processedInput;
   }
 }
 
