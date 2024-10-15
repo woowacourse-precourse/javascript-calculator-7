@@ -1,15 +1,20 @@
 import { Console } from "@woowacourse/mission-utils";
 
 const INPUT_PROMPT = '덧셈할 문자열을 입력해주세요.\n'; 
+const OUTPUT_PROMPT = '결과 : ';
 const DEFAULT_SEPARATOR = '[,:]';
 
 const isPositiveNumber = (arr) => {
     return arr.every(num => Number(num) > 0);
 }
 
+const getSum = (arr) => {
+    return arr.reduce( (acc,cur) => acc + cur,  0);
+}
+
 const splitUserInput = (input) => {
     const match = input.match(/\/\/(.)\\n/);
-    const CUSTOM_SEPARATOR = match[1];
+    const CUSTOM_SEPARATOR = match ? match[1] : null ;
 
     let userInputArray = undefined;
 
@@ -23,8 +28,6 @@ const splitUserInput = (input) => {
 
     return userInputArray ;
 }
-
-
 
 async function getUserNumbers(){
 
@@ -48,4 +51,18 @@ async function getUserNumbers(){
 
 }
 
-getUserNumbers();
+async function printUserInput(input) {
+    let sumValue = getSum(input);
+    Console.print(OUTPUT_PROMPT + sumValue);
+
+}
+
+
+async function run() {
+    const userNumbers = await getUserNumbers();
+    if (userNumbers) {
+        printUserInput(userNumbers);
+    }
+}
+
+run();
