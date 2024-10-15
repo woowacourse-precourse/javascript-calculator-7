@@ -14,9 +14,7 @@ export default class Calculator {
 
   parseNumber() {
     this.checkInputValidation();
-
-    let separatorReg = new RegExp(`[${this.separator.join("")}]`);
-
+    const separatorReg = new RegExp(`[${this.separator.join("")}]`);
     return this.inputString.split(separatorReg).map(Number);
   }
 
@@ -26,16 +24,26 @@ export default class Calculator {
   }
 
   validateCustomSeparator() {
-    if (this.inputString.startsWith("//")) {
-      const separatorEndIndex = this.inputString.indexOf("\\n");
+    const CUSTOM_SEPARATOR_PREFIX = "//";
+    const CUSTOM_SEPARATOR_SUFFIX = "\\n";
+
+    // //로 시작하는지 확인
+    if (this.inputString.startsWith(CUSTOM_SEPARATOR_PREFIX)) {
+      // \n으로 끝나는지 확인
+      const separatorEndIndex = this.inputString.indexOf(
+        CUSTOM_SEPARATOR_SUFFIX,
+      );
 
       if (separatorEndIndex === -1) {
         throw new Error(ERROR_MESSAGE.invalidCustomSeparator);
       }
+
       const customSeparator = this.inputString.substring(2, separatorEndIndex);
+
       if (customSeparator.length === 0) {
         throw new Error(ERROR_MESSAGE.invalidCustomSeparator);
       }
+
       this.separator.push(customSeparator);
       this.inputString = this.inputString.substring(separatorEndIndex + 2);
     }

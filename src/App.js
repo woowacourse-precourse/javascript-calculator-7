@@ -3,11 +3,11 @@ import Input from "./input.js";
 
 class App {
   constructor() {
-    this.userInput = new Input();
+    this.inputHandler = new Input();
   }
 
   async run() {
-    const input = await this.userInput.getUserInput();
+    const input = await this.inputHandler.getUserInput();
     const calculator = new Calculator(input);
     calculator.calculate();
   }
