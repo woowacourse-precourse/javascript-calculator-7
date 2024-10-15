@@ -6,7 +6,9 @@ class App {
   async run() {
     try {
       const userInput = await Console.readLineAsync(MESSAGES.USER_INPUT);
-      const { customString, numberString } = parseUserInput(userInput);
+      const userInputString = userInput.replaceAll("\\n", "\n");
+
+      const { customString, numberString } = parseUserInput(userInputString);
       const customSeparators = getCustomSeparator(customString);
 
       // 커스텀 문자열이 있는데 형식에 맞지 않다면 예외 처리
