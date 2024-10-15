@@ -22,6 +22,13 @@ class Calculator {
       .split(delimiter)
       .map(Number)
       .reduce((acc, cur) => acc + cur);
+
+    this.printResult(result);
+  }
+
+  /**@param {number} result */
+  printResult(result) {
+    this.printMessage(`${GAME_MESSAGE.RESULT} ${result}`);
   }
 
   /**@param {string} message */
