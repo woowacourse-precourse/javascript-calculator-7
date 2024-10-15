@@ -1,5 +1,16 @@
+import { getStringAsync } from './utils/index.js';
+
 class App {
-    async run() {}
+    initString;
+
+    setString(value) {
+        this.initString = value;
+    }
+
+    async run() {
+        const inputValue = await getStringAsync();
+        this.setString(inputValue);
+    }
 }
 
 export default App;
