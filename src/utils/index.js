@@ -16,3 +16,11 @@ export function getSeperatorArray(expression, seperator){
     }
     return seperator;
 }
+
+export function getExpressionString(expression){
+    if(expression.startsWith(SEPERATOR_STRING.START)){
+        const expressionStartIndex = expression.indexOf(SEPERATOR_STRING.END) + 2;
+        return expression.slice(expressionStartIndex);
+    }
+    return expression;
+}
