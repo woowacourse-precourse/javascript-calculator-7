@@ -4,7 +4,6 @@ import Input from "./input.js";
 class App {
   constructor() {
     this.userInput = new Input();
-    this.calculator = new Calculator();
   }
 
   async run() {

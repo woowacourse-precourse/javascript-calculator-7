@@ -4,8 +4,7 @@ export const GAME_MESSAGE = Object.freeze({
 });
 
 export const ERROR_MESSAGE = Object.freeze({
-  negativeValue: "[ERROR] 숫자는 양수만 입력 가능합니다.",
-  invalidSeparator:
-    "[ERROR] 구분자는 쉼표(,) 또는 콜론(:)만 가능합니다. 또는 커스텀 구분자를 지정해주세요.",
+  invalidInput:
+    "[ERROR] 형식이 올바르지 않습니다. 숫자는 양수만 가능, 구분자는 쉼표(,) 또는 콜론(:)만 가능합니다.",
   invalidCustomSeparator: "[ERROR] 커스텀 구분자의 형식이 올바르지 않습니다.",
 });
