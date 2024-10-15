@@ -28,9 +28,6 @@ class App {
       sum += parseInt(number);
     }
 
-
-
-
     return sum;
   }
 }
