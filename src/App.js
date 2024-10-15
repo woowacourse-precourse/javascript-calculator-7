@@ -6,26 +6,18 @@ class App {
       "덧셈할 문자열을 입력해 주세요.\n"
     );
 
-    if (
-      inputString.slice(0, 5).startsWith("//") &&
-      inputString.slice(0, 5).endsWith("\\n")
-    ) {
-      const customSeparator = inputString[2];
+    const customSeparator = this.hasCustomSeparator(inputString);
 
-      Console.print(
-        `결과 : ${this.stringSplitSumCalc(
-          inputString.slice(5),
-          customSeparator
-        )}`
-      );
-    } else {
-      Console.print(`결과 : ${this.stringSplitSumCalc(inputString)}`);
-    }
+    Console.print(
+      `결과 : ${this.stringSplitSumCalc(inputString, customSeparator)}`
+    );
   }
 
   stringSplitSumCalc(string, customSeparator) {
-    console.log(customSeparator);
-    let separatedArray = string.split(/[,:]/g);
+    let separatedArray = customSeparator
+      ? string.slice(5).split(/[,:]/g)
+      : string.split(/[,:]/g);
+
     if (customSeparator) {
       separatedArray = separatedArray
         .map((str) => str.split(customSeparator))
@@ -47,6 +39,17 @@ class App {
     }
 
     return Number(string);
+  }
+
+  hasCustomSeparator(string) {
+    if (
+      string.slice(0, 5).startsWith("//") &&
+      string.slice(0, 5).endsWith("\\n")
+    ) {
+      return string[2];
+    }
+
+    return null;
   }
 }
 
