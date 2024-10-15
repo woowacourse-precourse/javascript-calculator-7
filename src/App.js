@@ -34,7 +34,7 @@ class App {
 
       // 합산 결과 출력
       const sum = numbers.reduce((acc, cur) => acc + cur, 0);
-      Console.print(sum);
+      Console.print(MESSAGES.RESULT + sum);
     } catch (error) {
       Console.print(error.message);
       throw error;
