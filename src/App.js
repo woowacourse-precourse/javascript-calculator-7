@@ -7,10 +7,9 @@ class App {
     );
 
     const customSeparator = this.hasCustomSeparator(inputString);
+    const result = this.stringSplitSumCalc(inputString, customSeparator);
 
-    Console.print(
-      `결과 : ${this.stringSplitSumCalc(inputString, customSeparator)}`
-    );
+    Console.print(`결과 : ${result}`);
   }
 
   stringSplitSumCalc(string, customSeparator) {
@@ -29,7 +28,7 @@ class App {
   }
 
   validateNumber(string) {
-    if (Number(string) === NaN) {
+    if (isNaN(string)) {
       throw new Error("[ERROR] 숫자가 아닌 값을 입력했습니다");
     }
     if (Number(string) < 0) {
