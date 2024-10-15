@@ -5,7 +5,8 @@ class StringCalculator {
       return 0;
     }
 
-    const numbers = this.parseNumbers(input);
+    const numberStrings = this.parseDelimiter(input);
+    const numbers = this.parseNumbers(numberStrings);
 
     return this.calculateSum(numbers);
   }
@@ -16,8 +17,13 @@ class StringCalculator {
   }
 
   // 문자열을 숫자로 변환하는 메서드
-  parseNumbers(input) {
-    return input.split(",").map((number) => parseInt(number, 10));
+  parseNumbers(numberStrings) {
+    return numberStrings.map((number) => parseInt(number, 10));
+  }
+
+  // ,와 :를 구분자로 사용하여 숫자 배열을 반환하는 메서드
+  parseDelimiter(input) {
+    return input.split(",").map((item) => item.trim());
   }
 
   // 숫자 배열을 받아 합을 구하는 메서드
@@ -26,7 +32,7 @@ class StringCalculator {
   }
 
   // 커스텀 구분자 파싱 메서드
-  parseDelimiter(input) {}
+  parseCustomDelimiter(input) {}
 
   // 입력값 유효성 검사 메서드
   validateInput(input) {}
