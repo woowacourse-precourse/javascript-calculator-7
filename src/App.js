@@ -1,7 +1,7 @@
 import { Console } from "@woowacourse/mission-utils";
 
 class App {
-  defaultSeperator = /,;/;
+  defaultSeperator = ",;";
   async run() {
     const userInput = await this.getUserInput();
     const separator = this.getSeparator(userInput);
