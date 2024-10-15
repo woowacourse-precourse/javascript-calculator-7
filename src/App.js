@@ -1,6 +1,10 @@
 import { Console } from '@woowacourse/mission-utils';
 
 class App {
+  add(nums) {
+    return nums.reduce((acc, curr) => acc + curr, 0);
+  }
+
   async run() {
     try {
       const str = await Console.readLineAsync(
@@ -10,7 +14,8 @@ class App {
       const splited = str.split(/,|:/);
       const nums = splited.map(Number);
 
-      Console.print(nums);
+      const addRes = this.add(nums);
+      Console.print(addRes);
     } catch (error) {
       // Todo... error 처리
       // console.error(error);
