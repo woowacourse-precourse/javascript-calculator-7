@@ -15,6 +15,11 @@ class App {
     if (numbers.some((number) => isNaN(Number(number)))) {
       throw new Error(Errors.NOT_NUMBER);
     }
+
+    // 음수가 포함되어 있는 경우
+    if (numbers.some((number) => number < 0)) {
+      throw new Error(Errors.HAS_NEGATIVE);
+    }
   }
 }
 
