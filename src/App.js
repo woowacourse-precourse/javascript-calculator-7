@@ -7,6 +7,7 @@ class App {
 
   async run() {
     const input = await this.getInputForAddition();
+    const inputWithoutSpace = this.removeSpace(input);
   }
 
   async getInputForAddition() {
@@ -15,6 +16,10 @@ class App {
     );
 
     return input;
+  }
+
+  removeSpace(input) {
+    return input.replace(/\s/g, '');
   }
 }
 
