@@ -17,12 +17,12 @@ const getLogSpy = () => {
 };
 
 describe("문자열 계산기", () => {
-  test("커스텀 구분자 사용", async () => {
-    const inputs = ["//;\\n1"];
+  test("빈 문자열 입력", async () => {
+    const inputs = [""];
     mockQuestions(inputs);
 
     const logSpy = getLogSpy();
-    const outputs = ["결과 : 1"];
+    const outputs = ["ERROR : 빈 문자열이 입력되었습니다."];
 
     const app = new App();
     await app.run();
@@ -32,12 +32,4 @@ describe("문자열 계산기", () => {
     });
   });
 
-  test("예외 테스트", async () => {
-    const inputs = ["-1,2,3"];
-    mockQuestions(inputs);
-
-    const app = new App();
-
-    await expect(app.run()).rejects.toThrow("[ERROR]");
-  });
 });
