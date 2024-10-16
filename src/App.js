@@ -2,7 +2,10 @@ class App {
   async run() {}
 
   add(numbers) {
-    return numbers[0] + numbers[1]
+    const initialValue = 0;
+    
+    return numbers.reduce((accumulator, number) => 
+      accumulator + number, initialValue);
   }
 
 }
