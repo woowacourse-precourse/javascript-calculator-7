@@ -26,6 +26,10 @@ class App {
     if (numbers.some((number) => number < 0)) {
       throw new Error(Errors.HAS_NEGATIVE);
     }
+
+    // 숫자의 합 계산
+    const SUM = numbers.reduce((acc, cur) => acc + cur, 0);
+    Console.print(`${Messages.OUTPUT_MESSAGE}${SUM}`);
   }
 
   // 커스텀 구분자가 있는지 확인하는 함수
