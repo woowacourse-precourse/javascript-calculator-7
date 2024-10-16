@@ -7,8 +7,18 @@ class App {
     return userInput;
   }
 
+  parseString(string) {
+    const defaultDelimiters = [",", ":"];
+
+    const regex = new RegExp(`[${defaultDelimiters.join("")}]`);
+    const numbers = string.split(regex);
+
+    return numbers;
+  }
+
   async run() {
     const input = await this.readInput();
+    const numbers = this.parseString(input);
   }
 }
 
