@@ -8,7 +8,7 @@ class App {
     );
     const custom_seperator = this.findCustomSeperator(READ_STRING);
 
-    // 커스텀 구분자가 존재할 때의 로직을 모듈화한 함수 호출
+    // 커스텀 구분자가 존재할 때의 로직 처리
     if (custom_seperator.success) {
       READ_STRING = this.processCustomSeperator(
         custom_seperator.custom_seperator,
@@ -18,6 +18,12 @@ class App {
     }
 
     // 여기서 남은 문자열에 구분자가 아닌 문자가 있는지 체크 후 있을 경우 에러 출력
+    READ_STRING.split("").forEach((char) => {
+      if (!seperator.includes(char) && (char <= "0" || char >= "9")) {
+        throw new Error("[ERROR] 구분자가 아닌 문자가 포함되어 있습니다.");
+      }
+    });
+
     // 없다면 구분자를 기준으로 문자열을 나누어 배열로 만든다.
     // 배열의 각 요소를 정수로 변환한다.
     // 배열의 요소들을 더한 값을 반환한다.
