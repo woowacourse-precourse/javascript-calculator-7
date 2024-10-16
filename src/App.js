@@ -1,6 +1,5 @@
 import { Console } from '@woowacourse/mission-utils';
 import parseString from './Parser/MainParser/parser.js';
-import handleError from './Error/handleError.js';
 
 class App {
   async run() {

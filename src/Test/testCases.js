@@ -96,33 +96,39 @@ export function testNormalInput(parseNormalInput) {
     },
     {
       input: '1::2',
-      expectedError: '[ERROR]:문자열에 포멧이 올바르지 않습니다.',
+      expectedError:
+        '[ERROR]:문자열에 포멧이 올바르지 않거나, 음수를 입력했습니다.',
       description: '구분자가 연속으로 있을 경우 에러를 발생시켜야 합니다.',
     },
     {
       input: ',1,2',
-      expectedError: '[ERROR]:문자열에 포멧이 올바르지 않습니다.',
+      expectedError:
+        '[ERROR]:문자열에 포멧이 올바르지 않거나, 음수를 입력했습니다.',
       description:
         '문자열 시작 부분에 구분자가 있을 경우 에러를 발생시켜야 합니다.',
     },
     {
       input: '1,2,',
-      expectedError: '[ERROR]:문자열에 포멧이 올바르지 않습니다.',
+      expectedError:
+        '[ERROR]:문자열에 포멧이 올바르지 않거나, 음수를 입력했습니다.',
       description: '문자열 끝에 구분자가 있을 경우 에러를 발생시켜야 합니다.',
     },
     {
       input: '1,,2',
-      expectedError: '[ERROR]:문자열에 포멧이 올바르지 않습니다.',
+      expectedError:
+        '[ERROR]:문자열에 포멧이 올바르지 않거나, 음수를 입력했습니다.',
       description: '구분자가 중복될 경우 에러를 발생시켜야 합니다.',
     },
     {
       input: 'abc',
-      expectedError: '[ERROR]:문자열에 포멧이 올바르지 않습니다.',
+      expectedError:
+        '[ERROR]:문자열에 포멧이 올바르지 않거나, 음수를 입력했습니다.',
       description: '숫자가 아닌 값이 있을 경우 에러를 발생시켜야 합니다.',
     },
     {
       input: '1,2,a',
-      expectedError: '[ERROR]:문자열에 포멧이 올바르지 않습니다.',
+      expectedError:
+        '[ERROR]:문자열에 포멧이 올바르지 않거나, 음수를 입력했습니다.',
       description:
         '숫자가 아닌 값이 포함되어 있을 경우 에러를 발생시켜야 합니다.',
     },
@@ -133,12 +139,12 @@ export function testNormalInput(parseNormalInput) {
     },
     {
       input: null,
-      expectedError: '빈 문자열입니다.',
+      expectedError: '[ERROR]:빈 문자열입니다.',
       description: 'null 입력 시 에러를 발생시켜야 합니다.',
     },
     {
       input: undefined,
-      expectedError: '빈 문자열입니다.',
+      expectedError: '[ERROR]:빈 문자열입니다.',
       description: 'undefined 입력 시 에러를 발생시켜야 합니다.',
     },
     {
@@ -153,12 +159,14 @@ export function testNormalInput(parseNormalInput) {
     },
     {
       input: '-1,2',
-      expectedOutput: 1,
+      expectedError:
+        '[ERROR]:문자열에 포멧이 올바르지 않거나, 음수를 입력했습니다.',
       description: '음수와 양수의 조합을 처리해야 합니다.',
     },
     {
       input: '-1.5,2.5',
-      expectedOutput: 1,
+      expectedError:
+        '[ERROR]:문자열에 포멧이 올바르지 않거나, 음수를 입력했습니다.',
       description: '음수 소수와 양수 소수의 합을 처리해야 합니다.',
     },
   ];

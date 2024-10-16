@@ -11,7 +11,7 @@ export default function parseCustomInput(input) {
   // Check if the string starts with // and contains \n
   if (!str.startsWith('//') || !str.includes('\\n')) {
     throw new Error(
-      '[ERROR]:포멧이 올바르지 않습니다. 반드시 //로 시작하고,  \\n으로 끝나야 합니다.',
+      '[ERROR]:포멧이 올바르지 않습니다. 반드시 //로 시작하고, \\n으로 끝나야 합니다.',
     );
   }
 
