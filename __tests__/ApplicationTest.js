@@ -22,7 +22,7 @@ describe("문자열 계산기", () => {
     mockQuestions(inputs);
 
     const logSpy = getLogSpy();
-    const outputs = ["결과: 0"];
+    const outputs = ["결과 : 0"];
 
     const app = new App();
     await app.run();
@@ -37,7 +37,7 @@ describe("문자열 계산기", () => {
     mockQuestions(inputs);
 
     const logSpy = getLogSpy();
-    const outputs = ["결과: 5"];
+    const outputs = ["결과 : 5"];
 
     const app = new App();
     await app.run();
@@ -52,7 +52,7 @@ describe("문자열 계산기", () => {
     mockQuestions(inputs);
 
     const logSpy = getLogSpy();
-    const outputs = ["결과: 10"];
+    const outputs = ["결과 : 10"];
 
     const app = new App();
     await app.run();
