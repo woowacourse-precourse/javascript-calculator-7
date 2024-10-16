@@ -54,6 +54,10 @@ class App {
 		});
 	}
 
+	sumNumbers() {
+		return this.numbers.reduce((acc, curr) => acc + curr, 0);
+	}
+
 	async run() {
 		const input = await this.userInput();
 		if (this.checkCustomSeparator(input)) {
