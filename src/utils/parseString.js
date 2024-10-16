@@ -19,7 +19,12 @@ const parseString = (value) => {
             const splitByColon = splitByComma[i].split(':');
             for (let j = 0; j < splitByColon.length; j++) {
                 const num = Number(splitByColon[j]);
-                if (splitByColon[j].includes('.') || isNaN(num)) return 'error';
+                if (
+                    splitByColon[j].includes('-') ||
+                    splitByColon[j].includes('.') ||
+                    isNaN(num)
+                )
+                    return 'error';
                 result.push(num);
             }
         }

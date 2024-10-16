@@ -1,15 +1,26 @@
-import { getStringAsync, parseString } from './utils/index.js';
+import {
+    calculator,
+    getStringAsync,
+    handleError,
+    parseString,
+} from './utils/index.js';
 
 class App {
-    initString;
+    initString = '';
+    parsedResult = null;
 
     setString(value) {
-        this.initString = value;
+        this.initString = value.trim();
     }
+
     parse() {
-        const parseedResult = parseString(this.initString);
-        if (parseedResult === 'error') {
-        }
+        this.parsedResult = parseString(this.initString);
+        this.result();
+    }
+
+    result() {
+        if (this.parsedResult === 'error') handleError();
+        else calculator(this.parsedResult);
     }
 
     async run() {
