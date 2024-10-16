@@ -1,9 +1,25 @@
 import { Console } from "@woowacourse/mission-utils";
 
-const INPUT_PROMPT = '덧셈할 문자열을 입력해주세요.\n'; 
-const OUTPUT_PROMPT = '결과 : ';
-const DEFAULT_SEPARATOR = '[,:]';
-const CUSTOM_SEPARATOR = '//(.)\\\\n';
+/**
+ * @enum {string} 계산기 문구 및 구분자 환경변수를 정의하는 열거형입니다.
+ * @property {string} INPUT_PROMPT 덧셈할 문자열을 입력받는 프롬프트 메시지
+ * @property {string} OUTPUT_PROMPT 결과를 출력하는 프롬프트 메시지
+ * @property {string} DEFAULT_SEPARATOR 기본 구분자 (콤마, 콜론)
+ * @property {string} CUSTOM_SEPARATOR 커스텀 구분자(//, \n 사이 문자)
+ */
+const CALCULATOR_VARIABLES ={
+
+    INPUT_PROMPT : '덧셈할 문자열을 입력해주세요.\n', 
+    OUTPUT_PROMPT : '결과 : ',
+    DEFAULT_SEPARATOR : '[,:]',
+    CUSTOM_SEPARATOR : '//(.)\\\\n'
+}
+Object.freeze(CALCULATOR_VARIABLES);
+
+
+
+
+
 
 
 const isValidSeparator = (input) => {
