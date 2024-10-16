@@ -11,7 +11,7 @@ class App {
   }
 
   printResult(result) {
-    MissionUtils.Console.print(`결과: ${result}`);
+    MissionUtils.Console.print(`결과 : ${result}`);
   }
 
   calculate(inputString) {
