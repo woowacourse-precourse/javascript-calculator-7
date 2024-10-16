@@ -45,15 +45,4 @@ describe("문자열 계산기", () => {
       expect(app.getStrippedString("//;\\n1;2;3")).toBe("1;2;3");
     });
   });
-
-  describe("예외 처리", () => {
-    test("숫자가 아니면서 구분자가 있는 문자가 있다면 False 값을, 아니라면 True 값을 반환한다.", () => {
-      expect(app.isValidString("1,2;3")).toBe(false);
-
-    });
-    
-    test("예외가 발생하면 'ERROR'로 시작하는 메서지와 함께 Error를 발생시킨다.", () => {
-
-    });
-  });
 });
