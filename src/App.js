@@ -4,13 +4,16 @@ class App {
     let delimiters = [",", ":"];
 
     if(this.checkCustomSplitStringByDelimiter(inputString)){
+      delimiters = this.getMergedDelimiters(inputString, delimiters);
       inputString = this.getStrippedString(inputString);
     }
+
     else if(this.isValidString(inputString, delimiters)) {
       const stringArray = this.splitStringByDelimiter(inputString, delimiters);
       const numberArray = this.returnNumbers(stringArray);
       this.add(numberArray);
     }
+    
     else {
       console.log("Error");
     }
@@ -53,6 +56,7 @@ class App {
     const customDelimiter = inputString[2];
     return [...delimiters, customDelimiter];
   }
+
   getStrippedString(inputString) {
     return inputString.slice(5,);
   }
