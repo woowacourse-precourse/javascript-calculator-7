@@ -7,10 +7,17 @@ class App {
     ).trim();
 
     const USER_INPUT_NUMBER = USER_INPUT.split(/[,:]/);
-    // 콤마, 클론을 기준으로 구분
 
-    // 확인
-    Console.print(USER_INPUT_NUMBER);
+    const DEFAULT_CACULATOR = (USER_INPUT_NUMBER) => {
+      let sum = 0;
+
+      for (let i = 0; i < USER_INPUT_NUMBER.length; i++) {
+        sum += parseInt(USER_INPUT_NUMBER[i]);
+      }
+      return sum;
+    };
+
+    Console.print('결과 : ' + DEFAULT_CACULATOR(USER_INPUT_NUMBER));
   }
 }
 
