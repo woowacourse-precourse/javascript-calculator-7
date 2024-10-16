@@ -18,7 +18,6 @@ class App {
     if (checkStartWithNumber(userInput)) {
       checkUseOtherSeperator(userInput, customSeparator);
       checkSeperatorConflict(userInput, customSeparator);
-      this.checkeCommaColonConflict(userInput);
     } else if (checkStartWidthDubbleSlash(userInput)) {
       this.validateCustomSeperator(userInput);
       customSeparator = this.getCustomSeparator(userInput);
@@ -57,54 +56,6 @@ class App {
 
   getRemovedCustomSepartor(input) {
     return input.split(/\\n/)[1];
-  }
-
-  isStartWithNumber(input) {
-    const regExp = /^[1-9]/;
-    return regExp.test(input);
-  }
-
-  isStartWidthDubbleSlash(input) {
-    const regExp = /^(\/\/)/;
-    return regExp.test(input);
-  }
-
-  checkeCommaColonConflict(input) {
-    let result = false;
-    const duplicateComma = /,,+/;
-    const duplicateColon = /::+/;
-    const commaColonRegExp = /,:/;
-    const colonCommaRegExp = /:,/;
-
-    if (duplicateColon.test(input)) result = true;
-    if (duplicateComma.test(input)) result = true;
-    if (commaColonRegExp.test(input)) result = true;
-    if (colonCommaRegExp.test(input)) result = true;
-
-    if (result) throw new Error(errorMessage.useSeperatorConflict);
-  }
-
-  checkIncludeNewLine(input) {
-    const newLineRegExp = /\\n/;
-    if (!newLineRegExp.test(input)) throw new Error(errorMessage.useNewLine);
-  }
-
-  checkIncludeEmptyString(input) {
-    const splitInput = input.split(/(?:\/\/|\\n)/);
-    if (splitInput[1] === '') throw new Error(errorMessage.useCoustomSeparator);
-  }
-
-  checkUseOtherSeperator(input) {
-    let splitInput = input.split(/(?:\/\/|\\n)/);
-    const customSeperator = splitInput[1];
-
-    const basicSeparatorRegExp = /[,:]/;
-
-    splitInput = splitInput.join('').split(basicSeparatorRegExp).join('');
-    splitInput = splitInput.split(customSeperator).join('');
-
-    if (!Number(splitInput))
-      throw new Error(errorMessage.useCustomOrBasicSeparator);
   }
 
   validateCustomSeperator(input) {
