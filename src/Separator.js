@@ -20,7 +20,9 @@ class Separator {
   }
 
   // 커스텀 구분자로 분리
-  splitByCustomSeparator() {}
+  splitByCustomSeparator() {
+    this.value = this.input.split(this.customSeparator);
+  }
 
   // 분리 실행
   separate() {
