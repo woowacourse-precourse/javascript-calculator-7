@@ -1,14 +1,16 @@
 import { Console } from '@woowacourse/mission-utils';
+import parseString from './parser.js';
+import handleError from './handleError.js';
+
 class App {
   async run() {
     try {
       const str = await Console.readLineAsync(
         '덧셈할 문자열을 입력해 주세요.\n',
       );
-      Console.print(str); // 입력받은 문자열 확인
+      return parseString(str);
     } catch (error) {
-      // Todo... error 처리
-      // console.error(error);
+      handleError(error);
     }
   }
 }
