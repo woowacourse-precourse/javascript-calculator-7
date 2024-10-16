@@ -15,6 +15,12 @@ class App {
       // 기본 구분자 처리
       numbers = input.split(/,|;/).map(Number);
     }
+
+    // 합 계산
+    let sum = 0;
+    for (const num of numbers) {
+      sum += num;
+    }
   }
 }
 
