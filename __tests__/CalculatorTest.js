@@ -89,6 +89,10 @@ describe("문자열 계산기", () => {
     test("커스텀 구분자를 사용했다.", () => {
       expect(app.calculate("//;\\n1;2;3")).toBe(6);
     });
+
+    test("기본 구분자를 사용했다.", () => {
+      expect(app.calculate("1:2,3")).toBe(6);
+    });
   });
 
 });
