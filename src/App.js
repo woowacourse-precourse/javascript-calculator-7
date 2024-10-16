@@ -4,129 +4,68 @@ class App {
   #plusString;
   #plusNumberArray;
   #plusResult;
-  #customSeparator;
+  #separatorList;
 
   constructor() {
     this.#plusString = "";
+    this.#plusResult = 0;
     this.#plusNumberArray = [];
-    this.#customSeparator = [];
+    this.#separatorList = [",", ":"];
   }
 
   async printPlusString() {
     const plusString = await Console.readLineAsync(
       "덧셈할 문자열을 입력해 주세요.\n"
     );
-
-    // 예외 처리 부분
-    // 구분자 이외 문자 포함시 거르기
-    // 음수 거르기
+    return plusString;
+  }
+  generatePlusString(plusString) {
     this.#plusString = plusString;
   }
-  validatePlusString() {}
+
   printPlusResult() {
     Console.print(`결과 : ${this.#plusResult}`);
   }
 
-  generateArrayPlusResult() {
-    this.#plusResult = this.#plusNumberArray.reduce((acc, curr) => acc + curr);
-  }
-
-  generateZeroPlusResult() {
-    this.#plusResult = 0;
-  }
-
-  generateCustomSeparator(partString) {
-    if (typeof partString !== Number) {
-      this.#customSeparator.push(partString);
-    }
-  }
-
-  isEmptyPlusString() {
+  isEmptyString() {
     if (this.#plusString === "") {
       return true;
     }
     return false;
   }
 
-  isContainBasicSeparator(partString) {
-    if (partString === "," || partString === ":") {
-      return true;
-    }
-    return false;
-  }
-
-  isGenerateCustomSeparator(index) {
-    if (
-      this.#plusString[index] === "/" &&
-      this.#plusString[index + 1] === "/" &&
-      this.#plusString[index + 3] === "\\" &&
-      this.#plusString[index + 4] === "n"
-    ) {
-      return true;
-    }
-    return false;
-  }
-
-  isContainCustomSeparator(partString) {
-    let flag = false;
-    for (let i = 0; i < this.#customSeparator.length; i++) {
-      if (partString === this.#customSeparator[i]) {
-        flag = true;
-      }
-    }
-    return flag;
-  }
-
-  pushPlusNumberArray(tmpPlusNumber) {
-    if (tmpPlusNumber !== "") {
-      this.#plusNumberArray.push(Number(tmpPlusNumber));
-    }
-  }
-
-  splitPlusString() {
-    let tmpPlusNumber = "";
-    for (let i = 0; i < this.#plusString.length; i++) {
-      if (this.isContainBasicSeparator(this.#plusString[i])) {
-        this.pushPlusNumberArray(tmpPlusNumber);
-        tmpPlusNumber = "";
-        continue;
-      }
-      if (this.isGenerateCustomSeparator(i)) {
-        if (!this.isContainBasicSeparator(this.#plusString[i + 2])) {
-          this.generateCustomSeparator(this.#plusString[i + 2]);
-        }
-
-        this.pushPlusNumberArray(tmpPlusNumber);
-        tmpPlusNumber = "";
-
-        i += 4;
-        continue;
-      }
-      if (this.isContainCustomSeparator(this.#plusString[i])) {
-        this.pushPlusNumberArray(tmpPlusNumber);
-        tmpPlusNumber = "";
-        continue;
-      }
-      tmpPlusNumber += this.#plusString[i];
-      if (i === this.#plusString.length - 1) {
-        this.pushPlusNumberArray(tmpPlusNumber);
-      }
-    }
-  }
-
   generatePlusResult() {
-    if (this.isEmptyPlusString()) {
-      this.generateZeroPlusResult();
-    } else {
-      this.splitPlusString();
-      Console.print(this.#plusNumberArray);
-      Console.print(this.#customSeparator);
-      this.generateArrayPlusResult();
+    let plusString = this.#plusString;
+
+    // custom pattern
+    const CUSTOM_PATTERN = /\/\/(.)\\n/g;
+    const customSeparator = plusString.match(CUSTOM_PATTERN);
+    if (customSeparator) {
+      plusString = plusString.replace(CUSTOM_PATTERN, ",");
+      customSeparator.forEach((entireSeparator) => {
+        const separator = entireSeparator
+          .split("")
+          .filter((item) => item !== "/" && item !== "\\" && item !== "n")
+          .join("");
+        this.#separatorList.push(separator);
+      });
     }
+
+    // basic pattern
+    const separators = this.#separatorList.join("");
+    const separatorRegex = new RegExp(`[${separators}]+`, "g");
+    const numberList = plusString.split(separatorRegex);
+    Console.print(numberList);
   }
+
   async run() {
-    await this.printPlusString();
-    this.generatePlusResult();
+    const plusString = await this.printPlusString();
+    this.generatePlusString(plusString);
+
+    if (!this.isEmptyString()) {
+      this.generatePlusResult();
+    }
+
     this.printPlusResult();
   }
 }
