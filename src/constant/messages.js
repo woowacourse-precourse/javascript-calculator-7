@@ -7,8 +7,8 @@ const BASIC_MESSAGES = Object.freeze({
 const ERROR_WORD = "[ERROR]";
 
 const ERROR_MESSAGE = Object.freeze({
-  invalidPositiveNumber: "${ERROR_WORD} 음수는 입력할 수 없습니다.",
-  invalidString: "${ERROR_WORD} 문자는 입력할 수 없습니다.",
+  invalidPositiveNumber: `${ERROR_WORD} 음수는 입력할 수 없습니다.`,
+  invalidString: `${ERROR_WORD} 문자는 입력할 수 없습니다.`,
 });
 
 export { BASIC_MESSAGES, ERROR_MESSAGE };
