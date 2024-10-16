@@ -3,10 +3,11 @@ import { calculator } from "./caclulator.js";
 class App {
   async run() {
     try{
-      await calculator();
-    }catch(error){
-      Console.print(error.message);
+      const answer = await calculator();
+      Console.print("결과 : " + answer);
       return;
+    }catch(error){
+      throw error;
     }
   }
 }

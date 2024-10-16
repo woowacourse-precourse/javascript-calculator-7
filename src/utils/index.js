@@ -33,8 +33,21 @@ function hasExpressionError(expression, seperatorArray){
     return NUMBER_PATTERN.test(expression);
 }
 
+function splitBySeperator(expression, seperatorArray){
+    seperatorArray.map((seperator) => {
+        expression = expression.replaceAll(seperator, "@");
+    })
+    return expression.split('@').filter(item => item !== '');
+}
+
+function sumArray(array){
+    return array.reduce((acc, num) => acc + parseInt(num), 0);
+}
+
 export {
     getSeperatorArray,
     getExpressionString,
-    hasExpressionError
+    hasExpressionError,
+    splitBySeperator,
+    sumArray,
 }
