@@ -10,12 +10,13 @@ class StringSumCalController {
   }
 
   async transferDelimiter() {
-    const inputText = await this.inputView.getInputText();
-    let customDelimiter;
+    let inputText = await this.inputView.getInputText();
+    let delimiter;
     if (inputText.startsWith("//")) {
-      customDelimiter = this.CustomSplitModel.getDelimiter(inputText);
+      delimiter = this.CustomSplitModel.getDelimiter(inputText);
+      inputText = inputText.split("\\n")[1];
     }
-    this.SplitModel.stringSplit(customDelimiter);
+    this.SplitModel.stringSplit(delimiter, inputText);
   }
 }
 
