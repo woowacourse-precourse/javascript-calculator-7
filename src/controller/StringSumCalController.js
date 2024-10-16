@@ -13,22 +13,21 @@ class StringSumCalController {
 
   async transferDelimiter() {
     let inputText = await this.TextInputView.getInputText();
-    let delimiter;
-    if (inputText.startsWith("//")) {
-      delimiter = this.CustomSplitModel.getDelimiter(inputText);
-      inputText = inputText.split("\\n")[1];
-    }
-    const splitString = this.getSplitString(delimiter, inputText);
-    const total = this.getTotal(splitString);
+    let [operationText, delimiter] = this.getParts(inputText);
+    const splitArray = this.SplitModel.stringSplit(delimiter, operationText);
+    const total = this.CalculateSumModel.calculate(splitArray);
     return total;
   }
 
-  getSplitString(delimeter, inputText) {
-    return this.SplitModel.stringSplit(delimeter, inputText);
-  }
-
-  getTotal(splitString) {
-    const total = this.CalculateSumModel.calculateSum(splitString);
+  getParts(inputText) {
+    let operationText = inputText;
+    let delimiter = /[:,]/;
+    //커스텀 구분자가 있을 경우 구분자와 연산식을 변경
+    if (inputText.startsWith("//")) {
+      [delimiter, operationText] =
+        this.CustomSplitModel.getDelimiter(inputText);
+    }
+    return [operationText, delimiter];
   }
 }
 

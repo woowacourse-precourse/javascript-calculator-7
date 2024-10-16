@@ -7,7 +7,7 @@ class App {
   }
   async run() {
     const result = await this.controller.transferDelimiter();
-    Console.print(`result: ${result}`);
+    await Console.print(result);
   }
 }
 
