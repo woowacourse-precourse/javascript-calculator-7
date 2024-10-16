@@ -21,6 +21,9 @@ class App {
     for (const num of numbers) {
       sum += num;
     }
+
+    // 출력
+    Console.print(`결과 : ${sum}`);
   }
 }
 
