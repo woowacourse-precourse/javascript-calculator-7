@@ -5,15 +5,11 @@ const SEP_REGEX = /\/\/(.*?)\\n/g;
 
 class App {
   async run() {
-    try {
-      const input = await Console.readLineAsync("덧셈할 문자열을 입력해 주세요.\n");
-      const { str, separator } = this.makeCustomSep(input);
-      const sepStrArr = this.extractInput(str, separator);
-      const sepNumArr = this.toNumberArray(sepStrArr);
-      Console.print(sepNumArr);
-    } catch (error) {
-      Console.print(`[ERROR] ${error.message}`);
-    }
+    const input = await Console.readLineAsync("덧셈할 문자열을 입력해 주세요.\n");
+    const { str, separator } = this.makeCustomSep(input);
+    const sepStrArr = this.extractInput(str, separator);
+    const sepNumArr = this.toNumberArray(sepStrArr);
+    Console.print(`결과 : ${this.sumNumbers(sepNumArr)}`);
   }
 
   extractInput(str, sep) {
@@ -39,8 +35,8 @@ class App {
     if (NUM_REGEX.test(str)) {
       return true;
     }
-    if (+str < 0) throw Error("잘못된 입력입니다. 숫자는 양수만 입력해주세요!");
-    throw Error("잘못된 입력입니다. 커스텀 구분자를 확인해주세요!");
+    if (+str < 0) throw Error("[ERROR] 잘못된 입력입니다. 숫자는 양수만 입력해주세요!");
+    throw Error("[ERROR] 잘못된 입력입니다. 값을 올바르게 입력해주세요!");
   }
 
   makeCustomSep(str) {
@@ -51,6 +47,10 @@ class App {
     const customeSep = [...str.matchAll(SEP_REGEX)].map((v) => v[1]);
     str = str.replace(SEP_REGEX, "");
     return { str, separator: [...customeSep, ...separator] };
+  }
+
+  sumNumbers(numArr) {
+    return numArr.reduce((pVal, cVal) => pVal + cVal, 0);
   }
 }
 
