@@ -22,6 +22,11 @@ class App {
 
     //2. 쉼표(,) 구분자를 사용하여 숫자를 분리하고 합산
     //3. 콜론(:) 구분자를 추가하여 숫자를 분리하고 합산
+    let delimiters = [",", ":"];
+    let numbersString = input;
+
+    const delimiterRegex = new RegExp(`[${delimiters.join("")}]`);
+    const numberStrings = numbersString.split(delimiterRegex);
 
     //4. 커스텀 구분자를 지정. 구분자는 //와 \n 사이에 위치
 
