@@ -1,5 +1,9 @@
+import init from './calculator/init.js';
+
 class App {
-  async run() {}
+  async run() {
+    init();
+  }
 }
 
 export default App;
