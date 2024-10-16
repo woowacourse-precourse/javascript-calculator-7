@@ -1,5 +1,10 @@
+import { Console } from '@woowacourse/mission-utils';
+import { outputMessage } from './constant.js';
+
 class App {
-  async run() {}
+  async run() {
+    Console.print(outputMessage.startMessage);
+  }
 }
 
 export default App;
