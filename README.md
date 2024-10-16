@@ -1,10 +1,18 @@
 # javascript-calculator-precourse
 
 ---
+# 기능 명세
+
 ## 입력 기능
 
 @woowacourse/mission-utils에서 제공하는 Console API를 활용하여 입출력을 구현
+- 문자열 입력 : Console.readLineAsync
+- 문자열 출력 : Console.print
 
+## 구분자 기준 숫자 분리
+
+문자열 ',',':'을 구분자로 하여 숫자 분리
+- 구분자로 사용될 문자열을 배열로 관리하여 이후 확장성을 고려
 ---
 # 1주차 과제 분석하기
 
