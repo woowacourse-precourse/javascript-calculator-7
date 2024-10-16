@@ -13,6 +13,13 @@ class App {
 
   calculateSum(input) {
 
+    let defaultDelimiter = /[,:]/;
+    let numberString = input;
+
+    // `split`를 사용하여 문자열을 구분
+    const numbers = numberString.split(defaultDelimiter);
+    
+    return numbers
   }
 }
 
