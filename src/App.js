@@ -37,6 +37,11 @@ class App {
 
   sum(numbers) {
     if (!numbers.length) return 0;
+
+    let result = 0;
+    for (const number of numbers) result += number;
+
+    return result;
   }
 
   async run() {
