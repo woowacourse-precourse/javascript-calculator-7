@@ -49,8 +49,8 @@ class App {
     return true
   }
 
-  returnNumbers(string) {
-    return [1, 2];
+  returnNumbers(inputArray) {
+    return inputArray.map(element => Number(element));
   }
 }
 
