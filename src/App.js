@@ -1,8 +1,22 @@
 import { Console } from '@woowacourse/mission-utils';
 
+async function getString() {
+  try {
+    const inputString = await Console.readLineAsync(
+      '덧셈할 문자열을 입력해 주세요.\n'
+    );
+    console.log(`입력된 문자열: ${inputString}`);
+    console.log(typeof inputString);
+  } catch (error) {
+    console.error('에러 발생:', error);
+  }
+}
+
 class App {
   async run() {
     // 1. 입력을 문자열로 전환하거나 문자열만 받음 String()
+    getString();
+
     // 2. 정규표현식, includes(), split(), slice(), startsWith() 등으로 :나 ,로 구분된 문자열 기준으로 숫자 합 반환
     // 3. indexOf, split(), slice()로 커스텀 구분자
     // 4. 예외처리로 ERROR
