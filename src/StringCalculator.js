@@ -9,14 +9,15 @@ class StringCalculator {
   }
 
   #addCustomSeparator() {
-    const customSeparatorMatch = this.#inputStr.match(/\/{2}\D\\n/);
+    const customSeparatorMatch = this.#inputStr.match(/^\/{2}\D\\n/);
 
-    if (!customSeparatorMatch || customSeparatorMatch.index !== 0) {
+    if (!customSeparatorMatch) {
       return;
     }
 
-    this.#separators.add(customSeparatorMatch[0][2]);
-    this.#inputStr = this.#inputStr.slice(customSeparatorMatch[0].length);
+    const matchStr = customSeparatorMatch[0];
+    this.#separators.add(matchStr[2]); // //와 \n 사이의 커스텀 구분자 추가
+    this.#inputStr = this.#inputStr.slice(matchStr.length);
   }
 
   calculateSum() {
