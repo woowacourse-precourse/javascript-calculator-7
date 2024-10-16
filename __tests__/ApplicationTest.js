@@ -69,4 +69,28 @@ describe("문자열 계산기", () => {
       await expect(app.run()).rejects.toThrow("[ERROR]");
     });
   });
+  test("기본 구분자 외의 구분자 사용", async () => {
+    const inputs = ["1\\2"];
+    mockQuestions(inputs);
+
+    const app = new App();
+
+    await expect(app.run()).rejects.toThrow("[ERROR]");
+  });
+  test("커스텀 구분자 외의 구분자 사용", async () => {
+    const inputs = ["\\;\n1,2"];
+    mockQuestions(inputs);
+
+    const app = new App();
+
+    await expect(app.run()).rejects.toThrow("[ERROR]");
+  });
+  test("숫자 외의 문자 입력", async () => {
+    const inputs = ["\\;\na"];
+    mockQuestions(inputs);
+
+    const app = new App();
+
+    await expect(app.run()).rejects.toThrow("[ERROR]");
+  });
 });
