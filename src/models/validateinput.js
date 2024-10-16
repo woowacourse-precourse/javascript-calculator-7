@@ -22,6 +22,12 @@ function validateInput(input) {
       throw new Error(ERROR_MESSAGE.invalidSeparator);
     }
   }
+  const numbers = extractNumbersFromInput(input);
+  for (const num of numbers) {
+    if (num < 0) {
+      throw new Error(ERROR_MESSAGE.invalidPositiveNumber);
+    }
+  }
   return true;
 }
 
