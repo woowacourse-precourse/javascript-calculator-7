@@ -22,6 +22,11 @@ class App {
     const isAllNumbers = (numbers) => {
       return numbers.every((number) => !Number.isNaN(number))
     }
+
+    if (isAllNumbers) {
+      Console.print(`결과 : ${numbers.reduce((a, b) => a + b)}`)
+      return
+    }
   }
 }
 
