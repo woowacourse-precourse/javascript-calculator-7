@@ -2,7 +2,7 @@ import { MissionUtils } from '@woowacourse/mission-utils';
 
 class App {
   async run() {
-    const input = await MissionUtils.Console.readLineAsync(
+    let input = await MissionUtils.Console.readLineAsync(
       '덧셈할 문자열을 입력해 주세요.'
     );
 
@@ -11,7 +11,15 @@ class App {
     const customDivision =
       input.match(customPattern) && input.match(customPattern)[1];
 
-    MissionUtils.Console.print('결과 : ' + input);
+    let division = '';
+    if (customDivision) {
+      division = new RegExp(customDivision + '|:|,');
+      input = input.substring(4 + customDivision.length);
+    } else {
+      division = new RegExp(baseDivision);
+    }
+
+    MissionUtils.Console.print(division);
   }
 }
 
