@@ -12,7 +12,7 @@ class App {
     const customDivider = input.match(/^\/\/(.+)\\n/)
     if (customDivider !== null) {
       input = input.replace(/^\/\/.+\\n/, "")
-      DIVIDER.push(customDivider[1])
+      DIVIDER.unshift(customDivider[1])
     }
 
     if (input === "") {
@@ -33,7 +33,7 @@ class App {
 
     if (!isAllNumbers(numbers)) {
       throw new Error(
-        "[ERROR] 수와 구분자를 포함한 올바른 문자열을 입력해주세요.",
+        "[ERROR] 수와 구분자를 포함한 올바른 문자열을 입력해주세요. ex) 1,2",
       )
     }
     if (!isAllPositiveNumber(numbers)) {
