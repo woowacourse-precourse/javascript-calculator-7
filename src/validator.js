@@ -14,19 +14,15 @@ export function checkSeperator(input) {
   }
 }
 
-export function checkeCommaColonConflict(input) {
-  let result = false;
-  const duplicateComma = /,,+/;
-  const duplicateColon = /::+/;
-  const commaColonRegExp = /,:/;
-  const colonCommaRegExp = /:,/;
+export function checkSeperatorConflict(input, customSeperator) {
+  const regExpString = customSeperator
+    ? `${customSeperator}{2,}|${customSeperator}[,:]|[,:]{2,}|[,:]${customSeperator}`
+    : `,{2,}|:{2,}|,:|:,`;
 
-  if (duplicateColon.test(input)) result = true;
-  if (duplicateComma.test(input)) result = true;
-  if (commaColonRegExp.test(input)) result = true;
-  if (colonCommaRegExp.test(input)) result = true;
-
-  if (result) throw new Error(errorMessage.useSeperatorConflict);
+  const regExp = new RegExp(regExpString);
+  if (regExp.test(input)) {
+    throw new Error(errorMessage.useSeperatorConflict);
+  }
 }
 
 export function checkIncludeNewLine(input) {
@@ -50,18 +46,4 @@ export function checkUseOtherSeperator(input) {
 
   if (!Number(splitInput))
     throw new Error(errorMessage.useCustomOrBasicSeparator);
-}
-
-export function checkSeperatorConflict(input) {
-  checkeCommaColonConflict(input);
-
-  let splitInput = input.split(/(?:\/\/|\\n)/);
-  const customSeperator = splitInput[1];
-
-  const regExpString = `${customSeperator}{2,}|${customSeperator}[,:]|[,:]{2,}|[,:]${customSeperator}`;
-
-  const conflictRegExp = new RegExp(regExpString);
-
-  if (conflictRegExp.test(splitInput.join('')))
-    throw new Error(errorMessage.useSeperatorConflict);
 }
