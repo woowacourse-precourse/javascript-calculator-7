@@ -1,5 +1,5 @@
 import { Console } from "@woowacourse/mission-utils";
-import { WRONG_SEPARATOR } from "./constants/errorMessage.js";
+import { WRONG_SEPARATOR, WRONG_NUMBER } from "./constants/errorMessage.js";
 
 class App {
   #plusString;
@@ -62,6 +62,9 @@ class App {
     for (let i = 0; i < numberList.length; i++) {
       if (isNaN(numberList[i])) {
         throw new Error(WRONG_SEPARATOR);
+      }
+      if (Math.sign(numberList[i]) === -1) {
+        throw new Error(WRONG_NUMBER);
       }
     }
   }
