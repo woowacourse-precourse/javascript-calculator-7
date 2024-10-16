@@ -176,3 +176,51 @@ const regex = /패턴/flag;
 const regex = new RegExp('패턴', 'flag')
 
 ```
+
+---
+
+**comment**
+
+*주석 작성법은 airbnb 자바스크립트 스타일을 기반으로 학습*
+
+1. 여러줄 작성해야할 경우 /** ... **/
+
+```javascript
+  /**
+   * 이런 
+   * 식으로
+   * 작성
+   */
+
+```
+
+2. 한줄만 작성할 경우 //
+
+```javascript
+function comment() {
+  const something = 1
+
+  // 주석이 첫줄에 있지 않는 이상 한줄을 비워서 작성
+  return something;
+}
+```
+
+3. 작성할때 가독성을 위해서 한칸 띄워서 작성
+
+```javascript
+    //이건 나쁜방법
+    // 이렇게 작성해라
+```
+
+4. FIXME: , TODO: 같은 접두사를 작성해서 협업하는 사람들이 파악이 용이하게 해라
+
+```javascript
+function something() {
+  // FIXME: var 사용은 지양해야합니다.
+  var anything = /asdf/g;
+
+  /** TODO: let 또는 const로 변경 
+   *  정규식을 완성해야 합니다
+   * /
+}
+```
