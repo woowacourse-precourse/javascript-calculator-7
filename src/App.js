@@ -9,7 +9,7 @@ class App {
       const result = this.calculateSum(input);
       Console.print(`결과: ${result}`);
     } catch (error) {
-      Console.print(error.message);
+      Console.print("[ERROR]");
     }
   }
 
@@ -23,6 +23,12 @@ class App {
     // 커스텀 구분자인지 확인
     if (input.startsWith('//')) {
       const delimiterEnd = input.indexOf('\n');
+
+      // \n 가 없는 경우 에러
+      if (delimiterEndIndex === -1) {
+        throw new Error();
+      }
+
       const customDelimiter = input.slice(2, delimiterEnd);
       defaultDelimiter = new RegExp(`[${customDelimiter}]`);
 
