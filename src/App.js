@@ -1,5 +1,8 @@
 import { Console } from "@woowacourse/mission-utils";
 
+const NUM_REGEX = /^[0-9]+$/;
+const SEP_REGEX = /\/\/(.*?)\\n/g;
+
 class App {
   async run() {
     try {
@@ -33,8 +36,7 @@ class App {
 
   isValid(str) {
     // 정규표현식을 사용하여 양수인지 확인 후 아닐경우 오류 발생
-    const numRegex = /^[0-9]+$/;
-    if (numRegex.test(str)) {
+    if (NUM_REGEX.test(str)) {
       return true;
     }
     if (+str < 0) throw Error("잘못된 입력입니다. 숫자는 양수만 입력해주세요!");
@@ -45,10 +47,9 @@ class App {
     // 커스텀 구분자 생성함수
     // 정규표현식을 활용하여 커스텀 구분자를 분리 후 기본 구분자와 합쳐줌
     // 기존 문자열에서 커스텀 구분자를 만들기 위한 문자열을 삭제 후 반환해줌
-    const sepRegex = /\/\/(.*?)\\n/g;
     const separator = [",", ":"];
-    const customeSep = [...str.matchAll(sepRegex)].map((v) => v[1]);
-    str = str.replace(sepRegex, "");
+    const customeSep = [...str.matchAll(SEP_REGEX)].map((v) => v[1]);
+    str = str.replace(SEP_REGEX, "");
     return { str, separator: [...customeSep, ...separator] };
   }
 }
