@@ -1,18 +1,23 @@
-import { MissionUtils } from "@woowacourse/mission-utils";
+import { Console } from "@woowacourse/mission-utils";
 
 const getNumberString = async () => {
   try {
-    const numberString = await MissionUtils.Console.readLineAsync(
+    const numStr = await Console.readLineAsync(
       "덧셈할 문자열을 입력해 주세요.\n"
     );
+    return numStr;
   } catch (error) {
-    MissionUtils.Console.print(`[ERROR] ${error}`);
+    throw new Error(error);
   }
 };
 
 class App {
   async run() {
-    getNumberString();
+    try {
+      const numStr = new NumStr(await getNumberString());
+    } catch (error) {
+      throw new Error(`[ERROR] ${error.message}`);
+    }
   }
 }
 
