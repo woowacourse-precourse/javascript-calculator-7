@@ -1,12 +1,13 @@
 import { Console } from "@woowacourse/mission-utils";
+import MESSAGES from "./messages.js";
 
 const InterfaceUtil = {
   async inputString() {
-    return await Console.readLineAsync("덧셈할 문자열을 입력해 주세요.\n");
+    return await Console.readLineAsync(MESSAGES.INPUT);
   },
 
   printResult(sum) {
-    Console.print("결과 : " + sum);
+    Console.print(MESSAGES.RESULT + sum);
   },
 };
 
