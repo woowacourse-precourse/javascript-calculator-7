@@ -7,6 +7,7 @@ class App {
     const userInput = await Console.readLineAsync('');
     if (this.isStartWithNumber(userInput)) {
       this.checkSeperator(userInput);
+      this.checkeCommaColonConflict(userInput);
     } else if (this.isStartWidthDubbleSlash(userInput)) {
     } else {
       throw new Error(errorMessage.useNumberOrSlash);
@@ -27,6 +28,21 @@ class App {
     if (!Boolean(Number(input.split(/[,:]/).join('')))) {
       throw new Error(errorMessage.useCommaOrColon);
     }
+  }
+
+  checkeCommaColonConflict(input) {
+    let result = false;
+    const duplicateComma = /,,+/;
+    const duplicateColon = /::+/;
+    const commaColonRegExp = /,:/;
+    const colonCommaRegExp = /:,/;
+
+    if (duplicateColon.test(input)) result = true;
+    if (duplicateComma.test(input)) result = true;
+    if (commaColonRegExp.test(input)) result = true;
+    if (colonCommaRegExp.test(input)) result = true;
+
+    if (result) throw new Error(errorMessage.useSeperatorConflict);
   }
 }
 
