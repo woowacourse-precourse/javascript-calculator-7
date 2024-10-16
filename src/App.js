@@ -27,7 +27,7 @@ class App {
 
     const sumOfUserInput = this.getSum(separatedUserInputsNumberArray);
 
-    MissionUtils.Console.print(`결과 : ${sumOfUserInput}`);
+    this.printResult(sumOfUserInput);
   }
   async getUserInput() {
     return await MissionUtils.Console.readLineAsync("문자열을 입력해주세요.");
@@ -47,6 +47,9 @@ class App {
   }
   getSum(numberArray) {
     return numberArray.reduce((prev, cur) => prev + cur, 0);
+  }
+  printResult(str) {
+    MissionUtils.Console.print(`결과 : ${str}`);
   }
 }
 
