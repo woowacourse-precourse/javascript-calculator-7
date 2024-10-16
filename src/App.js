@@ -46,7 +46,11 @@ class App {
     var total = 0;
     if(arr.startsWith("//")){
       const customDelimiter = arr.split("\\n")[0].substring(2,); // 커스텀 구분자를 추출
-
+      const numParts = arr.split("\\n")[1]; // 분할된 숫자 부분
+      const numArr = numParts.split(customDelimiter);
+      for (let i = 0; i<numArr.length; i++){
+        total += Number(numArr[i]);
+      }
     } else { // 기본 구분자를 통한 합
       const numArr = arr.split(/,|:/);
       for (let i =0; i<numArr.length; i++){
