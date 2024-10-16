@@ -18,4 +18,8 @@ describe('문자열 계산기 model', () => {
     const result = parseNumbers('4,5,6,7:8:9');
     expect(result).toEqual([4, 5, 6, 7, 8, 9]);
   });
+  test('커스텀 구분자로 구분된 숫자 파싱', () => {
+    const result1 = parseNumbers('//;\n4;5;6;7;8;9');
+    expect(result1).toEqual([4, 5, 6, 7, 8, 9]);
+  });
 });
