@@ -1,5 +1,8 @@
 import { Console } from '@woowacourse/mission-utils';
 
-let userInput = Console.readLineAsync('덧셈할 문자열을 입력해 주세요.');
+const UserInput = async () => {
+  const input = await Console.readLineAsync('덧셈할 문자열을 입력해 주세요.');
+  return input;
+};
 
-export default userInput;
+export default UserInput;
