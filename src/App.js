@@ -48,6 +48,10 @@ class App {
     }
     return true
   }
+
+  returnNumbers(string) {
+    return [1, 2];
+  }
 }
 
 

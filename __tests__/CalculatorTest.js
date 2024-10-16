@@ -63,5 +63,11 @@ describe("문자열 계산기", () => {
     test("기본 구분자와 커스텀 구분자만 포함되면, 올바른 문자열이다.", () => {
       expect(app.isValidString("1,2;3", [",", ";"])).toBe(true);
     });
+  });
+
+  describe("문자 배열을 숫자 배열로 변환", () => {
+    test("문자 배열을 숫자 배열로 변환한다.", () => {
+      expect(app.returnNumbers(["1", "2"])).toEqual([1, 2]);
+    });
   })
 });
