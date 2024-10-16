@@ -1,8 +1,12 @@
 import { Console } from "@woowacourse/mission-utils";
 
+function sum(numbers) {
+  return numbers.reduce((acc, curr) => acc + curr, 0);
+}
+
 class App {
   async run() {
-    Console.print("덧셈할 문자를 입력해 주세요.");
+    // Console.print("덧셈할 문자를 입력해 주세요.");
     const STRING_INPUT = await Console.readLineAsync("");
     const CLEANED_INPUT = STRING_INPUT.replace(/"/g, "").trim();
 
@@ -18,10 +22,10 @@ class App {
     }
 
     const WORDS = NUM_STRING.split(DELIMITERS);
-    Console.print(WORDS);
     
     const STRING_TO_NUM = WORDS.map(Number);
-    Console.print(STRING_TO_NUM);
+    const RESULT = sum(STRING_TO_NUM)
+    Console.print("결과 : "+RESULT);
   }
 }
 
