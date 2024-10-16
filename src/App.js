@@ -19,33 +19,32 @@ class App {
   }
 
   async run() {
-    try {
-      const str = await Console.readLineAsync(
-        '덧셈할 문자열을 입력해 주세요.\n',
-      );
+    const str = await Console.readLineAsync('덧셈할 문자열을 입력해 주세요.\n');
 
-      const delimeters = [',', ':'];
-      const customRegexp = /^\/\/.+\\n/;
+    const delimeters = [',', ':'];
+    const customRegexp = /^\/\/.+\\n/;
 
-      let parsed = str;
+    let parsed = str;
 
-      if (this.isCustomDelimiterPresent(str, customRegexp)) {
-        delimeters.push(this.getCustomDelimiter(str.match(customRegexp)[0]));
-        parsed = str.replace(customRegexp, '');
-      }
-
-      const delimeterRegexp = new RegExp(`[${delimeters.join('')}]`, 'g');
-
-      const splited = parsed.split(delimeterRegexp);
-      const nums = splited.map(Number);
-
-      const addRes = this.add(nums);
-
-      this.printSum(addRes);
-    } catch (error) {
-      // Todo... error 처리
-      // console.error(error);
+    if (this.isCustomDelimiterPresent(str, customRegexp)) {
+      delimeters.push(this.getCustomDelimiter(str.match(customRegexp)[0]));
+      parsed = str.replace(customRegexp, '');
     }
+
+    const delimeterRegexp = new RegExp(`[${delimeters.join('')}]`, 'g');
+
+    const splited = parsed.split(delimeterRegexp);
+    const nums = splited.map(n => {
+      const num = Number(n);
+
+      if (num < 0) throw new Error('[ERROR]');
+      if (Number.isNaN(num)) throw new Error('[ERROR]');
+      return num;
+    });
+
+    const addRes = this.add(nums);
+
+    this.printSum(addRes);
   }
 }
 
