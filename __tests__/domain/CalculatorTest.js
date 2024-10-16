@@ -1,4 +1,4 @@
-import Calculator from '../src/domain/Calculator';
+import Calculator from '../../src/domain/Calculator';
 
 describe('계산 기능 테스트', () => {
   test('양수로 이루어진 배열을 입력하면 원소의 총합이 반환된다.', () => {
