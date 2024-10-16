@@ -1,6 +1,6 @@
-import { INITIAL_SUM } from '../constants/value';
-
 class Calculator {
+  static #INITIAL_TOTAL = 0;
+
   #numbers;
 
   constructor(numbers) {
@@ -8,9 +8,13 @@ class Calculator {
   }
 
   add() {
-    const sum = this.#numbers.reduce((acc, cur) => acc + cur, INITIAL_SUM);
+    const total = this.#numbers.reduce((acc, cur) => {
+      const sum = acc + cur;
 
-    return sum;
+      return sum;
+    }, Calculator.#INITIAL_TOTAL);
+
+    return total;
   }
 }
 
