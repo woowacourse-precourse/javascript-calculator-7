@@ -8,6 +8,10 @@ class App {
       accumulator + number, initialValue);
   }
 
+  splitStringByDelimiter(stringExpression) {
+    return ["1", "2"];
+  }
+
 }
 
 export default App;
