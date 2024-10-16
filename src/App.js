@@ -20,8 +20,9 @@ class App {
     }
 
     const numArr = input.split(division).map(Number);
+    const sum = numArr.reduce((a, b) => a + b);
 
-    MissionUtils.Console.print(numArr);
+    MissionUtils.Console.print('결과 : ' + sum);
   }
 }
 
