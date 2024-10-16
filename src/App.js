@@ -25,7 +25,16 @@ class App {
       return;
     }
 
+    const captureCustomRegex = /\/\/(.+?)\\n/g;
+    const custom = [...this.#text.matchAll(captureCustomRegex)];
     let separatorRegex = ",|;";
+
+    if (custom && custom.length > 0) {
+      custom.forEach(([caturedString, separator]) => {
+        this.#text = this.#text.substring(caturedString.length);
+        separatorRegex += `|${separator}`;
+      });
+    }
 
     const allSeparatorRegex = new RegExp(separatorRegex, "g");
     const numbers = this.#text.split(allSeparatorRegex);
