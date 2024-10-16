@@ -7,7 +7,7 @@ class App {
     return userInput;
   }
 
-  parseString(string) {
+  parseStringToNumbers(string) {
     const defaultDelimiters = [",", ":"];
     let result = string;
 
@@ -18,7 +18,7 @@ class App {
     const regex = new RegExp(`[${defaultDelimiters.join("")}]`);
     const numbers = result.split(regex);
 
-    return numbers;
+    return this.parseToNumber(numbers);
   }
 
   parseCustomDelimiters(string, defaultDelimiters) {
@@ -29,9 +29,13 @@ class App {
     return string.slice(findIndex + 2);
   }
 
+  parseToNumber(numbers) {
+    return numbers.map(Number);
+  }
+
   async run() {
     const input = await this.readInput();
-    const numbers = this.parseString(input);
+    const numbers = this.parseStringToNumbers(input);
   }
 }
 
