@@ -20,14 +20,16 @@ class App {
       const regex = new RegExp(`[${splitters}]`);
       return splitInput.split(regex).map((str) => parseInt(str, 10));
     } else {
-      const regex = new RegExp("[,:]");
+      const defaultSplitters = ",:";
+      const regex = new RegExp(`[${defaultSplitters}]`);
       return input.split(regex).map((str) => parseInt(str, 10));
     }
   }
 
   setSplitters(splitter) {
+    const defaultSplitters = ",:";
     const escapedSplitter = splitter.replace(/[.*+?^${}()|[\]\\]/g, "\\$&");
-    return ",:" + escapedSplitter;
+    return defaultSplitters + escapedSplitter;
   }
 
   addCalculate(nums) {
