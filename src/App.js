@@ -31,11 +31,8 @@ class App {
   }
 
   checkCustomSplitStringByDelimiter(inputString) {
-    if(inputString[0] === '/' && inputString[1] === '/' 
-      && inputString[3] === '\\' && inputString[4] === 'n'){
-      return true;
-    }
-    return false;
+    return (inputString[0] === '/' && inputString[1] === '/' 
+      && inputString[3] === '\\' && inputString[4] === 'n');
   }
 }
 
