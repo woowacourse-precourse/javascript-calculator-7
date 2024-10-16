@@ -19,7 +19,9 @@ class App {
       division = new RegExp(baseDivision);
     }
 
-    MissionUtils.Console.print(division);
+    const numArr = input.split(division).map(Number);
+
+    MissionUtils.Console.print(numArr);
   }
 }
 
