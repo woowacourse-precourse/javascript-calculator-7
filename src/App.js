@@ -23,7 +23,19 @@ class App {
 
     const WORDS = NUM_STRING.split(DELIMITERS);
     
-    const STRING_TO_NUM = WORDS.map(Number);
+    const STRING_TO_NUM = WORDS.map((word) => {
+      const NUM = Number(word);
+      if (isNaN(NUM)) {
+        throw new Error("[ERROR]");
+      }
+      return NUM;
+    });
+
+    const NEGATIVE_NUM = STRING_TO_NUM.filter(num => num < 0);
+    if (NEGATIVE_NUM.length > 0) {
+      throw new Error("[ERROR]");
+    }
+
     const RESULT = sum(STRING_TO_NUM)
     Console.print("결과 : "+RESULT);
   }
