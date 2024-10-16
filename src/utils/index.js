@@ -1,6 +1,7 @@
 import {
     SEPERATOR_STRING,
     DEFAULT_SEPERATOR,
+    NUMBER_PATTERN
 } from '../constant/index.js'
 
 function getSeperatorArray(expression){
@@ -25,7 +26,15 @@ function hasCustomSeperator(expression){
     return expression.startsWith(SEPERATOR_STRING.START) && expression.includes(SEPERATOR_STRING.END);
 }
 
+function hasExpressionError(expression, seperatorArray){
+    seperatorArray.map((seperator) => {
+        expression = expression.replaceAll(seperator, "");
+    })
+    return NUMBER_PATTERN.test(expression);
+}
+
 export {
     getSeperatorArray,
-    getExpressionString
+    getExpressionString,
+    hasExpressionError
 }

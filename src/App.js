@@ -1,7 +1,13 @@
+import { Console } from "@woowacourse/mission-utils";
 import { calculator } from "./caclulator.js";
 class App {
   async run() {
-    calculator();
+    try{
+      await calculator();
+    }catch(error){
+      Console.print(error.message);
+      return;
+    }
   }
 }
 
