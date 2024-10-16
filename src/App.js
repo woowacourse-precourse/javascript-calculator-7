@@ -4,8 +4,7 @@ class App {
   async run() {
     try {
 
-      const input = await Console.readLineAsync("덧셈할 문자열을 입력해 주세요."); 
-
+      const input = await Console.readLineAsync("덧셈할 문자열을 입력해 주세요.\n"); 
       const result = this.calculatorSum(input); 
       Console.print(`결과 : ${result}`); 
     } catch (error) {
@@ -20,10 +19,17 @@ class App {
       return 0;
     }
 
-    const delimiter = /[,:]/;
+    let delimiter = /[,:]/;
     
-    const numbers = input.split(delimiter).map(Number);
+    if(input.startsWith('//')){
+      const part = input.split('\\n');   
+    
 
+      delimiter = new RegExp(part[0].slice(2));
+      input = part[1];
+    }
+
+    const numbers = input.split(delimiter).map(Number);
     return numbers.reduce((acc, num) => acc + num, 0);
 
   }
