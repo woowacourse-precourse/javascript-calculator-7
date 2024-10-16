@@ -59,3 +59,18 @@ git restore --staged 파일명
 ```
 git log
 ```
+
+**config**
+
+```
+git config --list
+```
+
+git의 세팅되어 있는 설정을 확인
+
+```
+git config --global user.name 사용자명
+git config --global user.email 사용자@이메일.com
+```
+
+사용자의 이름, 이메일 설정
