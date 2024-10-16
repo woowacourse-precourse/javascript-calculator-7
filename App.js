@@ -57,7 +57,7 @@ const splitUserInput = (input) => {
     return userInputArray ;
 }
 
-async function getUserNumbers(){
+const getUserNumbers = async () => {
 
     try{
         const userInput = await Console.readLineAsync(CALCULATOR_VARIABLES.INPUT_PROMPT);
@@ -78,14 +78,14 @@ async function getUserNumbers(){
 
 }
 
-async function printUserInput(input) {
+const printUserInput = async(input) => {
     let sumValue = getSum(input);
     Console.print(CALCULATOR_VARIABLES.OUTPUT_PROMPT + sumValue);
 
 }
 
 
-async function run() {
+const run =async() => {
     const userNumbers = await getUserNumbers();
     if (userNumbers) {
         printUserInput(userNumbers);
