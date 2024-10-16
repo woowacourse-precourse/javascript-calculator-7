@@ -56,13 +56,9 @@ describe("문자열 계산기", () => {
     });
 
 
-    // test("커스텀 구분자만 포함되면, 올바른 문자열이다.", () => {
-    //   expect(app.isValidString("1;2;3", [";"])).toBe(true);
-    // });
-
-    // test("기본 구분자와 커스텀 구분자만 포함되면, 올바른 문자열이다.", () => {
-    //   expect(app.isValidString("1,2;3", [",", ";"])).toBe(true);
-    // });
+    test("커스텀 구분자만 포함되면, 올바른 문자열이다.", () => {
+      expect(app.isValidString("1;2;3", [";"])).toBe(true);
+    });
 
   })
 });
