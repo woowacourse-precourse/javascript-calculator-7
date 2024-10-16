@@ -39,7 +39,14 @@ class App {
   }
 
   isValidString(inputString, delimiters) {
-    return false;
+    for(const element of inputString) {
+      const isNotInclude = !delimiters.includes(element);
+      
+      if(isNaN(element) || isNotInclude) {
+        return false;
+      }
+    }
+    return true
   }
 }
 
