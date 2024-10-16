@@ -15,8 +15,13 @@ class App {
       DIVIDER.push(customDivider[1])
     }
 
+    if (input === "") {
+      throw new Error("[ERROR] 빈 문자열 입니다.")
+    }
+
     const escapedDivider = DIVIDER.map(escapeRegExp).join("|")
     const splitRegex = new RegExp(escapedDivider)
+
     const numbers = input.split(splitRegex).map(Number)
 
     const isAllNumbers = (numbers) => {
@@ -27,7 +32,9 @@ class App {
     }
 
     if (!isAllNumbers(numbers)) {
-      throw new Error("[ERROR] 문자열 입니다.")
+      throw new Error(
+        "[ERROR] 수와 구분자를 포함한 올바른 문자열을 입력해주세요.",
+      )
     }
     if (!isAllPositiveNumber(numbers)) {
       throw new Error("[ERROR] 양수만 입력해주세요.")
