@@ -1,4 +1,4 @@
-import { Console } from "@woowacourse/mission-utils";
+import { MissionUtils } from "@woowacourse/mission-utils";
 
 class App {
   defaultSeparator = ",;";
@@ -27,10 +27,10 @@ class App {
 
     const sumOfUserInput = this.getSum(separatedUserInputsNumberArray);
 
-    Console.print(`결과 : ${sumOfUserInput}`);
+    MissionUtils.Console.print(`결과 : ${sumOfUserInput}`);
   }
   async getUserInput() {
-    return await Console.readLineAsync("문자열을 입력해주세요.");
+    return await MissionUtils.Console.readLineAsync("문자열을 입력해주세요.");
   }
   getSeparator(str) {
     const customSeparatorMatchedString = str.match(this.customSeparatorRegExr);
