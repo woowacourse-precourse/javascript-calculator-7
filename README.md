@@ -26,13 +26,13 @@
 
 필드:
 
-- delimiters: 현재 사용 중인 구분자들의 배열
+- [] delimiters: 현재 사용 중인 구분자들의 배열
 
 메서드:
 
-- constructor(): 객체 생성 시 기본 구분자 리스트로 초기화
-- addCustomDelimiter(delimiter): 새로운 구분자를 delimiters 배열에 추가
-- getDelimiters(): 현재 저장된 구분자 배열을 반환
+- [] constructor(): 객체 생성 시 기본 구분자 리스트로 초기화
+- [] addCustomDelimiter(delimiter): 새로운 구분자를 delimiters 배열에 추가
+- [] getDelimiters(): 현재 저장된 구분자 배열을 반환
 
 #### StringParser
 
@@ -40,8 +40,8 @@
 
 메서드:
 
-- parseInput(input): 입력 문자열에서 커스텀 구분자와 계산 문자열을 추출
-- extractNumbers(calculationString, delimiters): 구분자를 사용하여 숫자들을 추출
+- [] parseInput(input): 입력 문자열에서 커스텀 구분자와 계산 문자열을 추출
+- [] extractNumbers(calculationString, delimiters): 구분자를 사용하여 숫자들을 추출
 
 #### Calculator
 
@@ -49,7 +49,7 @@
 
 메서드:
 
-- calculate(numbers): 숫자 배열의 합계를 계산하여 반환
+- [] calculate(numbers): 숫자 배열의 합계를 계산하여 반환
 
 #### ResultPrinter
 
@@ -57,7 +57,7 @@
 
 메서드:
 
-- print(result): 계산 결과를 출력
+- [] print(result): 계산 결과를 출력
 
 #### ErrorHandler
 
@@ -65,12 +65,12 @@
 
 메서드:
 
-- handleInvalidDelimiter(usedDelimiter): 입력된 구분자가 등록된 구분자 리스트에 없는 경우 에러 메시지를 출력
-- handleInvalidCustomDelimiter(customDelimiter): 커스텀 구분자가 숫자인지 검증하고, 숫자일 경우 에러 메시지를 출력
-- handleDelimiterAtStringEnds(inputString): 입력 문자열이 구분자로 시작하거나 끝나는지 확인하고, 그렇다면 에러 메시지를 출력
-- handleMissingCustomDelimiterSyntax(): 커스텀 구분자 지정 시 // 또는 \n 중 하나가 부재할 경우 에러를 출력
-- handleNumberOutOfRange(number): 숫자의 범위가 정수 범위를 벗어나는 경우 에러를 출력
-- handleGenericError(errorMessage): 기타 에러 상황에 대해 일반적인 에러 메시지를 출력
+- [] handleInvalidDelimiter(usedDelimiter): 입력된 구분자가 등록된 구분자 리스트에 없는 경우 에러 메시지를 출력
+- [] handleInvalidCustomDelimiter(customDelimiter): 커스텀 구분자가 숫자인지 검증하고, 숫자일 경우 에러 메시지를 출력
+- [] handleDelimiterAtStringEnds(inputString): 입력 문자열이 구분자로 시작하거나 끝나는지 확인하고, 그렇다면 에러 메시지를 출력
+- [] handleMissingCustomDelimiterSyntax(): 커스텀 구분자 지정 시 // 또는 \n 중 하나가 부재할 경우 에러를 출력
+- [] handleNumberOutOfRange(number): 숫자의 범위가 정수 범위를 벗어나는 경우 에러를 출력
+- [] handleGenericError(errorMessage): 기타 에러 상황에 대해 일반적인 에러 메시지를 출력
 
 ### 함수
 
@@ -94,5 +94,5 @@
 역할: 파싱된 입력 데이터를 저장
 필드:
 
-- customDelimiter: 커스텀 구분자 (없을 수도 있음)
-- calculationString: 실제 계산에 사용할 숫자 문자열
+- [] customDelimiter: 커스텀 구분자 (없을 수도 있음)
+- [] calculationString: 실제 계산에 사용할 숫자 문자열
