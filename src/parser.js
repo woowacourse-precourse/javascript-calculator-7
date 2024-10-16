@@ -1,4 +1,5 @@
 import { Console } from '@woowacourse/mission-utils';
+import parseCustomInput from './parseCustomInput';
 
 // 에러를 출력하는 함수
 function handleError(error) {
