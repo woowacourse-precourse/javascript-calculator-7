@@ -28,6 +28,9 @@ class App {
 
       numberString = input.slice(delimiterEnd + 1)
     }
+
+    const numbers = numberString.split(defaultDelimiter);
+
     return
   }
 }
