@@ -10,7 +10,8 @@ class App {
     if (!isInputValid(separator, expression)) throw new Error("[ERROR]");
 
     const sum = CalculateUtil.sumExpression(separator, expression);
-    console.log(sum);
+
+    InterfaceUtil.printResult(sum);
   }
 }
 
