@@ -8,6 +8,7 @@ class App {
     }
     else {
       const stringArray = this.splitStringByDelimiter(inputString, delimiters);
+      const numberArray = this.returnNumbers(stringArray);
     }
   }
 
