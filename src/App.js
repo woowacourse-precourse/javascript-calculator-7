@@ -2,6 +2,7 @@ import { Console } from '@woowacourse/mission-utils';
 
 const MESSAGE = {
 	INPUT_MESSAGE: '덧셈할 문자열을 입력해 주세요.\n',
+	END_MESSAGE: '결과 : ',
 };
 
 class App {
@@ -58,12 +59,18 @@ class App {
 		return this.numbers.reduce((acc, curr) => acc + curr, 0);
 	}
 
+	printEndMessage() {
+		let sum = this.sumNumbers();
+		Console.print(MESSAGE.END_MESSAGE + sum);
+	}
+
 	async run() {
 		const input = await this.userInput();
 		if (this.checkCustomSeparator(input)) {
 			this.updateCustomSeparator(input);
 		}
 		this.updateNumberFromString(input);
+		this.printEndMessage();
 	}
 }
 
