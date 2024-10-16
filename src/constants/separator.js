@@ -6,4 +6,4 @@ CUSTOM_SEPARATOR - 정규 표현식 설명
 \n: "\n" 문자로 끝나야 한다.
 /gm: 모든 문자를 검색하고, "\n" 줄바꿈 문자가 들어가기 때문에 다중 행 모드를 활성화한다.
 */
-export const CUSTOM_SEPARATOR = /^\/\/([^0-9\n]+)\n/gm;
+export const CUSTOM_SEPARATOR = /^\/\/([^0-9]+)\n/gm;
