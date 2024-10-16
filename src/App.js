@@ -3,19 +3,44 @@ import { errorMessage, outputMessage } from './constant.js';
 
 class App {
   async run() {
+    let customSeparator = null;
     Console.print(outputMessage.startMessage);
-    const userInput = await Console.readLineAsync('');
+    let userInput = await Console.readLineAsync('');
     if (this.isStartWithNumber(userInput)) {
       this.checkSeperator(userInput);
       this.checkeCommaColonConflict(userInput);
     } else if (this.isStartWidthDubbleSlash(userInput)) {
       this.checkIncludeNewLine(userInput);
       this.checkIncludeEmptyString(userInput);
+      customSeparator = this.getCustomSeparator(userInput);
       this.checkUseOtherSeperator(userInput);
       this.checkSeperatorConflict(userInput);
+      userInput = this.sliceCustomSeparator(userInput);
     } else {
       throw new Error(errorMessage.useNumberOrSlash);
     }
+
+    const splitedUserInput = this.splitUserInput(userInput, customSeparator);
+    const sum = this.sum(splitedUserInput);
+  }
+
+  sum(arr) {
+    return arr.reduce((acc, cur) => acc + Number(cur), 0);
+  }
+
+  splitUserInput(input, customSeparator) {
+    const separatorRegExp = new RegExp(`${customSeparator}|[,:]`);
+    return input.split(separatorRegExp);
+  }
+
+  sliceCustomSeparator(input) {
+    return input.split('\\n')[1];
+  }
+
+  getCustomSeparator(input) {
+    let splitInput = input.split(/(?:\/\/|\\n)/);
+    const customSeperator = splitInput[1];
+    return customSeperator;
   }
 
   isStartWithNumber(input) {
@@ -64,7 +89,6 @@ class App {
     const customSeperator = splitInput[1];
 
     const basicSeparatorRegExp = /[,:]/;
-    const customSeperatorRegExp = new RegExp(customSeperator);
 
     splitInput = splitInput.join('').split(basicSeparatorRegExp).join('');
     splitInput = splitInput.split(customSeperator).join('');
