@@ -1,6 +1,9 @@
 class App {
   async run() {
-    let inputString = '//;\\n1;2;3';
+
+  }
+
+  calculate(inputString) {
     let delimiters = [",", ":"];
 
     if(this.checkCustomSplitStringByDelimiter(inputString)){
@@ -8,10 +11,10 @@ class App {
       inputString = this.getStrippedString(inputString);
     }
 
-    else if(this.isValidString(inputString, delimiters)) {
+    if(this.isValidString(inputString, delimiters)) {
       const stringArray = this.splitStringByDelimiter(inputString, delimiters);
       const numberArray = this.returnNumbers(stringArray);
-      this.add(numberArray);
+      return this.add(numberArray);
     }
     
     else {
