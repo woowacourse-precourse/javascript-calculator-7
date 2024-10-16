@@ -2,27 +2,21 @@
 
 import { delimiter } from '../constants/delimiter.js';
 import { ERROR_MESSAGE } from '../constants/errorMessages.js';
+import { extractCustomDelimiter } from '../util/Util.js';
 
 class Validation {
   /**
    * @param {string} input
    * @throws {Error}
    * */
-  //커스텀 구분자 추출함수
-  //터미널 상에 입력되는 숫자는 string으로 인식이 되어 정규표현식으로 검증 불가하다고 판단
-  static extractCustomDelimiter(input) {
-    if (input.startsWith('//')) {
-      const delimiter = input.indexOf('\\n');
-      const hasNumber = input
-        .substring(2, delimiter)
-        .split('')
-        .filter((item) => !isNaN(Number(item)));
 
-      if (hasNumber.length > 0) {
-        throw new Error(
-          `${ERROR_MESSAGE.PREFIX} ${ERROR_MESSAGE.NO_NUMBER_CUSTOM_SEPARATOR}`
-        );
-      }
+  //터미널 상에 입력되는 숫자는 string으로 인식이 되어 정규표현식으로 검증 불가하다고 판단
+  static validateCustomDelimiter(input) {
+    const customDelimiter = extractCustomDelimiter(input);
+    if (customDelimiter && /\d/.test(customDelimiter)) {
+      throw new Error(
+        `${ERROR_MESSAGE.PREFIX} ${ERROR_MESSAGE.NO_NUMBER_CUSTOM_SEPARATOR}`
+      );
     }
   }
 
@@ -112,7 +106,7 @@ class Validation {
     this.validateDefaultDelimiter(input);
 
     //커스텀 구분자에 숫자가 포함된 경우
-    this.extractCustomDelimiter(input);
+    this.validateCustomDelimiter(input);
     return input;
 
     /**@todo 소수점 처리, 공백은 0도 생각해보기! */
