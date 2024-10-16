@@ -17,6 +17,9 @@ class App {
         this.extractCustomSeparationSymbols(inputWithoutSpace);
       this.separationSymbols.push(...customSeparationSymbols);
     }
+
+    const inputWithoutCustomSeparationSymbols =
+      this.removeCustomSeparationSymbols(inputWithoutSpace);
   }
 
   async getInputForAddition() {
@@ -42,6 +45,10 @@ class App {
     );
 
     return customSeparationSymbols;
+  }
+
+  removeCustomSeparationSymbols(input) {
+    return input.replace(customSeparationSymbolsRegex, '');
   }
 }
 
