@@ -21,6 +21,16 @@ class StringCalculator {
     const splitNumbers = numbers.split(new RegExp(`[${separator.join('')}]`));
     return splitNumbers.map(this.validateAndParseNumber);
   }
+
+  // 각 숫자 문자열의 유효성을 검사하고 숫자로 변환
+  static validateAndParseNumber(numStr) {
+    const num = Number(numStr);
+    
+    if (isNaN(num) || num < 0) {
+      throw new Error(`[ERROR] Invalid number: ${numStr}`);
+    }
+    return num;
+  }
 }
 
 class App {
