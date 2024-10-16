@@ -37,7 +37,7 @@ class App {
     let plusString = this.#plusString;
 
     // custom pattern
-    const CUSTOM_PATTERN = /\/\/(.)\\n/g;
+    const CUSTOM_PATTERN = /\/\/([^-])\\n/g;
     const customSeparator = plusString.match(CUSTOM_PATTERN);
     if (customSeparator) {
       plusString = plusString.replace(CUSTOM_PATTERN, ",");
