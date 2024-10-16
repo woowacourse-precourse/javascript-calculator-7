@@ -1,7 +1,7 @@
 import { MissionUtils } from "@woowacourse/mission-utils";
 
 class StringCalculator {
-  static CUSTOM_SEPARATOR_REGEX = /^\/\/(.)\n(.*)/;
+  static CUSTOM_SEPARATOR_REGEX = /^\/\/(.)\\n(.*)/;
   static DEFAULT_SEPARATORS = [',', ':'];
 
   // 입력 문자열을 파싱하여 구분자와 숫자 문자열 분리
@@ -9,7 +9,7 @@ class StringCalculator {
     const customSeparatorMatch = input.match(this.CUSTOM_SEPARATOR_REGEX);
     if (customSeparatorMatch) {
       return {
-        separator: customSeparatorMatch[1],
+        separator: [customSeparatorMatch[1]],
         numbers: customSeparatorMatch[2],
       };
     }
