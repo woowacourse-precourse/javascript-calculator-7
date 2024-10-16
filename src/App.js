@@ -30,7 +30,15 @@ class App {
     return TokenArray;
   }
 
+  checkCustomSplitStringByDelimiter(inputString) {
+    if(inputString[0] === '/' && inputString[1] === '/' 
+      && inputString[3] === '\\' && inputString[4] === 'n'){
+      return true;
+    }
+    return false;
+  }
 }
+
 
 export default App;
 
