@@ -21,6 +21,7 @@ class App {
     }
 
     const sum = numberArray.reduce((acc, num) => acc + parseInt(num), 0);
+    Console.print(`결과 : ${sum}`);
   }
 }
 
