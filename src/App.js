@@ -22,7 +22,9 @@ class App {
     const escapedDivider = DIVIDER.map(escapeRegExp).join("|")
     const splitRegex = new RegExp(escapedDivider)
 
-    const numbers = input.split(splitRegex).map(Number)
+    const numbers = input
+      .split(splitRegex)
+      .map((val) => (val == "" ? NaN : Number(val)))
 
     const isAllNumbers = (numbers) => {
       return numbers.every((number) => !Number.isNaN(number))
