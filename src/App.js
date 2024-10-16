@@ -17,6 +17,15 @@ class App {
 			Console.print(a);
 			const sum1 = a.map(Number).reduce((a, b) => a + b, 0);
 			Console.print(sum1);
+
+			//커스텀 구분자
+			const customD = answer.substring(2, 3);
+			const data = answer.split('\\n')[1];
+			Console.print(data);
+			const result = data.split(customD);
+			Console.print(result);
+			const sum2 = result.map(Number).reduce((a, b) => a + b, 0);
+			Console.print(sum2);
 		});
 	}
 }
