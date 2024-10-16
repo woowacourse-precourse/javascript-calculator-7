@@ -37,15 +37,12 @@ export function checkIncludeEmptyString(input) {
   if (splitInput[1] === '') throw new Error(errorMessage.useCoustomSeparator);
 }
 
-export function checkUseOtherSeperator(input) {
-  let splitInput = input.split(/(?:\/\/|\\n)/);
-  const customSeperator = splitInput[1];
+export function checkUseOtherSeperator(input, customSeparator) {
+  const separatorRegExp = new RegExp(
+    `${customSeparator ? customSeparator + '|' : ''}[,:]`,
+  );
+  const splitedInput = input.split(separatorRegExp).join('');
 
-  const basicSeparatorRegExp = /[,:]/;
-
-  splitInput = splitInput.join('').split(basicSeparatorRegExp).join('');
-  splitInput = splitInput.split(customSeperator).join('');
-
-  if (!Number(splitInput))
+  if (!Number(splitedInput))
     throw new Error(errorMessage.useCustomOrBasicSeparator);
 }
