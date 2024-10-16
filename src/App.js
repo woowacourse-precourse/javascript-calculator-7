@@ -83,17 +83,19 @@ class App {
   splitPlusString() {
     let tmpPlusNumber = "";
     for (let i = 0; i < this.#plusString.length; i++) {
-      if (this.isGenerateCustomSeparator(i)) {
-        this.generateCustomSeparator(this.#plusString[i + 2]);
-        i += 4;
-        continue;
-      }
-      if (this.isContainCustomSeparator(this.#plusString[i])) {
+      if (this.isContainBasicSeparator(this.#plusString[i])) {
         this.pushPlusNumberArray(tmpPlusNumber);
         tmpPlusNumber = "";
         continue;
       }
-      if (this.isContainBasicSeparator(this.#plusString[i])) {
+      if (this.isGenerateCustomSeparator(i)) {
+        if (!this.isContainBasicSeparator(this.#plusString[i + 2])) {
+          this.generateCustomSeparator(this.#plusString[i + 2]);
+        }
+        i += 4;
+        continue;
+      }
+      if (this.isContainCustomSeparator(this.#plusString[i])) {
         this.pushPlusNumberArray(tmpPlusNumber);
         tmpPlusNumber = "";
         continue;
