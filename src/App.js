@@ -6,7 +6,7 @@ const MESSAGE = {
 
 class App {
 	constructor() {
-		this.seperators = [',', ':'];
+		this.separators = [',', ':'];
 		this.numbers = [];
 	}
 
@@ -15,8 +15,30 @@ class App {
 		return input;
 	}
 
+	checkCustomSeparator(string) {
+		if (string.length >= 5) {
+			const firstTwoChars = string.substring(0, 2);
+			const nextThreeChars = string.substring(2, 5);
+
+			return (
+				firstTwoChars === '//' &&
+				nextThreeChars[1] === '\\' &&
+				nextThreeChars[2] === 'n'
+			);
+		}
+		return false;
+	}
+
+	updateCustomSeparator(string) {
+		const customSeparator = string[2];
+		this.separators.push(customSeparator);
+	}
+
 	async run() {
-		this.userInput();
+		const input = await this.userInput();
+		if (this.checkCustomSeparator(input)) {
+			this.updateCustomSeparator(input);
+		}
 	}
 }
 
