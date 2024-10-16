@@ -1,11 +1,11 @@
 const EXTRACTSEPARTOR = function extractSeparator(input) {
   if (input.startsWith("//")) {
-    const SEPARATORENDLNDEX = input.indexOf("\n");
-    if (SEPARATORENDLNDEX !== -1) {
-      return input.substring(2, SEPARATORENDLNDEX);
+    const SEPARATORENDINDEX = input.indexOf("\n");
+    if (SEPARATORENDINDEX !== -1) {
+      return input.substring(2, SEPARATORENDINDEX);
     }
   }
-  return /[,:\n]/;
+  return /[,:]/;
 };
 
 export default extractSeparator;
