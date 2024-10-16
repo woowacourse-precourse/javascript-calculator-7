@@ -6,10 +6,13 @@ class App {
     if(this.checkCustomSplitStringByDelimiter(inputString)){
       inputString = this.getStrippedString(inputString);
     }
-    else {
+    else if(this.isValidString(inputString, delimiters)) {
       const stringArray = this.splitStringByDelimiter(inputString, delimiters);
       const numberArray = this.returnNumbers(stringArray);
       this.add(numberArray);
+    }
+    else {
+      console.log("Error");
     }
   }
 
