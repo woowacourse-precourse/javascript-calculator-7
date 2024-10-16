@@ -11,6 +11,7 @@ const ERROR_MESSAGE = Object.freeze({
   INVALID_DELIMITER:
     '올바른 구분자를 입력, 혹은 커스텀 구분자를 설정하여 입력하세요.',
   NO_NEGATIVE_NUMBER: '음수는 입력할 수 없습니다.',
+  NO_ZERO: '0은 입력할 수 없습니다.',
 });
 
 export { ERROR_MESSAGE };

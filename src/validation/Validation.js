@@ -96,6 +96,13 @@ class Validation {
       throw new Error(`${ERROR_MESSAGE.PREFIX} ${ERROR_MESSAGE.NO_DELIMITER}`);
     }
 
+    //소수점이 입력되었을경우
+
+    //0이 입력되었을 경우
+    if (input.includes('0')) {
+      throw new Error(`${ERROR_MESSAGE.PREFIX} ${ERROR_MESSAGE.NO_ZERO}`);
+    }
+
     //커스텀 구분자없이 숫자와 기본 구분자를 입력하는데, 그 구분자가 ',' ':'가 아닐경우
     this.validateDefaultDelimiter(input);
 
