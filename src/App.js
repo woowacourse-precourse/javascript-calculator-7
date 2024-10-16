@@ -4,7 +4,7 @@ class App {
     let delimiters = [";"];
 
     if(this.checkCustomSplitStringByDelimiter(inputString)){
-      console.log("");
+      inputString = this.getStrippedString(inputString);
     }
     else {
       console.log("");
