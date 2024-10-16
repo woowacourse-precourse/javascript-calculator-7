@@ -24,8 +24,8 @@ Object.freeze(CALCULATOR_VARIABLES);
 
 const isValidSeparator = (input) => {
     
-    const customSeparatorMatch  = input.match(new RegExp(CUSTOM_SEPARATOR));
-    if (!customSeparatorMatch  && !input.match(DEFAULT_SEPARATOR)) {
+    const customSeparatorMatch  = input.match(new RegExp(CALCULATOR_VARIABLES.CUSTOM_SEPARATOR));
+    if (!customSeparatorMatch  && !input.match(CALCULATOR_VARIABLES.DEFAULT_SEPARATOR)) {
         throw new Error('[ERROR]: 구분자가 없거나 잘못됐습니다.');
     }
 };
@@ -41,7 +41,7 @@ const getSum = (arr) => {
 }
 
 const splitUserInput = (input) => {
-    const customSeparatorMatch = input.match(new RegExp(CUSTOM_SEPARATOR));
+    const customSeparatorMatch = input.match(new RegExp(CALCULATOR_VARIABLES.CUSTOM_SEPARATOR));
     const customToken = customSeparatorMatch ? customSeparatorMatch[1] : null ;
 
     let userInputArray;
@@ -51,7 +51,7 @@ const splitUserInput = (input) => {
         userInputArray = numbersPart.split(new RegExp(`[${customToken}]`));
     }
     else{
-        userInputArray = input.split( new RegExp(DEFAULT_SEPARATOR));
+        userInputArray = input.split( new RegExp(CALCULATOR_VARIABLES.DEFAULT_SEPARATOR));
     }
 
     return userInputArray ;
@@ -60,7 +60,7 @@ const splitUserInput = (input) => {
 async function getUserNumbers(){
 
     try{
-        const userInput = await Console.readLineAsync(INPUT_PROMPT);
+        const userInput = await Console.readLineAsync(CALCULATOR_VARIABLES.INPUT_PROMPT);
         const userInputArray = splitUserInput(userInput);
 
 
@@ -80,7 +80,7 @@ async function getUserNumbers(){
 
 async function printUserInput(input) {
     let sumValue = getSum(input);
-    Console.print(OUTPUT_PROMPT + sumValue);
+    Console.print(CALCULATOR_VARIABLES.OUTPUT_PROMPT + sumValue);
 
 }
 
