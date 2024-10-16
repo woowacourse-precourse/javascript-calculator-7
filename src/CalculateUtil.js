@@ -19,7 +19,7 @@ const CalculateUtil = {
   sumExpression(separator, expression) {
     const regex = new RegExp(`${separator.join("|")}`, "g");
     const numbers = expression.split(regex);
-    return numbers.reduce((acc, numString) => acc + Number(numString), 0);
+    return numbers.reduce((acc, numString) => acc + Number(numString.trim()), 0);
   },
 };
 
