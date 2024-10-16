@@ -7,6 +7,33 @@
 문자 이스케이프는 문자 그대로 표현할 수 없는 문자를 표현할때 사용된다  
 백슬레시(\\)를 활용해서 특수문자를 표현해야하는 경우나 정규 표현식을 작성할때 주로 사용한다
 
+**character class escape**
+
+[참고자료](https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Regular_expressions/Character_class_escape)
+
+문자 집합을 나타내는 escape 시퀀스
+
+###### syntax
+
+```javascript
+\d
+모든 숫자 문자와 일치한다
+[0-9]랑 동일한 기능
+
+\w
+모든 단어 문자를 일치시킨다.
+(A-Z, a-z), (0-9), (_)를 포함한다
+정규식이 유니코드를 인식하고 flag가 i로 설정되어 있을 경우 case folding으로 통해서
+다른 유니코드 문자도 일치시킨다
+
+\s
+공백 또는 line terminator 문자와 일치시킨다
+
+\D, \W \S는 각 syntax에 해당하지 않는 문자를 일치 시킨다
+ex) \D 는 숫자를 제외한 모든 문자열을 일치시킨다
+
+```
+
 ---
 
 **Regular expressions**
