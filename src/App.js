@@ -7,6 +7,9 @@ class App {
     );
 
     const baseDivision = ':|,';
+    const customPattern = /^\/\/(.+)\\n/;
+    const customDivision =
+      input.match(customPattern) && input.match(customPattern)[1];
 
     MissionUtils.Console.print('결과 : ' + input);
   }
