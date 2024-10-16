@@ -3,6 +3,7 @@ class Separator {
   constructor(input) {
     this.input = input;
     this.value = [];
+    this.customSeparator = '';
   }
 
   // 기본 구분자로 분리
@@ -10,9 +11,12 @@ class Separator {
     this.value = this.input.split(DEFAULT_SEPARATOR);
   }
 
-  // 커스텀 구분자 확인
+  // 커스텀 구분자 추출 및 확인
   hasCustomSeparator() {
-    return CUSTOM_SEPARATOR.test(this.input);
+    const match = CUSTOM_SEPARATOR.match(this.input);
+    if (!match) return false;
+    this.customSeparator = match[1];
+    return true;
   }
 
   // 커스텀 구분자로 분리
