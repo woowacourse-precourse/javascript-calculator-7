@@ -39,6 +39,31 @@ class Calculator {
 
     return delimiter;
   }
+
+  /**
+   *
+   * @param {string} delimiter
+   * @param {Array<string>} value
+   * @returns {Array<string>}
+   */
+  #delimite(delimiter, value) {
+    return value.flatMap((aValue) => aValue.split(delimiter));
+  }
+
+  /**
+   *
+   * @param {string} value
+   * @returns {Array<string>}
+   */
+  #getDelimitedString(value) {
+    let delimitedString = [value];
+
+    this.#getDelimiter(value).forEach((delimiter) => {
+      delimitedString = this.#delimite(delimiter, delimitedString);
+    });
+
+    return delimitedString;
+  }
 }
 
 export default Calculator;
