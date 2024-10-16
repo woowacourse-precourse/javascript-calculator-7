@@ -86,7 +86,6 @@ class App {
     let tmpPlusNumber = "";
     for (let i = 0; i < this.#plusString.length; i++) {
       if (this.isContainBasicSeparator(this.#plusString[i])) {
-        Console.print(`1: ${tmpPlusNumber}`);
         this.pushPlusNumberArray(tmpPlusNumber);
         tmpPlusNumber = "";
         continue;
@@ -95,7 +94,6 @@ class App {
         if (!this.isContainBasicSeparator(this.#plusString[i + 2])) {
           this.generateCustomSeparator(this.#plusString[i + 2]);
         }
-        Console.print(`2: ${tmpPlusNumber}`);
 
         this.pushPlusNumberArray(tmpPlusNumber);
         tmpPlusNumber = "";
@@ -104,8 +102,6 @@ class App {
         continue;
       }
       if (this.isContainCustomSeparator(this.#plusString[i])) {
-        Console.print(`3: ${tmpPlusNumber}`);
-
         this.pushPlusNumberArray(tmpPlusNumber);
         tmpPlusNumber = "";
         continue;
