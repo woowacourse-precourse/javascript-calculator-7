@@ -37,7 +37,7 @@ describe("문자열 계산기", () => {
       await runCalcualatorTest("//;\n1", "결과 : 1");
     });
     test("숫자 3개 입력", async () => {
-      await runCalcualatorTest("//;\n1;2;3", "결과 : 6");
+      await runCalcualatorTest("//v\n1v2v3", "결과 : 6");
     });
     test("숫자 10개 입력", async () => {
       await runCalcualatorTest("//;\n1;2;3;4;5;6;7;8;9;10", "결과 : 55");
@@ -50,6 +50,12 @@ describe("문자열 계산기", () => {
   describe("기본 구분자 사용", () => {
     test("숫자 1개 입력", async () => {
       await runCalcualatorTest("1", "결과 : 1");
+    });
+    test("숫자 3개 입력", async () => {
+      await runCalcualatorTest("1,2:3", "결과 : 6");
+    });
+    test("숫자 10개 입력", async () => {
+      await runCalcualatorTest("1,2:3,4:5,6:7,8:9,10", "결과 : 55");
     });
   });
 
