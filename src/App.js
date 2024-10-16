@@ -44,10 +44,16 @@ class App {
     return result;
   }
 
+  printResult(result) {
+    return Console.print(`결과 : ${result}`);
+  }
+
   async run() {
     const input = await this.readInput();
     const numbers = this.parseStringToNumbers(input);
     const result = this.sum(numbers);
+
+    return this.printResult(result);
   }
 }
 
