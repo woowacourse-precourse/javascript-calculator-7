@@ -5,17 +5,15 @@ class App {
   customSeparatorRegExr = /\/\/.+\\n/;
   async run() {
     const userInput = await this.getUserInput();
-    const separator = this.getSeparator(userInput);
+    const stringifiedUserInput = JSON.stringify(userInput);
+    const { separator, isCustomSeparator } =
+      this.getSeparator(stringifiedUserInput);
     const separatorRegExp = this.getSeparatorRegExp(separator);
 
     let separatedUserInput;
-    if (this.customSeparatorRegExr.test(userInput))
-      separatedUserInput = this.getSeparatedString(
-        userInput.split(this.customSeparatorRegExr)[1],
-        separatorRegExp
-      );
-    else
-      separatedUserInput = this.getSeparatedString(userInput, separatorRegExp);
+    if (isCustomSeparator)
+      separatedUserInput = userInput.split(separatorRegExp);
+    else separatedUserInput = userInput.split(separatorRegExp);
 
     for (const it of separatedUserInput) {
       if (isNaN(it) || Number(it) <= 0) throw new Error("[ERROR]");
@@ -35,9 +33,16 @@ class App {
   getSeparator(str) {
     const customSeparatorMatchedString = str.match(this.customSeparatorRegExr);
     if (customSeparatorMatchedString)
-      return customSeparatorMatchedString[0].slice(2, -2);
-
-    return this.defaultSeparator;
+      return {
+        separator: customSeparatorMatchedString[0]
+          .slice(2, -2)
+          .replace("\\", "\\\\"),
+        isCustomSeparator: true,
+      };
+    return {
+      separator: this.defaultSeparator,
+      isCustomSeparator: false,
+    };
   }
   getSeparatorRegExp(separator) {
     return new RegExp(`[${separator}]`);
