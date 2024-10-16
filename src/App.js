@@ -22,9 +22,15 @@ class App {
     const isAllNumbers = (numbers) => {
       return numbers.every((number) => !Number.isNaN(number))
     }
+    const isAllPositiveNumber = (numbers) => {
+      return numbers.every((number) => number >= 0)
+    }
 
     if (!isAllNumbers(numbers)) {
       throw new Error("[ERROR] 문자열 입니다.")
+    }
+    if (!isAllPositiveNumber(numbers)) {
+      throw new Error("[ERROR] 양수만 입력해주세요.")
     }
 
     Console.print(`결과 : ${numbers.reduce((a, b) => a + b)}`)
