@@ -1,11 +1,11 @@
-import parseCustomInput from './parseCustomInput';
-import parseNormalInput from './parseNormalInput';
+import parseCustomInput from '../SubParser/parseCustomInput.js';
+import parseNormalInput from '../SubParser/parseNormalInput.js';
 
 // 에러를 처리하는 함수
 
 function isFirstCharNumber(str) {
   if (!str || str.length === 0) {
-    throw new Error('빈 문자열입니다.');
+    throw new Error('[ERROR]:빈 문자열입니다.');
   }
   // 첫 번째 문자가 숫자인지 확인 (정규표현식 사용)
   return /^\d/.test(str);
@@ -25,5 +25,3 @@ export default function parseString(str) {
     throw new Error(error);
   }
 }
-
-// 첫 번째 문자가 숫자인지 확인하는 함수
