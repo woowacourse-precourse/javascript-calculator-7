@@ -1,7 +1,7 @@
 class App {
   async run() {
     let inputString = '//;\\n1;2;3';
-    let delimiters = [";"];
+    let delimiters = [",", ":"];
 
     if(this.checkCustomSplitStringByDelimiter(inputString)){
       inputString = this.getStrippedString(inputString);
