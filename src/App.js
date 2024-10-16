@@ -6,8 +6,10 @@ import {
 } from './utils/index.js';
 
 class App {
-    initString = '';
-    parsedResult = null;
+    constructor() {
+        this.initString = '';
+        this.parsedResult = null;
+    }
 
     setString(value) {
         this.initString = value.trim();
