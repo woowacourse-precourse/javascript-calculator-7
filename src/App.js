@@ -10,10 +10,7 @@ class App {
       this.getSeparator(stringifiedUserInput);
     const separatorRegExp = this.getSeparatorRegExp(separator);
 
-    let separatedUserInput;
-    if (isCustomSeparator)
-      separatedUserInput = newUserInput.split(separatorRegExp);
-    else separatedUserInput = newUserInput.split(separatorRegExp);
+    const separatedUserInput = newUserInput.split(separatorRegExp);
 
     for (const it of separatedUserInput) {
       if (isNaN(it) || Number(it) <= 0) throw new Error("[ERROR]");
