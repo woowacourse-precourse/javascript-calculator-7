@@ -44,13 +44,15 @@ describe("문자열 계산기", () => {
     test("문자열 앞부분의 커스텀 구분자 수식을 문자열에 제외한다.", () => {
       expect(app.getStrippedString("//;\\n1;2;3")).toBe("1;2;3");
     });
+  });
 
+  describe("예외 처리", () => {
     test("숫자와 지정된 구분자로만 이루어진 문자인지 판별한다.", () => {
       expect(app.isValidString("1,2;3")).toBe(false);
       // expect(app.isValidString("1,2,3").toBe(true));
       // expect(app.isValidString("1,2;3").toBe(false));
       // expect(app.isValidString("//;\\n1,2;3").toBe(true));
       // expect(app.isValidString("//;\\n1,2-3").toBe(false));
-    })
-  });
+    });
+  })
 });
