@@ -10,8 +10,42 @@ class App {
     }
 
     const [customDelimiter, remain] = this.extractDelimiter(input);
+    const delimiter = new Set(basicDelimiter.concat(customDelimiter));
+
+    const nums = this.divideNumsByhDelimiters(remain, delimiter);
+    const answer = nums.reduce((acc, num) => acc + num, 0);
 
     this.printResult(answer);
+  }
+
+  divideNumsByhDelimiters(input, delimiter) {
+    if (input.length === 0) {
+      return [0];
+    }
+
+    const result = [];
+
+    let num = "";
+    for (let st of input) {
+      if (isNaN(st)) {
+        if (!delimiter.has(st)) {
+          if (st === "-") {
+            throw new Error("[ERROR] 음수가 입력되었습니다.");
+          }
+          throw new Error(
+            "[ERROR] 지정된 구분자 외의 구분자가 입력되었습니다."
+          );
+        }
+        result.push(Number(num));
+        num = "";
+        continue;
+      }
+      num += st;
+    }
+    if (num.length > 0) {
+      result.push(Number(num));
+    }
+    return result;
   }
 
   extractDelimiter(input) {
