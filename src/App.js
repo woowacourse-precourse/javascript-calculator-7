@@ -5,6 +5,9 @@ class App {
     const input = await MissionUtils.Console.readLineAsync(
       '덧셈할 문자열을 입력해 주세요.'
     );
+
+    const baseDivision = ':|,';
+
     MissionUtils.Console.print('결과 : ' + input);
   }
 }
