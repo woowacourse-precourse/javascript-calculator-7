@@ -5,16 +5,21 @@ import Errors from "./constants/Errors.js";
 class App {
   async run() {
     // 입력 메세지 출력 및 입력 받기
-    const INPUT = await Console.readLineAsync(Messages.INPUT_MESSAGE);
+    let input = await Console.readLineAsync(Messages.INPUT_MESSAGE);
 
     // 커스텀 구분자가 있는지 확인
-    const CUSTOM_DELIMITER = this.checkCustomDelimiter(INPUT);
+    const CUSTOM_DELIMITER = this.checkCustomDelimiter(input);
+
+    //커스텀 구분자가 있다면 커스텀 구분자 이후로 문자열을 자름
+    if (CUSTOM_DELIMITER) {
+      input = input.slice(input.indexOf("\\n") + 2);
+    }
 
     // 정규식을 동적으로 생성
-    const delimiterRegex = new RegExp(`[,:${CUSTOM_DELIMITER}]`);
+    const DELIMITER_REGEX = new RegExp(`[,:${CUSTOM_DELIMITER}]`);
 
     // 입력 받은 문자열을 숫자로 변환
-    const numbers = INPUT.split(delimiterRegex).map(Number);
+    const numbers = input.split(DELIMITER_REGEX).map(Number);
 
     //에러처리
     // 숫자가 아닌 문자열이 포함되어 있는 경우
@@ -33,12 +38,12 @@ class App {
   }
 
   // 커스텀 구분자가 있는지 확인하는 함수
-  checkCustomDelimiter(INPUT) {
+  checkCustomDelimiter(input) {
     // 커스텀 구분자가 있는지 확인
-    if (INPUT.startsWith("//")) {
-      if (INPUT.includes("\n")) {
+    if (input.startsWith("//")) {
+      if (input.includes("\\n")) {
         // //와 \n 사이의 문자열을 구분자로 사용
-        const CUSTOMDELIMITER = INPUT.slice(2, INPUT.indexOf("\n"));
+        const CUSTOMDELIMITER = input.slice(2, input.indexOf("\\n"));
         return CUSTOMDELIMITER;
       }
       // 커스텀 구분자가 잘못된 경우
