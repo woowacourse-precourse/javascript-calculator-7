@@ -11,11 +11,11 @@ class App {
 		let answer = 0;
 		let input_array;
 		const custom_reg_tester = new RegExp(regs.custom);
-		// 사용자로 부터 문자열을 입력 받음
+
 		try {
 			input = await Console.readLineAsync(",(쉼표)와 ;(세미 콜론)와 숫자를 조합한 문자열을 입력해주세요. ex)1,2:3 ");
 			if (custom_reg_tester.test(input)) {
-				// 커스텀 구분자 사용
+				// 커스텀 구분자 사용할 경우
 				reg = input.split(regs.custom)[2];
 				input_array = input.split(regs.custom)[3].split(reg);
 			} else {
