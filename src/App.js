@@ -92,6 +92,10 @@ class App {
         if (!this.isContainBasicSeparator(this.#plusString[i + 2])) {
           this.generateCustomSeparator(this.#plusString[i + 2]);
         }
+
+        this.pushPlusNumberArray(tmpPlusNumber);
+        tmpPlusNumber = "";
+
         i += 4;
         continue;
       }
