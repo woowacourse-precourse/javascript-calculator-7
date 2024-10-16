@@ -22,6 +22,7 @@ class App {
     // 음수 거르기
     this.#plusString = plusString;
   }
+  validatePlusString() {}
   printPlusResult() {
     Console.print(`결과 : ${this.#plusResult}`);
   }
