@@ -1,4 +1,4 @@
-const EXTRACTSEPARTOR = function extractSeparator(input) {
+const EXTRACTSEPARATOR = function extractSeparator(input) {
   if (input.startsWith("//")) {
     const SEPARATORENDINDEX = input.indexOf("\n");
     if (SEPARATORENDINDEX !== -1) {
