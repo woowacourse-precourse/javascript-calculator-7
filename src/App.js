@@ -55,6 +55,8 @@ class App {
   async run() {
     try {
       const numStr = new NumStr(await getNumberString());
+      const sum = numStr.getSumOfStr();
+      Console.print(`결과 : ${sum}`);
     } catch (error) {
       throw new Error(error.message);
     }
