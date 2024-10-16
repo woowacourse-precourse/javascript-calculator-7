@@ -1,3 +1,5 @@
+import { errorMessage } from './constant.js';
+
 export function isStartWithNumber(input) {
   const regExp = /^[1-9]/;
   return regExp.test(input);
