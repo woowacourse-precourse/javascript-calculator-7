@@ -7,4 +7,8 @@ export class UserInterface {
     );
     return input;
   }
+
+  printResult(sumValue) {
+    Console.print(`결과 : ${sumValue}`);
+  }
 }
