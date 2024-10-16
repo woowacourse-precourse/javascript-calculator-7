@@ -1,11 +1,11 @@
 import { errorMessage } from './constant.js';
 
-export function isStartWithNumber(input) {
+export function checkStartWithNumber(input) {
   const regExp = /^[1-9]/;
   return regExp.test(input);
 }
 
-export function isStartWidthDubbleSlash(input) {
+export function checkStartWidthDubbleSlash(input) {
   const regExp = /^(\/\/)/;
   return regExp.test(input);
 }

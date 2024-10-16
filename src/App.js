@@ -4,6 +4,8 @@ import {
   checkSeperatorConflict,
   checkIncludeEmptyString,
   checkIncludeNewLine,
+  checkStartWithNumber,
+  checkStartWidthDubbleSlash,
 } from './validator.js';
 
 class App {
@@ -11,10 +13,10 @@ class App {
     let customSeparator = null;
     Console.print(outputMessage.startMessage);
     let userInput = await Console.readLineAsync('');
-    if (this.isStartWithNumber(userInput)) {
+    if (checkStartWithNumber(userInput)) {
       checkSeperatorConflict(userInput, customSeparator);
       this.checkeCommaColonConflict(userInput);
-    } else if (this.isStartWidthDubbleSlash(userInput)) {
+    } else if (checkStartWidthDubbleSlash(userInput)) {
       this.validateCustomSeperator(userInput);
       customSeparator = this.getCustomSeparator(userInput);
       this.checkUseOtherSeperator(userInput);
