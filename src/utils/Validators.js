@@ -9,17 +9,22 @@ class Validators {
         }
 
         // 2. 커스텀 구분자 확인
-        const customSeparator = input.match(this.CUSTOM_SEPARATOR_REGEX);
-        if (customSeparator) {
-            // 2-1. 커스텀 구분자가 있는 경우
-            const numberPart = input.split('\n')[1];
+        if (input.startsWith('//')) {
+            const customSeparator = input.match(this.CUSTOM_SEPARATOR_REGEX);
+            if (!customSeparator) {
+                throw new Error(`[ERROR] 커스텀 구분자 형식이 올바르지 않습니다. "//[구분자]\\n" 형식이어야 합니다.`);
+            }
+            const [, numberPart] = input.split('\n');
+            if (!numberPart || numberPart.trim() === '') {
+                throw new Error('[ERROR] 커스텀 구분자 이후 숫자 입력이 없습니다.');
+            }
             if (!this.isValidNumberString(numberPart, customSeparator[1])) {
-                throw new Error('[ERROR] 유효하지 않은 입력값입니다.');
+                throw new Error(`[ERROR] 유효하지 않은 숫자 형식입니다. (커스텀 구분자 '${customSeparator[1]}' 사용)`);
             }
         } else {
-            // 2-2. 기본 구분자만 있는 경우
+            // 3. 기본 구분자 확인
             if (!this.isValidNumberString(input)) {
-                throw new Error('[ERROR] 유효하지 않은 입력값입니다.');
+                throw new Error('[ERROR] 유효하지 않은 숫자 형식입니다. (기본 구분자 사용)');
             }
         }
     }
