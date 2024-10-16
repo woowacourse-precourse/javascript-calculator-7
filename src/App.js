@@ -5,7 +5,7 @@ class App {
   customSeparatorRegExr = /\/\/.+\\n/;
   async run() {
     const userInput = await this.getUserInput();
-    const stringifiedUserInput = JSON.stringify(userInput);
+    const stringifiedUserInput = this.getStringifiedString(userInput);
     const { separator, newUserInput } = this.getSeparator(stringifiedUserInput);
     const separatorRegExp = this.getSeparatorRegExp(separator);
 
@@ -25,6 +25,9 @@ class App {
   }
   async getUserInput() {
     return await MissionUtils.Console.readLineAsync("문자열을 입력해주세요.");
+  }
+  getStringifiedString(str) {
+    return JSON.stringify(str);
   }
   getSeparator(str) {
     const customSeparatorMatchedString = str.match(this.customSeparatorRegExr);
