@@ -7,13 +7,27 @@ class App {
       '덧셈할 문자열을 입력해 주세요.\n',
     );
 
-    const splittedString = App.splitWithSeparator(input, DEFAULT_SEPARATOR);
+    const [customSep, extractedStr] = this.extractCustomSeparator(input);
 
-    Console.print(input);
-    Console.print(splittedString);
+    Console.print(customSep);
+    Console.print(extractedStr);
+
+    const splittedString = this.splitWithSeparator(input, DEFAULT_SEPARATOR);
+
+    Console.pirint(splittedString);
   }
 
-  static splitWithSeparator(str, separator) {
+  extractCustomSeparator(str) {
+    const [first, rest] = str.split('\\n');
+
+    if (first.startsWith('//')) {
+      return [first.slice(2), rest];
+    }
+
+    return ['', first];
+  }
+
+  splitWithSeparator(str, separator) {
     const sepToRegex = new RegExp(separator.join('|'));
 
     return str.split(sepToRegex);
