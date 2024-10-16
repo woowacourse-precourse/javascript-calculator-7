@@ -9,12 +9,13 @@ class App {
 
     const [customSep, extractedStr] = this.extractCustomSeparator(input);
 
-    Console.print(customSep);
-    Console.print(extractedStr);
+    const splittedString = this.splitWithSeparator(
+      extractedStr,
+      DEFAULT_SEPARATOR,
+      customSep,
+    );
 
-    const splittedString = this.splitWithSeparator(input, DEFAULT_SEPARATOR);
-
-    Console.pirint(splittedString);
+    Console.print(splittedString);
   }
 
   extractCustomSeparator(str) {
@@ -27,8 +28,11 @@ class App {
     return ['', first];
   }
 
-  splitWithSeparator(str, separator) {
-    const sepToRegex = new RegExp(separator.join('|'));
+  splitWithSeparator(str, separator, customSep) {
+    const allSeparator = separator;
+
+    if (customSep !== '') allSeparator.push(customSep);
+    const sepToRegex = new RegExp(allSeparator.join('|'));
 
     return str.split(sepToRegex);
   }
