@@ -41,8 +41,8 @@ class App {
   isValidString(inputString, delimiters) {
     for(const element of inputString) {
       const isNotInclude = !delimiters.includes(element);
-      
-      if(isNaN(element) || isNotInclude) {
+
+      if(isNaN(element) && isNotInclude) {
         return false;
       }
     }
