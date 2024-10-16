@@ -16,6 +16,10 @@ class App {
     const plusString = await Console.readLineAsync(
       "덧셈할 문자열을 입력해 주세요.\n"
     );
+
+    // 예외 처리 부분
+    // 구분자 이외 문자 포함시 거르기
+    // 음수 거르기
     this.#plusString = plusString;
   }
   printPlusResult() {
@@ -62,7 +66,15 @@ class App {
     return false;
   }
 
-  isContainCustomSeparator() {}
+  isContainCustomSeparator(partString) {
+    let flag = false;
+    for (let i = 0; i < this.#customSeparator.length; i++) {
+      if (partString === this.#customSeparator[i]) {
+        flag = true;
+      }
+    }
+    return flag;
+  }
 
   pushPlusNumberArray(tmpPlusNumber) {
     this.#plusNumberArray.push(Number(tmpPlusNumber));
@@ -76,7 +88,10 @@ class App {
         i += 4;
         continue;
       }
-      if (this.isContainCustomSeparator()) {
+      if (this.isContainCustomSeparator(this.#plusString[i])) {
+        this.pushPlusNumberArray(tmpPlusNumber);
+        tmpPlusNumber = "";
+        continue;
       }
       if (this.isContainBasicSeparator(this.#plusString[i])) {
         this.pushPlusNumberArray(tmpPlusNumber);
