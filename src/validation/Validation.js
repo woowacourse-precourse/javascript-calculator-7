@@ -4,7 +4,10 @@ import { delimiter } from '../constants/delimiter.js';
 import { ERROR_MESSAGE } from '../constants/errorMessages.js';
 
 class Validation {
-  /**@param {string} input*/
+  /**
+   * @param {string} input
+   * @throws {Error}
+   * */
   //커스텀 구분자 추출함수
   //터미널 상에 입력되는 숫자는 string으로 인식이 되어 정규표현식으로 검증 불가하다고 판단
   static extractCustomDelimiter(input) {
@@ -55,6 +58,13 @@ class Validation {
       throw new Error(`${ERROR_MESSAGE.PREFIX} ${ERROR_MESSAGE.NO_INPUT}`);
     }
 
+    //음수를 입력한 경우
+    if (/-\d/.test(input)) {
+      throw new Error(
+        `${ERROR_MESSAGE.PREFIX} ${ERROR_MESSAGE.NO_NEGATIVE_NUMBER}`
+      );
+    }
+
     // 오른쪽 끝에 숫자가 아닌 문자가 있는 경우
     if (!/\d$/.test(input)) {
       throw new Error(
@@ -63,7 +73,7 @@ class Validation {
     }
 
     // "//"와 "\n" 사이에 아무 문자도 없을 경우
-    if (/^\/\/\n/.test(input)) {
+    if (/^\/\/\\n/.test(input)) {
       throw new Error(
         `${ERROR_MESSAGE.PREFIX} ${ERROR_MESSAGE.EMPTY_CUSTOM_SEPARATOR}`
       );
@@ -73,13 +83,6 @@ class Validation {
     if (!/^\d|^\/\//.test(input)) {
       throw new Error(
         `${ERROR_MESSAGE.PREFIX} ${ERROR_MESSAGE.INVALID_START_CHARACTER}`
-      );
-    }
-
-    //음수를 입력한 경우
-    if (/-\d/.test(input)) {
-      throw new Error(
-        `${ERROR_MESSAGE.PREFIX} ${ERROR_MESSAGE.NO_NEGATIVE_NUMBER}`
       );
     }
 
