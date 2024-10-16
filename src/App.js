@@ -1,46 +1,46 @@
 import { Console } from "@woowacourse/mission-utils";
 
-class NumStr {
-  #str;
-  #separations;
+class StringCalculator {
+  #inputStr;
+  #separators;
 
-  constructor(str) {
-    this.#str = str;
-    this.#separations = new Set([":", ","]);
-    this.#addCustomSeparation();
+  constructor(inputStr) {
+    this.#inputStr = inputStr;
+    this.#separators = new Set([",", ":"]);
+    this.#addCustomSeparator();
   }
 
-  #addCustomSeparation() {
-    const customStr = this.#str.match(/\/{2}\D\\n/);
+  #addCustomSeparator() {
+    const customSeparatorMatch = this.#inputStr.match(/\/{2}\D\\n/);
 
-    if (customStr === null || customStr.index !== 0) {
+    if (!customSeparatorMatch || customSeparatorMatch.index !== 0) {
       return;
     }
 
-    this.#separations.add(customStr[0][2]);
-    this.#str = this.#str.slice(customStr[0].length);
+    this.#separators.add(customSeparatorMatch[0][2]);
+    this.#inputStr = this.#inputStr.slice(customSeparatorMatch[0].length);
   }
 
-  getSumOfStr() {
-    let regExp = [...this.#separations].join("|");
-    const numArr = this.#str.split(new RegExp(regExp));
+  calculateSum() {
+    let separatorPattern = [...this.#separators].join("|");
+    const numArr = this.#inputStr.split(new RegExp(separatorPattern));
 
     let sum = 0;
     numArr.forEach((num) => {
-      const number = Number(num);
+      const parsedNumber = Number(num);
 
-      if (Number.isNaN(number) || number < 0) {
+      if (Number.isNaN(parsedNumber) || parsedNumber < 0) {
         throw new Error("[ERROR] 문자열의 형식이 틀렸습니다.");
       }
 
-      sum += number;
+      sum += parsedNumber;
     });
 
     return sum;
   }
 }
 
-const getNumberString = async () => {
+const getInputString = async () => {
   try {
     const numStr = await Console.readLineAsync(
       "덧셈할 문자열을 입력해 주세요.\n"
@@ -54,8 +54,9 @@ const getNumberString = async () => {
 class App {
   async run() {
     try {
-      const numStr = new NumStr(await getNumberString());
-      const sum = numStr.getSumOfStr();
+      const inputStr = await getInputString();
+      const calculator = new StringCalculator(inputStr);
+      const sum = calculator.calculateSum();
       Console.print(`결과 : ${sum}`);
     } catch (error) {
       throw new Error(error.message);
