@@ -1,10 +1,10 @@
 class App {
   #separators;
-  #input;
+  #inputNumbers;
 
   constructor() {
     this.#separators = [];
-    this.#input = null;
+    this.#inputNumbers = null;
   }
 
   async run() {}
@@ -21,11 +21,13 @@ class App {
     const firstElement = inputString[0];
     const elementNumber = Number(firstElement);
     if (!Number.isNaN(elementNumber)) {
+      this.#inputNumbers = inputString;
       return [',', ':'];
     }
 
     const removedFormatString = inputString.split('//').join('').split('\n');
     const separator = removedFormatString[0];
+    this.#inputNumbers = removedFormatString[1];
     return [separator];
   }
 }
