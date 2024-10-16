@@ -23,10 +23,12 @@ class App {
       return numbers.every((number) => !Number.isNaN(number))
     }
 
-    if (isAllNumbers) {
-      Console.print(`결과 : ${numbers.reduce((a, b) => a + b)}`)
-      return
+    if (!isAllNumbers(numbers)) {
+      throw new Error("[ERROR] 문자열 입니다.")
     }
+
+    Console.print(`결과 : ${numbers.reduce((a, b) => a + b)}`)
+    return
   }
 }
 
