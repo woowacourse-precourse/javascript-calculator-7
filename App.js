@@ -18,77 +18,136 @@ Object.freeze(CALCULATOR_VARIABLES);
 
 
 
+class Calculator {
 
+    constructor(){};
 
-
-
-const isValidSeparator = (input) => {
+    isValidSeparator(input) {
     
-    const customSeparatorMatch  = input.match(new RegExp(CALCULATOR_VARIABLES.CUSTOM_SEPARATOR));
-    if (!customSeparatorMatch  && !input.match(CALCULATOR_VARIABLES.DEFAULT_SEPARATOR)) {
-        throw new Error('[ERROR]: 구분자가 없거나 잘못됐습니다.');
-    }
-};
-
-const isPositiveNumber = (arr) => {
-    if (!arr.every(num => Number(num) > 0)) {
-        throw new Error('[ERROR]: 입력한 숫자가 양수가 아닙니다.');
-    }
-};
-
-const getSum = (arr) => {
-    return arr.reduce( (acc,cur) => acc + cur,  0);
-}
-
-const splitUserInput = (input) => {
-    const customSeparatorMatch = input.match(new RegExp(CALCULATOR_VARIABLES.CUSTOM_SEPARATOR));
-    const customToken = customSeparatorMatch ? customSeparatorMatch[1] : null ;
-
-    let userInputArray;
-
-    if (customToken){
-        const numbersPart = input.split("\\n")[1];
-        userInputArray = numbersPart.split(new RegExp(`[${customToken}]`));
-    }
-    else{
-        userInputArray = input.split( new RegExp(CALCULATOR_VARIABLES.DEFAULT_SEPARATOR));
+        const customSeparatorMatch  = input.match(new RegExp(CALCULATOR_VARIABLES.CUSTOM_SEPARATOR));
+        if (!customSeparatorMatch  && !input.match(CALCULATOR_VARIABLES.DEFAULT_SEPARATOR)) {
+            throw new Error('[ERROR]: 구분자가 없거나 잘못됐습니다.');
+        }
     }
 
-    return userInputArray ;
-}
-
-const getUserNumbers = async () => {
-
-    try{
-        const userInput = await Console.readLineAsync(CALCULATOR_VARIABLES.INPUT_PROMPT);
-        const userInputArray = splitUserInput(userInput);
-
-
-        // 검증 블록
-        isValidSeparator(userInput);
-        isPositiveNumber(userInputArray);
-
-        return userInputArray.map(Number);
-
-    }
-    catch (e) {
-        Console.print(e.message);
+    isPositiveNumber(arr) {
+        if (!arr.every(num => Number(num) > 0)) {
+            throw new Error('[ERROR]: 입력한 숫자가 양수가 아닙니다.');
+        }
     }
 
+    getSum(arr) {
+        return arr.reduce( (acc,cur) => acc + cur,  0);
+    }
 
-}
+    splitUserInput(input) { 
+        const customSeparatorMatch = input.match(new RegExp(CALCULATOR_VARIABLES.CUSTOM_SEPARATOR));
+        const customToken = customSeparatorMatch ? customSeparatorMatch[1] : null ;
 
-const printUserInput = async(input) => {
-    let sumValue = getSum(input);
-    Console.print(CALCULATOR_VARIABLES.OUTPUT_PROMPT + sumValue);
+        let userInputArray;
 
+        if (customToken){
+            const numbersPart = input.split("\\n")[1];
+            userInputArray = numbersPart.split(new RegExp(`[${customToken}]`));
+        }
+        else{
+            userInputArray = input.split( new RegExp(CALCULATOR_VARIABLES.DEFAULT_SEPARATOR));
+        }
+
+        return userInputArray ;
+    }
+
+    async getUserNumbers() {
+        try {
+            const userInput = await Console.readLineAsync(CALCULATOR_VARIABLES.INPUT_PROMPT);
+            const userInputArray = this.splitUserInput(userInput);
+
+            // 검증 블록
+            this.isValidSeparator(userInput);
+            this.isPositiveNumber(userInputArray);
+
+            return userInputArray.map(Number);
+        } catch (e) {
+            Console.print(e.message);
+        }
+    }
+
+    async printUserInput(input) {
+        let sumValue = this.getSum(input);
+        Console.print(CALCULATOR_VARIABLES.OUTPUT_PROMPT + sumValue);
+    }
 }
 
 
-const run =async() => {
-    const userNumbers = await getUserNumbers();
+
+// const isValidSeparator = (input) => {
+    
+//     const customSeparatorMatch  = input.match(new RegExp(CALCULATOR_VARIABLES.CUSTOM_SEPARATOR));
+//     if (!customSeparatorMatch  && !input.match(CALCULATOR_VARIABLES.DEFAULT_SEPARATOR)) {
+//         throw new Error('[ERROR]: 구분자가 없거나 잘못됐습니다.');
+//     }
+// };
+
+// const isPositiveNumber = (arr) => {
+//     if (!arr.every(num => Number(num) > 0)) {
+//         throw new Error('[ERROR]: 입력한 숫자가 양수가 아닙니다.');
+//     }
+// };
+
+// const getSum = (arr) => {
+//     return arr.reduce( (acc,cur) => acc + cur,  0);
+// }
+
+// const splitUserInput = (input) => {
+//     const customSeparatorMatch = input.match(new RegExp(CALCULATOR_VARIABLES.CUSTOM_SEPARATOR));
+//     const customToken = customSeparatorMatch ? customSeparatorMatch[1] : null ;
+
+//     let userInputArray;
+
+//     if (customToken){
+//         const numbersPart = input.split("\\n")[1];
+//         userInputArray = numbersPart.split(new RegExp(`[${customToken}]`));
+//     }
+//     else{
+//         userInputArray = input.split( new RegExp(CALCULATOR_VARIABLES.DEFAULT_SEPARATOR));
+//     }
+
+//     return userInputArray ;
+// }
+
+// const getUserNumbers = async () => {
+
+//     try{
+//         const userInput = await Console.readLineAsync(CALCULATOR_VARIABLES.INPUT_PROMPT);
+//         const userInputArray = splitUserInput(userInput);
+
+
+//         // 검증 블록
+//         isValidSeparator(userInput);
+//         isPositiveNumber(userInputArray);
+
+//         return userInputArray.map(Number);
+
+//     }
+//     catch (e) {
+//         Console.print(e.message);
+//     }
+
+
+// }
+
+// const printUserInput = async(input) => {
+//     let sumValue = getSum(input);
+//     Console.print(CALCULATOR_VARIABLES.OUTPUT_PROMPT + sumValue);
+
+// }
+
+
+const run = async() => {
+    const calculator = new Calculator();
+    const userNumbers = await calculator.getUserNumbers();
     if (userNumbers) {
-        printUserInput(userNumbers);
+        calculator.printUserInput(userNumbers);
     }
 }
 
