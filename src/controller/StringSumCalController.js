@@ -1,21 +1,21 @@
-import CustomSplitModel from "../model/CustomSplitModel.js";
-import DefaultSplitModel from "../model/DefaultSplitModel.js";
+import CustomSplitModel from "../model/GetDelimiterModel.js";
+import SplitModel from "../model/SplitModel.js";
 import InputView from "../view/TextInputView.js";
 
 class StringSumCalController {
   constructor() {
     this.inputView = new InputView(this);
-    this.CustomSplit = new CustomSplitModel();
-    this.DefaultSplit = new DefaultSplitModel();
+    this.CustomSplitModel = new CustomSplitModel();
+    this.SplitModel = new SplitModel();
   }
 
-  async getDelimeterType() {
+  async transferDelimiter() {
     const inputText = await this.inputView.getInputText();
+    let customDelimiter;
     if (inputText.startsWith("//")) {
-      this.CustomSplit.temp();
-    } else {
-      this.DefaultSplit.temp();
+      customDelimiter = this.CustomSplitModel.getDelimiter(inputText);
     }
+    this.SplitModel.stringSplit(customDelimiter);
   }
 }
 

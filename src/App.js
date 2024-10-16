@@ -5,7 +5,7 @@ class App {
     this.controller = new StringSumCalController();
   }
   async run() {
-    await this.controller.getDelimeterType();
+    await this.controller.transferDelimiter();
   }
 }
 
