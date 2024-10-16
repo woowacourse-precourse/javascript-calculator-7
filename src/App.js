@@ -9,6 +9,13 @@ import {
   checkUseOtherSeperator,
 } from './validator.js';
 
+import {
+  sum,
+  getCustomSeparator,
+  getRemovedCustomSeparator,
+  getSplitedBySeparator,
+} from './userInputHandler.js';
+
 class App {
   async run() {
     let customSeparator = null;
@@ -20,42 +27,21 @@ class App {
       checkSeperatorConflict(userInput, customSeparator);
     } else if (checkStartWidthDubbleSlash(userInput)) {
       this.validateCustomSeperator(userInput);
-      customSeparator = this.getCustomSeparator(userInput);
-      removedCustomSepartor = this.getRemovedCustomSepartor(userInput);
+      customSeparator = getCustomSeparator(userInput);
+      removedCustomSepartor = getRemovedCustomSeparator(userInput);
       checkUseOtherSeperator(removedCustomSepartor, customSeparator);
       checkSeperatorConflict(removedCustomSepartor, customSeparator);
     } else {
       throw new Error(errorMessage.useNumberOrSlash);
     }
 
-    const splitedUserInput = this.getSplitedBySeparator(
+    const splitedUserInput = getSplitedBySeparator(
       removedCustomSepartor || userInput,
       customSeparator,
     );
-    const sum = this.sum(splitedUserInput);
+    const result = sum(splitedUserInput);
 
-    Console.print(`결과 : ${sum}`);
-  }
-
-  sum(arr) {
-    return arr.reduce((acc, cur) => acc + Number(cur), 0);
-  }
-
-  getSplitedBySeparator(input, customSeparator) {
-    const separatorRegExp = new RegExp(
-      `${customSeparator ? customSeparator + '|' : ''}[,:]`,
-    );
-    return input.split(separatorRegExp);
-  }
-
-  getCustomSeparator(input) {
-    let splitInput = input.split(/(?:\/\/|\\n)/);
-    const customSeperator = splitInput[1];
-    return customSeperator;
-  }
-
-  getRemovedCustomSepartor(input) {
-    return input.split(/\\n/)[1];
+    Console.print(`결과 : ${result}`);
   }
 
   validateCustomSeperator(input) {
