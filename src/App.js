@@ -11,6 +11,7 @@ class App {
     } else if (this.isStartWidthDubbleSlash(userInput)) {
       this.checkIncludeNewLine(userInput);
       this.checkIncludeEmptyString(userInput);
+      this.checkUseOtherSeperator(userInput);
     } else {
       throw new Error(errorMessage.useNumberOrSlash);
     }
@@ -53,9 +54,22 @@ class App {
   }
 
   checkIncludeEmptyString(input) {
-    // 1번 방법
     const splitInput = input.split(/(?:\/\/|\\n)/);
     if (splitInput[1] === '') throw new Error(errorMessage.useCoustomSeparator);
+  }
+
+  checkUseOtherSeperator(input) {
+    let splitInput = input.split(/(?:\/\/|\\n)/);
+    const customSeperator = splitInput[1];
+
+    const basicSeparatorRegExp = /[,:]/;
+    const customSeperatorRegExp = new RegExp(customSeperator);
+
+    splitInput = splitInput.join('').split(basicSeparatorRegExp).join('');
+    splitInput = splitInput.split(customSeperator).join('');
+
+    if (!Number(splitInput))
+      throw new Error(errorMessage.useCustomOrBasicSeparator);
   }
 }
 
