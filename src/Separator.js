@@ -32,3 +32,5 @@ class Separator {
     return this.value;
   }
 }
+
+export default Separator;
