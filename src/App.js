@@ -1,8 +1,8 @@
-import InputHandler from './InputHandler.js';
+import InputHandler from './utils/InputHandler.js';
 import Validators from './utils/Validators.js';
-import StringParser from "./StringParser.js";
-import Calculator from "./Calculator.js";
-import OutputHandler from "./OutputHandler.js";
+import StringParser from "./utils/StringParser.js";
+import Calculator from "./utils/Calculator.js";
+import OutputHandler from "./utils/OutputHandler.js";
 
 class App {
   async run() {
