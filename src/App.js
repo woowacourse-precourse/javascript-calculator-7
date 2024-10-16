@@ -20,6 +20,12 @@ class App {
     // '\n' 문자를 실제 개행 문자로 교체
     input = input.replace(/\\n/g, '\n');
 
+    // 기본 구분자 연속 사용 여부 검사
+    const invalidDelimiter = /[,|:]{2,}/;
+    if (invalidDelimiter.test(input)) {
+      throw new Error();
+    }
+
     // 커스텀 구분자인지 확인
     if (input.startsWith('//')) {
       const delimiterEnd = input.indexOf('\n');
