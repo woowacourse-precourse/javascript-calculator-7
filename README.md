@@ -1,6 +1,11 @@
 # javascript-calculator-precourse
 
 ---
+## 입력 기능
+
+@woowacourse/mission-utils에서 제공하는 Console API를 활용하여 입출력을 구현
+
+---
 # 1주차 과제 분석하기
 
 ## 폴더 구조
