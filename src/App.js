@@ -10,7 +10,7 @@ class App {
 
   async run() {}
 
-  calculate(numberArray) {
+  static calculate(numberArray) {
     const result = numberArray.reduce(
       (currentSum, targetNumber) => currentSum + targetNumber,
       0,
