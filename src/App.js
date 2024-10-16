@@ -1,3 +1,4 @@
+import { Console } from "@woowacourse/mission-utils";
 import StringSumCalController from "./controller/StringSumCalController.js";
 
 class App {
@@ -5,7 +6,8 @@ class App {
     this.controller = new StringSumCalController();
   }
   async run() {
-    await this.controller.transferDelimiter();
+    const result = await this.controller.transferDelimiter();
+    Console.print(`result: ${result}`);
   }
 }
 

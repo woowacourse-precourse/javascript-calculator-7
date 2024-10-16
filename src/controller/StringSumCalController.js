@@ -1,22 +1,34 @@
+import CalculateSumModel from "../model/CalculateSumModel.js";
 import CustomSplitModel from "../model/GetDelimiterModel.js";
 import SplitModel from "../model/SplitModel.js";
-import InputView from "../view/TextInputView.js";
+import TextInputView from "../view/TextInputView.js";
 
 class StringSumCalController {
   constructor() {
-    this.inputView = new InputView(this);
+    this.TextInputView = new TextInputView(this);
     this.CustomSplitModel = new CustomSplitModel();
     this.SplitModel = new SplitModel();
+    this.CalculateSumModel = new CalculateSumModel();
   }
 
   async transferDelimiter() {
-    let inputText = await this.inputView.getInputText();
+    let inputText = await this.TextInputView.getInputText();
     let delimiter;
     if (inputText.startsWith("//")) {
       delimiter = this.CustomSplitModel.getDelimiter(inputText);
       inputText = inputText.split("\\n")[1];
     }
-    this.SplitModel.stringSplit(delimiter, inputText);
+    const splitString = this.getSplitString(delimiter, inputText);
+    const total = this.getTotal(splitString);
+    return total;
+  }
+
+  getSplitString(delimeter, inputText) {
+    return this.SplitModel.stringSplit(delimeter, inputText);
+  }
+
+  getTotal(splitString) {
+    const total = this.CalculateSumModel.calculateSum(splitString);
   }
 }
 

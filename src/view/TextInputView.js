@@ -1,6 +1,6 @@
 import { Console } from "@woowacourse/mission-utils";
 
-class InputView {
+class TextInputView {
   constructor(controller) {
     this.controller = controller;
   }
@@ -12,4 +12,4 @@ class InputView {
   }
 }
 
-export default InputView;
+export default TextInputView;
