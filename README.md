@@ -41,7 +41,8 @@
  ┣━ 📜App.js
  ┣━ 📜index.js
  ┣━ 📜user-input.js
- ┣━ 📜Calculator.js
+ ┣━ 📜Separator.js
+ ┣━ 📜calculate.js
  ┣━ 📜ErrorHandler.js
  ┗━ 📜print-message.js
 ```
