@@ -9,7 +9,21 @@ class App {
     }
 
     let delimiters = /,|:/;
+    let customDelimiter = input.match(/\/\/(.*?)\\n/);
+
+    if (customDelimiter) {
+      const slicedInput = input.slice(5);
+      const reg = new RegExp(`[^0-9${customDelimiter[1]}]`);
+
+      if (reg.test(slicedInput)) {
+        throw new Error("[ERROR] 올바른 커스텀 구분자를 입력하세요.");
+      }
+
+      delimiters = new RegExp(customDelimiter[1]);
+      input = slicedInput;
+    }
     let numArray = input.split(delimiters);
+
     let sum = 0;
 
     for (let num of numArray) {
