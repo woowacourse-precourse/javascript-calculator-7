@@ -14,6 +14,10 @@ class App {
     return str.replace(regexp, '');
   }
 
+  printSum(res) {
+    Console.print(`결과 : ${res}`);
+  }
+
   async run() {
     try {
       const str = await Console.readLineAsync(
@@ -36,7 +40,8 @@ class App {
       const nums = splited.map(Number);
 
       const addRes = this.add(nums);
-      Console.print(`결과 : ${addRes}`);
+
+      this.printSum(addRes);
     } catch (error) {
       // Todo... error 처리
       // console.error(error);
