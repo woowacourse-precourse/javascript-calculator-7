@@ -9,6 +9,8 @@ class App {
       this.checkSeperator(userInput);
       this.checkeCommaColonConflict(userInput);
     } else if (this.isStartWidthDubbleSlash(userInput)) {
+      this.checkIncludeNewLine(userInput);
+      this.checkIncludeEmptyString(userInput);
     } else {
       throw new Error(errorMessage.useNumberOrSlash);
     }
@@ -43,6 +45,17 @@ class App {
     if (colonCommaRegExp.test(input)) result = true;
 
     if (result) throw new Error(errorMessage.useSeperatorConflict);
+  }
+
+  checkIncludeNewLine(input) {
+    const newLineRegExp = /\\n/;
+    if (!newLineRegExp.test(input)) throw new Error(errorMessage.useNewLine);
+  }
+
+  checkIncludeEmptyString(input) {
+    // 1번 방법
+    const splitInput = input.split(/(?:\/\/|\\n)/);
+    if (splitInput[1] === '') throw new Error(errorMessage.useCoustomSeparator);
   }
 }
 
