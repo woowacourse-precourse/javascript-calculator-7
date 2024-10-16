@@ -3,12 +3,7 @@ import { Console } from "@woowacourse/mission-utils";
 class App {
   separator = new Set(":", ",");
 
-  splitBySeparator = (input) => {
-    // 입력받은 문자열을 구분자로 나눈다.
-    if (input.length === 0) {
-      return 0;
-    }
-
+  findCustomSeparator = (input) => {
     // 커스텀 구분자가 있는지 확인한다.
     // "//"와 "\n" 사이에 위치하는 문자를 커스텀 구분자로 사용한다
     let userInput = input.slice(); // 불변성 유지
@@ -21,11 +16,17 @@ class App {
       }
       userInput = userInput.replace(regex, "");
     }
+
+    return userInput;
   };
 
   solve = (input) => {
     try {
-      const seperatedInput = this.splitBySeparator(input);
+      if (input.length === 0) {
+        console.log("결과 :", 0);
+      } else {
+        const seperatedInput = this.findCustomSeparator(input);
+      }
     } catch (error) {
       console.error(error.message);
     }
