@@ -17,6 +17,10 @@ class App {
     else
       separatedUserInput = this.getSeparatedString(userInput, separatorRegExp);
 
+    for (const it of separatedUserInput) {
+      if (isNaN(it) || Number(it) <= 0) throw new Error("[ERROR]");
+    }
+
     const separatedUserInputsNumberArray = separatedUserInput.map((it) =>
       Number(it)
     );
