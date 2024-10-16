@@ -11,21 +11,41 @@ class App {
 		//4-1. 빈문자일경우 숫자 0 반환
 		//4-2. 음수면 ERROR 발생  -> try catch로 예외상황 나눌까?
 
-		Console.readLine(`덧셈할 문자열을 입력해 주세요.\n`, (answer) => {
-			// //일반 구분자
-			const a = answer.split(/[:,]/);
-			Console.print(a);
-			const sum1 = a.map(Number).reduce((a, b) => a + b, 0);
-			Console.print(sum1);
+		// 예외처리를 :,;//\n 이외를 제외하고는 어케하지 -> 일단 해결했지만 \n 개행문자도 포함시켰음에도 불구하고 에러뜸
+		// 예외처리 계획 다시 하기
+		// const validateAnswer = (answer) => {
+		// 	[...answer].forEach((a) => {
+		// 		if (!/[\\n,:;0-9\\]/.test(a)) {
+		// 			Console.print(`[ERROR]: 제외할 구분자 및 문자열 ${a}`);
+		// 		}
+		// 		return true;
+		// 	});
+		// };
 
-			//커스텀 구분자
-			const customD = answer.substring(2, 3);
-			const data = answer.split('\\n')[1];
-			Console.print(data);
-			const result = data.split(customD);
-			Console.print(result);
-			const sum2 = result.map(Number).reduce((a, b) => a + b, 0);
-			Console.print(sum2);
+		Console.readLine(`덧셈할 문자열을 입력해 주세요.\n`, (answer) => {
+			// 공백이 있을 경우 0 출력 (o)
+			// 일반구분자가 포함되어있지 않으면 커스텀구분자로 넘어가기 (o)
+			// 커스텀구분자에서 다른 구분자들이 있다면 에러내기
+			if (answer.trim() === '') {
+				Console.print(`결과: 0`);
+			} else {
+				if (answer.includes(',') || answer.includes(':')) {
+					//일반 구분자
+					const delimiter = answer.split(/[:,]/);
+					Console.print(delimiter);
+					const sum1 = delimiter.map(Number).reduce((a, b) => a + b, 0);
+					Console.print(`결과 : ${sum1}`);
+				} else {
+					//커스텀 구분자
+					const customD = answer.substring(2, 3);
+					const data = answer.split('\\n')[1];
+					Console.print(data);
+					const result = data.split(customD);
+					Console.print(result);
+					const sum2 = result.map(Number).reduce((a, b) => a + b, 0);
+					Console.print(`결과 : ${sum2}`);
+				}
+			}
 		});
 	}
 }
