@@ -40,5 +40,9 @@ describe("문자열 계산기", () => {
       expect(app.checkCustomSplitStringByDelimiter("//;\\n1;2;3")).toEqual(true);
       expect(app.checkCustomSplitStringByDelimiter("1,2,3")).toEqual(false);
     });
+
+    test("문자열 앞부분의 커스텀 구분자 수식을 문자열에 제외한다.", () => {
+      expect(app.getStrippedString("//;\\n1;2;3")).toBe("1;2;3");
+    });
   });
 });
