@@ -4,7 +4,7 @@
 ### 시작하기
 
 - [x]  요구사항 분석 README.md 작성
-- [ ]  constant 작성하기
+- [x]  constant 작성하기
 
 ### 입력받기
 
