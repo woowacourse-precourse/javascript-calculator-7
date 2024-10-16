@@ -6,15 +6,16 @@ class App {
     setString(value) {
         this.initString = value;
     }
-    basicSplit() {}
-    customSplit() {}
-    handleError() {}
+    parse() {
+        const parseedResult = parseString(this.initString);
+        if (parseedResult === 'error') {
+        }
+    }
 
     async run() {
         const inputValue = await getStringAsync();
         this.setString(inputValue);
-        const result = parseString(this.initString);
-        console.log(result);
+        this.parse();
     }
 }
 
