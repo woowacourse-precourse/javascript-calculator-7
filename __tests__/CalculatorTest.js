@@ -83,5 +83,12 @@ describe("문자열 계산기", () => {
     test("문자 배열을 숫자 배열로 변환한다.", () => {
       expect(app.returnNumbers(["1", "2"])).toEqual([1, 2]);
     });
-  })
+  });
+
+  describe("입출력을 제외한 문자열 계산기 로직 점검", () => {
+    test("커스텀 구분자를 사용했다.", () => {
+      expect(app.calculate("//;\\n1;2;3")).toBe(6);
+    });
+  });
+
 });
