@@ -12,6 +12,7 @@ class App {
       this.checkIncludeNewLine(userInput);
       this.checkIncludeEmptyString(userInput);
       this.checkUseOtherSeperator(userInput);
+      this.checkSeperatorConflict(userInput);
     } else {
       throw new Error(errorMessage.useNumberOrSlash);
     }
@@ -70,6 +71,20 @@ class App {
 
     if (!Number(splitInput))
       throw new Error(errorMessage.useCustomOrBasicSeparator);
+  }
+
+  checkSeperatorConflict(input) {
+    this.checkeCommaColonConflict(input);
+
+    let splitInput = input.split(/(?:\/\/|\\n)/);
+    const customSeperator = splitInput[1];
+
+    const regExpString = `${customSeperator}{2,}|${customSeperator}[,:]|[,:]{2,}|[,:]${customSeperator}`;
+
+    const conflictRegExt = new RegExp(regExpString);
+
+    if (conflictRegExt.test(splitInput.join('')))
+      throw new Error(errorMessage.useSeperatorConflict);
   }
 }
 
