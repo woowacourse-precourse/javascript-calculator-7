@@ -11,4 +11,14 @@ const reduce = (f, acc, iter) => {
 
 const go = (...args) => reduce((a, f) => f(a), args);
 
-export { reduce, go };
+//커스텀 구분자 추출 함수
+const extractCustomDelimiter = (input) => {
+  if (input.startsWith('//')) {
+    const delimiter = input.indexOf('\\n');
+    const customDelimiter = input.substring(2, delimiter);
+    return customDelimiter;
+  }
+  return null;
+};
+
+export { reduce, go, extractCustomDelimiter };
