@@ -15,6 +15,12 @@ class StringCalculator {
     }
     return { separator: this.DEFAULT_SEPARATORS, numbers: input };
   }
+
+  // 숫자 문자열을 구분자로 분리하고 각 숫자를 파싱
+  static parseNumbers(numbers, separator) {
+    const splitNumbers = numbers.split(new RegExp(`[${separator.join('')}]`));
+    return splitNumbers.map(this.validateAndParseNumber);
+  }
 }
 
 class App {
