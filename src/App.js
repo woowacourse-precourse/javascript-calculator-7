@@ -35,10 +35,9 @@ class App {
         numbers.push(parseInt(element));
       }
     });
-    Console.print(numbers);
-    // 배열의 각 요소를 정수로 변환한다.
     // 배열의 요소들을 더한 값을 반환한다.
-    Console.print(custom_seperator);
+    const result = numbers.reduce((acc, cur) => acc + cur, 0);
+    Console.print(`결과 : ${result}`);
   }
 
   // 만약 문자열에 커스텀 구분자가 있다면, 그 구분자를 반환한다.
