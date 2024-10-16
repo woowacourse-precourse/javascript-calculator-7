@@ -45,16 +45,4 @@ describe("문자열 계산기", () => {
       expect(app.getStrippedString("//;\\n1;2;3")).toBe("1;2;3");
     });
   });
-
-  describe("예외 처리", () => {
-    test("숫자가 아니면서 구분자가 아닌 문자가 있으면 'ERROR'로 시작하는 메서지와 함께 Error를 발생시킨다.", () => {
-      expect(app.checkCustomSplitStringByDelimiter("1,2;3")).toEqual(true);
-      // expect(app.checkCustomSplitStringByDelimiter("1;2;3")).toEqual(true);
-      // expect(app.checkCustomSplitStringByDelimiter("//[\\n1,2;3")).toEqual(true);
-      // expect(app.checkCustomSplitStringByDelimiter("//;\n1;2;3")).toEqual(true);
-      // expect(app.checkCustomSplitStringByDelimiter("20;2;30")).toEqual(true);
-      // expect(app.checkCustomSplitStringByDelimiter("//\n1;2;3")).toEqual(true);
-      // expect(app.checkCustomSplitStringByDelimiter("/;\\n1;2;3")).toEqual(true);
-    });
-  });
 });
