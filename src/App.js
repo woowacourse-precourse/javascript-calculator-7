@@ -34,11 +34,32 @@ class App {
 		this.separators.push(customSeparator);
 	}
 
+	escapeRegExp(string) {
+		return string.replace(/[.*+?^${}()|[\]\\]/g, '\\$&');
+	}
+
+	updateNumberFromString(string) {
+		let userInput = string;
+
+		const escapedSeparators = this.separators.map((sep) =>
+			this.escapeRegExp(sep)
+		);
+		const regex = new RegExp(`[${escapedSeparators.join('')}]`);
+
+		if (this.checkCustomSeparator(userInput)) {
+			userInput = string.substr(5);
+		}
+		userInput.split(regex).forEach((n, _) => {
+			this.numbers.push(Number(n));
+		});
+	}
+
 	async run() {
 		const input = await this.userInput();
 		if (this.checkCustomSeparator(input)) {
 			this.updateCustomSeparator(input);
 		}
+		this.updateNumberFromString(input);
 	}
 }
 
