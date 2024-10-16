@@ -6,8 +6,7 @@ class App {
     this.controller = new StringSumCalController();
   }
   async run() {
-    const result = await this.controller.transferDelimiter();
-    await Console.print(result);
+    await this.controller.transferDelimiter();
   }
 }
 

@@ -1,11 +1,13 @@
 import CalculateSumModel from "../model/CalculateSumModel.js";
 import CustomSplitModel from "../model/GetDelimiterModel.js";
 import SplitModel from "../model/SplitModel.js";
+import SumOutputView from "../view/SumOutputView.js";
 import TextInputView from "../view/TextInputView.js";
 
 class StringSumCalController {
   constructor() {
     this.TextInputView = new TextInputView(this);
+    this.SumOutputView = new SumOutputView();
     this.CustomSplitModel = new CustomSplitModel();
     this.SplitModel = new SplitModel();
     this.CalculateSumModel = new CalculateSumModel();
@@ -16,7 +18,7 @@ class StringSumCalController {
     let [operationText, delimiter] = this.getParts(inputText);
     const splitArray = this.SplitModel.stringSplit(delimiter, operationText);
     const total = this.CalculateSumModel.calculate(splitArray);
-    return total;
+    this.SumOutputView.printOutput(total);
   }
 
   getParts(inputText) {
