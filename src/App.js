@@ -31,6 +31,11 @@ class StringCalculator {
     }
     return num;
   }
+
+  // 파싱된 숫자 배열의 합계 계산
+  static sum(numbers) {
+    return numbers.reduce((acc, num) => acc + num, 0);
+  }
 }
 
 class App {
