@@ -1,11 +1,17 @@
 import { Console } from "@woowacourse/mission-utils";
 
 class App {
+  separator = [":", ","];
+
   splitBySeparator = (input) => {
     // 입력받은 문자열을 구분자로 나눈다.
     if (input.length === 0) {
       return 0;
     }
+
+    // 커스텀 구분자가 있는지 확인한다.
+    // "//"와 "\n" 사이에 위치하는 문자를 커스텀 구분자로 사용한다
+    const regex = /\/\/(.*?)\n/;
   };
 
   solve = (input) => {
