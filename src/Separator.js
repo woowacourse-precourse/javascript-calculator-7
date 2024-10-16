@@ -1,4 +1,4 @@
-import { DEFAULT_SEPARATOR } from './constant';
+import { DEFAULT_SEPARATOR, CUSTOM_SEPARATOR } from './constant';
 class Separator {
   constructor(input) {
     this.input = input;
@@ -11,7 +11,9 @@ class Separator {
   }
 
   // 커스텀 구분자 확인
-  hasCustomSeparator() {}
+  hasCustomSeparator() {
+    return CUSTOM_SEPARATOR.test(this.input);
+  }
 
   // 커스텀 구분자로 분리
   splitByCustomSeparator() {}
