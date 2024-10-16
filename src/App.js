@@ -6,28 +6,33 @@ import {
   checkIncludeNewLine,
   checkStartWithNumber,
   checkStartWidthDubbleSlash,
+  checkUseOtherSeperator,
 } from './validator.js';
 
 class App {
   async run() {
     let customSeparator = null;
+    let removedCustomSepartor = null;
     Console.print(outputMessage.startMessage);
     let userInput = await Console.readLineAsync('');
     if (checkStartWithNumber(userInput)) {
+      checkUseOtherSeperator(userInput, customSeparator);
       checkSeperatorConflict(userInput, customSeparator);
       this.checkeCommaColonConflict(userInput);
     } else if (checkStartWidthDubbleSlash(userInput)) {
       this.validateCustomSeperator(userInput);
       customSeparator = this.getCustomSeparator(userInput);
-      const removedCustomSepartor = this.getRemovedCustomSepartor(userInput);
-      this.checkUseOtherSeperator(userInput);
-      checkSeperatorConflict(userInput, customSeparator);
-      userInput = this.sliceCustomSeparator(userInput);
+      removedCustomSepartor = this.getRemovedCustomSepartor(userInput);
+      checkUseOtherSeperator(removedCustomSepartor, customSeparator);
+      checkSeperatorConflict(removedCustomSepartor, customSeparator);
     } else {
       throw new Error(errorMessage.useNumberOrSlash);
     }
 
-    const splitedUserInput = this.splitUserInput(userInput, customSeparator);
+    const splitedUserInput = this.getSplitedBySeparator(
+      removedCustomSepartor || userInput,
+      customSeparator,
+    );
     const sum = this.sum(splitedUserInput);
 
     Console.print(`결과 : ${sum}`);
@@ -37,13 +42,11 @@ class App {
     return arr.reduce((acc, cur) => acc + Number(cur), 0);
   }
 
-  splitUserInput(input, customSeparator) {
-    const separatorRegExp = new RegExp(`${customSeparator}|[,:]`);
+  getSplitedBySeparator(input, customSeparator) {
+    const separatorRegExp = new RegExp(
+      `${customSeparator ? customSeparator + '|' : ''}[,:]`,
+    );
     return input.split(separatorRegExp);
-  }
-
-  sliceCustomSeparator(input) {
-    return input.split('\\n')[1];
   }
 
   getCustomSeparator(input) {
