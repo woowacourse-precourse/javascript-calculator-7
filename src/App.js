@@ -44,7 +44,15 @@ class App {
     const numbers = numberString.split(defaultDelimiter);
 
     const sum = numbers.reduce((sum, numStr) => {
-      return sum + Number(numStr)
+      const num = Number(numStr);
+    
+      
+      // 숫자가 아니거나 비양수인 경우 에러 발생
+      if (isNaN(numStr) || num <= 0) {
+        throw new Error();
+      }
+
+      return sum + num;
     }, 0);
 
     return sum;
