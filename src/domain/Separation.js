@@ -1,44 +1,34 @@
-import { SPECIAL_CHARACTERS } from '../constants/value';
+import { DEFAULT_SEPARATOR, FORMAT, INDEX } from '../constants/value';
 
 class Separation {
-  static #INDEX = { start: 0, end: 1, separator: 2 };
-
   #string;
 
-  #separator;
+  #separator = DEFAULT_SEPARATOR;
 
   constructor(input) {
-    this.#setDefaultSeparator();
-    this.#updateSeparator(input);
-    this.#updateString(input);
+    this.#string = input;
+    this.#applyCustomFormat(input);
   }
 
-  #setDefaultSeparator() {
-    const { colon, comma } = SPECIAL_CHARACTERS;
+  #applyCustomFormat(input) {
+    const matches = input.match(FORMAT.custom);
 
-    this.#separator = new RegExp(`[${colon + comma}]`);
-  }
+    if (matches) {
+      const matchedString = matches[INDEX.start];
 
-  #updateSeparator(input) {
-    const { slash, newline } = SPECIAL_CHARACTERS;
-    const { start, separator } = Separation.#INDEX;
-    const doubleSlashIndex = input.indexOf(slash + slash);
-    const newlineIndex = input.indexOf(newline);
-
-    if (doubleSlashIndex === start && newlineIndex >= separator + 1) {
-      this.#separator = input.slice(separator, newlineIndex);
+      this.#updateSeparator(matchedString);
+      this.#updateString(input, matchedString);
     }
   }
 
-  #updateString(input) {
-    const { newline } = SPECIAL_CHARACTERS;
-    const { end } = Separation.#INDEX;
+  #updateSeparator(matchedString) {
+    const { separator, newline } = INDEX;
 
-    if (input.includes(newline)) {
-      this.#string = input.split(newline)[end] || '';
-    } else {
-      this.#string = input;
-    }
+    this.#separator = matchedString.slice(separator, newline);
+  }
+
+  #updateString(input, matchedString) {
+    this.#string = input.split(matchedString)[INDEX.next];
   }
 
   getNumbers() {
