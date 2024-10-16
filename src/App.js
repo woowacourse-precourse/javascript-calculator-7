@@ -6,8 +6,7 @@ class App {
   async run() {
     const userInput = await this.getUserInput();
     const stringifiedUserInput = JSON.stringify(userInput);
-    const { separator, isCustomSeparator, newUserInput } =
-      this.getSeparator(stringifiedUserInput);
+    const { separator, newUserInput } = this.getSeparator(stringifiedUserInput);
     const separatorRegExp = this.getSeparatorRegExp(separator);
 
     const separatedUserInput = newUserInput.split(separatorRegExp);
@@ -34,12 +33,10 @@ class App {
         separator: customSeparatorMatchedString[0]
           .slice(2, -2)
           .replace("\\", "\\\\"),
-        isCustomSeparator: true,
         newUserInput: str.slice(customSeparatorMatchedString[0].length + 1, -1),
       };
     return {
       separator: this.defaultSeparator,
-      isCustomSeparator: false,
       newUserInput: str.slice(1, -1),
     };
   }
