@@ -71,8 +71,8 @@
 
 ## 추가적인 학습 목록
 
-[Mardown 문법](../javascript-calculator-7/study/markdown.md)
+[Mardown 문법](https://github.com/thumbthing/javascript-calculator-7/blob/thumbthing/study/markdown.md)
 
-[vscode](../javascript-calculator-7/study/vscode.md)
+[vscode](../study/vscode.md)
 
-[Git](../javascript-calculator-7/study/git.md)
+[Git](https://github.com/thumbthing/javascript-calculator-7/blob/thumbthing/study/git.md)
