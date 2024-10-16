@@ -8,10 +8,9 @@ class App {
       accumulator + number, initialValue);
   }
 
-  splitStringByDelimiter(inputString) {
+  splitStringByDelimiter(inputString, delimiters) {
     let currentToken = '';
     let TokenArray = [];
-    const delimiters = [',', ':'];
 
     for(const element of inputString) {
       if(delimiters.includes(element)) {
