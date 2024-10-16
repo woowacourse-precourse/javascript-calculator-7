@@ -49,13 +49,9 @@ class StringCalculator {
 
 class App {
   async run() {
-    try{
-      const input = await MissionUtils.Console.readLineAsync("덧셈할 문자열을 입력해 주세요.\n");
-      const result = StringCalculator.calculate(input);
-      MissionUtils.Console.print(`결과: ${result}`);
-    } catch (e) {
-      MissionUtils.Console.print(e.message);
-    }
+    const input = await MissionUtils.Console.readLineAsync("덧셈할 문자열을 입력해 주세요.\n");
+    const result = StringCalculator.calculate(input);
+    MissionUtils.Console.print(`결과 : ${result}`);
   }
 }
 
