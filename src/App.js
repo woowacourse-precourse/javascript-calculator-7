@@ -1,4 +1,12 @@
 class App {
+  #separators;
+  #input;
+
+  constructor() {
+    this.#separators = [];
+    this.#input = null;
+  }
+
   async run() {}
 
   calculate(numberArray) {
