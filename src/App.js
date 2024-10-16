@@ -25,6 +25,17 @@ class App {
     });
 
     // 없다면 구분자를 기준으로 문자열을 나누어 배열로 만든다.
+    let numbers = [];
+    READ_STRING.split(new RegExp(seperator.join("|"))).forEach((element) => {
+      if (element === "") {
+        throw new Error("[ERROR] 구분자가 연속으로 입력되었습니다.");
+      } else if (element < 0) {
+        throw new Error("[ERROR] 음수가 입력되었습니다.");
+      } else {
+        numbers.push(parseInt(element));
+      }
+    });
+    Console.print(numbers);
     // 배열의 각 요소를 정수로 변환한다.
     // 배열의 요소들을 더한 값을 반환한다.
     Console.print(custom_seperator);
