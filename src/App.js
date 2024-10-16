@@ -1,5 +1,6 @@
 class App {
   #separators;
+
   #inputNumbers;
 
   constructor() {
