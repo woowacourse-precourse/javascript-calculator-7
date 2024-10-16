@@ -1,15 +1,4 @@
-import { MissionUtils } from '@woowacourse/mission-utils';
-
-// 입력
-// async function getUsername() {
-//   try {
-//     const username = await Console.readLineAsync('닉네임을 입력해주세요.');
-//   } catch (error) {
-//     // reject 되는 경우
-//   }
-// }
-// 출력
-// Console.print('안녕하세요.');
+import { Console } from '@woowacourse/mission-utils';
 
 class App {
   async run() {
