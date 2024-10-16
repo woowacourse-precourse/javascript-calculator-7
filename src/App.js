@@ -6,7 +6,7 @@ import calculateSum from './calculate';
 
 class App {
   async run() {
-    const input = userInput();
+    const input = await userInput();
     const separator = new Separator(input);
     const value = separator.separate();
 
