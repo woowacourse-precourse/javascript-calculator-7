@@ -2,15 +2,44 @@ import {Console} from "@woowacourse/mission-utils";
 
 class App {
   parseInput(input) {
-    // 쉼표나 콜론으로 문자열 분리(split)
-    const numbers = input.split(/[,;]/).map((num) => {
-      // 문자열 숫자로 변환
-      const parsedNum = parseInt(num.trim(), 10);
-      if (isNaN(parsedNum) || parsedNum < 0) {
-        throw new Error("유효하지 않은 입력입니다.");
-      }
-      return parsedNum;
-    });
+    // '\\n'을 실제 줄바꿈 문자로 변환
+    input = input.replace(/\\n/g, "\n");
+
+    let numberString = input;
+    let delimiter = /[,;]/; // 기본 구분자
+
+    // 커스텀 구분자 패턴 매칭
+    const customDelimiterMatch = input.match(/^\/\/(.+)\n([\s\S]*)$/);
+
+    if (customDelimiterMatch) {
+      // 커스텀 구분자가 있는 경우
+      const [, customDelimiter, numbers] = customDelimiterMatch;
+      delimiter = new RegExp(customDelimiter, "g");
+      numberString = numbers;
+    }
+
+    return this.processNumbers(numberString, delimiter);
+  }
+
+  processNumbers(numberString, delimiter) {
+    const numbers = numberString
+      .split(delimiter)
+      .filter((num) => num.trim() !== "") // 빈 문자열 제거
+      .map((num) => {
+        const parsedNum = parseInt(num.trim(), 10);
+        if (isNaN(parsedNum)) {
+          throw new Error(`'${num.trim()}'은(는) 유효한 숫자가 아닙니다.`);
+        }
+        if (parsedNum < 0) {
+          throw new Error("음수는 입력할 수 없습니다.");
+        }
+        return parsedNum;
+      });
+
+    if (numbers.length === 0) {
+      throw new Error("숫자가 입력되지 않았습니다.");
+    }
+
     return numbers;
   }
 
@@ -18,7 +47,8 @@ class App {
     try {
       const input = await this.getUserInput();
       const numbers = this.parseInput(input);
-      Console.print(numbers);
+      const sum = numbers.reduce((acc, curr) => acc + curr, 0);
+      Console.print(`결과: ${sum}`);
     } catch (error) {
       Console.print(`[ERROR] ${error.message}`);
     }
