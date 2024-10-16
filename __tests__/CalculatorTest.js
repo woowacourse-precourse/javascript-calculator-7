@@ -21,4 +21,11 @@ describe("문자열 계산기", () => {
 
     expect(app.add([1, 2, 3, 4])).toBe(10);
   });
+
+  test("0개의 숫자는 0으로 처리한다.", async () => {
+
+    const app = new App();
+
+    expect(app.add([])).toBe(0);
+  });
 });
