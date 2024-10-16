@@ -19,52 +19,32 @@ class Calculator {
   /**@param {string} input */
   calculate(input) {
     //실제 계산 로직
+    go(
+      input,
+      this.parseInput,
 
-    // '//'로 시작한다면
+      /**@type {(numbers:string[]) => number[]}  */
+      (numbers) => numbers.map(Number),
+
+      /**@type {(numbers:number[]) => number}   */
+      (numbers) => numbers.reduce((acc, cur) => acc + cur),
+
+      /**@type {(result: number) => void}   */
+      (result) => this.printResult(result)
+    );
+  }
+
+  /**
+   * @param {string} input
+   * @returns {string[]}
+   */
+  parseInput(input) {
     if (input.startsWith('//')) {
-      return go(
-        input,
-
-        /**@type {(str:string) => string[]}  */
-        (str) => str.split('\\n'),
-
-        /**@type {(str:string[]) => {customDelimiter:string, numbersPart:string}}  */
-        ([delimiterPart, numbersPart]) => ({
-          customDelimiter: delimiterPart.slice(2),
-          numbersPart,
-        }),
-        ({ customDelimiter, numbersPart }) =>
-          numbersPart.split(customDelimiter),
-
-        /**@type {(numbers:string[]) => number[]}  */
-        (numbers) => numbers.map(Number),
-
-        /**@type {(numbers:number[]) => number}   */
-        (numbers) => numbers.reduce((acc, cur) => acc + cur),
-
-        /**@type {(result: number) => void}   */
-        (result) => this.printResult(result)
-      );
+      const [delimiterPart, numbersPart] = input.split('\\n');
+      const customDelimiter = delimiterPart.slice(2);
+      return numbersPart.split(customDelimiter);
     }
-
-    // '//'로 시작하지 않고 일반 숫자가 먼저 입력된다면
-    if (/^\d/.test(input)) {
-      go(
-        input,
-
-        /**@type {(input:string) => string[]}  */
-        (input) => input.split(delimiter),
-
-        /**@type {(nums:string[]) => number[]}  */
-        (nums) => nums.map(Number),
-
-        /**@type {(nums:number[]) => number}   */
-        (nums) => nums.reduce((acc, cur) => acc + cur),
-
-        /**@type {(result: number) => void}   */
-        (result) => this.printResult(result)
-      );
-    }
+    return input.split(delimiter);
   }
 
   /**@param {number} result */
