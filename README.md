@@ -65,3 +65,7 @@
 [vscode](../study/vscode.md)
 
 [Git](https://github.com/thumbthing/javascript-calculator-7/blob/thumbthing/study/git.md)
+
+[JavaScript](https://github.com/thumbthing/javascript-calculator-7/blob/thumbthing/study/javascript.md)
+
+[프리코스 회고록](https://github.com/thumbthing/javascript-calculator-7/blob/thumbthing/study/retrospective.md)
