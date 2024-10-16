@@ -30,10 +30,7 @@ class App {
   }
   getSeparator(str) {
     const customSeparatorMatchedString = str.match(this.customSeparatorRegExr);
-    if (
-      customSeparatorMatchedString &&
-      customSeparatorMatchedString.index === 0
-    )
+    if (customSeparatorMatchedString)
       return customSeparatorMatchedString[0].slice(2, -2);
 
     return this.defaultSeparator;
