@@ -11,9 +11,10 @@ class App {
   splitStringByDelimiter(inputString) {
     let currentToken = '';
     let TokenArray = [];
+    const delimiters = [',', ':'];
 
     for(const element of inputString) {
-      if(element === ',') {
+      if(delimiters.includes(element)) {
         TokenArray.push(currentToken);
         currentToken = '';
       }

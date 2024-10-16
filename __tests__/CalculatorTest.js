@@ -29,5 +29,9 @@ describe("문자열 계산기", () => {
     test("쉼표(,) 구분자를 기준으로 문자열을 분리한다.", () => {
       expect(app.splitStringByDelimiter("1,2")).toEqual(["1", "2"]);
     });
+
+    test("콜론(:) 구분자를 기준으로 문자열을 분리한다.", () => {
+      expect(app.splitStringByDelimiter("1:2")).toEqual(["1", "2"]);
+    });
   })
 });
