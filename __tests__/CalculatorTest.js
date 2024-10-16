@@ -25,13 +25,20 @@ describe("문자열 계산기", () => {
     });
   })
 
-  describe("구분자를 기준으로 문자열 분리", () => {
+  describe("기본 구분자를 기준으로 문자열 분리", () => {
     test("쉼표(,) 구분자를 기준으로 문자열을 분리한다.", () => {
       expect(app.splitStringByDelimiter("1,2")).toEqual(["1", "2"]);
     });
 
     test("콜론(:) 구분자를 기준으로 문자열을 분리한다.", () => {
       expect(app.splitStringByDelimiter("1:2")).toEqual(["1", "2"]);
+    });
+  });
+
+  describe("커스텀 구분자를 기준으로 문자열 분리", () => {
+    test("문자열 앞부분의 '//'와 '\n' 사이에 위치하는 문자를 커스텀 구분자를 찾는다.", () => {
+      expect(app.checkCustomSplitStringByDelimiter("//;\n1;2;3")).toEqual(true);
+      expect(app.checkCustomSplitStringByDelimiter("1,2,3")).toEqual(false);
     });
   });
 });
