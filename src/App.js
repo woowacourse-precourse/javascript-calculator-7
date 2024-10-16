@@ -6,14 +6,14 @@ class App {
   async run() {
     const userInput = await this.getUserInput();
     const stringifiedUserInput = JSON.stringify(userInput);
-    const { separator, isCustomSeparator } =
+    const { separator, isCustomSeparator, newUserInput } =
       this.getSeparator(stringifiedUserInput);
     const separatorRegExp = this.getSeparatorRegExp(separator);
 
     let separatedUserInput;
     if (isCustomSeparator)
-      separatedUserInput = userInput.split(separatorRegExp);
-    else separatedUserInput = userInput.split(separatorRegExp);
+      separatedUserInput = newUserInput.split(separatorRegExp);
+    else separatedUserInput = newUserInput.split(separatorRegExp);
 
     for (const it of separatedUserInput) {
       if (isNaN(it) || Number(it) <= 0) throw new Error("[ERROR]");
@@ -38,10 +38,12 @@ class App {
           .slice(2, -2)
           .replace("\\", "\\\\"),
         isCustomSeparator: true,
+        newUserInput: str.slice(customSeparatorMatchedString[0].length + 1, -1),
       };
     return {
       separator: this.defaultSeparator,
       isCustomSeparator: false,
+      newUserInput: str.slice(1, -1),
     };
   }
   getSeparatorRegExp(separator) {
