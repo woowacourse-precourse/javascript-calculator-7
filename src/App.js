@@ -19,6 +19,8 @@ class App {
     if (hasInvalidNumber) {
       throw new Error('[ERROR] 잘못된 값이 입력되었습니다.');
     }
+
+    const sum = numberArray.reduce((acc, num) => acc + parseInt(num), 0);
   }
 }
 
