@@ -1,5 +1,7 @@
 import { Console } from '@woowacourse/mission-utils';
 
+const customSeparationSymbolRegex = /\/\/(.*?)\\n/g;
+
 class App {
   constructor() {
     this.separationSymbols = [',', ':'];
@@ -20,6 +22,10 @@ class App {
 
   removeSpace(input) {
     return input.replace(/\s/g, '');
+  }
+
+  isCustomSeparationSymbolExist(input) {
+    return customSeparationSymbolRegex.test(input);
   }
 }
 
