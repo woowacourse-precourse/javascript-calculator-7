@@ -52,7 +52,7 @@ export function testCustomInput(parseCustomInput) {
         );
       }
     }
-    console.log('---');
+    console.log('--------');
   });
 }
 
