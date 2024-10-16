@@ -17,7 +17,7 @@ const notCustomConditionCheck = userInput => {
     loopCount += 1;
   }
   if (loopCount === tureCountForNumber + tureCountForSeparator) {
-    console.log('입력 값의 오류가 없습니다.'); // 나중에 삭제
+    return true;
   }
 };
 
