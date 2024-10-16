@@ -1,5 +1,10 @@
 import { Console } from '@woowacourse/mission-utils';
 import { errorMessage, outputMessage } from './constant.js';
+import {
+  checkSeperatorConflict,
+  checkIncludeEmptyString,
+  checkIncludeNewLine,
+} from './validator.js';
 
 class App {
   async run() {
@@ -7,14 +12,13 @@ class App {
     Console.print(outputMessage.startMessage);
     let userInput = await Console.readLineAsync('');
     if (this.isStartWithNumber(userInput)) {
-      this.checkSeperator(userInput);
+      checkSeperatorConflict(userInput, customSeparator);
       this.checkeCommaColonConflict(userInput);
     } else if (this.isStartWidthDubbleSlash(userInput)) {
-      this.checkIncludeNewLine(userInput);
-      this.checkIncludeEmptyString(userInput);
+      this.validateCustomSeperator(userInput);
       customSeparator = this.getCustomSeparator(userInput);
       this.checkUseOtherSeperator(userInput);
-      this.checkSeperatorConflict(userInput);
+      checkSeperatorConflict(userInput, customSeparator);
       userInput = this.sliceCustomSeparator(userInput);
     } else {
       throw new Error(errorMessage.useNumberOrSlash);
@@ -55,12 +59,6 @@ class App {
     return regExp.test(input);
   }
 
-  checkSeperator(input) {
-    if (!Boolean(Number(input.split(/[,:]/).join('')))) {
-      throw new Error(errorMessage.useCommaOrColon);
-    }
-  }
-
   checkeCommaColonConflict(input) {
     let result = false;
     const duplicateComma = /,,+/;
@@ -99,18 +97,9 @@ class App {
       throw new Error(errorMessage.useCustomOrBasicSeparator);
   }
 
-  checkSeperatorConflict(input) {
-    this.checkeCommaColonConflict(input);
-
-    let splitInput = input.split(/(?:\/\/|\\n)/);
-    const customSeperator = splitInput[1];
-
-    const regExpString = `${customSeperator}{2,}|${customSeperator}[,:]|[,:]{2,}|[,:]${customSeperator}`;
-
-    const conflictRegExt = new RegExp(regExpString);
-
-    if (conflictRegExt.test(splitInput.join('')))
-      throw new Error(errorMessage.useSeperatorConflict);
+  validateCustomSeperator(input) {
+    checkIncludeNewLine(input);
+    checkIncludeEmptyString(input);
   }
 }
 
