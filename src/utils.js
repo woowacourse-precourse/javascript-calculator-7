@@ -22,3 +22,21 @@ export function shallowCopy(object) {
     return Object.assign({}, object);
   }
 }
+
+/**
+ *
+ * @param {string} value
+ * @returns {boolean}
+ */
+export function isNumericString(value) {
+  return !isNaN(value);
+}
+
+/**
+ *
+ * @param {string} value
+ * @returns {boolean}
+ */
+export function isPositiveNumber(value) {
+  return Number(value) > 0;
+}

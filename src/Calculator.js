@@ -1,4 +1,4 @@
-import { isMatch, shallowCopy } from './utils';
+import { isMatch, isNumericString, isPositiveNumber, shallowCopy } from './utils';
 
 class Calculator {
   /** @type {object} */
@@ -63,6 +63,17 @@ class Calculator {
     });
 
     return delimitedString;
+  }
+
+  #getPositiveNumericString(value) {
+    return value.filter((aValue) => isNumericString(aValue) && isPositiveNumber(aValue));
+  }
+
+  calculate(value) {
+    return this.#getPositiveNumericString(this.#getDelimitedString(value)).reduce(
+      (sum, current) => sum + Number(current),
+      0,
+    );
   }
 }
 
