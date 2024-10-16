@@ -16,7 +16,23 @@ class App {
     if (!input) {
       return 0;
     }
-    const numbers = input.split(/[,|:]/).map(Number);
+
+    let delimiter = /[,|:]/;
+    let numbersString = input;
+
+    if (input.startsWith("//")) {
+      const delimiterEndIndex = input.indexOf("\\n");
+
+      const customDelimiter = input.substring(2, delimiterEndIndex);
+      numbersString = input.substring(delimiterEndIndex + 2);
+      delimiter = customDelimiter;
+    }
+
+    const numbers = numbersString.split(delimiter).map((num) => {
+      const parsedNumber = Number(num.trim());
+
+      return parsedNumber;
+    });
 
     return numbers.reduce((acc, curr) => acc + curr, 0);
   }
