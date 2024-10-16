@@ -26,9 +26,9 @@ class App {
     }
 
     const removedFormatString = inputString.split('//').join('').split('\n');
-    const separator = removedFormatString[0];
-    this.#inputNumbers = removedFormatString[1];
-    return [separator];
+    const [separator, numberString] = removedFormatString;
+    this.#inputNumbers = numberString;
+    return [...separator];
   }
 
   extractNumbers() {
