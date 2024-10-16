@@ -1,46 +1,23 @@
 import { MissionUtils } from "@woowacourse/mission-utils";
 
-class App {
-  constructor() {
-    this.seperators = [",", ":"];
-  }
+const CUSTOM_EXPRESSION = Object.freeze({
+  START: "//",
+  END: "\\n",
+});
 
-  async run() {
-    const userInput = await this.getUserInput();
-    this.getCustomSeperator(userInput);
-    const processedInput = this.replaceAllSeperators(
-      userInput,
-      this.seperators
-    );
-    const validInputArray = this.validateInput(processedInput);
-
-    const sum = this.sumAll(validInputArray);
-    this.print(`결과 : ${sum}`);
-  }
-
-  async read(input) {
-    return MissionUtils.Console.readLineAsync(input);
-  }
-
-  print(input) {
-    return MissionUtils.Console.print(input);
-  }
-
-  async getUserInput() {
-    return await this.read("덧셈할 문자열을 입력해 주세요.");
+class Calculator {
+  constructor(defaultSeperators) {
+    this.seperators = defaultSeperators;
+    this.constantSeperator = ",";
   }
 
   getCustomSeperator(input) {
-    const CUSTOM_SEPERATOR_START = "//";
-    const CUSTOM_SEPERATOR_END = "\\n";
-
     if (
-      input.startsWith(CUSTOM_SEPERATOR_START) &&
-      input.includes(CUSTOM_SEPERATOR_END)
+      input.startsWith(CUSTOM_EXPRESSION.START) &&
+      input.includes(CUSTOM_EXPRESSION.END)
     ) {
-      const startIndex = CUSTOM_SEPERATOR_START.length;
-      const endIndex = input.indexOf(CUSTOM_SEPERATOR_END);
-
+      const startIndex = CUSTOM_EXPRESSION.START.length;
+      const endIndex = input.indexOf(CUSTOM_EXPRESSION.END);
       const customSeperator = input.slice(startIndex, endIndex);
 
       if (customSeperator.length === 0) {
@@ -48,25 +25,30 @@ class App {
       }
 
       this.seperators.unshift(
-        CUSTOM_SEPERATOR_START + customSeperator + CUSTOM_SEPERATOR_END,
+        CUSTOM_EXPRESSION.START + customSeperator + CUSTOM_EXPRESSION.END,
         customSeperator
       );
     }
   }
 
-  replaceAllSeperators(input, seperators) {
+  replaceAllSeperators(input) {
     let processedInput = input;
-    const DEFAULT_SEPERATOR = ",";
 
-    seperators.forEach((seperator) => {
-      processedInput = processedInput.replaceAll(seperator, DEFAULT_SEPERATOR);
+    this.seperators.forEach((seperator) => {
+      processedInput = processedInput.replaceAll(
+        seperator,
+        this.constantSeperator
+      );
     });
 
     return processedInput;
   }
 
   validateInput(input) {
-    const inputArray = input.split(",").filter(Boolean).map(Number);
+    const inputArray = input
+      .split(this.constantSeperator)
+      .filter(Boolean)
+      .map(Number);
 
     if (inputArray.some(isNaN)) {
       throw new Error("[ERROR] 정의되지 않은 구분자가 포함되어 있습니다.");
@@ -81,6 +63,33 @@ class App {
 
   sumAll(inputArray) {
     return inputArray.reduce((sum, num) => sum + Number(num), 0);
+  }
+}
+
+class Console {
+  async read(input) {
+    return MissionUtils.Console.readLineAsync(input);
+  }
+
+  print(input) {
+    return MissionUtils.Console.print(input);
+  }
+}
+
+class App {
+  constructor() {
+    this.calculator = new Calculator([",", ":"]);
+    this.console = new Console();
+  }
+
+  async run() {
+    const userInput = await this.console.read("덧셈할 문자열을 입력해 주세요.");
+    this.calculator.getCustomSeperator(userInput);
+    const processedInput = this.calculator.replaceAllSeperators(userInput);
+    const validInputArray = this.calculator.validateInput(processedInput);
+
+    const sum = this.calculator.sumAll(validInputArray);
+    this.console.print(`결과 : ${sum}`);
   }
 }
 
