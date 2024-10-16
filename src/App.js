@@ -30,6 +30,23 @@ class App {
     this.#inputNumbers = removedFormatString[1];
     return [separator];
   }
+
+  extractNumbers() {
+    const separators = this.#separators;
+    const numberString = this.#inputNumbers;
+    if (separators.length === 1) {
+      const separator = separators.pop();
+      return numberString.split(separator);
+    }
+
+    const [firstSeparator, secondSeparator] = separators;
+    const firstSeparated = numberString
+      .split(firstSeparator)
+      .join(secondSeparator);
+
+    const numbers = firstSeparated.split(secondSeparator);
+    return numbers;
+  }
 }
 
 export default App;
