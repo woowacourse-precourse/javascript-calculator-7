@@ -11,7 +11,13 @@ class App {
 		//4-1. 빈문자일경우 숫자 0 반환
 		//4-2. 음수면 ERROR 발생  -> try catch로 예외상황 나눌까?
 
-		Console.readLine(`덧셈할 문자열을 입력해 주세요.\n`, (answer) => {});
+		Console.readLine(`덧셈할 문자열을 입력해 주세요.\n`, (answer) => {
+			// //일반 구분자
+			const a = answer.split(/[:,]/);
+			Console.print(a);
+			const sum1 = a.map(Number).reduce((a, b) => a + b, 0);
+			Console.print(sum1);
+		});
 	}
 }
 
