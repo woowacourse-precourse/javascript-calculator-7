@@ -1,5 +1,10 @@
 # javascript-calculator-precourse
 
+## 학습 목표
+
+- Git, GitHub, IDE 등 실제 개발을 위한 환경에 익숙해진다.
+- 교육 분야에 맞는 프로그래밍 언어를 사용하여 간단한 문제를 해결한다.
+
 ## 기능 목록
 
 - 계산할 문자열 입력
