@@ -19,6 +19,7 @@ class App {
     } else if (checkStartWidthDubbleSlash(userInput)) {
       this.validateCustomSeperator(userInput);
       customSeparator = this.getCustomSeparator(userInput);
+      const removedCustomSepartor = this.getRemovedCustomSepartor(userInput);
       this.checkUseOtherSeperator(userInput);
       checkSeperatorConflict(userInput, customSeparator);
       userInput = this.sliceCustomSeparator(userInput);
@@ -49,6 +50,10 @@ class App {
     let splitInput = input.split(/(?:\/\/|\\n)/);
     const customSeperator = splitInput[1];
     return customSeperator;
+  }
+
+  getRemovedCustomSepartor(input) {
+    return input.split(/\\n/)[1];
   }
 
   isStartWithNumber(input) {
