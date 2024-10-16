@@ -17,7 +17,7 @@ class App {
 
     const hasInvalidNumber = numberArray.some((num) => !/^\d+$/.test(num));
     if (hasInvalidNumber) {
-      // 잘못된 입력값 처리
+      throw new Error('[ERROR] 잘못된 값이 입력되었습니다.');
     }
   }
 }
