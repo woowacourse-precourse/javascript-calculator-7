@@ -6,6 +6,7 @@ class App {
     Console.print(outputMessage.startMessage);
     const userInput = await Console.readLineAsync('');
     if (this.isStartWithNumber(userInput)) {
+      this.checkSeperator(userInput);
     } else if (this.isStartWidthDubbleSlash(userInput)) {
     } else {
       throw new Error(errorMessage.useNumberOrSlash);
@@ -20,6 +21,12 @@ class App {
   isStartWidthDubbleSlash(input) {
     const regExp = /^(\/\/)/;
     return regExp.test(input);
+  }
+
+  checkSeperator(input) {
+    if (!Boolean(Number(input.split(/[,:]/).join('')))) {
+      throw new Error(errorMessage.useCommaOrColon);
+    }
   }
 }
 
