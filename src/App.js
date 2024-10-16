@@ -8,14 +8,35 @@ function handleEmptyInput(input) {
 // 기본 구분자로 문자열 분리 및 합산
 function sumWithDefaultDelimiters(input) {
   const delimiters = /[,|:]/;
+  Console.print(delimiters);
   const numbers = input.split(delimiters).map(Number);
+  Console.print(numbers);
   return numbers.reduce((acc, num) => acc + num, 0);
+}
+
+//커스텀 구분자로 문자열 분리 및 합산
+function sumWithCustomDelimiter(input) {
+  if (input.startsWith('//')) {
+    const delimitersStartIndex = 2;
+    const delimitersEndIndex = input.indexOf('\\n');
+    const customDelimiter = input.substring(
+      delimitersStartIndex,
+      delimitersEndIndex,
+    );
+    const numbersString = input.slice(delimitersEndIndex + 2);
+    const delimiters = new RegExp(`[${customDelimiter}|,|:]`);
+    const numbers = numbersString.split(delimiters).map(Number);
+    return numbers.reduce((acc, num) => acc + num, 0);
+  }
 }
 
 function sum(input) {
   const result = handleEmptyInput(input);
   if (result !== null) {
     return result;
+  }
+  if (input.startsWith('//')) {
+    return sumWithCustomDelimiter(input);
   }
   return sumWithDefaultDelimiters(input);
 }
