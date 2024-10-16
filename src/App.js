@@ -1,20 +1,19 @@
-import { Console } from "@woowacourse/mission-utils";
 import StringCalculator from "./StringCalculator.js";
+import InputHandler from "./InputHandler.js";
 
 class App {
   constructor() {
     this.calculator = new StringCalculator();
+    this.inputHandler = new InputHandler();
   }
 
   async run() {
     try {
-      const input = await Console.readLineAsync(
-        "덧셈할 문자열을 입력해 주세요.\n"
-      );
+      const input = await this.inputHandler.getInput();
       const result = this.calculator.calculate(input);
-      Console.print(`결과 : ${result}`);
+      this.inputHandler.printResult(result);
     } catch (error) {
-      Console.print(`[ERROR] ${error.message}`);
+      this.inputHandler.printError(error);
     }
   }
 }
