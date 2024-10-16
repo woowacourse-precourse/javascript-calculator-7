@@ -37,6 +37,10 @@ class App {
   getStrippedString(inputString) {
     return inputString.slice(5,);
   }
+
+  isValidString(inputString) {
+    return false;
+  }
 }
 
 
