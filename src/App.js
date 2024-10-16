@@ -8,6 +8,9 @@ class App {
 
     const { separator, expression } = CalculateUtil.parseInput(input);
     if (!isInputValid(separator, expression)) throw new Error("[ERROR]");
+
+    const sum = CalculateUtil.sumExpression(separator, expression);
+    console.log(sum);
   }
 }
 
