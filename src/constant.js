@@ -11,6 +11,8 @@ export const errorMessage = {
     '[ERROR] 커스텀 구분자 혹은 쉼표와 클론만 사용해 주세요',
 
   useNumberOrSlash: '[ERROR] 입력값을 확인해 주세요',
+
+  useSeperatorConflict: `[ERROR] 구분자는 동시에 나올 수 없습니다.`,
 };
 
 export const outputMessage = {
