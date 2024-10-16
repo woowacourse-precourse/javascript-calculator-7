@@ -5,13 +5,34 @@ class App {
     return nums.reduce((acc, curr) => acc + curr, 0);
   }
 
+  isCustomDelimiterPresent(str, regexp) {
+    return regexp.test(str);
+  }
+
+  getCustomDelimiter(str) {
+    const regexp = /[/\\n]/g;
+    return str.replace(regexp, '');
+  }
+
   async run() {
     try {
       const str = await Console.readLineAsync(
         '덧셈할 문자열을 입력해 주세요.\n',
       );
 
-      const splited = str.split(/,|:/);
+      const delimeters = [',', ':'];
+      const customRegexp = /^\/\/.+\\n/;
+
+      let parsed = str;
+
+      if (this.isCustomDelimiterPresent(str, customRegexp)) {
+        delimeters.push(this.getCustomDelimiter(str.match(customRegexp)[0]));
+        parsed = str.replace(customRegexp, '');
+      }
+
+      const delimeterRegexp = new RegExp(`[${delimeters.join('')}]`, 'g');
+
+      const splited = parsed.split(delimeterRegexp);
       const nums = splited.map(Number);
 
       const addRes = this.add(nums);
