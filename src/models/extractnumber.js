@@ -1,4 +1,12 @@
-import extractSeparator from "./extractseparator.js";
+function extractSeparator(input) {
+  if (input.startsWith("//")) {
+    const SEPARATORENDINDEX = input.indexOf("\n");
+    if (SEPARATORENDINDEX !== -1) {
+      return input.substring(2, SEPARATORENDINDEX);
+    }
+  }
+  return /[,:]/;
+}
 
 function extractNumbers(input) {
   if (!input) return [];
