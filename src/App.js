@@ -11,7 +11,7 @@ class App {
   async calculator() {
     const inputStr = await this.inputString();
     const answer = this.getTotal(inputStr);
-    Console.print(answer);
+    Console.print(`결과 : ${answer}`);
   }
   async inputString() {
     const input = await Console.readLineAsync(MESSAGE.INPUT); // 문자열을 입력받는다.
