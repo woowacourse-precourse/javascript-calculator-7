@@ -1,6 +1,7 @@
 import { Console } from '@woowacourse/mission-utils';
 
-const customSeparationSymbolRegex = /\/\/(.*?)\\n/g;
+const customSeparationSymbolRegex = /\/\/(.*?)\\n/;
+const customSeparationSymbolsRegex = /\/\/(.*?)\\n/g;
 
 class App {
   constructor() {
@@ -10,6 +11,12 @@ class App {
   async run() {
     const input = await this.getInputForAddition();
     const inputWithoutSpace = this.removeSpace(input);
+
+    if (this.isCustomSeparationSymbolExist(inputWithoutSpace)) {
+      const customSeparationSymbols =
+        this.extractCustomSeparationSymbols(inputWithoutSpace);
+      this.separationSymbols.push(...customSeparationSymbols);
+    }
   }
 
   async getInputForAddition() {
@@ -26,6 +33,15 @@ class App {
 
   isCustomSeparationSymbolExist(input) {
     return customSeparationSymbolRegex.test(input);
+  }
+
+  extractCustomSeparationSymbols(input) {
+    const customSeparationSymbols = Array.from(
+      input.matchAll(customSeparationSymbolsRegex),
+      (m) => m[1]
+    );
+
+    return customSeparationSymbols;
   }
 }
 
