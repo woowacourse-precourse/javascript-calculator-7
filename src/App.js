@@ -34,6 +34,10 @@ class App {
     return (inputString[0] === '/' && inputString[1] === '/' 
       && inputString[3] === '\\' && inputString[4] === 'n');
   }
+
+  getStrippedString(inputString) {
+    return inputString.slice(5,);
+  }
 }
 
 
