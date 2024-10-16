@@ -8,7 +8,7 @@ class App {
   }
 
   parseStringToNumbers(string) {
-    if (string === " ") return [];
+    if (!string.trim()) return [];
 
     const defaultDelimiters = [",", ":"];
     let result = string;
