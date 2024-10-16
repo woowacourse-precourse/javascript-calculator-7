@@ -1,4 +1,5 @@
 import { Console } from "@woowacourse/mission-utils";
+import { WRONG_SEPARATOR } from "./constants/errorMessage.js";
 
 class App {
   #plusString;
@@ -54,8 +55,15 @@ class App {
     // basic pattern
     const separators = this.#separatorList.join("");
     const separatorRegex = new RegExp(`[${separators}]+`, "g");
-    const numberList = plusString.split(separatorRegex);
+    const numberList = plusString.split(separatorRegex).map(Number);
     Console.print(numberList);
+
+    // validate number list
+    for (let i = 0; i < numberList.length; i++) {
+      if (isNaN(numberList[i])) {
+        throw new Error(WRONG_SEPARATOR);
+      }
+    }
   }
 
   async run() {
