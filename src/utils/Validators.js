@@ -19,12 +19,12 @@ class Validators {
                 throw new Error('[ERROR] 커스텀 구분자 이후 숫자 입력이 없습니다.');
             }
             if (!this.isValidNumberString(numberPart, customSeparator[1])) {
-                throw new Error(`[ERROR] 유효하지 않은 숫자 형식입니다. (커스텀 구분자 '${customSeparator[1]}' 사용)`);
+                throw new Error(`[ERROR] 유효하지 않은 형식입니다. (커스텀 구분자 '${customSeparator[1]}' 사용)`);
             }
         } else {
             // 3. 기본 구분자 확인
             if (!this.isValidNumberString(input)) {
-                throw new Error('[ERROR] 유효하지 않은 숫자 형식입니다. (기본 구분자 사용)');
+                throw new Error('[ERROR] 유효하지 않은 형식입니다. (기본 구분자 사용)');
             }
         }
     }
@@ -32,7 +32,8 @@ class Validators {
     static isValidNumberString(str, customSeparator = null) {
         if (customSeparator) {
             // 커스텀 구분자를 사용하는 경우: 새로운 정규식으로 검사
-            const regex = new RegExp(`^\\d+(${customSeparator}\\d+)*$`);
+            const escapedSeparator = customSeparator.replace(/[.*+?^${}()|[\]\\]/g, '\\$&');
+            const regex = new RegExp(`^\\d+(${escapedSeparator}\\d+)*$`);
             return regex.test(str);
         }
         // 기본 구분자를 사용하는 경우
