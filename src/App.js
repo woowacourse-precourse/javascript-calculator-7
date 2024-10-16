@@ -1,5 +1,15 @@
 class App {
-  async run() {}
+  async run() {
+    let inputString = '//;\\n1;2;3';
+    let delimiters = [";"];
+
+    if(this.checkCustomSplitStringByDelimiter(inputString)){
+      console.log("");
+    }
+    else {
+      console.log("");
+    }
+  }
 
   add(numbers) {
     const initialValue = 0;
