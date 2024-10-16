@@ -5,6 +5,12 @@ class App {
   async run() {
     Console.print(outputMessage.startMessage);
     const userInput = await Console.readLineAsync('');
+    console.log(this.isStartWithNumber(userInput));
+  }
+
+  isStartWithNumber(input) {
+    const regExp = /^[1-9]/;
+    return regExp.test(input);
   }
 }
 
