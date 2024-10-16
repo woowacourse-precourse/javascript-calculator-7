@@ -7,4 +7,10 @@ export const ExtractAddCalculator = {
 
     return SUM;
   },
+
+  extract(userInput) {
+    const EXTRACTED_ARR = userInput.split(/[^\d]+/).map(Number);
+
+    return EXTRACTED_ARR;
+  },
 };
