@@ -22,15 +22,12 @@ class App {
       inputString = this.getStrippedString(inputString);
     }
 
-    if(this.isValidString(inputString, delimiters)) {
+      this.isValidString(inputString, delimiters);
+
       const stringArray = this.splitStringByDelimiter(inputString, delimiters);
       const numberArray = this.returnNumbers(stringArray);
-      return this.add(numberArray);
-    }
-    
-    else {
-      console.log("Error");
-    }
+      
+      return this.add(numberArray);    
   }
 
   add(numbers) {
@@ -80,17 +77,15 @@ class App {
       const isNotInclude = !delimiters.includes(element);
 
       if(isNaN(element) && isNotInclude) {
-        return false;
+        throw new Error("[ERROR]");
       }
     }
-    return true
   }
 
   returnNumbers(inputArray) {
     return inputArray.map(element => Number(element));
   }
 }
-
 
 export default App;
 
