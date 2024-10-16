@@ -19,7 +19,7 @@ class App {
       numbers = input.substring(5).split(input[2]).map(Number);
     } else {
       // 기본 구분자 처리
-      numbers = input.split(/,|;/).map(Number);
+      numbers = input.split(/,|:/).map(Number);
     }
 
     // 합 계산
