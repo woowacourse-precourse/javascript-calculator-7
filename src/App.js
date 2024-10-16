@@ -34,6 +34,11 @@ class App {
       delimiter = customDelimiter;
     }
 
+    const singleNumber = Number(numbersString.trim());
+    if (!isNaN(singleNumber)) {
+      return singleNumber;
+    }
+
     const numbers = numbersString.split(delimiter).map((num) => {
       const trimmedNum = num.trim();
 
