@@ -37,6 +37,10 @@ describe("문자열 계산기", () => {
     test("세미콜론(;) 구분자를 기준으로 문자열을 분리한다.", () => {
       expect(app.splitStringByDelimiter("1;2", [";"])).toEqual(["1", "2"]);
     });
+
+    test("세미콜론(;) 구분자와 쉼표(,) 구분자를 기준으로 문자열을 분리한다.", () => {
+      expect(app.splitStringByDelimiter("1;2,3", [";", ','])).toEqual(["1", "2", "3"]);
+    });
   });
 
   describe("커스텀 구분자를 찾고 문자열에서 분리", () => {
