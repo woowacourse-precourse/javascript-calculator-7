@@ -7,7 +7,7 @@ class App {
       inputString = this.getStrippedString(inputString);
     }
     else {
-      console.log("");
+      const stringArray = this.splitStringByDelimiter(inputString, delimiters);
     }
   }
 
