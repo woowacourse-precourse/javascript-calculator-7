@@ -1,6 +1,7 @@
 import { Console } from "@woowacourse/mission-utils";
 import { MESSAGE } from "./constants/message.js";
 import { ERROR } from "./constants/error.js";
+import { validate } from "./utils/validate.js";
 
 
 class App {
@@ -15,7 +16,8 @@ class App {
   }
   async inputString() {
     const input = await Console.readLineAsync(MESSAGE.INPUT); // 문자열을 입력받는다.
-    this.validate(input); //유효성 검사
+    //this.validate(input); //유효성 검사
+    validate(input);
     return input;
     
   }
