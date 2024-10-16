@@ -8,6 +8,18 @@ class App {
 
     return result;
   }
+
+  findSeparator(inputString) {
+    const firstElement = inputString[0];
+    const elementNumber = Number(firstElement);
+    if (!Number.isNaN(elementNumber)) {
+      return [',', ':'];
+    }
+
+    const removedFormatString = inputString.split('//').join('').split('\n');
+    const separator = removedFormatString[0];
+    return [separator];
+  }
 }
 
 export default App;
