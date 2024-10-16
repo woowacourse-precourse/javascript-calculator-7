@@ -22,8 +22,12 @@ class App {
       sum += num;
     }
 
-    // 출력
-    Console.print(`결과 : ${sum}`);
+    // 예외처리 및 출력
+    if (numbers.some((num) => isNaN(num) || num <= 0)) {
+      throw new Error("[ERROR]");
+    } else {
+      Console.print(`결과 : ${sum}`);
+    }
   }
 }
 
