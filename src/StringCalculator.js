@@ -1,13 +1,16 @@
 class StringCalculator {
   // 입력값을 받아 최종 결과를 반환하는 메서드
   calculate(input) {
+    this.validateCustomDelimiterPosition(input);
     const preProcessInput = this.preProcessInput(input);
 
     if (this.isEmpty(preProcessInput)) {
       return 0;
     }
 
-    const numberStrings = this.parseBasicAndCustomDelimiter(preProcessInput);
+    const { numberStrings, customDelimiter } =
+      this.parseBasicAndCustomDelimiter(preProcessInput); // 기본 구분자와 커스텀 구분자를 파싱함.
+    this.validateMultipleDelimiterInput(preProcessInput, customDelimiter); // 숫자들 사이에 구분자가 여러 개 포함된 경우 유효성 검사
     const numbers = this.parseNumbers(numberStrings);
 
     return this.calculateSum(numbers);
@@ -47,10 +50,16 @@ class StringCalculator {
     // 커스텀 구분자가 있는 경우
     if (match) {
       const [, delimiter, numbers] = match;
-      return numbers.split(new RegExp(`[${delimiter},:]`));
+      return {
+        numberStrings: numbers.split(new RegExp(`[${delimiter},:]`)),
+        customDelimiter: delimiter,
+      };
     }
 
-    return input.split(/[,:]/);
+    return {
+      numberStrings: input.split(/[,:]/),
+      customDelimiter: null,
+    };
   }
 
   // 숫자 배열을 받아 합을 구하는 메서드
@@ -58,8 +67,22 @@ class StringCalculator {
     return numbers.reduce((acc, cur) => acc + cur, 0);
   }
 
-  // 입력값 유효성 검사 메서드
-  validateInput(input) {}
+  // 커스텀 구분자 위치 유효성 검사 메서드
+  validateCustomDelimiterPosition(input) {
+    if (input.includes("//") && !input.startsWith("//")) {
+      throw new Error("커스텀 구분자는 맨 앞에 위치해야 합니다.");
+    }
+  }
+
+  // 숫자들 사이에 구분자가 여러 개 포함된 경우 유효성 검사 메서드
+  validateMultipleDelimiterInput(input, customDelimiter) {
+    const delimiters = customDelimiter ? `${customDelimiter},:` : ",:";
+    const multipleDelimitersPattern = new RegExp(`[${delimiters}]{2,}`); // 구분자가 2개 이상인 경우를 판별하는 정규표현식
+
+    if (multipleDelimitersPattern.test(input)) {
+      throw new Error("구분자는 한 번만 사용할 수 있습니다.");
+    }
+  }
 }
 
 export default StringCalculator;
