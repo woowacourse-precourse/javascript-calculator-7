@@ -14,6 +14,11 @@ class App {
 
     const delimiterRegex = new RegExp(`[${delimiters.join('')}]`);
     const numberArray = numbers.split(delimiterRegex);
+
+    const hasInvalidNumber = numberArray.some((num) => !/^\d+$/.test(num));
+    if (hasInvalidNumber) {
+      // 잘못된 입력값 처리
+    }
   }
 }
 
