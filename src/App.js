@@ -17,6 +17,11 @@ class App {
     let defaultDelimiter = /[,:]/; // 기본 구분자 , :
     let numberString = input;
     
+      // 빈 문자열일 경우 0을 반환
+      if (input === "") {
+        return 0;
+      }
+
     // '\n' 문자를 실제 개행 문자로 교체
     input = input.replace(/\\n/g, '\n');
 
