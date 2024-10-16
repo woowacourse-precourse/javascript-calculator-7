@@ -1,14 +1,21 @@
 class StringCalculator {
   // 입력값을 받아 최종 결과를 반환하는 메서드
   calculate(input) {
-    if (this.isEmpty(input)) {
+    const preProcessInput = this.preProcessInput(input);
+
+    if (this.isEmpty(preProcessInput)) {
       return 0;
     }
 
-    const numberStrings = this.parseBasicAndCustomDelimiter(input);
+    const numberStrings = this.parseBasicAndCustomDelimiter(preProcessInput);
     const numbers = this.parseNumbers(numberStrings);
 
     return this.calculateSum(numbers);
+  }
+
+  // \n을 개행문자로 변환하는 메서드
+  preProcessInput(input) {
+    return input.replace(/\\n/g, "\n");
   }
 
   // 문자열이 비어있는지 확인하는 메서드
@@ -20,18 +27,14 @@ class StringCalculator {
   parseNumbers(numberStrings) {
     return numberStrings.map((number) => {
       const parsedNumber = parseInt(number, 10);
-
       // 숫자가 아닌 값이 포함되어 있는 경우
       if (isNaN(parsedNumber)) {
-        throw new Error(
-          `[ERROR] 숫자가 아닌 값이 포함되어 있습니다: ${number}`
-        );
+        throw new Error(`숫자가 아닌 값이 포함되어 있습니다: ${number}`);
       }
       // 음수가 포함되어 있는 경우
       if (parsedNumber < 0) {
-        throw new Error(`[ERROR] 음수는 허용되지 않습니다: ${parsedNumber}`);
+        throw new Error(`음수는 허용되지 않습니다: ${parsedNumber}`);
       }
-
       return parsedNumber;
     });
   }
