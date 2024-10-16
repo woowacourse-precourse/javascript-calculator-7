@@ -8,6 +8,8 @@ class App {
   }
 
   parseStringToNumbers(string) {
+    if (string === " ") return [];
+
     const defaultDelimiters = [",", ":"];
     let result = string;
 
@@ -33,9 +35,14 @@ class App {
     return numbers.map(Number);
   }
 
+  sum(numbers) {
+    if (!numbers.length) return 0;
+  }
+
   async run() {
     const input = await this.readInput();
     const numbers = this.parseStringToNumbers(input);
+    const result = this.sum(numbers);
   }
 }
 
