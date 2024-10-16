@@ -3,7 +3,7 @@ import App from "./App.js"
 
 const app = new App()
 try {
-  Console.print(await app.run())
+  await app.run()
 } catch (error) {
   Console.print(error.message)
 }

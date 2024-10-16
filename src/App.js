@@ -33,7 +33,7 @@ class App {
       throw new Error("[ERROR] 양수만 입력해주세요.")
     }
 
-    return `결과 : ${numbers.reduce((a, b) => a + b)}`
+    Console.print(`결과 : ${numbers.reduce((a, b) => a + b)}`)
   }
 }
 
