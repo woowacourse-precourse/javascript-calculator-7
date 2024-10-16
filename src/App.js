@@ -11,9 +11,7 @@ class App {
 
     const separatedUserInput = newUserInput.split(separatorRegExp);
 
-    for (const it of separatedUserInput) {
-      if (isNaN(it) || Number(it) <= 0) throw new Error("[ERROR]");
-    }
+    this.checkErrorSeparatedUserInput(separatedUserInput);
 
     const separatedUserInputsNumberArray = separatedUserInput.map((it) =>
       Number(it)
@@ -45,6 +43,11 @@ class App {
   }
   getSeparatorRegExp(separator) {
     return new RegExp(`[${separator}]`);
+  }
+  checkErrorSeparatedUserInput(separatedUserInput) {
+    for (const it of separatedUserInput) {
+      if (isNaN(it) || Number(it) <= 0) throw new Error("[ERROR]");
+    }
   }
   getSeparatedString(str, separator) {
     return str.split(separator);
