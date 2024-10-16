@@ -4,14 +4,6 @@
 
 ---
 
-### 출력
-
----
-
-1. 고정된 텍스트를 출력
-
-2. 변하는 텍스트를 출력
-
 ### 입력
 
 ---
@@ -46,9 +38,6 @@
 
 변환된 입력값을 덧셈으로 계산하여 결과값을 반환
 
-### 계산된 값 출력
-
----
 
 ### 에러 처리
 
@@ -71,7 +60,7 @@
 
 ## 추가적인 학습 목록
 
-[Mardown 문법](https://github.com/thumbthing/javascript-calculator-7/blob/thumbthing/study/markdown.md)
+[Markdown](https://github.com/thumbthing/javascript-calculator-7/blob/thumbthing/study/markdown.md)
 
 [vscode](../study/vscode.md)
 
