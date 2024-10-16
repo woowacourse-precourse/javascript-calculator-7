@@ -80,13 +80,7 @@ class App {
   }
 
   sumAll(inputArray) {
-    let sum = 0;
-
-    for (let num of inputArray) {
-      sum += num;
-    }
-
-    return sum;
+    return inputArray.reduce((sum, num) => sum + Number(num), 0);
   }
 }
 
