@@ -48,11 +48,7 @@ describe("문자열 계산기", () => {
 
   describe("예외 처리", () => {
     test("숫자와 지정된 구분자로만 이루어진 문자인지 판별한다.", () => {
-      expect(app.isValidString("1,2;3")).toBe(false);
-      // expect(app.isValidString("1,2,3").toBe(true));
-      // expect(app.isValidString("1,2;3").toBe(false));
-      // expect(app.isValidString("//;\\n1,2;3").toBe(true));
-      // expect(app.isValidString("//;\\n1,2-3").toBe(false));
+      expect(app.isValidString("1,2;3", [","])).toBe(false);
     });
   })
 });

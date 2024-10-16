@@ -38,7 +38,7 @@ class App {
     return inputString.slice(5,);
   }
 
-  isValidString(inputString) {
+  isValidString(inputString, delimiters) {
     return false;
   }
 }
