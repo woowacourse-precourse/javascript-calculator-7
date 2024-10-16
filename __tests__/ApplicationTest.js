@@ -78,7 +78,7 @@ describe("문자열 계산기", () => {
   });
 
   test("커스텀 구분자만 존재하는 문자열", async () => {
-    const inputs = ["//;\n"];
+    const inputs = ["//;\\n"];
     mockQuestions(inputs);
 
     const logSpy = getLogSpy();
@@ -108,7 +108,7 @@ describe("문자열 계산기", () => {
   });
 
   test("기본 및 커스텀 구분자만 존재하는 문자열", async () => {
-    const inputs = ["//;\n,:"];
+    const inputs = ["//;\\n,:"];
     mockQuestions(inputs);
 
     const logSpy = getLogSpy();

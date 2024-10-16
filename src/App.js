@@ -54,7 +54,7 @@ class App {
     const separators = this.#separatorList.join("");
     const separatorRegex = new RegExp(`[${separators}]+`, "g");
     const numberList = plusString.split(separatorRegex).map(Number);
-    // Console.print(numberList);
+    Console.print(numberList);
 
     // validate number list
     for (let i = 0; i < numberList.length; i++) {
