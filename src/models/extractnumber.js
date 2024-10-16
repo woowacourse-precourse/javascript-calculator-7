@@ -9,7 +9,7 @@ function extractSeparator(input) {
 }
 
 function extractNumbers(input) {
-  if (!input) return [];
+  if (!input) return [0]; // 빈 입력일 경우 0을 반환
 
   const SEPARATOR = extractSeparator(input);
   let NUMBERS = input;
@@ -26,7 +26,10 @@ function extractNumbers(input) {
       ? SEPARATOR.replace(/[-\/\\^$*+?.()|[\]{}]/g, "\\$&")
       : SEPARATOR;
 
-  return NUMBERS.split(new RegExp(`[${escapedSeparator}]`)).map(Number);
+  const result = NUMBERS.split(new RegExp(`[${escapedSeparator}]`)).map(Number);
+
+  // 결과 배열이 빈 배열이면 0을 반환
+  return result.length === 0 ? [0] : result;
 }
 
 export default extractNumbers;
