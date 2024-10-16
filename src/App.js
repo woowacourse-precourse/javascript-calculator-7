@@ -3,14 +3,12 @@ import { WRONG_SEPARATOR, WRONG_NUMBER } from "./constants/errorMessage.js";
 
 class App {
   #plusString;
-  #plusNumberArray;
   #plusResult;
   #separatorList;
 
   constructor() {
     this.#plusString = "";
     this.#plusResult = 0;
-    this.#plusNumberArray = [];
     this.#separatorList = [",", ":"];
   }
 
@@ -56,7 +54,7 @@ class App {
     const separators = this.#separatorList.join("");
     const separatorRegex = new RegExp(`[${separators}]+`, "g");
     const numberList = plusString.split(separatorRegex).map(Number);
-    Console.print(numberList);
+    // Console.print(numberList);
 
     // validate number list
     for (let i = 0; i < numberList.length; i++) {
@@ -67,6 +65,9 @@ class App {
         throw new Error(WRONG_NUMBER);
       }
     }
+
+    // sum number list
+    this.#plusResult = numberList.reduce((acc, curr) => acc + curr);
   }
 
   async run() {
