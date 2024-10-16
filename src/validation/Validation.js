@@ -97,6 +97,11 @@ class Validation {
     }
 
     //소수점이 입력되었을경우
+    if (/\./.test(input)) {
+      throw new Error(
+        `${ERROR_MESSAGE.PREFIX} ${ERROR_MESSAGE.NO_DECIMAL_NUMBERS}`
+      );
+    }
 
     //0이 입력되었을 경우
     if (input.includes('0')) {
