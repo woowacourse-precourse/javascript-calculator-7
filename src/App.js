@@ -2,11 +2,16 @@ import { MissionUtils } from "@woowacourse/mission-utils";
 class App {
   async run() {
     const inputString = await this.getInputString();
-    this.calculate(inputString);
+    const result = this.calculate(inputString);
+    this.printResult(result);
   }
 
   async getInputString() {    
     return await MissionUtils.Console.readLineAsync("덧셈할 문자열을 입력해 주세요.\n");
+  }
+
+  printResult(result) {
+    MissionUtils.Console.print(`결과: ${result}`);
   }
 
   calculate(inputString) {
