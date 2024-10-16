@@ -36,14 +36,25 @@ class StringCalculator {
   static sum(numbers) {
     return numbers.reduce((acc, num) => acc + num, 0);
   }
+
+  // 메인 계산 메서드: 입력 문자열을 받아 최종 결과 반환
+  static calculate(input) {
+    if (input === '') return 0;
+
+    const { separator, numbers } = StringCalculator.parseInput(input);
+    const parsedNumbers = StringCalculator.parseNumbers(numbers, separator);
+    return StringCalculator.sum(parsedNumbers);
+  }
 }
 
 class App {
   async run() {
     try{
-      const input = await MissionUtils.Console.readLineAsync("덧셈할 문자열을 입력해 주세요.");
+      const input = await MissionUtils.Console.readLineAsync("덧셈할 문자열을 입력해 주세요.\n");
+      const result = StringCalculator.calculate(input);
+      MissionUtils.Console.print(`결과: ${result}`);
     } catch (e) {
-      console.error(e.message);
+      MissionUtils.Console.print(e.message);
     }
   }
 }
