@@ -21,10 +21,14 @@ export const extractCustomSeparators = (customString) => {
   return Array.from(matches, (match) => match[1]);
 };
 
-export const isAllPositive = (numbers) => {
-  return numbers.every((num) => num > 0);
-};
-
 export const splitBySeparators = (numberString, separators) => {
   return numberString.split(separators).map(Number);
+};
+
+export const sumNumbers = (numbers) => {
+  return numbers.reduce((acc, cur) => acc + cur, 0);
+};
+
+export const isAllPositive = (numbers) => {
+  return numbers.every((num) => num > 0);
 };

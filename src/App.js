@@ -1,6 +1,12 @@
 import { Console } from "@woowacourse/mission-utils";
 import { MESSAGES, DEFAULT_SEPARATORS } from "./constants/index.js";
-import { parseUserInput, extractCustomSeparators, splitBySeparators, isAllPositive } from "./utils/index.js";
+import {
+  parseUserInput,
+  extractCustomSeparators,
+  splitBySeparators,
+  sumNumbers,
+  isAllPositive,
+} from "./utils/index.js";
 
 class App {
   async run() {
@@ -33,7 +39,7 @@ class App {
       }
 
       // 합산 결과 출력
-      const sum = numbers.reduce((acc, cur) => acc + cur, 0);
+      const sum = sumNumbers(numbers);
       Console.print(MESSAGES.RESULT + sum);
     } catch (error) {
       Console.print(error.message);
