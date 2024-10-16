@@ -25,8 +25,10 @@ class App {
       const delimiterEnd = input.indexOf('\n');
       const customDelimiter = input.slice(2, delimiterEnd);
       defaultDelimiter = new RegExp(`[${customDelimiter}]`);
+
+      numberString = input.slice(delimiterEnd + 1)
     }
-    return     
+    return
   }
 }
 
