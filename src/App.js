@@ -11,8 +11,8 @@ class App {
     MissionUtils.Console.print(`결과: ${result}`);
   }
   parseInput(input) {
-    const delimiter = /,|:/;
-    const numbers = input.split(delimiter).map(Number);
+    const DELIMITER = /,|:/;
+    const numbers = input.split(DELIMITER).map(Number);
     return numbers;
   }
 }
