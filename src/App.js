@@ -42,6 +42,16 @@ class App {
     }
 
     //5. 구분자와 숫자 이외의 값 또는 음수를 입력할 경우 [ERROR]로 시작하는 메시지를 출력하고 프로그램을 종료
+    const numbers = numberStrings.map((numStr) => {
+      if (numStr === "") {
+        throw new Error("숫자 형식이 잘못 되었습니다.");
+      }
+      const num = Number(numStr);
+      if (isNaN(num) || num < 0) {
+        throw new Error("숫자 형식이 잘못 되었습니다.");
+      }
+      return num;
+    });
 
     const sum = numbers.reduce((acc, curr) => acc + curr, 0);
     return sum;
