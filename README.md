@@ -2,8 +2,6 @@
 
 ## **기능 요구 사항**
 
----
-
 입력한 문자열에서 숫자를 추출하여 더하는 계산기를 구현한다.
 
 - 쉼표(,) 또는 콜론(:)을 구분자로 가지는 문자열을 전달하는 경우 구분자를 기준으로 분리한 각 숫자의 합을 반환한다.
@@ -13,8 +11,6 @@
 - 사용자가 잘못된 값을 입력할 경우 "[ERROR]"로 시작하는 메시지와 함께 `Error`를 발생시킨 후 애플리케이션은 종료되어야 한다.
 
 ## 시스템의 흐름
-
----
 
 1. 문자열을 입력 받는다.
 2. 커스텀 구분자가 지정된 문자열인지 확인한다.
@@ -55,50 +51,50 @@
 
 ---
 
-# getInputString()
+#### 'getInputString()'
 
 - 사용자에게 문자열을 입력 받는 함수입니다.
 - 빈 문자열이 입력된 경우, 기본적으로 0을 반환하도록 합니다.
 
-# validateCustomDelimiterFormat()
+#### 'validateCustomDelimiterFormat()'
 
 - 입력한 문자열이 커스텀 구분자를 포함하는 형식인 경우, 형식이 올바른지 검증하는 함수입니다.
 - 형식이 올바르지 않은 경우 [ERROR] 메시지를 출력하고, Error를 throw하여 프로그램을 종료합니다.
 
-# separateCustomDelimiter()
+#### 'separateCustomDelimiter()'
 
 - 입력된 문자열에서 커스텀 구분자와 실제 숫자 문자열 부분을 분리하는 함수입니다.
 - 커스텀 구분자와 나머지 숫자들이 포함된 부분을 구분하여, 이 정보를 기반으로 이후 숫자를 추출할수 있도록 합니다.
 
-# validateNoWhitespace()
+#### 'validateNoWhitespace()'
 
 - 문자열에 공백이 포함되어 있는지 검사하는 함수입니다.
 - 문자열에 공백이 있는 경우 [ERROR] 메시지를 출력하고 Error를 throw하여 프로그램을 종료합니다.
 
-# validateDelimiterEdges()
+#### 'validateDelimiterEdges()'
 
 - 문자열 내에서 구분자 앞뒤에 값이 없는 경우를 검사하는 함수입니다.
 - 예를 들어, 1,,2와 같이 두 개의 쉼표 사이에 값이 없거나 ;2와 같이 구분자 앞에 값이 없는 경우를 처리합니다.
 - 이러한 경우 [ERROR] 메시지를 출력하고 Error를 throw하여 프로그램을 종료합니다.
 
-# validateAllowedDelimiters()
+#### 'validateAllowedDelimiters()'
 
 - 입력 문자열에 사용된 구분자가 허용된 구분자 목록에 포함되는지를 검증하는 함수입니다.
 - 기본 구분자(쉼표, 콜론) 및 사용자가 정의한 커스텀 구분자 외의 다른 구분자가 있을 경우 [ERROR] 메시지를 출력하고, Error를 throw하여 프로그램을 종료합니다.
 
-# extractNumbers()
+#### 'extractNumbers()'
 
 - 문자열에서 지정된 구분자를 기준으로 숫자를 추출해 배열로 변환하는 함수입니다.
 
-# calculateSum()
+#### 'calculateSum()'
 
 - 배열을 입력 받아 그 합계를 계산하는 함수입니다.
 
-# printResult()
+#### 'printResult()'
 
 - 계산된 합계를 출력하는 함수입니다.
 
-# printErrorMessage()
+#### 'printErrorMessage()'
 
 - 에러가 발생했을 때, 지정된 [ERROR] 메시지를 출력하는 함수 입니다.
 - 에러 발생 상황에 대한 정보를 설명하고 이후 Error를 throw하여 프로그램의 실행을 중단합니다.
