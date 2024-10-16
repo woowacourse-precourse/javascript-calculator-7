@@ -4,7 +4,7 @@ export const RESULT_MESSAGE = '결과: ';
 
 // 입력 구분자 관련 상수
 export const DEFAULT_SEPARATOR = /,|:/;
-export const CUSTOM_SEPARATOR = /^\/\/.*\n/;
+export const CUSTOM_SEPARATOR = /^\/\/(.*?)\n/;
 
 // 에러 메시지 관련 상수
 export const ERROR_INVALID_INPUT = '[ERROR] 잘못된 입력입니다.';
