@@ -61,4 +61,41 @@ describe("문자열 계산기 2", () => {
 
     expect(logSpy).toHaveBeenCalledWith(expect.stringContaining(output));
   });
+
+  test("Number overflow", async () => {
+    const inputs = ["100000000000000000;100"];
+    mockQuestions(inputs);
+
+    const logSpy = getLogSpy();
+    const outputs = ["결과 : 100000000000000100"];
+
+    const app = new App();
+    await app.run();
+
+    outputs.forEach(output => {
+      expect(logSpy).toHaveBeenCalledWith(expect.stringContaining(output));
+    });
+  });
+
+  test.each([[";1;2"], ["1,,2"], ["1x2"]])(
+    `예외 테스트(기본 구분자), "%s"`,
+    async input => {
+      mockQuestions([input]);
+
+      const app = new App();
+
+      await expect(app.run()).rejects.toThrow("[ERROR]");
+    }
+  );
+
+  test.each([["//o\\no1o2"], ["//o\\n1oo2"], ["//o\\n1x2"]])(
+    `예외 테스트(커스텀 구분자), "%s"`,
+    async input => {
+      mockQuestions([input]);
+
+      const app = new App();
+
+      await expect(app.run()).rejects.toThrow("[ERROR]");
+    }
+  );
 });
