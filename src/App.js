@@ -31,7 +31,11 @@ class App {
 
     const numbers = numberString.split(defaultDelimiter);
 
-    return
+    const sum = numbers.reduce((sum, numStr) => {
+      return sum + Number(numStr)
+    }, 0);
+
+    return sum;
   }
 }
 
