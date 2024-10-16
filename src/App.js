@@ -21,9 +21,9 @@ class App {
     let strInput = '';
 
     if (customSeperate) {
-      strInput = newInput.slice(5).join('').split(/\s+/);
+      strInput = newInput.slice(5).join('').trim().split(/\s+/);
     } else {
-      strInput = newInput.join('').split(/\s+/);
+      strInput = newInput.join('').trim().split(/\s+/);
     }
     const result = strInput.reduce((acc, cur) => acc + Number(cur), 0);
 
