@@ -24,6 +24,19 @@ class NumStr {
   getSumOfStr() {
     let regExp = [...this.#separations].join("|");
     const numArr = this.#str.split(new RegExp(regExp));
+
+    let sum = 0;
+    numArr.forEach((num) => {
+      const number = Number(num);
+
+      if (Number.isNaN(number) || number < 0) {
+        throw new Error("[ERROR] 문자열의 형식이 틀렸습니다.");
+      }
+
+      sum += number;
+    });
+
+    return sum;
   }
 }
 
