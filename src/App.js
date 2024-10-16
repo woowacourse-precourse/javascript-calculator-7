@@ -22,6 +22,8 @@ class App {
 
     const splitedUserInput = this.splitUserInput(userInput, customSeparator);
     const sum = this.sum(splitedUserInput);
+
+    Console.print(`결과 : ${sum}`);
   }
 
   sum(arr) {
