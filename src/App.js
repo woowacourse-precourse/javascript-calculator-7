@@ -1,6 +1,6 @@
 import { Console } from "@woowacourse/mission-utils";
 import { MESSAGES, DEFAULT_SEPARATORS } from "./constants/index.js";
-import { parseUserInput, extractCustomSeparators, isAllPositive } from "./utils/index.js";
+import { parseUserInput, extractCustomSeparators, splitBySeparators, isAllPositive } from "./utils/index.js";
 
 class App {
   async run() {
@@ -25,7 +25,7 @@ class App {
       const regExpSeparator = new RegExp(separators.join("|"), "g");
 
       // 기본 구분자 + 커스텀 구분자를 기준으로 숫자 문자열을 나누고, 숫자로 변환한다.
-      const numbers = numberString.split(regExpSeparator).map(Number);
+      const numbers = splitBySeparators(numberString, regExpSeparator);
 
       // 숫자가 모두 양수가 아니라면 예외 처리
       if (!isAllPositive(numbers)) {

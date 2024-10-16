@@ -24,3 +24,7 @@ export const extractCustomSeparators = (customString) => {
 export const isAllPositive = (numbers) => {
   return numbers.every((num) => num > 0);
 };
+
+export const splitBySeparators = (numberString, separators) => {
+  return numberString.split(separators).map(Number);
+};
