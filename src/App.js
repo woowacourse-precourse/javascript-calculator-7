@@ -49,6 +49,10 @@ class App {
       && inputString[3] === '\\' && inputString[4] === 'n');
   }
 
+  getMergedDelimiters(inputString, delimiters) {
+    const customDelimiter = inputString[2];
+    return [...delimiters, customDelimiter];
+  }
   getStrippedString(inputString) {
     return inputString.slice(5,);
   }

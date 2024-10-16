@@ -56,7 +56,7 @@ describe("문자열 계산기", () => {
 
   describe("구분자 통합", () => {
     test("커스텀 구분자가 있다면, 기본 구분자 배열에 커스텀 구분자가 추가된 배열을 반환한다.", () => {
-      expect(app.getMergedDelimiters("//;\\n1;2;3").toEqual([',', ':', ";"]))
+      expect(app.getMergedDelimiters("//;\\n1;2;3", [',', ':'])).toEqual([',', ':', ";"]);
     })
   })
 
