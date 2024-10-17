@@ -16,7 +16,7 @@ export const getLogSpy = () => {
   return logSpy;
 };
 
-describe.skip("문자열 계산기", () => {
+describe("문자열 계산기", () => {
   test("커스텀 구분자 사용", async () => {
     const inputs = ["//;\\n1"];
     mockQuestions(inputs);
@@ -39,5 +39,18 @@ describe.skip("문자열 계산기", () => {
     const app = new App();
 
     await expect(app.run()).rejects.toThrow("[ERROR]");
+  });
+
+  test("추출된 숫자들을 받아와 덧셈 연산을 한다.", async () => {
+    const inputs = ["1,2,3"];
+    mockQuestions(inputs);
+
+    const logSpy = getLogSpy();
+    const outputs = 6;
+
+    const app = new App();
+    await app.run();
+
+    expect(logSpy).toHaveBeenCalledWith(outputs);
   });
 });
