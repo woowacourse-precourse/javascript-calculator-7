@@ -24,6 +24,14 @@ class App {
     if (numbers.length === 0 || numbers.length === 1) {
       throw new Error("[ERROR]");
     }
+
+    // 8. 숫자가 아닌 문자나 기호로만 이루어진 경우 에러 반환
+    // 9. 숫자가 아닌 문자가 하나라도 포함되어 있으면 에러 반환
+    if (numbers.some((number) => isNaN(number))) {
+      throw new Error("[ERROR]");
+    }
+
+    return true;
   };
 
   solve = (input) => {
@@ -41,7 +49,9 @@ class App {
         const parsedNumbers = numbers.map((number) => parseInt(number));
 
         // 숫자가 유효한지 확인한다.
-        this.validateNumber(parsedNumbers);
+        if (this.validateNumber(parsedNumbers)) {
+          console.log("유효한 입력값");
+        }
       }
     } catch (error) {
       console.error(error.message);
