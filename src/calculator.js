@@ -1,10 +1,10 @@
-import { Console } from "@woowacourse/mission-utils";
-import { PROMT_MESSAGE, ERROR_MESSAGE } from "./constants/message.js";
+import { Console } from '@woowacourse/mission-utils';
+import { PROMT_MESSAGE, ERROR_MESSAGE } from './constants/message.js';
 
 export default class Calculator {
   constructor(input) {
     this.inputString = input;
-    this.separator = [",", ":"];
+    this.separator = [',', ':'];
   }
 
   calculate() {
@@ -15,9 +15,13 @@ export default class Calculator {
 
   parseNumber() {
     const separatorReg = this.createSeparatorRegEx();
-    return this.inputString.split(separatorReg).map(Number);
-  }
 
+    const tokens = this.inputString
+      .split(separatorReg)
+      .map(token => parseFloat(token));
+
+    return tokens;
+  }
   checkInputValidation() {
     this.validateCustomSeparator();
     this.validateAllowedChars();
@@ -25,8 +29,8 @@ export default class Calculator {
   }
 
   validateCustomSeparator() {
-    const CUSTOM_SEPARATOR_PREFIX = "//";
-    const CUSTOM_SEPARATOR_SUFFIX = "\\n";
+    const CUSTOM_SEPARATOR_PREFIX = '//';
+    const CUSTOM_SEPARATOR_SUFFIX = '\\n';
 
     // //로 시작하는지 확인
     if (this.inputString.startsWith(CUSTOM_SEPARATOR_PREFIX)) {
@@ -44,6 +48,9 @@ export default class Calculator {
       if (customSeparator.length === 0) {
         throw new Error(ERROR_MESSAGE.invalidCustomSeparator);
       }
+      if (customSeparator === '.') {
+        throw new Error(ERROR_MESSAGE.invalidCustomSeparatorDot);
+      }
 
       this.separator.push(customSeparator);
       this.inputString = this.inputString.substring(separatorEndIndex + 2);
@@ -52,11 +59,17 @@ export default class Calculator {
   validateAllowedChars() {
     // separator, 숫자 이외의 문자가 포함됐는지 확인
     const validCharactersRegEx = new RegExp(
-      `^[0-9${this.separator.join("")}\n]*$`,
+      `^[0-9.${this.separator.join('')}]*$`,
     );
 
     if (!validCharactersRegEx.test(this.inputString)) {
       throw new Error(ERROR_MESSAGE.invalidInput);
+    }
+
+    // "1..2"와 같이 연속된 소수점 처리
+    const hasConsecutiveDots = this.inputString.includes('..');
+    if (hasConsecutiveDots) {
+      throw new Error(ERROR_MESSAGE.consecutiveDots);
     }
   }
 
@@ -66,13 +79,13 @@ export default class Calculator {
     const tokens = this.inputString.split(separatorReg);
 
     // separator로 끝나는지 확인
-    const isEndingWithSeparator = tokens[tokens.length - 1] === "";
+    const isEndingWithSeparator = tokens[tokens.length - 1] === '';
     if (isEndingWithSeparator) {
       throw new Error(ERROR_MESSAGE.endsWithSeparator);
     }
 
     // separator가 연속적으로 오는지 확인
-    const hasConsecutiveSeparators = tokens.filter((v) => v === "").length > 0;
+    const hasConsecutiveSeparators = tokens.filter(v => v === '').length > 0;
     if (hasConsecutiveSeparators) {
       throw new Error(ERROR_MESSAGE.consecutiveSeparators);
     }
@@ -80,6 +93,6 @@ export default class Calculator {
 
   createSeparatorRegEx() {
     // separator 배열을 기반으로 정규식을 생성하는 함수
-    return new RegExp(`[${this.separator.join("")}]`);
+    return new RegExp(`[${this.separator.join('')}]`);
   }
 }
