@@ -29,10 +29,15 @@ class App {
     return numbers.every((number) => !isNaN(number) && parseInt(number) >= 0);
   }
 
+  async calculateNumbers(numbers) {
+    return numbers.reduce((acc, cur) => acc + parseInt(cur), 0);
+  }
+
   async run() {
     const input = await this.getString();
     const numbers = await this.getNumbers(input);
-    Console.print(numbers);
+    const result = await this.calculateNumbers(numbers);
+    console.log(result);
   }
 }
 
