@@ -48,7 +48,7 @@ describe('문자열 계산기', () => {
   });
 
   test('커스텀 구분자로 분리', async () => {
-    const inputs = ['//;\n1;2;3'];
+    const inputs = ['//;\\n1;2;3'];
     mockQuestions(inputs);
 
     const logSpy = getLogSpy();
