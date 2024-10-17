@@ -3,6 +3,7 @@ import printMessage from './print-message';
 import Separator from './Separator';
 import userInput from './user-input';
 import calculateSum from './calculate';
+import { RESULT_MESSAGE } from './constant';
 
 class App {
   async run() {
@@ -13,7 +14,7 @@ class App {
       const value = separator.separate();
 
       ErrorHandler.validatePositiveNumbers(value);
-      printMessage(calculateSum(value));
+      printMessage(RESULT_MESSAGE + calculateSum(value));
     } catch (error) {
       printMessage(error.message);
     }
