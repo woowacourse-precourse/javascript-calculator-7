@@ -24,11 +24,12 @@ export class Calculator {
     } else {
       result = input.split(regexText);
     }
+    // result type :  array<string>
+
     for (let index = 0; index < result.length; index++) {
       let preNum = parseFloat(result[index]);
       if (preNum < 0) return { error: true };
     }
-    // result type :  array<string>
     result = result.map((number) => {
       let preNum = parseFloat(number);
       if ((preNum * 10) % 10 == 0) {
@@ -36,6 +37,7 @@ export class Calculator {
       }
       return preNum;
     });
+
     return { error: false, numbers: result };
   }
 
