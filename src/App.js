@@ -18,14 +18,15 @@ class App {
     }
 
     // 커스텀 구분자도 추가할 것이기 때문에 변수로 선언
-    let delimiter = /[,:]/;
+    let delimiter = [',', ':'];
 
     if (input.startsWith("//")) {
       const match = input.match(/^\/\/(.)\\n(.*)$/);
       if (match) {
         // delimiter = new RegExp(`[${match[1]}]`);
         const customDelimiter = match[1];  // 커스텀 구분자 추출
-        delimiter = new RegExp(`[${delimiter.source}${customDelimiter}]`);
+        // delimiter = new RegExp(`[${delimiter.source}${customDelimiter}]`);
+        delimiter.push(customDelimiter);
         // MissionUtils.Console.print(delimiter)
         input = match[2]; // \n 이후의 문자열을 처리
       } else {
@@ -34,8 +35,9 @@ class App {
       }
     }
 
-
-    let numbers = input.split(delimiter);
+    let pattern = new RegExp(`[${delimiter.join('')}]`);
+    MissionUtils.Console.print(pattern)
+    let numbers = input.split(pattern);
     MissionUtils.Console.print(numbers)
     MissionUtils.Console.print(delimiter)
 
