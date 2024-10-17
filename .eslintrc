@@ -3,6 +3,13 @@
   "plugins": ["prettier"],
   "rules": {
     "prettier/prettier": "error",
+    "import/extensions": [
+      "error",
+      "always",
+      {
+        "js": "always",
+      },
+    ],
   },
   "parserOptions": {
     "ecmaVersion": 2020,
