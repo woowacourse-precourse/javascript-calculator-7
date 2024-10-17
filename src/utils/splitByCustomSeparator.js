@@ -5,10 +5,7 @@ export function splitByCustomSeparator(str) {
 	if (match) {
 		const separator = match[1];
 		const remainingStr = str.split(match[0])[1];
-		return remainingStr
-			.split(separator)
-			.map(Number)
-			.reduce((a, b) => a + b, 0);
+		return remainingStr.split(separator);
 	}
 	return null;
 }
