@@ -33,10 +33,8 @@ class App {
     return false;
   }
 
-  generatePlusResult() {
-    let plusString = this.#plusString;
-
-    // custom pattern
+  checkCustomPattern(originPlusString) {
+    let plusString = originPlusString;
     const CUSTOM_PATTERN = /\/\/([^-])\\n/g;
     const customSeparator = plusString.match(CUSTOM_PATTERN);
     if (customSeparator) {
@@ -49,14 +47,14 @@ class App {
         this.#separatorList.push(separator);
       });
     }
+    return plusString;
+  }
 
-    // basic pattern
+  checkBasicPattern(plusString) {
     const separators = this.#separatorList.join("");
     const separatorRegex = new RegExp(`[${separators}]+`, "g");
     const numberList = plusString.split(separatorRegex).map(Number);
-    Console.print(numberList);
 
-    // validate number list
     for (let i = 0; i < numberList.length; i++) {
       if (isNaN(numberList[i])) {
         throw new Error(WRONG_SEPARATOR);
@@ -65,8 +63,13 @@ class App {
         throw new Error(WRONG_NUMBER);
       }
     }
+    return numberList;
+  }
 
-    // sum number list
+  generatePlusResult() {
+    let plusString = this.#plusString;
+    plusString = this.checkCustomPattern(plusString);
+    const numberList = this.checkBasicPattern(plusString);
     this.#plusResult = numberList.reduce((acc, curr) => acc + curr);
   }
 
