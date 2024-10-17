@@ -2,11 +2,9 @@ import { MissionUtils } from "@woowacourse/mission-utils";
 
 class App {
   async run() {
-    // MissionUtils.Console.print("덧셈할 문자열을 입력해 주세요.");
     let input = await MissionUtils.Console.readLineAsync("덧셈할 문자열을 입력해 주세요.");
     try {
       let result = this.caculate(input);
-      if (isNaN(result)) {throw new Error("[ERROR] 숫자가 아닌 값이 포함되어 있습니다.")}
       MissionUtils.Console.print(`결과 : ${result}`);
     } catch(e) {
       MissionUtils.Console.print("[ERROR] 잘못된 형식의 입력입니다.");
@@ -20,7 +18,7 @@ class App {
     }
 
     // 커스텀 구분자도 추가할 것이기 때문에 변수로 선언
-    let delimiter = /,:/;
+    let delimiter = /[,:]/;
 
     if (input.startsWith("//")) {
       const match = input.match(/^\/\/(.)\\n(.*)$/);
@@ -38,19 +36,19 @@ class App {
 
 
     let numbers = input.split(delimiter);
-    // MissionUtils.Console.print(numbers)
+    MissionUtils.Console.print(numbers)
+    MissionUtils.Console.print(delimiter)
 
     let sum  = 0
 
     for (let number of numbers) {
-
+      MissionUtils.Console.print(number)
       // 음수 에러 처리
       if (parseInt(number) < 0) {
         throw new Error("[ERROR] 음수는 입력할 수 없습니다.")
       }
       sum += parseInt(number);
     }
-
     return sum;
   }
 }
