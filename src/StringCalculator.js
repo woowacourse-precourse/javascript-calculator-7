@@ -1,28 +1,17 @@
+import Separator from "./Separator.js";
+
 class StringCalculator {
   #inputStr;
-  #separators;
+  #separator;
 
   constructor(inputStr) {
     this.#inputStr = inputStr;
-    this.#separators = new Set([",", ":"]);
-    this.#addCustomSeparator();
-  }
-
-  #addCustomSeparator() {
-    const customSeparatorPattern = /^\/\/(.)\\n/;
-    const customSeparatorMatch = this.#inputStr.match(customSeparatorPattern);
-
-    if (!customSeparatorMatch) {
-      return;
-    }
-
-    const customSeparator = customSeparatorMatch[1];
-    this.#separators.add(customSeparator);
-    this.#inputStr = this.#inputStr.slice(customSeparatorMatch[0].length);
+    this.#separator = new Separator();
+    this.#inputStr = this.#separator.addCustomSeparator(this.#inputStr);
   }
 
   calculateSum() {
-    const separatorPattern = [...this.#separators].join("|");
+    const separatorPattern = this.#separator.getSeparatorPattern();
     const numArr = this.#inputStr.split(new RegExp(separatorPattern));
 
     const sum = numArr.reduce((total, num) => {
