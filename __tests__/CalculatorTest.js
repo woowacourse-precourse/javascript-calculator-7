@@ -44,3 +44,14 @@ describe("findCustomSeparator()", () => {
     expect(findCustomSeparator("//;//;")).toEqual([";"]);
   });
 });
+
+describe("findCustomSeparatorAndNumbers()", () => {
+  const { findCustomSeparatorAndNumbers } = calculator;
+
+  test("커스텀 구분자가 없을 때 빈 문자열과 연산 문자열 반환", async () => {
+    expect(findCustomSeparatorAndNumbers("1,2,3")).toEqual({
+      customSeparator: "",
+      numbers: "1,2,3",
+    });
+  });
+});

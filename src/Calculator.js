@@ -1,6 +1,16 @@
 class Calculator {
   /**
     *
+    * @param {string} text - 입력으로 주어진 문자열
+    * @returns {{customSeparator: string[], numbers: string}}
+    */
+  findCustomSeparatorAndNumbers(text) {
+    const customSeparatorAndNumbers = text.split("\n");
+    if (customSeparatorAndNumbers.length === 1) return { customSeparator: "", numbers: customSeparatorAndNumbers[0] };
+  }
+
+  /**
+    *
     * @param {string} text - "//"로 시작하는 커스텀 구분자들의 문자열
     * @returns {string[]}
     */
