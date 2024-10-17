@@ -11,7 +11,7 @@
 
 ---
 
-- [ ] 기능2. 사용자의 값 입력 및 출력
+- [x] 기능2. 사용자의 값 입력 및 출력
 
 - 입력은 @woowacourse/mission-utils의 Console API에서 Console.readLineAsync()를 활용한다.
 - 출력은 @woowacourse/mission-utils의 Console API에서 Console.print()를 활용한다.
