@@ -18,7 +18,7 @@ class App {
       .findSeparator()
       .extractNumbers();
     const convertedNumbers = numberArray.map(Number);
-    const sum = this.calculate(convertedNumbers);
+    const sum = App.calculate(convertedNumbers);
     Console.print(sum);
   }
 
