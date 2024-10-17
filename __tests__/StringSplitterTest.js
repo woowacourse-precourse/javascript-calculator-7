@@ -1,3 +1,4 @@
+import App from "../src/App";
 import Calculator from "../src/Calculator";
 import { mockQuestions } from "./ApplicationTest";
 
@@ -51,5 +52,14 @@ describe("문자열 구분", () => {
 
     const result = cal.separator();
     expect(result).toEqual(output);
+  });
+
+  test("분리된 문자열이 숫자가 아닐 경우, 예외 테스트", async () => {
+    const inputs = ["a,2,3"];
+    mockQuestions(inputs);
+
+    const app = new App();
+
+    await expect(app.run()).rejects.toThrow("[ERROR]");
   });
 });
