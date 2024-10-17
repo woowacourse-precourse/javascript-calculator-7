@@ -1,4 +1,5 @@
 import { Console } from '@woowacourse/mission-utils';
+import { ERROR } from './constants.js';
 
 class App {
   async run() {
@@ -6,9 +7,8 @@ class App {
       await Console.readLineAsync('덧셈할 문자열을 입력해 주세요.\n')
     ).trim();
 
-    let defaultSeparator = /[,:]/;
-
     const userInputSeparate = (userInput) => {
+      const defaultSeparator = /[,:]/;
       const customSymbols = /\/\/(.+)\\/;
 
       if (!customSymbols.test(userInput) && defaultSeparator.test(userInput)) {
@@ -25,7 +25,9 @@ class App {
           reCustomSymbols.length - 1
         );
 
-        const userInputNumber = inputSplit[1].split(customSeparator);
+        const combinedSeparator = new RegExp(`[,:${customSeparator}]`);
+
+        const userInputNumber = inputSplit[1].split(combinedSeparator);
 
         return userInputNumber;
       } else {
