@@ -8,6 +8,12 @@ class App {
 				'덧셈할 문자열을 입력해주세요.\n'
 			);
 
+			// 2. 빈 문자열 처리
+			if (input === '') {
+				Console.print('결과 : 0');
+				return;
+			}
+
 			// 2. 결과 출력
 			Console.print(`결과 : ${input}`);
 		} catch (error) {
