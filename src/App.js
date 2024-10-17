@@ -18,7 +18,8 @@ class App {
     const operatorList = this.#isCustomCalculate ? [customOperator] : DEFAULT_OPERATOR;
     const expression = this.#isCustomCalculate ? input.slice(input.indexOf(END_CUSTOM_OPERATOR) + END_CUSTOM_OPERATOR.length) : input;
     this.#calculate = new Calculator();
-    this.#calculate.calculate(operatorList, expression);
+    const result = this.#calculate.calculate(operatorList, expression);
+    console.log(result);
   }
 }
 

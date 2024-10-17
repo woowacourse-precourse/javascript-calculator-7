@@ -5,6 +5,7 @@ export class Calculator {
     const op = this.#makeRegularExpression(operatorList);
     const splitNumbers = expression.split(op);
     splitNumbers.some((number) => this.#validateNumber(number));
+    return splitNumbers.reduce((a, c) => Number(a) + Number(c));
   }
 
   #makeRegularExpression(operatorList) {
