@@ -8,6 +8,10 @@ class App {
       const SEPARATOR = ",:";
       let RESULT = 0;
 
+      // 조건 1: 기본 구분자
+      if(DATA.match(SEPARATOR)){
+        NUMBERS = DATA.split(SEPARATOR).map(Number);
+      }
     }
 }
 
