@@ -9,7 +9,7 @@ class App {
 
     const cal = new Calculator(inputValue);
 
-    console.log(cal.hasCustomDelimiter());
+    console.log(cal.separator());
   }
 }
 

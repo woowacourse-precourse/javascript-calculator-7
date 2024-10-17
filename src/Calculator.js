@@ -14,6 +14,11 @@ class Calculator {
       return true;
     }
   }
+
+  separator() {
+    const numbers = this.inputValue.split(/[,;]/).map(Number);
+    return numbers;
+  }
 }
 
 export default Calculator;
