@@ -1,9 +1,14 @@
+import { Console } from '@woowacourse/mission-utils';
+
 class App {
+  #input;
+
   #separators;
 
   #inputNumbers;
 
   constructor() {
+    this.#input = null;
     this.#separators = [];
     this.#inputNumbers = null;
   }
@@ -48,6 +53,13 @@ class App {
 
     const numbers = firstSeparated.split(secondSeparator);
     return numbers;
+  }
+
+  async askNumbers() {
+    const inputString =
+      await Console.readLineAsync('덧셈할 문자열을 입력해 주세요.');
+    this.#input = inputString;
+    return this;
   }
 }
 
