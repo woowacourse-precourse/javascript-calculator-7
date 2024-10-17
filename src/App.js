@@ -26,6 +26,13 @@ class App {
     }
   }
 
+  validateNoNegativeNumbers(numbers) {
+    const hasNegative = numbers.some((number) => number < 0);
+    if (hasNegative) this.handleError("음수는 입력할 수 없습니다.");
+
+    return numbers;
+  }
+
   parseStringToNumbers(string) {
     if (!string.trim()) return [];
 
@@ -55,7 +62,7 @@ class App {
   }
 
   parseToNumber(numbers) {
-    return numbers.map(Number);
+    return this.validateNoNegativeNumbers(numbers.map(Number));
   }
 
   sum(numbers) {
