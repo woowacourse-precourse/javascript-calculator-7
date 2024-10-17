@@ -6,6 +6,7 @@ import {
   getOrRegExpFromString,
   getSum,
   printResult,
+  getNumberArray,
 } from './utils';
 
 class App {
@@ -19,9 +20,7 @@ class App {
 
     checkTheNumberArray(separatedUserInput);
 
-    const separatedUserInputsNumberArray = separatedUserInput.map(it =>
-      Number(it),
-    );
+    const separatedUserInputsNumberArray = getNumberArray(separatedUserInput);
 
     const sumOfUserInput = getSum(separatedUserInputsNumberArray);
 

@@ -25,6 +25,10 @@ export function checkTheNumberArray(array) {
   }
 }
 
+export function getNumberArray(array) {
+  return array.map(it => Number(it));
+}
+
 export function getOrRegExpFromString(separator) {
   return new RegExp(`[${separator}]`);
 }
