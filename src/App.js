@@ -17,11 +17,15 @@ class App {
       const arr = input.split(",");
       for (const el of arr) {
         const number = +el;
-        result += number;
+        if (Number.isNaN(number)) {
+          throw Error("[ERROR]처리할 수 없는 입력입니다.");
+        } else {
+          result += number;
+        }
       }
       console.log(`결과 : ${result}`);
     } catch (err) {
-      Console.print(`[ERROR]${err}`);
+      throw Error(`[ERROR]${err}`);
     }
   }
 }
