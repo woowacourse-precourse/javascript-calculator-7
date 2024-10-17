@@ -37,7 +37,8 @@ function sumWithCustomDelimiter(input) {
     );
 
     const delimiters = new RegExp(`[${customDelimiter}|,|:]`);
-    const tokens = input.split(delimiters);
+    const numbersString = input.slice(delimitersEndIndex + 2);
+    const tokens = numbersString.split(delimiters);
 
     if (tokens.some((token) => token === '')) {
       throw new Error('[ERROR] 구분자 사이에 숫자가 없습니다.');
