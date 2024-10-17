@@ -6,9 +6,8 @@ class Calculator {
     */
   findCustomSeparatorAndNumbers(text) {
     const customSeparatorAndNumbers = text.split("\n");
-    if (customSeparatorAndNumbers.length === 1) return { customSeparator: "", numbers: customSeparatorAndNumbers[0] };
-    const [customSeparator, numbers] = customSeparatorAndNumbers;
-    return { customSeparator, numbers };
+    const numbers = customSeparatorAndNumbers.pop();
+    return { customSeparator: customSeparatorAndNumbers, numbers };
   }
 
   /**
