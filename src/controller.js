@@ -15,3 +15,5 @@ class CalculatorController {
     }
   }
 }
+
+export default CalculatorController;
