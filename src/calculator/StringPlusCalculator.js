@@ -34,6 +34,7 @@ class StringPlusCalculator {
       }
     }
     this.number += Number(sum);
+    return this.number;
   }
 
   replaceDelimitersToComma(input) {

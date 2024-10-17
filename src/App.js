@@ -7,7 +7,8 @@ class App {
       const input =
         await Console.readLineAsync('덧셈할 문자열을 입력해주세요.\n');
       const calculate = new StringPlusCalculator();
-      calculate.calculate(input);
+      const result = calculate.calculate(input);
+      Console.print(`결과 : ${result}`);
     } catch (e) {
       throw new Error(e);
     }
