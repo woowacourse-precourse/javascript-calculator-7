@@ -21,4 +21,11 @@ export class ValidateError {
       }
     }
   }
+  static validateNonEmptySplitValues(values) {
+    for (let value of values) {
+      if (value === '') {
+        throw new Error('구분자 주위에 빈 값이 존재합니다.');
+      }
+    }
+  }
 }
