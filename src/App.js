@@ -1,4 +1,5 @@
 import View from "./view/View.js";
+import Constant from "./constants.js/Constant.js";
 
 class App {
   async run() {
@@ -7,6 +8,7 @@ class App {
     const userInput = await view.inputPrompt();
     const customSeperator = this.isCustomSeparator(userInput);
     const inputArr = this.userValueArr(userInput, customSeperator);
+    this.validateValue(inputArr);
   }
 
   isCustomSeparator(user) {
@@ -33,6 +35,21 @@ class App {
     const end = user.indexOf("n") + 1;
 
     return user.slice(0, start) + user.slice(end);
+  }
+
+  validateValue(arr) {
+    let tempArr = [];
+    for (let str of arr) {
+      tempArr.push(Number(str));
+    }
+
+    for (let i = 0; i < tempArr.length; i++) {
+      if (isNaN(tempArr[i]) || tempArr[i] < 0) {
+        throw new Error(Constant.errorMessage);
+      }
+    }
+
+    return tempArr;
   }
 }
 
