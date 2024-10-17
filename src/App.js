@@ -19,6 +19,9 @@ function findSeparator(input){
     }
 
   }else{
+    if(isNaN(inputArray[0])){
+      throw new Error("[ERROR] 입력 형식을 지켜주세요.")
+    }
     return inputArray;
   }
 }
