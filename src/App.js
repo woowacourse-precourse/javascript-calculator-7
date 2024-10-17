@@ -14,7 +14,23 @@ class App {
       return 0;
     }
   
-    const delimiters = [',', ':'];
+    let delimiters = [',', ':'];
+    let numbersStr = input;
+
+    if (input.startsWith('//')) {
+      const delimiterEndIndex = input.indexOf('\\n');
+      if (delimiterEndIndex === -1) {
+        throw new Error('[ERROR] 잘못된 입력입니다. 커스텀 구분자 지정 형식이 잘못되었습니다.');
+      }
+      const customDelimiter = input.substring(2, delimiterEndIndex);
+      if (customDelimiter.length !== 1) {
+        throw new Error('[ERROR] 커스텀 구분자는 한 글자여야 합니다.');
+      }
+      delimiters.push(customDelimiter);
+      numbersStr = input.substring(delimiterEndIndex + 2); // '\\n'의 길이는 2
+    }
+
+    
     const tokens = this.splitNumbers(input, delimiters);
   
     const numbers = tokens.map((token) => {
