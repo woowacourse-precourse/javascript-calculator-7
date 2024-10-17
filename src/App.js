@@ -8,7 +8,10 @@ class App {
     const userInput = await view.inputPrompt();
     const customSeperator = this.isCustomSeparator(userInput);
     const inputArr = this.userValueArr(userInput, customSeperator);
-    this.validateValue(inputArr);
+    const verifiedArr = this.validateValue(inputArr);
+    const sum = this.calculate(verifiedArr);
+
+    view.outputView(sum);
   }
 
   isCustomSeparator(user) {
@@ -50,6 +53,14 @@ class App {
     }
 
     return tempArr;
+  }
+
+  calculate(arr) {
+    let sum = 0;
+    for (let num of arr) {
+      sum += num;
+    }
+    return sum;
   }
 }
 
