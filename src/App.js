@@ -14,10 +14,6 @@ class App {
       customSep,
     );
 
-    if (extractedStr !== '' && splittedString[0] === extractedStr) {
-      throw Error(errorString(CONSOLE_MESSAGE.SEPARATOR_ERROR));
-    }
-
     const sum = this.sumAllString(splittedString);
 
     Console.print(`결과 : ${sum}`);
