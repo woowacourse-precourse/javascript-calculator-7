@@ -7,10 +7,19 @@ class StringCalculator {
     let numbers = input;
     const delimiters = [",", ":"];
 
+    if (input.startsWith("//")) {
+      const [delimiterPart, numbersPart] = input.split("\\n");
+      const customDelimiter = delimiterPart.slice(2);
+      delimiters.push(customDelimiter);
+      numbers = numbersPart;
+    }
+
     const delimiterRegex = new RegExp(`[${delimiters.join("")}]`);
     const splitNumbers = numbers.split(delimiterRegex);
 
-    return splitNumbers.reduce((acc, num) => acc + +num, 0);
+    const parsedNumbers = splitNumbers.map((num) => parseInt(num, 10));
+
+    return parsedNumbers.reduce((acc, num) => acc + num, 0);
   }
 }
 
