@@ -8,7 +8,7 @@ class CalculatorController {
 
   async handleCalculate() {
     try {
-      const RESULT = this.model.calculate(Console.readLineAsync);
+      const RESULT = this.model.calculate(input);
       this.view.outputView(RESULT);
     } catch (error) {
       this.view.errorView(error);
