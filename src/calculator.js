@@ -1,3 +1,5 @@
+import Errors from "./error";
+
 class Calculator {
   constructor() {
     this.defaultDelimiters = [",", ":"];
@@ -29,7 +31,7 @@ class Calculator {
     return splitNumbers.map((num) => {
       const number = Number(num);
       if (isNaN(number)) {
-        throw new Error("계산할 수 있는 형식이 아닙니다.");
+        throw new Error(Errors.INVALID_FORMAT);
       }
       return number;
     });
@@ -38,7 +40,7 @@ class Calculator {
   checkNegativeNumbers(numArray) {
     const negatives = numArray.filter((num) => num < 0);
     if (negatives.length > 0) {
-      throw new Error(`음수는 입력할 수 없습니다.`);
+      throw new Error(Errors.NEGATIVE_NUMBERS);
     }
   }
 
@@ -48,7 +50,7 @@ class Calculator {
       input == null ||
       input == undefined
     ) {
-      throw new Error("입력된 문자열이 없습니다.");
+      throw new Error(Errors.EMPTY_INPUT);
     }
 
     const { delimiters, numbers } = this.checkDelimiter(input);
