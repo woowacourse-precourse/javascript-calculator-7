@@ -31,10 +31,16 @@ function sumWithCustomDelimiter(input) {
   if (input.startsWith('//')) {
     const delimitersStartIndex = 2;
     const delimitersEndIndex = input.indexOf('\\n');
+    if (delimitersEndIndex === -1) {
+      throw new Error('[ERROR] 잘못된 커스텀 구분자 형식입니다.');
+    }
     const customDelimiter = input.substring(
       delimitersStartIndex,
       delimitersEndIndex,
     );
+    if (!customDelimiter) {
+      throw new Error('[ERROR] 잘못된 커스텀 구분자 형식입니다.');
+    }
 
     const delimiters = new RegExp(`[${customDelimiter}|,|:]`);
     const numbersString = input.slice(delimitersEndIndex + 2);
