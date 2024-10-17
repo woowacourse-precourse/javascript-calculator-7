@@ -8,8 +8,9 @@ const CheckDelimiter = str => {
   }
 
   const delimiterSet = new Set([...findDelimiter]);
+  const findCustomRegex = /(?<=\/\/)(.*?)(?=\\n)/g.test(str);
 
-  return delimiterSet;
+  return [delimiterSet, findCustomRegex];
 };
 
 export default CheckDelimiter;
