@@ -1,9 +1,12 @@
+import { Validator } from "./Validator.js";
+
 export class Calculator {
   #string;
   #customDelimiter;
 
   constructor(userInput) {
     this.setCustomDelimiter(userInput);
+    this.validate();
   }
 
   setCustomDelimiter(userInput) {
@@ -23,6 +26,15 @@ export class Calculator {
       this.#customDelimiter = undefined;
       this.#string = userInput;
     }
+  }
+
+  validate() {
+    if (this.#customDelimiter !== undefined) {
+      Validator.customDelimiterLength(this.#customDelimiter);
+      Validator.isCustomDelimiterString(this.#customDelimiter);
+    }
+
+    Validator.containUndelimitedChars(this.#string, this.#customDelimiter);
   }
 
   extract() {
