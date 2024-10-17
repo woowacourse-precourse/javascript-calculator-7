@@ -27,21 +27,21 @@ describe("regex test", () => {
   const minTest = "-3;-2;1";
 
   test("공백", () => {
-    expect(calculator.regexTest(noneTest)).toEqual(0);
+    expect(calculator.testRegex(noneTest)).toEqual(0);
   });
   test("//;\\n1;2;3", () => {
-    expect(calculator.regexTest(testInput)).toEqual({
+    expect(calculator.testRegex(testInput)).toEqual({
       error: false,
       numbers: [1, 2, 3],
     });
   });
   test("1:2:3", () => {
-    expect(calculator.regexTest(noneCustomTestInput)).toEqual({
+    expect(calculator.testRegex(noneCustomTestInput)).toEqual({
       error: false,
       numbers: [1, 2, 3],
     });
   });
   test("-3;-2;1", () => {
-    expect(calculator.regexTest(minTest)).toEqual({ error: true });
+    expect(calculator.testRegex(minTest)).toEqual({ error: true });
   });
 });
