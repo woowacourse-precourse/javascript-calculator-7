@@ -11,8 +11,16 @@ class App {
   }
 
   splitNumbersByDelimiter(input) {
-    const DELIMITERS = /[,:]/;
-    const stringNumbers = input.split(DELIMITERS);
+    let delimiters;
+    
+    if (input.startsWith('//') && input.slice(3, 5) === '\\n') {
+      delimiters = input[2];
+      input = input.slice(5)
+    } else {
+      delimiters = /[,:]/;
+    }
+
+    const stringNumbers = input.split(delimiters);
 
     return stringNumbers.map(num => parseInt(num));
   }
