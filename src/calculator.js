@@ -13,11 +13,15 @@
 *
 * */
 
-function addCal(input){
+function addCal(input) {
     // 1. 빈 문자열 입력 시 0 반환
-    if(input === ''){
+    if (input === "") {
         return 0;
     }
-
+    // 2. 쉼표와 콜론을 구분자로 사용해 분리 후 각 숫자의 합을 반환.
+    const numbers = input.split(/[,|:]/);
+    const result = numbers.reduce((sum, num) => sum + Number(num), 0);
 
 }
+
+export default addCal;
