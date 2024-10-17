@@ -20,6 +20,12 @@ class App {
     return userInput;
   };
 
+  validateNumber = (numbers) => {
+    if (numbers.length === 0) {
+      throw new Error("[ERROR]");
+    }
+  };
+
   solve = (input) => {
     try {
       if (input.length === 0) {
@@ -30,7 +36,12 @@ class App {
         // 구분자를 기준으로 문자열을 나눈다.
         const separators = new RegExp(`[${[...this.separator].join("")}]`);
         const numbers = separatedInput.split(separators);
-        console.log("numbers", numbers);
+
+        // 문자열을 숫자로 변환한다.
+        const parsedNumbers = numbers.map((number) => parseInt(number));
+
+        // 숫자가 유효한지 확인한다.
+        this.validateNumber(parsedNumbers);
       }
     } catch (error) {
       console.error(error.message);
