@@ -5,13 +5,21 @@ class App {
   }
   isStart() {
     MissionUtils.Console.readLine("덧셈할 문자열을 입력해 주세요.", (input) => {
-      if (input.include("// \n")) {
+      if (input.includes("//\n")) {
+        //예외처리 => // \n사이의 문자가 한개가 맞는지
+
         let custom = this.CustomMessage(input); // => ;를 기준으로 split
         // // \n 지우기
         let sliceMessage = this.MessageSlice(input);
-        sliceMessage.split("custom");
+        sliceMessage = sliceMessage.split(custom);
+        let sum = sliceMessage.reduce((a, b) => Number(a) + Number(b), 0);
+        MissionUtils.Console.print(`결과 : ${sum}`);
       } else {
-        this.NotCustomMessage(input);
+        // 예외처리 => /,|:/
+
+        let FirstSplit = input.split(/,|:/);
+        let sum = FirstSplit.reduce((a, b) => Number(a) + Number(b), 0);
+        MissionUtils.Console.print(`결과 : ${sum}`);
       }
     });
   }
@@ -27,11 +35,7 @@ class App {
   MessageSlice(message) {
     const firstIndex = message.indexOf("//");
     const secondIndex = message.indexOf("\n");
-    if (
-      message.includes(firstIndex) &&
-      message.includes(secondIndex) &&
-      firstIndex < secondIndex
-    ) {
+    if (firstIndex !== -1 && secondIndex !== -1 && firstIndex < secondIndex) {
       return message.slice(0, firstIndex) + message.slice(secondIndex + 1);
     }
     return message;
