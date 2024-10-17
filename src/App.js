@@ -24,6 +24,13 @@ class App {
 		// 숫자와 구분자로 구성된 문자열을 구분자로 분리하고 숫자로 변환
 		const valueArray = values.split(delimiter).map(Number);
 
+		// 에러 처리: 음수가 있을 경우 에러 발생
+		valueArray.forEach(num => {
+			if (num < 0) {
+				throw new Error('[ERROR] 음수는 입력할 수 없습니다.');
+			}
+		});
+
 		// 숫자들의 합을 반환
 		return valueArray.reduce((sum, num) => sum + num, 0);
 	}
