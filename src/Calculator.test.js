@@ -23,6 +23,9 @@ describe("add test", () => {
 describe("regex test", () => {
   const testInput = "//;\n1;2;3";
   const noneCustomTestInput = "1;2;3";
+  test("공백", () => {
+    expect(calculator.regexTest(testInput)).toEqual(0);
+  });
   test("//;\\n1;2;3", () => {
     expect(calculator.regexTest(testInput)).toEqual([1, 2, 3]);
   });
