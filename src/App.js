@@ -25,7 +25,15 @@ class App {
     for (const separator of this.separators) {
       input = input.split(separator).join(",");
     }
+
+    // 문자열 계산
+    const result = this.numberReducer(input.split(","));
   }
+
+  numberReducer(list) {
+    return list.reduce((acc, cur) => +cur + acc, 0);
+  }
+
 }
 
 export default App;
