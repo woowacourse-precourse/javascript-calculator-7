@@ -17,7 +17,6 @@ function findSeparator(input){
         return inputArray.slice(end+2);
       }
     }
-
   }else{
     if(isNaN(inputArray[0])){
       throw new Error("[ERROR] 입력 형식을 지켜주세요.")
@@ -30,7 +29,6 @@ function getNumber(inputArray) {
   let currentNum = '';
   const result=[];
   let isContinuous=0;
-
   inputArray.forEach(string=>{
     if(separator.includes(string)){
       isContinuous+=1;
@@ -60,6 +58,9 @@ function getNumber(inputArray) {
 function calculate(input){
   let result = 0;
   getNumber(input).map((number)=>{
+    if(isNaN(number)){
+      throw new Error("[ERROR] 올바른 숫자를 입력해주세요.")
+    }
     result+=Number(number);
   })
   return result;
