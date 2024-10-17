@@ -1,5 +1,5 @@
 import { MissionUtils } from '@woowacourse/mission-utils';
-import { ERROR_MESSAGE, INPUT_INFO_MESSAGE } from "./constants";
+import { ERROR_MESSAGE, INPUT_INFO_MESSAGE } from './constants';
 
 export async function getUserInput() {
   return await MissionUtils.Console.readLineAsync(INPUT_INFO_MESSAGE);
@@ -18,7 +18,7 @@ export function getSum(numberArray) {
 }
 
 export function checkTheNumberArray(array) {
-  if(!Array.isArray(array)) throw new Error(ERROR_MESSAGE)
+  if (!Array.isArray(array)) throw new Error(ERROR_MESSAGE);
   for (const item of array) {
     if (item === '') continue;
     if (isNaN(item) || Number(item) <= 0) throw new Error(ERROR_MESSAGE);

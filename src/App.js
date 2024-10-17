@@ -1,9 +1,14 @@
-
-import { getStringifiedString, getUserInput,checkTheNumberArray,getOrRegExpFromString,getSum,printResult } from './utils';
+import { CUSTOM_SEPARATOR_REGEXP, DEFAULT_SEPARATOR } from './constants';
+import {
+  getStringifiedString,
+  getUserInput,
+  checkTheNumberArray,
+  getOrRegExpFromString,
+  getSum,
+  printResult,
+} from './utils';
 
 class App {
-  defaultSeparator = ',:';
-  customSeparatorRegExr = /\/\/.+\\n/;
   async run() {
     const userInput = await getUserInput();
     const stringifiedUserInput = getStringifiedString(userInput);
@@ -22,9 +27,9 @@ class App {
 
     printResult(sumOfUserInput);
   }
-  
+
   getSeparator(str) {
-    const customSeparatorMatchedString = str.match(this.customSeparatorRegExr);
+    const customSeparatorMatchedString = str.match(CUSTOM_SEPARATOR_REGEXP);
     if (customSeparatorMatchedString)
       return {
         separator: customSeparatorMatchedString[0]
@@ -33,7 +38,7 @@ class App {
         newUserInput: str.slice(customSeparatorMatchedString[0].length + 1, -1),
       };
     return {
-      separator: this.defaultSeparator,
+      separator: DEFAULT_SEPARATOR,
       newUserInput: str.slice(1, -1),
     };
   }
