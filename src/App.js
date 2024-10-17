@@ -31,7 +31,12 @@ class App {
     }
 
     if (first.startsWith('//')) {
-      return [first.slice(2), rest];
+      const customSep = first.slice(2);
+      if (customSep.length !== 1) {
+        throw Error(errorString(CONSOLE_MESSAGE.SEPARATOR_LENGTH_ERROR));
+      }
+
+      return [customSep, rest];
     }
 
     return ['', first];
