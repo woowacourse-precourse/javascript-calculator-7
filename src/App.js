@@ -15,9 +15,9 @@ class App {
       customSep,
     );
 
-    this.sumAllString(splittedString);
+    const sum = this.sumAllString(splittedString);
 
-    Console.print(splittedString);
+    Console.print(sum);
   }
 
   extractCustomSeparator(str) {
@@ -49,6 +49,8 @@ class App {
       if (this.checkNumber(num)) return num;
       throw Error('[ERROR] 숫자가 아닌 문자열이 포함되어 있습니다.');
     });
+
+    return numArr.reduce((acc, cur) => acc + cur, 0);
   }
 }
 
