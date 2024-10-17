@@ -1,10 +1,11 @@
 import Calculator from '../src/Calculator';
+import Delimiter from '../src/Delimiter';
 
 describe('Calculator', () => {
   let calculator;
 
   beforeEach(() => {
-    calculator = new Calculator();
+    calculator = new Calculator(new Delimiter());
   });
 
   describe('calculate', () => {
