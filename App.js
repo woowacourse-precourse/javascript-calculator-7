@@ -18,66 +18,6 @@ Object.freeze(CALCULATOR_VARIABLES);
 
 
 
-class Calculator {
-
-    constructor(){};
-
-    isValidSeparator(input) {
-    
-        const customSeparatorMatch  = input.match(new RegExp(CALCULATOR_VARIABLES.CUSTOM_SEPARATOR));
-        if (!customSeparatorMatch  && !input.match(CALCULATOR_VARIABLES.DEFAULT_SEPARATOR)) {
-            throw new Error('[ERROR]: 구분자가 없거나 잘못됐습니다.');
-        }
-    }
-
-    isPositiveNumber(arr) {
-        if (!arr.every(num => Number(num) > 0)) {
-            throw new Error('[ERROR]: 입력한 숫자가 양수가 아닙니다.');
-        }
-    }
-
-    getSum(arr) {
-        return arr.reduce( (acc,cur) => acc + cur,  0);
-    }
-
-    splitUserInput(input) { 
-        const customSeparatorMatch = input.match(new RegExp(CALCULATOR_VARIABLES.CUSTOM_SEPARATOR));
-        const customToken = customSeparatorMatch ? customSeparatorMatch[1] : null ;
-
-        let userInputArray;
-
-        if (customToken){
-            const numbersPart = input.split("\\n")[1];
-            userInputArray = numbersPart.split(new RegExp(`[${customToken}]`));
-        }
-        else{
-            userInputArray = input.split( new RegExp(CALCULATOR_VARIABLES.DEFAULT_SEPARATOR));
-        }
-
-        return userInputArray ;
-    }
-
-    async getUserNumbers() {
-        try {
-            const userInput = await Console.readLineAsync(CALCULATOR_VARIABLES.INPUT_PROMPT);
-            const userInputArray = this.splitUserInput(userInput);
-
-            // 검증 블록
-            this.isValidSeparator(userInput);
-            this.isPositiveNumber(userInputArray);
-
-            return userInputArray.map(Number);
-        } catch (e) {
-            Console.print(e.message);
-        }
-    }
-
-    async printUserInput(input) {
-        let sumValue = this.getSum(input);
-        Console.print(CALCULATOR_VARIABLES.OUTPUT_PROMPT + sumValue);
-    }
-}
-
 
 /**
  * 유저로부터 입력 기능 클래스
@@ -161,6 +101,22 @@ class OutputHandler {
     printUserInput(sumValue) {
         Console.print(CALCULATOR_VARIABLES.OUTPUT_PROMPT + sumValue);
     }
+}
+
+
+/**
+ * 기능을 종합한 계산기 
+ */
+class Calculator {
+
+    constructor(){
+        this.inputHandler = new InputHandler();
+        this.inputParser = new InputParser();
+        this.calculatorHandler = new CalculatorHandler();
+        this.Validator = new Validator();
+        this.outputHandler = new OutputHandler();
+    }
+
 }
 
 
