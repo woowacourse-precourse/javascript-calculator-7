@@ -40,4 +40,4 @@ const seperateNumbers = (numbersString) => {
     return seperatedString.map((e) => {return parseInt(e)})
 }
 
-console.log(processInput('//;\n1;2;3'))
+export default processInput
