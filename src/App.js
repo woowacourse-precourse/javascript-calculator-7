@@ -33,40 +33,78 @@ function stringCalculator(input) {
     parsedArray = parseDefaultDelimiter(input);
   }
   else {
-    const customDelim = customDelimiterFlag[1];
+    const customDelimiter = customDelimiterFlag[1];
     const numbers = customDelimiterFlag[2];
-    parsedArray = parseCustomDelimiter(numbers, customDelim);
+    parsedArray = parseCustomDelimiter(numbers, customDelimiter);
   }
 
-  const resultArray = convertNumArray(parsedArray);
-  const resultSum = calculateSum(resultArray);
+  var resultSepArray = convertArray(parsedArray);
+
+  checkNegativeNumbers(resultSepArray);
+  checkFAlphabetsAndKorean(resultSepArray);
+  checkSpecialCharacters(resultSepArray);
+
+  var resultNumArray = convertNumArray(resultSepArray);
+
+  const resultSum = calculateSum(resultNumArray);
 
   return resultSum;
 
 }
 
 function parseDefaultDelimiter(input) {
-  return input.split(/[,:]/);
+  var parsedArray = input.split(/[,:]/);
+  return parsedArray;
 }
 
 
 function parseCustomDelimiter(numbers, customDelimiter) {
   const regex = new RegExp(`[${customDelimiter},:]`);
-  return numbers.split(regex);
+  var parsedArray = numbers.split(regex);
+  return parsedArray;
 }
 
-function convertNumArray(parsedArray) {
-  return parsedArray.map((num) => {
-    const parsedNum = parseInt(num, 10);
-    if (isNaN(parsedNum)) {
-      throw new Error("[ERROR] 숫자가 아닌 값이 포함되어 있습니다");
+function convertArray(parsedArray) {
+  let resultArray = [];
+  parsedArray.forEach((item) => {
+    const splitItem = item.split('');
+    resultArray = resultArray.concat(splitItem);
+  });
+  return resultArray;
+}
+
+function checkNegativeNumbers(resultSepArray) {
+  resultSepArray.forEach((item) => {
+    if (item === '-') {
+      throw new Error("[ERROR] 음수가 포함되어 있습니다.");
     }
-    return parsedNum;
   });
 }
 
-function calculateSum(numericArray) {
-  let resultSum = numericArray.reduce((acc, curr) => acc + curr, 0);
+function checkFAlphabetsAndKorean(resultSepArray) {
+  const regex = /[a-zA-Z가-힣]/;
+  resultSepArray.forEach((item) => {
+    if (regex.test(item)) {
+      throw new Error("[ERROR] 알파벳 또는 한글이 포함되어 있습니다.");
+    }
+  });
+}
+
+function checkSpecialCharacters(resultSepArray) {
+  const regex = /[^0-9a-zA-Z가-힣,-]/;
+  resultSepArray.forEach((item) => {
+    if (regex.test(item)) {
+      throw new Error("[ERROR] 구분자가 아닌 특수문자가 포함되어 있습니다.");
+    }
+  });
+}
+
+function convertNumArray(resultSepArray) {
+  return resultSepArray.map((item) => parseInt(item, 10));
+}
+
+function calculateSum(resultNumArray) {
+  let resultSum = resultNumArray.reduce((acc, curr) => acc + curr, 0);
   return resultSum;
 }
 
