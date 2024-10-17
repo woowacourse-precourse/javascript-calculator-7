@@ -4,7 +4,12 @@ import {
   DEFAULT_SEPARATOR,
   SPECIAL_CHARACTERS,
 } from './constant.js';
-import { isNumber, isPositiveNumber, errorString } from './util.js';
+import {
+  isNumber,
+  isPositiveNumber,
+  errorString,
+  escapeRegex,
+} from './util.js';
 
 class App {
   async run() {
@@ -50,13 +55,14 @@ class App {
     const allSeparator = separator;
 
     if (customSep !== '') {
-      if (SPECIAL_CHARACTERS.includes(customSep)) {
-        allSeparator.push(`\\${customSep}`);
-      } else {
-        allSeparator.push(customSep);
-      }
+      const escapedSep = SPECIAL_CHARACTERS.includes(customSep)
+        ? escapeRegex(customSep)
+        : customSep;
+
+      allSeparator.push(escapedSep);
     }
 
+    Console.print(allSeparator);
     const sepToRegex = new RegExp(allSeparator.join('|'));
 
     return str.split(sepToRegex);
