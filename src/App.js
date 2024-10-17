@@ -79,6 +79,12 @@ class App {
     this.#input = inputString;
     return this;
   }
+
+  static isCustomSeparator(input) {
+    const numberArray = input.split(',').join(':').split(':');
+    const numbers = Number(numberArray.join(''));
+    return !Number.isNaN(numbers);
+  }
 }
 
 export default App;
