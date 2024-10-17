@@ -7,17 +7,13 @@ import { RESULT_MESSAGE } from './constant';
 
 class App {
   async run() {
-    try {
-      const input = await userInput();
+    const input = await userInput();
 
-      const separator = new Separator(input);
-      const value = separator.separate();
+    const separator = new Separator(input);
+    const value = separator.separate();
 
-      ErrorHandler.validatePositiveNumbers(value);
-      printMessage(RESULT_MESSAGE + calculateSum(value));
-    } catch (error) {
-      printMessage(error.message);
-    }
+    ErrorHandler.validatePositiveNumbers(value);
+    printMessage(RESULT_MESSAGE + calculateSum(value));
   }
 }
 
