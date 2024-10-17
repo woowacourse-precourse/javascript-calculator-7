@@ -8,4 +8,8 @@ class CalculatorView {
   async outputView() {
     return await Console.readLineAsync(`결과: ${RESULT}`);
   }
+
+  errorView() {
+    console.error(error.message);
+  }
 }
