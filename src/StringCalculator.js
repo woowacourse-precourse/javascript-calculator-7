@@ -2,30 +2,37 @@ import StringValidator from "./StringValidator.js";
 import DelimiterParser from "./DelimiterParser.js";
 
 class StringCalculator {
-  constructor() {
-    this.stringValidator = new StringValidator();
-    this.delimiterParser = new DelimiterParser();
+  constructor(
+    validator = new StringValidator(),
+    delimiterParser = new DelimiterParser()
+  ) {
+    this.validator = validator;
+    this.parser = delimiterParser;
   }
 
   // 입력값을 받아 최종 결과를 반환하는 메서드
   calculate(input) {
-    this.stringValidator.validateCustomDelimiterPosition(input); // 커스텀 구분자 위치 유효성 검사
+    // 커스텀 구분자 위치 유효성 검사
+    this.validator.validateCustomDelimiterPosition(input);
     const preProcessInput = this.preProcessInput(input);
 
+    // 빈 문자열인 경우 0을 반환
     if (this.isEmpty(preProcessInput)) {
       return 0;
     }
 
+    // 기본 구분자와 커스텀 구분자를 파싱함.
     const { numberStrings, customDelimiter } =
-      this.delimiterParser.parse(preProcessInput); // 기본 구분자와 커스텀 구분자를 파싱함.
+      this.parser.parse(preProcessInput);
 
-    this.stringValidator.validateMultipleDelimiterInput(
+    this.validator.validateMultipleDelimiterInput(
       preProcessInput,
       customDelimiter
     ); // 숫자들 사이에 구분자가 여러 개 포함된 경우 유효성 검사
-    this.stringValidator.validateNumberStrings(numberStrings); // 숫자가 아닌 값이 포함되어 있는 경우 유효성 검사
-    this.stringValidator.validateNegativeNumbers(numberStrings); // 음수가 포함되어 있는 경우 유효성 검사
+    this.validator.validateNumberStrings(numberStrings); // 숫자가 아닌 값이 포함되어 있는 경우 유효성 검사
+    this.validator.validateNegativeNumbers(numberStrings); // 음수가 포함되어 있는 경우 유효성 검사
 
+    // 문자열을 숫자로 변환
     const numbers = this.parseNumbers(numberStrings);
 
     return this.calculateSum(numbers);
