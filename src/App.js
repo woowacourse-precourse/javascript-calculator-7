@@ -14,9 +14,15 @@ class App {
 
     let numbers;
 
-    //커스텀 구분자 처리
-    if (input.startsWith("//") && input.substring(3, 5) === "\\n") {
-      numbers = input.substring(5).split(input[2]);
+    // 커스텀 구분자 처리
+    const PATTERN = /^\/\/(.*)\\n(.*)$/;
+    const MATCH = input.match(PATTERN);
+
+    if (MATCH) {
+      const CUSTOM = MATCH[1]; // 커스텀 구분자
+      const NUMS = MATCH[2]; // 숫자부분
+
+      numbers = NUMS.split(CUSTOM);
     } else {
       // 기본 구분자 처리
       numbers = input.split(/,|:/);
@@ -27,7 +33,7 @@ class App {
       throw new Error("[ERROR] 연속된 구분자는 사용할 수 없습니다.");
     }
 
-    // 숫자로 변환
+    // 숫자로 변환, 문자 예외 처리
     numbers = numbers.map((num) => {
       if (isNaN(Number(num))) {
         throw new Error("[ERROR] 문자는 입력할 수 없습니다.");
