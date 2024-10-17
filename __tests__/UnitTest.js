@@ -1,4 +1,20 @@
-import { parseUserInput, extractCustomSeparators } from "../src/utils";
+import { parseUserInput, extractCustomSeparators, replaceAllPattern } from "../src/utils";
+
+describe("문자열의 특정 패턴을 바꾸고 싶은 문자열로 모두 바꾼다.", () => {
+  test("\\n를 모두 \n로 변환한다.", () => {
+    const string = "//;\\n\\n";
+    const newString = replaceAllPattern(string, "\\n", "\n");
+
+    expect(newString).toBe("//;\n\n");
+  });
+
+  test("a를 모두 b로 변환한다.", () => {
+    const string = "a//a\na";
+    const newString = replaceAllPattern(string, "a", "b");
+
+    expect(newString).toBe("b//b\nb");
+  });
+});
 
 describe("사용자 입력을 커스텀 문자열과 숫자 문자열로 나눈다.", () => {
   const userInput = "//;\n1;2;3";
