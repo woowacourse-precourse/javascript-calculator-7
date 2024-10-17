@@ -8,8 +8,6 @@ import {
 } from './utils/main.js';
 import { DEFAULT_SEPARATORS } from './constants.js';
 
-const c = Console.print;
-
 class App {
   async run() {
     const separators = [...DEFAULT_SEPARATORS];
@@ -17,7 +15,7 @@ class App {
     const line = await Console.readLineAsync('');
     checkLine(line);
     
-    if (checkIsNormal(line)) return Console.print(`결과 : ${sumString(linePart, separators)}`);
+    if (checkIsNormal(line)) return Console.print(`결과 : ${sumString(line, separators)}`);
 
     const [customPart, linePart] = divideCustom(line);
     checkCustomPart(customPart);
