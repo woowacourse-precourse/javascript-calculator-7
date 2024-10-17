@@ -1,10 +1,10 @@
 import Calculator from "./Calculator.js"
 class App {
   async run() {
-
+    
     const calculator = new Calculator();
 
-    calculator.start();
+    await calculator.start();
   }
 }
 
