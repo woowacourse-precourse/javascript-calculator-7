@@ -1,10 +1,6 @@
 import { MAX_NUM, MESSAGES } from './constants.js';
 
 class Validator {
-  constructor() {
-    this.MAX_NUM = new MAX_NUM();
-  }
-
   // 구분자 유효성 검사
   checkValidSeparator(sep) {
     if (sep === '-') {
@@ -23,7 +19,7 @@ class Validator {
 
   // 계산 결과 유효성 검사
   checkValidCalculateResult(calcResult) {
-    if (calcResult > this.MAX_NUM) {
+    if (calcResult > MAX_NUM) {
       throw new Error(MESSAGES.ERROR.OVER_MAX_NUMBER);
     }
   }
