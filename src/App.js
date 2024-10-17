@@ -34,7 +34,7 @@ class App {
         separator: customSeparatorMatchedString[0]
           .slice(2, -2)
           .replace('\\', '\\\\'),
-        newUserInput: str.slice(customSeparatorMatchedString[0].length + 1, -1),
+        newUserInput: str.replace(CUSTOM_SEPARATOR_REGEXP, '').slice(1, -1),
       };
     return {
       separator: DEFAULT_SEPARATOR,
