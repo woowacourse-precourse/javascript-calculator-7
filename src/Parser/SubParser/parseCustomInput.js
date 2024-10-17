@@ -34,6 +34,13 @@ export default function parseCustomInput(input) {
   // 숫자들을 추출한다. +2를 플러스 해서 숫자 구하는 스트링 추출
   const content = input.slice(delimiterEnd + 2);
 
+  // 1. ^[0-9] 정수부를 잡는다
+  // 1.1. + 숫자가 하나 이상 반복 될수 있다.
+  // 2. (\\.[0-9]+) 소수점이 나오는 숫자가 하나 이상 더 반복될수 있다.
+  // 2.1. ? 이 소수점은 선택적이다.
+  // 3 ${escapedDelimiter}[0-9]+(\\.[0-9]+)? delimiter+숫자+소수점으로 구성한다. 숫자는 하나 이상일수 있다.똑같이 소수점은 선택적이다.
+  // 3.1 * 해당 패턴은 n회 이상 반복될수 있다.
+  // 3.2 $ 문자열 끝을 의미한다. 이 패턴이 반복되고 또 다른 문자열이 반복되면 안된다.
   const validChars = new RegExp(
     `^[0-9]+(\\.[0-9]+)?(${escapedDelimiter}[0-9]+(\\.[0-9]+)?)*$`,
   ); // Allow valid decimal format and delimiter
