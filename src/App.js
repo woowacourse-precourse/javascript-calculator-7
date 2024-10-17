@@ -15,6 +15,8 @@ async function getString() {
 // 2. 정규표현식, includes(), split() 등으로 :나 ,로 구분된 문자열 기준으로 숫자 합 반환
 function computeResult(inputString) {
   const splitString = inputString.toString().split(/[:,]/);
+  console.log(splitString); // ERROR 처리를 위한 확인
+
   const stringToNumber = splitString.map(Number);
   const compute = stringToNumber.reduce((acc, cur) => {
     return acc + cur;
@@ -23,19 +25,34 @@ function computeResult(inputString) {
   return compute;
 }
 
+// 커스텀구분자
+function customSeparator(inputString) {
+  const regex = /^(?:\/\/)(\D)(?:\\n)/;
+  const customString = inputString.match(regex);
+
+  return customString[1];
+}
+
+// splitString 변수 선언부를 function으로 뺀다.
+// function에서 커스텀구분자 여부부터 확인하고, if문으로 split 정규표현식 안에 넣어준다. (변수로 이름 바꿈)
+
 class App {
   async run() {
     const inputString = await getString();
+    const customString = customSeparator(inputString);
 
-    const computeReturn = computeResult(inputString);
-    Console.print(`결과: ${computeReturn}`);
+    console.log(customString);
+
+    customSeparator(inputString);
+    //const computeReturn = computeResult(inputString);
+    //Console.print(`결과: ${computeReturn}`);
   }
 }
 
 export default App;
 
-// 3. indexOf, split(), slice()로 커스텀 구분자
 // 4. 예외처리로 ERROR
 // - 커스텀 구분자가 앞부분에 선언되었는지와 문자(1)인지
 // - 별도의 구분자가 들어갔는지
 // - 양수인지
+// 전체 async run을 catch로 잡아준다.
