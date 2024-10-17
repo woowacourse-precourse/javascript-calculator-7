@@ -10,6 +10,7 @@ function findSeparator(input){
       throw new Error("[ERROR] 커스텀 구분자 추가를 위해선 //와 \\n 사이에 추가하고자 하는 구분자를 입력해주세요.")
     }else{
       const customSeparator = input.slice(start, end);
+      separator.push(customSeparator);
       if(customSeparator.length>1||!isNaN(customSeparator)){
         throw new Error("[ERROR] 커스텀 구분자의 입력이 잘못됐습니다.")
       }else{
@@ -56,6 +57,10 @@ function getNumber(inputArray) {
 }
 
 function calculate(input){
+  console.log(input);
+  if(isNaN(input[input.length-1])){
+    throw new Error("[ERROR] 더할 숫자 없이 구분자만 입력됐습니다.")
+  }
   let result = 0;
   getNumber(input).map((number)=>{
     if(isNaN(number)){
