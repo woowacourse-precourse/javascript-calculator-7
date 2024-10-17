@@ -21,10 +21,11 @@ describe("add test", () => {
 
 // regex 함수 테스트 코드 정의
 describe("regex test", () => {
+  const noneTest = "";
   const testInput = "//;\n1;2;3";
   const noneCustomTestInput = "1;2;3";
   test("공백", () => {
-    expect(calculator.regexTest(testInput)).toEqual(0);
+    expect(calculator.regexTest(noneTest)).toEqual(0);
   });
   test("//;\\n1;2;3", () => {
     expect(calculator.regexTest(testInput)).toEqual([1, 2, 3]);
