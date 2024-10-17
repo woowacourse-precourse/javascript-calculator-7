@@ -4,7 +4,6 @@ import { mockQuestions } from "./ApplicationTest";
 describe("문자열 구분", () => {
   test("커스텀 구분자 설정 부분이 없을 때 false를 반환하는 지 확인", async () => {
     const input = "//;\\1";
-    mockQuestions(input);
 
     const output = false;
 
@@ -16,7 +15,6 @@ describe("문자열 구분", () => {
 
   test("커스텀 구분자 설정 부분이 있을 때 true를 반환하는 지 확인", async () => {
     const input = "//;\\n1";
-    mockQuestions(input);
 
     const output = true;
     const cal = new Calculator(input);
@@ -25,9 +23,18 @@ describe("문자열 구분", () => {
     expect(result).toBe(output);
   });
 
+  test("커스텀 구분자 설정 부분이 있다면 커스텀 구분자를 구분자 리스트에 추가한다.", async () => {
+    const input = "//[\\n1,2:3";
+
+    const output = [",", ":", "["];
+    const cal = new Calculator(input);
+
+    cal.addCustomDelimiter();
+    expect(cal.delimiters).toEqual(output);
+  });
+
   test("입력 문자열을 쉼표 또는 콜론을 기준으로 분리한다.", async () => {
-    const input = "1,2;3";
-    mockQuestions(input);
+    const input = "1,2:3";
 
     const output = [1, 2, 3];
     const cal = new Calculator(input);
