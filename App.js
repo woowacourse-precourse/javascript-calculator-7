@@ -58,7 +58,7 @@ class InputParser {
             userInputArray = input.split( new RegExp(CALCULATOR_VARIABLES.DEFAULT_SEPARATOR));
         }
 
-        return userInputArray ;
+        return userInputArray.map(Number) ;
     }
 }
 
@@ -122,7 +122,6 @@ class Calculator {
         this.Validator.isValidSeparator(userInput);
 
         const numbersArray = this.inputParser.splitUserInput(userInput);
-        console.log(numbersArray);
 
         this.Validator.isPositiveNumber(numbersArray);
 
