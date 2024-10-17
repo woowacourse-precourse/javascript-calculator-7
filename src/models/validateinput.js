@@ -1,4 +1,5 @@
 import { ERROR_MESSAGE, BASIC_MESSAGES } from "../constant/messages.js";
+import extractNumbers from "./extractnumber.js";
 
 function validateInput(input) {
   if (typeof input !== "string") {
@@ -28,15 +29,15 @@ function validateInput(input) {
       throw error;
     }
   }
-  /*
-  const numbers = extractNumbersFromInput(input);
+
+  const numbers = extractNumbers(input);
   for (const num of numbers) {
     if (num < 0) {
       const error = new Error(ERROR_MESSAGE.invalidPositiveNumber);
       error.additionalMessage = BASIC_MESSAGES.exitMessage;
       throw error;
     }
-  }*/
+  }
   return true;
 }
 
