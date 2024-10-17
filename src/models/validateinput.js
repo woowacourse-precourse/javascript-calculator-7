@@ -28,6 +28,7 @@ function validateInput(input) {
       throw error;
     }
   }
+  /*
   const numbers = extractNumbersFromInput(input);
   for (const num of numbers) {
     if (num < 0) {
@@ -35,7 +36,7 @@ function validateInput(input) {
       error.additionalMessage = BASIC_MESSAGES.exitMessage;
       throw error;
     }
-  }
+  }*/
   return true;
 }
 
