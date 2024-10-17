@@ -1,6 +1,6 @@
 import { Console } from '@woowacourse/mission-utils';
 import { CONSOLE_MESSAGE, DEFAULT_SEPARATOR } from './constant.js';
-import { checkIsNumber, errorString } from './util.js';
+import { checkIsNumber, checkIsPositive, errorString } from './util.js';
 
 class App {
   async run() {
@@ -46,12 +46,20 @@ class App {
     return str.split(sepToRegex);
   }
 
-  sumAllString(strArr) {
-    const numArr = strArr.map((str) => {
-      const num = Number(str);
-      if (checkIsNumber(num)) return num;
+  checkNumber(num) {
+    if (!checkIsNumber(num)) {
       throw Error(errorString(CONSOLE_MESSAGE.NUMBER_ERROR));
-    });
+    }
+
+    if (!checkIsPositive(num)) {
+      throw Error(errorString(CONSOLE_MESSAGE.NUMBER_POSITIVE_ERROR));
+    }
+
+    return num;
+  }
+
+  sumAllString(strArr) {
+    const numArr = strArr.map((str) => this.checkNumber(Number(str)));
 
     return numArr.reduce((acc, cur) => acc + cur, 0);
   }
