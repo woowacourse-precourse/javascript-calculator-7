@@ -5,6 +5,9 @@ const TEST_CASE = [
   {title: "커스텀 구분자 사용", testCaseInputs: "//;\\n1", testCaseOutputs: "결과 : 1"},
   {title: "예외 테스트", testCaseInputs: "-1,2,3", testCaseOutputs: ""},
   {title: "없는 구분자 사용", testCaseInputs: "1;2,3", testCaseOutputs: ""},
+  {title: "구분자 잘못 사용: 앞", testCaseInputs: ":1:2,3", testCaseOutputs: ""},
+  {title: "구분자 잘못 사용: 뒤", testCaseInputs: "1:2,3:", testCaseOutputs: ""},
+  {title: "특수한 구분자 사용", testCaseInputs: "//$^\\n1$^2,3", testCaseOutputs: "결과 : 6"},
 ]
 
 const mockQuestions = (inputs) => {

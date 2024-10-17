@@ -2,6 +2,7 @@ import getSum from "./getSum.js"
 
 const PRE_SEPERATORS = [',', ':']
 const SELECTOR_REGEX = /^\/\/(.+)\\n(.*)/
+const REGEX_META_LETTER = /[\\\^\$\.\|\[\]\(\)\*\+\?\{\}]/
 
 // string => number
 // 들어온 입력값을 처리해 출력값을 계산
@@ -12,11 +13,14 @@ const processInput = (inputData) => {
     // 구분자 지정문이 있음
     if (isSelectorExisted(inputData)) {
         // 구분자와 숫자배열 분리
-        let [selector, noSelector] = seperateSelector(inputData)
+        let [selectorPart, noSelectorPart] = seperateSelector(inputData)
+
+        // 구분자 가공
+        const selector = getSelector(selectorPart)
 
         // 구분자 추가 및 숫자배열 최신화
         seperators.push(selector)
-        restString = noSelector
+        restString = noSelectorPart
     }
 
     // 구분자 정보 합치기
@@ -30,6 +34,22 @@ const processInput = (inputData) => {
 
     // 합 구하기
     return getSum(numbersArray)
+}
+
+// string => string
+// 사용할 수 있는 구분자 제공
+const getSelector = (selectorPart) => {
+    // 구분자에 특수한 문자가 있는지 확인
+    let selector = ''
+    for (let i=0; i<selectorPart.length; i++) {
+        let selectorLetter = selectorPart[i]
+        if (REGEX_META_LETTER.test(selectorLetter)) {
+            selector += '\\'
+        }
+        selector += selectorLetter
+    }
+
+    return selector
 }
 
 // string => boolean
