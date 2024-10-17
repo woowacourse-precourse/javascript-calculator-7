@@ -16,7 +16,7 @@ class App {
 
     // 검증된 사용자 입력값 커스텀 구분자 추출하기
     const { customSeparator, processedUserInput } =
-      this.#exportUserInput(userInput);
+      this.#parseUserInput(userInput);
 
     const sumResult = this.#sumUserInput(processedUserInput, customSeparator);
     this.#printSumResult(sumResult);
@@ -34,14 +34,13 @@ class App {
     this.#validator.validateStartsWith(input);
 
     // 커스텀 구분자와 정제된 입력값 추출
-    const { customSeparator, processedUserInput } =
-      this.#exportUserInput(input);
+    const { customSeparator, processedUserInput } = this.#parseUserInput(input);
 
     // 구분자를 제대로 사용했는지 검증
     this.#validator.validateUsedSeparator(processedUserInput, customSeparator);
   }
 
-  #exportUserInput(input) {
+  #parseUserInput(input) {
     let customSeparator = null;
     let processedUserInput = null;
 
