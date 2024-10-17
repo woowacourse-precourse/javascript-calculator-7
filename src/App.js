@@ -3,21 +3,29 @@ const Console = MissionUtils.Console;
 
 class App {
   async run() {
-    Console.print(
-      this.add(
-        this.processInput(
-          await Console.readLineAsync("덧셈할 문자열을 입력해 주세요.")
+    try {
+      Console.print(
+        this.setOutput(
+          this.add(
+            this.processInput(
+              await Console.readLineAsync("덧셈할 문자열을 입력해 주세요.\n")
+            )
+          )
         )
-      )
-    ); // 1단계: 그대로 출력
+      );
+    } catch ({ name, message }) {
+      Console.print(message);
+    }
   }
   processInput(inputstr) {
     const condCustomInput = /\/\/[^0-9]+\\n.+/g;
     const condCustomSep = /[^\/\\n]+/g; // exec()[0]의 결과가 seperator
     const condSepValid = /[^0-9]+/g;
-    const condAbnormalFormat = /[^0-9,:]+/g;
+    const condAbnormalFormat = /[^0-9,:-]+/g;
     // 커스텀 구분자가 있는지 확인
-    if (
+    if (inputstr === "") {
+      throw new Error("[ERROR]: 빈 문자열을 입력했습니다!");
+    } else if (
       condCustomInput.test(inputstr) &&
       condSepValid.test(inputstr.match(condCustomSep)[0]) // Note:이건 구분자가 적절한지(숫자 미포함인지) 확인하는 코드
     ) {
@@ -31,7 +39,7 @@ class App {
         )
         .reduce((prev, curr) => prev.concat(curr), [])
         .filter((value) => value !== ":" && value !== ",");
-      if (intermediate.some((value) => RegExp("[^0-9]+", "g").test(value)))
+      if (intermediate.some((value) => RegExp("[^0-9-]+", "g").test(value)))
         throw new Error("[ERROR]: 잘못된 연산식이 들어왔습니다.");
       return intermediate.map((value) => parseInt(value));
     } else if (!condAbnormalFormat.test(inputstr)) {
@@ -52,6 +60,9 @@ class App {
       throw new Error("[Error]: 양수가 아닌 수가 섞여 있습니다!");
     }
     return inputArr.reduce((prev, curr) => prev + curr, 0);
+  }
+  setOutput(value) {
+    return ["결과 : ", value].join("");
   }
 }
 
