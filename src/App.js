@@ -13,6 +13,8 @@ class App {
 
     if (this.isEmpty(INPUT)) {
       result = 0;
+    } else if (INPUT === 'error') {
+      return this.printError("'error'를 입력했습니다");
     } else {
       result = INPUT;
     }
@@ -26,6 +28,11 @@ class App {
 
   printResult(result) {
     Console.print(`결과 : ${result}`);
+  }
+
+  printError(errorMessage) {
+    Console.print(`[ERROR] : ${errorMessage}`);
+    return;
   }
 }
 
