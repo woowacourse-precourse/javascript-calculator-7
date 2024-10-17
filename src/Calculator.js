@@ -1,4 +1,4 @@
-import Delimiter from './Delimiter';
+import Delimiter from './Delimiter.js';
 
 class Calculator {
   /** @type {Delimiter} */

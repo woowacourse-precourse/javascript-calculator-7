@@ -1,4 +1,4 @@
-import { isMatch, shallowCopy } from './utils';
+import { isMatch, shallowCopy } from './utils.js';
 
 class Delimiter {
   /** @type {object} */
