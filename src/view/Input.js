@@ -1,5 +1,5 @@
 import { Console } from "@woowacourse/mission-utils";
-import { INPUT_FORMAT } from "../utils/input.contants.js";
+import { INPUT_FORMAT } from "../utils/input.constants.js";
 
 export const getInput = async () => {
   const input = await Console.readLineAsync(INPUT_FORMAT);
