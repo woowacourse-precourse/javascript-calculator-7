@@ -8,31 +8,53 @@ class App {
   constructor() {
     this.#validator = new Validator();
   }
+
   async run() {
+    const userInput = await this.#inputText();
+
+    const { customSeparator, removedCustomSepartor } =
+      this.#validateUserInput(userInput);
+
+    const splitedUserInput = removedCustomSepartor || userInput;
+
+    this.#printSumResult(splitedUserInput, customSeparator);
+  }
+
+  // 사용자에게 문자열 입력받기
+  async #inputText() {
+    Console.print(outputMessage.startMessage);
+    return await Console.readLineAsync('');
+  }
+
+  // 입력값 검증하기
+  #validateUserInput(input) {
     let customSeparator = null;
     let removedCustomSepartor = null;
-    Console.print(outputMessage.startMessage);
-    let userInput = await Console.readLineAsync('');
-    this.#validator.validateStartsWith(userInput);
 
-    if (this.#validator.checkStartWidthDubbleSlash(userInput)) {
-      this.#validator.validateCustomSeparator(userInput);
-      customSeparator = UserInputHandler.getCustomSeparator(userInput);
-      removedCustomSepartor =
-        UserInputHandler.getRemovedCustomSeparator(userInput);
+    this.#validator.validateStartsWith(input);
+
+    if (this.#validator.checkStartWidthDubbleSlash(input)) {
+      this.#validator.validateCustomSeparator(input);
+      customSeparator = UserInputHandler.getCustomSeparator(input);
+      removedCustomSepartor = UserInputHandler.getRemovedCustomSeparator(input);
     }
 
     this.#validator.validateUsedSeparator(
-      removedCustomSepartor || userInput,
+      removedCustomSepartor || input,
       customSeparator,
     );
 
+    return { customSeparator, removedCustomSepartor };
+  }
+
+  // 결과 계산하기
+  #printSumResult(input, customSeparator) {
     const splitedUserInput = UserInputHandler.getSplitedBySeparator(
-      removedCustomSepartor || userInput,
+      input,
       customSeparator,
     );
-    const result = UserInputHandler.sum(splitedUserInput);
 
+    const result = UserInputHandler.sum(splitedUserInput);
     Console.print(`결과 : ${result}`);
   }
 }
