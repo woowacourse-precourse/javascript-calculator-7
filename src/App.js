@@ -18,7 +18,15 @@ class App {
 
     const result = string.split(regex);
 
+    if (!this.validate(result)) {
+      throw new Error(`[ERROR] ${input}값은 유효하지 않습니다.`);
+    }
+
     return result;
+  }
+
+  validate(numbers) {
+    return numbers.every((number) => !isNaN(number) && number >= 0);
   }
 
   async run() {
