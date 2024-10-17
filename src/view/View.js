@@ -3,12 +3,12 @@ import Constant from "../constants.js/Constant.js";
 
 class View {
   async inputPrompt() {
-    let userInput = await Console.readLineAsync(Constant.inputMessage);
+    let userInput = await Console.readLineAsync(Constant.INPUT_MESSAGE);
     return userInput;
   }
 
   outputView(sum) {
-    Console.print(`${Constant.resultMessage}${sum}`);
+    Console.print(`${Constant.RESULT_MESSAGE}${sum}`);
   }
 }
 
