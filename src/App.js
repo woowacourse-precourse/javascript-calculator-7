@@ -4,7 +4,6 @@ import { Console } from "@woowacourse/mission-utils";
 class App {
   async run() {
     const calculator = new Calculator("1,2,3,4!5");
-    Console.print(calculator.add());
   }
 }
 
