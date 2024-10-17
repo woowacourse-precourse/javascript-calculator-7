@@ -76,7 +76,7 @@ class CalculatorHandler {
 /**
  * 검증 기능 클래스
  */
-class Vaildator {
+class Validator {
 
     isValidSeparator(input) {
     
