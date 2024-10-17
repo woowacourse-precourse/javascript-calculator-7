@@ -1,10 +1,27 @@
 import { MissionUtils } from "@woowacourse/mission-utils";
 
+function returnCustomSum(inputText) {
+  // custom 구분자가 있을 경우의 계산
+}
+
+function returnSum(inputText) {
+  // custom 구분자가 없을 경우의 계산
+  let returnAns = 0
+  for (let i = 0; i < inputText.length; i++) {
+    if (i === 0) {
+      returnAns += parseInt(inputText[i])
+    } else if (inputText[i] === ':' || inputText[i] === ',') {
+      returnAns += parseInt(inputText[i + 1])
+    }
+  }
+  return returnAns
+}
+
 function checkInput(inputText) {
   // inputText값이 유효한 값인지 확인. 유효하면 true, 유효하지 않으면 false 리턴.
   // 1. 입력값 길이 0이면 반드시 유효
   if (inputText.length === 0) {
-    return true
+    return 'answer zero'
   }
 
   // 2. 커스텀 입력값일 경우 유효성 검사
@@ -34,7 +51,12 @@ function checkInput(inputText) {
       const ES_SAPARATOR = SAPARATOR.replace(/[.*+?^${}()|[\]\\]/g, '\\$&')
       // 숫자가 구분자에 의해 올바르게 구분되고 있는지 확인. 동적으로 사용해야 하므로 new RegExp 사용해 객체 생성
       const CUSTOM_PATTERN = new RegExp(`^\\d+(${ES_SAPARATOR}\\d+)*$`)
-      return CUSTOM_PATTERN.test(NUMBER_PART)
+      // return CUSTOM_PATTERN.test(NUMBER_PART)
+      if (CUSTOM_PATTERN.test(NUMBER_PART)) {
+        return 'custom pattern'
+      } else {
+        return false
+      }
     }
     // \n의 위치를 찾지 못해 N_START_IDX 값이 0일 경우 false 리턴
     return false
@@ -42,7 +64,12 @@ function checkInput(inputText) {
 
   // 3. 커스텀 입력값이 아닐 경우 유효성 검사
   const CHECK_NON_CUSTOM = /^\d+([,:]\d+)*$/;
-  return CHECK_NON_CUSTOM.test(inputText);
+  // return CHECK_NON_CUSTOM.test(inputText);
+  if (CHECK_NON_CUSTOM.test(inputText)) {
+    return 'non custom pattern'
+  } else {
+    return false
+  }
 }
 
 class App {
@@ -55,12 +82,19 @@ class App {
     // 입력 형식에 맞지 않을 경우 ERROR 출력 후 종료
     // 1. STRING_INPUT 값을 확인하고, error 여부를 판단하여 throw
     // 2. index.js 파일의 try catch문 작동
-    if (!checkInput(STRING_INPUT)) {
+    const CHECK_INPUT = await checkInput(STRING_INPUT)
+    if (!CHECK_INPUT) {
       throw new Error("[ERROR]")
     } else {
       // 입력 형식이 올바를 경우 returnSum 함수를 통해 STRING_INPUT에 대한 결과를 저장
-      // const RETURN_ANS = await returnSum(STRING_INPUT)
       // return RETURN_ANS
+      if (CHECK_INPUT === 'answer zero') {
+        return 0
+      } else if (CHECK_INPUT === 'custom pattern') {
+        return await returnCustomSum(STRING_INPUT)
+      } else {
+        return await returnSum(STRING_INPUT)
+      }
     }
   }
 }
