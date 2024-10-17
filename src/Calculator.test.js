@@ -22,8 +22,8 @@ describe("add test", () => {
 // regex 함수 테스트 코드 정의
 describe("regex test", () => {
   const noneTest = "";
-  const testInput = "//;\n1;2;3";
-  const noneCustomTestInput = "1;2;3";
+  const testInput = "//;\\n1;2;3";
+  const noneCustomTestInput = "1:2:3";
   const minTest = "-3;-2;1";
 
   test("공백", () => {
@@ -35,7 +35,7 @@ describe("regex test", () => {
       numbers: [1, 2, 3],
     });
   });
-  test("1;2;3", () => {
+  test("1:2:3", () => {
     expect(calculator.regexTest(noneCustomTestInput)).toEqual({
       error: false,
       numbers: [1, 2, 3],
