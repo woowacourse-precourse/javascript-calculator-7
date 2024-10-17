@@ -1,8 +1,19 @@
-import PrintStartMessage from "./ui/PrintStartMessage.js";
+import getInput from "./ui/getInput.js";
+import printStartMessage from "./ui/PrintStartMessage.js";
 
 class Calculator {
   main() {
-    PrintStartMessage();
+    this.start();
+  }
+
+  start() {
+    printStartMessage();
+    this.handleInput();
+  }
+
+  async handleInput() {
+    const input = await getInput();
+    console.log(input);
   }
 }
 
