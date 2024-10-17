@@ -12,11 +12,11 @@ class App {
         // // \n 지우기
         let sliceMessage = this.MessageSlice(input);
         sliceMessage = sliceMessage.split(custom);
+
         let sum = sliceMessage.reduce((a, b) => Number(a) + Number(b), 0);
         MissionUtils.Console.print(`결과 : ${sum}`);
       } else {
         // 예외처리 => /,|:/
-
         let FirstSplit = input.split(/,|:/);
         let sum = FirstSplit.reduce((a, b) => Number(a) + Number(b), 0);
         MissionUtils.Console.print(`결과 : ${sum}`);
@@ -39,6 +39,28 @@ class App {
       return message.slice(0, firstIndex) + message.slice(secondIndex + 1);
     }
     return message;
+  }
+  // 배열인지 검사하는 함수
+  ExceptionA(array) {
+    for (let i = 0; i < array.length; i++) {
+      const num = Number(array[i]);
+      if (!Number.isInteger(num)) {
+        throw new Error("[Error] 숫자만 입력하세요");
+      }
+      if (num < 0) {
+        throw new Error("[Error] 음수만 입력하세요");
+      }
+    }
+  }
+  ExceptionB(custom) {
+    if (custom.length !== 1) {
+      throw new Error("[Error] 커스텀 문자사이 하나만 입력하세요");
+    }
+  }
+  ExceptionC(custom) {
+    if (custom !== "," && custom !== ":") {
+      throw new Error("[Error] 숫자 사이에 , : 로 구분해주세요");
+    }
   }
 }
 
