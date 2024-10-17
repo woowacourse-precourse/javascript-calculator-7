@@ -32,8 +32,35 @@ describe("문자열 계산기", () => {
     });
   });
 
-  test("예외 테스트", async () => {
+  test("음수 입력 시 예외 발생", async () => {
     const inputs = ["-1,2,3"];
+    mockQuestions(inputs);
+
+    const app = new App();
+
+    await expect(app.run()).rejects.toThrow("[ERROR]");
+  });
+
+  test("빈 숫자 입력 시 예외 발생", async () => {
+    const inputs = ["1,,2"];
+    mockQuestions(inputs);
+
+    const app = new App();
+
+    await expect(app.run()).rejects.toThrow("[ERROR]");
+  });
+
+  test("유효하지 않은 숫자 입력 시 예외 발생", async () => {
+    const inputs = ["1,a,2"];
+    mockQuestions(inputs);
+
+    const app = new App();
+
+    await expect(app.run()).rejects.toThrow("[ERROR]");
+  });
+
+  test("올바르지 않은 커스텀 구분자 형식 사용 시 예외 발생", async () => {
+    const inputs = ["//;\\n"];
     mockQuestions(inputs);
 
     const app = new App();
