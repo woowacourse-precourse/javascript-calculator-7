@@ -20,7 +20,7 @@ function findSeparator(input){
 
   }else{
     if(isNaN(inputArray[0])){
-      throw new Error("[ERROR] 입력 형식을 지켜주세요.")
+      throw new Error("[ERROR]")
     }
     return inputArray;
   }
@@ -29,8 +29,14 @@ function findSeparator(input){
 function getNumber(inputArray) {
   let currentNum = '';
   const result=[];
+  let isContinuous=0;
+
   inputArray.forEach(string=>{
     if(separator.includes(string)){
+      isContinuous+=1;
+      if(isContinuous>1){
+        throw new Error("[ERROR]")
+      }
       if(currentNum.length>0){
         result.push(currentNum);
         currentNum='';
@@ -38,6 +44,7 @@ function getNumber(inputArray) {
     }else{
       if(!isNaN(currentNum)){
         currentNum += string;
+        isContinuous=0;
       }
       else{
         throw new Error("[ERROR]")
