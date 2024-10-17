@@ -10,12 +10,6 @@ export function checkStartWidthDubbleSlash(input) {
   return regExp.test(input);
 }
 
-export function checkSeperator(input) {
-  if (!Boolean(Number(input.split(/[,:]/).join('')))) {
-    throw new Error(errorMessage.useCommaOrColon);
-  }
-}
-
 export function checkSeperatorConflict(input, customSeperator) {
   const regExpString = customSeperator
     ? `${customSeperator}{2,}|${customSeperator}[,:]|[,:]{2,}|[,:]${customSeperator}`
