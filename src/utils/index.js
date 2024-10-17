@@ -37,7 +37,7 @@ function splitBySeperator(expression, seperatorArray){
     seperatorArray.map((seperator) => {
         expression = expression.replaceAll(seperator, "@");
     })
-    return expression.split('@').filter(item => item !== '');
+    return expression.split('@');
 }
 
 function sumArray(array){

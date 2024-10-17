@@ -12,8 +12,11 @@ export async function calculator(){
     const seperatorArray = getSeperatorArray(expression);
     const expressionString = getExpressionString(expression);
     if(hasExpressionError(expressionString, seperatorArray)){
-        throw new Error('[ERROR]')
+        throw new Error('[ERROR] 구분자, 숫자를 제외한 문자가 포함되어 있습니다.');
    }
     const numArray = splitBySeperator(expressionString, seperatorArray);
+    if(numArray.includes("") || numArray.includes("@@")){
+        throw new Error('[ERROR] 숫자와 구분자가 교차되는 형식이 아닙니다.');
+    }
     return sumArray(numArray);
 }
