@@ -22,18 +22,16 @@ class App {
     let removedCustomSepartor = null;
     Console.print(outputMessage.startMessage);
     let userInput = await Console.readLineAsync('');
-    if (checkStartWithNumber(userInput)) {
-      checkUseOtherSeperator(userInput, customSeparator);
-      checkSeperatorConflict(userInput, customSeparator);
-    } else if (checkStartWidthDubbleSlash(userInput)) {
-      this.validateCustomSeperator(userInput);
+    if (checkStartWidthDubbleSlash(userInput)) {
+      this.validateCustomSeparator(userInput);
       customSeparator = getCustomSeparator(userInput);
       removedCustomSepartor = getRemovedCustomSeparator(userInput);
-      checkUseOtherSeperator(removedCustomSepartor, customSeparator);
-      checkSeperatorConflict(removedCustomSepartor, customSeparator);
-    } else {
-      throw new Error(errorMessage.useNumberOrSlash);
     }
+
+    this.validateUsedSeparator(
+      removedCustomSepartor || userInput,
+      customSeparator,
+    );
 
     const splitedUserInput = getSplitedBySeparator(
       removedCustomSepartor || userInput,
@@ -44,7 +42,12 @@ class App {
     Console.print(`결과 : ${result}`);
   }
 
-  validateCustomSeperator(input) {
+  validateUsedSeparator(input, customSeparator) {
+    checkUseOtherSeperator(input, customSeparator);
+    checkSeperatorConflict(input, customSeparator);
+  }
+
+  validateCustomSeparator(input) {
     checkIncludeNewLine(input);
     checkIncludeEmptyString(input);
   }
