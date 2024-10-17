@@ -34,6 +34,18 @@ class App {
     return { delimiter: /[,:]/, numbers: input };
   }
 
+  // 4. 구분자에 따른 문자열 분리 및 예외 처리
+  splitByDelimiter(input, delimiter) {
+    const numberStrings = input.split(delimiter);
+    return numberStrings.map(str => {
+      const number = Number(str);
+      if (isNaN(number)) {
+        this.handleError();
+      }
+      return number;
+    });
+  }
+
 }
 
 export default App;
