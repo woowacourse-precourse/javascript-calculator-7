@@ -1,5 +1,14 @@
 class Calculator {
   /**
+    *
+    * @param {string} text
+    * @returns {number[]}
+    */
+  splitNumbers(text) {
+    return text.split(",").map(Number);
+  }
+
+  /**
    *
    * @param {number[]} numbers
    * @returns {number}
