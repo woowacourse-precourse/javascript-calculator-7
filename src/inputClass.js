@@ -3,4 +3,8 @@ export default class Input {
     this.value = inputString;
     this.result = 0;
   }
+
+  isEmpty(){
+    return this.value.length === 0;
+  }
 }
