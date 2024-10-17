@@ -1,3 +1,5 @@
+import { Console } from "@woowacourse/mission-utils";
+
 class CalculatorController {
   constructor(model, view) {
     this.model = model;
@@ -6,7 +8,7 @@ class CalculatorController {
 
   async handleCalculate() {
     try {
-      const RESULT = this.model.calculate(rl);
+      const RESULT = this.model.calculate(Console.readLineAsync);
       this.view.outputView(RESULT);
     } catch (error) {
       this.view.errorView(error);
