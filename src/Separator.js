@@ -13,8 +13,9 @@ class Separator {
 
   // 커스텀 구분자 추출 및 확인
   hasCustomSeparator() {
-    const match = CUSTOM_SEPARATOR.match(this.input);
+    const match = this.input.match(CUSTOM_SEPARATOR);
     if (!match) return false;
+    this.input = this.input.replace(match[0], '');
     this.customSeparator = match[1];
     return true;
   }
@@ -26,7 +27,7 @@ class Separator {
 
   // 분리 실행
   separate() {
-    if (this.hasCustomSeparator) this.splitByCustomSeparator();
+    if (this.hasCustomSeparator()) this.splitByCustomSeparator();
     else this.splitByDefaultSeparator();
 
     return this.value;
