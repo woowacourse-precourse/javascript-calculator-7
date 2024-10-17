@@ -46,6 +46,7 @@ class App {
   }
   checkErrorSeparatedUserInput(separatedUserInput) {
     for (const it of separatedUserInput) {
+      if (it === "") continue;
       if (isNaN(it) || Number(it) <= 0) throw new Error("[ERROR]");
     }
   }
