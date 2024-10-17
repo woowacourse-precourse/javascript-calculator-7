@@ -25,7 +25,8 @@ class App {
       return expList[1]
         .split(expList[0])
         .map((value) => value.split(/(:|,)/g).filter((value) => !isNaN(value)))
-        .reduce((prev, curr) => prev.concat(curr), []);
+        .reduce((prev, curr) => prev.concat(curr), [])
+        .map((value) => parseInt(value));
     } else if (!condAbnormalFormat.test(inputstr)) {
       // 커스텀 구분자가 없으며 포맷에 맞는 경우 정해진 값대로 split
       return inputstr
@@ -36,6 +37,9 @@ class App {
       // 잘못된 입력
       throw new Error("[ERROR]: 잘못된 포맷입니다.");
     }
+  }
+  add(inputArr) {
+    return inputArr.add;
   }
 }
 
