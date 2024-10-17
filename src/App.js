@@ -1,7 +1,7 @@
 import { Console } from '@woowacourse/mission-utils';
 
 //정규표현식
-const REGEX1 = /^[\d][\d|\,|\:]+\d$/;
+const REGEX1 = /^\d([\d\,\:]*\d)$/;
 const REGEX2 = /^\/{2}.+\d$/;
 
 class App {
@@ -18,7 +18,8 @@ class App {
       this.add_num(userStr);
     } else if (REGEX2.test(userStr)) {
       // 커스텀 구분자 문자열
-      this.add_num(userStr, [this.extract_delimiter(userStr)]);
+      const params = this.extract_delimiter(userStr);
+      this.add_num(params[0], params[1]);
     } else {
       //에러
     }
@@ -35,11 +36,26 @@ class App {
       //에러
     }
 
-    return delimiter;
+    return [extractedStr, delimiter];
   };
 
   //숫자 더하기
-  add_num = (str, delimiter = [',', ':']) => {};
+  add_num = (str, delimiter = '') => {
+    let numArr = [];
+
+    //숫자 추출하기
+    if (delimiter == '') {
+      numArr = str.split(/\,|\:/);
+    } else {
+      numArr = str.split(delimiter);
+    }
+
+    //숫자로 전환
+    numArr = numArr.map((x) => Number(x));
+
+    //더한 결과 값 반환
+    return numArr.reduce((a, b) => a + b);
+  };
 
   async run() {
     this.getStr();
