@@ -126,6 +126,14 @@ class InputParser {
  * 계산 처리 기능 클래스
  */
 
+class CalculatorHandler {
+
+    getSum(numbersArray) {
+        return numbersArray.reduce((acc, cur) => acc + cur, 0);
+    }
+}
+
+
 // const isValidSeparator = (input) => {
     
 //     const customSeparatorMatch  = input.match(new RegExp(CALCULATOR_VARIABLES.CUSTOM_SEPARATOR));
