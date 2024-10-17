@@ -24,6 +24,8 @@ describe("regex test", () => {
   const noneTest = "";
   const testInput = "//;\n1;2;3";
   const noneCustomTestInput = "1;2;3";
+  const minTest = "-3;-2;1";
+
   test("공백", () => {
     expect(calculator.regexTest(noneTest)).toEqual(0);
   });
@@ -32,5 +34,8 @@ describe("regex test", () => {
   });
   test("1;2;3", () => {
     expect(calculator.regexTest(noneCustomTestInput)).toEqual([1, 2, 3]);
+  });
+  test("-3;-2;1", () => {
+    expect(calculator.regexTest(minTest)).toEqual("[ERROR]");
   });
 });
