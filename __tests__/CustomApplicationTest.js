@@ -46,4 +46,19 @@ describe("문자열 계산기", () => {
       expect(logSpy).toHaveBeenCalledWith(expect.stringContaining(output));
     });
   });
+
+  test("2자리 이상 숫자는 2개의 수가 아니라 하나의 수로 처리한다.", async () => {
+    const inputs = ["12,100,38"];
+    mockQuestions(inputs);
+
+    const logSpy = getLogSpy();
+    const outputs = ["결과 : 150"];
+
+    const app = new App();
+    await app.run();
+
+    outputs.forEach((output) => {
+        expect(logSpy).toHaveBeenCalledWith(expect.stringContaining(output));
+      });
+  });
 });
