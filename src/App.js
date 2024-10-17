@@ -25,6 +25,8 @@ class App {
       inputWithoutCustomSeparationSymbols
     );
 
+    this.validateWrongNumber(separatedInput);
+
     this.printResult(separatedInput);
   }
 
@@ -64,6 +66,18 @@ class App {
 
   printResult(input) {
     Console.print(`결과 : ${input.reduce((acc, cur) => acc + cur, 0)}`);
+  }
+
+  validateWrongNumber(additionArray) {
+    additionArray.forEach((num) => {
+      if (isNaN(num)) {
+        throw new Error('[ERROR] 숫자가 입력되지 않았습니다.');
+      }
+
+      if (num <= 0) {
+        throw new Error('[ERROR] 양수의 숫자만 입력해 주세요.');
+      }
+    });
   }
 }
 
