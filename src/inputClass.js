@@ -7,4 +7,9 @@ export default class Input {
   isEmpty(){
     return this.value.length === 0;
   }
+
+  colonCommaValidation(){
+    const numberList = this.value.split(/\,|\:/);
+    return numberList.every((number) => !isNaN(Number(number)));
+  }
 }
