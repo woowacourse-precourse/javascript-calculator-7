@@ -16,10 +16,28 @@ class App {
 
     //커스텀 구분자 처리
     if (input.startsWith("//") && input.substring(3, 5) === "\\n") {
-      numbers = input.substring(5).split(input[2]).map(Number);
+      numbers = input.substring(5).split(input[2]);
     } else {
       // 기본 구분자 처리
-      numbers = input.split(/,|:/).map(Number);
+      numbers = input.split(/,|:/);
+    }
+
+    // 연속된 구분자 처리
+    if (numbers.some((num) => num === "")) {
+      throw new Error("[ERROR] 연속된 구분자는 사용할 수 없습니다.");
+    }
+
+    // 숫자로 변환
+    numbers = numbers.map((num) => {
+      if (isNaN(Number(num))) {
+        throw new Error("[ERROR] 문자는 입력할 수 없습니다.");
+      }
+      return Number(num);
+    });
+
+    // 음수 예외 처리
+    if (numbers.some((num) => num <= 0)) {
+      throw new Error("[ERROR] 양수만 입력할 수 있습니다.");
     }
 
     // 합 계산
@@ -28,12 +46,8 @@ class App {
       sum += num;
     }
 
-    // 예외처리 및 출력
-    if (numbers.some((num) => isNaN(num) || num <= 0)) {
-      throw new Error("[ERROR]");
-    } else {
-      Console.print(`결과 : ${sum}`);
-    }
+    // 결과 출력
+    Console.print(`결과 : ${sum}`);
   }
 }
 
