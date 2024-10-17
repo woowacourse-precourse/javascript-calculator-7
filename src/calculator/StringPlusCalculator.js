@@ -11,6 +11,20 @@ class StringPlusCalculator {
     if (hasCustomDelimiter(input)) {
       this.addCustomDelimiter(input);
     }
+    this.number = 0;
+    let sum = '';
+    for (let idx = this.numberStartIdx; idx < input.length; idx += 1) {
+      const asciiCode = input[idx].charCodeAt();
+      if (asciiCode < 48 || asciiCode > 57) {
+        // 구분자인 경우
+        this.number += Number(sum);
+        sum = '';
+      } else {
+        // 숫자인 경우
+        sum += input[idx];
+      }
+    }
+    this.number += Number(sum);
   }
 
   addCustomDelimiter(input) {
@@ -18,6 +32,7 @@ class StringPlusCalculator {
     const newlineReplacedInput = input.replace(/\\n/, '\n');
     for (let idx = 2; idx < newlineReplacedInput.length; idx += 1) {
       if (newlineReplacedInput[idx] === '\n') {
+        this.numberStartIdx = idx + 2;
         break;
       }
       if (newlineReplacedInput[idx] === ' ') {
