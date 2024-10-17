@@ -12,6 +12,10 @@ class App {
 
     // 커스텀 구분자 처리
     if (input.startsWith("//")) {
+      // 커스텀 구분자가 숫자인 경우
+      if (!isNaN(+input.charAt(2))) {
+        throw new Error("[ERROR] 구분자는 숫자가 될 수 없습니다.");
+      }
       this.separators.push(input.charAt(2));
       input = input.split(/\n|\\n/)[1];
     }
