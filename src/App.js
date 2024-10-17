@@ -8,7 +8,25 @@ async function getUserInputData() {
 
 // 숫자 추출
 function extractNumber(userInputData) {
-  return userInputData
+  const splitReg = /[,|:]|\/\/.\\n/g;
+  const numberArr = userInputData.split(splitReg);
+
+  if (isError(numberArr) == true) {
+    // todo: throw error 
+    return null
+  }
+
+  return numberArr
+}
+
+function isError(numberArr) {
+  const reg = /[^0-9]/
+
+  const findChar = numberArr.find((element) => {
+    return reg.test(element);
+  })
+
+  return findChar != undefined
 }
 
 // 숫자 연산
