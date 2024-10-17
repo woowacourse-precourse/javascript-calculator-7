@@ -6,14 +6,14 @@ class App {
 
     const seperator = [":", ","];
 
-    const isString = await this.isString(input);
+    const isString = this.isString(input);
 
     if (isString) {
       Console.print(input);
     }
   }
 
-  async isString(input) {
+  isString(input) {
     if (typeof input === "string") {
       return true;
     }
