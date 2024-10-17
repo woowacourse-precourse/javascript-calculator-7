@@ -16,11 +16,12 @@ class StringPlusCalculator {
     for (let idx = this.numberStartIdx; idx < input.length; idx += 1) {
       const asciiCode = input[idx].charCodeAt();
       if (asciiCode < 48 || asciiCode > 57) {
-        // 구분자인 경우
+        if (!this.delimiter.includes(input[idx])) {
+          throw new Error('[ERROR] 등록되지 않은 구분자입니다.');
+        }
         this.number += Number(sum);
         sum = '';
       } else {
-        // 숫자인 경우
         sum += input[idx];
       }
     }
