@@ -1,6 +1,7 @@
 import StringInputProcessor from './classes/StringInputProcessor.js';
 import StringInputReader from './classes/StringInputReader.js';
 import StringCalculator from './classes/StringCalculator.js';
+import StringOutputWriter from './classes/StringOutputWriter.js';
 
 class App {
   async run() {
@@ -9,6 +10,7 @@ class App {
     const processedInput = StringInputProcessor.processInput(inputString);
     StringCalculator.validateNumbersArray(processedInput);
     const result = StringCalculator.sum(processedInput);
+    StringOutputWriter.printResult(result);
   }
 }
 
