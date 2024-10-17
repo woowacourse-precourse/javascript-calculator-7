@@ -6,8 +6,9 @@ class App {
     let startIndex = 0;
     let customSeparator = null;  // 커스텀 구분자 변수
     
-    const input = await Console.readLineAsync("숫자를 입력해주세요.");
-    Console.print(`${input[0]},${input[1]},${input[2]},${input[3]},${input[4]},${input[5]}`);
+const input = await Console.readLineAsync("안녕하세요! 숫자 덧셈 계산기입니다. 쉼표(,) 또는 콜론(:)을 구분자로 사용해 숫자를 입력하거나, 원하는 구분자를 설정해보세요!");
+    // 테스트를 위한 코드
+    // Console.print(`${input[0]},${input[1]},${input[2]},${input[3]},${input[4]},${input[5]}`);
 
     // 구분자 찾는 함수
     const findIndex = (input, startIndex, customSeparator) => {
@@ -25,13 +26,14 @@ class App {
     // 커스텀 구분자 처리 (//;\n 형식)
     if (input.startsWith('//')) {
       customSeparator = input[2];  // 커스텀 구분자 추출
-      Console.print(`${customSeparator}`);
+      // Console.print(`${customSeparator}`);
       startIndex = 5;  // 숫자가 시작하는 부분의 인덱스를 5로 설정
     }
 
     while (startIndex < input.length) {
       // 구분자 인덱스를 찾음 (커스텀 구분자 또는 기본 구분자 사용)
       const nextIndex = findIndex(input, startIndex, customSeparator);
+      // Console.print(`${nextIndex}`); nextIndex가 -1이 되어도 계속 while문이 실행되는 문제 발견
 
       // 만약 nextIndex가 -1이면 문자열 끝까지 간 것이므로 루프 종료
       if (nextIndex === -1) {
