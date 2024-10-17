@@ -21,4 +21,7 @@ export const stringSumCalculator = (input) => {
     if (num <= 0) throw new Error("[ERROR]양수를 입력하시오.");
     return num;
   });
+
+  //calculate sum
+  return numList.reduce((acc, cur) => acc + cur, 0);
 };
