@@ -1,6 +1,6 @@
 import { Console } from "@woowacourse/mission-utils";
 import { CALCULATOR_MESSAGE, ERROR_MESSAGE } from "./constants.js";
-import { failNumberRange } from "./validation.js";
+import { failNumberRange, failIsNumbers } from "./validation.js";
 
 class App {
   async run() {
@@ -42,6 +42,9 @@ class App {
   }
 
   checkInput(Input) {
+    if (failIsNumbers(Input)) {
+      throw new Error(ERROR_MESSAGE.INVALID_NUMBER);
+    }
     if (failNumberRange(Input)) {
       throw new Error(ERROR_MESSAGE.INVALID_RANGE);
     }
