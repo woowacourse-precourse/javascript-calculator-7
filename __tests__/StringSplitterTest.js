@@ -42,4 +42,14 @@ describe("문자열 구분", () => {
     const result = cal.separator();
     expect(result).toEqual(output);
   });
+
+  test("입력 문자열을 쉼표 또는 콜론 또는 커스텀 구분자를 기준으로 분리한다.", async () => {
+    const input = "//[\\n1,2:3[4";
+
+    const output = [1, 2, 3, 4];
+    const cal = new Calculator(input);
+
+    const result = cal.separator();
+    expect(result).toEqual(output);
+  });
 });
