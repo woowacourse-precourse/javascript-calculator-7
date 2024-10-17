@@ -13,9 +13,13 @@ class StringPlusCalculator {
     }
     this.number = 0;
     let sum = '';
+    console.log(this.delimiter);
     for (let idx = this.numberStartIdx; idx < input.length; idx += 1) {
       const asciiCode = input[idx].charCodeAt();
       if (asciiCode < 48 || asciiCode > 57) {
+        if (input[idx] === '-') {
+          throw new Error('[ERROR] 숫자는 양수만 사용할 수 있습니다.');
+        }
         if (!this.delimiter.includes(input[idx])) {
           throw new Error('[ERROR] 등록되지 않은 구분자입니다.');
         }
