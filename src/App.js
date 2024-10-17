@@ -8,16 +8,22 @@ function handleEmptyInput(input) {
 // 기본 구분자로 문자열 분리 및 합산
 function sumWithDefaultDelimiters(input) {
   const delimiters = /[,|:]/;
-  const numbers = input.split(delimiters).map(Number);
+  const tokens = input.split(delimiters);
 
-  if (numbers.some(isNaN)) {
+  if (tokens.some((token) => token === '')) {
+    throw new Error('[ERROR] 구분자 사이에 숫자가 없습니다.');
+  }
+
+  const numericValues = tokens.map(Number);
+
+  if (numericValues.some(isNaN)) {
     throw new Error('[ERROR] 숫자 이외의 값이 포함되어 있습니다.');
   }
-  if (numbers.some((num) => num < 0)) {
+  if (numericValues.some((num) => num < 0)) {
     throw new Error('[ERROR] 양수 이외의 값이 포함되어 있습니다.');
   }
 
-  return numbers.reduce((acc, num) => acc + num, 0);
+  return numericValues.reduce((acc, num) => acc + num, 0);
 }
 
 //커스텀 구분자로 문자열 분리 및 합산
@@ -31,16 +37,22 @@ function sumWithCustomDelimiter(input) {
     );
 
     const delimiters = new RegExp(`[${customDelimiter}|,|:]`);
-    const numbers = numbersString.split(delimiters).map(Number);
+    const tokens = input.split(delimiters);
 
-    if (numbers.some(isNaN)) {
+    if (tokens.some((token) => token === '')) {
+      throw new Error('[ERROR] 구분자 사이에 숫자가 없습니다.');
+    }
+
+    const numericValues = tokens.map(Number);
+
+    if (numericValues.some(isNaN)) {
       throw new Error('[ERROR] 숫자 이외의 값이 포함되어 있습니다.');
     }
-    if (numbers.some((num) => num < 0)) {
+    if (numericValues.some((num) => num < 0)) {
       throw new Error('[ERROR] 양수 이외의 값이 포함되어 있습니다.');
     }
 
-    return numbers.reduce((acc, num) => acc + num, 0);
+    return numericValues.reduce((acc, num) => acc + num, 0);
   }
 }
 
