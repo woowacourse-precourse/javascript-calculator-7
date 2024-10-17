@@ -6,7 +6,7 @@ class Calculator {
     */
   findCustomSeparator(text) {
     if (!text) return [];
-    return text.split("//").slice(1);
+    return [...new Set(text.split("//").slice(1))];
   }
 
   /**

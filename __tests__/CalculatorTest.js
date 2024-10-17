@@ -35,4 +35,12 @@ describe("findCustomSeparator()", () => {
   test("커스텀 구분자 1개 등록", async () => {
     expect(findCustomSeparator("//;")).toEqual([";"]);
   });
+
+  test("서로 다른 커스텀 구분자 여러 개 등록", async () => {
+    expect(findCustomSeparator("//;//$")).toEqual([";", "$"]);
+  });
+
+  test("같은 커스텀 구분자 여러 개 등록", async () => {
+    expect(findCustomSeparator("//;//;")).toEqual([";"]);
+  });
 });
