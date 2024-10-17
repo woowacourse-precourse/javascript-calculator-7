@@ -35,6 +35,11 @@ class App {
     ) {
       throw new Error("[ERROR] 잘못된 입력이 포함되었습니다."); // 오류 발생
     }
+
+    // 덧셈 수행
+    for (const num of numbersArr) {
+      sum += num; // 숫자들을 합산
+    }
   }
 }
 
