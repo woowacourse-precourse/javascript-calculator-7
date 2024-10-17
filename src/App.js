@@ -3,12 +3,27 @@ import { MissionUtils } from '@woowacourse/mission-utils';
 const INPUT_INFO_MESSAGE = '문자열을 입력해주세요.'
 const ERROR_MESSAGE = '[ERROR]';
 
+async function getUserInput() {
+  return await MissionUtils.Console.readLineAsync(INPUT_INFO_MESSAGE);
+}
+
+function getStringifiedString(str) {
+  return JSON.stringify(str);
+}
+
+function getSum(numberArray) {
+  return numberArray.reduce((prev, cur) => prev + cur, 0);
+}
+function printResult(str) {
+  MissionUtils.Console.print(`결과 : ${str}`);
+}
+
 class App {
   defaultSeparator = ',:';
   customSeparatorRegExr = /\/\/.+\\n/;
   async run() {
-    const userInput = await this.getUserInput();
-    const stringifiedUserInput = this.getStringifiedString(userInput);
+    const userInput = await getUserInput();
+    const stringifiedUserInput = getStringifiedString(userInput);
     const { separator, newUserInput } = this.getSeparator(stringifiedUserInput);
     const separatorRegExp = this.getSeparatorRegExp(separator);
 
@@ -20,16 +35,12 @@ class App {
       Number(it),
     );
 
-    const sumOfUserInput = this.getSum(separatedUserInputsNumberArray);
+    const sumOfUserInput = getSum(separatedUserInputsNumberArray);
 
-    this.printResult(sumOfUserInput);
+    printResult(sumOfUserInput);
   }
-  async getUserInput() {
-    return await MissionUtils.Console.readLineAsync(INPUT_INFO_MESSAGE);
-  }
-  getStringifiedString(str) {
-    return JSON.stringify(str);
-  }
+  
+  
   getSeparator(str) {
     const customSeparatorMatchedString = str.match(this.customSeparatorRegExr);
     if (customSeparatorMatchedString)
@@ -53,15 +64,7 @@ class App {
       if (isNaN(it) || Number(it) <= 0) throw new Error(ERROR_MESSAGE);
     }
   }
-  getSeparatedString(str, separator) {
-    return str.split(separator);
-  }
-  getSum(numberArray) {
-    return numberArray.reduce((prev, cur) => prev + cur, 0);
-  }
-  printResult(str) {
-    MissionUtils.Console.print(`결과 : ${str}`);
-  }
+  
 }
 
 export default App;
