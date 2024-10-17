@@ -1,3 +1,28 @@
 export const MESSAGE_INPUT_PROMPT = '덧셈할 문자열을 입력해 주세요.\n';
+export const MESSAGE_RESULT_OUTPUT = '결과 :';
+export const MESSAGE_ERROR_OUTPUT = '[ERROR]';
 
-export const MESSAGE_RESULT_OUTPUT = '결과 : ';
+export const VALID_STRING_CODE = -1;
+
+export const ERROR_CODES = {
+  EMPTY_STRING: 0,
+  LEADING_TRAILING_CHARACTER: 1,
+  INVALID_CUSTOM_DELIMITER: 2,
+  EMPTY_CUSTOM_DELIMITER: 3,
+  MULTIPLE_CUSTOM_DELIMITERS: 4,
+  NUMERIC_CUSTOM_DELIMITER: 5,
+  INVALID_CHARACTER_AFTER_CUSTOM_DELIMITER: 6,
+  UNDEFINED_DELIMITER: 7,
+  CONSECUTIVE_DELIMITERS: 8,
+}
+
+export const ERROR_MESSAGES = {
+  [ERROR_CODES.LEADING_TRAILING_CHARACTER]: `문자열의 맨 앞 또는 맨 뒤에 문자가 포함되어 있습니다.`,
+  [ERROR_CODES.INVALID_CUSTOM_DELIMITER]: `커스텀 구분자 선언 시 "\\n"이 존재하지 않습니다.`,
+  [ERROR_CODES.EMPTY_CUSTOM_DELIMITER]: `커스텀 구분자가 비어 있습니다.`,
+  [ERROR_CODES.MULTIPLE_CUSTOM_DELIMITERS]: `커스텀 구분자는 하나의 문자만 허용됩니다.`,
+  [ERROR_CODES.NUMERIC_CUSTOM_DELIMITER]: `커스텀 구분자는 숫자가 될 수 없습니다.`,
+  [ERROR_CODES.INVALID_CHARACTER_AFTER_CUSTOM_DELIMITER]: `커스텀 구분자 바로 뒤에 문자가 발견되었습니다.`,
+  [ERROR_CODES.UNDEFINED_DELIMITER]: `문자열에 정의되지 않은 구분자가 포함되어 있습니다.`,
+  [ERROR_CODES.CONSECUTIVE_DELIMITERS]: `구분자가 연속으로 사용되었습니다.`,
+}
