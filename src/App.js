@@ -31,6 +31,11 @@ class App {
       throw new Error('[ERROR] 숫자만 입력 가능합니다.');
     }
 
+    // 음수 처리
+    if (input.some((value) => +value < 0)) {
+      throw new Error("[ERROR] 음수는 입력할 수 없습니다.");
+    }
+
     // 문자열 계산
     const result = this.numberReducer(input.split(","));
 
