@@ -1,4 +1,3 @@
-import { Console } from "@woowacourse/mission-utils";
 import StringSumCalController from "./controller/StringSumCalController.js";
 
 class App {

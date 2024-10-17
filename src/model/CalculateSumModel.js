@@ -9,8 +9,8 @@ class CalculateSumModel {
       const total = this.calculateSum(numberArray);
       return total;
     } else {
-      throw new Error(`[ERROR] 계산할 문자열은 '숫자'로만 구성돼야 합니다.
-        현재 입력된 문자는 다음과 같습니다. : ${splitArray} `);
+      throw new Error(`[ERROR] 계산식은 '숫자'로만 구성돼야 합니다.
+        현재 입력된 계산식은 다음과 같습니다. : ${splitArray} `);
     }
   }
 
