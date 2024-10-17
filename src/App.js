@@ -8,9 +8,12 @@ function handleEmptyInput(input) {
 // 기본 구분자로 문자열 분리 및 합산
 function sumWithDefaultDelimiters(input) {
   const delimiters = /[,|:]/;
-  Console.print(delimiters);
   const numbers = input.split(delimiters).map(Number);
-  Console.print(numbers);
+
+  if (numbers.some(isNaN)) {
+    throw new Error('[ERROR] 숫자 이외의 값이 포함되어 있습니다.');
+  }
+
   return numbers.reduce((acc, num) => acc + num, 0);
 }
 
@@ -23,9 +26,14 @@ function sumWithCustomDelimiter(input) {
       delimitersStartIndex,
       delimitersEndIndex,
     );
-    const numbersString = input.slice(delimitersEndIndex + 2);
+
     const delimiters = new RegExp(`[${customDelimiter}|,|:]`);
     const numbers = numbersString.split(delimiters).map(Number);
+
+    if (numbers.some(isNaN)) {
+      throw new Error('[ERROR] 숫자 이외의 값이 포함되어 있습니다.');
+    }
+
     return numbers.reduce((acc, num) => acc + num, 0);
   }
 }
