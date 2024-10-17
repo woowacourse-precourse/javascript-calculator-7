@@ -19,10 +19,23 @@ class App {
       division = new RegExp(baseDivision);
     }
 
-    const numArr = input.split(division).map(Number);
-    const sum = numArr.reduce((a, b) => a + b);
+    const divisionArr = input.split(division);
+    let sum = 0;
 
+    try {
+      divisionArr.map((num, index) => {
+        num = Number(num);
+
+        if (!num) throw new Error('[ERROR] 입력값이 숫자가 아닙니다.');
+        else if (num < 0) throw new Error('[ERROR] 음수 입력');
+
+        sum += num;
+        divisionArr.length - 1 === index &&
     MissionUtils.Console.print('결과 : ' + sum);
+      });
+    } catch (error) {
+      throw error;
+    }
   }
 }
 
