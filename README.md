@@ -1,6 +1,6 @@
 # javascript-calculator-precourse
 
-우아한 테크코스 프리코스 1주차 레포지토리
+우아한 테크코스 프리코스 1주차
 
 ## 기능 구현 목록
 
