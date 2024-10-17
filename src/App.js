@@ -12,12 +12,14 @@ class App {
   async run() {
     const userInput = await this.#inputText();
 
-    const { customSeparator, removedCustomSepartor } =
+    const { customSeparator, processedUserInput } =
       this.#validateUserInput(userInput);
 
-    const splitedUserInput = removedCustomSepartor || userInput;
-
-    this.#printSumResult(splitedUserInput, customSeparator);
+    const sumResult = this.#sumUserInput(
+      processedUserInput || userInput,
+      customSeparator,
+    );
+    this.#printSumResult(sumResult);
   }
 
   // 사용자에게 문자열 입력받기
@@ -29,32 +31,34 @@ class App {
   // 입력값 검증하기
   #validateUserInput(input) {
     let customSeparator = null;
-    let removedCustomSepartor = null;
+    let processedUserInput = null;
 
     this.#validator.validateStartsWith(input);
 
     if (this.#validator.checkStartWidthDubbleSlash(input)) {
       this.#validator.validateCustomSeparator(input);
       customSeparator = UserInputHandler.getCustomSeparator(input);
-      removedCustomSepartor = UserInputHandler.getRemovedCustomSeparator(input);
+      processedUserInput = UserInputHandler.getRemovedCustomSeparator(input);
     }
 
     this.#validator.validateUsedSeparator(
-      removedCustomSepartor || input,
+      processedUserInput || input,
       customSeparator,
     );
 
-    return { customSeparator, removedCustomSepartor };
+    return { customSeparator, processedUserInput };
   }
 
-  // 결과 계산하기
-  #printSumResult(input, customSeparator) {
+  #sumUserInput(input, customSeparator) {
     const splitedUserInput = UserInputHandler.getSplitedBySeparator(
       input,
       customSeparator,
     );
 
-    const result = UserInputHandler.sum(splitedUserInput);
+    return UserInputHandler.sum(splitedUserInput);
+  }
+
+  #printSumResult(result) {
     Console.print(`결과 : ${result}`);
   }
 }
