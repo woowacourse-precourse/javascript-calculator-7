@@ -4,6 +4,7 @@ import {
     NUMBER_PATTERN,
     SEPERATOR_SUBTITUTE,
     NULL_STRING,
+    ERROR_MESSAGE
 } from '../constant/index.js'
 
 function getSeperatorArray(expression){
@@ -41,10 +42,10 @@ function hasExpressionError(numArray){
 
 function checkExpressionError(expression, seperetorArray, numArray){
     if(hasSeperatorError(expression, seperetorArray)){
-        throw new Error('[ERROR] 구분자, 숫자를 제외한 문자가 포함되어 있습니다.');
+        throw new Error(ERROR_MESSAGE.OTHER_CHARACTER);
     }
     if(hasExpressionError(numArray)){
-        throw new Error('[ERROR] 숫자와 구분자가 교차되는 형식이 아닙니다.');
+        throw new Error(ERROR_MESSAGE.INVALID_EXPRESSION);
     }
 }
 
