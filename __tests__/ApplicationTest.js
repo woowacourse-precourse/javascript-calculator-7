@@ -17,6 +17,23 @@ const getLogSpy = () => {
 };
 
 describe("문자열 계산기", () => {
+
+  test("문자열 입력", async () => {
+    const inputs = ["1:2,3"];
+    mockQuestions(inputs);
+
+    const logSpy = getLogSpy();
+    const outputs = ["결과 : 6"];
+
+    const app = new App();
+    await app.run();
+
+    outputs.forEach((output) => {
+      expect(logSpy).toHaveBeenCalledWith(expect.stringContaining(output));
+    });
+  });
+
+
   test("빈 문자열 입력", async () => {
     const inputs = [""];
     mockQuestions(inputs);
@@ -33,7 +50,7 @@ describe("문자열 계산기", () => {
   });
 
   test("다른 문자 입력", async () => {
-    const inputs = ["1,2,k", "1,2,@"];
+    const inputs = ["1,2,k"];
     mockQuestions(inputs);
 
     const logSpy = getLogSpy();
@@ -46,4 +63,20 @@ describe("문자열 계산기", () => {
       expect(logSpy).toHaveBeenCalledWith(expect.stringContaining(output));
     });
   });
+
+  test("숫자 하나만 입력", async () => {
+    const inputs = ["1"];
+    mockQuestions(inputs);
+
+    const logSpy = getLogSpy();
+    const outputs = ["결과 : 1"];
+
+    const app = new App();
+    await app.run();
+
+    outputs.forEach((output) => {
+      expect(logSpy).toHaveBeenCalledWith(expect.stringContaining(output));
+    });
+  });
+
 });

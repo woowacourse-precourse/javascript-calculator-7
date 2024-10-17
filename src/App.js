@@ -5,6 +5,7 @@ class App {
     try {
       const input = await Console.readLineAsync("덧셈할 문자열을 입력해 주세요.\n");
       const result = stringCalculator(input);
+      Console.print(`결과 : ${result}`);
     }
     catch (error) {
       Console.print(`${error.message}`)
@@ -30,14 +31,18 @@ function stringCalculator(input) {
 
   if (!customDelimiterFlag) {
     parsedArray = parseDefaultDelimiter(input);
-  } else {
+  }
+  else {
     const customDelim = customDelimiterFlag[1];
     const numbers = customDelimiterFlag[2];
     parsedArray = parseCustomDelimiter(numbers, customDelim);
   }
 
-  convertNumArray(parsedArray)
-  console.log
+  const resultArray = convertNumArray(parsedArray);
+  const resultSum = calculateSum(resultArray);
+
+  return resultSum;
+
 }
 
 function parseDefaultDelimiter(input) {
@@ -60,6 +65,9 @@ function convertNumArray(parsedArray) {
   });
 }
 
-
+function calculateSum(numericArray) {
+  let resultSum = numericArray.reduce((acc, curr) => acc + curr, 0);
+  return resultSum;
+}
 
 export default App;
