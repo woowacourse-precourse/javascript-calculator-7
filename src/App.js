@@ -1,4 +1,6 @@
-import { getInput } from "./inputFunctions";
+import { Console } from "@woowacourse/mission-utils";
+import Input from "./InputClass.js";
+import { allValidationAndCalc, getInput } from "./inputFunctions.js";
 
 class App {
   async run() {

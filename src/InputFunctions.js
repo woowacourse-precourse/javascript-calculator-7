@@ -9,7 +9,7 @@ function isPositiveNumber(numberList) {
 }
 
 export function allValidationAndCalc(input) {
-  const isCustom = input.customValidation(input.value);
+  const isCustom = input.customSeparatorValidation(input.value);
   const isColonComma = input.colonCommaValidation();
 
   if (isCustom) {
@@ -19,7 +19,7 @@ export function allValidationAndCalc(input) {
       return 0;
     }
     charList.forEach((number) => {
-      input.plus(Number(number));
+      input.resultAdd(Number(number));
     });
     return 1;
   }
@@ -29,7 +29,7 @@ export function allValidationAndCalc(input) {
       return 0;
     }
     inputList.forEach((number) => {
-      input.plus(Number(number));
+      input.resultAdd(Number(number));
     });
     return 2;
   }
