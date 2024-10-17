@@ -1,11 +1,11 @@
 export class Calculator {
   calculate(input) {
     const sliceNumbers = this.regexTest(input);
-    if (sliceNumbers.length === 0) return `[결과 : 0]`;
+    if (sliceNumbers.length === 0) return `결과 : 0`;
     if (sliceNumbers.error) {
       return "[ERROR]";
     }
-    return `[결과 : ${this.add(sliceNumbers.numbers)}]`;
+    return `결과 : ${this.add(...sliceNumbers.numbers)}`;
   }
 
   regexTest(input) {
@@ -43,7 +43,6 @@ export class Calculator {
 
   // add 함수내 파라미터를 레스트 파라미터로 설정
   add(...numbers) {
-    console.log(numbers);
     let result = 0;
     numbers.forEach((number) => {
       result += number;
