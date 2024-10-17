@@ -7,3 +7,31 @@ export function getInput() {
 function isPositiveNumber(numberList) {
   return numberList.every((number) => Number(number) > 0);
 }
+
+export function allValidationAndCalc(input) {
+  const isCustom = input.customValidation(input.value);
+  const isColonComma = input.colonCommaValidation();
+
+  if (isCustom) {
+    const charExceptSeparator = input.value.slice(5);
+    const charList = charExceptSeparator.split(input.value[2]);
+    if (!isPositiveNumber(charList)) {
+      return 0;
+    }
+    charList.forEach((number) => {
+      input.plus(Number(number));
+    });
+    return 1;
+  }
+  if (isColonComma) {
+    const inputList = input.value.split(/\,|\:/);
+    if (!isPositiveNumber(inputList)) {
+      return 0;
+    }
+    inputList.forEach((number) => {
+      input.plus(Number(number));
+    });
+    return 2;
+  }
+  return 0;
+}
