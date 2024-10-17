@@ -37,7 +37,7 @@ class App {
     const input = await this.getString();
     const numbers = await this.getNumbers(input);
     const result = await this.calculateNumbers(numbers);
-    console.log(result);
+    Console.print(`결과 : ${result}`);
   }
 }
 
