@@ -20,6 +20,14 @@ class App {
 				answer = splitByDefaultSeparators(res);
 			}
 
+			if (Array.isArray(answer)) {
+				let sum = 0;
+				for (const v of answer) {
+					sum += +v;
+				}
+				answer = sum;
+			}
+
 			Console.print(`결과 : ${answer}`);
 		} catch (err) {
 			throw new Error(err);
