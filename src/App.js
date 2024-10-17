@@ -4,8 +4,13 @@ class App {
   async run() {
     const input = await Console.readLineAsync();
     const calculator = new StringCalculator();
-    const result = calculator.add(input);
-    Console.print(`결과 : ${result}`);
+    try {
+      const result = calculator.add(input);
+      Console.print(`결과 : ${result}`);
+    } catch (error) {
+      Console.print(error.message);
+      throw error;
+    }
   }
 }
 

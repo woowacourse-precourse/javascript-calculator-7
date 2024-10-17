@@ -17,7 +17,16 @@ class StringCalculator {
     const delimiterRegex = new RegExp(`[${delimiters.join("")}]`);
     const splitNumbers = numbers.split(delimiterRegex);
 
-    const parsedNumbers = splitNumbers.map((num) => parseInt(num, 10));
+    const parsedNumbers = splitNumbers.map((num) => {
+      const parsed = parseInt(num, 10);
+      if (isNaN(parsed)) {
+        throw new Error("[ERROR] 잘못된 형식의 입력입니다.");
+      }
+      if (parsed < 0) {
+        throw new Error("[ERROR] 음수는 입력할 수 없습니다.");
+      }
+      return parsed;
+    });
 
     return parsedNumbers.reduce((acc, num) => acc + num, 0);
   }
