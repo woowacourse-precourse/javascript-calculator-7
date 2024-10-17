@@ -1,5 +1,12 @@
+import { InputHandler } from "./handler/InputHandler.js";
+
 class App {
-  async run() {}
+  #inputHandler;
+
+  async run() {
+    this.#inputHandler = new InputHandler();
+    await this.#inputHandler.getInput()
+  }
 }
 
 export default App;
