@@ -1,5 +1,22 @@
 import { Console } from '@woowacourse/mission-utils';
 
+// 허용되지 않은 구분자 검사 함수
+function validateDelimiters(input, customDelimiter = null) {
+  let allowedDelimiters = [',', ':'];
+
+  if (customDelimiter) {
+    allowedDelimiters.push(customDelimiter);
+  }
+
+  const invalidChars = input.split('').filter((char) => {
+    return !/\d/.test(char) && !allowedDelimiters.includes(char);
+  });
+
+  if (invalidChars.length > 0) {
+    throw new Error('[ERROR] 허용되지 않은 구분자가 사용되었습니다.');
+  }
+}
+
 // 빈 문자열 처리
 function handleEmptyInput(input) {
   return input === '' ? 0 : null;
@@ -8,6 +25,7 @@ function handleEmptyInput(input) {
 // 기본 구분자로 문자열 분리 및 합산
 function sumWithDefaultDelimiters(input) {
   const delimiters = /[,|:]/;
+  validateDelimiters(input);
   const tokens = input.split(delimiters);
 
   if (tokens.some((token) => token === '')) {
@@ -44,6 +62,8 @@ function sumWithCustomDelimiter(input) {
 
     const delimiters = new RegExp(`[${customDelimiter}|,|:]`);
     const numbersString = input.slice(delimitersEndIndex + 2);
+    validateDelimiters(numbersString, customDelimiter);
+
     const tokens = numbersString.split(delimiters);
 
     if (tokens.some((token) => token === '')) {
