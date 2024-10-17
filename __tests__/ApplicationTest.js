@@ -48,6 +48,9 @@ describe("문자열 계산기", () => {
   });
 
   describe("기본 구분자 사용", () => {
+    test("빈 문자열 입력", async () => {
+      await runCalcualatorTest("", "0");
+    });
     test("숫자 1개 입력", async () => {
       await runCalcualatorTest("1", "1");
     });
