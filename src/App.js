@@ -15,6 +15,8 @@ class App {
       result = 0;
     } else if (INPUT === 'error') {
       return this.printError("'error'를 입력했습니다");
+    } else if (!this.validateNumber(INPUT)) {
+      return this.printError('숫자가 아닌 문자를 입력하셨습니다');
     } else {
       result = INPUT;
     }
@@ -24,6 +26,14 @@ class App {
 
   isEmpty(str) {
     return str.trim().length === 0;
+  }
+
+  validateNumber(num) {
+    if (!isNaN(num)) {
+      return true;
+    } else {
+      return false;
+    }
   }
 
   printResult(result) {
