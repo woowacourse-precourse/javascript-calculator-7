@@ -52,7 +52,11 @@ class App {
 
         // '//'와 '\n' 사이에 있는 문자 추가하기
         for (let i = 0; i < FIRST_PARTS.length; i += 3) {
-          if (FIRST_PARTS[i] === "//" && FIRST_PARTS[i + 2] === "\n")
+          if (
+            FIRST_PARTS[i] === "//" &&
+            isNaN(Number(FIRST_PARTS[i + 1])) &&
+            FIRST_PARTS[i + 2] === "\n"
+          )
             SEPARATOR_ARR.push(FIRST_PARTS[i + 1]);
           else throw ERROR;
         }
@@ -64,8 +68,10 @@ class App {
       );
 
       // 마지막 배열의 모든 문자 요소가 구분자 배열에 포함되있는 지 확인
-      for (let PARTS = 1; PARTS < LAST_PARTS.length; PARTS += 2) {
-        if (!SEPARATOR_ARR.includes(LAST_PARTS[PARTS])) {
+      for (let PARTS = 0; PARTS < LAST_PARTS.length; PARTS++) {
+        if (PARTS % 2 === 1 && !SEPARATOR_ARR.includes(LAST_PARTS[PARTS])) {
+          throw ERROR;
+        } else if (PARTS % 2 === 0 && typeof LAST_PARTS[PARTS] !== "number") {
           throw ERROR;
         }
       }
@@ -74,8 +80,8 @@ class App {
       const RESULT = NUM_ARR.reduce((acc, val) => acc + val);
       Console.print("결과 : " + RESULT);
     } catch (err) {
-      console.error(ERROR);
-      // console.error(err);
+      // await expect(err).resolves.toBe();
+      Console.print(err);
     }
   }
 }
