@@ -1,6 +1,6 @@
-import StringCalculator from "./StringCalculator.js";
-import InputValidator from "./InputValidator.js";
-import View from "./View.js";
+import StringCalculator from "../domain/StringCalculator.js";
+import InputValidator from "../util/InputValidator.js";
+import View from "../view/View.js";
 
 class StringCalculatorController {
     constructor() {

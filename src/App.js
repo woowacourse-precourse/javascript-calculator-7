@@ -1,4 +1,4 @@
-import StringCalculatorController from "./StringCalculatorController.js";
+import StringCalculatorController from "./controller/StringCalculatorController";
 class App {
   async run() {
     const controller = new StringCalculatorController();
