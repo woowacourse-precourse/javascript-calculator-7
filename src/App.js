@@ -10,7 +10,7 @@ class App {
       const cal = new Calculator(inputValue);
       const numbers = cal.separator();
 
-      printOuput(cal.sumNumbers(numbers));
+      printOuput(`결과 : ${cal.sumNumbers(numbers)}`);
     } catch (error) {
       throw new Error(error);
     }
