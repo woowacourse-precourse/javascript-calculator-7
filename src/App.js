@@ -45,6 +45,14 @@ class App {
       throw new Error("[ERROR]: 잘못된 포맷입니다.");
     }
   }
+
+  add(inputArr) {
+    if (inputArr.some((value) => value <= 0)) {
+      // 음수 처리를 add에서 처리하는 것이 맞는지 모르겠지만, 과제에서 제시한 연산에 이런 조건이 달린 것이 특이하다고 판단하여 여기서 필터링
+      throw new Error("[Error]: 양수가 아닌 수가 섞여 있습니다!");
+    }
+    return inputArr.reduce((prev, curr) => prev + curr, 0);
+  }
 }
 
 export default App;
