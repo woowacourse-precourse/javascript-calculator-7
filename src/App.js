@@ -13,10 +13,22 @@ async function getString() {
 }
 
 // 2. 정규표현식, includes(), split() 등으로 :나 ,로 구분된 문자열 기준으로 숫자 합 반환
-function computeResult(inputString) {
-  const splitString = inputString.toString().split(/[:,]/);
+function computeResult(inputString, customString) {
+  let regex;
+  let formattedInput;
+  if (customString) {
+    regex = new RegExp(`[\\n:,${customString}]`);
+    formattedInput = inputString.toString().replace(/^(?:\/\/)(\D)(?:\\n)/, ''); // 숫자만 남기기
+  } else {
+    regex = /[:,]/;
+    formattedInput = inputString.toString();
+  }
+  const splitString = formattedInput.split(regex);
   console.log(splitString); // ERROR 처리를 위한 확인
 
+  // \n 다음 숫자도 나눠주기
+  // slice로 배열 복사
+  // reduce
   const stringToNumber = splitString.map(Number);
   const compute = stringToNumber.reduce((acc, cur) => {
     return acc + cur;
@@ -43,9 +55,8 @@ class App {
 
     console.log(customString);
 
-    customSeparator(inputString);
-    //const computeReturn = computeResult(inputString);
-    //Console.print(`결과: ${computeReturn}`);
+    const computeReturn = computeResult(inputString, customString);
+    Console.print(`결과: ${computeReturn}`);
   }
 }
 
@@ -56,3 +67,11 @@ export default App;
 // - 별도의 구분자가 들어갔는지
 // - 양수인지
 // 전체 async run을 catch로 잡아준다.
+
+// const 변수 = 'JS';
+// const regex = new RegExp(`${변수}`, 'g');
+// console.log(regex); // /JS/g
+
+// const str = 'JS공부JS';
+// const result = str.match(regex); // ['JS', 'JS']
+// console.log(result.length); // 2
