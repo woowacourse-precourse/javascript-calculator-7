@@ -1,10 +1,12 @@
-import { InputHandler } from "./handler/InputHandler.js";
 import { CustomOperatorExtractor } from "./CustomOperatorExtractor.js";
-import { DEFAULT_OPERATOR, END_CUSTOM_OPERATOR } from "./constants/Constants.js";
 import { Calculator } from "./Calculator.js";
+import { InputHandler } from "./handler/InputHandler.js";
+import { OutputHandler } from "./handler/OutputHandler.js";
+import { DEFAULT_OPERATOR, END_CUSTOM_OPERATOR } from "./constants/Constants.js";
 
 class App {
   #inputHandler;
+  #outputHandler;
   #customOperatorExtractor;
   #isCustomCalculate;
   #calculate;
@@ -19,7 +21,8 @@ class App {
     const expression = this.#isCustomCalculate ? input.slice(input.indexOf(END_CUSTOM_OPERATOR) + END_CUSTOM_OPERATOR.length) : input;
     this.#calculate = new Calculator();
     const result = this.#calculate.calculate(operatorList, expression);
-    console.log(result);
+    this.#outputHandler = new OutputHandler();
+    this.#outputHandler.print(result);
   }
 }
 
