@@ -24,7 +24,7 @@ class App {
         } else {
           const number = +el;
           if (Number.isNaN(number) || number < 0) {
-            throw new Error("[ERROR]"); // 예외를 명확하게 throw 합니다.
+            throw new Error("[ERROR]");
           } else {
             result += number;
           }
