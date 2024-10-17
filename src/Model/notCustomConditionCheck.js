@@ -4,6 +4,7 @@ let loopCount = 0;
 let tureCountForNumber = 0;
 let tureCountForSeparator = 0;
 
+// TODO: 머시지 리팩토링
 const notCustomConditionCheck = userInput => {
   for (let i = 0; i < userInput.length; i++) {
     if (i % 2 === 0 && !isNaN(userInput[i]) === true) {
