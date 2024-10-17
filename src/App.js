@@ -8,8 +8,8 @@ class App {
     printOuput(inputValue);
 
     const cal = new Calculator(inputValue);
-
-    console.log(cal.separator());
+    cal.addCustomDelimiter();
+    console.log(cal.delimiters);
   }
 }
 

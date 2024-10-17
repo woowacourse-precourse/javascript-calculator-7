@@ -1,6 +1,8 @@
 class Calculator {
   constructor(inputValue) {
     this.inputValue = inputValue;
+    this.delimiters = [",", ":"];
+    this.customDelimiter = null;
   }
 
   hasCustomDelimiter() {
@@ -8,15 +10,22 @@ class Calculator {
 
     const customDelimiter = this.inputValue.match(delimiterPattern);
 
-    if (!customDelimiter) {
-      return false;
-    } else {
+    if (customDelimiter) {
+      this.customDelimiter = customDelimiter[1];
       return true;
+    } else {
+      return false;
+    }
+  }
+
+  addCustomDelimiter() {
+    if (this.hasCustomDelimiter()) {
+      this.delimiters.push(this.customDelimiter);
     }
   }
 
   separator() {
-    const numbers = this.inputValue.split(/[,;]/).map(Number);
+    const numbers = this.inputValue.split(/[,:]/).map(Number);
     return numbers;
   }
 }
