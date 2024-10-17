@@ -1,5 +1,4 @@
-import { Console } from '@woowacourse/mission-utils';
-import { PROMT_MESSAGE, ERROR_MESSAGE } from './constants/message.js';
+import { ERROR_MESSAGE } from './constants/message.js';
 
 export default class Calculator {
   constructor(input) {
@@ -8,9 +7,15 @@ export default class Calculator {
   }
 
   calculate() {
-    this.checkInputValidation();
-    const nums = this.parseNumber();
-    Console.print(`${PROMT_MESSAGE.result} ${nums.reduce((a, c) => a + c)}`);
+    this.checkAndApplyCustomSeparator();
+
+    if (this.inputString) {
+      this.checkInputValidation();
+      const nums = this.parseNumber();
+      return nums.reduce((a, c) => a + c);
+    }
+
+    return 0;
   }
 
   parseNumber() {
@@ -22,13 +27,8 @@ export default class Calculator {
 
     return tokens;
   }
-  checkInputValidation() {
-    this.validateCustomSeparator();
-    this.validateAllowedChars();
-    this.validateSeparatorUsage();
-  }
 
-  validateCustomSeparator() {
+  checkAndApplyCustomSeparator() {
     const CUSTOM_SEPARATOR_PREFIX = '//';
     const CUSTOM_SEPARATOR_SUFFIX = '\\n';
 
@@ -43,19 +43,30 @@ export default class Calculator {
         throw new Error(ERROR_MESSAGE.invalidCustomSeparator);
       }
 
-      const customSeparator = this.inputString.substring(2, separatorEndIndex);
+      let customSeparator = this.inputString.substring(2, separatorEndIndex);
 
       if (customSeparator.length === 0) {
         throw new Error(ERROR_MESSAGE.invalidCustomSeparator);
+      } else if (customSeparator.length > 1) {
+        throw new Error(ERROR_MESSAGE.invalidCustomSeparatorLength);
       }
+
       if (customSeparator === '.') {
         throw new Error(ERROR_MESSAGE.invalidCustomSeparatorDot);
+      } else if (customSeparator === '\\') {
+        customSeparator = '\\\\'; // 정규식에서 사용하려면 백슬래시 두 개로 이스케이프 처리
       }
 
       this.separator.push(customSeparator);
       this.inputString = this.inputString.substring(separatorEndIndex + 2);
     }
   }
+
+  checkInputValidation() {
+    this.validateAllowedChars();
+    this.validateSeparatorUsage();
+  }
+
   validateAllowedChars() {
     // separator, 숫자 이외의 문자가 포함됐는지 확인
     const validCharactersRegEx = new RegExp(
@@ -78,10 +89,12 @@ export default class Calculator {
     const separatorReg = this.createSeparatorRegEx();
     const tokens = this.inputString.split(separatorReg);
 
-    // separator로 끝나는지 확인
+    // separator로 시작하거나 끝나는지 확인
+    const isStartingWithSeparator = tokens[0] === '';
     const isEndingWithSeparator = tokens[tokens.length - 1] === '';
-    if (isEndingWithSeparator) {
-      throw new Error(ERROR_MESSAGE.endsWithSeparator);
+
+    if (isEndingWithSeparator || isStartingWithSeparator) {
+      throw new Error(ERROR_MESSAGE.hasBoundarySeparator);
     }
 
     // separator가 연속적으로 오는지 확인
