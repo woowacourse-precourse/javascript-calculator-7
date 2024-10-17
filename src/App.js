@@ -1,5 +1,10 @@
+import Controller from "./controller/controller.js";
+
 class App {
-  async run() {}
+  #Controller = new Controller();
+  async run() {
+    this.#Controller.start();
+  }
 }
 
 export default App;

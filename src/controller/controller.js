@@ -1,10 +1,11 @@
-import INPUT from "../view/input";
+import INPUT from "../view/input.js";
 
 class Controller {
   async start() {
     const userInput = await INPUT.getUserInput();
-    console.log(userInput);
   }
 
   checkUserInput() {}
 }
+
+export default Controller;
