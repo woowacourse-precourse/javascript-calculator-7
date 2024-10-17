@@ -19,3 +19,5 @@ class CalculatorView {
     this.rl.close();
   }
 }
+
+export default CalculatorView;
