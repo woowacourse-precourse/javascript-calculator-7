@@ -3,7 +3,8 @@ import { MissionUtils } from "@woowacourse/mission-utils";
 
 const TEST_CASE = [
   {title: "커스텀 구분자 사용", testCaseInputs: "//;\\n1", testCaseOutputs: "결과 : 1"},
-  // {title: "예외 테스트", inputs: "-1,2,3", outputs: ""},
+  {title: "예외 테스트", testCaseInputs: "-1,2,3", testCaseOutputs: ""},
+  {title: "없는 구분자 사용", testCaseInputs: "1;2,3", testCaseOutputs: ""},
 ]
 
 const mockQuestions = (inputs) => {
@@ -21,12 +22,12 @@ const getLogSpy = () => {
   return logSpy;
 };
 
-describe("문자열 계산기", () => {
+describe("문자열 계산기 Custom", () => {
   TEST_CASE.forEach(({title, testCaseInputs, testCaseOutputs}) => {
     // 에러 상황
     if (testCaseOutputs === "") {
         test(title, async () => {
-          const inputs = testCaseInputs;
+          const inputs = [testCaseInputs];
           mockQuestions(inputs);
       
           const app = new App();
