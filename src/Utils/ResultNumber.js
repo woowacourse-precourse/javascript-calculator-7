@@ -1,4 +1,4 @@
-const ResultNumber = parseNumbers => {
+const ResultNumber = (parseNumbers) => {
   return parseNumbers.reduce((p, n) => {
     if (n > 0) {
       return parseInt(p, 10) + parseInt(n, 10);

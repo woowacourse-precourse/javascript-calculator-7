@@ -1,10 +1,10 @@
 const ValidateInputData = (str, delimiterSet, findCustom) => {
-  const pattern = new RegExp(
+  const VALID_REGEX = new RegExp(
     `[^${[...new Set([...delimiterSet])].join('|')}|\\d+${findCustom ? '|//|\\\\n' : ''}]`,
     'g',
   );
 
-  if (str.match(pattern) === null) {
+  if (str.match(VALID_REGEX) === null) {
     return str.match(/\d+/g);
   }
 
