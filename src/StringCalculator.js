@@ -7,9 +7,17 @@ export class StringCalculator {
     return { customDelimiter, valueString };
   }
 
-  extractValues(delimiter, valueString) {
+  extractValues(delimiters, valueString) {
     const delimiterRegex = new RegExp(`[${delimiters.join('')}]`);
     const values = valueString.split(delimiterRegex);
     return values;
+  }
+
+  calculateSum(values) {
+    let sumValue = 0;
+    for (let value of values) {
+      sumValue = sumValue + Number(value);
+    }
+    return sumValue;
   }
 }
