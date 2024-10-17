@@ -3,7 +3,7 @@ class Separator {
   constructor(input) {
     this.input = input;
     this.value = [];
-    this.customSeparator = '';
+    this.customMatch;
   }
 
   // 기본 구분자로 분리
@@ -13,16 +13,16 @@ class Separator {
 
   // 커스텀 구분자 추출 및 확인
   hasCustomSeparator() {
-    const match = this.input.match(CUSTOM_SEPARATOR);
-    if (!match) return false;
-    this.input = this.input.replace(match[0], '');
-    this.customSeparator = match[1];
+    this.customMatch = this.input.match(CUSTOM_SEPARATOR);
+    if (!this.customMatch) return false;
     return true;
   }
 
   // 커스텀 구분자로 분리
   splitByCustomSeparator() {
-    this.value = this.input.split(this.customSeparator);
+    this.value = this.input
+      .replace(this.customMatch[0], '')
+      .split(this.customMatch[1]);
   }
 
   // 분리 실행
