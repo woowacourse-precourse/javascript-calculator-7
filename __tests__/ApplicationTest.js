@@ -47,6 +47,36 @@ describe('문자열 계산기', () => {
     });
   });
 
+  test('길이가 긴 커스텀 구분자 사용', async () => {
+    const inputs = ['//123\\n13,21233'];
+    mockQuestions(inputs);
+
+    const logSpy = getLogSpy();
+    const outputs = ['결과 : 18'];
+
+    const app = new App();
+    await app.run();
+
+    outputs.forEach(output => {
+      expect(logSpy).toHaveBeenCalledWith(expect.stringContaining(output));
+    });
+  });
+
+  test('길이가 긴 커스텀 구분자가 여러개 있을경우', async () => {
+    const inputs = ['//123\\n//22\\n13,21233221'];
+    mockQuestions(inputs);
+
+    const logSpy = getLogSpy();
+    const outputs = ['결과 : 19'];
+
+    const app = new App();
+    await app.run();
+
+    outputs.forEach(output => {
+      expect(logSpy).toHaveBeenCalledWith(expect.stringContaining(output));
+    });
+  });
+
   test('예외 테스트', async () => {
     const inputs = ['-1,2,3'];
     mockQuestions(inputs);
