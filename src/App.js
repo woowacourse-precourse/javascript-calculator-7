@@ -19,6 +19,7 @@ function printResult(str) {
 }
 
 function checkTheNumberArray(array) {
+  if(!Array.isArray(array)) throw new Error(ERROR_MESSAGE)
   for (const item of array) {
     if (item === '') continue;
     if (isNaN(item) || Number(item) <= 0) throw new Error(ERROR_MESSAGE);
