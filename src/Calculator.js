@@ -2,10 +2,11 @@ class Calculator {
   /**
     *
     * @param {string} text
+    * @param {string} customSeparator
     * @returns {number[]}
     */
-  splitNumbers(text) {
-    const regex = new RegExp(",|:");
+  splitNumbers(text, customSeparator) {
+    const regex = new RegExp(`,|:|${customSeparator}`);
     return text.split(regex).map(Number);
   }
 

@@ -19,4 +19,8 @@ describe("splitNumbers()", () => {
   test("쉼표, 콜론을 포함한 문자열에서 숫자 분리", async () => {
     expect(splitNumbers("1,2:3")).toEqual([1, 2, 3]);
   });
+
+  test("쉼표, 콜론, 커스텀 구분자를 포함한 문자열에서 숫자 분리", async () => {
+    expect(splitNumbers("1,2:3;4", ";")).toEqual([1, 2, 3, 4]);
+  });
 });
