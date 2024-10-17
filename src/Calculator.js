@@ -12,7 +12,8 @@ export class Calculator {
     return new RegExp(`[${escapedOperators}]`);
   }
 
-  #validateNumber(number){
+  #validateNumber(num) {
+    const number = Number(num);
     this.#validatePositiveNumber(number);
     this.#validateIsNaN(number);
   }
@@ -22,6 +23,6 @@ export class Calculator {
   }
 
   #validateIsNaN(number) {
-    if (isNaN(Number(number))) throw new Error(INPUT_ERROR_MESSAGE);
+    if (isNaN(number)) throw new Error(INPUT_ERROR_MESSAGE);
   }
 }
