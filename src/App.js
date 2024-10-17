@@ -13,6 +13,9 @@ function sumWithDefaultDelimiters(input) {
   if (numbers.some(isNaN)) {
     throw new Error('[ERROR] 숫자 이외의 값이 포함되어 있습니다.');
   }
+  if (numbers.some((num) => num < 0)) {
+    throw new Error('[ERROR] 양수 이외의 값이 포함되어 있습니다.');
+  }
 
   return numbers.reduce((acc, num) => acc + num, 0);
 }
@@ -32,6 +35,9 @@ function sumWithCustomDelimiter(input) {
 
     if (numbers.some(isNaN)) {
       throw new Error('[ERROR] 숫자 이외의 값이 포함되어 있습니다.');
+    }
+    if (numbers.some((num) => num < 0)) {
+      throw new Error('[ERROR] 양수 이외의 값이 포함되어 있습니다.');
     }
 
     return numbers.reduce((acc, num) => acc + num, 0);
