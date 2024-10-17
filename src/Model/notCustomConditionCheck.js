@@ -7,7 +7,7 @@ let tureCountForSeparator = 0;
 // TODO: 머시지 리팩토링
 const notCustomConditionCheck = userInput => {
   for (let i = 0; i < userInput.length; i++) {
-    if (i % 2 === 0 && !isNaN(userInput[i]) === true) {
+    if ((i % 2 === 0 && !isNaN(userInput[i]) && userInput[i] > 0) === true) {
       tureCountForNumber += 1;
     }
     if (i % 2 === 1 && (userInput[i] === ':' || userInput[i] === ',')) {
