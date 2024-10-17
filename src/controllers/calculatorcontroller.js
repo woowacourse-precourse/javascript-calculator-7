@@ -3,13 +3,11 @@ import OutputView from "../views/outputview.js";
 import extractNumbers from "../models/extractnumber.js";
 import validateInput from "../models/validateinput.js";
 import calculateSum from "../models/sumnumbers.js";
-import { BASIC_MESSAGES } from "../constant/messages.js";
 
 class StringAdditionController {
   constructor() {
     this.inputView = new InputView();
     this.outputView = new OutputView();
-    this.BASIC_MESSAGES = BASIC_MESSAGES;
   }
 
   async startRun() {
@@ -30,4 +28,4 @@ class StringAdditionController {
   }
 }
 
-export default calculator;
+export default StringAdditionController;
