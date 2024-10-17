@@ -6,4 +6,10 @@ export class StringCalculator {
     const valueString = input.slice(customemDelimiterFormat[0].length);
     return { customDelimiter, valueString };
   }
+
+  extractValues(delimiter, valueString) {
+    const delimiterRegex = new RegExp(`[${delimiters.join('')}]`);
+    const values = valueString.split(delimiterRegex);
+    return values;
+  }
 }
