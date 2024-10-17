@@ -1,3 +1,5 @@
+import { Console } from "@woowacourse/mission-utils";
+
 class StringCalculator {
   #inputStr;
   #separators;
@@ -9,33 +11,37 @@ class StringCalculator {
   }
 
   #addCustomSeparator() {
-    const customSeparatorMatch = this.#inputStr.match(/^\/{2}\D\\n/);
+    const customSeparatorPattern = /^\/\/(.)\\n/;
+    const customSeparatorMatch = this.#inputStr.match(customSeparatorPattern);
 
     if (!customSeparatorMatch) {
       return;
     }
 
-    const matchStr = customSeparatorMatch[0];
-    this.#separators.add(matchStr[2]); // //와 \n 사이의 커스텀 구분자 추가
-    this.#inputStr = this.#inputStr.slice(matchStr.length);
+    const customSeparator = customSeparatorMatch[1];
+    this.#separators.add(customSeparator);
+    this.#inputStr = this.#inputStr.slice(customSeparatorMatch[0].length);
   }
 
   calculateSum() {
-    let separatorPattern = [...this.#separators].join("|");
+    const separatorPattern = [...this.#separators].join("|");
     const numArr = this.#inputStr.split(new RegExp(separatorPattern));
 
-    let sum = 0;
-    numArr.forEach((num) => {
-      const parsedNumber = Number(num);
-
-      if (Number.isNaN(parsedNumber) || parsedNumber < 0) {
-        throw new Error("[ERROR] 문자열의 형식이 틀렸습니다.");
-      }
-
-      sum += parsedNumber;
-    });
+    const sum = numArr.reduce((total, num) => {
+      return total + this.#validateAndParseNumber(num);
+    }, 0);
 
     return sum;
+  }
+
+  #validateAndParseNumber(num) {
+    const parsedNumber = Number(num);
+
+    if (Number.isNaN(parsedNumber) || parsedNumber < 0) {
+      throw new Error("[ERROR] 문자열의 형식이 잘못됐습니다.");
+    }
+
+    return parsedNumber;
   }
 }
 
