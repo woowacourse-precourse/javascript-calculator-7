@@ -1,5 +1,5 @@
 import { MissionUtils } from '@woowacourse/mission-utils';
-import { printInputMessage } from './views/CalculatorView.js';
+import { printInputMessage, getUserInput } from './views/CalculatorView.js';
 import { parseNumbers } from './models/CalculatorModel.js';
 
 // View 테스트
@@ -8,6 +8,17 @@ describe('문자열 계산기 View', () => {
     const consoleSpy = jest.spyOn(MissionUtils.Console, 'print');
     printInputMessage();
     expect(consoleSpy).toHaveBeenCalledWith('덧셈할 문자열을 입력해 주세요.');
+    consoleSpy.mockRestore();
+  });
+
+  test('사용자 입력', () => {
+    const consoleSpy = jest
+      .spyOn(MissionUtils.Console, 'readLineAsync')
+      .mockImplementation(() => Promise.resolve('1,2:3'));
+
+    getUserInput((input) => {
+      expect(input).toBe('1,2:3');
+    });
     consoleSpy.mockRestore();
   });
 });
