@@ -5,3 +5,4 @@ export const ERROR_MESSAGE = Object.freeze({
   CHAR_NOT_ALLOWED: '[ERROR] 등록되지 않은 문자가 포함되어 있습니다.',
   NEGATIVE_NOT_ALLOWED: '[ERROR] 음수는 허용되지 않습니다.',
 });
+export const PATTERN = /\/\/(.*?)\\n/g;
