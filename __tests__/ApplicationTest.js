@@ -16,7 +16,7 @@ const getLogSpy = () => {
   return logSpy;
 };
 
-const runCalcualatorTest = async (input, output) => {
+const runCalculatorTest = async (input, output) => {
   const inputs = [input];
   const outputs = [`결과 : ${output}`];
   mockQuestions(inputs);
@@ -32,45 +32,45 @@ describe("문자열 계산기", () => {
   describe("커스텀 구분자 사용", () => {
     describe("커스텀 구분자 1개", () => {
       test("숫자 1개 입력", async () => {
-        await runCalcualatorTest("//;\n1", "1");
+        await runCalculatorTest("//;\n1", "1");
       });
       test("숫자 3개 입력", async () => {
-        await runCalcualatorTest("//v\n1v23v456", "480");
+        await runCalculatorTest("//v\n1v23v456", "480");
       });
     });
     describe("커스텀 구분자 2개", () => {
       test("숫자 1개 입력", async () => {
-        await runCalcualatorTest("//;v\n1", "1");
+        await runCalculatorTest("//;v\n1", "1");
       });
       test("숫자 3개 입력", async () => {
-        await runCalcualatorTest("//;v\n1v23;456", "480");
+        await runCalculatorTest("//;v\n1v23;456", "480");
       });
     });
     describe("특수한 구분자 2개", () => {
       test("숫자 1개 입력", async () => {
-        await runCalcualatorTest("//;v\b\n1", "1");
+        await runCalculatorTest("//;v\b\n1", "1");
       });
       test("숫자 3개 입력", async () => {
-        await runCalcualatorTest("//;v\b\n1\\23b456", "480");
+        await runCalculatorTest("//;v\b\n1\\23b456", "480");
       });
       test("중복된 특수한 구분자 & 숫자 3개 입력", async () => {
-        await runCalcualatorTest("//;vv\n1v23v456", "480");
+        await runCalculatorTest("//;vv\n1v23v456", "480");
       });
     });
   });
 
   describe("기본 구분자 사용", () => {
     test("빈 문자열 입력", async () => {
-      await runCalcualatorTest("", "0");
+      await runCalculatorTest("", "0");
     });
     test("숫자 1개 입력", async () => {
-      await runCalcualatorTest("1", "1");
+      await runCalculatorTest("1", "1");
     });
     test("숫자 3개 입력", async () => {
-      await runCalcualatorTest("1,2:3", "6");
+      await runCalculatorTest("1,2:3", "6");
     });
     test("숫자 10개 입력", async () => {
-      await runCalcualatorTest("1,2:3,4:5,6:7,8:9,10", "55");
+      await runCalculatorTest("1,2:3,4:5,6:7,8:9,10", "55");
     });
   });
 
