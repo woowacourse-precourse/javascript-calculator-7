@@ -50,11 +50,10 @@ class App {
     return plusString;
   }
 
-  checkBasicPattern(plusString) {
+  filterNumber(plusString) {
     const separators = this.#separatorList.join("");
     const separatorRegex = new RegExp(`[${separators}]+`, "g");
     const numberList = plusString.split(separatorRegex).map(Number);
-
     for (let i = 0; i < numberList.length; i++) {
       if (isNaN(numberList[i])) {
         throw new Error(WRONG_SEPARATOR);
@@ -69,7 +68,7 @@ class App {
   generatePlusResult() {
     let plusString = this.#plusString;
     plusString = this.checkCustomPattern(plusString);
-    const numberList = this.checkBasicPattern(plusString);
+    const numberList = this.filterNumber(plusString);
     this.#plusResult = numberList.reduce((acc, curr) => acc + curr);
   }
 
