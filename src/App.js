@@ -26,6 +26,10 @@ function checkTheNumberArray(array) {
   }
 }
 
+function getOrRegExpFromString(separator) {
+  return new RegExp(`[${separator}]`);
+}
+
 
 class App {
   defaultSeparator = ',:';
@@ -34,7 +38,7 @@ class App {
     const userInput = await getUserInput();
     const stringifiedUserInput = getStringifiedString(userInput);
     const { separator, newUserInput } = this.getSeparator(stringifiedUserInput);
-    const separatorRegExp = this.getSeparatorRegExp(separator);
+    const separatorRegExp = getOrRegExpFromString(separator);
 
     const separatedUserInput = newUserInput.split(separatorRegExp);
 
@@ -63,9 +67,6 @@ class App {
       separator: this.defaultSeparator,
       newUserInput: str.slice(1, -1),
     };
-  }
-  getSeparatorRegExp(separator) {
-    return new RegExp(`[${separator}]`);
   }
 }
 
