@@ -1,10 +1,10 @@
-import calculator from "./controllers/calculatorcontroller.js";
+import StringAdditionController from "./controllers/calculatorcontroller.js";
 
 class App {
   #controller;
 
   constructor() {
-    this.#controller = new calculator();
+    this.#controller = new StringAdditionController();
   }
 
   async run() {
