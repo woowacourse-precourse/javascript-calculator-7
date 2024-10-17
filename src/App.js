@@ -24,7 +24,8 @@ class App {
     return result;
   }
 
-  findSeparator(inputString) {
+  findSeparator() {
+    const inputString = this.#input;
     const firstElement = inputString[0];
     const elementNumber = Number(firstElement);
     if (!Number.isNaN(elementNumber)) {
