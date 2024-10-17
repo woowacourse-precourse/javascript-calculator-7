@@ -37,8 +37,13 @@ function sumWithDefaultDelimiters(input) {
   if (numericValues.some(isNaN)) {
     throw new Error('[ERROR] 숫자 이외의 값이 포함되어 있습니다.');
   }
+
   if (numericValues.some((num) => num < 0)) {
     throw new Error('[ERROR] 양수 이외의 값이 포함되어 있습니다.');
+  }
+
+  if (numericValues.some((num) => num > Number.MAX_SAFE_INTEGER)) {
+    throw new Error('[ERROR] 숫자가 허용된 범위를 초과했습니다.');
   }
 
   return numericValues.reduce((acc, num) => acc + num, 0);
@@ -62,6 +67,7 @@ function sumWithCustomDelimiter(input) {
 
     const delimiters = new RegExp(`[${customDelimiter}|,|:]`);
     const numbersString = input.slice(delimitersEndIndex + 2);
+
     if (!numbersString) {
       throw new Error('[ERROR] 덧셈할 숫자가 없습니다.');
     }
@@ -78,8 +84,13 @@ function sumWithCustomDelimiter(input) {
     if (numericValues.some(isNaN)) {
       throw new Error('[ERROR] 숫자 이외의 값이 포함되어 있습니다.');
     }
+
     if (numericValues.some((num) => num < 0)) {
       throw new Error('[ERROR] 양수 이외의 값이 포함되어 있습니다.');
+    }
+
+    if (numericValues.some((num) => num > Number.MAX_SAFE_INTEGER)) {
+      throw new Error('[ERROR] 숫자가 허용된 범위를 초과했습니다.');
     }
 
     return numericValues.reduce((acc, num) => acc + num, 0);
