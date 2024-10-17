@@ -31,4 +31,8 @@ describe("findCustomSeparator()", () => {
   test("커스텀 구분자가 없을 때 등록하지 않음", async () => {
     expect(findCustomSeparator("")).toEqual([]);
   });
+
+  test("커스텀 구분자 1개 등록", async () => {
+    expect(findCustomSeparator("//;")).toEqual([";"]);
+  });
 });

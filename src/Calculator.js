@@ -1,11 +1,12 @@
 class Calculator {
   /**
     *
-    * @param {string} text
+    * @param {string} text - "//"로 시작하는 커스텀 구분자들의 문자열
     * @returns {string[]}
     */
   findCustomSeparator(text) {
     if (!text) return [];
+    return text.split("//").slice(1);
   }
 
   /**
