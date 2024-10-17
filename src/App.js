@@ -13,8 +13,11 @@ class App {
     let found = userStr.match(/\d+/g);
 
     let num = 0;
-    found.map((item) => (num += Number(item)));
-    this.printresult(num);
+    if (found === null) this.printresult(num);
+    if (found !== null) {
+      found.map((item) => (num += Number(item)));
+      this.printresult(num);
+    }
   }
 
   //더한 값 출력
