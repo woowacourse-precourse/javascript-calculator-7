@@ -4,13 +4,14 @@ class App {
   async run() {
     Console.print("덧셈할 문자열을 입력해주세요.");
     const inputStr = await Console.readLineAsync("");
+
     let numbersArr = [];
-    const defaultSeparators = ",:"; // 기본 구분자 (쉼표와 콜론)
+    //const defaultSeparators = ",:"; // 기본 구분자 (쉼표와 콜론)
     let sum = 0; // 최종 덧셈 결과
 
     // 쉼표와 클론으로 계산
-    if (inputStr.match(defaultSeparators)) {
-      numbersArr = inputStr.split(defaultSeparators).map(Number); // 문자열을 숫자 배열로 변환
+    if (inputStr.match(/[,:]/)) {
+      numbersArr = inputStr.split(/[,:]/).map(Number); // 문자열을 숫자 배열로 변환
     }
 
     // 커스텀 구분자로 계산(형식: //구분자\n숫자들)
@@ -33,6 +34,7 @@ class App {
       numbersArr.length > 0 &&
       numbersArr.some((num) => isNaN(num) || num <= 0)
     ) {
+      console.log(numbersArr);
       throw new Error("[ERROR] 잘못된 입력이 포함되었습니다."); // 오류 발생
     }
 
