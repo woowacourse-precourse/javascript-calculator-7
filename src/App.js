@@ -1,5 +1,9 @@
+import io from "./io/io.js";
+
 class App {
-  async run() {}
+  async run() {
+    io();
+  }
 }
 
 export default App;
