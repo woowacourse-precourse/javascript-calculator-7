@@ -5,8 +5,6 @@ import UserInput from '../View/UserInput.js';
 
 // 1. //+구분자+\n 입력 체크
 function conditionTextInputCheck(userInput) {
-  console.log('[디버깅] userInput', userInput);
-
   if (userInput[0] === '/' && userInput[1] === '/' && userInput[3] === '\\' && userInput[4] === 'n') {
     return true;
   }

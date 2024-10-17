@@ -10,7 +10,7 @@ class App {
     if (notCustomConditionCheck(input) === true || customConditionCheck(input) === true) {
       numberSum(input);
     } else {
-      throw new Error('ERROR] 잘못된 입력입니다.');
+      throw new Error('[ERROR] 잘못된 입력입니다.');
     }
   }
 }
