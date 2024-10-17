@@ -3,7 +3,8 @@
 function solution(message) {
   const FirstSplit = message.split("\n")[0];
   const SecondSplit = FirstSplit.split("//")[1];
-  return SecondSplit;
+
+  return message.split(SecondSplit);
 }
 
 console.log(solution("//;\n1;2;3"));
