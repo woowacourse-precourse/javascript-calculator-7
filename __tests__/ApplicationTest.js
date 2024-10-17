@@ -46,6 +46,17 @@ describe("문자열 계산기", () => {
         await runCalcualatorTest("//;v\n1v23;456", "480");
       });
     });
+    describe("특수한 구분자 2개", () => {
+      test("숫자 1개 입력", async () => {
+        await runCalcualatorTest("//;v\b\n1", "1");
+      });
+      test("숫자 3개 입력", async () => {
+        await runCalcualatorTest("//;v\b\n1\\23b456", "480");
+      });
+      test("중복된 특수한 구분자 & 숫자 3개 입력", async () => {
+        await runCalcualatorTest("//;vv\n1v23v456", "480");
+      });
+    });
   });
 
   describe("기본 구분자 사용", () => {
