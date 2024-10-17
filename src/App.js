@@ -1,10 +1,10 @@
-import CalculatorController from "./controllers/calculatorcontroller";
+import calculator from "./controllers/calculatorcontroller.js";
 
 class App {
   #controller;
 
   constructor() {
-    this.#controller = new CalculatorController();
+    this.#controller = new calculator();
   }
 
   async run() {
