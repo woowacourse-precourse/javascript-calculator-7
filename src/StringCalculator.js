@@ -56,8 +56,9 @@ class StringCalculator {
     return arr.map(n => {
       const num = Number(n);
 
-      if (num < 0) throw new Error('[ERROR]');
-      if (Number.isNaN(num)) throw new Error('[ERROR]');
+      if (num < 0) throw new Error('[ERROR] 숫자는 양수만 입력이 가능합니다.');
+      if (Number.isNaN(num))
+        throw new Error('[ERROR] 숫자가 아닌 값이 입력됐습니다.');
       return num;
     });
   }
