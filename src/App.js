@@ -22,6 +22,8 @@ class App {
     let removedCustomSepartor = null;
     Console.print(outputMessage.startMessage);
     let userInput = await Console.readLineAsync('');
+    this.validateStartsWith(userInput);
+
     if (checkStartWidthDubbleSlash(userInput)) {
       this.validateCustomSeparator(userInput);
       customSeparator = getCustomSeparator(userInput);
@@ -40,6 +42,12 @@ class App {
     const result = sum(splitedUserInput);
 
     Console.print(`결과 : ${result}`);
+  }
+
+  validateStartsWith(input) {
+    if (checkStartWidthDubbleSlash(input)) return;
+    if (checkStartWithNumber(input)) return;
+    throw new Error(errorMessage.useNumberOrSlash);
   }
 
   validateUsedSeparator(input, customSeparator) {
