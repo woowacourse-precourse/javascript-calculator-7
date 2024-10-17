@@ -12,7 +12,7 @@ class App {
   async run() {
     const separators = [...DEFAULT_SEPARATORS];
 
-    const line = await Console.readLineAsync('');
+    const line = await Console.readLineAsync('덧셈할 문자열을 입력해 주세요.');
     checkLine(line);
     
     if (checkIsNormal(line)) return Console.print(`결과 : ${sumString(line, separators)}`);
