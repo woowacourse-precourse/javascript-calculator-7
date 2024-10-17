@@ -86,7 +86,8 @@ export const customTestCases = [
   },
   {
     input: '//|\\n1.1|-2.2|3.3|4.4',
-    expectedError: 'Error',
+    expectedError:
+      '[ERROR]: delimiter와 숫자 이외의 문자가 입력 됬거나, 입력 순서가 잘못되었습니다!',
     description: '소수와 음수가 포함된 입력',
   },
   { input: '//;\\n1;1000;1001;2', expectedOutput: 2004, description: '' },
