@@ -29,6 +29,9 @@ export function testCustomInput(parseCustomInput) {
     ['//-\\n1-', 'Error', '구분자가 있지만 마지막 값이 빈 경우'],
     ['//|\\n1|2|', 'Error', '마지막 구분자 이후에 값이 없는 경우'],
     ['//\\n1,2,3', 'Error', '구분자가 명시되지 않은 경우'],
+    ['///\\n1/2/3', 6, '예약어 /가 사용되는 경우'],
+    ['//\\\\n1\\2\\3', 6, '예약어 \\가 사용되는 경우'],
+    ['//n\\n1n2n3', 6, '예약어 n이 사용되는 경우'],
   ];
 
   testCases.forEach((testCase, index) => {

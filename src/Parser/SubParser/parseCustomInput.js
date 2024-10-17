@@ -1,23 +1,27 @@
 function escapeRegExp(string) {
-  // Escape special characters for use in a regular expression
+  // 정규식에 사용되는 모든 예약어들을 escape 처리한다. .*[]\ 등...
+  // 원본 문자를 남기고 ($&), 그 문자에 \를 더 붙인다.
+  // "Hello. How+are|you?" =>
+  // "Hello\. How\+are\|you\?"
+
   return string.replace(/[.*+?^${}()|[\]\\]/g, '\\$&');
 }
 
 export default function parseCustomInput(input) {
   // Ensure input is a string and remove quotes if present
-  let str = Array.isArray(input) ? input[0] : input;
-  str = str.replace(/^["']|["']$/g, '');
+  // let input = Array.isArray(input) ? input[0] : input;
+  // str = str.replace(/^["']|["']$/g, '');
 
   // Check if the string starts with // and contains \n
-  if (!str.startsWith('//') || !str.includes('\\n')) {
+  if (!input.startsWith('//') || !input.includes('\\n')) {
     throw new Error(
       '[ERROR]:포멧이 올바르지 않습니다. 반드시 //로 시작하고, \\n으로 끝나야 합니다.',
     );
   }
 
   // Extract the delimiter and the content
-  const delimiterEnd = str.indexOf('\\n');
-  const delimiter = str.slice(2, delimiterEnd); // Extract delimiter between // and \n
+  const delimiterEnd = input.indexOf('\\n');
+  const delimiter = input.slice(2, delimiterEnd); // Extract delimiter between // and \n
 
   // Check if delimiter is empty (i.e., delimiter not specified)
   if (delimiter === '') {
@@ -27,7 +31,7 @@ export default function parseCustomInput(input) {
   // Escape delimiter for use in regular expression
   const escapedDelimiter = escapeRegExp(delimiter);
 
-  const content = str.slice(delimiterEnd + 2); // +2 to skip '\n'
+  const content = input.slice(delimiterEnd + 2); // +2 to skip '\n'
 
   // Check if the content contains any character other than digits, valid decimal point, and the specified delimiter
   const validChars = new RegExp(
