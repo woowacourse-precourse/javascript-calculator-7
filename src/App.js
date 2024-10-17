@@ -10,8 +10,11 @@ class App {
       if (input.indexOf("//") === 0 && input.indexOf("\\n") > 2) {
         separator = input.slice(2, input.indexOf("\\n"));
         input = input.slice(input.indexOf("\\n") + 2);
-        Console.print(separator);
+        input = input.replaceAll(separator, ",");
       }
+      input = input.replaceAll(":", ",");
+      const arr = input.split(",");
+      Console.print(arr);
     } catch (err) {
       Console.print(`[ERROR]${err}`);
     }
