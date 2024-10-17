@@ -1,7 +1,8 @@
 class App {
-    async run(str) {
-        if (str === "") return 0;
+    async run(STR) {
+        if (STR === "") return 0;
         else {
+            var STR_ARRAY = STR.split(/[,|:]/);
         }
     }
 }
