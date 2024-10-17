@@ -1,5 +1,6 @@
 import { MissionUtils } from '@woowacourse/mission-utils';
 
+const INPUT_INFO_MESSAGE = '문자열을 입력해주세요.'
 const ERROR_MESSAGE = '[ERROR]';
 
 class App {
@@ -24,7 +25,7 @@ class App {
     this.printResult(sumOfUserInput);
   }
   async getUserInput() {
-    return await MissionUtils.Console.readLineAsync('문자열을 입력해주세요.');
+    return await MissionUtils.Console.readLineAsync(INPUT_INFO_MESSAGE);
   }
   getStringifiedString(str) {
     return JSON.stringify(str);
