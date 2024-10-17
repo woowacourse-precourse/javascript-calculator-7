@@ -7,9 +7,10 @@ class App {
         "덧셈할 문자열을 입력해 주세요. \n"
       );
       const result = this.calculateSum(input);
-      Console.print(`결과: ${result}`);
+      Console.print(`결과 : ${result}`);
     } catch (error) {
-      Console.print("[ERROR]");
+      Console.print(error.message);
+      throw error;
     }
   }
 
@@ -24,7 +25,7 @@ class App {
 
     // 숫자 하나만 있는 경우 에러 처리
     if (/^\d+$/.test(input)) {
-      throw new Error();
+      throw new Error('[ERROR]');
     }
 
     // '\n' 문자를 실제 개행 문자로 교체
@@ -33,7 +34,7 @@ class App {
     // 기본 구분자 연속 사용 여부 검사
     const invalidDelimiter = /[,|:]{2,}/;
     if (invalidDelimiter.test(input)) {
-      throw new Error();
+      throw new Error('[ERROR]');
     }
 
     // 커스텀 구분자인지 확인
@@ -41,8 +42,8 @@ class App {
       const delimiterEnd = input.indexOf("\n");
 
       // \n 가 없는 경우 에러
-      if (delimiterEndIndex === -1) {
-        throw new Error();
+      if (delimiterEnd === -1) {
+        throw new Error('[ERROR]');
       }
 
       const customDelimiter = input.slice(2, delimiterEnd);
@@ -58,7 +59,7 @@ class App {
 
       // 숫자가 아니거나 비양수인 경우 에러 발생
       if (isNaN(numStr) || num <= 0) {
-        throw new Error();
+        throw new Error('[ERROR]'); 
       }
 
       return sum + num;
