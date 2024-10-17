@@ -4,12 +4,17 @@ class App {
     let nums = 0;
 
     let string = await this.getString();
-    const customs = await this.customSeparator(string); // customs가 0이면 커스텀 구분자가 아니므로 기본 덧셈 진행
-    if (customs == 0) {
-      nums = await this.basicSumNums(string);
+    if (!string) { // 입력값이 ""이면 0을 출력
+      nums = 0
     }
     else {
-      nums = await this.customSumNums(string);
+      const CUSTOMS = await this.customSeparator(string); // customs가 0이면 커스텀 구분자가 아니므로 기본 덧셈 진행
+      if (CUSTOMS == 0) {
+        nums = await this.basicSumNums(string);
+      }
+      else {
+        nums = await this.customSumNums(string);
+      }
     }
     
     Console.print("결과 : "+ nums);
