@@ -3,10 +3,10 @@ const Constant = {
   ERROR_MESSAGE: "[ERROR] 잘못된 문자 입니다.",
   RESULT_MESSAGE: "결과 : ",
 
-  DEFAULT_SEPERATOR_REGIX: /[,:]/,
-  CUSTOM_SEPERATOR_REGIX: /^\/\/(.)\\n/,
-  CUSTOM_CODITION_FIRST_STR: "/",
-  CUSTOM_CODITION_LAST_STR: "n",
+  DEFAULT_SEPARATOR_REGEX: /[,:]/,
+  CUSTOM_SEPARATOR_REGEX: /^\/\/(.)\\n/,
+  CUSTOM_CONDITION_FIRST_STR: "/",
+  CUSTOM_CONDITION_LAST_STR: "n",
 };
 
 export default Constant;

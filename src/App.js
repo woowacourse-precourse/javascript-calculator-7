@@ -6,8 +6,8 @@ class App {
     const view = new View();
 
     const userInput = await view.inputPrompt();
-    const customSeperator = this.isCustomSeparator(userInput);
-    const inputArr = this.userValueArr(userInput, customSeperator);
+    const customSeparator = this.isCustomSeparator(userInput);
+    const inputArr = this.userValueArr(userInput, customSeparator);
     const verifiedArr = this.validateValue(inputArr);
     const sum = this.calculate(verifiedArr);
 
@@ -15,26 +15,26 @@ class App {
   }
 
   isCustomSeparator(user) {
-    const match = user.match(Constant.CUSTOM_SEPERATOR_REGIX);
+    const match = user.match(Constant.CUSTOM_SEPARATOR_REGEX);
 
     return match ? match[1] : null;
   }
 
-  userValueArr(user, customSeperator) {
+  userValueArr(user, customSeparator) {
     let arr = [];
-    if (customSeperator) {
-      let newUserStirng = this.removeCustomCondition(user);
-      arr = newUserStirng.split(Constant.DEFAULT_SEPERATOR_REGIX);
-      arr = newUserStirng.split(customSeperator);
+    if (customSeparator) {
+      let newUserString = this.removeCustomCondition(user);
+      arr = newUserString.split(Constant.DEFAULT_SEPARATOR_REGEX);
+      arr = newUserString.split(customSeparator);
       return arr;
     }
-    arr = user.split(Constant.DEFAULT_SEPERATOR_REGIX);
+    arr = user.split(Constant.DEFAULT_SEPARATOR_REGEX);
     return arr;
   }
 
   removeCustomCondition(user) {
-    const start = user.indexOf(Constant.CUSTOM_CODITION_FIRST_STR);
-    const end = user.indexOf(Constant.CUSTOM_CODITION_LAST_STR) + 1;
+    const start = user.indexOf(Constant.CUSTOM_CONDITION_FIRST_STR);
+    const end = user.indexOf(Constant.CUSTOM_CONDITION_LAST_STR) + 1;
 
     return user.slice(0, start) + user.slice(end);
   }
