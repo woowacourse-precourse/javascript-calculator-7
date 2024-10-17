@@ -39,10 +39,13 @@ class App {
       this.#inputNumbers = inputString;
       this.#separators = [',', ':'];
     } else {
-      const removedFormatString = inputString.split('//').join('').split('\n');
-      const [separator, numberString] = removedFormatString;
+      const removedFormatString = inputString
+        .split('\\n')
+        .join('//')
+        .split('//');
+      const [, separator, numberString] = removedFormatString;
       this.#inputNumbers = numberString;
-      this.#separators = [...separator];
+      this.#separators = [separator];
     }
 
     return this;
