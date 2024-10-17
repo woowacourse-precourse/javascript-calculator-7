@@ -133,6 +133,26 @@ class CalculatorHandler {
     }
 }
 
+/**
+ * 검증 기능 클래스
+ */
+class Vaildator {
+
+    isValidSeparator(input) {
+    
+        const customSeparatorMatch = input.match(new RegExp(CALCULATOR_VARIABLES.CUSTOM_SEPARATOR));
+        if (!customSeparatorMatch  && !input.match(CALCULATOR_VARIABLES.DEFAULT_SEPARATOR)) {
+            throw new Error('[ERROR]: 구분자가 없거나 잘못됐습니다.');
+        }
+    }
+
+    isPositiveNumber(numbersArray) {
+        if (!arr.every(num => Number(num) > 0)) {
+            throw new Error('[ERROR]: 입력한 숫자가 양수가 아닙니다.');
+        }
+    }
+}
+
 
 // const isValidSeparator = (input) => {
     
