@@ -41,6 +41,7 @@ export default function parseCustomInput(input) {
   // 3 ${escapedDelimiter}[0-9]+(\\.[0-9]+)? delimiter+숫자+소수점으로 구성한다. 숫자는 하나 이상일수 있다.똑같이 소수점은 선택적이다.
   // 3.1 * 해당 패턴은 n회 이상 반복될수 있다.
   // 3.2 $ 문자열 끝을 의미한다. 이 패턴이 반복되고 또 다른 문자열이 반복되면 안된다.
+
   const validChars = new RegExp(
     `^[0-9]+(\\.[0-9]+)?(${escapedDelimiter}[0-9]+(\\.[0-9]+)?)*$`,
   ); // Allow valid decimal format and delimiter
@@ -51,7 +52,7 @@ export default function parseCustomInput(input) {
   }
 
   // delimiter로 컨텐츠를 나눔.
-  const parts = content.split(new RegExp(escapedDelimiter));
+  const parts = content.split(delimiter);
 
   // 중간에 '' 가 있다면 delimiter가 중복되어 입력되었다는 뜻. 이를 걸러냄.
   if (parts.some(part => part === '')) {
