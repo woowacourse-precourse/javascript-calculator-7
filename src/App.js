@@ -43,6 +43,10 @@ class App {
   }
 
   splitWithSeparator(str, separator, customSep) {
+    if (!str || str.trim() === '') {
+      return ['0'];
+    }
+
     const allSeparator = separator;
 
     if (customSep !== '') {
