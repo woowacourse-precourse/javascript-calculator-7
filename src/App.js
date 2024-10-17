@@ -37,7 +37,7 @@ class App {
   solve = (input) => {
     try {
       if (input.length === 0) {
-        console.log("결과 :", 0);
+        Console.print("결과 :", 0);
       } else {
         const separatedInput = this.findCustomSeparator(input);
 
@@ -52,11 +52,11 @@ class App {
         if (this.validateNumber(parsedNumbers)) {
           // 숫자를 모두 더한다.
           const sum = parsedNumbers.reduce((acc, cur) => acc + cur, 0);
-          console.log("결과 :", sum);
+          Console.print(`결과 : ${sum}`);
         }
       }
     } catch (error) {
-      console.error(error.message);
+      Console.print(error.message);
     }
   };
 
