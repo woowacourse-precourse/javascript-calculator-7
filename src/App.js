@@ -15,6 +15,8 @@ class App {
       customSep,
     );
 
+    this.sumAllString(splittedString);
+
     Console.print(splittedString);
   }
 
@@ -35,6 +37,18 @@ class App {
     const sepToRegex = new RegExp(allSeparator.join('|'));
 
     return str.split(sepToRegex);
+  }
+
+  checkNumber(num) {
+    return !Number.isNaN(num);
+  }
+
+  sumAllString(strArr) {
+    const numArr = strArr.map((str) => {
+      const num = Number(str);
+      if (this.checkNumber(num)) return num;
+      throw Error('[ERROR] 숫자가 아닌 문자열이 포함되어 있습니다.');
+    });
   }
 }
 
