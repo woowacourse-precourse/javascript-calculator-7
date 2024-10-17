@@ -15,15 +15,38 @@ class App {
       Console.print(`결과 : 0`);
     } else if (REGEX1.test(userStr)) {
       //, 또는 : 구분자 문자열
+      this.add_num(userStr);
     } else if (REGEX2.test(userStr)) {
       // 커스텀 구분자 문자열
+      this.add_num(userStr, [this.extract_delimiter(userStr)]);
     } else {
       //에러
     }
   };
+
+  //커스텀 구분자 추출
+  extract_delimiter = (str) => {
+    const delimiter = str.slice(2, str.indexOf('\\n'));
+    const extractedStr = str.slice(str.indexOf('\\n') + 2);
+
+    //입력값 검사
+    const REGEX3 = new RegExp(`^\\d([\\d${delimiter}]*)$`);
+    if (REGEX3.test(extractedStr)) {
+      //에러
+    }
+
+    return delimiter;
+  };
+
+  //숫자 더하기
+  add_num = (str, delimiter = [',', ':']) => {};
+
+  async run() {
+    this.getStr();
+  }
 }
 
 let app = new App();
-app.getStr(); //문자열 입력받기
+app.run();
 
 export default App;
