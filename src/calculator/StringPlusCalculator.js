@@ -15,15 +15,19 @@ class StringPlusCalculator {
 
   addCustomDelimiter(input) {
     let customDelimiter = '';
-    const escapeInput = input.replace(/\\n/, '\n');
-    for (let idx = 2; idx < escapeInput.length; idx += 1) {
-      if (escapeInput[idx] === '\n') {
+    const newlineReplacedInput = input.replace(/\\n/, '\n');
+    for (let idx = 2; idx < newlineReplacedInput.length; idx += 1) {
+      if (newlineReplacedInput[idx] === '\n') {
         break;
       }
-      if (escapeInput[idx] === ' ') {
+      if (newlineReplacedInput[idx] === ' ') {
         throw new Error('[ERROR] 커스텀 구분자에 공백이 포함될 수 없습니다.');
       }
-      customDelimiter += input[idx];
+      const asciiCode = newlineReplacedInput[idx].charCodeAt();
+      if (asciiCode >= 48 && asciiCode <= 57) {
+        throw new Error('[ERROR] 커스텀 구분자에 숫자가 포함될 수 없습니다.');
+      }
+      customDelimiter += newlineReplacedInput[idx];
     }
     this.delimiter.push(customDelimiter);
   }
