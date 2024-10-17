@@ -21,6 +21,9 @@ class StringPlusCalculator {
         if (char === '-') {
           throw new Error('[ERROR] 숫자는 양수만 사용할 수 있습니다.');
         }
+        if (char === ' ') {
+          throw new Error('[ERROR] 공백이 포함될 수 없습니다.');
+        }
         if (char !== ',') {
           throw new Error('[ERROR] 등록되지 않은 구분자입니다.');
         }
