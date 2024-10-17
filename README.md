@@ -28,26 +28,30 @@
 <br/><br/>
 ## ❓ 생각해 볼 내용
 
-1. 구분자로부터 숫자 추출하기
-    a. 맨 처음에 “//” 문자가 나오지 않으면 무조건 숫자부터 시작
-    b. “//;;\n” 와 같은 2개 이상의 이어진 문자열이 나올때 ⇒ 커스텀 구분자로 추가
-    c. “//\n” 와 같이 커스텀 구분자 안에 아무 구분자도 없을때 ⇒ 에러로 출력
-    d. “//2\n” 와 같이 커스텀 구분자 안에 숫자가 들어갈때 ⇒ 에러로 출력
-    e. “//]\n//[\n” 와 같이 커스텀 구분자가 2개가 될 경우 ⇒ 커스텀 구분자 “[”, “]” 에 “,” , “;” 까지 포함하여 검사 진행
-<br/>
-1. [JavaScript Style Guide](https://github.com/woowacourse/woowacourse-docs/tree/main/styleguide/javascript) 컨벤션에 맞게 코드 작성하기 (Airbnb 스타일)
-    a. 변수 선언 - const, let 을 사용 (var 사용 X)
-    b. 문자열 - “ 큰따옴표가 아닌 ‘ 작은 따옴표 사용
-    c. 함수 선언 - 명시적으로 이름을 붙인 함수 표현식과 화살표 함수 사용
-    d. 세미 콜론 - 모든 문장 끝에는 ; 붙이기
-    e. 에러 핸들링 - 에러가 발생할 가능성 있는 코드에는 try - catch 문 사용
-    f. 상수명 - SNAKE_CASE 로 작성
-    g. 클래스, 메서드 - 특수 문자 사용 X
-<br/>
-1. AngularJS Git Commit Message Conventions 컨벤션에 맞게 커밋하기
-    a. <type> : 커밋의 유형 지정  ⇒  feat, fix, docs, style, refactor, test, chore
-    b. (<scope>) : 선택 사항으로 간단한 단어로 핵심을 표현 ex. (login)
-    c. <subject> : 커밋에 대한 간결한 설명 추가, 첫 글자는 소문자 + 명령형으로 작성
+1. 구분자로부터 숫자 추출하기<br>
+    a. 맨 처음에 “//” 문자가 나오지 않으면 무조건 숫자부터 시작 ( 요구사항에 “문자열 앞부분” 이라는 말이 있기 떄문)<br>
+    b. “//;;\n” 와 같이 2개 이상의 이어진 문자열이 나올때 ⇒ 에러로 출력 ( 커스텀 구분자는 문자열 앞부분의 "//"와 "\n" 사이에 위치하는 "문자"를 커스텀 구분자로 사용한다. 요구사항에 "문자"라고 나와있으므로 에러로 출력)<br>
+    c. “//\n” 와 같이 커스텀 구분자 안에 아무 구분자도 없을때 ⇒ 에러로 출력<br>
+    d. “//2\n” 와 같이 커스텀 구분자 안에 숫자가 들어갈때 ⇒ 에러로 출력<br>
+    e. “//]\n//[\n” 와 같이 커스텀 구분자가 2개가 될 경우 ⇒ 커스텀 구분자 “[”, “]” 에 “,” , “;” 까지 포함하여 검사 진행<br>
+    f. 빈 문자열이 들어올 경우 ⇒ 0 출력<br>
+    g. 맨 뒤에 문자가 들어갈 경우 ⇒ 에러로 출력<br>
+    h. 구분자가 여러개 연달아 들어갈 경우 ⇒ 에러로 출력<br>
+    i. "//" 이 나오고 "\n"이 나오지 않는 경우나 개수가 똑같지 않은 경우 => 에러로 출력<br><br>
+
+2. [JavaScript Style Guide](https://github.com/woowacourse/woowacourse-docs/tree/main/styleguide/javascript) 컨벤션에 맞게 코드 작성하기 (Airbnb 스타일)<br>
+    a. 변수 선언 - const, let 을 사용 (var 사용 X)<br>
+    b. 문자열 - “ 큰따옴표가 아닌 ‘ 작은 따옴표 사용<br>
+    c. 함수 선언 - 명시적으로 이름을 붙인 함수 표현식과 화살표 함수 사용<br>
+    d. 세미 콜론 - 모든 문장 끝에는 ; 붙이기<br>
+    e. 에러 핸들링 - 에러가 발생할 가능성 있는 코드에는 try - catch 문 사용<br>
+    f. 상수명 - SNAKE_CASE 로 작성<br>
+    g. 클래스, 메서드 - 특수 문자 사용 X<br><br>
+
+3. AngularJS Git Commit Message Conventions 컨벤션에 맞게 커밋하기<br>
+    a. <type> : 커밋의 유형 지정  ⇒  feat, fix, docs, style, refactor, test, chore<br>
+    b. (<scope>) : 선택 사항으로 간단한 단어로 핵심을 표현 ex. (login)<br>
+    c. <subject> : 커밋에 대한 간결한 설명 추가, 첫 글자는 소문자 + 명령형으로 작성<br><br>
 
 ```
 <type>(<scope>): <subject>
@@ -60,19 +64,19 @@
 ```
 git clone https://github.com/subsub-e/javascript-calculator-7.git
 ```
-<br/>
+
 2. 의존성 모듈 설치
 
 ```
 npm install
 ```
-<br/>
+
 3. 프로젝트 실행
 
 ```
 npm run start
 ```
-<br/>
+
 4. 프로젝트 테스트
 
 ```
