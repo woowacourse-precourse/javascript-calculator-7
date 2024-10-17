@@ -11,7 +11,7 @@ class CalculatorView {
     return await this.rl(`결과: ${RESULT}`);
   }
 
-  errorView() {
+  errorView(error) {
     console.error(error.message);
   }
 
