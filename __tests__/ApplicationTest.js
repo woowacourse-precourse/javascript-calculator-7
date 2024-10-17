@@ -32,4 +32,18 @@ describe("문자열 계산기", () => {
     });
   });
 
+  test("다른 문자 입력", async () => {
+    const inputs = ["1,2,k", "1,2,@"];
+    mockQuestions(inputs);
+
+    const logSpy = getLogSpy();
+    const outputs = ["[ERROR] 숫자가 아닌 값이 포함되어 있습니다"];
+
+    const app = new App();
+    await app.run();
+
+    outputs.forEach((output) => {
+      expect(logSpy).toHaveBeenCalledWith(expect.stringContaining(output));
+    });
+  });
 });
