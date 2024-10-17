@@ -1,9 +1,9 @@
 import { MissionUtils } from "@woowacourse/mission-utils";
 class App {
   async run() {
-    const inputString = await this.getInputString();
-    const result = this.calculate(inputString);
-    this.printResult(result);
+      const inputString = await this.getInputString();
+      const result = this.calculate(inputString);
+      this.printResult(result);
   }
 
   async getInputString() {    
@@ -21,7 +21,7 @@ class App {
       delimiters = this.getMergedDelimiters(inputString, delimiters);
       inputString = this.getStrippedString(inputString);
     }
-
+    
       this.isValidString(inputString, delimiters);
 
       const stringArray = this.splitStringByDelimiter(inputString, delimiters);
@@ -77,9 +77,11 @@ class App {
       const isNotInclude = !delimiters.includes(element);
 
       if(isNaN(element) && isNotInclude) {
+        console.error(`유효하지 않은 입력: ${element}`); 
         throw new Error("[ERROR]");
       }
     }
+    return true;
   }
 
   returnNumbers(inputArray) {
