@@ -21,6 +21,19 @@ class App {
 	  return input;
 	}
 
+  // 3. 구분자 판단 (기본 구분자 또는 커스텀 구분자)
+  getDelimiter(input) {
+    if (input.startsWith('//')) {
+      const customDelimiterMatch = input.match(/^\/\/(.)\\n(.*)$/);
+      if (customDelimiterMatch) {
+        const [, customDelimiter, numbers] = customDelimiterMatch;
+        return { delimiter: new RegExp(`[${customDelimiter}]`), numbers };
+      }
+      this.handleError();
+    }
+    return { delimiter: /[,:]/, numbers: input };
+  }
+
 }
 
 export default App;
