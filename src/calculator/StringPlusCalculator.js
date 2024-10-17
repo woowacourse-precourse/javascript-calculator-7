@@ -11,18 +11,7 @@ class StringPlusCalculator {
     if (hasCustomDelimiter(input)) {
       this.addCustomDelimiter(input);
     }
-
-    const calculateString = input.slice(this.numberStartIdx);
-    let newCalculateString = calculateString;
-    for (let i = 0; i < this.delimiter.length; i += 1) {
-      const delimiter = this.delimiter[i].replace(
-        /[.*+?^${}()|[\]\\]/g,
-        '\\$&',
-      );
-      const regex = new RegExp(delimiter, 'g');
-      newCalculateString = newCalculateString.replace(regex, ' ');
-    }
-
+    const newCalculateString = this.replaceDelimitersToSpace(input);
     this.number = 0;
     let sum = '';
     for (let i = 0; i < newCalculateString.length; i += 1) {
@@ -42,6 +31,20 @@ class StringPlusCalculator {
       }
     }
     this.number += Number(sum);
+  }
+
+  replaceDelimitersToSpace(input) {
+    const calculateString = input.slice(this.numberStartIdx);
+    let newCalculateString = calculateString;
+    for (let i = 0; i < this.delimiter.length; i += 1) {
+      const delimiter = this.delimiter[i].replace(
+        /[.*+?^${}()|[\]\\]/g,
+        '\\$&',
+      );
+      const regex = new RegExp(delimiter, 'g');
+      newCalculateString = newCalculateString.replace(regex, ' ');
+    }
+    return newCalculateString;
   }
 
   addCustomDelimiter(input) {
