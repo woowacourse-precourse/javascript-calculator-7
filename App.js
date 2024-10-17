@@ -79,6 +79,52 @@ class Calculator {
 }
 
 
+/**
+ * 유저로부터 입력 기능 클래스
+ */
+class InputHandler {
+
+    async getUserInput(){
+
+        try {
+            const userInput = await Console.readLineAsync(CALCULATOR_VARIABLES.INPUT_PROMPT);
+            return userInput;
+        } catch (error) {
+            Console.print('[ERROR]: 입력을 받는 중 문제가 발생했습니다.');
+            return null;
+        }
+    }
+
+}
+
+
+/**
+ * 입력받은 데이터 처리 클래스
+ */
+
+class InputParser {
+    
+    splitUserInput(input) { 
+        const customSeparatorMatch = input.match(new RegExp(CALCULATOR_VARIABLES.CUSTOM_SEPARATOR));
+        const customToken = customSeparatorMatch ? customSeparatorMatch[1] : null ;
+
+        let userInputArray;
+
+        if (customToken){
+            const numbersPart = input.split("\\n")[1];
+            userInputArray = numbersPart.split(new RegExp(`[${customToken}]`));
+        }
+        else{
+            userInputArray = input.split( new RegExp(CALCULATOR_VARIABLES.DEFAULT_SEPARATOR));
+        }
+
+        return userInputArray ;
+    }
+}
+
+/**
+ * 계산 처리 기능 클래스
+ */
 
 // const isValidSeparator = (input) => {
     
