@@ -2,6 +2,15 @@ class Calculator {
   /**
     *
     * @param {string} text
+    * @returns {string[]}
+    */
+  findCustomSeparator(text) {
+    if (!text) return [];
+  }
+
+  /**
+    *
+    * @param {string} text
     * @param {string} customSeparator
     * @returns {number[]}
     */
