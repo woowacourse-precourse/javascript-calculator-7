@@ -3,6 +3,7 @@ class App {
     try {
       const input = await Console.readLineAsync('덧셈할 문자열을 입력해 주세요.\n'); // 문자열 입력
       const result = this.calculate(input); // 계산 결과 얻기
+      this.printResult(result); // 결과 출력
     } catch (error) {
       this.handleError(); // 예외 처리
     }
@@ -64,6 +65,10 @@ class App {
     return this.sumNumbers(numberList); // 숫자 합산
   }
 
+  // 7. 결과 출력
+  printResult(result) {
+    Console.print(`결과 : ${result}`);
+  }
 }
 
 export default App;
