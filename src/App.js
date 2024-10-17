@@ -30,10 +30,12 @@ class App {
       numbersStr = input.substring(delimiterEndIndex + 2); // '\\n'의 길이는 2
     }
 
-    
     const tokens = this.splitNumbers(input, delimiters);
   
     const numbers = tokens.map((token) => {
+      if (token === ''){
+        throw new Error(`[ERROR] 잘못된 숫자입니다.`);
+      }
       const num = Number(token);
       if (isNaN(num) || num <= 0) {
         throw new Error('[ERROR] 잘못된 숫자입니다.');
