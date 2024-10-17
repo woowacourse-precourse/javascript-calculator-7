@@ -18,6 +18,14 @@ function printResult(str) {
   MissionUtils.Console.print(`결과 : ${str}`);
 }
 
+function checkTheNumberArray(array) {
+  for (const item of array) {
+    if (item === '') continue;
+    if (isNaN(item) || Number(item) <= 0) throw new Error(ERROR_MESSAGE);
+  }
+}
+
+
 class App {
   defaultSeparator = ',:';
   customSeparatorRegExr = /\/\/.+\\n/;
@@ -29,7 +37,7 @@ class App {
 
     const separatedUserInput = newUserInput.split(separatorRegExp);
 
-    this.checkErrorSeparatedUserInput(separatedUserInput);
+    checkTheNumberArray(separatedUserInput);
 
     const separatedUserInputsNumberArray = separatedUserInput.map(it =>
       Number(it),
@@ -58,13 +66,6 @@ class App {
   getSeparatorRegExp(separator) {
     return new RegExp(`[${separator}]`);
   }
-  checkErrorSeparatedUserInput(separatedUserInput) {
-    for (const it of separatedUserInput) {
-      if (it === '') continue;
-      if (isNaN(it) || Number(it) <= 0) throw new Error(ERROR_MESSAGE);
-    }
-  }
-  
 }
 
 export default App;
