@@ -25,7 +25,12 @@ class App {
       if (input.length === 0) {
         console.log("결과 :", 0);
       } else {
-        const seperatedInput = this.findCustomSeparator(input);
+        const separatedInput = this.findCustomSeparator(input);
+
+        // 구분자를 기준으로 문자열을 나눈다.
+        const separators = new RegExp(`[${[...this.separator].join("")}]`);
+        const numbers = separatedInput.split(separators);
+        console.log("numbers", numbers);
       }
     } catch (error) {
       console.error(error.message);
