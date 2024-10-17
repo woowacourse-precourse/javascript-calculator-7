@@ -17,6 +17,23 @@ class App {
     else if (inputStr.startsWith("//") && inputStr.substring(3, 5) === "\\n") {
       const customSeparator = inputStr[2]; // 커스텀 구분자 추출
       numbersArr = inputStr.substring(5).split(customSeparator).map(Number); // 커스텀 구분자로 문자열 분리
+
+      // 예외 처리 1: 빈 문자열 입력 시
+    } else if (inputStr === "") {
+      Console.print("0"); // 결과 0 출력
+      return;
+
+      // 예외 처리 2: 잘못된 문자열 입력 (구분자가 없고 빈 문자열이 아님)
+    } else {
+      numbersArr = [Number(inputStr)]; // 단일 숫자로 처리
+    }
+
+    // 예외 처리 3: 숫자가 아니거나 0 이하인 값이 포함된 경우
+    if (
+      numbersArr.length > 0 &&
+      numbersArr.some((num) => isNaN(num) || num <= 0)
+    ) {
+      throw new Error("[ERROR] 잘못된 입력이 포함되었습니다."); // 오류 발생
     }
   }
 }
