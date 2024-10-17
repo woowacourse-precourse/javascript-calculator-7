@@ -14,6 +14,10 @@ class App {
       customSep,
     );
 
+    if (extractedStr !== '' && splittedString[0] === extractedStr) {
+      throw Error(errorString(CONSOLE_MESSAGE.SEPARATOR_ERROR));
+    }
+
     const sum = this.sumAllString(splittedString);
 
     Console.print(sum);
@@ -23,7 +27,7 @@ class App {
     const [first, rest] = str.split('\\n');
 
     if (rest && !first.startsWith('//')) {
-      throw Error(errorString(CONSOLE_MESSAGE.SEPARATOR_ERROR));
+      throw Error(errorString(CONSOLE_MESSAGE.SEPARATOR_FORM_ERROR));
     }
 
     if (first.startsWith('//')) {
