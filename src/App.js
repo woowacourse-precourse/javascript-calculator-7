@@ -4,12 +4,16 @@ import Calculator from "./Calculator.js";
 
 class App {
   async run() {
-    const inputValue = await readInput("덧셈할 문자열을 입력해 주세요.\n");
-    printOuput(inputValue);
+    try {
+      const inputValue = await readInput("덧셈할 문자열을 입력해 주세요.\n");
+      printOuput(inputValue);
 
-    const cal = new Calculator(inputValue);
-    cal.addCustomDelimiter();
-    console.log(cal.delimiters);
+      const cal = new Calculator(inputValue);
+      const numbers = cal.separator();
+      console.log(numbers);
+    } catch (error) {
+      throw new Error(error);
+    }
   }
 }
 

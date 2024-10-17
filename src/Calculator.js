@@ -28,7 +28,15 @@ class Calculator {
   separator() {
     this.addCustomDelimiter();
     const delimitersRegex = new RegExp(`[${this.delimiters.join("")}]`);
-    const numbers = this.inputValue.split(delimitersRegex).map(Number);
+    const numbers = this.inputValue.split(delimitersRegex);
+
+    numbers.forEach((number, index, array) => {
+      if (!isNaN(number)) {
+        array[index] = Number(number);
+      } else {
+        throw new Error("[ERROR] 숫자가 아닌 값을 입력할 수 없습니다.");
+      }
+    });
     return numbers;
   }
 }
