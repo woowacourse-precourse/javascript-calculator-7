@@ -20,6 +20,10 @@ class App {
 
     const inputWithoutCustomSeparationSymbols =
       this.removeCustomSeparationSymbols(inputWithoutSpace);
+
+    const separatedInput = this.separateInput(
+      inputWithoutCustomSeparationSymbols
+    );
   }
 
   async getInputForAddition() {
@@ -49,6 +53,11 @@ class App {
 
   removeCustomSeparationSymbols(input) {
     return input.replace(customSeparationSymbolsRegex, '');
+  }
+
+  separateInput(input) {
+    const separationRegex = new RegExp(`[${this.separationSymbols.join('')}]`);
+    return input.split(separationRegex).map((char) => Number(char));
   }
 }
 
