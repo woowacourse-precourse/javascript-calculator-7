@@ -13,9 +13,7 @@ class App {
     let found = userStr.match(/\d+/g);
 
     let num = 0;
-    found.map((item) => {
-      num += item;
-    });
+    found.map((item) => (num += Number(item)));
   }
 }
 
