@@ -1,6 +1,5 @@
-import { Console } from '@woowacourse/mission-utils';
-import { INTRO, RESULT_PREFIX } from './constant.js';
 import Validator from './Validator.js';
+import IOManager from './IOManager.js';
 
 class App {
   constructor() {
@@ -9,17 +8,13 @@ class App {
   }
 
   async run() {
-    await this.input();
+    this.str = await IOManager.input();
     this.analysis(this.str);
     Validator.customSeperator(this.seperator);
     const arr = this.stringSplitter(this.str);
     Validator.parseNumber(arr);
-    this.output(arr);
-  }
-
-  async input() {
-    const input = await Console.readLineAsync(INTRO);
-    this.str = input;
+    const answer = arr.reduce((prev, cur) => prev + Number(cur), 0);
+    IOManager.output(answer);
   }
 
   analysis(str) {
@@ -35,11 +30,6 @@ class App {
     const regexp = new RegExp(`[${this.seperator.join('')}]`);
     const filterArr = str.split(regexp).filter((item) => item.length);
     return filterArr;
-  }
-
-  output(value) {
-    const answer = value.reduce((prev, cur) => prev + Number(cur), 0);
-    Console.print(RESULT_PREFIX + answer);
   }
 }
 
