@@ -11,11 +11,13 @@ class App {
 
     // 문자열 구분
     if (input.startsWith("//") && input.substring(3, 5) === "\\n") {
-      words = input.substring(5).split(input[2])
+      words = input.substring(5).split(input[2]).map(Number);
     } else {
-      words = input.split(/[,|:]/);
+      words = input.split(/[,|:]/).map(Number);
     }
-    Console.print(words);
+
+    const sum = words.reduce((acc, curr) => acc + curr);
+    Console.print("결과: " + sum);
   }
 }
 
