@@ -5,6 +5,7 @@ const { Console } = MissionUtils;
 class App {
   async run() {
     try {
+      let result = 0;
       let input = await Console.readLineAsync("덧셈할 문자열을 입력해 주세요.");
       let separator = "";
       if (input.indexOf("//") === 0 && input.indexOf("\\n") > 2) {
@@ -14,7 +15,11 @@ class App {
       }
       input = input.replaceAll(":", ",");
       const arr = input.split(",");
-      Console.print(arr);
+      for (const el of arr) {
+        const number = +el;
+        result += number;
+      }
+      console.log(`결과 : ${result}`);
     } catch (err) {
       Console.print(`[ERROR]${err}`);
     }
