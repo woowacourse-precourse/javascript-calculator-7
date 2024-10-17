@@ -28,6 +28,11 @@ class App {
         if (NUMBERS.length>0 && NUMBERS.some((NUM) => isNaN(NUM) || NUM <= 0)) {
             throw new Error("[ERROR]");
         }
+
+        // 덧셈 수행
+        for (const NUM of NUMBERS) {
+          RESULT += NUM;
+        }
     }
 }
 
