@@ -21,7 +21,7 @@ class App {
   };
 
   validateNumber = (numbers) => {
-    if (numbers.length === 0) {
+    if (numbers.length === 0 || numbers.length === 1) {
       throw new Error("[ERROR]");
     }
   };
