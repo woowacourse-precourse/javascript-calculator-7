@@ -5,7 +5,8 @@ const app = new App();
 // 에러 체크 후 ERROR 문구 리턴
 async function running() {
     try {
-        await app.run();
+        const PRINT_ANS = await app.run();
+        console.log(PRINT_ANS)
     } catch (error) {
         console.log("[ERROR]");
         console.log(error)

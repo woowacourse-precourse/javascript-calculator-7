@@ -2,6 +2,20 @@ import { MissionUtils } from "@woowacourse/mission-utils";
 
 function returnCustomSum(inputText) {
   // custom 구분자가 있을 경우의 계산
+  const [SAPARATOR, NUMBER_PART] = inputText
+  const CAL_NUM = NUMBER_PART.replace(new RegExp(SAPARATOR, 'g'), ' ')
+  let RETURN_ANS = 0
+  let SEMI_ANS = ''
+  for (let i = 0; i < CAL_NUM.length; i++) {
+    if (CAL_NUM[i] != ' ') {
+      SEMI_ANS += CAL_NUM[i]
+    } else {
+      RETURN_ANS += parseInt(SEMI_ANS)
+      SEMI_ANS = ''
+    }
+  }
+  RETURN_ANS += parseInt(SEMI_ANS)
+  return RETURN_ANS
 }
 
 function returnSum(inputText) {
@@ -53,7 +67,7 @@ function checkInput(inputText) {
       const CUSTOM_PATTERN = new RegExp(`^\\d+(${ES_SAPARATOR}\\d+)*$`)
       // return CUSTOM_PATTERN.test(NUMBER_PART)
       if (CUSTOM_PATTERN.test(NUMBER_PART)) {
-        return 'custom pattern'
+        return [SAPARATOR, NUMBER_PART]
       } else {
         return false
       }
@@ -82,7 +96,7 @@ class App {
     // 입력 형식에 맞지 않을 경우 ERROR 출력 후 종료
     // 1. STRING_INPUT 값을 확인하고, error 여부를 판단하여 throw
     // 2. index.js 파일의 try catch문 작동
-    const CHECK_INPUT = await checkInput(STRING_INPUT)
+    const CHECK_INPUT = checkInput(STRING_INPUT)
     if (!CHECK_INPUT) {
       throw new Error("[ERROR]")
     } else {
@@ -90,10 +104,10 @@ class App {
       // return RETURN_ANS
       if (CHECK_INPUT === 'answer zero') {
         return 0
-      } else if (CHECK_INPUT === 'custom pattern') {
-        return await returnCustomSum(STRING_INPUT)
+      } else if (CHECK_INPUT === 'non custom pattern') {
+        return returnSum(STRING_INPUT)
       } else {
-        return await returnSum(STRING_INPUT)
+        return returnCustomSum(CHECK_INPUT)
       }
     }
   }
