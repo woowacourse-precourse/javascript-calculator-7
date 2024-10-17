@@ -14,7 +14,7 @@ class App {
   }
 
   async run() {
-    const numberArray = await this.askNumbers()
+    const numberArray = (await this.askNumbers())
       .findSeparator()
       .extractNumbers();
     const convertedNumbers = numberArray.map(Number);
