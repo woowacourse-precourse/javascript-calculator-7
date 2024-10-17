@@ -13,4 +13,12 @@ export const stringSumCalculator = (input) => {
       input = input.slice(nIndex + 2);
     }
   }
+
+  //numList
+  let numList = input.split(delimiter).map((x) => {
+    if (x == "" || isNaN(x)) throw new Error("[ERROR]잘못된 형식입니다.");
+    let num = Number(x);
+    if (num <= 0) throw new Error("[ERROR]양수를 입력하시오.");
+    return num;
+  });
 };
