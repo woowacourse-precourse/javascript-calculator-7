@@ -24,6 +24,7 @@ export class Calculator {
     return { error: false, numbers: result };
   }
 
+  // 커스텀 구분자 확인 함수
   checkCustom(string) {
     let customInput = string.match(/^\/\/(.)\\n/); // ; 추출
     // 커스텀 구분자가 있는 케이스
@@ -33,8 +34,10 @@ export class Calculator {
       const result = sliceInput.split(regexText);
       return result;
     }
+    return false;
   }
 
+  // 소수는 소수로 정수는 정수로 형변환
   changeFloat(result) {
     const newResult = result.map((number) => {
       let preNum = parseFloat(number);
@@ -46,13 +49,15 @@ export class Calculator {
     return newResult;
   }
 
+  // 숫자 아닌 값 확인
   checkNotNum(result) {
     for (let index = 0; index < result.length; index++) {
-      if (isNaN(result[index])) return true;
+      if (Number.isNaN(result[index])) return true;
     }
     return false;
   }
 
+  // 음수 확인
   checkMin(result) {
     for (let index = 0; index < result.length; index++) {
       if (result[index] < 0) return true;
