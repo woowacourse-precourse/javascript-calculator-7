@@ -3,8 +3,8 @@ import {Console} from '@woowacourse/mission-utils';
 class App {
 	async run() {
 		const input = await Console.readLineAsync('덧셈할 문자열을 입력해 주세요.');
-		const {values, delimiter} = this.handleString(input);
-		Console.print(`결과 값 : ${values} 구분자:${delimiter}`);
+		const result = this.handleString(input);
+		Console.print(`결과 값 : ${result}`);
 	}
 
 	// 문자열을 처리함수
@@ -20,7 +20,12 @@ class App {
 			delimiter = new RegExp(match[1]);
 			values = input.split('\\n')[1];
 		}
-		return {values, delimiter};
+
+		// 숫자와 구분자로 구성된 문자열을 구분자로 분리하고 숫자로 변환
+		const valueArray = values.split(delimiter).map(Number);
+
+		// 숫자들의 합을 반환
+		return valueArray.reduce((sum, num) => sum + num, 0);
 	}
 }
 
