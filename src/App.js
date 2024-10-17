@@ -14,6 +14,18 @@ class App {
     }
   }
 
+  validateCustomDelimiters(index, customDelimiter) {
+    if (index === -1) {
+      this.handleError("커스텀 구분자 형식이 잘못되었습니다.");
+    }
+
+    if (customDelimiter.length > 1) {
+      this.handleError(
+        "다중 구분자는 지원되지 않습니다. 하나의 구분자만 입력해 주세요."
+      );
+    }
+  }
+
   parseStringToNumbers(string) {
     if (!string.trim()) return [];
 
@@ -35,8 +47,10 @@ class App {
   parseCustomDelimiters(string, defaultDelimiters) {
     const findIndex = string.indexOf("\\n");
     const customDelimiter = string.slice(2, findIndex);
-    defaultDelimiters.push(customDelimiter);
 
+    this.validateCustomDelimiters(findIndex, customDelimiter);
+
+    defaultDelimiters.push(customDelimiter);
     return string.slice(findIndex + 2);
   }
 
