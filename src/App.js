@@ -4,23 +4,23 @@ class App {
   async run() {
     const input = await Console.readLineAsync("덧셈할 문자열을 입력해 주세요.\n");
 
-    let DEFAULT_DISTINGUISH_STRING = [',', ':']
+    let default_distinguish_string = [',', ':']
     
     if (isNaN(input[0])) {
       const START_STRING = input[0] + input[1];
       if (START_STRING !== '//') {
         throw new Error('[ERROR] 구분문자열을 시작// \\n입니다.')
       }
-      let STRING_INDEX = 2;
+      let string_index = 2;
     
-      while (input.slice(STRING_INDEX, STRING_INDEX + 2) !== '\\n') {
-        if (!DEFAULT_DISTINGUISH_STRING.includes(input[STRING_INDEX])) {
-          DEFAULT_DISTINGUISH_STRING.push(input[STRING_INDEX]);
+      while (input.slice(string_index, string_index + 2) !== '\\n') {
+        if (!default_distinguish_string.includes(input[string_index])) {
+          default_distinguish_string.push(input[string_index]);
         }
-        STRING_INDEX++;
+        string_index++;
       }
     }
-    Console.print(DEFAULT_DISTINGUISH_STRING)
+    Console.print(default_distinguish_string)
   }
 }
 
