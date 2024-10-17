@@ -2,7 +2,7 @@ import UserInput from '../View/UserInput.js';
 
 // 구분자 쉼표나 콜론 기준으로 숫자 추출
 
-const notCustomNumberSum = userInput => {
+const NumberSum = userInput => {
   const regularExpression = /[^0-9]/g;
   const removeStr = userInput.replace(regularExpression, '');
 
@@ -16,4 +16,4 @@ const notCustomNumberSum = userInput => {
   console.log('결과: ', totalNumberSum);
 };
 
-export default notCustomNumberSum;
+export default NumberSum;

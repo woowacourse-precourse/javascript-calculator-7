@@ -1,25 +1,27 @@
 import { Console } from '@woowacourse/mission-utils';
-
 import UserInput from '../View/UserInput.js';
 
-// 디버깅 필요
+// 디버깅 필요 화살표로 통일
+
 // 1. //+구분자+\n 입력 체크
-function conditionTextInputCheck() {
-  if (UserInput[0] === '/' && UserInput[1] === '/' && UserInput[3] === '\\' && UserInput[4] === 'n') {
+function conditionTextInputCheck(userInput) {
+  console.log('[디버깅] userInput', userInput);
+
+  if (userInput[0] === '/' && userInput[1] === '/' && userInput[3] === '\\' && userInput[4] === 'n') {
     return true;
   }
+  return false;
 }
 
 // 2. 구분자 사용 입력 체크
-function separatorTextInputCheck() {
+function separatorTextInputCheck(userInput) {
   let allSpeparatorTrueCheck = 0;
   let loofCountForallSpeparatorTrueCheck = 0;
-  for (let i = 6; i < UserInput.length; i += 1) {
-    // 짝수
+  for (let i = 6; i < userInput.length; i += 1) {
     if (i % 2 === 0) {
       loofCountForallSpeparatorTrueCheck += 1;
     }
-    if (UserInput[2] === UserInput[i]) {
+    if (userInput[2] === userInput[i]) {
       allSpeparatorTrueCheck += 1;
     }
   }
@@ -29,22 +31,14 @@ function separatorTextInputCheck() {
   return false;
 }
 
-const CustomConditionCheck = UserInput => {
-  Console.print('[디버깅]확인');
-  conditionTextInputCheck();
-  Console.print('[디버깅]conditionTextInputCheck(): ' + conditionTextInputCheck());
-  separatorTextInputCheck();
-  Console.print('[디버깅]separatorTextInputCheck(): ' + separatorTextInputCheck());
-  if (conditionTextInputCheck() && separatorTextInputCheck()) {
+const customConditionCheck = userInput => {
+  if (conditionTextInputCheck(userInput) && separatorTextInputCheck(userInput)) {
     return true;
   }
   return false;
 };
-// // [디버깅용]
-CustomConditionCheck();
-Console.print('[디버깅]CustomConditionCheck(): ' + CustomConditionCheck());
 
-export default CustomConditionCheck;
+export default customConditionCheck;
 
 // console.log('UserInput[0]', UserInput[0]);
 // console.log('UserInput[1]', UserInput[1]);
