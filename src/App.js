@@ -4,7 +4,7 @@ import {
   DEFAULT_SEPARATOR,
   SPECIAL_CHARACTERS,
 } from './constant.js';
-import { checkIsNumber, checkIsPositive, errorString } from './util.js';
+import { isNumber, isPositiveNumber, errorString } from './util.js';
 
 class App {
   async run() {
@@ -63,11 +63,11 @@ class App {
   }
 
   checkNumber(num) {
-    if (!checkIsNumber(num)) {
+    if (!isNumber(num)) {
       throw Error(errorString(CONSOLE_MESSAGE.NUMBER_ERROR));
     }
 
-    if (!checkIsPositive(num)) {
+    if (!isPositiveNumber(num)) {
       throw Error(errorString(CONSOLE_MESSAGE.NUMBER_POSITIVE_ERROR));
     }
 

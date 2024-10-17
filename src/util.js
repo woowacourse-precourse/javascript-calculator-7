@@ -1,5 +1,5 @@
 export const errorString = (error) => `[ERROR] ${error}`;
 
-export const checkIsNumber = (num) => !Number.isNaN(num);
+export const isNumber = (num) => !Number.isNaN(num);
 
-export const checkIsPositive = (num) => num >= 0;
+export const isPositiveNumber = (num) => num >= 0;
