@@ -24,6 +24,8 @@ class App {
     const separatedInput = this.separateInput(
       inputWithoutCustomSeparationSymbols
     );
+
+    this.printResult(separatedInput);
   }
 
   async getInputForAddition() {
@@ -58,6 +60,10 @@ class App {
   separateInput(input) {
     const separationRegex = new RegExp(`[${this.separationSymbols.join('')}]`);
     return input.split(separationRegex).map((char) => Number(char));
+  }
+
+  printResult(input) {
+    Console.print(`결과 : ${input.reduce((acc, cur) => acc + cur, 0)}`);
   }
 }
 
