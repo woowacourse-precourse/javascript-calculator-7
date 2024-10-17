@@ -15,6 +15,12 @@ const checkBackslashNEnd = (str) => {
   if (!str.endsWith('\\n')) throw('[Error] 커스텀 구분자를 잘못 사용하였습니다. (\\n으로 끝나야 함)');
 }
 
+const checkIncludeInvalidCharacter = (str, sep) => {
+  if (str.split('').some((char) => isNaN(char) && !sep.includes(char))) {
+    throw('[Error] 잘못된 문자가 포함되어 있습니다.')
+  };
+}
+
 const checkLine = (line) => {
   checkMaximumLength(line);
 }
@@ -25,6 +31,7 @@ const checkCustomPart = (str) => {
 }
 
 const checkLinePart = (str, sep) => {
+  checkIncludeInvalidCharacter(str, sep);
 }
 
 const checkIsNormal = (line) => !line.split('').some((char) => !DEFAULT_ELEMENTS.includes(char));
