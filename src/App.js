@@ -14,6 +14,8 @@ class App {
 				answer = 0;
 			} else if (isSingleCharacter(res)) {
 				answer = +res;
+			} else if (!isNaN(res)) {
+				answer = [...res];
 			} else if (res.startsWith('//')) {
 				answer = splitByCustomSeparator(res);
 			} else {
