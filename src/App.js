@@ -12,6 +12,12 @@ class App {
     if (inputStr.match(defaultSeparators)) {
       numbersArr = inputStr.split(defaultSeparators).map(Number); // 문자열을 숫자 배열로 변환
     }
+
+    // 커스텀 구분자로 계산(형식: //구분자\n숫자들)
+    else if (inputStr.startsWith("//") && inputStr.substring(3, 5) === "\\n") {
+      const customSeparator = inputStr[2]; // 커스텀 구분자 추출
+      numbersArr = inputStr.substring(5).split(customSeparator).map(Number); // 커스텀 구분자로 문자열 분리
+    }
   }
 }
 
