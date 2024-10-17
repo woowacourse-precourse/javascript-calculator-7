@@ -6,12 +6,16 @@ class App {
       "덧셈할 문자열을 입력해 주세요. :"
     );
 
-    const splitNums = this.splitStrings(input);
-    const result = this.addCalculate(splitNums);
+    const splitNums = this.splitString(input);
+    const result = this.addNums(splitNums);
     Console.print(`결과 : ${result}`);
   }
 
-  splitStrings(input) {
+  splitString(input) {
+    if (!input || input.trim() === "") {
+      return [0];
+    }
+
     const result = input.match(/\/\/(.*?)\\n(.*)/);
     if (result) {
       const splitters = this.setSplitters(result[1]);
@@ -32,7 +36,7 @@ class App {
     return defaultSplitters + escapedSplitter;
   }
 
-  addCalculate(nums) {
+  addNums(nums) {
     return nums.reduce((acc, cur) => acc + cur, 0);
   }
 }
