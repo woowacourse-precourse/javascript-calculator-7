@@ -1,8 +1,6 @@
 class StringCalculator {
   add(input) {
-    if (!input) {
-      return 0;
-    }
+    if (!input) return 0;
 
     let numbers = input;
     const delimiters = [",", ":"];
@@ -19,12 +17,8 @@ class StringCalculator {
 
     const parsedNumbers = splitNumbers.map((num) => {
       const parsed = parseInt(num, 10);
-      if (isNaN(parsed)) {
-        throw new Error("[ERROR] 잘못된 형식의 입력입니다.");
-      }
-      if (parsed < 0) {
-        throw new Error("[ERROR] 음수는 입력할 수 없습니다.");
-      }
+      if (isNaN(parsed)) throw new Error("[ERROR] 잘못된 형식의 입력입니다.");
+      if (parsed < 0) throw new Error("[ERROR] 음수는 입력할 수 없습니다.");
       return parsed;
     });
 
