@@ -68,9 +68,9 @@
 
 ## 구현 체크리스트
 
-- [ x ] 문자열 입력받기
-  - [ x ] `@woowacourse/mission-utils` 의 `Console.readLineAsync()` 를 활용
-- [ ] 커스텀 구분자가 있는지 검사하는 메서드 구현
+- [x] 문자열 입력받기
+  - [x] `@woowacourse/mission-utils` 의 `Console.readLineAsync()` 를 활용
+- [x] 커스텀 구분자가 있는지 검사하는 메서드 구현
 - [ ] 커스텀 구분자 지정하는 메서드 구현
   - [ ] 잘못된 입력 예외처리
     - [ ] [커스텀 구분자] 입력 도중 공백이 나오는 경우
