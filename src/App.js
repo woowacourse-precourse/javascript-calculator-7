@@ -5,8 +5,17 @@ class App {
     const [index, sep] = this.separator(input_data);
     const string_data = input_data.slice(index);
     const num_list = [...this.separateNum(string_data, sep)];
+    const sum = this.addNum(num_list);
+    MissionUtils.Console.print(`결과 : ${sum}`);
   }
 
+  addNum(numList) {
+    var sum = 0;
+    for (var i = 0; i < numList.length; i++) {
+      sum += parseInt(numList[i]);
+    }
+    return sum;
+  }
   separateNum(str, sep) {
     str = str.replace(":", "").replace(",", "").replace(sep, "");
     return str;
