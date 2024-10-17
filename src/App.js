@@ -2,9 +2,16 @@ import { Console } from "@woowacourse/mission-utils";
 import { MESSAGE } from "./constants.js";
 
 class App {
-  async readInput() {
-    const userInput = await Console.readLineAsync(MESSAGE.INPUT);
-    return userInput;
+  handleError(messages) {
+    const formattedMessage = `[ERROR] ${messages}`;
+    throw Error(formattedMessage);
+  }
+
+  validateNumbers(strings) {
+    for (const string of strings) {
+      if (isNaN(Number(string)))
+        this.handleError("문자열의 숫자와 구분자가 유효한지 확인해주세요.");
+    }
   }
 
   parseStringToNumbers(string) {
@@ -18,9 +25,11 @@ class App {
     }
 
     const regex = new RegExp(`[${defaultDelimiters.join("")}]`);
-    const numbers = result.split(regex);
+    const strings = result.split(regex);
 
-    return this.parseToNumber(numbers);
+    this.validateNumbers(strings);
+
+    return this.parseToNumber(strings);
   }
 
   parseCustomDelimiters(string, defaultDelimiters) {
@@ -42,6 +51,11 @@ class App {
     for (const number of numbers) result += number;
 
     return result;
+  }
+
+  async readInput() {
+    const userInput = await Console.readLineAsync(MESSAGE.INPUT);
+    return userInput;
   }
 
   printResult(result) {
