@@ -1,65 +1,26 @@
-import View from "./view/View.js";
-import Constant from "./constants/Constant.js";
+import View from "./View.js";
+import Separator from "./Separate.js";
+import Validate from "./Validate.js";
+import Calculate from "./calculate.js";
 
 class App {
+  constructor() {}
+
   async run() {
     const view = new View();
+    const separator = new Separator();
+    const validate = new Validate();
+    const calculate = new Calculate();
 
     const userInput = await view.inputPrompt();
-    const customSeparator = this.isCustomSeparator(userInput);
-    const inputArr = this.userValueArr(userInput, customSeparator);
-    const verifiedArr = this.validateValue(inputArr);
-    const sum = this.calculate(verifiedArr);
 
-    view.outputView(sum);
-  }
+    const customSeparator = separator.isCustomSeparator(userInput);
+    const inputArr = separator.userValueArr(userInput, customSeparator);
 
-  isCustomSeparator(user) {
-    const match = user.match(Constant.CUSTOM_SEPARATOR_REGEX);
+    const verifiedArr = validate.validateValue(inputArr);
+    const result = calculate.sum(verifiedArr);
 
-    return match ? match[1] : null;
-  }
-
-  userValueArr(user, customSeparator) {
-    let arr = [];
-    if (customSeparator) {
-      let newUserString = this.removeCustomCondition(user);
-      arr = newUserString.split(Constant.DEFAULT_SEPARATOR_REGEX);
-      arr = newUserString.split(customSeparator);
-      return arr;
-    }
-    arr = user.split(Constant.DEFAULT_SEPARATOR_REGEX);
-    return arr;
-  }
-
-  removeCustomCondition(user) {
-    const start = user.indexOf(Constant.CUSTOM_CONDITION_FIRST_STR);
-    const end = user.indexOf(Constant.CUSTOM_CONDITION_LAST_STR) + 1;
-
-    return user.slice(0, start) + user.slice(end);
-  }
-
-  validateValue(arr) {
-    let tempArr = [];
-    for (let str of arr) {
-      tempArr.push(Number(str));
-    }
-
-    for (let i = 0; i < tempArr.length; i++) {
-      if (isNaN(tempArr[i]) || tempArr[i] < 0) {
-        throw new Error(Constant.ERROR_MESSAGE);
-      }
-    }
-
-    return tempArr;
-  }
-
-  calculate(arr) {
-    let sum = 0;
-    for (let num of arr) {
-      sum += num;
-    }
-    return sum;
+    view.outputView(result);
   }
 }
 

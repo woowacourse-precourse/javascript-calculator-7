@@ -1,5 +1,5 @@
 import { Console } from "@woowacourse/mission-utils";
-import Constant from "../constants/Constant.js";
+import Constant from "./constants/Constant.js";
 
 class View {
   async inputPrompt() {
@@ -7,8 +7,8 @@ class View {
     return userInput;
   }
 
-  outputView(sum) {
-    Console.print(`${Constant.RESULT_MESSAGE}${sum}`);
+  outputView(result) {
+    Console.print(`${Constant.RESULT_MESSAGE}${result}`);
   }
 }
 
