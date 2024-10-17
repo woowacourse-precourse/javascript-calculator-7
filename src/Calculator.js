@@ -25,11 +25,8 @@ export class Calculator {
       result = input.split(regexText);
     }
     // result type :  array<string>
+    if (minCheck) return { error: true };
 
-    for (let index = 0; index < result.length; index++) {
-      let preNum = parseFloat(result[index]);
-      if (preNum < 0 || isNaN(preNum)) return { error: true };
-    }
     result = result.map((number) => {
       let preNum = parseFloat(number);
       if ((preNum * 10) % 10 == 0) {
@@ -39,6 +36,14 @@ export class Calculator {
     });
 
     return { error: false, numbers: result };
+  }
+
+  minCheck(numbers) {
+    for (let index = 0; index < result.length; index++) {
+      let preNum = parseFloat(result[index]);
+      if (preNum < 0 || isNaN(preNum)) return false;
+    }
+    return true;
   }
 
   // add 함수내 파라미터를 레스트 파라미터로 설정
