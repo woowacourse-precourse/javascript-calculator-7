@@ -1,4 +1,7 @@
 class App {
+  separators = [',', ':'];
+  extractedNumbers = [];
+
   async run() {}
 }
 
