@@ -18,10 +18,10 @@ class App {
     // 정규식을 동적으로 생성
     const DELIMITER_REGEX = new RegExp(`[,:${CUSTOM_DELIMITER}]`);
 
-    // 입력 받은 문자열을 숫자로 변환
+    // 구분자에 따라 입력 받은 문자열을 숫자로 변환
     const numbers = input.split(DELIMITER_REGEX).map(Number);
 
-    //에러처리
+    // 에러처리
     // 숫자가 아닌 문자열이 포함되어 있는 경우
     if (numbers.some((number) => isNaN(Number(number)))) {
       throw new Error(Errors.NOT_NUMBER);
@@ -49,6 +49,8 @@ class App {
       // 커스텀 구분자가 잘못된 경우
       throw new Error(Errors.WRONG_CUSTOM_DELIMITER);
     }
+
+    return false;
   }
 }
 
