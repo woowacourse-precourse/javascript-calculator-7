@@ -2,61 +2,56 @@ import { Console } from '@woowacourse/mission-utils';
 
 class App {
   async run() {
-    const USER_INPUT = (
+    const userInput = (
       await Console.readLineAsync('덧셈할 문자열을 입력해 주세요.\n')
     ).trim();
 
-    const DEFAULT_SEPARATOR = /[,:]/;
+    let defaultSeparator = /[,:]/;
 
-    const CUSTOM_SYMBOLS = /\/\/(.+)\\n/;
+    const userInputSeparate = (userInput) => {
+      const customSymbols = /\/\/(.+)\\/;
 
-    const USER_INPUT_SPLIT = USER_INPUT.split('n');
+      if (!customSymbols.test(userInput) && defaultSeparator.test(userInput)) {
+        const userInputNumber = userInput.split(defaultSeparator);
 
-    const CUSTOM_SEPARATOR = (USER_INPUT) => {
-      if (CUSTOM_SYMBOLS.test(USER_INPUT)) {
-        const USER_CUSTOM_SYMBOLS = USER_INPUT_SPLIT[0];
-        const RE_USER_CUSTOM_SYMBOLS = USER_CUSTOM_SYMBOLS.replace('//', '');
-        const CUSTOM_SEPARATOR = RE_USER_CUSTOM_SYMBOLS.slice(
+        return userInputNumber;
+      } else if (userInput.includes('n') && customSymbols.test(userInput)) {
+        const inputSplit = userInput.split('n');
+
+        const userCustomSymbols = inputSplit[0];
+        const reCustomSymbols = userCustomSymbols.replace('//', '');
+        const customSeparator = reCustomSymbols.slice(
           0,
-          RE_USER_CUSTOM_SYMBOLS.length - 1
+          reCustomSymbols.length - 1
         );
-        return CUSTOM_SEPARATOR;
-      } else if (!CUSTOM_SYMBOLS.test(USER_INPUT)) {
-        throw new Error('[ERROR] 커스텀 구분자 생성 기호가 올바르지 않습니다.');
+
+        const userInputNumber = inputSplit[1].split(customSeparator);
+
+        return userInputNumber;
+      } else {
+        throw new Error(ERROR.CUSTOM_SEPERATOR_ERROR);
       }
     };
 
-    const USER_CUSTOM_SEPARATOR = CUSTOM_SEPARATOR(USER_INPUT);
+    const userInputNumber = userInputSeparate(userInput);
 
-    const SUM_CACULATOR = (USER_INPUT) => {
+    const sumCaculator = (userInputNumber) => {
       let sum = 0;
 
-      for (let i = 0; i < USER_INPUT.length; i++) {
-        sum += parseInt(USER_INPUT[i]);
+      for (let i = 0; i < userInputNumber.length; i++) {
+        sum += parseInt(userInputNumber[i]);
       }
 
       return sum;
     };
 
-    const CACULATOR = (USER_INPUT) => {
-      if (CUSTOM_SYMBOLS.test(USER_INPUT)) {
-        const USER_CUSTOM_SYMBOLS = USER_INPUT_SPLIT[1];
-        const USER_INPUT_NUMBER = USER_CUSTOM_SYMBOLS.split(
-          USER_CUSTOM_SEPARATOR
-        );
-        const OUTPUT = SUM_CACULATOR(USER_INPUT_NUMBER);
+    const caculator = (userInputNumber) => {
+      const caculation = sumCaculator(userInputNumber);
 
-        return OUTPUT;
-      } else {
-        const USER_INPUT_NUMBER = USER_INPUT.split(DEFAULT_SEPARATOR);
-
-        const OUTPUT = SUM_CACULATOR(USER_INPUT_NUMBER);
-
-        return OUTPUT;
-      }
+      return caculation;
     };
 
-    Console.print('결과 : ' + CACULATOR(USER_INPUT));
+    Console.print('결과 : ' + caculator(userInputNumber));
   }
 }
 
