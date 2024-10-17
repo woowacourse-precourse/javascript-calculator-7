@@ -2,6 +2,7 @@ class App {
   async run() {
     try {
       const input = await Console.readLineAsync('덧셈할 문자열을 입력해 주세요.\n'); // 문자열 입력
+      const result = this.calculate(input); // 계산 결과 얻기
     } catch (error) {
       this.handleError(); // 예외 처리
     }
@@ -53,6 +54,14 @@ class App {
       this.handleError();
     }
     return numbers.reduce((acc, num) => acc + num, 0);
+  }
+
+  // 6. 계산 과정 통합
+  calculate(input) {
+    input = this.validateInput(input); // 입력 검증
+    const { delimiter, numbers } = this.getDelimiter(input); // 구분자 및 숫자 추출
+    const numberList = this.splitByDelimiter(numbers, delimiter); // 구분자로 문자열 분리
+    return this.sumNumbers(numberList); // 숫자 합산
   }
 
 }
