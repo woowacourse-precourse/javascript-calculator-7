@@ -1,7 +1,7 @@
 import { Console } from "@woowacourse/mission-utils";
 
 class App {
-  separator = new Set(":", ",");
+  separator = new Set([":", ","]);
 
   findCustomSeparator = (input) => {
     // 커스텀 구분자가 있는지 확인한다.
