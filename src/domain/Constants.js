@@ -1,5 +1,8 @@
 export const ErrorMessage = {
     NEGATIVE_NUMBER: '[ERROR] 음수는 허용되지 않습니다.',
+    EMPTY_NUMBER: '[ERROR] 빈 숫자는 허용되지 않습니다.',
+    INVALID_NUMBER: '[ERROR] 유효하지 않은 숫자입니다.',
+    INVALID_CUSTOM_DELIMITER_FORMAT: '[ERROR] 올바르지 않은 커스텀 구분자 형식입니다.',
 };
 
 export const GuideMessage = {
