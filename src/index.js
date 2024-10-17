@@ -6,7 +6,7 @@ const app = new App();
 async function running() {
     try {
         const PRINT_ANS = await app.run();
-        console.log(PRINT_ANS)
+        console.log('결과: ', PRINT_ANS)
     } catch (error) {
         console.log("[ERROR]가 발생하였습니다.");
         console.log(error)
