@@ -6,11 +6,12 @@ import calculateSum from './calculate';
 
 class App {
   async run() {
-    const input = await userInput();
-    const separator = new Separator(input);
-    const value = separator.separate();
-
     try {
+      const input = await userInput();
+
+      const separator = new Separator(input);
+      const value = separator.separate();
+
       ErrorHandler.validatePositiveNumbers(value);
       printMessage(calculateSum(value));
     } catch (error) {

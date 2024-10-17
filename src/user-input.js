@@ -3,8 +3,7 @@ import { printMessage } from './print-message';
 import { PROMPT_USER_INPUT } from './constant';
 
 async function userInput() {
-  printMessage(PROMPT_USER_INPUT);
-  return await Console.readLineAsync();
+  return await Console.readLineAsync(PROMPT_USER_INPUT);
 }
 
 export default userInput;
