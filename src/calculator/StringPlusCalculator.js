@@ -11,7 +11,7 @@ class StringPlusCalculator {
     if (hasCustomDelimiter(input)) {
       this.addCustomDelimiter(input);
     }
-    const newCalculateString = this.replaceDelimitersToSpace(input);
+    const newCalculateString = this.replaceDelimitersToComma(input);
     this.number = 0;
     let sum = '';
     for (let i = 0; i < newCalculateString.length; i += 1) {
@@ -21,7 +21,7 @@ class StringPlusCalculator {
         if (char === '-') {
           throw new Error('[ERROR] 숫자는 양수만 사용할 수 있습니다.');
         }
-        if (char !== ' ') {
+        if (char !== ',') {
           throw new Error('[ERROR] 등록되지 않은 구분자입니다.');
         }
         this.number += Number(sum);
@@ -31,10 +31,9 @@ class StringPlusCalculator {
       }
     }
     this.number += Number(sum);
-    console.log(this.number);
   }
 
-  replaceDelimitersToSpace(input) {
+  replaceDelimitersToComma(input) {
     const calculateString = input.slice(this.numberStartIdx);
     let newCalculateString = calculateString;
     for (let i = 0; i < this.delimiter.length; i += 1) {
@@ -43,7 +42,7 @@ class StringPlusCalculator {
         '\\$&',
       );
       const regex = new RegExp(delimiter, 'g');
-      newCalculateString = newCalculateString.replace(regex, ' ');
+      newCalculateString = newCalculateString.replace(regex, ',');
     }
     return newCalculateString;
   }
