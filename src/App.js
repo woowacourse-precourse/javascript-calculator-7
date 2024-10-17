@@ -14,6 +14,12 @@ class App {
 
     let num = 0;
     found.map((item) => (num += Number(item)));
+    this.printresult(num);
+  }
+
+  //더한 값 출력
+  printresult(num) {
+    MissionUtils.Console.print(`결과 : ${num}`);
   }
 }
 
