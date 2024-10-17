@@ -28,6 +28,9 @@ class App {
 
     // 문자열 계산
     const result = this.numberReducer(input.split(","));
+
+    // 결과 출력
+    Console.print(`결과 : ${result}`);
   }
 
   numberReducer(list) {
