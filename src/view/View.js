@@ -1,14 +1,15 @@
 import { Console } from "@woowacourse/mission-utils";
-
+import { GuideMessage } from "../domain/Constants"
+    ;
 const View = {
 
     async readInputStirng() {
-        const input = await Console.readLineAsync("덧셈할 문자열을 입력해 주세요.\n");
+        const input = await Console.readLineAsync(GuideMessage.START_CALCULATION);
         return input;
     },
 
     async printResult(result) {
-        await Console.print(`결과 : ${result}`);
+        await Console.print(`${GuideMessage.RESULT}${result}`);
     },
 
     printErrorMessage(message) {

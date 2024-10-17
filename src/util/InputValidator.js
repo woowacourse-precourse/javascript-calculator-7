@@ -1,35 +1,37 @@
+import { ErrorMessage, Delimiter, StaticNumber } from '../domain/Constants.js';
+
 const InputValidator = {
-    validateInputString(input) {
-      if (input === null || input.trim() === "") return [0];
-  
-      const { delimiter, numbers } = this.parseInput(input);
-      const splitNumbers = numbers.split(delimiter);
-  
-      return splitNumbers.map(num => {
-        const trimmedNum = num.trim();
-        
-        const parsedNum = parseInt(trimmedNum, 10);
-        
-        if (parsedNum < 0) {
-          throw new Error("[ERROR] 음수는 허용되지 않습니다.");
-        }
-        return parsedNum;
-      });
-    },
-  
-    parseInput(input) {
-      if (input.startsWith("//")) {
-        const [delimiterPart, numbersPart] = input.split("\\n");
-        return {
-          delimiter: delimiterPart.slice(2),
-          numbers: numbersPart
-        };
+  validateInputString(input) {
+    if (input === null || input.trim() === "") return [StaticNumber.INITIAL_SUM];
+
+    const { delimiter, numbers } = this.parseInput(input);
+    const splitNumbers = numbers.split(delimiter);
+
+    return splitNumbers.map(num => {
+      const trimmedNum = num.trim();
+      
+      const parsedNum = parseInt(trimmedNum, StaticNumber.RADIX);
+      
+      if (parsedNum < 0) {
+        throw new Error(ErrorMessage.NEGATIVE_NUMBER);
       }
+      return parsedNum;
+    });
+  },
+
+  parseInput(input) {
+    if (input.startsWith(Delimiter.CUSTOM_PREFIX)) {
+      const [delimiterPart, numbersPart] = input.split(Delimiter.CUSTOM_SUFFIX);
       return {
-        delimiter: /[,:]/, // 기본 구분자로 쉼표와 콜론 모두 사용
-        numbers: input
+        delimiter: delimiterPart.slice(Delimiter.CUSTOM_PREFIX.length),
+        numbers: numbersPart
       };
     }
-  };
-  
-  export default InputValidator;
+    return {
+      delimiter: Delimiter.DEFAULT,
+      numbers: input
+    };
+  }
+};
+
+export default InputValidator;
