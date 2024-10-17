@@ -68,7 +68,7 @@ ___
    - 입력 문자열을 구분자를 기준으로 분리
    - 분리된 결과값 배열로 반환(tokens)
 
-4. **isValidateInput(tokens,delimiters)**
+4. **isValidInput(tokens,delimiters)**
     - 입력 값이 유효한지 확인
     - 유효하지 않다면 Error 반환
     - 유효하지 않은 기준
