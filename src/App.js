@@ -1,9 +1,15 @@
 import addCal from "./calculator.js";
+import { Console } from "@woowacourse/mission-utils";
 
 class App {
   async run() {
-    const result = addCal("//;\n 1;3;4;5;-1");
-    console.log(`결과: ${result}`);
+    try {
+      const input = await Console.readLineAsync("덧셈할 문자열을 입력해 주세요.\n");
+      const result = addCal(input);
+      Console.print(`결과 : ${result}`);
+    } catch (error) {
+      Console.print(error.message); // 에러 메시지 출력
+    }
   }
 }
 
