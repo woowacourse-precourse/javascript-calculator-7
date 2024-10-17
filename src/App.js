@@ -2,12 +2,18 @@ import { MissionUtils } from "@woowacourse/mission-utils";
 class App {
   async run() {
     const input_data = await MissionUtils.Console.readLineAsync();
-    const sep = this.separator(input_data);
+    const [index, sep] = this.separator(input_data);
+    const string_data = input_data.slice(index);
+    const num_list = [...this.separateNum(string_data, sep)];
   }
 
+  separateNum(str, sep) {
+    str = str.replace(":", "").replace(",", "").replace(sep, "");
+    return str;
+  }
   separator(str) {
     if (str[0] !== "/" || str[1] !== "/") {
-      return ""; // 커스텀 구분자가 없다.
+      return [0, ""]; // 커스텀 구분자가 없다.
     }
     var customSep = "";
     var i = 2;
@@ -16,8 +22,8 @@ class App {
       customSep = customSep + str[i];
       i += 1;
       checkEnd = str[i] + str[i + 1];
-    }
-    return customSep;
+    } // string.length - 2까지 가면 에러 처리 필요
+    return [i + 2, customSep];
   }
 }
 
