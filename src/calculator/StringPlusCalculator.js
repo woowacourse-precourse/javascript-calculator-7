@@ -16,8 +16,7 @@ class StringPlusCalculator {
     let sum = '';
     for (let i = 0; i < newCalculateString.length; i += 1) {
       const char = newCalculateString[i];
-      const asciiCode = char.charCodeAt();
-      if (asciiCode < 48 || asciiCode > 57) {
+      if (!/\d/.test(char)) {
         if (char === '-') {
           throw new Error('[ERROR] 숫자는 양수만 사용할 수 있습니다.');
         }
@@ -55,15 +54,15 @@ class StringPlusCalculator {
     let customDelimiter = '';
     const newlineReplacedInput = input.replace(/\\n/, '\n');
     for (let idx = 2; idx < newlineReplacedInput.length; idx += 1) {
-      if (newlineReplacedInput[idx] === '\n') {
+      const char = newlineReplacedInput[idx];
+      if (char === '\n') {
         this.numberStartIdx = idx + 2;
         break;
       }
-      if (newlineReplacedInput[idx] === ' ') {
+      if (char === ' ') {
         throw new Error('[ERROR] 커스텀 구분자에 공백이 포함될 수 없습니다.');
       }
-      const asciiCode = newlineReplacedInput[idx].charCodeAt();
-      if (asciiCode >= 48 && asciiCode <= 57) {
+      if (/\d/.test(char)) {
         throw new Error('[ERROR] 커스텀 구분자에 숫자가 포함될 수 없습니다.');
       }
       customDelimiter += newlineReplacedInput[idx];
