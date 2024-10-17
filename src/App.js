@@ -5,8 +5,7 @@ class App { //하나의 메소드는 하나의 역할
   customSeparator = "" //인스턴스 변수는 최대 2개
   async run() { //풀이 결과 반환 담당, 메소드명만 봐도 무슨역할인지 알 수 있게
     const input = await Console.readLineAsync("덧셈할 문자열을 입력해 주세요.\n")
-    this.isCustom(input)
-    this.calculator([...input])
+    this.calculator([...this.isCustom(input)])
     this.resultOutput()
   }
 
@@ -21,7 +20,7 @@ class App { //하나의 메소드는 하나의 역할
   }
 
   isSeparator(value){//구분자 판단
-    return value === "," || value === ":" ? 0 : value
+    return value === "," || value === ":" ||  value === this.customSeparator ? 0 : value
   }
 
   resultOutput(){
@@ -33,7 +32,6 @@ class App { //하나의 메소드는 하나의 역할
       this.sum += Number(this.isSeparator(element))
     }
   }
-
 }
 
 export default App;
