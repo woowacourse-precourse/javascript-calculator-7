@@ -15,13 +15,11 @@ class App {
 				//커스텀 구분자
 				const delimiter = answer.substring(2, 3);
 				const numbers = answer.split('\\n')[1].split(delimiter);
-				Console.print(numbers);
 				const sum = numbers.map(Number).reduce((a, b) => a + b, 0);
 				Console.print(`결과 : ${sum}`);
 			} else {
 				//일반 구분자
 				const numbers = answer.split(/[:,]/);
-				Console.print(numbers);
 				const sum = numbers.map(Number).reduce((a, b) => a + b, 0);
 				Console.print(`결과 : ${sum}`);
 			}
