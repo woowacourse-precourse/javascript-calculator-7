@@ -1,5 +1,5 @@
 import View from "./view/View.js";
-import Constant from "./constants.js/Constant.js";
+import Constant from "./constants/Constant.js";
 
 class App {
   async run() {
