@@ -3,17 +3,11 @@ import { errorMessage } from "./utils/errorMessage.js";
 
 class Calculator {
     async start() {
-        let keepGoing = true;
-        MissionUtils.Console.print('문자열 덧셈 계산기를 실행합니다.');
-        while(keepGoing) {
-            try {
-                await this.GetUserInput();
-                keepGoing = await this.handleApplication();  
-            } catch (error) {
-                MissionUtils.Console.print(error.message); 
-                keepGoing = false;
-                this.closeCalculator();  
-            }
+        try {
+            await this.GetUserInput();
+        } catch (error) {
+            MissionUtils.Console.print(error.message); 
+            throw new Error('[ERROR]');
         }
     }
 
@@ -22,7 +16,7 @@ class Calculator {
         
         // 올바른 값인지 확인
         const result = this.validateInput(userInput);
-        if (result) MissionUtils.Console.print(`결과: ${result}`);
+        if (result) MissionUtils.Console.print(`결과 : ${result}`);
     }
 
     validateInput(input) {
@@ -60,7 +54,7 @@ class Calculator {
         if(numbers && numbers.length > 0) {
             isPositiveNum = numbers.every(v => v > 0);
             // 올바른 값일 때
-            if(isPositiveNum && hasDefaultSeparator && !includeInvalidStr) {
+            if(isPositiveNum && !includeInvalidStr) {
                const sum = numbers.reduce((acc, curr) => acc + curr, 0);
                result = sum;
             }
@@ -75,38 +69,11 @@ class Calculator {
     handleError(hasDefaultSeparator, isPositiveNum, includeInvalidStr) {
         if(!hasDefaultSeparator && !isPositiveNum) {
             throw new Error(errorMessage.NONE_OF_THE_VALUE);
-           } else if(!hasDefaultSeparator) {
-               throw new Error(errorMessage.NO_SEPARATOR);
-           } else if(includeInvalidStr) {
-                throw new Error(errorMessage.INCLUDE_INVALID_VALUE);
-           } else if(!isPositiveNum) {
-               throw new Error(errorMessage.NOT_POSITIVE_NUM);
-           }
-    }
-
-    async handleApplication() {
-        let isValidInput = false;
-        while (!isValidInput) {
-            const keepGoingInput = await MissionUtils.Console.readLineAsync('계속하시겠습니까?(y/n)\n');
-            isValidInput = this.validateKeepGoingInput(keepGoingInput);
-            if(isValidInput){
-                if(keepGoingInput === 'n') this.closeCalculator();
-                return keepGoingInput === 'y' ? true : false;
-            }
+        } else if(includeInvalidStr) {
+            throw new Error(errorMessage.INCLUDE_INVALID_VALUE);
+        } else if(!isPositiveNum) {
+            throw new Error(errorMessage.NOT_POSITIVE_NUM);
         }
-    }
-
-    closeCalculator() {
-        MissionUtils.Console.print('문자열 덧셈 계산기를 종료합니다.');
-    }
-
-    validateKeepGoingInput(string) {
-        const isValid = string === 'y' || string === 'n';
-        if(!isValid) {
-            MissionUtils.Console.print('y 또는 n으로 입력해주세요.');
-            return false;
-        }
-        return isValid;
     }
 }
 
