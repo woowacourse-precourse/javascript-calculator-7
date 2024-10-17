@@ -1,3 +1,5 @@
+import Calculator from './calculator.js';
+
 export default function splitInputs(inputs) {
     let splitedInputs = [];
     if (inputs.includes(':') === true) {
@@ -7,9 +9,5 @@ export default function splitInputs(inputs) {
     }
     const splitedNum = splitedInputs.map((num) => Number(num));
 
-    let sum = 0;
-    splitedNum.forEach((n) => {
-        sum += n;
-    });
-    return sum;
+    return Calculator(splitedNum);
 }

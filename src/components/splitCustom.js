@@ -1,16 +1,14 @@
+import Calculator from './calculator.js';
+
 export default function splitCustom(inputs) {
-  let splitedInputs = [];
-  let startIdx = inputs.indexOf('//');
-  let endIdx = inputs.indexOf('\\n', startIdx);
-  let customDelimiter = inputs.substring(startIdx + 2, endIdx).trim();
+    let splitedInputs = [];
+    const startIdx = inputs.indexOf('//');
+    const endIdx = inputs.indexOf('\\n', startIdx);
+    const customDelimiter = inputs.substring(startIdx + 2, endIdx).trim();
 
-  splitedInputs = inputs.substring(endIdx + 2).split(customDelimiter);
+    splitedInputs = inputs.substring(endIdx + 2).split(customDelimiter);
 
-  const splitedNum = splitedInputs.map((num) => Number(num));
+    const splitedNum = splitedInputs.map((num) => Number(num));
 
-  let sum = 0;
-  splitedNum.forEach((n) => {
-    sum += n;
-  });
-  return sum;
+    return Calculator(splitedNum);
 }
