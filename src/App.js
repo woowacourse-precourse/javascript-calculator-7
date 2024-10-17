@@ -42,10 +42,11 @@ class App {
       // 4. 숫자인 경우만 출력값에 합하는 기능 구현
       var output = 0;
       NumberArray.map((value, index) => {
-        if (!Number(value) && value.length >= 1)
+        if ((!Number(value) && value.length >= 1) || Number(value) < 0)
           throw new Error('[ERROR]');
-        else
+        else {
           output += Number(value);
+        }
       })
 
       // 결과 출력
