@@ -31,6 +31,7 @@ class StringPlusCalculator {
       }
     }
     this.number += Number(sum);
+    console.log(this.number);
   }
 
   replaceDelimitersToSpace(input) {
