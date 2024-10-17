@@ -39,7 +39,9 @@ class App {
   // 존재한다면 커스텀 구분자로 나눈 배열의 각 원소가 유효한지
   isValidCustomDelimiter(input) {
     const match = input.match(App.CUSTOM_DELIMITER_REGEX);
-    if (match[1] === "," || match[1] === ":") {
+    // match가 존재하지 않는다면 match의 1번째 index를 확인하는 과정에서 TypeError 발생
+    // 따라서 match가 존재하는지도 조건을 넣어줘야 함
+    if (match && (match[1] === "," || match[1] === ":")) {
       return false;
     } else if (match) {
       // '//custom_delimiter\n'을 제외한 문자열
