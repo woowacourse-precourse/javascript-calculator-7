@@ -25,20 +25,23 @@ export class Calculator {
       result = input.split(regexText);
     }
     // result type :  array<string>
-    if (minCheck) return { error: true };
+    if (this.minCheck(result)) return { error: true };
+    result = floatChange(result);
 
-    result = result.map((number) => {
+    return { error: false, numbers: result };
+  }
+  floatChange(result) {
+    const newResult = result.map((number) => {
       let preNum = parseFloat(number);
       if ((preNum * 10) % 10 == 0) {
         preNum = parseInt(preNum);
       }
       return preNum;
     });
-
-    return { error: false, numbers: result };
+    return newResult;
   }
 
-  minCheck(numbers) {
+  minCheck(result) {
     for (let index = 0; index < result.length; index++) {
       let preNum = parseFloat(result[index]);
       if (preNum < 0 || isNaN(preNum)) return false;
