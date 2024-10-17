@@ -1,5 +1,5 @@
 import { Console } from '@woowacourse/mission-utils';
-import { INTRO, RESULT_PREFIX } from './constant';
+import { INTRO, RESULT_PREFIX } from './constant.js';
 
 class IOManager {
   static async input() {
