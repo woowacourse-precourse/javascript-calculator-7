@@ -32,6 +32,9 @@ class App {
       for (const NUM of NUMBERS) {
         RESULT += NUM;
       }
+
+      // 결과 출력 
+      Console.print(`결과 : ${RESULT}`);
     }
 }
 
