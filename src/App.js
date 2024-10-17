@@ -29,13 +29,15 @@ class App {
     const elementNumber = Number(firstElement);
     if (!Number.isNaN(elementNumber)) {
       this.#inputNumbers = inputString;
-      return [',', ':'];
+      this.#separators = [',', ':'];
+    } else {
+      const removedFormatString = inputString.split('//').join('').split('\n');
+      const [separator, numberString] = removedFormatString;
+      this.#inputNumbers = numberString;
+      this.#separators = [...separator];
     }
 
-    const removedFormatString = inputString.split('//').join('').split('\n');
-    const [separator, numberString] = removedFormatString;
-    this.#inputNumbers = numberString;
-    return [...separator];
+    return this;
   }
 
   extractNumbers() {
