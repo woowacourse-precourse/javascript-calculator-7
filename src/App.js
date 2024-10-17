@@ -8,6 +8,24 @@ class App {
 
     const DEFAULT_SEPARATOR = /[,:]/;
 
+    const CUSTOM_SYMBOLS = /\/\/(.+)n/;
+
+    const CUSTOM_SEPARATOR = (USER_INPUT) => {
+      if (CUSTOM_SYMBOLS.test(USER_INPUT)) {
+        const USER_INPUT_SPLIT = USER_INPUT.split('n');
+        const USER_CUSTOM_SYMBOLS = USER_INPUT_SPLIT[0];
+        const RE_USER_CUSTOM_SYMBOLS = USER_CUSTOM_SYMBOLS.replace('//', '');
+        const CUSTOM_SEPARATOR = RE_USER_CUSTOM_SYMBOLS.slice(
+          0,
+          RE_USER_CUSTOM_SYMBOLS.length - 1
+        );
+
+        return CUSTOM_SEPARATOR;
+      } else if (!CUSTOM_SYMBOLS.test(USER_INPUT)) {
+        throw new Error('[ERROR]');
+      }
+    };
+
     const DEFAULT_CACULATOR = (USER_INPUT) => {
       const USER_INPUT_NUMBER = USER_INPUT.split(DEFAULT_SEPARATOR);
 
@@ -19,7 +37,8 @@ class App {
       return sum;
     };
 
-    Console.print('결과 : ' + DEFAULT_CACULATOR(USER_INPUT));
+    // 확인용
+    Console.print('결과 : ' + CUSTOM_SEPARATOR(USER_INPUT));
   }
 }
 
