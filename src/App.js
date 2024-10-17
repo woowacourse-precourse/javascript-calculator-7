@@ -30,18 +30,20 @@ class App {
       input = input.split(separator).join(",");
     }
 
+    const inputList = input.split(",");
+
     // 숫자가 아닌 값 처리
-    if (input.some((value) => isNaN(+value))) {
+    if (inputList.some((value) => isNaN(+value))) {
       throw new Error('[ERROR] 숫자만 입력 가능합니다.');
     }
 
     // 음수 처리
-    if (input.some((value) => +value < 0)) {
+    if (inputList.some((value) => +value < 0)) {
       throw new Error("[ERROR] 음수는 입력할 수 없습니다.");
     }
 
     // 문자열 계산
-    const result = this.numberReducer(input.split(","));
+    const result = this.numberReducer(inputList);
 
     // 결과 출력
     Console.print(`결과 : ${result}`);
