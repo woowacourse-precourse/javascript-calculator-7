@@ -8,6 +8,10 @@ export default class Input {
     return this.value.length === 0;
   }
 
+  resultAdd(number) {
+    this.result += number;
+  }
+
   colonCommaValidation() {
     const numberList = this.value.split(/\,|\:/);
     return numberList.every((number) => !isNaN(Number(number)));
