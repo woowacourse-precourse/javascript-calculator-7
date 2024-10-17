@@ -1,7 +1,9 @@
 import {
     SEPERATOR_STRING,
     DEFAULT_SEPERATOR,
-    NUMBER_PATTERN
+    NUMBER_PATTERN,
+    SEPERATOR_SUBTITUTE,
+    NULL_STRING,
 } from '../constant/index.js'
 
 function getSeperatorArray(expression){
@@ -26,18 +28,31 @@ function hasCustomSeperator(expression){
     return expression.startsWith(SEPERATOR_STRING.START) && expression.includes(SEPERATOR_STRING.END);
 }
 
-function hasExpressionError(expression, seperatorArray){
+function hasSeperatorError(expression, seperatorArray){
     seperatorArray.map((seperator) => {
-        expression = expression.replaceAll(seperator, "");
+        expression = expression.replaceAll(seperator, NULL_STRING);
     })
     return NUMBER_PATTERN.test(expression);
 }
 
+function hasExpressionError(numArray){
+    return numArray.includes(NULL_STRING) || numArray.includes(SEPERATOR_SUBTITUTE.repeat(2));
+}
+
+function checkExpressionError(expression, seperetorArray, numArray){
+    if(hasSeperatorError(expression, seperetorArray)){
+        throw new Error('[ERROR] 구분자, 숫자를 제외한 문자가 포함되어 있습니다.');
+    }
+    if(hasExpressionError(numArray)){
+        throw new Error('[ERROR] 숫자와 구분자가 교차되는 형식이 아닙니다.');
+    }
+}
+
 function splitBySeperator(expression, seperatorArray){
     seperatorArray.map((seperator) => {
-        expression = expression.replaceAll(seperator, "@");
+        expression = expression.replaceAll(seperator, SEPERATOR_SUBTITUTE);
     })
-    return expression.split('@');
+    return expression.split(SEPERATOR_SUBTITUTE);
 }
 
 function sumArray(array){
@@ -47,7 +62,7 @@ function sumArray(array){
 export {
     getSeperatorArray,
     getExpressionString,
-    hasExpressionError,
+    checkExpressionError,
     splitBySeperator,
     sumArray,
 }
