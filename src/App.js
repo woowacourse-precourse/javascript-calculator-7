@@ -8,6 +8,8 @@ class App {
     let delimiters = [",", ";"];
 
     this.classifyCharacters(input, numbers, delimiters);
+
+    const sum = this.calculator(numbers);
   }
 
   classifyCharacters(input, numbers, delimiters) {
@@ -40,6 +42,10 @@ class App {
     ) {
       delimiters.push(slicedchars[2]);
     }
+  }
+
+  calculator(numbers) {
+    return numbers.reduce((acc, cur) => acc + cur, 0);
   }
 }
 
