@@ -11,22 +11,16 @@ class App {
 
     const PROCESSED_INPUT = this.handleCustomSeparator(INPUT);
 
-    Console.print(`입력: ${PROCESSED_INPUT}`);
-    Console.print(`현재 구분자 목록: ${this.separators.join('|')}`);
-
-    let result;
-
     if (this.isEmpty(PROCESSED_INPUT)) {
-      result = 0;
-    } else if (PROCESSED_INPUT === 'error') {
-      return this.printError("'error'를 입력했습니다");
-    } else if (!this.validateNumber(PROCESSED_INPUT)) {
-      return this.printError('숫자가 아닌 문자를 입력하셨습니다');
+      this.printResult(0);
     } else {
-      result = PROCESSED_INPUT;
+      try {
+        this.splitAndExtractNumbers(PROCESSED_INPUT);
+        Console.print(`추출된 숫자들: ${this.extractedNumbers.join(', ')}`);
+      } catch (error) {
+        this.printError(error.message);
+      }
     }
-
-    this.printResult(result);
   }
 
   isEmpty(str) {
@@ -55,6 +49,22 @@ class App {
       return true;
     } else {
       return false;
+    }
+  }
+
+  splitAndExtractNumbers(input) {
+    const REGEX = new RegExp(`[${this.separators.join('')}]`, 'g');
+    const NUMBERS = input.split(REGEX);
+
+    if (NUMBERS.some((num) => num.trim() === '')) {
+      throw new Error('구분자 사이에 빈 문자열이 있습니다');
+    }
+
+    for (const NUM of NUMBERS) {
+      if (!this.validateNumber(NUM)) {
+        throw new Error(`숫자가 아닌 문자를 입력하셨습니다`);
+      }
+      this.extractedNumbers.push(Number(NUM));
     }
   }
 
