@@ -87,7 +87,7 @@ class Validator {
     }
 
     isPositiveNumber(numbersArray) {
-        if (!arr.every(num => Number(num) > 0)) {
+        if (!numbersArray.every(num => Number(num) > 0)) {
             throw new Error('[ERROR]: 입력한 숫자가 양수가 아닙니다.');
         }
     }
