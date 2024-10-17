@@ -7,8 +7,8 @@ class App {
 
     let numbers;
 
-    numbers = input.split(/,|:/);
-    Console.print(arr);
+    numbers = input.split(/,|:|\/\/.\\n/);
+    Console.print(numbers);
   }
 }
 
