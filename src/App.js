@@ -20,7 +20,7 @@ class App {
 
     const sum = this.sumAllString(splittedString);
 
-    Console.print(sum);
+    Console.print(`결과 : ${sum}`);
   }
 
   extractCustomSeparator(str) {
