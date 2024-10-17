@@ -3,15 +3,24 @@ import {Console} from "@woowacourse/mission-utils";
 let separator = [",",":"];
 function findSeparator(input){
   const inputArray=input.split("");
-  if(input.slice(0,2)==="//"&&input.slice(3,5)==="\\n"){
-    if(isNaN(input[2])){
-      separator.push(input[2]);
-    }else{
+  if(input.slice(0,2)==="//"){
+    const start = input.indexOf("//")+2;
+    const end = input.indexOf("\\n");
+    if(start===1||end===-1){
       throw new Error("[ERROR]")
+    }else{
+      const customSeparator = input.slice(start, end);
+      if(customSeparator.length>1||!isNaN(customSeparator)){
+        throw new Error("[ERROR]")
+      }else{
+        separator.push(input.slice(customSeparator))
+        return inputArray.slice(end+2);
+      }
     }
-    return inputArray.splice(5);
+
+  }else{
+    return inputArray;
   }
-  return inputArray;
 }
 
 function getNumber(inputArray) {
@@ -26,6 +35,9 @@ function getNumber(inputArray) {
     }else{
       if(!isNaN(currentNum)){
         currentNum += string;
+      }
+      else{
+        throw new Error("[ERROR]")
       }
     }
   })
