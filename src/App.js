@@ -1,5 +1,6 @@
 import { Console } from "@woowacourse/mission-utils";
 import { WRONG_SEPARATOR, WRONG_NUMBER } from "./constants/errorMessage.js";
+import { IS_MINUS } from "./constants/numberMessage.js";
 
 class App {
   #plusString;
@@ -36,6 +37,7 @@ class App {
   checkCustomPattern(originPlusString) {
     let plusString = originPlusString;
     const CUSTOM_PATTERN = /\/\/([^-])\\n/g;
+
     const customSeparator = plusString.match(CUSTOM_PATTERN);
     if (customSeparator) {
       plusString = plusString.replace(CUSTOM_PATTERN, ",");
@@ -47,18 +49,23 @@ class App {
         this.#separatorList.push(separator);
       });
     }
+
     return plusString;
   }
 
-  filterNumber(plusString) {
+  generateSeparatorRegExp() {
     const separators = this.#separatorList.join("");
     const separatorRegex = new RegExp(`[${separators}]+`, "g");
+    return separatorRegex;
+  }
+
+  filterNumber(separatorRegex, plusString) {
     const numberList = plusString.split(separatorRegex).map(Number);
     for (let i = 0; i < numberList.length; i++) {
       if (isNaN(numberList[i])) {
         throw new Error(WRONG_SEPARATOR);
       }
-      if (Math.sign(numberList[i]) === -1) {
+      if (Math.sign(numberList[i]) === IS_MINUS) {
         throw new Error(WRONG_NUMBER);
       }
     }
@@ -68,7 +75,8 @@ class App {
   generatePlusResult() {
     let plusString = this.#plusString;
     plusString = this.checkCustomPattern(plusString);
-    const numberList = this.filterNumber(plusString);
+    const separatorRegex = this.generateSeparatorRegExp();
+    const numberList = this.filterNumber(separatorRegex, plusString);
     this.#plusResult = numberList.reduce((acc, curr) => acc + curr);
   }
 
