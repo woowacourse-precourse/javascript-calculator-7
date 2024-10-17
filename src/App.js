@@ -31,6 +31,15 @@ class App {
     }
   }
 
+  validateHasDelimiter(defaultDelimiters, string) {
+    const hasDelimiter = defaultDelimiters.some((delimiter) =>
+      string.includes(delimiter)
+    );
+
+    if (!hasDelimiter)
+      this.handleError("구분자와 양수로 구성된 문자열을 입력해주세요.");
+  }
+
   parseStringToNumbers(string) {
     if (!string.trim()) return [];
 
@@ -40,6 +49,8 @@ class App {
     if (string.startsWith("//")) {
       result = this.parseCustomDelimiters(string, defaultDelimiters);
     }
+
+    this.validateHasDelimiter(defaultDelimiters, string);
 
     const regex = new RegExp(`[${defaultDelimiters.join("")}]`);
     const strings = result.split(regex);
