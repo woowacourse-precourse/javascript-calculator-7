@@ -5,6 +5,7 @@ import {
   assertCondition,
   isValidCustomSeparator,
   isAllPositive,
+  sumNumbers,
 } from "../src/utils";
 import { MESSAGES } from "../src/constants";
 
@@ -113,5 +114,19 @@ describe("유효성 검사들을 테스트한다.", () => {
     expect(() => {
       assertCondition(!isValidCustomSeparator(customString, customSeparators), MESSAGES.INVALID_CUSTOM_SEPARATOR);
     }).toThrow(MESSAGES.INVALID_CUSTOM_SEPARATOR);
+  });
+});
+
+describe("숫자 배열의 모든 원소의 합을 구한다.", () => {
+  test("[1, 2, 3]의 모든 원소를 합한 값은 6이다.", () => {
+    const numbers = [1, 2, 3];
+
+    expect(sumNumbers(numbers)).toBe(6);
+  });
+
+  test("[1, 2, 3, 4, 5]의 모든 원소를 합한 값은 15이다.", () => {
+    const numbers = [1, 2, 3, 4, 5];
+
+    expect(sumNumbers(numbers)).toBe(15);
   });
 });
