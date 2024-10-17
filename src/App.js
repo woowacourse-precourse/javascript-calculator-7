@@ -5,7 +5,7 @@ class App {
     const input = await Console.readLineAsync("덧셈할 문자열을 입력해 주세요.");
 
     let numbers = [];
-    let delimiters = [",", ";"];
+    let delimiters = [",", ":"];
 
     this.classifyCharacters(input, numbers, delimiters);
 
@@ -30,6 +30,7 @@ class App {
       }
     }
   }
+
   isNaturalNumber(value) {
     return value > 0 && Number.isInteger(value);
   }
