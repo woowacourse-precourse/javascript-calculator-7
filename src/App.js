@@ -7,14 +7,10 @@ class App {
     const [seperatorSet, filteredInput] = this.handleCustomSeperator(input);
     const [isValidInput, errorMessage] = this.validateInputWithErrorMessage(filteredInput, ...seperatorSet);
 
-    try {
-      if(isValidInput){
-        // 양수 추출 후 덧셈 로직 추가
-      } else {
-        throw new Error(errorMessage);
-      }
-    } catch(error){
-      MissionUtils.Console.print(error.message);
+    if(isValidInput){
+      // 양수 추출 후 덧셈 로직 추가
+    } else {
+      throw new Error(errorMessage);
     }
   }
 
