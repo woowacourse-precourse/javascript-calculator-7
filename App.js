@@ -153,6 +153,17 @@ class Vaildator {
     }
 }
 
+/**
+ * 결과 출력 기능 클래스
+ */
+class OutputHandler {
+
+    printUserInput(sumValue) {
+        Console.print(CALCULATOR_VARIABLES.OUTPUT_PROMPT + sumValue);
+    }
+}
+
+
 
 // const isValidSeparator = (input) => {
     
