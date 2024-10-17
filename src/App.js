@@ -6,6 +6,8 @@ function findSeparator(input){
   if(input.slice(0,2)==="//"&&input.slice(3,5)==="\\n"){
     if(isNaN(input[2])){
       separator.push(input[2]);
+    }else{
+      throw new Error("[ERROR]")
     }
     return inputArray.splice(5);
   }
