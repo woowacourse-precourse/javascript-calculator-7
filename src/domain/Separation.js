@@ -1,4 +1,4 @@
-import { DEFAULT_SEPARATOR, FORMAT, INDEX } from '../constants/value';
+import { DEFAULT_SEPARATOR, FORMAT, INDEX } from '../constants/value.js';
 
 class Separation {
   #string;

@@ -1,4 +1,4 @@
-import Validation from '../../src/domain/Validation';
+import Validation from '../../src/domain/Validation.js';
 
 describe('유효성 검사 기능 테스트', () => {
   test('빈 문자열을 입력하면 에러가 발생한다.', () => {

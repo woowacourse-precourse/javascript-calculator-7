@@ -1,4 +1,4 @@
-import Separation from '../../src/domain/Separation';
+import Separation from '../../src/domain/Separation.js';
 
 describe('분리 기능 테스트', () => {
   test.each([
