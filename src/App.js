@@ -13,11 +13,16 @@ const checkSlashStart = (line) => {
   if (!line.startsWith('//')) throw('[Error] 커스텀 구분자를 잘못 사용하였습니다.');
 }
 
+const checkBackslashN = (line) => {
+  if (!line.includes('\\n')) throw('[Error] 커스텀 구분자를 잘못 사용하였습니다.');
+}
+
 const check = (line, isCustomed) => {
   checkMaximumLength(line);
 
   if (isCustomed) {
     checkSlashStart(line);
+    checkBackslashN(line);
   }
 }
 
