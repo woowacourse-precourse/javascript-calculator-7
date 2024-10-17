@@ -1,13 +1,7 @@
 import { Console } from '@woowacourse/mission-utils';
 import { outputMessage } from './constant.js';
 import Validator from './Validator.js';
-
-import {
-  sum,
-  getCustomSeparator,
-  getRemovedCustomSeparator,
-  getSplitedBySeparator,
-} from './userInputHandler.js';
+import UserInputHandler from './userInputHandler.js';
 
 class App {
   #validator;
@@ -23,8 +17,9 @@ class App {
 
     if (this.#validator.checkStartWidthDubbleSlash(userInput)) {
       this.#validator.validateCustomSeparator(userInput);
-      customSeparator = getCustomSeparator(userInput);
-      removedCustomSepartor = getRemovedCustomSeparator(userInput);
+      customSeparator = UserInputHandler.getCustomSeparator(userInput);
+      removedCustomSepartor =
+        UserInputHandler.getRemovedCustomSeparator(userInput);
     }
 
     this.#validator.validateUsedSeparator(
@@ -32,11 +27,11 @@ class App {
       customSeparator,
     );
 
-    const splitedUserInput = getSplitedBySeparator(
+    const splitedUserInput = UserInputHandler.getSplitedBySeparator(
       removedCustomSepartor || userInput,
       customSeparator,
     );
-    const result = sum(splitedUserInput);
+    const result = UserInputHandler.sum(splitedUserInput);
 
     Console.print(`결과 : ${result}`);
   }

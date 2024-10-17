@@ -1,20 +1,22 @@
-export function sum(arr) {
-  return arr.reduce((acc, cur) => acc + Number(cur), 0);
-}
+export default class UserInputHandler {
+  static sum(arr) {
+    return arr.reduce((acc, cur) => acc + Number(cur), 0);
+  }
 
-export function getSplitedBySeparator(input, customSeparator) {
-  const separatorRegExp = new RegExp(
-    `${customSeparator ? customSeparator + '|' : ''}[,:]`,
-  );
-  return input.split(separatorRegExp);
-}
+  static getSplitedBySeparator(input, customSeparator) {
+    const separatorRegExp = new RegExp(
+      `${customSeparator ? customSeparator + '|' : ''}[,:]`,
+    );
+    return input.split(separatorRegExp);
+  }
 
-export function getCustomSeparator(input) {
-  let splitInput = input.split(/(?:\/\/|\\n)/);
-  const customSeparator = splitInput[1];
-  return customSeparator;
-}
+  static getCustomSeparator(input) {
+    let splitInput = input.split(/(?:\/\/|\\n)/);
+    const customSeparator = splitInput[1];
+    return customSeparator;
+  }
 
-export function getRemovedCustomSeparator(input) {
-  return input.split(/\\n/)[1];
+  static getRemovedCustomSeparator(input) {
+    return input.split(/\\n/)[1];
+  }
 }
