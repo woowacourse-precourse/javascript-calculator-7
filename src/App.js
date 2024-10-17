@@ -42,7 +42,7 @@ function customSeparator(inputString) {
   const regex = /^(?:\/\/)(\D)(?:\\n)/;
   const customString = inputString.match(regex);
 
-  return customString[1];
+  return customString ? customString[1] : null;
 }
 
 // splitString 변수 선언부를 function으로 뺀다.
