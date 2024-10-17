@@ -19,32 +19,34 @@ export default function parseCustomInput(input) {
     );
   }
 
-  // Extract the delimiter and the content
+  // delimiterEnd를 찾는다. \n로 끝나는 것을 찾고, 2번째 인덱스(delimiter)를 추출한다.
   const delimiterEnd = input.indexOf('\\n');
-  const delimiter = input.slice(2, delimiterEnd); // Extract delimiter between // and \n
+  const delimiter = input.slice(2, delimiterEnd);
 
   // Check if delimiter is empty (i.e., delimiter not specified)
   if (delimiter === '') {
     throw new Error('[ERROR]:Delimiter를 입력받지 못했습니다.');
   }
 
-  // Escape delimiter for use in regular expression
+  // escape 처리.
   const escapedDelimiter = escapeRegExp(delimiter);
 
-  const content = input.slice(delimiterEnd + 2); // +2 to skip '\n'
+  // 숫자들을 추출한다. +2를 플러스 해서 숫자 구하는 스트링 추출
+  const content = input.slice(delimiterEnd + 2);
 
-  // Check if the content contains any character other than digits, valid decimal point, and the specified delimiter
   const validChars = new RegExp(
     `^[0-9]+(\\.[0-9]+)?(${escapedDelimiter}[0-9]+(\\.[0-9]+)?)*$`,
   ); // Allow valid decimal format and delimiter
   if (!validChars.test(content)) {
-    throw new Error('[ERROR]: delimiter와 숫자 이외의 문자가 입력 됬습니다!');
+    throw new Error(
+      '[ERROR]: delimiter와 숫자 이외의 문자가 입력 됬거나, 입력 순서가 잘못되었습니다!',
+    );
   }
 
-  // Split the content using the delimiter
+  // delimiter로 컨텐츠를 나눔.
   const parts = content.split(new RegExp(escapedDelimiter));
 
-  // Check for empty entries (which occur when delimiters are consecutive)
+  // 중간에 '' 가 있다면 delimiter가 중복되어 입력되었다는 뜻. 이를 걸러냄.
   if (parts.some(part => part === '')) {
     throw new Error(
       '[ERROR]: delimiter가 숫자 사이에 중복되어 입력되었습니다.',

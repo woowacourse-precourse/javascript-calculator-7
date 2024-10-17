@@ -32,6 +32,7 @@ export function testCustomInput(parseCustomInput) {
     ['///\\n1/2/3', 6, '예약어 /가 사용되는 경우'],
     ['//\\\\n1\\2\\3', 6, '예약어 \\가 사용되는 경우'],
     ['//n\\n1n2n3', 6, '예약어 n이 사용되는 경우'],
+    ['//^&^\\n1^&^2^&^3', 6, "구분자가 '^&^' 이 사용되는 경우"],
   ];
 
   testCases.forEach((testCase, index) => {
