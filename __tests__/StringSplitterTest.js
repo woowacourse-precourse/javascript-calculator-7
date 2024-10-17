@@ -24,4 +24,15 @@ describe("문자열 구분", () => {
     const result = cal.hasCustomDelimiter();
     expect(result).toBe(output);
   });
+
+  test("입력 문자열을 쉼표 또는 콜론을 기준으로 분리한다.", async () => {
+    const input = "1,2;3";
+    mockQuestions(input);
+
+    const output = [1, 2, 3];
+    const cal = new Calculator(input);
+
+    const result = cal.separator();
+    expect(result).toEqual(output);
+  });
 });
