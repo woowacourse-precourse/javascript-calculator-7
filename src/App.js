@@ -39,9 +39,17 @@ class App {
 
       Console.print(NumberArray); // 후에 출력값으로 바뀔 예정
 
+      // 4. 숫자인 경우만 출력값에 합하는 기능 구현
+      var output = 0;
+      NumberArray.map((value, index) => {
+        if (!Number(value) && value.length >= 1)
+          throw new Error('[ERROR]');
+        else
+          output += Number(value);
+      })
 
       // 결과 출력
-      Console.print(`결과 : ${input}`); // 후에 출력값으로 바뀔 예정
+      Console.print(`결과 : ${output}`); // 후에 출력값으로 바뀔 예정
       return;
     } catch(err) {
       Console.print(err); // 임시 로직
