@@ -3,33 +3,31 @@ import OutputView from "../views/outputview.js";
 import extractNumbers from "../models/extractnumber.js";
 import validateInput from "../models/validateinput.js";
 import calculateSum from "../models/sumnumbers.js";
+import { BASIC_MESSAGES } from "../constant/messages.js";
 
-class calsculatorController {
+class StringAdditionController {
   constructor() {
-    // InputView와 OutputView 인스턴스 초기화
     this.inputView = new InputView();
     this.outputView = new OutputView();
-
-    (this.handleSubmit = this.handleSubmit), bind(this);
+    this.BASIC_MESSAGES = BASIC_MESSAGES;
   }
 
-  initialize() {
-    this.inputView.onSubmit(this.handleSubmit);
-  }
+  async startRun() {
+    const input = await this.inputView.getCalcNumber();
 
-  handlesubmit(inputString) {
     //입력값 검증
-    const isValid = validateInput(inputString);
+    const isValid = validateInput(input);
+    if (!isValid) return;
 
-    //문자열에서 숫자 추출
-    const NUMBERS = extractNumbers(inputString);
+    //숫자 추출
+    const NUMBERS = extractNumbers(input);
 
     //숫자 합 계산
-    const sum = calculateSum(sum);
+    const sum = calculateSum(NUMBERS);
+
+    //결과 출력
+    this.outputView.printCalcsum(sum);
   }
 }
 
-const calsculatorController = new calsculatorController();
-calsculatorController.initialize();
-
-export default calsculatorController;
+export default calculator;
