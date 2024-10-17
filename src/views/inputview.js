@@ -1,8 +1,10 @@
 import { BASIC_MESSAGES } from "../constant/messages.js";
-import { Console } from 
+import { Console } from "@woowacourse/mission-utils";
 
 class InputView {
-    async getCalcNumber() {
-        return await Console.readLineAsync
-    }
+  async getCalcNumber() {
+    return await Console.readLineAsync(BASIC_MESSAGES.stringInputMessage);
+  }
 }
+
+export default InputView;
