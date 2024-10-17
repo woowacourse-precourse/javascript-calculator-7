@@ -13,7 +13,14 @@ class App {
     this.#inputNumbers = null;
   }
 
-  async run() {}
+  async run() {
+    const numberArray = await this.askNumbers()
+      .findSeparator()
+      .extractNumbers();
+    const convertedNumbers = numberArray.map(Number);
+    const sum = this.calculate(convertedNumbers);
+    Console.print(sum);
+  }
 
   static calculate(numberArray) {
     const result = numberArray.reduce(
