@@ -1,5 +1,9 @@
+import getUserInput from './inputHandler.js';
+
 class App {
-  async run() {}
+  async run() {
+    getUserInput();
+  }
 }
 
 export default App;
