@@ -46,6 +46,15 @@ class App {
     });
   }
 
+  // 5. 음수 검증 및 합산 계산
+  sumNumbers(numbers) {
+    const negativeNumbers = numbers.filter(num => num < 0);
+    if (negativeNumbers.length > 0) {
+      this.handleError();
+    }
+    return numbers.reduce((acc, num) => acc + num, 0);
+  }
+
 }
 
 export default App;
