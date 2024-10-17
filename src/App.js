@@ -10,6 +10,8 @@ class App {
     this.classifyCharacters(input, numbers, delimiters);
 
     const sum = this.calculator(numbers);
+
+    Console.print(`결과 : ${sum}`);
   }
 
   classifyCharacters(input, numbers, delimiters) {
