@@ -1,7 +1,7 @@
 import getSum from "./getSum.js"
 
 const SEPERATORS = [',', ':']
-const SELECTOR_REGEX = /^\/\/(.+)\n(.*)/
+const SELECTOR_REGEX = /^\/\/(.+)\\n(.*)/
 
 // string => number
 // 들어온 입력값을 처리해 출력값을 계산
