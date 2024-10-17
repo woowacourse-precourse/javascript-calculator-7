@@ -39,6 +39,14 @@ class Calculator {
     });
     return numbers;
   }
+
+  sumNumbers(numbers) {
+    const sumResult = numbers.reduce((acc, cur) => {
+      return acc + cur;
+    }, 0);
+
+    return sumResult;
+  }
 }
 
 export default Calculator;

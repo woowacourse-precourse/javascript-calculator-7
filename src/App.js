@@ -6,11 +6,11 @@ class App {
   async run() {
     try {
       const inputValue = await readInput("덧셈할 문자열을 입력해 주세요.\n");
-      printOuput(inputValue);
 
       const cal = new Calculator(inputValue);
       const numbers = cal.separator();
-      console.log(numbers);
+
+      printOuput(cal.sumNumbers(numbers));
     } catch (error) {
       throw new Error(error);
     }
