@@ -7,11 +7,16 @@ class App {
     throw Error(formattedMessage);
   }
 
-  validateNumbers(strings) {
-    for (const string of strings) {
-      if (isNaN(Number(string)))
+  validateAndCovertNumbers(strings) {
+    return strings.map((string) => {
+      const number = Number(string);
+      if (isNaN(number))
         this.handleError("문자열의 숫자와 구분자가 유효한지 확인해주세요.");
-    }
+
+      if (number < 0) this.handleError("음수는 입력할 수 없습니다.");
+
+      return number;
+    });
   }
 
   validateCustomDelimiters(index, customDelimiter) {
@@ -24,13 +29,6 @@ class App {
         "다중 구분자는 지원되지 않습니다. 하나의 구분자만 입력해 주세요."
       );
     }
-  }
-
-  validateNoNegativeNumbers(numbers) {
-    const hasNegative = numbers.some((number) => number < 0);
-    if (hasNegative) this.handleError("음수는 입력할 수 없습니다.");
-
-    return numbers;
   }
 
   parseStringToNumbers(string) {
@@ -46,9 +44,7 @@ class App {
     const regex = new RegExp(`[${defaultDelimiters.join("")}]`);
     const strings = result.split(regex);
 
-    this.validateNumbers(strings);
-
-    return this.parseToNumber(strings);
+    return this.validateAndCovertNumbers(strings);
   }
 
   parseCustomDelimiters(string, defaultDelimiters) {
