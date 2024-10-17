@@ -31,7 +31,7 @@ class App {
       assertCondition(!isValidCustomSeparator(customString, customSeparators), MESSAGES.INVALID_CUSTOM_SEPARATOR);
 
       // 기본 구분자 + 커스텀 구분자
-      const separators = mergeSeparators(customSeparators, DEFAULT_SEPARATORS);
+      const separators = mergeSeparators(...customSeparators, ...DEFAULT_SEPARATORS);
       const regExpSeparator = convertRegExp(separators.join("|"), "g");
 
       // 기본 구분자 + 커스텀 구분자를 기준으로 숫자 문자열을 나누고, 숫자로 변환한다.
