@@ -1,8 +1,8 @@
 import { MissionUtils } from "@woowacourse/mission-utils";
-import { inputMessage } from "../constants/Messages.js";
+import { INPUT_MESSAGE } from "../constants/Messages.js";
 
 export class InputHandler {
   async getInput() {
-    return await MissionUtils.Console.readLineAsync(inputMessage);
+    return await MissionUtils.Console.readLineAsync(INPUT_MESSAGE);
   }
 }
