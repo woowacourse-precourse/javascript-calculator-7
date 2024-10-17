@@ -1,5 +1,9 @@
 class StringCalculator {
   add(input) {
+    if (!input) {
+      return 0;
+    }
+
     let numbers = input;
     const delimiters = [",", ":"];
 
