@@ -1,9 +1,9 @@
-import { MissionUtils } from "@woowacourse/mission-utils";
+import { MissionUtils } from '@woowacourse/mission-utils';
 
-const ERROR_MESSAGE = "[ERROR]";
+const ERROR_MESSAGE = '[ERROR]';
 
 class App {
-  defaultSeparator = ",:";
+  defaultSeparator = ',:';
   customSeparatorRegExr = /\/\/.+\\n/;
   async run() {
     const userInput = await this.getUserInput();
@@ -15,8 +15,8 @@ class App {
 
     this.checkErrorSeparatedUserInput(separatedUserInput);
 
-    const separatedUserInputsNumberArray = separatedUserInput.map((it) =>
-      Number(it)
+    const separatedUserInputsNumberArray = separatedUserInput.map(it =>
+      Number(it),
     );
 
     const sumOfUserInput = this.getSum(separatedUserInputsNumberArray);
@@ -24,7 +24,7 @@ class App {
     this.printResult(sumOfUserInput);
   }
   async getUserInput() {
-    return await MissionUtils.Console.readLineAsync("문자열을 입력해주세요.");
+    return await MissionUtils.Console.readLineAsync('문자열을 입력해주세요.');
   }
   getStringifiedString(str) {
     return JSON.stringify(str);
@@ -35,7 +35,7 @@ class App {
       return {
         separator: customSeparatorMatchedString[0]
           .slice(2, -2)
-          .replace("\\", "\\\\"),
+          .replace('\\', '\\\\'),
         newUserInput: str.slice(customSeparatorMatchedString[0].length + 1, -1),
       };
     return {
@@ -48,7 +48,7 @@ class App {
   }
   checkErrorSeparatedUserInput(separatedUserInput) {
     for (const it of separatedUserInput) {
-      if (it === "") continue;
+      if (it === '') continue;
       if (isNaN(it) || Number(it) <= 0) throw new Error(ERROR_MESSAGE);
     }
   }
