@@ -1,5 +1,9 @@
 import { Console } from '@woowacourse/mission-utils';
-import { CONSOLE_MESSAGE, DEFAULT_SEPARATOR } from './constant.js';
+import {
+  CONSOLE_MESSAGE,
+  DEFAULT_SEPARATOR,
+  SPECIAL_CHARACTERS,
+} from './constant.js';
 import { checkIsNumber, checkIsPositive, errorString } from './util.js';
 
 class App {
@@ -41,7 +45,14 @@ class App {
   splitWithSeparator(str, separator, customSep) {
     const allSeparator = separator;
 
-    if (customSep !== '') allSeparator.push(customSep);
+    if (customSep !== '') {
+      if (SPECIAL_CHARACTERS.includes(customSep)) {
+        allSeparator.push(`\\${customSep}`);
+      } else {
+        allSeparator.push(customSep);
+      }
+    }
+
     const sepToRegex = new RegExp(allSeparator.join('|'));
 
     return str.split(sepToRegex);
