@@ -1,35 +1,5 @@
-import { MissionUtils } from '@woowacourse/mission-utils';
 
-const INPUT_INFO_MESSAGE = '문자열을 입력해주세요.'
-const ERROR_MESSAGE = '[ERROR]';
-
-async function getUserInput() {
-  return await MissionUtils.Console.readLineAsync(INPUT_INFO_MESSAGE);
-}
-
-function getStringifiedString(str) {
-  return JSON.stringify(str);
-}
-
-function getSum(numberArray) {
-  return numberArray.reduce((prev, cur) => prev + cur, 0);
-}
-function printResult(str) {
-  MissionUtils.Console.print(`결과 : ${str}`);
-}
-
-function checkTheNumberArray(array) {
-  if(!Array.isArray(array)) throw new Error(ERROR_MESSAGE)
-  for (const item of array) {
-    if (item === '') continue;
-    if (isNaN(item) || Number(item) <= 0) throw new Error(ERROR_MESSAGE);
-  }
-}
-
-function getOrRegExpFromString(separator) {
-  return new RegExp(`[${separator}]`);
-}
-
+import { getStringifiedString, getUserInput,checkTheNumberArray,getOrRegExpFromString,getSum,printResult } from './utils';
 
 class App {
   defaultSeparator = ',:';
@@ -52,7 +22,6 @@ class App {
 
     printResult(sumOfUserInput);
   }
-  
   
   getSeparator(str) {
     const customSeparatorMatchedString = str.match(this.customSeparatorRegExr);
