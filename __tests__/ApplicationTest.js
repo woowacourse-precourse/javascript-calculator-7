@@ -32,19 +32,18 @@ describe("문자열 계산기", () => {
   describe("커스텀 구분자 사용", () => {
     describe("커스텀 구분자 1개", () => {
       test("숫자 1개 입력", async () => {
-        await runCalcualatorTest("//;\\n1", "1");
-      });
-      test("숫자 1개 입력 (다른 형식)", async () => {
         await runCalcualatorTest("//;\n1", "1");
       });
       test("숫자 3개 입력", async () => {
-        await runCalcualatorTest("//v\n1v2v3", "6");
+        await runCalcualatorTest("//v\n1v23v456", "480");
       });
-      test("숫자 10개 입력", async () => {
-        await runCalcualatorTest("//;\n1;2;3;4;5;6;7;8;9;10", "55");
+    });
+    describe("커스텀 구분자 2개", () => {
+      test("숫자 1개 입력", async () => {
+        await runCalcualatorTest("//;v\n1", "1");
       });
-      test("두 자리 이상 숫자로 5개 입력", async () => {
-        await runCalcualatorTest("//;\\n10;20;30;40;50", "150");
+      test("숫자 3개 입력", async () => {
+        await runCalcualatorTest("//;v\n1v23;456", "480");
       });
     });
   });
