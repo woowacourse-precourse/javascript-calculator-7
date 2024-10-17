@@ -24,18 +24,19 @@ export class Calculator {
     } else {
       result = input.split(regexText);
     }
+    for (let index = 0; index < result.length; index++) {
+      let preNum = parseFloat(result[index]);
+      if (preNum < 0) return { error: true };
+    }
     // result type :  array<string>
     result = result.map((number) => {
       let preNum = parseFloat(number);
-      if (preNum < 0) {
-        return { error: true };
-      }
       if ((preNum * 10) % 10 == 0) {
         preNum = parseInt(preNum);
       }
       return preNum;
     });
-    return { error: false, numbers: [] };
+    return { error: false, numbers: result };
   }
 
   // add 함수내 파라미터를 레스트 파라미터로 설정

@@ -30,12 +30,18 @@ describe("regex test", () => {
     expect(calculator.regexTest(noneTest)).toEqual(0);
   });
   test("//;\\n1;2;3", () => {
-    expect(calculator.regexTest(testInput)).toEqual([1, 2, 3]);
+    expect(calculator.regexTest(testInput)).toEqual({
+      error: false,
+      numbers: [1, 2, 3],
+    });
   });
   test("1;2;3", () => {
-    expect(calculator.regexTest(noneCustomTestInput)).toEqual([1, 2, 3]);
+    expect(calculator.regexTest(noneCustomTestInput)).toEqual({
+      error: false,
+      numbers: [1, 2, 3],
+    });
   });
   test("-3;-2;1", () => {
-    expect(calculator.regexTest(minTest)).toEqual("[ERROR]");
+    expect(calculator.regexTest(minTest)).toEqual({ error: true });
   });
 });
