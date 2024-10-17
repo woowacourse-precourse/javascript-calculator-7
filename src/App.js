@@ -4,8 +4,10 @@ const Console = MissionUtils.Console;
 class App {
   async run() {
     Console.print(
-      this.processInput(
-        await Console.readLineAsync("덧셈할 문자열을 입력해 주세요.")
+      this.add(
+        this.processInput(
+          await Console.readLineAsync("덧셈할 문자열을 입력해 주세요.")
+        )
       )
     ); // 1단계: 그대로 출력
   }
@@ -22,11 +24,16 @@ class App {
       // 커스텀 구분자가 있을 경우
       const expList = inputstr.match(condCustomSep);
       if (expList.length !== 2) throw new Error("[ERROR]: 잘못된 포맷입니다.");
-      return expList[1]
+      const intermediate = expList[1]
         .split(expList[0])
-        .map((value) => value.split(/(:|,)/g).filter((value) => !isNaN(value)))
+        .map((value) =>
+          value.split(RegExp(["(\\", expList[0], "|:|,)"].join(""), "g"))
+        )
         .reduce((prev, curr) => prev.concat(curr), [])
-        .map((value) => parseInt(value));
+        .filter((value) => value !== ":" && value !== ",");
+      if (intermediate.some((value) => RegExp("[^0-9]+", "g").test(value)))
+        throw new Error("[ERROR]: 잘못된 연산식이 들어왔습니다.");
+      return intermediate.map((value) => parseInt(value));
     } else if (!condAbnormalFormat.test(inputstr)) {
       // 커스텀 구분자가 없으며 포맷에 맞는 경우 정해진 값대로 split
       return inputstr
@@ -37,9 +44,6 @@ class App {
       // 잘못된 입력
       throw new Error("[ERROR]: 잘못된 포맷입니다.");
     }
-  }
-  add(inputArr) {
-    return inputArr.add;
   }
 }
 
