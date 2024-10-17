@@ -8,7 +8,7 @@ class App {
 
     const DEFAULT_SEPARATOR = /[,:]/;
 
-    const CUSTOM_SYMBOLS = /\/\/(.+)n/;
+    const CUSTOM_SYMBOLS = /\/\/(.+)\\n/;
 
     const USER_INPUT_SPLIT = USER_INPUT.split('n');
 
