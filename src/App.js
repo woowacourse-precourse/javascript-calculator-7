@@ -6,17 +6,16 @@ class App {
   }
 
   async getNumbers(input) {
-    let string = input;
-    if (input === '') {
+    if (input.trim() === '') {
       return [0];
     }
 
-    const match = input.match(/^\/\/(.)\\n/);
-    string = match ? string.replace(match[0], '') : string;
+    const match = input.match(/^\/\/(.+?)\\n/);
+    const string = match ? input.replace(match[0], '') : input;
 
     const regex = match ? new RegExp(`[:,${match[1]}]`) : new RegExp(`[:,]`);
 
-    const result = string.split(regex);
+    const result = string.split(regex).filter((v) => v.trim() !== '');
 
     if (!this.validate(result)) {
       throw new Error(`[ERROR] ${input}값은 유효하지 않습니다.`);
@@ -25,8 +24,8 @@ class App {
     return result;
   }
 
-  validate(numbers) {
-    return numbers.every((number) => !isNaN(number) && parseInt(number) >= 0);
+  validate(arr) {
+    return arr.every((value) => !isNaN(value) && parseInt(value) >= 0);
   }
 
   async calculateNumbers(numbers) {
