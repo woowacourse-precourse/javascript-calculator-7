@@ -14,12 +14,17 @@ class App {
   }
 
   async run() {
-    const numberArray = (await this.askNumbers())
-      .findSeparator()
-      .extractNumbers();
-    const convertedNumbers = numberArray.map(Number);
-    const sum = App.calculate(convertedNumbers);
-    Console.print(sum);
+    try {
+      const numberArray = (await this.askNumbers())
+        .findSeparator()
+        .extractNumbers();
+      const convertedNumbers = numberArray.map(Number);
+      const sum = App.calculate(convertedNumbers);
+
+      Console.print(sum);
+    } catch (error) {
+      Console.print(`[ERROR] ${error.message}`);
+    }
   }
 
   static calculate(numberArray) {
