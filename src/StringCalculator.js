@@ -11,6 +11,9 @@ class StringCalculator {
     const { numberStrings, customDelimiter } =
       this.parseBasicAndCustomDelimiter(preProcessInput); // 기본 구분자와 커스텀 구분자를 파싱함.
     this.validateMultipleDelimiterInput(preProcessInput, customDelimiter); // 숫자들 사이에 구분자가 여러 개 포함된 경우 유효성 검사
+    this.validateNumberStrings(numberStrings); // 숫자가 아닌 값이 포함되어 있는 경우 유효성 검사
+    this.validateNegativeNumbers(numberStrings); // 음수가 포함되어 있는 경우 유효성 검사
+
     const numbers = this.parseNumbers(numberStrings);
 
     return this.calculateSum(numbers);
@@ -28,18 +31,7 @@ class StringCalculator {
 
   // 문자열을 숫자로 변환하는 메서드
   parseNumbers(numberStrings) {
-    return numberStrings.map((number) => {
-      const parsedNumber = parseInt(number, 10);
-      // 숫자가 아닌 값이 포함되어 있는 경우
-      if (isNaN(parsedNumber)) {
-        throw new Error(`숫자가 아닌 값이 포함되어 있습니다: ${number}`);
-      }
-      // 음수가 포함되어 있는 경우
-      if (parsedNumber < 0) {
-        throw new Error(`음수는 허용되지 않습니다: ${parsedNumber}`);
-      }
-      return parsedNumber;
-    });
+    return numberStrings.map((number) => parseInt(number, 10));
   }
 
   // 커스텀 구분자를 포함한 모든 구분자 파싱 메서드
@@ -65,6 +57,27 @@ class StringCalculator {
   // 숫자 배열을 받아 합을 구하는 메서드
   calculateSum(numbers) {
     return numbers.reduce((acc, cur) => acc + cur, 0);
+  }
+
+  // 숫자가 아닌 값이 포함되어 있는 경우
+  validateNumberStrings(numberStrings) {
+    const nonNumberPattern = /[^\d\s-]+/g; // 숫자, 공백, 음수가 아닌 값이 포함되어 있는지 확인하는 정규표현식
+
+    const nonNumberMatch = numberStrings.join("").match(nonNumberPattern);
+
+    if (nonNumberMatch) {
+      nonNumberMatch.forEach((nonNumber) => {
+        throw new Error(`숫자가 아닌 값이 포함되어 있습니다: ${nonNumber}`);
+      });
+    }
+  }
+
+  // 음수가 포함되어 있는 경우
+  validateNegativeNumbers(numbers) {
+    const negativeNumbers = numbers.filter((number) => number < 0);
+    if (negativeNumbers.length > 0) {
+      throw new Error(`음수는 허용되지 않습니다: ${negativeNumbers}`);
+    }
   }
 
   // 커스텀 구분자 위치 유효성 검사 메서드
