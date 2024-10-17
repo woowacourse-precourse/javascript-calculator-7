@@ -8,7 +8,7 @@ class App {
     // 비동기 입력 오류 상황 예외처리
     try {
       const result = calculator.calculate(input); // 계산 함수 실행
-      if (result == "[ERROR]") throw new Error("[ERROR]"); // 명시적으로 에러 발생
+      if (result == false) throw new Error("[ERROR]"); // 명시적으로 에러 발생
       MissionUtils.Console.print(`${result}`);
     } catch (error) {
       MissionUtils.Console.print(`[ERROR]`);

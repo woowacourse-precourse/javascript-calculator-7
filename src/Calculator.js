@@ -3,7 +3,7 @@ export class Calculator {
     const sliceNumbers = this.testRegex(input);
     if (sliceNumbers.length === 0) return `결과 : 0`;
     if (sliceNumbers.error) {
-      return "[ERROR]";
+      return false;
     }
     return `결과 : ${this.add(...sliceNumbers.numbers)}`;
   }
@@ -13,10 +13,14 @@ export class Calculator {
     if (input.length > 10000) return { error: true };
     let regexText = /[,:]/; // 기본 구분자 설정
     let result = "";
-    if (checkCustom) result = input.split(regexText);
+    // 커스텀 구분자 확인
+    if (this.checkCustom(input)) result = this.checkCustom(input);
+    // 기본 구분자
+    else result = input.split(regexText);
     // result type :  array<string>
-    if (this.checkMin(result)) return { error: true };
-    result = changeFloat(result);
+    result = this.changeFloat(result);
+    if (this.checkNotNum(result)) return { error: true }; // 숫자아닌지 체크
+    if (this.checkMin(result)) return { error: true }; // 음수 체크
     return { error: false, numbers: result };
   }
 
@@ -24,8 +28,8 @@ export class Calculator {
     let customInput = string.match(/^\/\/(.)\\n/); // ; 추출
     // 커스텀 구분자가 있는 케이스
     if (customInput) {
-      let sliceInput = input.split("\\n")[1];
-      regexText = new RegExp(`[${customInput[1]},:]`); // 정규식 생성
+      let sliceInput = string.split("\\n")[1];
+      const regexText = new RegExp(`[${customInput[1]},:]`); // 정규식 생성
       const result = sliceInput.split(regexText);
       return result;
     }
@@ -42,12 +46,18 @@ export class Calculator {
     return newResult;
   }
 
+  checkNotNum(result) {
+    for (let index = 0; index < result.length; index++) {
+      if (isNaN(result[index])) return true;
+    }
+    return false;
+  }
+
   checkMin(result) {
     for (let index = 0; index < result.length; index++) {
-      let preNum = parseFloat(result[index]);
-      if (preNum < 0 || isNaN(preNum)) return false;
+      if (result[index] < 0) return true;
     }
-    return true;
+    return false;
   }
 
   // add 함수내 파라미터를 레스트 파라미터로 설정
