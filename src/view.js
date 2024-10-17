@@ -15,9 +15,9 @@ class CalculatorView {
     console.error(error.message);
   }
 
-  close() {
+  /*close() {
     this.rl.close();
-  }
+  }*/
 }
 
 export default CalculatorView;
