@@ -5,7 +5,8 @@ class Calculator {
     * @returns {number[]}
     */
   splitNumbers(text) {
-    return text.split(",").map(Number);
+    const regex = /,|:/;
+    return text.split(regex).map(Number);
   }
 
   /**
