@@ -1,6 +1,7 @@
 import Validator from './Validator.js';
 import IOManager from './IOManager.js';
 import Analysis from './Analysis.js';
+import ArrayUtil from './ArrayUtil.js';
 
 class App {
   #str = '';
@@ -14,7 +15,7 @@ class App {
     Validator.customSeperator(newSeperators);
     Validator.parseNumber(seperatedArr);
 
-    const answer = seperatedArr.reduce((prev, cur) => prev + Number(cur), 0);
+    const answer = ArrayUtil.sum(seperatedArr);
     IOManager.output(answer);
   }
 }
