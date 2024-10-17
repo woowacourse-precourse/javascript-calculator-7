@@ -26,7 +26,7 @@ class App {
   }
 
   validate(numbers) {
-    return numbers.every((number) => !isNaN(number) && number >= 0);
+    return numbers.every((number) => !isNaN(number) && parseInt(number) >= 0);
   }
 
   async run() {
