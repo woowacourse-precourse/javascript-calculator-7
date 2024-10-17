@@ -3,6 +3,14 @@ import { Console } from '@woowacourse/mission-utils';
 const MESSAGE = {
 	INPUT_MESSAGE: '덧셈할 문자열을 입력해 주세요.\n',
 	END_MESSAGE: '결과 : ',
+	ERROR_MESSAGE: '[ERROR] ',
+};
+
+const ERROR = {
+	empty: '데이터를 입력하지 않았습니다.',
+	notNumber: '계산할 값은 0~9 사이의 숫자만 입력할 수 있습니다.',
+	whitespace: '공백을 사용할 수 없습니다.',
+	negative: '음수를 입력할 수 없습니다.',
 };
 
 class App {
@@ -45,14 +53,21 @@ class App {
 		const escapedSeparators = this.separators.map((sep) =>
 			this.escapeRegExp(sep)
 		);
+
 		const regex = new RegExp(`[${escapedSeparators.join('')}]`);
 
 		if (this.checkCustomSeparator(userInput)) {
 			userInput = string.substr(5);
 		}
-		userInput.split(regex).forEach((n, _) => {
-			this.numbers.push(Number(n));
-		});
+
+		const numbers = userInput.split(regex);
+
+		for (const n of numbers) {
+			const num = Number(n);
+			this.validateNumber(num);
+			this.numbers.push(num);
+		}
+		return true;
 	}
 
 	sumNumbers() {
@@ -64,11 +79,42 @@ class App {
 		Console.print(MESSAGE.END_MESSAGE + sum);
 	}
 
+	printErrorMessage(errorCode) {
+		throw new Error(MESSAGE.ERROR_MESSAGE + ERROR[errorCode]);
+	}
+
+	validateInput(string) {
+		if (string.length < 1 || /^\s*$/.test(string)) {
+			this.printErrorMessage('empty');
+		}
+
+		if (/\s/.test(string)) {
+			this.printErrorMessage('whitespace');
+		}
+	}
+
+	validateNumber(n) {
+		if (!Number.isInteger(n)) {
+			this.printErrorMessage('notNumber');
+		}
+
+		if (n > 9) {
+			this.printErrorMessage('notNumber');
+		}
+
+		if (n < 0) {
+			this.printErrorMessage('negative');
+		}
+	}
+
 	async run() {
 		const input = await this.userInput();
+		this.validateInput(input);
+
 		if (this.checkCustomSeparator(input)) {
 			this.updateCustomSeparator(input);
 		}
+
 		this.updateNumberFromString(input);
 		this.printEndMessage();
 	}
