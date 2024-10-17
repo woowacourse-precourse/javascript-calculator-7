@@ -10,9 +10,11 @@ class App {
         return;
       }
 
-      //유효한 입력인지 검사
-      if (this.isValid(input)) {
-        // 유효한 입력값일 경우, 계산하는 메서드 를 실행
+      //커스텀 구분자가 있는지 검사후 배열을 반환
+      const { inputArr, delimiters } = this.parseInputToArray(input);
+
+      // 유효한 입력값일 경우, 계산하는 메서드 를 실행
+      if (this.isValid(inputArr, delimiters)) {
         this.calculate();
       } else {
         MissionUtils.Console.print('[ERROR] 잘못된 값을 입력하셨습니다.');
@@ -22,12 +24,26 @@ class App {
       MissionUtils.Console.print(`[ERROR]: ${error}`);
       return;
     }
-
+    
     MissionUtils.Console.print('계산 성공');
   }
-
+  
   //유효값을 검사하는 메서드 
-  isValid(input) {
+  isValid(inputArr,delimiters) {
+    MissionUtils.Console.print(inputArr);
+    const isValidInput = inputArr.every((str, idx) => {
+      if (idx % 2 === 0) { 
+        return !isNaN(str); 
+      } else { 
+        return isNaN(str) && delimiters.includes(str);
+      }
+    });
+    return isValidInput; 
+    
+  }  
+  
+  //입력받은 input 을 배열로 바꿔주는 메서드
+  parseInputToArray(input){
     const delimiters = [',', ':'];
 
     // 커스텀 구분자가 있는지 확인
@@ -41,12 +57,7 @@ class App {
         }
       }
     }
-    const inputArr=this.parseInputToArray(input)
-    MissionUtils.Console.print(inputArr);
-  }  
-  
-  //입력받은 input 을 배열로 바꿔주는 메서드
-  parseInputToArray(input){
+
     let temp = '';
     const result = [];
     for (let i = 0; i < input.length; i++) {
@@ -94,7 +105,7 @@ class App {
       combinedResult.push(numberString);
     }
     
-    return combinedResult;
+    return { inputArr: combinedResult, delimiters }; 
   }
 
 
