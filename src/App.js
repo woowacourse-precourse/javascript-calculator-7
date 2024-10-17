@@ -14,6 +14,13 @@ class App {
 
     calculate(input) {
         if (!input) return 0;
+
+        let delimiter = /[,:]/;
+        let numbers = input.split(delimiter).map(Number);
+
+        const result = numbers.reduce((sum, num) => sum + num, 0);
+
+        return result;
     }
 }
 
