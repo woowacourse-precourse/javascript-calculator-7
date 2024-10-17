@@ -1,4 +1,4 @@
-import { ERROR_MESSAGE } from './constant.js';
+import { ERROR_MESSAGE } from '../constant/index.js';
 
 class Validator {
   // 커스텀 구분자 배열에 대한 유효성 검사 메서드

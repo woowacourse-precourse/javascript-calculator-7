@@ -1,5 +1,5 @@
 import { PATTERN } from './constant';
-import Util from './PatternUtil';
+import Util from './utils/PatternUtil';
 
 class Analysis {
   #seperators;

@@ -1,7 +1,7 @@
-import Validator from './Validator.js';
-import IOManager from './IOManager.js';
+import Validator from './utils/Validator.js';
+import IOManager from './utils/IOManager.js';
 import Analysis from './Analysis.js';
-import ArrayUtil from './ArrayUtil.js';
+import ArrayUtil from './utils/ArrayUtil.js';
 
 class App {
   #str = '';
