@@ -62,6 +62,9 @@ function sumWithCustomDelimiter(input) {
 
     const delimiters = new RegExp(`[${customDelimiter}|,|:]`);
     const numbersString = input.slice(delimitersEndIndex + 2);
+    if (!numbersString) {
+      throw new Error('[ERROR] 덧셈할 숫자가 없습니다.');
+    }
     validateDelimiters(numbersString, customDelimiter);
 
     const tokens = numbersString.split(delimiters);
