@@ -38,7 +38,7 @@ class StringCalculator {
     const parsedNumber = Number(num);
 
     if (Number.isNaN(parsedNumber) || parsedNumber < 0) {
-      throw new Error("[ERROR] 문자열의 형식이 잘못됐습니다.");
+      throw new Error("문자열의 형식이 잘못됐습니다.");
     }
 
     return parsedNumber;

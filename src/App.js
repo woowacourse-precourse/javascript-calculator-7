@@ -13,7 +13,7 @@ class App {
       const sum = calculator.calculateSum();
       Console.print(`결과 : ${sum}`);
     } catch (error) {
-      throw new Error(error.message);
+      throw new Error(`[ERROR] ${error.message}`);
     }
   }
 }
