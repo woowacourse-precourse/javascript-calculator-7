@@ -1,4 +1,4 @@
-const { Console } = require("@woowacourse/mission-utils");
+import { Console } from "@woowacourse/mission-utils";
 
 class App {
   async run() {
@@ -7,6 +7,10 @@ class App {
     let numbers = [];
     let delimiters = [",", ":"];
 
+    if (input === "") {
+      Console.print("결과 : 0");
+      return;
+    }
     this.classifyCharacters(input, numbers, delimiters);
 
     const sum = this.calculator(numbers);
