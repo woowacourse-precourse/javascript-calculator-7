@@ -16,7 +16,8 @@ class App {
     } else {
       try {
         this.splitAndExtractNumbers(PROCESSED_INPUT);
-        Console.print(`추출된 숫자들: ${this.extractedNumbers.join(', ')}`);
+        const SUM = this.calculateSum();
+        this.printResult(SUM);
       } catch (error) {
         this.printError(error.message);
       }
@@ -66,6 +67,10 @@ class App {
       }
       this.extractedNumbers.push(Number(NUM));
     }
+  }
+
+  calculateSum() {
+    return this.extractedNumbers.reduce((sum, num) => sum + num, 0);
   }
 
   printResult(result) {
