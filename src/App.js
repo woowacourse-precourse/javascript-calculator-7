@@ -1,11 +1,10 @@
 import { Console } from '@woowacourse/mission-utils';
-import { DEFAULT_SEPARATOR } from './constant.js';
+import { CONSOLE_MESSAGE, DEFAULT_SEPARATOR } from './constant.js';
+import { checkIsNumber, errorString } from './util.js';
 
 class App {
   async run() {
-    const input = await Console.readLineAsync(
-      '덧셈할 문자열을 입력해 주세요.\n',
-    );
+    const input = await Console.readLineAsync(CONSOLE_MESSAGE.INPUT);
 
     const [customSep, extractedStr] = this.extractCustomSeparator(input);
 
@@ -23,6 +22,10 @@ class App {
   extractCustomSeparator(str) {
     const [first, rest] = str.split('\\n');
 
+    if (rest && !first.startsWith('//')) {
+      throw Error(errorString(CONSOLE_MESSAGE.SEPARATOR_ERROR));
+    }
+
     if (first.startsWith('//')) {
       return [first.slice(2), rest];
     }
@@ -39,15 +42,11 @@ class App {
     return str.split(sepToRegex);
   }
 
-  checkNumber(num) {
-    return !Number.isNaN(num);
-  }
-
   sumAllString(strArr) {
     const numArr = strArr.map((str) => {
       const num = Number(str);
-      if (this.checkNumber(num)) return num;
-      throw Error('[ERROR] 숫자가 아닌 문자열이 포함되어 있습니다.');
+      if (checkIsNumber(num)) return num;
+      throw Error(errorString(CONSOLE_MESSAGE.NUMBER_ERROR));
     });
 
     return numArr.reduce((acc, cur) => acc + cur, 0);
