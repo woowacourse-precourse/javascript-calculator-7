@@ -38,8 +38,10 @@ class App {
 
     // 덧셈 수행
     for (const num of numbersArr) {
-      sum += num; // 숫자들을 합산
+      sum += num;
     }
+
+    Console.print(`결과 : ${sum}`);
   }
 }
 
