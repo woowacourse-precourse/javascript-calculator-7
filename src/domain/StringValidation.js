@@ -1,5 +1,6 @@
 import { ERROR_CODES, VALID_STRING_CODE } from "../constants/constants.js";
 
+// TODO: 공백 처리 및 리팩토링
 class StringValidation {
   static validate(inputValue) {
     if (inputValue === '')
