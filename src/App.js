@@ -23,10 +23,6 @@ class App {
     this.#plusString = plusString;
   }
 
-  printPlusResult() {
-    Console.print(`결과 : ${this.#plusResult}`);
-  }
-
   isEmptyString() {
     if (this.#plusString === "") {
       return true;
@@ -78,6 +74,10 @@ class App {
     const separatorRegex = this.generateSeparatorRegExp();
     const numberList = this.filterNumber(separatorRegex, plusString);
     this.#plusResult = numberList.reduce((acc, curr) => acc + curr);
+  }
+
+  printPlusResult() {
+    Console.print(`결과 : ${this.#plusResult}`);
   }
 
   async run() {
