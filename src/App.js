@@ -53,7 +53,7 @@ class App {
       Console.print(`결과 : ${output}`); // 후에 출력값으로 바뀔 예정
       return;
     } catch(err) {
-      Console.print(err); // 임시 로직
+      throw err; // 에러 throw -> 테스트 코드 통과
     }
   }
   
