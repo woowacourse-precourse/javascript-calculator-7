@@ -1,5 +1,5 @@
-import parseCustomInput from '../SubParser/parseCustomInput.js';
-import parseNormalInput from '../SubParser/parseNormalInput.js';
+import parseNormalInput from './SubParser/parseNormalInput.js';
+import parseCustomInput from './SubParser/parseCustomInput.js';
 
 // 에러를 처리하는 함수
 
