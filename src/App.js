@@ -26,6 +26,11 @@ class App {
       input = input.split(separator).join(",");
     }
 
+    // 숫자가 아닌 값 처리
+    if (input.some((value) => isNaN(+value))) {
+      throw new Error('[ERROR] 숫자만 입력 가능합니다.');
+    }
+
     // 문자열 계산
     const result = this.numberReducer(input.split(","));
 
