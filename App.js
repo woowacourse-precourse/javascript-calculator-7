@@ -116,17 +116,30 @@ class Calculator {
         this.Validator = new Validator();
         this.outputHandler = new OutputHandler();
     }
+    async run(){
+        const userInput = await this.inputHandler.getUserInput();
 
-}
+        this.Validator.isValidSeparator(userInput);
 
+        const numbersArray = this.inputParser.splitUserInput(userInput);
+        console.log(numbersArray);
 
+        this.Validator.isPositiveNumber(numbersArray);
 
-const run = async() => {
-    const calculator = new Calculator();
-    const userNumbers = await calculator.getUserNumbers();
-    if (userNumbers) {
-        calculator.printUserInput(userNumbers);
+        const sumValue = this.calculatorHandler.getSum(numbersArray);
+
+        this.outputHandler.printUserInput(sumValue);
     }
+
 }
 
-run();
+// const run = async() => {
+//     const calculator = new Calculator();
+//     const userNumbers = await calculator.getUserNumbers();
+//     if (userNumbers) {
+//         calculator.printUserInput(userNumbers);
+//     }
+// }
+
+const cal = new Calculator();
+cal.run();
