@@ -1,10 +1,10 @@
-import { ERROR_MESSAGE } from './constant';
+import { ERROR_MESSAGE } from './constant.js';
 
 class Validator {
   // 커스텀 구분자 배열에 대한 유효성 검사 메서드
   static customSeperator(seperators) {
     seperators.forEach((item) => {
-      if (Number.isInteger(item)) {
+      if (!Number.isNaN(Number(item))) {
         throw new Error(ERROR_MESSAGE.SEPERATOR_TYPE_ERROR);
       }
     });
