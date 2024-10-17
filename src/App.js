@@ -13,7 +13,7 @@ class App {
 
     let division = '';
     if (customDivision) {
-      division = new RegExp(customDivision + '|:|,');
+      division = new RegExp(`${customDivision}|${baseDivision}`);
       input = input.substring(4 + customDivision.length);
     } else {
       division = new RegExp(baseDivision);
@@ -31,7 +31,7 @@ class App {
 
         sum += num;
         divisionArr.length - 1 === index &&
-    MissionUtils.Console.print('결과 : ' + sum);
+          MissionUtils.Console.print('결과 : ' + sum);
       });
     } catch (error) {
       throw error;
