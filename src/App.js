@@ -1,5 +1,7 @@
 import { MissionUtils } from "@woowacourse/mission-utils";
 
+const ERROR_MESSAGE = "[ERROR]";
+
 class App {
   defaultSeparator = ",:";
   customSeparatorRegExr = /\/\/.+\\n/;
@@ -47,7 +49,7 @@ class App {
   checkErrorSeparatedUserInput(separatedUserInput) {
     for (const it of separatedUserInput) {
       if (it === "") continue;
-      if (isNaN(it) || Number(it) <= 0) throw new Error("[ERROR]");
+      if (isNaN(it) || Number(it) <= 0) throw new Error(ERROR_MESSAGE);
     }
   }
   getSeparatedString(str, separator) {
