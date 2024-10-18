@@ -38,7 +38,7 @@ class App {
 
   findSeparator() {
     const inputString = this.#input;
-    const firstElement = inputString[0];
+    const firstElement = inputString[0] ?? '';
     const elementNumber = Number(firstElement);
     if (!Number.isNaN(elementNumber)) {
       this.#inputNumbers = inputString;
