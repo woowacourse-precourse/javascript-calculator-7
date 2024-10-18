@@ -1,11 +1,4 @@
-// import Console from "../node_modules/@woowacourse/mission-utils/src/console.js";
 import { Console } from "@woowacourse/mission-utils";
-
-// [x] 문자열 커스텀 구분자 처리
-// [x] 숫자와 구분자 제외한 문자 제거
-// [x] 콜론과 콤마를 구분자로 사용하여 배열로 변환
-// [x] 각 요소들 숫자로 변환하여 합산
-// [x] 결과 출력
 
 class App {
   async run() {
@@ -26,6 +19,12 @@ class App {
       }
     }
 
+    function findMinus(userInput) {
+      const minusRegex = /-\d+/g;
+      let minusString = userInput.match(minusRegex);
+      return minusString;
+    }
+
     function getSum(userInput) {
       let sum = 0;
       const targetRegex = /[^0-9:,]/g;
@@ -39,7 +38,6 @@ class App {
         }
         sum += number;
       });
-
       return sum;
     }
 
@@ -48,6 +46,9 @@ class App {
       return;
     } else {
       let result_custom = customIdentifer(userInput);
+      if (findMinus(userInput) !== null) {
+        throw new Error("[ERROR] 음수는 입력할 수 없습니다.");
+      }
       let sum = getSum(result_custom);
       Console.print(`결과 : ${sum}`);
       return;
