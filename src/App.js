@@ -95,9 +95,9 @@ class App {
     }
   }
 
-  static isValidCustomFormat(prefixString, numbers) {
+  static isValidCustomFormat(prefixString) {
     const prefix = prefixString.slice(0, 2);
-    if (prefix !== '//' || !numbers) {
+    if (prefix !== '//') {
       throw new Error(
         '커스텀 구분자를 선택하신 경우, 구분자를 "//"와 "\\n" 사이에 입력해주세요.',
       );
