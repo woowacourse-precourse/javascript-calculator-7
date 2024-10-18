@@ -5,7 +5,7 @@ class Delimiter {
   #customDelimiterRegEx = /\/\/.*\\n/;
 
   /** @type {Array<string>} */
-  #defaultDelimiter = [',', ':'];
+  #defaultDelimiters = [',', ':'];
 
   /** @type {Array<string>} */
   #defaultDelimiterMatcher = ['//', '\\n'];
@@ -34,7 +34,7 @@ class Delimiter {
    * @returns {Array<string>}
    */
   #getDelimiter(value) {
-    const delimiter = shallowCopy(this.#defaultDelimiter);
+    const delimiter = shallowCopy(this.#defaultDelimiters);
 
     if (this.#hasCustomDelimiter(value)) {
       delimiter.unshift(this.#getCustomDelimiter(value));
