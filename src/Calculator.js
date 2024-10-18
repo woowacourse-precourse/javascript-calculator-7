@@ -1,5 +1,8 @@
 import { Validator } from "./Validator.js";
 
+const CUSTOM_START = "//";
+const CUSTOM_END = "\n";
+
 export class Calculator {
   #string;
   #customDelimiter;
@@ -10,11 +13,9 @@ export class Calculator {
   }
 
   setCustomDelimiter(userInput) {
-    const CUSTOM_START = "//";
-    const CUSTOM_END = "\n";
     const CUSTOM_END_INDEX = userInput.indexOf(CUSTOM_END);
 
-    if (userInput.startsWith(CUSTOM_START) && CUSTOM_END_INDEX !== -1) {
+    if (this.isSetCustomDelimiter(userInput, CUSTOM_END_INDEX)) {
       this.#customDelimiter = userInput.slice(
         CUSTOM_START.length,
         CUSTOM_END_INDEX
@@ -22,9 +23,19 @@ export class Calculator {
       this.#string = userInput.slice(CUSTOM_END_INDEX + CUSTOM_END.length);
     }
 
-    if (!userInput.startsWith(CUSTOM_START) || CUSTOM_END_INDEX === -1) {
+    if (!this.isSetCustomDelimiter(userInput, CUSTOM_END_INDEX)) {
       this.#customDelimiter = undefined;
       this.#string = userInput;
+    }
+  }
+
+  isSetCustomDelimiter(userInput, customEndIndex) {
+    if (userInput.startsWith(CUSTOM_START) && customEndIndex !== -1) {
+      return true;
+    }
+
+    if (!userInput.startsWith(CUSTOM_START) || customEndIndex === -1) {
+      return false;
     }
   }
 
