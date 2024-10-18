@@ -1,7 +1,8 @@
 const { Console } = await import("@woowacourse/mission-utils");
 class App {
   async run() {
-    const input = await Console.readLineAsync("");
+    let input = await Console.readLineAsync("");
+    input = input.replace(" ", ""); // 공백 제거
 
     const type = this.checkType(input);
     
@@ -44,7 +45,16 @@ class App {
   }
 
   checkDefaultValidation(input) {
-    
+    // 첫 문자나 끝 문자가 숫자가 아니거나
+    // 콤마와 세미콜론이 아닌 구분자를 포함하고 있거나
+    // 콤마와 세미콜론이 연속적으로 사용될 때 
+    const regExp = new RegExp(/^\d+([,:]\d+)*$/g);
+
+    if (regExp.test(input) === false) {
+      return false;
+    }
+
+    return true;
   }
 
   checkCustomValidation(input) {
