@@ -38,6 +38,12 @@ class App {
       numbers = input.split(/[,|:]/).map(Number);
     }
 
+    // 5번 기능: 숫자가 아닌 값이 있는지 확인
+    const invalidNumbers = numbers.filter((num) => isNaN(num));
+    if (invalidNumbers.length > 0) {
+      throw new Error("[ERROR] 숫자 형식이 잘못되었습니다.");
+    }
+
     // 4번 기능: 음수가 포함된 경우 에러를 발생시킴
     const negativeNumbers = numbers.filter((num) => num < 0);
     if (negativeNumbers.length > 0) {
