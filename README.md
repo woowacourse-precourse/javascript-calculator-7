@@ -26,6 +26,7 @@
 ## References
 
 - [Node.js 기본 Documentation](https://nodejs.org/docs/latest/api/)
+- [미션용 라이브러리 GitHub Repo](https://github.com/woowacourse-projects/javascript-mission-utils)
 
 ## Target features
 
@@ -43,4 +44,22 @@
 
 - 3단계: PR 후 2차 수정
 
-* [ ] PR 결과에 따라 코드 수정
+* [ ] PR 피드백이 있으면 결과에 따라 코드 수정
+
+## 추가 과정
+코드 작성 및 테스트 후 ESLint로 스타일 검증하는 연습을 수행하였다.
+
+ESLint + Prettier를 VS Code와 연계하여 사용하며, [airbnb에서 제공한 린트 세팅](https://www.npmjs.com/package/eslint-config-airbnb)에 따라 다음과 같이 패키지를 설치하였다. Airbnb의 자바스크립트 린팅 설정은 아직 ESLint v9을 지원하지 않아, v8로 설치해야 한다[(링크)](https://github.com/airbnb/javascript/issues/2961)
+
+```Shell
+  npm install --save-dev eslint@8.x.x prettier eslint-config-prettier eslint-plugin-prettier eslint-config-airbnb eslint-plugin-airbnb
+  npm init @eslint/config # 이것으로 ESLint 설정 파일을 생성한 후 적절하게 수정한다.
+```
+
+설정 파일(.eslintrc 및 eslint.config.js)로 Linting한 결과는 다음과 같다.
+
+![린트 결과](./docs/lint-result.png)
+
+* 정규표현식에서 let으로 인스턴스를 선언하도록 바꾸었을 때 / 문자에 불필요한 역슬래시(\)가 붙었다고 되어 있다. 그러나 실제로 돌려보면 해당 역슬래시가 없으면 정규표현식 구문 내 조건이 중간에 끊긴 것으로 판단하기 때문에 반드시 넣어야 한다.
+
+package.json의 dev dependencies로 추가 패키지가 반드시 들어가야 수행이 가능하기 때문에 테스트 후 원래의 package.json롤백하였으며 변경된 package.json은 linttest 확장자를 추가하여 구분하도록 백업하였다.
