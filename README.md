@@ -54,7 +54,7 @@
 
 - 문자열 입력받기
   - `@woowacourse/mission-utils` 의 `Console.readLineAsync()` 를 활용
-- 커스텀 구분자가 있는지 검사하는 메서드 구현
+- 커스텀 구분자가 존재 유무 판단 기능
 - 커스텀 구분자 지정하는 메서드 구현
   - 잘못된 입력 예외처리
     - [커스텀 구분자] 입력 도중 공백이 나오는 경우
@@ -72,7 +72,7 @@
 
 - [x] 문자열 입력받기
   - [x] `@woowacourse/mission-utils` 의 `Console.readLineAsync()` 를 활용
-- [x] 커스텀 구분자가 있는지 검사하는 메서드 구현
+- [x] 커스텀 구분자가 존재 유무 판단 기능
 - [x] 커스텀 구분자 지정하는 메서드 구현
   - [x] 잘못된 입력 예외처리
     - [x] [커스텀 구분자] 입력 도중 공백이 나오는 경우
@@ -83,5 +83,5 @@
     - [x] [숫자] 음수인 경우
     - [x] [숫자] 중간에 공백이 나오는 경우
     - [x] [숫자] 지정되지 않은 구분자가 나오는 경우
-- [ ] 계산결과 출력
-  - [ ] `@woowacourse/mission-utils` 의 `Console.print()` 을 활용
+- [x] 계산결과 출력
+  - [x] `@woowacourse/mission-utils` 의 `Console.print()` 을 활용
