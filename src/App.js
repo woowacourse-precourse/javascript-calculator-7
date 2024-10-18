@@ -1,4 +1,4 @@
-import { CUSTOM_SEPARATOR_REGEXP, DEFAULT_SEPARATOR } from './constants';
+import { CUSTOM_SEPARATOR_REGEXP, DEFAULT_SEPARATOR } from './constants.js';
 import {
   getStringifiedString,
   getUserInput,
@@ -7,7 +7,7 @@ import {
   getSum,
   printResult,
   getNumberArray,
-} from './utils';
+} from './utils.js';
 
 class App {
   async run() {

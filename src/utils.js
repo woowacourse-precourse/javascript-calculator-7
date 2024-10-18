@@ -1,5 +1,5 @@
 import { MissionUtils } from '@woowacourse/mission-utils';
-import { ERROR_MESSAGE, INPUT_INFO_MESSAGE } from './constants';
+import { ERROR_MESSAGE, INPUT_INFO_MESSAGE } from './constants.js';
 
 export async function getUserInput() {
   return await MissionUtils.Console.readLineAsync(INPUT_INFO_MESSAGE);
