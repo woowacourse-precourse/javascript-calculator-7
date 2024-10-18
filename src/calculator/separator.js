@@ -67,8 +67,8 @@ export const splitBySeparators = (separators, calculationString) => {
       throw new Error('[ERROR] 입력 문자열에 유효하지 않은 구분자가 있습니다.');
     }
 
-    if (num < 0) {
-      throw new Error('[ERROR] 입력 문자열에 음수가 있습니다.');
+    if (num <= 0) {
+      throw new Error('[ERROR] 입력 문자열에 0이나 음수가 포함되어 있습니다.');
     }
 
     return num;
