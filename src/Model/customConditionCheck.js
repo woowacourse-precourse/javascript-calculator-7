@@ -1,7 +1,7 @@
 import { Console } from '@woowacourse/mission-utils';
 import UserInput from '../View/UserInput.js';
 
-// TO DO: 리펙토링 디버깅 필요 화살표로 통일
+// TO DO: 리펙토링 -> 화살표 함수 공부 후, 모두 통일하기
 
 // 1. //+구분자+\n 입력 체크
 function conditionTextInputCheck(userInput) {
