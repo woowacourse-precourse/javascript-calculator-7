@@ -58,7 +58,11 @@ export default class Calculator {
   #validateInput() {
     this.#extractDelimiter();
 
-    // TODO: Implement the input validation
+    const INPUT_FORMAT_REGEX = new RegExp(`^(//(.)?\\\\n)?(\\d+([${this.#delimiters.join('')}]\\d+)*)?$`)
+
+    if (!INPUT_FORMAT_REGEX.test(this.#input)) {
+      throw new Error('[ERROR]: Invalid input')
+    }
   }
 
   /**
