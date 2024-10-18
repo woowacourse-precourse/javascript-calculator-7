@@ -20,12 +20,17 @@ class App {
     }
     return str.split(delimiter); 
   }
-  
+
+  getSum(numbers) {
+    return numbers.reduce((total, num) => total + Number(num), 0);
+  }
+
   async run() {
     const str = await this.receiveInput();
     const delimiter = this.getDelimiter(str);
     const numbers = this.getNumbers(str, delimiter);
-    MissionUtils.Console.print(numbers);
+    const sum = this.getSum(numbers);
+    MissionUtils.Console.print(sum);
   }
 }
 
