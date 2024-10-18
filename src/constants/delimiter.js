@@ -1,1 +1,1 @@
-export const delimiter = /[,:]/;
+export const DELIMITER = /[,:]/;
