@@ -51,7 +51,7 @@ export const splitBySeparators = (separators, calculationString) => {
   // 구분자를 모아 정규표현식 패턴으로 변환
   let splitPattern = '';
   separators.forEach((separator) => {
-    splitPattern += separator;
+    splitPattern += '\\' + separator;
   });
 
   // 구분자로 문자열 분리
