@@ -58,6 +58,6 @@ export default class Validator {
     const separatorRegExp = getSeparatorPattern(customSeparator);
     const splitedInput = Number(input.split(separatorRegExp).join(''));
 
-    if (splitedInput) throw new Error(errorMessage.invalidSeparatorUsage);
+    if (!splitedInput) throw new Error(errorMessage.invalidSeparatorUsage);
   }
 }
