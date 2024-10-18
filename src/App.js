@@ -1,46 +1,51 @@
 import { Console } from "@woowacourse/mission-utils";
-import { checkNum, basicCheckIsMinus, customCheckIsMinus, checkSeparator } from "./validate.js";
+import { checkNum, checkIsBasicMinus, checkIsCustomMinus, checkSeparator } from "./validate.js";
 class App {
   async run() {
-    let nums = 0;
-
     let string = await this.getString();
-    if (!string) { // 입력값이 ""이면 0을 출력
-      nums = 0
-    }
-    else {
-      const CUSTOMS = await this.customSeparator(string); // customs가 0이면 커스텀 구분자가 아니므로 기본 덧셈 진행
-      if (CUSTOMS == 0) {
-        nums = await this.basicSumNums(string);
-      }
-      else {
-        nums = await this.customSumNums(string);
-      }
-    }
     
-    Console.print("결과 : "+ nums);
+    let result = await this.calcAfterUserInput(string);
+    
+    Console.print("결과 : "+ result);
   }
 
   // 사용자 입력 받기
   async getString() {
     try {
       let userInput = await Console.readLineAsync('덧셈할 문자열을 입력해 주세요.\n');
-      this.checkUserInput(userInput);
+      this.checkUserInputValidation(userInput);
       return userInput;
     } catch (error) {
       Console.print(error.message);
       throw error;
     }
   }
-
-  checkUserInput(userInput) {
-    if (!checkNum(userInput)) {
-      throw new Error("[ERROR] 숫자를 입력하세요");
+  
+  //입력값의 종류 구분후 계산
+  async calcAfterUserInput(userInput) {
+    if (!userInput) { // 입력값이 ""이면 0을 출력
+      return 0;
     }
-    if (!customCheckIsMinus(userInput)) {
+    else {
+      let customs = await this.customSeparator(userInput); // customs가 0이면 커스텀 구분자가 아니므로 기본 덧셈 진행
+      if (customs == 0) {
+        return await this.basicSumNums(userInput);
+      }
+      else {
+        return await this.customSumNums(userInput);
+      }
+    }
+  }
+
+  // 사용자 입력값이 유효값인지 확인
+  checkUserInputValidation(userInput) {
+    if (!checkNum(userInput)) {
       throw new Error("[ERROR]");
     }
-    if (!basicCheckIsMinus(userInput)) {
+    if (!checkIsCustomMinus(userInput)) {
+      throw new Error("[ERROR]");
+    }
+    if (!checkIsBasicMinus(userInput)) {
       throw new Error("[ERROR]");
     }
     if (!checkSeparator(userInput)) {
@@ -52,15 +57,13 @@ class App {
   // 쉼표와 콜론 덧셈
   basicSumNums(arrayString) {
     let nums = arrayString.split(/,|:/).map(function(num){return parseInt(num);});
-    const SUM_NUMS = nums.reduce((a, b) => a + b);
-    return SUM_NUMS;
+    return nums.reduce((a, b) => a + b);
   }
 
   // 커스텀 구분자 추출과 '//'과 '\n'이 없으면 0을 반환
   customSeparator(arrayString) {
     if (arrayString.indexOf('//') == 0 && arrayString.indexOf('\\n') != -1) {
-      const SEPARATOR = arrayString.substring(arrayString.indexOf('//') + 2, arrayString.indexOf('\\n'));
-      return SEPARATOR;
+      return arrayString.substring(arrayString.indexOf('//') + 2, arrayString.indexOf('\\n'));
     }
     else {
       return 0;
@@ -69,11 +72,9 @@ class App {
   
   // 커스텀 구분자가 있을 때 덧셈
   customSumNums(arrayString) {
-    const CUSTOM_SEPARATOR = this.customSeparator(arrayString);
     let customNums = arrayString.substring(arrayString.indexOf('\\n')+2);
-    customNums = customNums.split(CUSTOM_SEPARATOR).map(function(num){return parseInt(num);});
-    const CUSTOM_SUM_NUMS = customNums.reduce((a, b) => a + b);
-    return CUSTOM_SUM_NUMS;
+    customNums = customNums.split(this.customSeparator(arrayString)).map(function(num){return parseInt(num);});
+    return customNums.reduce((a, b) => a + b);
   }
 }
 
