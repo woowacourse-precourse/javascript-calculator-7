@@ -38,8 +38,8 @@ class App {
   }
 
   addCustomSeparator(input, separator) {
-    const custom = input.match(CUSTOM_PATTERN);
-    const customSeparator = custom[0]
+    const pattern = this.sliceCustomPattern(input);
+    const customSeparator = pattern
       .split(/[//,\\n]/)
       .filter((i) => i.length > 0);
     separator.push(...customSeparator);
