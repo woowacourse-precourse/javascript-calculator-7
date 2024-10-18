@@ -23,6 +23,9 @@ class App {
 			if (Array.isArray(answer)) {
 				let sum = 0;
 				for (const v of answer) {
+					if (isNaN(v)) {
+						throw new Error('[ERROR]: 입력값에 숫자 이외의 값이 포함되어 있어요.');
+					}
 					sum += +v;
 				}
 				answer = sum;
