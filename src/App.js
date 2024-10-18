@@ -37,7 +37,18 @@ class App {
       // 2번 기능: 쉼표(,) 또는 콜론(:) 구분자로 숫자 더하기
       numbers = input.split(/[,|:]/).map(Number);
     }
+    // 6번 기능: 연속된 구분자나 문자열 끝에 구분자가 있는지 확인
+    const delimiterPattern = customSeparatorFormat
+      ? customSeparatorFormat[1]
+      : /[,|:]/; // 커스텀 구분자 사용 또는 기본 구분자 사용
 
+    // 유효성 검사: 연속된 구분자 또는 끝에 구분자가 있는지 확인
+    const invalidSeparatorPattern = new RegExp(
+      `(${delimiterPattern}){2,}|(${delimiterPattern})$`
+    );
+    if (invalidSeparatorPattern.test(input)) {
+      throw new Error("[ERROR] 구분자가 연속되거나 마지막에 올 수 없습니다.");
+    }
     // 5번 기능: 숫자가 아닌 값이 있는지 확인
     const invalidNumbers = numbers.filter((num) => isNaN(num));
     if (invalidNumbers.length > 0) {
