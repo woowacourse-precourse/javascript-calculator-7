@@ -9,6 +9,7 @@ export default class Validator {
   static validateUsedSeparator(input, customSeparator) {
     this.#checkUseOtherSeperator(input, customSeparator);
     this.#checkSeperatorConflict(input, customSeparator);
+    this.#checkIncludeZero(input, customSeparator);
   }
 
   static validateStartsWith(input) {
@@ -52,9 +53,17 @@ export default class Validator {
       throw new Error(errorMessage.invalidCustomSepartor);
   }
 
+  static #checkIncludeZero(input, customSeparator) {
+    const separatorRegExp = new RegExp(
+      `${customSeparator ? customSeparator + '|[,:]' : '[,:]'}0`,
+    );
+
+    if (separatorRegExp.test(input)) throw new Error(errorMessage.usePositive);
+  }
+
   static #checkUseOtherSeperator(input, customSeparator) {
     const separatorRegExp = new RegExp(
-      `${customSeparator ? customSeparator + '|' : ''}[,:]`,
+      `${customSeparator ? customSeparator + '|[,:]' : '[,:]'}`,
     );
     const splitedInput = input.split(separatorRegExp).join('');
 
