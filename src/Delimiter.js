@@ -2,13 +2,13 @@ import { isMatch, shallowCopy } from './utils.js';
 
 class Delimiter {
   /** @type {object} */
-  #customDelimiterRegEx = /\/\/.*\n/;
+  #customDelimiterRegEx = /\/\/.*\\n/;
 
   /** @type {Array<string>} */
   #defaultDelimiter = [',', ':'];
 
   /** @type {Array<string>} */
-  #defaultDelimiterMatcher = ['//', '\n'];
+  #defaultDelimiterMatcher = ['//', '\\n'];
 
   /**
    *
@@ -25,16 +25,7 @@ class Delimiter {
    * @returns {string}
    */
   #getCustomDelimiter(value) {
-    return value.split('//')[1].split('\n')[0];
-  }
-
-  /**
-   *
-   * @param {Array<string>} value
-   * @returns
-   */
-  #deleteCustomDelimiterMatcher(value) {
-    return value.filter((aValue) => !this.#defaultDelimiterMatcher.includes(aValue));
+    return value.split('//')[1].split('\\n')[0];
   }
 
   /**
@@ -46,8 +37,11 @@ class Delimiter {
     const delimiter = shallowCopy(this.#defaultDelimiter);
 
     if (this.#hasCustomDelimiter(value)) {
-      delimiter.push(this.#getCustomDelimiter(value));
+      delimiter.unshift(this.#getCustomDelimiter(value));
+      delimiter.unshift(...this.#defaultDelimiterMatcher);
     }
+
+    console.log(delimiter);
 
     return delimiter;
   }
@@ -64,6 +58,15 @@ class Delimiter {
 
   /**
    *
+   * @param {Array<string>} value
+   * @returns {Array<string>}
+   */
+  #filterEmpty(value) {
+    return value.filter((aValue) => aValue !== '');
+  }
+
+  /**
+   *
    * @param {string} value
    * @returns {Array<string>}
    */
@@ -74,11 +77,7 @@ class Delimiter {
       delimitedString = this.#delimite(delimiter, delimitedString);
     });
 
-    if (this.#hasCustomDelimiter(value)) {
-      return this.#deleteCustomDelimiterMatcher(delimitedString);
-    }
-
-    return delimitedString;
+    return this.#filterEmpty(delimitedString);
   }
 }
 

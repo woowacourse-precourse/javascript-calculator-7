@@ -31,6 +31,8 @@ class Validator {
   validate(value) {
     const delimitedString = this.#delimiter.getDelimitedString(value);
 
+    console.log(delimitedString);
+
     this.#validator
       .validate(delimitedString)
       .with(this.#hasAllowedDelimiter, {
