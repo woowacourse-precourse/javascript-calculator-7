@@ -24,7 +24,7 @@ export default class Calculator {
    */
   setInput(input) {
     if (typeof input !== 'string') {
-      throw new Error('Input should be a string');
+      throw new Error('[ERROR]: Input should be a string');
     }
 
     this.#input = input;
