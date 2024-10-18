@@ -15,9 +15,21 @@ class App {
       rl.close();
     });
     rl.on("close", () => {
-      //, or ; 구분해서 배열에 하나씩 넣기
-      // "" => 0, "1,2" => 3, "1,2,3" => 6, "1,2:3" => 6
-      const OUTPUT = INPUT.split(/,|:/).map(Number);
+      let re = new RegExp("//(.*?)\\\\n"); //구분자 캡처를 위해 (.*?) 사용
+      let split_input;
+      let OUTPUT;
+
+      if ((split_input = re.exec(INPUT)) !== null) {
+        // "//;\n1;2;3" => 6
+        //split_input에는 //;\n 이 부분만 들어감.
+        let new_re = split_input[1]; //새로운 구분자를 new_re에 저장
+        let new_input = INPUT.replace(re, "");
+        OUTPUT = new_input.split(new_re).map(Number);
+      } else {
+        // "" => 0, "1,2" => 3, "1,2,3" => 6, "1,2:3" => 6
+        let default_re = new RegExp(",|:");
+        OUTPUT = INPUT.split(default_re).map(Number);
+      }
       const sum = OUTPUT.reduce((acc, cur) => acc + cur, 0);
       console.log(sum);
     });
