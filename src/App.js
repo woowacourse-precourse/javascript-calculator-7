@@ -1,11 +1,13 @@
-import StringCalculator from './models/StringCalculator.js';
+import NumberProcessor from "./models/NumberProcessor.js";
 
 class App {
   constructor(){
-    this.model = new StringCalculator();
+    this.model = new NumberProcessor();
   }
   async run() {
-    this.model.calculate('//;\n1;2;3');
+    const result = this.model.process('//;\n1;2;3',';');
+    console.log(result);
+    
 
   }
 }
