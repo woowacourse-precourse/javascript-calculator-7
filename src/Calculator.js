@@ -18,8 +18,9 @@ export class Calculator {
     // 기본 구분자
     else result = input.split(regexText);
     // result type :  array<string>
-    if (this.checkNone(result)) return { error: true };
-    if (this.checkNotNum(result)) return { error: true };
+    if (this.checkNone(result)) return { error: true }; // "" 빈문자열 체크
+    if (this.checkNotNum(result)) return { error: true }; // "" 숫자인지 체크
+    if (this.checkSpace(result)) return { error: true }; // 공백 체크
     result = this.changeFloat(result); // 정수는 정수로 소수는 소수로 형변환
     if (this.checkMin(result)) return { error: true }; // 음수 체크
     return { error: false, numbers: result };
@@ -71,6 +72,13 @@ export class Calculator {
   checkNone = (result) => {
     for (let index = 0; index < result.length; index++) {
       if (result[index] == "") return true;
+    }
+    return false;
+  };
+  checkSpace = (result) => {
+    let regexSpace = /\s/;
+    for (let index = 0; index < result.length; index++) {
+      if (regexSpace.test(result[index])) return true;
     }
     return false;
   };
