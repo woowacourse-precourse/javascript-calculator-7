@@ -1,6 +1,6 @@
 import { MissionUtils } from '@woowacourse/mission-utils';
 import { printInputMessage, getUserInput } from './views/CalculatorView.js';
-import { parseNumbers } from './models/CalculatorModel.js';
+import { parseNumbers, calculate } from './models/CalculatorModel.js';
 
 // View 테스트
 describe('문자열 계산기 View', () => {
@@ -44,7 +44,8 @@ describe('문자열 계산기 model', () => {
     }
   });
 
-  // test('구분자가 아닌 문자가 들어가 있는 경우', () => {
-  //   const result = parseNumbers('4,5,6,7:8:9');
-  // });
+  test('계산', () => {
+    const result2 = calculate('5, 6');
+    expect(result2).toEqual(11);
+  });
 });
