@@ -1,6 +1,6 @@
-export const ERROR_PREFIX = '[ERROR]: ';
+const ERROR_PREFIX = '[ERROR]: ';
 
-export const ERROR_MESSAGES = {
+const ERROR_MESSAGES = {
   INVALID_INPUT_FORMAT:
     '입력은 반드시 "//"로 시작하고, "\\n"이 포함되어야 합니다.',
   INVALID_CUSTOM_INPUT:
@@ -11,3 +11,8 @@ export const ERROR_MESSAGES = {
   EMPTY_STRING: '빈 문자열입니다.',
   EMPTY_DELIMITER: 'delimiter가 비어있습니다.', // 추가된 에러 메시지
 };
+const SYSTEM_MESSAGES = {
+  ASK_USER_INPUT: '덧셈할 문자열을 입력해 주세요.\n',
+  PARSE_RESULT: `결과 : `,
+};
+export { ERROR_MESSAGES, ERROR_PREFIX, SYSTEM_MESSAGES };
