@@ -35,4 +35,18 @@ describe("StringCalculator", () => {
       expect(calculator.extractCustomDelimiter("1,2:3")).toBe(null);
     });
   });
+
+  describe("splitInputByDelimiter", () => {
+    test("커스텀 구분자를 사용하여 문자열을 나누고 숫자 배열을 반환한다", () => {
+      const calculator = new StringCalculator();
+      expect(calculator.splitInputByDelimiter("//;\n1;2;3", ";")).toEqual([
+        1, 2, 3,
+      ]);
+    });
+
+    test("기본 구분자를 사용하여 문자열을 나누고 숫자 배열을 반환한다", () => {
+      const calculator = new StringCalculator();
+      expect(calculator.splitInputByDelimiter("1,2:3")).toEqual([1, 2, 3]);
+    });
+  });
 });

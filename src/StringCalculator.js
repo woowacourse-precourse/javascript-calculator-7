@@ -29,5 +29,13 @@ class StringCalculator {
     }
     return null;
   }
+
+  splitInputByDelimiter(input, customDelimiter) {
+    if (customDelimiter) {
+      const numbersSection = input.split("\n")[1];
+      return numbersSection.split(customDelimiter).map(Number);
+    }
+    return input.split(/,|:/).map(Number);
+  }
 }
 export default StringCalculator;
