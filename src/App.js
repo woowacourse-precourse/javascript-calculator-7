@@ -14,11 +14,11 @@ function extractNumber(userInputData) {
 class NumberExtractor {
   orgUserInputData
   userInputData
-  numberData
+
   delemeter
   customDelemter
 
-  NUM_REG = /[^0-9]/
+  NUM_REG = /\D/
   CUSTOM_DELI_START = '//'
   CUSTOM_DELI_END = '\\\\n'
 
@@ -33,16 +33,20 @@ class NumberExtractor {
     if (this.findCustomDelemeter() === true) {
       this.addDelemeter();
     }
+
+    this.splitByDelimeter()
+
+    return this.userInputData;
   }
 
   findCustomDelemeter() {
-    const customDeliReg = new RegExp(`^${this.CUSTOM_DELI_START}.${this.CUSTOM_DELI_END}`)
-    const customDeliString = this.userInputData.match(customDeliReg);
+    const customDeliRegExp = new RegExp(`^${this.CUSTOM_DELI_START}.${this.CUSTOM_DELI_END}`)
+    const customDeliString = this.userInputData.match(customDeliRegExp);
 
     if (customDeliString == undefined) return false
   
     this.customDelemter = customDeliString[0].charAt(2)
-    this.userInputData = this.userInputData.replace(customDeliReg, '')
+    this.userInputData = this.userInputData.replace(customDeliRegExp, '')
 
     return true
     // todo : Error Handling
@@ -52,25 +56,24 @@ class NumberExtractor {
 
   addDelemeter() {
     this.delemeter.push(this.customDelemter)
-    console.log(this.delemeter)
   }
 
-  splitInputDate(inputData) {
-    this.splitReg = "/[,|:]|\/\/.\\n/g;"
+  splitByDelimeter() {
+    // todo: delemeter[2] undefined처리
+    const deliRegExp = new RegExp(`${this.delemeter[0]}|${this.delemeter[1]}|${this.delemeter[2]}`, 'g')
+    this.userInputData = this.userInputData.split(deliRegExp);
 
-    const numberArr = userInputData.split(splitReg);
+    console.log(this.userInputData)
 
-    if (isError(numberArr) == true) {
+    if (this.checkError() == true) {
       // todo: throw error 
       Console.print("error")
-      return null
     }
-    return numberArr
   }
 
   checkError() {
-    const findChar = numberArr.find((element) => {
-      return reg.test(element);
+    const findChar = this.userInputData.find((element) => {
+      return this.NUM_REG.test(element);
     })
     return findChar != undefined
   }
