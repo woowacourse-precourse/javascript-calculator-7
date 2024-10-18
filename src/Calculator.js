@@ -8,11 +8,9 @@ export default class Calculator {
     }
 
     getDelimiters(input) {
-        const defaultDeliters = [",", ":"]
-        const customDeliter = input.match(/^\/\/(.+)\/n$/)
-        if (customDeliter) {
-            return [...defaultDeliters, customDeliter[1]]
-        }
-        return defaultDeliters
+        const defaulDelimiters = [",", ":"]
+        const customDeliter = input.match(/\/\/(.*?)\\n/)
+
+        return customDeliter ? [...defaulDelimiters, customDeliter[1]] : defaulDelimiters
     }
 }
