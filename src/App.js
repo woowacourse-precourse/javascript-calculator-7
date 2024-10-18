@@ -7,14 +7,19 @@ class App {
   }
 
   async run() {
-    // 1. 사용자에게 문자열을 입력 받는다.
-    const STR = await this.readLine('덧셈할 문자열을 입력해 주세요.\n');
-    // 2. 입력받은 문자열을 처리한다.
-    this.processString(STR);
-    // 3. 배열의 숫자를 모두 더해 반환한다.
-    const RESULT = this.numbers.reduce((sum, cur) => sum + cur, 0);
-    // 4. 반환된 숫자를 출력한다.
-    this.printResult(`결과 : ${RESULT}`);
+    try {
+      // 1. 사용자에게 문자열을 입력 받는다.
+      const STR = await this.readLine('덧셈할 문자열을 입력해 주세요.\n');
+      // 2. 입력받은 문자열을 처리한다.
+      this.processString(STR);
+      // 3. 배열의 숫자를 모두 더해 반환한다.
+      const RESULT = this.numbers.reduce((sum, cur) => sum + cur, 0);
+      // 4. 반환된 숫자를 출력한다.
+      this.printResult(`결과 : ${RESULT}`);
+    }
+    catch (err) {
+      Console.print(err.message);
+    }
   }
 
   /**
@@ -46,25 +51,21 @@ class App {
   }
 
   /**
-   * 커스텀 구분자를 분리해 this.separator에 push하고
+   * 문자열 앞에서부터 커스텀 구분자를 분리해 this.separator에 push하고
    * 커스텀 구분자를 선언하는 부분을 제거한 문자열을 return 한다.
    * @param str
    * @return {string}
-   * @throws {Error} 구분자가 1글자가 아닌 경우
    * @example
-   * param = "1//;\n//-\n2"
-   * return = "1;-2"
+   * param = "//;\n//-\n1;2-3"
+   * return = "1;2-3"
    */
   processCustomSeparator(str) {
-    const REGEX = /\/\/(?<=\/\/)(.?)(?=\\n)\\n/g; // 커스텀 구분자 선언부에서 구분자만 캡처링할 수 있게
-    const result = [...str.matchAll(REGEX)];
-    result.forEach(matches => {
-      if (matches[1].length !== 1) {
-        this.throwError(); // 구분자가 1글자가 아닌 경우 throw. *요구 사항에서 구분자는 "문자"임
-      }
-      this.separator.push(matches[1]);
-    }); // 구분자를 this.speparator에 push
-    return str.replaceAll(REGEX, ''); // return은 커스텀 구분자 선언부를 제거한 문자열
+    const REGEX = /^\/\/.\\n/; // 글자 앞부분에 //.\n 형식이 있는 경우
+    while (str.match(REGEX)) {
+      this.separator.push(str[2]);
+      str = str.substring(5);
+    }
+    return str;
   }
 
   /**
@@ -77,21 +78,13 @@ class App {
     const REGEX = new RegExp(`[${this.separator.join('')}]`, 'g');
     const SPLITTED_STR = str.split(REGEX);
     SPLITTED_STR.forEach(string => {
-      if (!this.isNumber(string)) {
+      if (!Number(string)) { // NaN인 경우
+        this.throwError();
+      } else if (Number(string) <= 0) { // 0이거나 음수인 경우
         this.throwError();
       }
       this.numbers.push(Number.parseInt(string, 10));
     });
-  }
-
-  /**
-   * 숫자로만 이루어진 문자열인지 확인한다.
-   * @param str
-   * @return {boolean} 숫자로만 이루어진 문자열인 경우 true
-   */
-  isNumber(str) {
-    const REGEX = /[^-+0-9]/;
-    return !REGEX.test(str);
   }
 
   /**
