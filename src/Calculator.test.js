@@ -60,6 +60,7 @@ describe("regex_random_test", () => {
     testInput += `//${randomAscii}\\n`;
     for (let i = 0; i < randomNumberList.length; i++) {
       testInput += randomNumberList[i];
+      if (i === randomNumberList.length - 1) break;
       const randomDevider = Math.random() * 10;
       if (randomDevider >= 7) testInput += ":";
       else if (randomDevider >= 4) testInput += ",";
@@ -76,9 +77,13 @@ describe("regex_random_test", () => {
   }
   console.log(testInput);
   test(`random : ${testInput}`, () => {
-    expect(calculator.testRegex(testInput)).toEqual({
-      error: false,
-      numbers: randomNumberList,
-    });
+    expect(calculator.testRegex(testInput)).toEqual(
+      randomNumberList != []
+        ? {
+            error: false,
+            numbers: randomNumberList,
+          }
+        : 0
+    );
   });
 });
