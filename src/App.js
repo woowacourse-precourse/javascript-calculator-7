@@ -18,7 +18,15 @@ class App {
   }
 
   isInValidInput() {
-    return true;
+    if (this.#input.startsWith("//")) {
+      const lineBreakStringIndex = this.#input.indexOf("\\n");
+
+      if (lineBreakStringIndex === -1) {
+        return true;
+      }
+    }
+
+    return false;
   }
 }
 
