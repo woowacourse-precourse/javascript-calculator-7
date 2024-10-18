@@ -16,6 +16,7 @@ class App {
   constructor() {
     this.sum = 0;
     this.separatorArray = [",", ":"];
+    this.separator = "";
   }
   async run() {
     let userInput = await Console.readLineAsync(
@@ -26,6 +27,15 @@ class App {
       this.checkCustomSeparatorError(userInput);
       this.separatorArray.push(userInput[2]);
       userInput = userInput.slice(5);
+    }
+    this.separator = this.separatorArray.join("");
+    if (userInput.length > 0) {
+      const separatorReg = new RegExp(`[${this.separator}]`, "g");
+      const numbers = userInput.replace(separatorReg, " ").split(" ");
+      const parsedNumbers = numbers.map((number) => {
+        const num = parseInt(number, 10);
+        return num;
+      });
     }
   }
   checkCustomSeparatorError(userInput) {
