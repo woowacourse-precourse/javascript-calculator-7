@@ -17,11 +17,11 @@ class Validator {
 
   /**
    *
-   * @param {Array<string>} value
+   * @param {Array<string>} values
    * @returns {boolean}
    */
-  #hasAllowedDelimiter(value) {
-    return value.every((aValue) => isNumericString(aValue));
+  #hasAllowedDelimiters(values) {
+    return values.every((value) => isNumericString(value));
   }
 
   /**
@@ -41,7 +41,7 @@ class Validator {
   validate(value) {
     this.#validator
       .validate(value)
-      .with(this.#hasAllowedDelimiter, {
+      .with(this.#hasAllowedDelimiters, {
         message: Validator.ERROR_MESSAGE.HAS_NOT_ALLOWED_DELIMITER,
       })
       .with(this.#hasPositiveNumber, {
