@@ -6,7 +6,7 @@ class App {
   async run() {
     const inputString = await consoleUtils();
     const result = add(inputString);
-    Console.print(result);
+    Console.print(`결과 : ${result}`);
   }
 }
 
