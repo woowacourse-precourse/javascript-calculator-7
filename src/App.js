@@ -1,5 +1,7 @@
 import { Console } from '@woowacourse/mission-utils';
 
+import { PRINT_MESSAGES } from './constants.js';
+
 const customSeparationSymbolRegex = /\/\/(.*?)\\n/;
 const customSeparationSymbolsRegex = /\/\/(.*?)\\n/g;
 
@@ -32,7 +34,7 @@ class App {
 
   async getInputForAddition() {
     const input = await Console.readLineAsync(
-      '덧셈할 문자열을 입력해 주세요.\n'
+      PRINT_MESSAGES.ENTER_ADDITION_STRING
     );
 
     return input;
@@ -67,7 +69,12 @@ class App {
   }
 
   printResult(input) {
-    Console.print(`결과 : ${input.reduce((acc, cur) => acc + cur, 0)}`);
+    Console.print(
+      `${PRINT_MESSAGES.FINAL_RESULT}${input.reduce(
+        (acc, cur) => acc + cur,
+        0
+      )}`
+    );
   }
 
   validateWrongNumber(additionArray) {
