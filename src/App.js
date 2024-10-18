@@ -12,7 +12,7 @@ class App {
 
   async userInput() {
     const inputWords = Console.readLineAsync(
-      "µ¡¼ÀÇÒ ¹®ÀÚ¿­À» ÀÔ·ÂÇØ ÁÖ¼¼¿ä.\n"
+      "ë§ì…ˆí•  ë¬¸ìžì—´ì„ ìž…ë ¥í•´ ì£¼ì„¸ìš”.\n"
     );
     return inputWords;
   }
@@ -36,7 +36,7 @@ class App {
 
   userOutput(NUMBERS) {
     const sum = NUMBERS.reduce((acc, curr) => acc + curr, 0);
-    Console.print(`°á°ú: ${sum}`);
+    Console.print(`ê²°ê³¼: ${sum}`);
   }
 }
 
