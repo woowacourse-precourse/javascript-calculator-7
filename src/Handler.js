@@ -22,6 +22,8 @@ class Handler {
       numString += '.';
     } else if (!separator.includes(input) && !assignCustomSep.includes(input)) {
       throw new Error(MESSAGES.ERROR.INPUT_BASIC_OR_CUSTOM_SEPARATOR);
+    } else if (input === '.' && hasDecimalPoint) {
+      throw new Error(MESSAGES.ERROR.INPUT_CONTINUOUS_DOTS);
     } else {
       numSum += Number(numString);
       numString = '';
