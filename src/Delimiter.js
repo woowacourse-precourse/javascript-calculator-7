@@ -8,7 +8,7 @@ class Delimiter {
   #defaultDelimiters = [',', ':'];
 
   /** @type {Array<string>} */
-  #defaultDelimiterMatcher = ['//', '\\n'];
+  #defaultDelimiterMatchers = ['//', '\\n'];
 
   /**
    *
@@ -38,7 +38,7 @@ class Delimiter {
 
     if (this.#hasCustomDelimiter(value)) {
       delimiter.unshift(this.#getCustomDelimiter(value));
-      delimiter.unshift(...this.#defaultDelimiterMatcher);
+      delimiter.unshift(...this.#defaultDelimiterMatchers);
     }
 
     return delimiter;
