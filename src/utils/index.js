@@ -4,7 +4,8 @@ import {
     NUMBER_PATTERN,
     SEPERATOR_SUBTITUTE,
     NULL_STRING,
-    ERROR_MESSAGE
+    ERROR_MESSAGE,
+    EMPTY_INPUT_ARRAY
 } from '../constant/index.js'
 
 function getSeperatorArray(expression){
@@ -60,7 +61,7 @@ function splitBySeperator(expression, seperatorArray){
     seperatorArray.map((seperator) => {
         expression = expression.replaceAll(seperator, SEPERATOR_SUBTITUTE);
     })
-    return expression.split(SEPERATOR_SUBTITUTE);
+    return expression ? expression.split(SEPERATOR_SUBTITUTE) : EMPTY_INPUT_ARRAY;
 }
 
 function sumArray(array){
