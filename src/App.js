@@ -1,10 +1,14 @@
 import { Console } from "@woowacourse/mission-utils";
 
 class App {
+
   async run() {
     const userInput = await Console.readLineAsync('문자열 덧셈을 해보아요:');
-    this.print(userInput)
 
+  };
+
+  printError(msg) {
+    Console.print('[ERROR]'+msg);
   }
 
   print(str) {
