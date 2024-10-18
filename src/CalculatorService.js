@@ -1,8 +1,8 @@
 import Validator from './Validator.js';
 import UserInputHandler from './userInputHandler.js';
 
-export default class Service {
-  sumUserInput(input, customSeparator) {
+export default class CalculatorService {
+  static sumUserInput(input, customSeparator) {
     const splitedUserInput = UserInputHandler.getSplitedBySeparator(
       input,
       customSeparator,
@@ -10,7 +10,7 @@ export default class Service {
     return UserInputHandler.sum(splitedUserInput);
   }
 
-  validateUserInput(input) {
+  static validateUserInput(input) {
     // 더블슬래시와 숫자로 시작하는지 검증
     Validator.validateStartsWith(input);
 
@@ -21,7 +21,7 @@ export default class Service {
     Validator.validateUsedSeparator(processedUserInput, customSeparator);
   }
 
-  parseUserInput(input) {
+  static parseUserInput(input) {
     let customSeparator = null;
     let processedUserInput = null;
 
