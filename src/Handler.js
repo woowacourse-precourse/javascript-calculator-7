@@ -1,6 +1,11 @@
-import { MESSAGES } from './constants.js';
+import { MESSAGES, SEPARATOR } from './constants.js';
+import Validator from './Validator.js';
 
 class Handler {
+  constructor() {
+    this.validator = new Validator();
+  }
+
   // 숫자일 때
   handleNumberInput(input, userInput, numString, idx) {
     if (input === '0' && numString === '' && userInput[idx + 1] !== '.') {
@@ -21,6 +26,22 @@ class Handler {
       numSum += Number(numString);
       numString = '';
     }
+    return { numSum, numString, hasDecimalPoint };
+  }
+
+  // 전체 문자열 검사
+  handleUserInput(input, userInput, numString, idx, hasDecimalPoint, separator, allowedSeps, numSum) {
+    if (!isNaN(input) && input.trim() !== '') {
+      const numResult = this.handleNumberInput(input, userInput, numString, idx);
+      numString = numResult.numString;
+    } else {
+      const sepResult = this.handleSeparatorInput(input, hasDecimalPoint, numString, separator, allowedSeps, numSum);
+      numSum = sepResult.numSum;
+      this.validator.checkValidCalculateResult(numSum);
+      numString = sepResult.numString;
+      hasDecimalPoint = sepResult.hasDecimalPoint;
+    }
+
     return { numSum, numString, hasDecimalPoint };
   }
 }

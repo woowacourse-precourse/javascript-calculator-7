@@ -26,7 +26,6 @@ class Calculator {
   calcUserInput(userInput) {
     let numString = '';
     let numSum = 0;
-    let isSep = false;
     let hasDecimalPoint = false;
 
     const customSep = this.calcCustomSeparator(userInput);
@@ -37,24 +36,20 @@ class Calculator {
     userInput.forEach((input, idx) => {
       this.validator.checkValidSeparator(input);
 
-      // 숫자인 경우
-      if (!isNaN(input) && input.trim() !== '') {
-        const numResult = this.handler.handleNumberInput(input, userInput, numString, idx);
-        numString = numResult.numString;
-      } else {
-        const sepResult = this.handler.handleSeparatorInput(
-          input,
-          this.handler.handleNumberInput.hasDecimalPoint,
-          numString,
-          allowedSeps,
-          SEPARATOR.ASSIGN_CUSTOM_SEPARATOR,
-          numSum
-        );
-        numSum = sepResult.numSum;
-        this.validator.checkValidCalculateResult(numSum);
-        numString = sepResult.numString;
-        hasDecimalPoint = sepResult.hasDecimalPoint;
-      }
+      const calcResult = this.handler.handleUserInput(
+        input,
+        userInput,
+        numString,
+        idx,
+        hasDecimalPoint,
+        allowedSeps,
+        SEPARATOR.ASSIGN_CUSTOM_SEPARATOR,
+        numSum
+      );
+
+      numString = calcResult.numString;
+      numSum = calcResult.numSum;
+      hasDecimalPoint = calcResult.hasDecimalPoint;
     });
 
     if (numString !== '') {
