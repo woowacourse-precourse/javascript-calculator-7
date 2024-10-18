@@ -38,4 +38,8 @@ export class Controller {
   getTotalSum() {
     this.sumValue = calculator.calculateSum(this.values);
   }
+
+  showResult() {
+    user.printResult(this.sumValue);
+  }
 }
