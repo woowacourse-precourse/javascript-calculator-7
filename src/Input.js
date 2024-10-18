@@ -21,6 +21,15 @@ class Input {
     const numbers = customSeparatorAndNumbers.pop();
     return { customSeparator: customSeparatorAndNumbers, numbers };
   }
+
+  /**
+   *
+   * @param {string} numbers - 구분자와 숫자로 이루어진 문자열
+   * @returns
+   */
+  validateNumbers(numbers) {
+    return numbers;
+  }
 }
 
 export default Input;

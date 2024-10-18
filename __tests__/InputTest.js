@@ -70,3 +70,12 @@ describe("findCustomSeparatorAndNumbers()", () => {
     });
   });
 });
+
+describe("validateNumbers()", () => {
+  const input = new Input();
+  const { validateNumbers } = input;
+
+  test("연산 문자열이 구분자와 양수로 이루어져 있으면 문자열 그대로 반환", () => {
+    expect(validateNumbers("1,2,3")).toBe("1,2,3");
+  });
+});
