@@ -1,5 +1,5 @@
 import { errorMessage } from './constant.js';
-import UserInputHandler from './userInputHandler.js';
+import { getCustomSeparator } from './userInputHandler.js';
 import { getSeparatorConflictPattern, getSeparatorPattern } from './regExp.js';
 
 export default class Validator {
@@ -39,7 +39,7 @@ export default class Validator {
   }
 
   static #checkCustomSeparator(input) {
-    const customSeparator = UserInputHandler.getCustomSeparator(input);
+    const customSeparator = getCustomSeparator(input);
     if (customSeparator === '')
       throw new Error(errorMessage.missingCustomSeparator);
     if (customSeparator === '.')
