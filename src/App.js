@@ -5,10 +5,10 @@ class App {
   async run() {
     const input = await enter('덧셈할 문자열을 입력해 주세요.\n');
 
-    this.calculate(input);
+    this.#calculate(input);
   }
 
-  calculate(input) {
+  #calculate(input) {
     const numbers = splitWithCustomDelimiter(input);
     const sum = numbers.reduce((acc, cur) => acc + cur, BigInt(0));
 
