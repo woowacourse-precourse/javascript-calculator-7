@@ -11,6 +11,7 @@ export class Controller {
     this.delimiter = [',', ':'];
     this.valueString;
     this.values;
+    this.sumValue;
   }
   async getUserInput() {
     this.inputString = await user.getInputString();
@@ -33,5 +34,8 @@ export class Controller {
     ValidateError.validateNoNegativeNumbers(this.values);
     ValidateError.validateAllowedDelimiters(this.values);
     ValidateError.validateNonEmptySplitValues(this.values);
+  }
+  getTotalSum() {
+    this.sumValue = calculator.calculateSum(this.values);
   }
 }
