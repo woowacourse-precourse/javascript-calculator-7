@@ -8,6 +8,12 @@ function getNumberArray(stringArray) {
       throw ERROR;
     }
 
+    if(singleValue < 0) {
+      const ERROR_MESSAGE = '입력하신 값 중에 정수가 아닌 값이 존재합니다.';
+      const ERROR = new Error(ERROR_MESSAGE);
+      throw ERROR;
+    }
+
     return singleValue;
   });
 
