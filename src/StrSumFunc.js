@@ -3,7 +3,7 @@
 import { ValidateValue } from "./ValidateValue";
 
 export function StrSumFunc(input) {
-  let divisionStr = "/[,:]/"; // ,:을 나타내는 정규식
+  let divisionStr = /[,:]/; // ,:을 나타내는 정규식
   let inputValueStr = input;
 
   // 커스텀 구분자 추출
@@ -20,7 +20,7 @@ export function StrSumFunc(input) {
   const DIVISIONVALUES = inputValueStr.split(divisionStr);
 
   // 사용자가 입력한 값이 ""일 때는 0을 반환
-  if (DIVISIONVALUES.trim == "") {
+  if (DIVISIONVALUES.every((value) => value.trim() === "")) {
     return 0;
   }
 
