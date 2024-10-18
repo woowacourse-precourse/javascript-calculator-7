@@ -1,5 +1,7 @@
 class App {
-  async run() {}
+  async run() {
+    // Placeholder for the run method implementation
+  }
 }
 
 export default App;
