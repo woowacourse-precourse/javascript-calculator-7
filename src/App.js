@@ -52,13 +52,15 @@ class Calculator {
     const inputArray = input
       .split(this.constantSeperator)
       .filter(Boolean)
-      .map(Number);
+      .map((num) => {
+        try {
+          return BigInt(num);
+        } catch (error) {
+          throw new Error("[ERROR] 정의되지 않은 구분자가 포함되어 있습니다.");
+        }
+      });
 
-    if (inputArray.some(isNaN)) {
-      throw new Error("[ERROR] 정의되지 않은 구분자가 포함되어 있습니다.");
-    }
-
-    if (inputArray.some((num) => num <= 0 || !Number.isInteger(num))) {
+    if (inputArray.some((num) => num <= 0n)) {
       throw new Error("[ERROR] 숫자는 자연수만 입력할 수 있습니다.");
     }
 
@@ -66,7 +68,7 @@ class Calculator {
   }
 
   sumAll(inputArray) {
-    return inputArray.reduce((sum, num) => sum + Number(num), 0);
+    return inputArray.reduce((sum, num) => sum + num, 0n);
   }
 }
 
