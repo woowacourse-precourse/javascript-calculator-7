@@ -8,6 +8,10 @@ class App {
     '[ERROR] 숫자는 구분 문자열이 될 수 없습니다.',
   ];
 
+  throwError(messageIndex) {
+    throw new Error(this.errorMessages[messageIndex]);
+  }
+  
   async run() {
     const input = await Console.readLineAsync(
       '덧셈할 문자열을 입력해 주세요.\n'
@@ -19,14 +23,14 @@ class App {
     if (isNaN(input[0])) {
       const START_STRING = input[0] + input[1];
       if (START_STRING !== '//') {
-        throw new Error(this.errorMessages[0]);
+        throw new Error(this.throwError(0));
       }
 
       while (
         !(input[string_index] === '\\' && input[string_index + 1] === 'n')
       ) {
         if (!isNaN(input[string_index])) {
-          throw new Error(this.errorMessages[3]);
+          throw new Error(this.throwError(3));
         }
         if (!default_distinguish_string.has(input[string_index])) {
           default_distinguish_string.add(input[string_index]);
@@ -38,14 +42,14 @@ class App {
     for (let i = string_index + 2; i < input.length; i++) {
       if (isNaN(input[i])) {
         if (!default_distinguish_string.has(input[i])) {
-          throw new Error(this.errorMessages[1]);
+          throw new Error(this.throwError(1));
         }
         continue;
       }
 
       let number = Number(input[i]);
       if (number <= 0) {
-        throw new Error(this.errorMessages[2]);
+        throw new Error(this.throwError(2));
       }
 
       output += number;
