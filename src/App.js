@@ -33,8 +33,10 @@ class App {
       }
       validNumbers.push(num);
     }
-
     Console.print(`validNumbers: ${validNumbers}`);
+
+    const sum = validNumbers.reduce((acc, curr) => acc + curr, 0);
+    Console.print(`결과: ${sum}`);
   }
 }
 
