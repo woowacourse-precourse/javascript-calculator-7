@@ -29,6 +29,7 @@ class CalculatorModel {
 
     const NUMBERS = numbersString
       .split(new RegExp(`[${SEPARATOR.join("")}]`)) // 구분자를 기준으로 숫자 분리
+      .filter((num) => num !== "")
       .map((num) => parseFloat(num));
     return { SEPARATOR, NUMBERS };
   }
