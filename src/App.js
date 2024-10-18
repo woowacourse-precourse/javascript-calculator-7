@@ -35,11 +35,7 @@ class App {
   }
 
   extractContent(str) {
-    const customSeparator = str.match(App.CUSTOM_SEPARATOR_REGEXP);
-
-    if (customSeparator)
-      return str.replace(App.CUSTOM_SEPARATOR_REGEXP, '').slice(1, -1);
-    return str.slice(1, -1);
+    return str.replace(App.CUSTOM_SEPARATOR_REGEXP, '').replace(/^"|"$/g, '');
   }
 
   calculateSum(input) {
