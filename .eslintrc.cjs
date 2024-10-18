@@ -17,5 +17,6 @@ module.exports = {
     "no-return-await": "off",
     "no-console": "off",
     "no-restricted-globals": "off",
+    "class-methods-use-this": "off",
   },
 };
