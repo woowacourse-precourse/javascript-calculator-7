@@ -16,6 +16,8 @@ const ERROR_MESSAGE = Object.freeze({
   NO_NUMBER_AFTER_CUSTOM_DELIMITER:
     '커스텀 구분자 지정 이후에는 숫자를 입력해주세요.',
   NO_CALCULATE: '자식 클래스에 calculate 메서드를 정의하세요. 현재 입력 값:',
+  INVALID_CUSTOM_DELIMITER_FORMAT:
+    '커스텀 구분자 형식이 올바르지 않습니다. "//[구분자]\\n[숫자]" 형식을 사용해주세요.',
 });
 
 export { ERROR_MESSAGE };

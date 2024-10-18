@@ -22,7 +22,6 @@ const checkNotEmpty = (input) => {
 // 음수를 입력한 경우
 const checkPositive = (input) => {
   if (/-\d/.test(input)) throwError(ERROR_MESSAGE.NO_NEGATIVE_NUMBER);
-
   return input;
 };
 
@@ -98,9 +97,20 @@ const checkValidDefaultDelimiter = (input) => {
 };
 
 /**@type {ValidationFunction} */
+// 커스텀 구분자 지정 이후에 숫자가 오지 않을경우
 const checkNumberAfterCustomDelimiter = (input) => {
   if (input.startsWith('//') && !/^\/\/.*\\n\d/.test(input))
     throwError(ERROR_MESSAGE.NO_NUMBER_AFTER_CUSTOM_DELIMITER);
+  return input;
+};
+
+/**@type {ValidationFunction} */
+// 커스텀 구분자 형식이 올바르지 않을 때
+const checkCustomDelimiterFormat = (input) => {
+  const customDelimiter = extractCustomDelimiter(input);
+  const [, afterCustomDelimiter] = input.split(customDelimiter);
+  if (!afterCustomDelimiter.startsWith('\\n'))
+    throwError(ERROR_MESSAGE.INVALID_CUSTOM_DELIMITER_FORMAT);
   return input;
 };
 
@@ -116,6 +126,7 @@ const validateInput = _pipe(
   checkZero,
   checkCustomDelimiterWithNumbers,
   checkValidDefaultDelimiter,
+  checkCustomDelimiterFormat,
   checkNumberAfterCustomDelimiter
 );
 
