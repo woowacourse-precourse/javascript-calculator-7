@@ -14,7 +14,7 @@ class App {
     // 3. 배열의 숫자를 모두 더해 반환한다.
     const RESULT = this.numbers.reduce((sum, cur) => sum + cur, 0);
     // 4. 반환된 숫자를 출력한다.
-    this.printResult(`결과 : ${this.parseResult(RESULT)}`);
+    this.printResult(this.parseResult(RESULT));
   }
 
   /**
@@ -34,6 +34,11 @@ class App {
   processString(str) {
     // 커스텀 구분자를 배열에 저장하고 문자열 앞부분의 //와 \n을 제거한 문자열을 반환한다.
     const STRING_AFTER_PROCESS = this.processCustomSeparator(str);
+    // 커스텀 구분자를 처리 한 후 빈 문자열이라면 결과 : 0을 출력한다.
+    if (STRING_AFTER_PROCESS === '') {
+      this.printResult(0);
+      return;
+    }
     this.separateNumbers(STRING_AFTER_PROCESS); // 배열에 있는 모든 구분자를 통해 숫자를 분리해 배열에 저장한다.
   }
 
@@ -101,7 +106,7 @@ class App {
    * @param message
    */
   printResult(message) {
-    Console.print(message);
+    Console.print(`결과 : ${message}`);
   }
 
   /**
