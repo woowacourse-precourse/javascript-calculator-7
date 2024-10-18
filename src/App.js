@@ -19,6 +19,9 @@ class App {
     if (input === "") {
       return 0;
     }
+    // 2번 기능: 쉼표(,) 또는 콜론(:) 구분자로 숫자 더하기
+    cnumbers = input.split(/[,|:]/).map(Number);
+    return numbers.reduce((sum, num) => sum + num, 0);
   }
 }
 
