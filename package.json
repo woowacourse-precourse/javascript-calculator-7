@@ -5,8 +5,7 @@
   "type": "module",
   "scripts": {
     "start": "node src/index.js",
-    "test": "jest --detectOpenHandles",
-    "eslint": "eslint"
+    "test": "jest --detectOpenHandles"
   },
   "devDependencies": {
     "@babel/core": "^7.25.8",
