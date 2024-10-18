@@ -1,6 +1,7 @@
 import { MissionUtils } from "@woowacourse/mission-utils"; 
 class App {
   async receiveInput() {
+    MissionUtils.Console.print("덧셈할 문자열을 입력해 주세요."); 
     return await MissionUtils.Console.readLineAsync();
   }
 
@@ -30,7 +31,7 @@ class App {
     const delimiter = this.getDelimiter(str);
     const numbers = this.getNumbers(str, delimiter);
     const sum = this.getSum(numbers);
-    MissionUtils.Console.print(sum);
+    MissionUtils.Console.print("결과 : " + sum);
   }
 }
 
