@@ -1,4 +1,4 @@
-import { isMatch, isStartsWith, shallowCopy } from '../lib/utils.js';
+import { filterEmpty, isMatch, isStartsWith, shallowCopy } from '../lib/utils.js';
 
 class Delimiter {
   /** @type {object} */
@@ -71,15 +71,6 @@ class Delimiter {
 
   /**
    *
-   * @param {Array<string>} value
-   * @returns {Array<string>}
-   */
-  #filterEmpty(value) {
-    return value.filter((aValue) => aValue !== '');
-  }
-
-  /**
-   *
    * @param {string} value
    * @returns {Array<string>}
    */
@@ -94,7 +85,7 @@ class Delimiter {
       delimitedString = this.#delimite(delimiter, delimitedString);
     });
 
-    return this.#filterEmpty(delimitedString);
+    return filterEmpty(delimitedString);
   }
 }
 

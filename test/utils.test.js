@@ -1,4 +1,5 @@
 import {
+  filterEmpty,
   isMatch,
   isNumericString,
   isPositiveNumber,
@@ -118,6 +119,16 @@ describe('utils', () => {
 
         expect(result).toBe(false);
       });
+    });
+  });
+
+  describe('filterEmpty', () => {
+    it('주어진 배열에서 빈 문자열을 제외한 배열을 반환한다', () => {
+      const values = ['', '', '', '1', ',', '2'];
+
+      const result = filterEmpty(values);
+
+      expect(result).toEqual(['1', ',', '2']);
     });
   });
 });

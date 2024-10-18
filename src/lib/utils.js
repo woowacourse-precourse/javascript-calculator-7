@@ -50,3 +50,12 @@ export function isNumericString(value) {
 export function isPositiveNumber(value) {
   return Number(value) > 0;
 }
+
+/**
+ *
+ * @param {Array<string>} values
+ * @returns {Array<string>}
+ */
+export function filterEmpty(values) {
+  return values.filter((value) => value !== '');
+}
