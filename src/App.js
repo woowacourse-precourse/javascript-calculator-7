@@ -10,7 +10,7 @@ class App {
     }
 
     let delimiters = [',', ':'];
-    const customDelimiter = inputString.match(/^\/\/(.*?)\\n/);
+    const customDelimiter = inputString.match(/^\/\/(.)\\n/);
     let numbers = inputString;
 
     if (customDelimiter) {
