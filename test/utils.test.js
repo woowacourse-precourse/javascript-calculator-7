@@ -1,4 +1,4 @@
-import { isMatch, isNumericString, isPositiveNumber, shallowCopy } from '../src/utils';
+import { isMatch, isNumericString, isPositiveNumber, shallowCopy } from '../src/lib/utils';
 
 describe('utils', () => {
   describe('isMatch', () => {

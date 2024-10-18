@@ -1,4 +1,3 @@
-import { Console } from '@woowacourse/mission-utils';
 import View from './View.js';
 import Validator from './Validator.js';
 import Calculator from './Calculator.js';

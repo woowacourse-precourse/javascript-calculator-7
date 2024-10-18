@@ -1,5 +1,5 @@
 import Delimiter from './Delimiter.js';
-import { isNumericString, isPositiveNumber } from './utils.js';
+import { isNumericString, isPositiveNumber } from './lib/utils.js';
 import SchemaValidator from './lib/SchemaValidator.js';
 
 class Validator {
