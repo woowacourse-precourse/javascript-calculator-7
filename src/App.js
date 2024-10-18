@@ -4,7 +4,7 @@ class App {
 	async run() {
 		const input = await Console.readLineAsync('덧셈할 문자열을 입력해 주세요.');
 		const result = this.handleString(input);
-		Console.print(`결과 값 : ${result}`);
+		Console.print(`결과 : ${result}`);
 	}
 
 	// 문자열을 처리함수
