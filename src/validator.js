@@ -1,5 +1,10 @@
+import ERROR_MESSAGES from './constants/errorMessages.js';
+
 function validateNegativeNumber(number) {
-  if (number < 0) throw new Error('[ERROR] 음수는 포함할 수 없습니다.');
+  if (number < 0)
+    throw new Error(
+      `${ERROR_MESSAGES.PREFIX} ${ERROR_MESSAGES.NEGATIVE_NUMBER}`,
+    );
 }
 
 export function validateEmptyString(userInput) {
@@ -12,7 +17,9 @@ export function validateNumbers(parsedArray) {
     const number = Number(value);
 
     if (Number.isNaN(number))
-      throw new Error('[ERROR] 구분자 이외의 문자열이 포함되어 있습니다.');
+      throw new Error(
+        `${ERROR_MESSAGES.PREFIX} ${ERROR_MESSAGES.INVALID_CHARACTER}`,
+      );
 
     validateNegativeNumber(number);
     return number;
@@ -22,12 +29,15 @@ export function validateNumbers(parsedArray) {
 export function validateMixedDelimiters(userInput) {
   if (/^\/\/(.*?)\\n.*[,:]/.test(userInput))
     throw new Error(
-      '[ERROR] 기본 구분자와 커스텀 구분자를 혼합하여 사용할 수 없습니다.',
+      `${ERROR_MESSAGES.PREFIX} ${ERROR_MESSAGES.MIXED_DELIMITERS}`,
     );
 }
 
 export function validateOnlyDelimiter(delimiterSeparated) {
   const isOnlyDelimeter = delimiterSeparated.every((value) => value === '');
 
-  if (isOnlyDelimeter) throw new Error('[ERROR] 구분자만 입력할 수 없습니다.');
+  if (isOnlyDelimeter)
+    throw new Error(
+      `${ERROR_MESSAGES.PREFIX} ${ERROR_MESSAGES.ONLY_DELIMITER}`,
+    );
 }

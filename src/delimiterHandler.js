@@ -1,3 +1,4 @@
+import ERROR_MESSAGES from './constants/errorMessages.js';
 import { validateMixedDelimiters, validateOnlyDelimiter } from './validator.js';
 
 function parseDefaultDelimiters(userInput) {
@@ -9,13 +10,13 @@ function parseDefaultDelimiters(userInput) {
 }
 
 function parseCustomDelimiters(userInput) {
-  validateMixedDelimiters(userInput);
-
   const customDelimitersPattern = /^\/\/(.*?)\\n/;
   const match = userInput.match(customDelimitersPattern);
 
   if (!match) {
-    throw new Error('[ERROR] 커스텀 구분자는 맨 앞에 위치해야 합니다.');
+    throw new Error(
+      `${ERROR_MESSAGES.PREFIX} ${ERROR_MESSAGES.CUSTOM_DELIMITER_POSITION}`,
+    );
   }
 
   const customDelimiter = match[1];
@@ -23,6 +24,7 @@ function parseCustomDelimiters(userInput) {
     .split('\\n')[1]
     .split(customDelimiter);
 
+  validateMixedDelimiters(userInput);
   validateOnlyDelimiter(delimiterSeparatedArray);
   return delimiterSeparatedArray;
 }
