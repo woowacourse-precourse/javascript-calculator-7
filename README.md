@@ -2,7 +2,7 @@
 
 ## 구현 기능 목록
 
-- [ ] **validateInput**: 입력 문자열이 허용된 형식인지 검증
+- [x] **validateInput**: 입력 문자열이 허용된 형식인지 검증
 - [ ] **extractCustomDelimiter**: 커스텀 구분자를 추출
 - [ ] **splitInputByDelimiter**: 문자열을 구분자로 나누어 숫자 배열을 반환
 - [ ] **calculateSum**: 숫자 배열을 합산하여 결과를 반환
