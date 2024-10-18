@@ -30,7 +30,21 @@ describe('문자열 계산기 model', () => {
     expect(result).toEqual([4, 5, 6, 7, 8, 9]);
   });
   test('커스텀 구분자로 구분된 숫자 파싱', () => {
-    const result1 = parseNumbers('//;\n4;5;6;7;8;9');
+    const inputNum = '//!\n4!5!6!7!8,9';
+    const result1 = parseNumbers(inputNum);
     expect(result1).toEqual([4, 5, 6, 7, 8, 9]);
   });
+
+  test('에러 발생 시 프로그램 종료 테스트', () => {
+    try {
+      parseNumbers('1.2,3'); // 구분자가 잘못된 입력으로 에러 발생 예상
+    } catch (error) {
+      expect(error.message).toBe('구분자가 아닌 문자는 입력할 수 없습니다.');
+      // 에러 발생 후 추가 로직이 없으면 사실상 프로그램 종료
+    }
+  });
+
+  // test('구분자가 아닌 문자가 들어가 있는 경우', () => {
+  //   const result = parseNumbers('4,5,6,7:8:9');
+  // });
 });
