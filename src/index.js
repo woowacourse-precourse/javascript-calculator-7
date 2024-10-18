@@ -7,8 +7,9 @@ import View from './View.js';
 
 const app = new App(
   new View(),
-  new Validator(new Delimiter(), new SchemaValidator()),
-  new Calculator(new Delimiter()),
+  new Validator(new SchemaValidator()),
+  new Delimiter(),
+  new Calculator(),
 );
 
 await app.run();

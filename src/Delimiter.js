@@ -41,8 +41,6 @@ class Delimiter {
       delimiter.unshift(...this.#defaultDelimiterMatcher);
     }
 
-    console.log(delimiter);
-
     return delimiter;
   }
 

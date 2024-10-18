@@ -1,6 +1,7 @@
 import View from './View.js';
 import Validator from './Validator.js';
 import Calculator from './Calculator.js';
+import Delimiter from './Delimiter.js';
 
 class App {
   /** @type {View} */
@@ -9,12 +10,16 @@ class App {
   /** @type {Validator} */
   #validator;
 
+  /** @type {Delimiter} */
+  #delimiter;
+
   /** @type {Calculator} */
   #calculator;
 
-  constructor(view, validator, calculator) {
+  constructor(view, validator, delimiter, calculator) {
     this.#view = view;
     this.#validator = validator;
+    this.#delimiter = delimiter;
     this.#calculator = calculator;
   }
 
@@ -22,9 +27,11 @@ class App {
     try {
       const input = await this.#view.input('덧셈할 문자열을 입력해 주세요.');
 
-      this.#validator.validate(input);
+      const delimitedString = this.#delimiter.getDelimitedString(input);
 
-      const result = this.#calculator.calculate(input);
+      this.#validator.validate(delimitedString);
+
+      const result = this.#calculator.calculate(delimitedString);
 
       this.#view.output(`결과 : ${result}`);
     } catch (error) {
