@@ -37,10 +37,27 @@ export default class Calculator {
   }
 
   /**
+   * Extract the custom delimiter from the input string.
+   * @returns {void} Nothing.
+   */
+  #extractDelimiter() {
+    // Extract custom delimiter from the input
+    const CUSTOM_DELIMITER_REGEX = /^\/\/(.)?\\n/;
+    const CUSTOM_DELIMITER = this.#input.match(CUSTOM_DELIMITER_REGEX)?.[1];
+
+    // Add custom delimiter to the list of delimiters
+    if (CUSTOM_DELIMITER && !this.#delimiters.includes(CUSTOM_DELIMITER)) {
+      this.#delimiters.push(CUSTOM_DELIMITER);
+    }
+  }
+
+  /**
    * Check if the input matches the required format.
    * @throws {Error} If the input is invalid.
    */
   #validateInput() {
+    this.#extractDelimiter();
+
     // TODO: Implement the input validation
   }
 
