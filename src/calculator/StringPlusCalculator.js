@@ -1,5 +1,3 @@
-import hasCustomDelimiter from './hasCustomDelimiter.js';
-
 class StringPlusCalculator {
   constructor() {
     this.number = 0;
@@ -8,7 +6,7 @@ class StringPlusCalculator {
   }
 
   calculate(input) {
-    if (hasCustomDelimiter(input)) {
+    if (input.startsWith('//')) {
       this.addCustomDelimiter(input);
     }
     const newCalculateString = this.replaceDelimitersToComma(input);
