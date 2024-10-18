@@ -1,3 +1,5 @@
+import { ERROR_MESSAGES, ERROR_PREFIX } from '../Constraints/Constraints.js';
+
 export const customTestCases = [
   {
     input: '//;\\n1;2;3;4',
@@ -36,26 +38,22 @@ export const customTestCases = [
   },
   {
     input: '//;\\n1;2.5;3;4....',
-    expectedError:
-      '[ERROR]: delimiter와 숫자 이외의 문자가 입력 됬거나, 입력 순서가 잘못되었습니다!',
+    expectedError: `${ERROR_PREFIX}${ERROR_MESSAGES.INVALID_CUSTOM_INPUT}`,
     description: '잘못된 입력: 연속된 소수점이 있는 경우',
   },
   {
     input: '//|\\n1||2',
-    expectedError:
-      '[ERROR]: delimiter와 숫자 이외의 문자가 입력 됬거나, 입력 순서가 잘못되었습니다!',
+    expectedError: `${ERROR_PREFIX}${ERROR_MESSAGES.INVALID_CUSTOM_INPUT}`,
     description: '잘못된 입력: 구분자가 연속으로 있는 경우',
   },
   {
     input: '//,\\n1,2.5,3..75',
-    expectedError:
-      '[ERROR]: delimiter와 숫자 이외의 문자가 입력 됬거나, 입력 순서가 잘못되었습니다!',
+    expectedError: `${ERROR_PREFIX}${ERROR_MESSAGES.INVALID_CUSTOM_INPUT}`,
     description: '잘못된 입력: 숫자 중간에 잘못된 소수점 포함',
   },
   {
     input: '//@\\n1@2@abc',
-    expectedError:
-      '[ERROR]: delimiter와 숫자 이외의 문자가 입력 됬거나, 입력 순서가 잘못되었습니다!',
+    expectedError: `${ERROR_PREFIX}${ERROR_MESSAGES.INVALID_CUSTOM_INPUT}`,
     description: '잘못된 입력: 숫자가 아닌 문자가 포함된 경우',
   },
   {
@@ -80,45 +78,47 @@ export const customTestCases = [
   },
   {
     input: '//:\\n1:-2:3:4',
-    expectedError:
-      '[ERROR]: delimiter와 숫자 이외의 문자가 입력 됬거나, 입력 순서가 잘못되었습니다!',
+    expectedError: `${ERROR_PREFIX}${ERROR_MESSAGES.INVALID_CUSTOM_INPUT}`,
     description: '음수와 양수가 혼합된 입력',
   },
   {
     input: '//|\\n1.1|-2.2|3.3|4.4',
-    expectedError:
-      '[ERROR]: delimiter와 숫자 이외의 문자가 입력 됬거나, 입력 순서가 잘못되었습니다!',
+    expectedError: `${ERROR_PREFIX}${ERROR_MESSAGES.INVALID_CUSTOM_INPUT}`,
     description: '소수와 음수가 포함된 입력',
   },
-  { input: '//;\\n1;1000;1001;2', expectedOutput: 2004, description: '' },
-  { input: '//-\\n1-1000-1001-3', expectedOutput: 2005, description: '' },
+  {
+    input: '//;\\n1;1000;1001;2',
+    expectedOutput: 2004,
+    description: '',
+  },
+  {
+    input: '//-\\n1-1000-1001-3',
+    expectedOutput: 2005,
+    description: '',
+  },
   {
     input: '//;\\n',
-    expectedError:
-      '[ERROR]: delimiter와 숫자 이외의 문자가 입력 됬거나, 입력 순서가 잘못되었습니다!',
+    expectedError: `${ERROR_PREFIX}${ERROR_MESSAGES.INVALID_CUSTOM_INPUT}`,
     description: '구분자가 있지만 내용이 없는 경우',
   },
   {
     input: '//:\\n',
-    expectedError:
-      '[ERROR]: delimiter와 숫자 이외의 문자가 입력 됬거나, 입력 순서가 잘못되었습니다!',
+    expectedError: `${ERROR_PREFIX}${ERROR_MESSAGES.INVALID_CUSTOM_INPUT}`,
     description: '구분자가 있지만 내용이 없는 경우',
   },
   {
     input: '//-\\n1-',
-    expectedError:
-      '[ERROR]: delimiter와 숫자 이외의 문자가 입력 됬거나, 입력 순서가 잘못되었습니다!',
+    expectedError: `${ERROR_PREFIX}${ERROR_MESSAGES.INVALID_CUSTOM_INPUT}`,
     description: '구분자가 있지만 마지막 값이 빈 경우',
   },
   {
     input: '//|\\n1|2|',
-    expectedError:
-      '[ERROR]: delimiter와 숫자 이외의 문자가 입력 됬거나, 입력 순서가 잘못되었습니다!',
+    expectedError: `${ERROR_PREFIX}${ERROR_MESSAGES.INVALID_CUSTOM_INPUT}`,
     description: '마지막 구분자 이후에 값이 없는 경우',
   },
   {
     input: '//\\n1,2,3',
-    expectedError: '[ERROR]:Delimiter를 입력받지 못했습니다.',
+    expectedError: `${ERROR_PREFIX}${ERROR_MESSAGES.EMPTY_DELIMITER}`,
     description: '구분자가 명시되지 않은 경우',
   },
   {
@@ -186,39 +186,33 @@ export const normalTestCases = [
   },
   {
     input: '1::2',
-    expectedError:
-      '[ERROR]:문자열에 포멧이 올바르지 않거나, 음수를 입력했습니다.',
+    expectedError: `${ERROR_PREFIX}${ERROR_MESSAGES.INVALID_NUMBER_INPUT}`,
     description: '구분자가 연속으로 있을 경우 에러를 발생시켜야 합니다.',
   },
   {
     input: ',1,2',
-    expectedError:
-      '[ERROR]:문자열에 포멧이 올바르지 않거나, 음수를 입력했습니다.',
+    expectedError: `${ERROR_PREFIX}${ERROR_MESSAGES.INVALID_NUMBER_INPUT}`,
     description:
       '문자열 시작 부분에 구분자가 있을 경우 에러를 발생시켜야 합니다.',
   },
   {
     input: '1,2,',
-    expectedError:
-      '[ERROR]:문자열에 포멧이 올바르지 않거나, 음수를 입력했습니다.',
+    expectedError: `${ERROR_PREFIX}${ERROR_MESSAGES.INVALID_NUMBER_INPUT}`,
     description: '문자열 끝에 구분자가 있을 경우 에러를 발생시켜야 합니다.',
   },
   {
     input: '1,,2',
-    expectedError:
-      '[ERROR]:문자열에 포멧이 올바르지 않거나, 음수를 입력했습니다.',
+    expectedError: `${ERROR_PREFIX}${ERROR_MESSAGES.INVALID_NUMBER_INPUT}`,
     description: '구분자가 중복될 경우 에러를 발생시켜야 합니다.',
   },
   {
     input: 'abc',
-    expectedError:
-      '[ERROR]:문자열에 포멧이 올바르지 않거나, 음수를 입력했습니다.',
+    expectedError: `${ERROR_PREFIX}${ERROR_MESSAGES.INVALID_NUMBER_INPUT}`,
     description: '숫자가 아닌 값이 있을 경우 에러를 발생시켜야 합니다.',
   },
   {
     input: '1,2,a',
-    expectedError:
-      '[ERROR]:문자열에 포멧이 올바르지 않거나, 음수를 입력했습니다.',
+    expectedError: `${ERROR_PREFIX}${ERROR_MESSAGES.INVALID_NUMBER_INPUT}`,
     description:
       '숫자가 아닌 값이 포함되어 있을 경우 에러를 발생시켜야 합니다.',
   },
@@ -229,12 +223,12 @@ export const normalTestCases = [
   },
   {
     input: null,
-    expectedError: '[ERROR]:빈 문자열입니다.',
+    expectedError: `${ERROR_PREFIX}${ERROR_MESSAGES.EMPTY_STRING}`,
     description: 'null 입력 시 에러를 발생시켜야 합니다.',
   },
   {
     input: undefined,
-    expectedError: '[ERROR]:빈 문자열입니다.',
+    expectedError: `${ERROR_PREFIX}${ERROR_MESSAGES.EMPTY_STRING}`,
     description: 'undefined 입력 시 에러를 발생시켜야 합니다.',
   },
   {
@@ -249,14 +243,12 @@ export const normalTestCases = [
   },
   {
     input: '-1,2',
-    expectedError:
-      '[ERROR]:문자열에 포멧이 올바르지 않거나, 음수를 입력했습니다.',
+    expectedError: `${ERROR_PREFIX}${ERROR_MESSAGES.INVALID_NUMBER_INPUT}`,
     description: '음수와 양수의 조합을 처리해야 합니다.',
   },
   {
     input: '-1.5,2.5',
-    expectedError:
-      '[ERROR]:문자열에 포멧이 올바르지 않거나, 음수를 입력했습니다.',
+    expectedError: `${ERROR_PREFIX}${ERROR_MESSAGES.INVALID_NUMBER_INPUT}`,
     description: '음수 소수와 양수 소수의 합을 처리해야 합니다.',
   },
 ];

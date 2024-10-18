@@ -1,13 +1,14 @@
 import sumAllNumbers from '../../Util/sumAllNumbers.js';
 import { validateNormalInput } from '../../Validator/Validator.js';
+import { ERROR_MESSAGES, ERROR_PREFIX } from '../../Constraints/Constraints.js';
 
 export default function parseNormalInput(str) {
   if (str === '') {
-    return [0];
+    return 0;
   }
 
   if (!str) {
-    throw new Error('[ERROR]:빈 문자열입니다.');
+    throw new Error(`${ERROR_PREFIX}${ERROR_MESSAGES.EMPTY_STRING}`);
   }
 
   const splitters = [':', ','];

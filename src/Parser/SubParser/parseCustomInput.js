@@ -1,9 +1,10 @@
 import sumAllNumbers from '../../Util/sumAllNumbers.js';
 import {
   validateCustomInput,
-  validateNoDuplicateDelimiters,
+  // validateNoDuplicateDelimiters,
   validateCustomInputFormat,
 } from '../../Validator/Validator.js';
+import { ERROR_MESSAGES, ERROR_PREFIX } from '../../Constraints/Constraints.js';
 
 import { escapeRegExp } from '../../Util/regex.js';
 
@@ -16,19 +17,22 @@ export default function parseCustomInput(input) {
 
   // delimiter가 비어있으면 에러를 던진다.
   if (delimiter === '') {
-    throw new Error('[ERROR]: delimiter가 비어있습니다.');
+    throw new Error(`${ERROR_PREFIX}${ERROR_MESSAGES.EMPTY_DELIMITER}`);
   }
+  // console.log(delimiter);
+  // console.log('1||2'.split('|'));
 
   // escape 처리.
+
   const escapedDelimiter = escapeRegExp(delimiter);
 
   // delimiter 이후의 내용을 추출한다.
   const content = input.slice(delimiterEnd + 2);
+  // console.log(content);
   validateCustomInput(content, escapedDelimiter);
 
   const parts = content.split(delimiter);
-  validateNoDuplicateDelimiters(parts);
-
+  // validateNoDuplicateDelimiters(parts);
   // 모든 숫자의 합을 반환한다.
   return sumAllNumbers(parts);
 }
