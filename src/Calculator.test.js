@@ -22,9 +22,10 @@ describe("add test", () => {
 // regex 함수 테스트 코드 정의
 describe("regex test", () => {
   const noneTest = "";
-  const testInput = "//;\n1;2;3";
+  const testInput = "//;\\n1;2;3";
   const noneCustomTestInput = "1:2:3";
   const minTest = "-3;-2;1";
+  const appInputTest = "//;\\n1";
 
   test("공백", () => {
     expect(calculator.testRegex(noneTest)).toEqual(0);
@@ -43,6 +44,12 @@ describe("regex test", () => {
   });
   test("-3;-2;1", () => {
     expect(calculator.testRegex(minTest)).toEqual({ error: true });
+  });
+  test(appInputTest, () => {
+    expect(calculator.testRegex(appInputTest)).toEqual({
+      error: false,
+      numbers: [1],
+    });
   });
 });
 
@@ -78,7 +85,7 @@ describe("regex_random_test", () => {
 
     // 커스텀 구분자가 있는경우
     if (random * 10 >= 5) {
-      testInput += `//${randomAscii}\n`;
+      testInput += `//${randomAscii}\\n`;
       for (let i = 0; i < randomNumberList.length; i++) {
         testInput += randomNumberList[i];
         if (i === randomNumberList.length - 1) break;

@@ -17,21 +17,22 @@ export class Calculator {
     if (this.checkCustom(input)) result = this.checkCustom(input);
     // 기본 구분자
     else result = input.split(regexText);
+    console.log(result);
+
     // result type :  array<string>
-    result = this.changeFloat(result);
-    if (this.checkNotNum(result)) return { error: true }; // 숫자아닌지 체크
+    result = this.changeFloat(result); // 정수는 정수로 소수는 소수로 형변환
     if (this.checkMin(result)) return { error: true }; // 음수 체크
     return { error: false, numbers: result };
   }
 
   // 커스텀 구분자 확인 함수
   checkCustom(string) {
-    let customInput = string.match(/^\/\/(.)\n/); // ; 추출
+    let customInput = string.match(/^\/\/(.)\\n/); // ; 추출
     //  커스텀 구분자가 숫자일때 false 출력
     if (!isNaN(customInput)) return false;
     // 커스텀 구분자가 있는 케이스
     if (customInput) {
-      let sliceInput = string.split("\n")[1];
+      let sliceInput = string.split("\\n")[1];
       const regexText = new RegExp(`[${customInput[1]},:]`); // 정규식 생성
       const result = sliceInput.split(regexText);
       return result;
