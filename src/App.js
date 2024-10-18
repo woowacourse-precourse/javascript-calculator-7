@@ -37,6 +37,15 @@ function extractCustomSeparator(input) {
   return [input.slice(input.indexOf('\\n') + 2), input.match(/\/\/(.*?)\\n/)[1]];
 }
 
+function splitInputBySeparators(input, separators) {
+  const separateRegExp = new RegExp(`[${separators.join('')}]`);
+
+  return input
+    .split(separateRegExp)
+    .map((item) => item.trim())
+    .filter((item) => item !== '');
+}
+
 class App {
   async run() {
     let input = await Console.readLineAsync('덧셈할 문자열을 입력해 주세요.\n');
