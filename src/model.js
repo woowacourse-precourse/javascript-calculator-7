@@ -42,7 +42,7 @@ class CalculatorModel {
   validateNumbers(NUMBERS) {
     const FREFIX_ERROR = "[ERROR]";
     for (const num of NUMBERS) {
-      if (isNaN(num)) {
+      if (isNaN(num) || num === null || num === undefined) {
         throw new Error(`${FREFIX_ERROR} 숫자가 아닌 값이 포함되었습니다`);
       }
       if (num < 0) {
