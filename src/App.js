@@ -10,13 +10,13 @@ class App {
 
     if (userInput === '') {
       const result = validateEmptyString(userInput);
-      return result;
+      return MissionUtils.Console.print(`결과 : ${result}`);
     }
 
     const rawValues = parseInput(userInput);
     const numbers = validateNumbers(rawValues);
     const result = sumCalculation(numbers);
-    return result;
+    return MissionUtils.Console.print(`결과 : ${result}`);
   }
 }
 
