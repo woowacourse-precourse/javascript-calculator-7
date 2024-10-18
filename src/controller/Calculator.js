@@ -4,6 +4,7 @@ import User from '../user/User.js';
 import { GAME_MESSAGE } from '../constants/gameMessages.js';
 import { DELIMITER } from '../constants/delimiter.js';
 import { _go } from '../util/util.js';
+import OutputView from '../view/OutputView.js';
 
 //덧셈기 게임 관리
 class Calculator {
@@ -31,7 +32,7 @@ class Calculator {
       (numbers) => numbers.reduce((acc, cur) => acc + cur),
 
       /**@type {(result: number) => void}   */
-      (result) => this.printResult(result)
+      (result) => OutputView.printResult(result)
     );
   }
 
@@ -46,16 +47,6 @@ class Calculator {
       return numbersPart.split(customDelimiter);
     }
     return input.split(DELIMITER);
-  }
-
-  /**@param {number} result */
-  printResult(result) {
-    this.printMessage(`${GAME_MESSAGE.RESULT} ${result}`);
-  }
-
-  /**@param {string} message */
-  printMessage(message) {
-    Console.print(message);
   }
 }
 

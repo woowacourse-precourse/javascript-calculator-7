@@ -42,7 +42,6 @@ const checkStartInput = (input) => {
 };
 
 // Infinity 또는 -Infinity가 입력된 경우
-
 const checkInfinity = (input) => {
   if (/Infinity|-Infinity/.test(input)) throwError(ERROR_MESSAGE.NO_INFINITY);
   return input;
