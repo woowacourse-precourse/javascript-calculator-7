@@ -77,8 +77,13 @@ class App {
     return true;
   }
 
-  calculateDefault() {
+  calculateDefault(input) {
+    const sum = input
+      .split(new RegExp(/[,:]/g))
+      .map((str) => Number(str))
+      .reduce((prev, curr) => prev + curr, 0);
 
+    return sum;
   }
 
   calculateCustom() {
