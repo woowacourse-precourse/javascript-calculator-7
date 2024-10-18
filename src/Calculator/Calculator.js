@@ -10,7 +10,8 @@ export default class Calculator {
     return seperators[1];
   }
 
-  convertArray(string, separator) {
+  convertArray(input, separator) {
+    const string = input.replace(/^\/\/.+\\n/, '');
     const defaultArray = string.split(/,|;/);
     return defaultArray.flatMap((item) => item.split(separator));
   }

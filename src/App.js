@@ -13,8 +13,7 @@ class App {
       ? calculator.extractSeparator(input)
       : undefined;
 
-    const string = input.replace(/^\/\/.+\\n/, '');
-    const array = calculator.convertArray(string, extraSeperator);
+    const array = calculator.convertArray(input, extraSeperator);
 
     calculator.validate(array);
 
