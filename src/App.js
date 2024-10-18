@@ -1,5 +1,5 @@
 import CalculatorService from './CalculatorService.js';
-import { inputText, printSumResult } from './util.js';
+import { inputText, printSumResult } from './ioUtil.js';
 
 class App {
   async run() {

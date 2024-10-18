@@ -4,7 +4,7 @@ import {
   getCustomSeparator,
   getRemovedCustomSeparator,
   getSplitedBySeparator,
-} from './userInputHandler.js';
+} from './inputUitl.js';
 
 export default class CalculatorService {
   static sumUserInput(input, customSeparator) {
