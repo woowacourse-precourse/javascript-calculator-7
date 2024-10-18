@@ -15,11 +15,11 @@ export const viewUtils = {
   async outputData(output) {
     const { validateOutputForm } = Validator();
     validateOutputForm(output);
-    return await Console.print(output);
+    return await Console.print(`${messages.outputMeesage} ${output}`);
   },
 
   // 에러 메세지를 콘솔에 출력하는 함수
   async errorMessage(err) {
-    return await Console.print(`${messages.errorMessage} ${err}`);
+    return await Console.print(`${err.message}`);
   },
 };
