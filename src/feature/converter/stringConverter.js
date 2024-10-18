@@ -13,15 +13,19 @@ function customSeparator(text) {
   const CUSTOM_REGEX = /\/\/\w+\n/g;
   const IS_NOT_CUSTOM = -1;
 
+  const RESULT = new Map([
+    ['customSeparatorString', null],
+    ['text', text]
+  ])
+
   if(text.search(CUSTOM_REGEX) === IS_NOT_CUSTOM) {
-    return text;
+    return RESULT;
   } else {
-    /**
-     * TODO: 유효성 검사가 필요함
-     * 이 함수에서 구현을 할지
-     * 다른 파일에서 유효성 검사를 하는 기능을 구현할지
-     * 구조에 대해서 조금 더 생각해 볼 필요가 있음
-     */
+    let customText = text.match(CUSTOM_REGEX);
+    let resultCustomSeparator = getCustomSeparator(customText[0]);
+    RESULT.set('customSeparatorString', resultCustomSeparator);
+    
+    return RESULT;
   }
 }
 
