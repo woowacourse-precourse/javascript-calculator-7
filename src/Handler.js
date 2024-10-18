@@ -25,6 +25,7 @@ class Handler {
     } else {
       numSum += Number(numString);
       numString = '';
+      hasDecimalPoint = false;
     }
     return { numSum, numString, hasDecimalPoint };
   }
