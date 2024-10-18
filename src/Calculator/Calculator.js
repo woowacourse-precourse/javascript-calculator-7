@@ -1,3 +1,5 @@
+import { ERROR_MESSAGE } from '../constants/index.js';
+
 export default class Calculator {
   hasCustomPrefixSeparator(string) {
     return /^\/\/.+\\n.*/.test(string);
@@ -15,15 +17,15 @@ export default class Calculator {
 
   validate(array) {
     if (array.some((item) => item === '')) {
-      throw Error('[ERROR] 구분자 사이에 숫자가 없습니다.');
+      throw Error(ERROR_MESSAGE.noNumberBetweenSeparator);
     }
 
     if (array.some((item) => Number(item) <= 0)) {
-      throw Error('[ERROR] 숫자는 양수만 허용합니다.');
+      throw Error(ERROR_MESSAGE.allowPositiveNumber);
     }
 
     if (array.some((item) => Number.isNaN(Number(item)))) {
-      throw Error('[ERROR] 구분자가 아닌 문자가 포함되어 있습니다.');
+      throw Error(ERROR_MESSAGE.noNumberBetweenSeparator);
     }
   }
 }
