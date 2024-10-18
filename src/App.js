@@ -26,7 +26,6 @@ class App {
 
             let customDelimiter = input.slice(2, customDelimiterIndex);
 
-            // 커스텀 구분자를 유효성 검사 후 이스케이프 처리
             customDelimiter = this.validateRegExp(customDelimiter);
 
             delimiter = `[,:${customDelimiter}]`;
@@ -38,19 +37,21 @@ class App {
 
         let numbers = input.split(delimiter).map(Number);
 
+        // 음수는 예외로 처리
+        if (numbers.some((num) => num < 0)) {
+            throw new Error('[ERROR] 음수는 입력할 수 없습니다.');
+        }
+
         const result = numbers.reduce((acc, number) => acc + number, 0);
 
         return result;
     }
 
-    // 예외를 막을 유효성 검사 함수
     validateRegExp(char) {
-        // 잘못된 형식의 숫자 입력을 방지
         if (/\d/.test(char)) {
             throw new Error('[ERROR] 숫자는 커스텀 구분자로 사용할 수 없습니다.');
         }
 
-        // 정규식 메타문자를 이스케이프 처리
         return char.replace(/[.*+?^${}()|[\]\\]/g, '\\$&');
     }
 }
