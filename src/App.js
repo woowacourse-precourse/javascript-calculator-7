@@ -1,4 +1,3 @@
-import { CUSTOM_SEPARATOR_REGEXP, DEFAULT_SEPARATOR } from './constants.js';
 import {
   stringifyToJSON,
   readLineAsync,
@@ -10,6 +9,8 @@ import {
 } from './utils.js';
 
 class App {
+  static DEFAULT_SEPARATOR = ',:';
+  static CUSTOM_SEPARATOR_REGEXP = /\/\/(.+)\\n/;
   async run() {
     const userInput = await readLineAsync();
     const processedInput = this.processInput(userInput);
@@ -27,17 +28,17 @@ class App {
   }
 
   getSeparator(str) {
-    const customSeparator = str.match(CUSTOM_SEPARATOR_REGEXP);
+    const customSeparator = str.match(App.CUSTOM_SEPARATOR_REGEXP);
 
     if (customSeparator) return customSeparator[0].replace('\\', '\\\\');
-    return DEFAULT_SEPARATOR;
+    return App.DEFAULT_SEPARATOR;
   }
 
   extractContent(str) {
-    const customSeparator = str.match(CUSTOM_SEPARATOR_REGEXP);
+    const customSeparator = str.match(App.CUSTOM_SEPARATOR_REGEXP);
 
     if (customSeparator)
-      return str.replace(CUSTOM_SEPARATOR_REGEXP, '').slice(1, -1);
+      return str.replace(App.CUSTOM_SEPARATOR_REGEXP, '').slice(1, -1);
     return str.slice(1, -1);
   }
 
