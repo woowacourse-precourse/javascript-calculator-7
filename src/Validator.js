@@ -26,11 +26,11 @@ class Validator {
 
   /**
    *
-   * @param {Array<string>} value
+   * @param {Array<string>} values
    * @returns {boolean}
    */
-  #hasPositiveNumber(value) {
-    return value.every((aValue) => isPositiveNumber(aValue));
+  #hasPositiveNumbers(values) {
+    return values.every((value) => isPositiveNumber(value));
   }
 
   /**
@@ -44,7 +44,7 @@ class Validator {
       .with(this.#hasAllowedDelimiters, {
         message: Validator.ERROR_MESSAGE.HAS_NOT_ALLOWED_DELIMITER,
       })
-      .with(this.#hasPositiveNumber, {
+      .with(this.#hasPositiveNumbers, {
         message: Validator.ERROR_MESSAGE.HAS_NEGATIVE_OR_ZERO_NUMBER,
       });
   }
