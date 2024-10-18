@@ -1,7 +1,7 @@
 export class Calculator {
   calculate(input) {
     const sliceNumbers = this.testRegex(input);
-    if (sliceNumbers.length === 0) return `결과 : 0`;
+    if (sliceNumbers === 0) return `결과 : 0`;
     if (sliceNumbers.error) {
       return false;
     }
