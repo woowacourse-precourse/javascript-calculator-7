@@ -86,8 +86,15 @@ class App {
     return sum;
   }
 
-  calculateCustom() {
+  calculateCustom(input) {
+    const divider = this.getCustomDivider(input);
+    const sum = input
+      .slice(divider.length + 2)
+      .split(divider)
+      .map((str) => Number(str))
+      .reduce((prev, curr) => prev + curr, 0);
 
+    return sum;
   }
 
   getCustomDivider(input) {
