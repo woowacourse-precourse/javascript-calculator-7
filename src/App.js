@@ -7,6 +7,7 @@ const CUSTOM_DIVIDER_REGEX = /\/\/(.*?)\\n/;
 class App {
   #get_number_list(user_string) {
     let num_list;
+
     if (CUSTOM_REGEX.test(user_string)) {
       const divider = user_string.match(CUSTOM_DIVIDER_REGEX)[1];
       const number_area = user_string.replace(CUSTOM_DIVIDER_REGEX, "");
@@ -36,6 +37,11 @@ class App {
       const user_string = await Console.readLineAsync(
         "덧셈할 문자열을 입력해 주세요.\n"
       );
+
+      if (user_string == "") {
+        Console.print("결과 : 0");
+        return;
+      }
       const num_list = this.#get_number_list(user_string);
       const result = this.#get_sum_of_number(num_list);
 
