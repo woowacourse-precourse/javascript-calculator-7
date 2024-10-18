@@ -37,5 +37,13 @@ class StringCalculator {
     }
     return input.split(/,|:/).map(Number);
   }
+
+  calculateSum(numbers) {
+    let sum = 0;
+    numbers.forEach((num) => {
+      sum += num;
+    });
+    return sum;
+  }
 }
 export default StringCalculator;

@@ -49,4 +49,16 @@ describe("StringCalculator", () => {
       expect(calculator.splitInputByDelimiter("1,2:3")).toEqual([1, 2, 3]);
     });
   });
+
+  describe("calculateSum", () => {
+    test("숫자 배열을 합산하여 결과를 반환한다", () => {
+      const calculator = new StringCalculator();
+      expect(calculator.calculateSum([1, 2, 3])).toBe(6);
+    });
+
+    test("빈 배열이 주어지면 0을 반환한다", () => {
+      const calculator = new StringCalculator();
+      expect(calculator.calculateSum([])).toBe(0);
+    });
+  });
 });
