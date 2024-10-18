@@ -13,3 +13,8 @@ export function getUserInput(callback) {
       MissionUtils.Console.print(error);
     }); // 에러처리
 }
+
+// 에러 메시지 출력 함수
+export function displayErrorMessage(message) {
+  MissionUtils.Console.print(`[ERROR]: ${message}`);
+}
