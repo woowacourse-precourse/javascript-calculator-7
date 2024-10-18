@@ -1,3 +1,4 @@
+//@ts-check
 import { Console } from '@woowacourse/mission-utils';
 import { GAME_MESSAGE } from '../constants/gameMessages.js';
 

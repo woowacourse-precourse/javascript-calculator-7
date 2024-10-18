@@ -1,3 +1,4 @@
+//@ts-check
 import { _reduce } from '../util/util.js';
 import Calculator from './Calculator.js';
 

@@ -1,3 +1,4 @@
+//@ts-check
 import { ERROR_MESSAGE } from '../constants/errorMessages.js';
 
 /**@param {string} message */
