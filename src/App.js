@@ -90,9 +90,10 @@ class App {
   static validate(input) {
     if (App.isCustomSeparator(input)) {
       const [prefixString, numbers] = input.split('\\n');
+      const separator = prefixString.slice(2);
       App.isValidCustomFormat(prefixString, numbers);
-      App.isValidSeparator(prefixString);
-      App.isValidNumbersFormat(prefixString, numbers);
+      App.isValidSeparator(separator);
+      App.isValidNumbersFormat(separator, numbers);
     }
   }
 
@@ -105,8 +106,7 @@ class App {
     }
   }
 
-  static isValidNumbersFormat(prefixString, numbers) {
-    const separator = prefixString.slice(2);
+  static isValidNumbersFormat(separator, numbers) {
     const numberString = numbers.split(separator).join('');
     if (Number.isNaN(Number(numberString))) {
       throw new Error(
@@ -115,8 +115,7 @@ class App {
     }
   }
 
-  static isValidSeparator(prefixString) {
-    const separator = prefixString.slice(2);
+  static isValidSeparator(separator) {
     if (separator.length !== 1) {
       throw new Error(
         '문자 또는 기호/특수문자 1자로 커스텀 구분자를 입력해주세요.',
