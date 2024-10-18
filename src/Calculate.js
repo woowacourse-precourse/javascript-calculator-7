@@ -3,13 +3,14 @@ import OutPutView from "./View/OutputView.js";
 
 class Calculate {
   async startCalculate() {
-    const result = await this.getUserInput();
+    const splitedNums = await this.getUserInput();
+    const result = this.calculateTotal(splitedNums);
     await OutPutView.printResult(result);
   }
 
   async getUserInput() {
     const userInput = await InputView.getUserInput();
-    console.log(this.splitByDelimiters(userInput));
+    return this.splitByDelimiters(userInput);
   }
 
   splitByDelimiters(userInput) {
@@ -43,6 +44,10 @@ class Calculate {
       userInput = splitedInput[1];
       return userInput.split(customSplited).map(Number);
     }
+  }
+
+  calculateTotal(splitedNums) {
+    return splitedNums.reduce((acc, cur) => (acc += cur));
   }
 
   validateUserInput(userInput) {}
