@@ -9,9 +9,13 @@ class App {
         "덧셈할 문자열을 입력해 주세요.\n"
       );
       separator = string.match(/\/\/(.*?)\\n(.*)/);
-    } catch (error) {}
 
-    // Console.print(separator);
+      // "//", "\n"이 있다면 커스텀 구분자 지정
+      if (separator) {
+        const customSeperator = separator[1];
+        string = separator[2];
+      }
+    } catch (error) {}
   }
 }
 
