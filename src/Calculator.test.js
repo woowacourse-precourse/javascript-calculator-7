@@ -76,7 +76,7 @@ const getRandomList = (random, count) => {
 };
 
 describe("regex_random_test", () => {
-  const testCount = 0;
+  const testCount = 100000;
   for (let i = 0; i < testCount; i++) {
     const count = 10; // 숫자의 개수 아무리 큰수가 들어가도 강건한 테스트를 위함
     const random = Math.random();
