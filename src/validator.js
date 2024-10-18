@@ -1,5 +1,5 @@
 import { errorMessage } from './constant.js';
-import { getCustomSeparator } from './inputUitl.js';
+import { getCustomSeparator, getSplitedBySeparator } from './inputUitl.js';
 import {
   getSeparatorConflictPattern,
   getSeparatorPattern,
@@ -58,8 +58,7 @@ export default class Validator {
   }
 
   static #checkInvalidSeparatorUsage(input, customSeparator) {
-    const separatorRegExp = getSeparatorPattern(customSeparator);
-    const splitedInput = Number(input.split(separatorRegExp).join(''));
+    const splitedInput = getSplitedBySeparator(input, customSeparator);
 
     if (!splitedInput) throw new Error(errorMessage.invalidSeparatorUsage);
   }
