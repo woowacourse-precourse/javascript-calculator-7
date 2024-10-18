@@ -1,35 +1,35 @@
 import { DEFAULT_DELIMITER_STRING } from '../constant.js';
-import {
-  isPositive,
-  isValidDelimiterLength,
-  isValidNumberArray,
-} from './validation.js';
 
-function findCustomDelimiter(string) {
-  const regExp = /\/\/.*\\n/;
+export function findCustomDelimiter(string, validation = []) {
+  const match = string.match(/\/\/.*\\n/);
 
-  if (!regExp.test(string)) {
-    return { customDelimiter: null, numbers: string };
+  if (!match) {
+    return { customDelimiter: null, numberStr: string };
   }
 
+  const customDelimiter = [...match[0]].slice(2, -2).join('');
+
+  validation.forEach((func) => func(customDelimiter));
+
   return {
-    customDelimiter: [...string.match(regExp)[0]].slice(2, -2).join(''),
-    numbers: string.replace(regExp, ''),
+    customDelimiter,
+    numberStr: string.slice(match[0].length),
   };
 }
 
-export default function splitWithCustomDelimiter(string) {
-  const { customDelimiter, numbers } = findCustomDelimiter(string);
+export function splitWithCustomDelimiter(
+  customDelimiter,
+  numberStr,
+  validation = []
+) {
   const delimiterRegExp = new RegExp(
     customDelimiter
       ? `${DEFAULT_DELIMITER_STRING}|${customDelimiter}`
       : DEFAULT_DELIMITER_STRING
   );
-  const numberArr = numbers.split(delimiterRegExp);
+  const numberArr = numberStr.split(delimiterRegExp);
 
-  customDelimiter && isValidDelimiterLength(customDelimiter);
-  isValidNumberArray(numberArr);
-  isPositive(numberArr);
+  validation.forEach((func) => func(numberArr));
 
   return numberArr.map(BigInt);
 }

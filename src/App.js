@@ -1,5 +1,13 @@
-import splitWithCustomDelimiter from './utils/split.js';
+import {
+  findCustomDelimiter,
+  splitWithCustomDelimiter,
+} from './utils/split.js';
 import { enter, print } from './utils/console.js';
+import {
+  isPositive,
+  isValidDelimiterLength,
+  isValidNumberArray,
+} from './utils/validation.js';
 
 class App {
   async run() {
@@ -8,7 +16,13 @@ class App {
   }
 
   #tokenizer(input) {
-    const numbers = splitWithCustomDelimiter(input);
+    const { customDelimiter, numberStr } = findCustomDelimiter(input, [
+      isValidDelimiterLength,
+    ]);
+    const numbers = splitWithCustomDelimiter(customDelimiter, numberStr, [
+      isPositive,
+      isValidNumberArray,
+    ]);
     this.#calculate(numbers);
   }
 
