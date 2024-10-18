@@ -30,6 +30,9 @@ class App {
 
       const numbers = numberPart.split(regex).map(Number);
       console.log('numbers', numbers);
+
+      const sum = numbers.reduce((acc, curr) => acc + curr, 0);
+      return sum;
    }
 }
 
