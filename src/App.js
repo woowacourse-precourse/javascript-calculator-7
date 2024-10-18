@@ -5,7 +5,7 @@ class App {
   separator = new Set([":", ","]);
 
   isValidateNumber = (number) => {
-    return number && !isNaN(number) && number >= 0;
+    return !isNaN(number) && number >= 0;
   };
 
   findCustomSeparator = (input) => {
