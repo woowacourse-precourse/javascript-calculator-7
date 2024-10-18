@@ -91,6 +91,7 @@ class App {
     if (App.isCustomSeparator(input)) {
       const [prefixString, numbers] = input.split('\\n');
       App.isValidCustomFormat(prefixString, numbers);
+      App.isValidSeparator(prefixString);
       App.isValidNumbersFormat(prefixString, numbers);
     }
   }
@@ -110,6 +111,15 @@ class App {
     if (Number.isNaN(Number(numberString))) {
       throw new Error(
         '숫자만 계산가능 합니다. 각 숫자는 입력하신 커스텀 구분자로 구분해주세요.',
+      );
+    }
+  }
+
+  static isValidSeparator(prefixString) {
+    const separator = prefixString.slice(2);
+    if (separator.length !== 1) {
+      throw new Error(
+        '문자 또는 기호/특수문자 1자로 커스텀 구분자를 입력해주세요.',
       );
     }
   }
