@@ -1,5 +1,6 @@
 import Input from "../view/Input.js";
 import Output from "../view/Output.js";
+import Calculator from "../model/Calculator.js";
 
 export default class CalculatorController {
   /**
@@ -7,7 +8,8 @@ export default class CalculatorController {
    * @returns {number}
    */
   process(input) {
-    return Number(input);
+    const calc = new Calculator(input);
+    return calc.compute();
   }
 
   async run() {

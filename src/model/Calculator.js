@@ -3,6 +3,7 @@ import {
   CUSTOM_SEPARATOR_START,
   CUSTOM_SEPARATOR_END,
 } from '../constant/separator.js'
+import { ERROR_MESSAGE } from '../constant/error.js'
 
 export default class Calculator {
   /**
@@ -60,5 +61,16 @@ export default class Calculator {
    */
   add(a, b) {
     return a + b;
+  }
+
+  /**
+   * @returns {number}
+   */
+  compute() {
+    const values = this.split();
+    if (!values.every(this.validator)) {
+      throw new Error(ERROR_MESSAGE.INVALID_INPUT);
+    }
+    return values.reduce(this.add);
   }
 }
