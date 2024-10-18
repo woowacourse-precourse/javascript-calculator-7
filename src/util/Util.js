@@ -1,4 +1,4 @@
-const reduce = (f, acc, iter) => {
+const _reduce = (f, acc, iter) => {
   if (!iter) {
     iter = acc[Symbol.iterator]();
     acc = iter.next().value;
@@ -9,7 +9,12 @@ const reduce = (f, acc, iter) => {
   return acc;
 };
 
-const go = (...args) => reduce((a, f) => f(a), args);
+const _go = (...args) => _reduce((a, f) => f(a), args);
+
+const _pipe =
+  (...fns) =>
+  (x) =>
+    _reduce((v, f) => f(v), x, fns);
 
 //커스텀 구분자 추출 함수
 const extractCustomDelimiter = (input) => {
@@ -21,4 +26,4 @@ const extractCustomDelimiter = (input) => {
   return null;
 };
 
-export { reduce, go, extractCustomDelimiter };
+export { _reduce, _go, _pipe, extractCustomDelimiter };
