@@ -7,7 +7,7 @@ class OutputView{
     }
 
     printError(message){
-        MissionUtils.Console.print(`[ERROR] ${message}`);
+        MissionUtils.Console.print(`${message}`);
     }
 }
 

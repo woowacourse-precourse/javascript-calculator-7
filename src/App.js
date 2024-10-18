@@ -1,16 +1,15 @@
 import InputView from "./views/InputView.js"
 import OutputView from "./views/OutputView.js";
+import CalculatorController from "./controllers/CalculatorController.js";
 
 class App {
   constructor(){
-    this.model = new InputView();
-    this.model2 = new OutputView();
+    const inputView = new InputView();
+    const outputView = new OutputView();
+    this.controller = new CalculatorController(inputView,outputView);
   }
   async run() {
-    const result = await this.model.getInput();
-    this.model2.printError(result);
-    this.model2.printResult(result);
-    
+    await this.controller.run();
 
   }
 }
