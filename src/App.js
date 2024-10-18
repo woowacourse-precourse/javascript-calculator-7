@@ -93,7 +93,9 @@ class App {
       const separator = prefixString.slice(2);
       App.isValidCustomFormat(prefixString, numbers);
       App.isValidSeparator(separator);
-      App.isValidNumbersFormat(separator, numbers);
+      App.isValidNumbers([separator], numbers);
+    } else {
+      App.isValidNumbers([',', ':'], input);
     }
   }
 
@@ -106,11 +108,16 @@ class App {
     }
   }
 
-  static isValidNumbersFormat(separator, numbers) {
-    const numberString = numbers.split(separator).join('');
+  static isValidNumbers(separators, numbers) {
+    let numberString = numbers;
+    separators.forEach((separator, index) => {
+      const nextSeparator = separators[index + 1];
+      numberString = numbers.split(separator).join(nextSeparator ?? '');
+    });
+
     if (Number.isNaN(Number(numberString))) {
       throw new Error(
-        '숫자만 계산가능 합니다. 각 숫자는 입력하신 커스텀 구분자로 구분해주세요.',
+        '숫자만 계산 가능합니다. 각 숫자는 커스텀 구분자 또는 기본 구분자(쉼표(,), 콜론(:))로 구분해주세요.',
       );
     }
   }
