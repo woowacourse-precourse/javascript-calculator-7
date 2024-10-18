@@ -82,6 +82,7 @@ const checkCustomDelimiterWithNumbers = (input) => {
   if (customDelimiter && /\d/.test(customDelimiter)) {
     throwError(ERROR_MESSAGE.NO_NUMBER_CUSTOM_SEPARATOR);
   }
+
   return input;
 };
 
@@ -107,10 +108,12 @@ const checkNumberAfterCustomDelimiter = (input) => {
 /**@type {ValidationFunction} */
 // 커스텀 구분자 형식이 올바르지 않을 때
 const checkCustomDelimiterFormat = (input) => {
-  const customDelimiter = extractCustomDelimiter(input);
-  const [, afterCustomDelimiter] = input.split(customDelimiter);
-  if (!afterCustomDelimiter.startsWith('\\n'))
-    throwError(ERROR_MESSAGE.INVALID_CUSTOM_DELIMITER_FORMAT);
+  if (input.startsWith('//')) {
+    const customDelimiter = extractCustomDelimiter(input);
+    const [, afterCustomDelimiter] = input.split(customDelimiter);
+    if (!afterCustomDelimiter.startsWith('\\n'))
+      throwError(ERROR_MESSAGE.INVALID_CUSTOM_DELIMITER_FORMAT);
+  }
   return input;
 };
 
