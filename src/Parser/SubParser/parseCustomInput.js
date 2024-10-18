@@ -2,14 +2,14 @@ import sumAllNumbers from '../../Util/sumAllNumbers.js';
 import {
   validateCustomInput,
   validateNoDuplicateDelimiters,
-  validateInputFormat,
+  validateCustomInputFormat,
 } from '../../Validator/Validator.js';
 
 import { escapeRegExp } from '../../Util/regex.js';
 
 export default function parseCustomInput(input) {
   // 입력이 //로 시작하고 \n을 포함하는지 확인한다.
-  validateInputFormat(input);
+  validateCustomInputFormat(input);
 
   const delimiterEnd = input.indexOf('\\n');
   const delimiter = input.slice(2, delimiterEnd);
