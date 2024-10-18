@@ -29,6 +29,10 @@ class App {
     }
     return INPUT;
   }
+
+  parseNumbers(INPUT) {
+    return INPUT.map(Number);
+  }
 }
 
 export default App;
