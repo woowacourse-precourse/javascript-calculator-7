@@ -5,9 +5,6 @@ class App {
     Console.print("덧셈할 문자열을 입력해 주세요.");
     const input = await Console.readLineAsync("");
 
-    Console.print(input.slice(0, 2));
-    Console.print(isNaN(input));
-
     if (isNaN(input) && input.slice(0, 2) !== "//") {
       throw new Error("[ERROR] 잘못된 입력입니다.");
     }
