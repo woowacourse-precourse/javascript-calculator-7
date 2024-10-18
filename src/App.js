@@ -1,11 +1,11 @@
-import NumberProcessor from "./models/NumberProcessor.js";
+import InputView from "./views/InputView.js"
 
 class App {
   constructor(){
-    this.model = new NumberProcessor();
+    this.model = new InputView();
   }
   async run() {
-    const result = this.model.process('//;\n1;2;3',';');
+    const result = this.model.getInput();
     console.log(result);
     
 
