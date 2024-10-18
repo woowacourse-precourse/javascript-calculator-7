@@ -1,7 +1,6 @@
-import { Console } from "@woowacourse/mission-utils";
 import { Calculator } from "./Calculator.js";
 
-const CUSTOM_END = "\n";
+const CUSTOM_END = "\\n";
 
 export class Validator {
   static customDelimiterLength(customDelimiter) {

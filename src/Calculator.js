@@ -1,7 +1,8 @@
+import { Console } from "@woowacourse/mission-utils";
 import { Validator } from "./Validator.js";
 
 const CUSTOM_START = "//";
-const CUSTOM_END = "\n";
+const CUSTOM_END = "\\n";
 
 export class Calculator {
   #string;
