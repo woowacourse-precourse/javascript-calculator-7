@@ -1,14 +1,15 @@
 import { Calculator } from "./Calculator.js";
-import { Console } from "@woowacourse/mission-utils";
 import { InputView } from "./view/InputView.js";
+import { OutputView } from "./view/OutputView.js";
 
 class App {
   async run() {
     try {
-      const USER_INPUT = await InputView.inputString();
+      const USER_INPUT = await InputView.string();
       const calculator = new Calculator(USER_INPUT);
+      OutputView.sum(calculator.add());
     } catch (error) {
-      Console.print(`${error.message}`);
+      OutputView.error(error.message);
     }
   }
 }
