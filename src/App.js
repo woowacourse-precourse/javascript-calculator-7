@@ -6,9 +6,9 @@ class App {
 
     let strArr = [];
     if(inputStr.includes('//') && inputStr.includes('\\n')){
-      const customSeperator = this.getCustom(inputStr);
+      const customSeparator = this.getCustom(inputStr);
       inputStr = inputStr.split('\\n')[1];
-      strArr = this.separateStr(inputStr, customSeperator);
+      strArr = this.separateStr(inputStr, customSeparator);
     }
     else{
       strArr = this.separateStr(inputStr);
@@ -27,9 +27,9 @@ class App {
 
   getCustom(str){
     const regex = /\/\/(.*?)\\n/;
-    const customSeperator = str.match(regex);
+    const customSeparator = str.match(regex);
 
-    return customSeperator ? customSeperator[1] : null;
+    return customSeparator ? customSeparator[1] : null;
   }
 
   separateStr(str, customSeperator = null){
