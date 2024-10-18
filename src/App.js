@@ -1,3 +1,4 @@
+import { MissionUtils } from "@woowacourse/mission-utils";
 class App {
   async run() {
     
@@ -52,5 +53,5 @@ class App {
       // 0은 초기값. 첫 번째 요소부터 차례차례 더해지기 시작한다.
   }
 }
-
+//.
 export default App;
