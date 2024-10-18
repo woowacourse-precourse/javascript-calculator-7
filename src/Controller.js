@@ -29,4 +29,9 @@ export class Controller {
   extractValues() {
     this.values = calculator.extractValues(this.delimiter, this.valueString);
   }
+  validateValues() {
+    ValidateError.validateNoNegativeNumbers(this.values);
+    ValidateError.validateAllowedDelimiters(this.values);
+    ValidateError.validateNonEmptySplitValues(this.values);
+  }
 }
