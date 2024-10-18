@@ -7,8 +7,8 @@
 
 - [O]  문자열 덧셈 계산기 저장소를 fork하고 clone하는 것으로 시작한다.
 - [O]  기능을 구현하기 전 [README.md](http://README.md) 에 구현할 기능 목록을 정리해 추가한다.
-- [ ]  Git의 커밋 단위는 앞 단계에서 [REAME.md](http://REAME.md) 에 정리한 **기능 목록 단위로 추가**한다.
-    - [ ]  [AngularJS Git Commit Message Conventions](https://gist.github.com/stephenparish/9941e89d80e2bc58a153)을 참고해 커밋 메시지를 작성한다.
+- [O]  Git의 커밋 단위는 앞 단계에서 [REAME.md](http://REAME.md) 에 정리한 **기능 목록 단위로 추가**한다.
+    - [O]  [AngularJS Git Commit Message Conventions](https://gist.github.com/stephenparish/9941e89d80e2bc58a153)을 참고해 커밋 메시지를 작성한다.
 
 <br/>
 
