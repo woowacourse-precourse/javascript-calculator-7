@@ -30,7 +30,7 @@ class strToArr {
 
 class App {
   async run() {
-    const ERROR = "[ERROR]";
+    const ERR_MESSAGE = "[ERROR]";
     try {
       const PLUS_OP_STR = await Console.readLineAsync(
         "덧셈할 문자열을 입력해주세요.\n"
@@ -60,7 +60,7 @@ class App {
             SEPERATOR_ADD_PART[i + 2] === "\n"
           )
             SEPARATOR_ARR.push(SEPERATOR_ADD_PART[i + 1]);
-          else throw ERROR;
+          else throw ERR_MESSAGE;
         }
       }
 
@@ -72,12 +72,12 @@ class App {
       // 마지막 배열의 모든 문자 요소가 구분자 배열에 포함되있는 지 확인
       for (let PARTS = 0; PARTS < CALCULATE_PART.length; PARTS++) {
         if (PARTS % 2 === 1 && !SEPARATOR_ARR.includes(CALCULATE_PART[PARTS])) {
-          throw ERROR;
+          throw ERR_MESSAGE;
         } else if (
           PARTS % 2 === 0 &&
           typeof CALCULATE_PART[PARTS] !== "number"
         ) {
-          throw ERROR;
+          throw ERR_MESSAGE;
         }
       }
 
@@ -86,7 +86,7 @@ class App {
       Console.print("결과 : " + RESULT);
     } catch (err) {
       // await expect(err).resolves.toBe();
-      Console.print(err);
+      console.error(err);
     }
   }
 }
