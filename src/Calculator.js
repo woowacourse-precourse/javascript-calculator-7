@@ -8,11 +8,26 @@ export default class Calculator {
 
   validateInput() {
     const isInputValid = new RegExp(`^[0-9${this.delimiter.join('')}\n]*$`);
+    
     if (!isInputValid.test(this.input)) {
       throw new Error(ERROR_MESSAGE.INVALID_INPUT);
     }
 
+    // 첫번째 혹은 마지막 숫자 뒤에 delimiter 불가능
+    for (let i=0; i<this.delimiter.length; i++) {
+      if (this.input.startsWith(this.delimiter[i]) || this.input.endsWith(this.delimiter[i])) {
+        throw new Error(ERROR_MESSAGE.END_WITH_DELIMITER);
+      }
+    }
+
+    // 연속된 delimiter 불가능
+    const isConsecutiveDelimiter = new RegExp(`[${this.delimiter.join('')}]{2,}`);
+    
+    if (isConsecutiveDelimiter.test(this.input)) {
+      throw new Error(ERROR_MESSAGE.CONSECUTIVE_DELIMITER);
+    }
   }
+
 
   customDelimiter() {
     if (this.input.startsWith('//')) {
@@ -21,6 +36,8 @@ export default class Calculator {
       this.input = numberPart;
     }
   }
+
+
 
   calculate() {
     this.customDelimiter();
