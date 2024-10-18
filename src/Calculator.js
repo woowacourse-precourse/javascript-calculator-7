@@ -7,5 +7,13 @@ const delimiters = [',', ':'];
 export const runCalculator = async () => {
     const userInput = await getUserInput();
 
-    Console.print(userInput);
+    defineDelimiters(userInput);
+
+    Console.print(delimiters);
+}
+
+const defineDelimiters = (userInput) => {
+    if (userInput.slice(0, 2) === '//' && userInput.slice(3, 5) === '\\n') {
+        delimiters.push(userInput[2]);
+    }
 }
