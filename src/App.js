@@ -1,8 +1,10 @@
+import add from "./calculator/add.js";
 import consoleUtils from "./calculator/consoleUtils.js";
 
 class App {
   async run() {
-    consoleUtils();
+    const inputString = await consoleUtils();
+    add(inputString);
   }
 }
 
