@@ -21,7 +21,7 @@ class App {
     if (this.#input.startsWith("//")) {
       const lineBreakStringIndex = this.#input.indexOf("\\n");
 
-      if (lineBreakStringIndex === -1) {
+      if (lineBreakStringIndex !== 3) {
         return true;
       }
     }
