@@ -13,7 +13,10 @@ class App {
     }
     //수식 유효성 검사
     if (this.validateFormula(formula, delimiters)) {
-
+      //피연산자 추출
+      const operands = this.extractOperands(formula, delimiters);
+      const sum = this.calculateSum(operands);
+      Console.print(`결과 : ${sum}`);
     }
   }
 
@@ -61,11 +64,20 @@ class App {
     return true;
   }
 
-  calculateSum(formula, delimiters) {
+  extractOperands(formula, delimiters) {
     //구분자를 기준으로 split
     const delimitersRegex = new RegExp(`[${delimiters.join('')}]`);
-    const numbers = formula.split(delimitersRegex);
-    return numbers;
+    const operands = formula.split(delimitersRegex);
+    return operands;
+  }
+
+  calculateSum(operands) {
+    let sum = 0;
+    for (let index = 0; index < operands.length; index++) {
+      sum = sum + Number(operands[index]);
+    }
+
+    return (sum);
   }
 };
 
