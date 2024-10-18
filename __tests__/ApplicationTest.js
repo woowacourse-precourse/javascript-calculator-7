@@ -55,4 +55,25 @@ describe('문자열 계산기', () => {
       expect(logSpy).toHaveBeenCalledWith(expect.stringContaining(output));
     });
   });
+
+  test('다양한 커스텀 구분자 사용', async () => {
+    const inputs = ['//!\\n1!2!3', '//b\\n1b2b3b4'];
+
+    for (const input of inputs) {
+      mockQuestions([input]);
+      const logSpy = getLogSpy();
+      const expectedSum = input
+        .split('\\n')[1]
+        .split(input[2])
+        .reduce((acc, cur) => acc + Number(cur), 0);
+      const outputs = [`결과 : ${expectedSum}`];
+
+      const app = new App();
+      await app.run();
+
+      outputs.forEach((output) => {
+        expect(logSpy).toHaveBeenCalledWith(expect.stringContaining(output));
+      });
+    }
+  });
 });
