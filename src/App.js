@@ -1,6 +1,5 @@
 import { Console } from '@woowacourse/mission-utils';
 import { isEmptyOrNull } from './utils/isEmptyOrNull.js';
-import { isSingleCharacter } from './utils/isSingleCharacter.js';
 import { splitByCustomSeparator } from './utils/splitByCustomSeparator.js';
 import { splitByDefaultSeparators } from './utils/splitByDefaultSeparators.js';
 
@@ -12,10 +11,6 @@ class App {
 
 			if (isEmptyOrNull(res)) {
 				answer = 0;
-			} else if (isSingleCharacter(res)) {
-				answer = +res;
-			} else if (!isNaN(res)) {
-				answer = [...res];
 			} else if (res.startsWith('//')) {
 				answer = splitByCustomSeparator(res);
 			} else {
