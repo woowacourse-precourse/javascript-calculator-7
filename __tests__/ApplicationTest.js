@@ -76,4 +76,14 @@ describe('문자열 계산기', () => {
       });
     }
   });
+
+  test('소수점 처리', async () => {
+    const inputs = ['0.5,0.1,0.2', '//;\\n1.5;0.2;0.3'];
+    for (const input of inputs) {
+      mockQuestions([input]);
+
+      const app = new App();
+      await expect(app.run()).rejects.toThrow('[ERROR]');
+    }
+  });
 });
