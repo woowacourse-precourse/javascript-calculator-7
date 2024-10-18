@@ -58,8 +58,7 @@ class App {
   }
 
   checkCustomValidation(input) {
-    const endIdx = input.indexOf("\n");
-    const divider = input.slice(2, endIdx);
+    const divider = this.getCustomDivider(input);
     let dividerRegExp = "";
 
     for (let i = 0; i < divider.length; i++) {
@@ -84,6 +83,10 @@ class App {
 
   calculateCustom() {
 
+  }
+
+  getCustomDivider(input) {
+    return input.slice(2, input.indexOf("\n"));;
   }
 
   validationError() {
