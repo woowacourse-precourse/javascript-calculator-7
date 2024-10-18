@@ -32,6 +32,11 @@ class App {
     return false;
   }
 
+  sliceCustomPattern(input) {
+    const custom = input.match(CUSTOM_PATTERN);
+    return custom[0];
+  }
+
   addCustomSeparator(input, separator) {
     const custom = input.match(CUSTOM_PATTERN);
     const customSeparator = custom[0]
