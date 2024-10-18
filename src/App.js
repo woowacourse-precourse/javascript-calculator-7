@@ -1,8 +1,9 @@
 import { Console } from '@woowacourse/mission-utils';
 
 //정규표현식
-const REGEX1 = /^\d([\d\,\:]*\d)$/;
-const REGEX2 = /^\/{2}.+\d$/;
+const REGEX1 = /^\d*(\.\d*)?([\d*(\.\d*)?\,\:]*\d*(\.\d*)?)$/;
+const REGEX2 = /^\/{2}.+\d*(\.\d*)?$/;
+const REGEX4 = /\,|\:/;
 
 class App {
   getStr = async () => {
@@ -31,24 +32,23 @@ class App {
     const extractedStr = str.slice(str.indexOf('\\n') + 2);
 
     //입력값 검사
-    const REGEX3 = new RegExp(`^\\d([\\d${delimiter}]*)$`);
-    if (REGEX3.test(extractedStr)) {
-      //에러
-    }
+    const REGEX3 = new RegExp(
+      `^\\d*(\\.\\d*)?((\\d*(\\.\\d*)?\|${delimiter})*)$`
+    );
 
-    return [extractedStr, delimiter];
+    if (REGEX3.test(extractedStr)) {
+      return [extractedStr, delimiter];
+    } else {
+      //Err
+    }
   };
 
   //숫자 더하기
-  add_num = (str, delimiter = '') => {
+  add_num = (str, delimiter = REGEX4) => {
     let numArr = [];
 
     //숫자 추출하기
-    if (delimiter == '') {
-      numArr = str.split(/\,|\:/);
-    } else {
-      numArr = str.split(delimiter);
-    }
+    numArr = str.split(delimiter);
 
     //숫자로 전환
     numArr = numArr.map((x) => Number(x));
