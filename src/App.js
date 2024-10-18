@@ -21,6 +21,9 @@ class App {
 			}
 
 			if (Array.isArray(answer)) {
+				if (answer[0] === res) {
+					throw new Error('[ERROR]: 구분자와 양수로 이루어진 값을 입력해주세요.');
+				}
 				let sum = 0;
 				for (const v of answer) {
 					if (isNaN(v)) {
