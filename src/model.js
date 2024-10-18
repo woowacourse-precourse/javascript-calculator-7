@@ -33,7 +33,8 @@ class CalculatorModel {
 
     const NUMBERS = numbersString
       .split(new RegExp(`[${SEPARATOR.join("")}]`)) // 구분자를 기준으로 숫자 분리
-      .filter((num) => num.trim() !== "")
+      .map((num) => num.trim()) // 공백 제거
+      .filter((num) => num !== "") // 빈 문자열 제거
       .map((num) => parseFloat(num));
     return { SEPARATOR, NUMBERS };
   }
