@@ -1,6 +1,10 @@
 import { Console } from "@woowacourse/mission-utils";
 
 class App {
+  constructor() {
+    this.normalSeperators = [',', ':'];
+    this.customSeperators = ['//', '\\n'];
+  }
 
   async run() {
     const userInput = await Console.readLineAsync('문자열 덧셈을 해보아요:');
