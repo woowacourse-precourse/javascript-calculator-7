@@ -1,5 +1,3 @@
-import { Console } from "@woowacourse/mission-utils";
-
 class CalculatorController {
   constructor(model, view) {
     this.model = model;
