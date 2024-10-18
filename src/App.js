@@ -12,6 +12,7 @@ function extractNumber(userInputData) {
 }
 
 class NumberExtractor {
+  orgUserInputData
   userInputData
   numberData
   delemeter
@@ -20,27 +21,30 @@ class NumberExtractor {
   NUM_REG = /[^0-9]/
   CUSTOM_DELI_START = '//'
   CUSTOM_DELI_END = '\\\\n'
-  CUSTOM_DELI_REG = new RegExp(`^${this.CUSTOM_DELI_START}.${this.CUSTOM_DELI_END}`)
 
   constructor(userInputData) {
+    this.orgUserInputData = userInputData
     this.userInputData = userInputData
+
     this.delemeter = [',', ':']
   }
 
   extractNumber() {
-    if (this.findCustomDelemeter() == true) {
-      addDelemeter();
+    if (this.findCustomDelemeter() === true) {
+      this.addDelemeter();
     }
-
   }
 
   findCustomDelemeter() {
-    console.log(this.CUSTOM_DELI_REG)
+    const customDeliReg = new RegExp(`^${this.CUSTOM_DELI_START}.${this.CUSTOM_DELI_END}`)
+    const customDeliString = this.userInputData.match(customDeliReg);
 
-    const customDeliString = this.userInputData.match(this.CUSTOM_DELI_REG);
     if (customDeliString == undefined) return false
-
+  
     this.customDelemter = customDeliString[0].charAt(2)
+    this.userInputData = this.userInputData.replace(customDeliReg, '')
+
+    return true
     // todo : Error Handling
     // 1. custom 구분자 설정은 \n 으로 끝나야 합니다.
     // 2. custom 구분자는 '하나의 문자'로 설정되어야 합니다.
@@ -48,6 +52,7 @@ class NumberExtractor {
 
   addDelemeter() {
     this.delemeter.push(this.customDelemter)
+    console.log(this.delemeter)
   }
 
   splitInputDate(inputData) {
@@ -93,7 +98,7 @@ class App {
   async run() {
     const userInput = await getUserInputData();
     const numberextractor = new NumberExtractor(userInput);
-    numberextractor.findCustomDelemeter();
+    numberextractor.extractNumber();
   }
 }
 
