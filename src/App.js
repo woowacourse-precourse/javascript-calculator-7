@@ -11,7 +11,7 @@ class Calculator {
     this.constantSeperator = ",";
   }
 
-  getCustomSeperator(input) {
+  extractCustomSeperator(input) {
     if (
       input.startsWith(CUSTOM_EXPRESSION.START) &&
       input.includes(CUSTOM_EXPRESSION.END)
@@ -24,11 +24,15 @@ class Calculator {
         throw new Error("[ERROR] 커스텀 구분자의 길이는 0일 수 없습니다.");
       }
 
-      this.seperators.unshift(
+      this.setCustomSeperator([
         CUSTOM_EXPRESSION.START + customSeperator + CUSTOM_EXPRESSION.END,
-        customSeperator
-      );
+        customSeperator,
+      ]);
     }
+  }
+
+  setCustomSeperator(customSeperators) {
+    this.seperators = [...customSeperators, ...this.seperators];
   }
 
   replaceAllSeperators(input) {
@@ -84,7 +88,7 @@ class App {
 
   async run() {
     const userInput = await this.console.read("덧셈할 문자열을 입력해 주세요.");
-    this.calculator.getCustomSeperator(userInput);
+    this.calculator.extractCustomSeperator(userInput);
     const processedInput = this.calculator.replaceAllSeperators(userInput);
     const validInputArray = this.calculator.validateInput(processedInput);
 
