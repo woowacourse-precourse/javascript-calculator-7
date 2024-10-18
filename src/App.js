@@ -69,12 +69,9 @@ class App {
   }
 
   printResult(input) {
-    Console.print(
-      `${PRINT_MESSAGES.FINAL_RESULT}${input.reduce(
-        (acc, cur) => acc + cur,
-        0
-      )}`
-    );
+    const result = input.reduce((acc, cur) => acc + cur, 0);
+
+    Console.print(`${PRINT_MESSAGES.FINAL_RESULT}${result}`);
   }
 
   validateWrongNumber(additionArray) {
