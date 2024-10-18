@@ -1,31 +1,11 @@
 import { Console } from "@woowacourse/mission-utils";
+import {
+  CustomSeparatorError,
+  ValidateError,
+  ParseError,
+} from "./CustomErrors.js";
 
 const customSeparatorReg = new RegExp(/\/\/.*\\n/);
-
-class CalculateError extends Error {
-  constructor(message) {
-    super();
-    this.message = "[ERROR] " + message;
-  }
-}
-
-class CustomSeparatorError extends CalculateError {
-  constructor(message) {
-    super(message);
-  }
-}
-
-class ValidateError extends CalculateError {
-  constructor(message) {
-    super(message);
-  }
-}
-
-class ParseError extends CalculateError {
-  constructor(message) {
-    super(message);
-  }
-}
 
 class App {
   constructor() {
