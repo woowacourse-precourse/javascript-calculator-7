@@ -11,7 +11,7 @@ describe("splitToNumber 테스트", () => {
     { input: "1,e", expected: [1, NaN] },
   ])("'$input'은 $expected로 분할된다.", ({ input, expected }) => {
     const splitter = new Splitter();
-    const result = splitter.splitToNumber(input);
+    const result = splitter.split(input);
     expect(result).toEqual(expected);
   });
 });
