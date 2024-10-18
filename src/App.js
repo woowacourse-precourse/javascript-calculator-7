@@ -33,6 +33,11 @@ class App {
   parseNumbers(INPUT) {
     return INPUT.map(Number);
   }
+
+  userOutput(NUMBERS) {
+    const sum = NUMBERS.reduce((acc, curr) => acc + curr, 0);
+    Console.print(`°á°ú: ${sum}`);
+  }
 }
 
 export default App;
