@@ -50,7 +50,9 @@ export default class Validator {
     if (splitInput[1] === '')
       throw new Error(errorMessage.missingCustomSeparator);
     if (splitInput[1] === '.')
-      throw new Error(errorMessage.invalidCustomSepartor);
+      throw new Error(errorMessage.invalidDotForCustomSepartor);
+    if (Number(splitInput[1]))
+      throw new Error(errorMessage.invalidNumberForCustomSepartor);
   }
 
   static #checkIncludeZero(input, customSeparator) {

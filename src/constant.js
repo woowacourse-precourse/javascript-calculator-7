@@ -14,7 +14,9 @@ export const errorMessage = {
 
   conflictingSeparators: `[ERROR] 구분자는 동시에 나올 수 없습니다.`,
 
-  invalidCustomSepartor: `[ERROR] "."은 커스텀 구분자로 사용할 수 없습니다.`,
+  invalidDotForCustomSepartor: `[ERROR] "."은 커스텀 구분자로 사용할 수 없습니다.`,
+
+  invalidNumberForCustomSepartor: `[ERROR] 숫자는 커스텀 구분자로 사용할 수 없습니다.`,
 };
 
 export const outputMessage = {
