@@ -29,8 +29,29 @@ function separatorTextInputCheck(userInput) {
   return false;
 }
 
+// 3. 숫자가 양수로 이루어진지 체크하기
+function positiveNumberCheck(userInput) {
+  let positiveNumberCheckCount;
+  const numberCount = (userInput.length - 5) / 2 + 1;
+  // Console.print(parseInt(numberCount));
+
+  for (let i = 5; i < userInput.length; i += 1) {
+    if (i % 2 === 1 && Number(userInput[i]) > 0) {
+      positiveNumberCheckCount += 1;
+    }
+  }
+
+  if (positiveNumberCheckCount === numberCount) {
+    return true;
+  }
+  false;
+}
+
 const customConditionCheck = userInput => {
-  if (conditionTextInputCheck(userInput) && separatorTextInputCheck(userInput)) {
+  // Console.print('[디버깅] conditionTextInputCheck(userInput)' + conditionTextInputCheck(userInput));
+  // Console.print('[디버깅] separatorTextInputCheck(userInput)' + separatorTextInputCheck(userInput));
+
+  if (conditionTextInputCheck(userInput) && separatorTextInputCheck(userInput) && positiveNumberCheck(userInput)) {
     return true;
   }
   return false;
