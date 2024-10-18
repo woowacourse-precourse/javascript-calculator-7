@@ -54,11 +54,17 @@ class App {
     }
   }
 
+  // 합 계산
+  calculateSum() {
+    this.result = this.numbers.reduce((acc, num) => acc + Number(num), 0);
+  }
+
   async run() {
     try {
       await this.getUserInput();
       await this.getSeparator();
       await this.validateInput();
+      this.calculateSum();
     } catch (error) {
       throw new Error(error);
     }
