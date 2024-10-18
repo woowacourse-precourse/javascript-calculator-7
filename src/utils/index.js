@@ -29,6 +29,10 @@ function hasCustomSeperator(expression){
     return expression.startsWith(SEPERATOR_STRING.START) && expression.includes(SEPERATOR_STRING.END);
 }
 
+function hasNullSeperatorError(seperatorArray){
+    return seperatorArray.includes('');
+}
+
 function hasSeperatorError(expression, seperatorArray){
     seperatorArray.map((seperator) => {
         expression = expression.replaceAll(seperator, NULL_STRING);
@@ -41,6 +45,9 @@ function hasExpressionError(numArray){
 }
 
 function checkExpressionError(expression, seperetorArray, numArray){
+    if(hasNullSeperatorError(seperetorArray)){
+        throw new Error(ERROR_MESSAGE.NULL_SEPERATOR);
+    }
     if(hasSeperatorError(expression, seperetorArray)){
         throw new Error(ERROR_MESSAGE.OTHER_CHARACTER);
     }
