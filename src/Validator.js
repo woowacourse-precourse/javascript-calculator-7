@@ -5,6 +5,8 @@ class Validator {
   checkValidSeparator(sep) {
     if (sep === '-') {
       throw new Error(MESSAGES.ERROR.INPUT_DASH_SEPARATOR);
+    } else if (sep === ' ') {
+      throw new Error(MESSAGES.ERROR.INPUT_SPACE);
     }
   }
 
