@@ -3,16 +3,10 @@ import Validator from "../src/Validator";
 
 describe("validateNumberArray 테스트", () => {
   test.each([
-    {
-      input: [1, 2, 3],
-    },
-    {
-      input: [0, 2, 3],
-    },
-    {
-      input: [+0, 2, 3],
-    },
-  ])("'$input'은 유효한 숫자 배열이다.", ({ input }) => {
+    { input: [1, 2, 3] },
+    { input: [0, 2, 3] },
+    { input: [+0, 2, 3] },
+  ])("'$input'은 CustomError가 발생하지 않는다.", ({ input }) => {
     expect(() => Validator.validateNumberArray(input)).not.toThrow(CustomError);
   });
 
@@ -29,7 +23,42 @@ describe("validateNumberArray 테스트", () => {
       input: [-2, 1],
       expected: Validator.VALIDATION_NUMBER_ARRAY.isPositive.errorMessage,
     },
-  ])("'$input'은 '$expected' 메시지의 CustomError가 발생한다.", ({ input, expected }) => {
-    expect(() => Validator.validateNumberArray(input)).toThrow(new CustomError(expected));
-  });
+  ])(
+    "'$input'은 '$expected' 메시지의 CustomError가 발생한다.",
+    ({ input, expected }) => {
+      expect(() => Validator.validateNumberArray(input)).toThrow(
+        new CustomError(expected)
+      );
+    }
+  );
+});
+
+describe("validateCustomSeparator 테스트", () => {
+  test.each([{ input: "//;\\n1;2;3" }])(
+    "'$input'은 CustomError가 발생하지 않는다.",
+    ({ input }) => {
+      expect(() => Validator.validateCustomSeparator(input)).not.toThrow(
+        CustomError
+      );
+    }
+  );
+
+  test.each([
+    {
+      input: "//\\n1;2;3",
+      expected: Validator.VALIDATION_CUSTOM_SEPARATOR.noSeparator.errorMessage,
+    },
+    {
+      input: "//;;\\n1;2;3",
+      expected:
+        Validator.VALIDATION_CUSTOM_SEPARATOR.tooManySeparator.errorMessage,
+    },
+  ])(
+    "'$input'은 '$expected' 메시지의 CustomError가 발생한다.",
+    ({ input, expected }) => {
+      expect(() => Validator.validateCustomSeparator(input)).toThrow(
+        new CustomError(expected)
+      );
+    }
+  );
 });
