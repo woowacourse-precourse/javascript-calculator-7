@@ -41,6 +41,24 @@ describe("문자열 계산기", () => {
     await expect(app.run()).rejects.toThrow("[ERROR]");
   });
 
+  test("커스텀 구분자 예외 테스트", async () => {
+    const inputs = ["//;\\n1&2,3"];
+    mockQuestions(inputs);
+
+    const app = new App();
+
+    await expect(app.run()).rejects.toThrow("[ERROR]");
+  });
+
+  test("음의 소수 예외 테스트", async () => {
+    const inputs = ["-1.5,-2.5,3"];
+    mockQuestions(inputs);
+
+    const app = new App();
+
+    await expect(app.run()).rejects.toThrow("[ERROR]");
+  });
+
   test("양의 소수 테스트", async () => {
     const inputs = ["1.5,2.5,3"];
     mockQuestions(inputs);
@@ -56,14 +74,7 @@ describe("문자열 계산기", () => {
     });
   });
 
-  test("음의 소수 예외 테스트", async () => {
-    const inputs = ["-1.5,-2.5,3"];
-    mockQuestions(inputs);
 
-    const app = new App();
-
-    await expect(app.run()).rejects.toThrow("[ERROR]");
-  });
 
   test("커스텀 구분자 사용, 양의 소수 사용 테스트", async () => {
     const inputs = ["//;\\n1;10;3,4.5"];
