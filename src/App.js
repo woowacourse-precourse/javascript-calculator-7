@@ -54,16 +54,13 @@ function computeResult(inputString, customString) {
 
 class App {
   async run() {
+    const inputString = await getString();
     try {
-      const inputString = await getString();
       // 유효한 입력인지 확인
       vaildateInput(inputString);
     } catch (error) {
       console.error(error.message);
     }
-
-    //const inputString = await getString();
-
     // 커스텀연산자가 있는지 확인
     const customString = customSeparator(inputString);
     console.log(customString);
