@@ -1,12 +1,8 @@
 import { MissionUtils } from "@woowacourse/mission-utils";
 
 class InputView {
-    getInput(){
-        return MissionUtils.Console.readLine('닉네임을 입력해주세요.', (answer) => 
-            {
-                console.log(`닉네임: ${answer}`);
-            }
-        );
+    async getInput(){
+        return await MissionUtils.Console.readLineAsync('덧셈할 문자열을 입력해 주세요.\n');
     }
 }
 
