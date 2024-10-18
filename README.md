@@ -5,25 +5,43 @@
 ### 문자열 덧셈 계산기 흐름
 
 - 문자열 입력 받기
-- 입력받은 문자열 구분 방식을 정함(쉼표 콜론 방식 , 커스텀 구분자)
-- 쉼표 콜론 방식인 경우 이를 기준으로 숫자를 분리
-- 커스텀 구분자인 경우 "//" , "\n" 사이에 있는 구분자를 기준으로 숫자를 분리
-- 구분자를 기준으로 나누어진 숫자들을 더해주고 프로그램 종료
+- 입력받은 문자열의 구분 방식 결정 (쉼표, 콜론 또는 커스텀 구분자)
+- 쉼표와 콜론을 사용하는 경우, 이를 기준으로 숫자를 분리
+- 커스텀 구분자를 사용하는 경우, "//"와 "\n" 사이에 있는 구분자를 기준으로 숫자를 분리
+- 구분자를 기준으로 나누어진 숫자들을 더한 후 결과 출력 및 프로그램 종료
 
 ## 함수 구현
 
-### 문자열 입력 받기 - getUserInput()
+### InputView
+- getUserInput : : 사용자 입력을 받아 유효한 경우 반환하며, 그렇지 않은 경우 에러 처리
 
-사용자의 값을 입력받아 문자열로 반환
+### OutputView
+- printResult : 계산된 결과값을 출력
 
-### 커스텀 구분자 판단 - checkCustomDelimiter()
+### InputValidation
+- isValidateForm : 입력 형식이 올바른지 확인
+- customDelimeterInputValidate : 커스텀 구분자를 사용하는 경우 입력 값의 유효성 확인
+- defaultDelimterInputValidate : 기본 구분자를 사용하는 경우 입력 값의 유효성 확인
 
-커스텀 구분자인경우 구분자를 반환 아닌경우는 함수 종료후 기본구분자 사용
+### CalculatorGenerator
+- getResult : 계산된 결과 값 반환
+- checkCustomDelimiter : 커스텀 구분자 사용 여부 확인
+- calculatDelimiter : 기본 구분자를 사용하는 경우 값을 계산
+- calculateCustomDelimiter : 커스텀 구분자를 사용하는 경우 값을 계산
+- calculateNumber : 유효한 숫자 배열을 받아 값을 계산하여 반환
 
-### 구분이 완료된 배열을 더해주는 함수 - calculateNumber()
+### Constants
 
-배열 조회하면서 숫자가 아닐시 ERROR , 숫자인 경우 더해준 값을 반환
+#### ERROR_MESSAGE
+- WRONG_INPUT_STRING : 입력 값이 문자열이 아닌 경우
+- WRONG_INPUT_STRING_NEGATIVE : 입력 값에 음수가 포함된 경우
+- WRONG_CUSTOM_DELIMETER : 커스텀 구분자 입력 시 잘못된 값이 있는 경우
+- WRONG_DEFAULT_DELIMETER : 기본 구분자 입력 시 잘못된 값이 있는 경우
 
-### 입력값 ERROR 정의 - InputValidation , ERROR_MESSAGE
+#### DEFAULT_DELIMITER
+- 쉼표(,)와 콜론(:)을 기본 구분자로 사용
 
-입력값에 오류가 있는경우 에러 처리
+#### INPUT_MESSAGE , OUTPUT_MESSAGE
+- COMPOUND_STRING : 입력 시 사용자에게 표시할 메시지
+- RESULT : 계산 결과를 출력할 메시지
+
