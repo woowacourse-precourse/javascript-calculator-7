@@ -16,6 +16,19 @@ class App {
     );
     return inputWords;
   }
+
+  userSeparator(INPUT) {
+    if (INPUT.startsWith("//")) {
+      const indexCustom = INPUT.indexOf("\\n");
+      const customDelimiter = INPUT.substring(2, indexCustom);
+      INPUT = INPUT.substring(indexCustom + 2);
+      console.log(INPUT);
+      return INPUT.split(customDelimiter);
+    } else if (INPUT.includes(",") || INPUT.includes(";")) {
+      return INPUT.split(/[,;]/);
+    }
+    return INPUT;
+  }
 }
 
 export default App;
