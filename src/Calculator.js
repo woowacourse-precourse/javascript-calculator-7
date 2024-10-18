@@ -53,7 +53,7 @@ class Calculator {
         
         // 숫자 배열
         const numbers = !includeInvalidStr ? separatedStr.filter(Boolean).map(Number) : 
-        userInput.match(/-?\d+/g).map(Number);
+        userInput?.match(/-?\d+/g).map(Number);
         
         if(numbers && numbers.length > 0) {
             // 양수인지
