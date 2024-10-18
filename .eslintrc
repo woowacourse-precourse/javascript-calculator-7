@@ -1,0 +1,25 @@
+{
+  "env": {
+    "browser": true,
+    "es2018": true,
+    "node": true
+  },
+  "settings": {
+    "import/resolver": {
+      "node": {
+        "extensions": [".js"]
+      }
+    }
+  },
+  "extends": [
+    "airbnb",
+    "airbnb/hooks",
+    "eslint:recommended",
+  ],
+  "parser": "babel-eslint",
+  "parserOptions": {
+    "sourceType": "module",
+    "ecmaVersion": "latest",
+  },
+  "plugins": ["airbnb"],
+}
