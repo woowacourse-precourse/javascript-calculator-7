@@ -1,20 +1,22 @@
 export class Calculator {
-  static SEPARATOR_REGEX = /[,:]/;
+  constructor(separatorRegex = /[,:]/) {
+    this.separatorRegex = separatorRegex;
+  }
 
-  static calculate(input) {
+  calculate(input) {
     if (input === '') return 0;
 
     const numbers = this.parseNumbers(input);
-    const sum = this.sumNumbers(numbers)
+    const sum = this.sumNumbers(numbers);
 
-    return sum
+    return sum;
   }
 
-  static parseNumbers(input) {
-    return input.split(this.SEPARATOR_REGEX).map((num) => Number(num.trim()));
+  parseNumbers(input) {
+    return input.split(this.separatorRegex).map((num) => Number(num.trim()));
   }
 
-  static sumNumbers(numbers) {
+  sumNumbers(numbers) {
     return numbers.reduce((acc, cur) => acc + cur, 0);
   }
 }
