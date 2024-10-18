@@ -9,7 +9,15 @@ class Calculate {
 
   async getUserInput() {
     const userInput = await InputView.getUserInput();
-    return this.splitByCustom(userInput);
+    console.log(this.splitByDelimiters(userInput));
+  }
+
+  splitByDelimiters(userInput) {
+    if (userInput.startsWith("//") || userInput.startsWith("\\n")) {
+      return this.splitByCustom(userInput);
+    } else {
+      return this.splitByCommaColon(userInput);
+    }
   }
 
   // 콤마, 콜론 기준으로 Input을 분리
