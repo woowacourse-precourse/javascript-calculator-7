@@ -52,6 +52,8 @@ class App {
       (m) => m[1]
     );
 
+    this.validateWrongCustomSeparationSymbols(customSeparationSymbols);
+
     return customSeparationSymbols;
   }
 
@@ -76,6 +78,28 @@ class App {
 
       if (num <= 0) {
         throw new Error('[ERROR] 양수의 숫자만 입력해 주세요.');
+      }
+    });
+  }
+
+  validateWrongCustomSeparationSymbols(customSymbols) {
+    const symbolRegex = /[!@#$%^&*().?";{}|<>]/;
+
+    customSymbols.forEach((symbol) => {
+      if (symbol.length !== 1) {
+        throw new Error('[ERROR] 커스텀 구분자는 한 글자씩 입력해 주세요.');
+      }
+
+      if (this.separationSymbols.includes(symbol)) {
+        throw new Error(
+          '[ERROR] 커스텀 구분자는 기본 구분자와 겹치지 않아야 합니다.'
+        );
+      }
+
+      if (!symbolRegex.test(symbol)) {
+        throw new Error(
+          '[ERROR] 커스텀 구분자는 기본 구분자를 제외한 특수문자만 포함할 수 있습니다.'
+        );
       }
     });
   }
