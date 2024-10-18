@@ -1,5 +1,14 @@
-import { IS_SELECTOR_WRONG, IS_WRONG_NUMBERS, IS_WRONG_SEPERATOR } from "../data/constants.js";
-import { WRONG_INPUT_ERROR, WRONG_NUMBERS_ERROR, WRONG_SELECTOR_ERROR, WRONG_SEPERATOR_ERROR } from "../data/errorMessage.js";
+import {
+  IS_SELECTOR_WRONG,
+  IS_WRONG_NUMBERS,
+  IS_WRONG_SEPERATOR,
+} from "../data/constants.js";
+import {
+  WRONG_INPUT_ERROR,
+  WRONG_NUMBERS_ERROR,
+  WRONG_SELECTOR_ERROR,
+  WRONG_SEPERATOR_ERROR,
+} from "../data/errorMessage.js";
 
 // string => Error?
 // 입력받은 값 유효성 검사

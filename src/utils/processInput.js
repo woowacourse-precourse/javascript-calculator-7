@@ -1,7 +1,11 @@
 import { PRE_SEPERATORS } from "../data/constants.js";
 import checkError from "./checkError.js";
 import { seperateNumbers, getSum } from "./processNumbers.js";
-import { getSelector, isSelectorExisted, seperateSelector } from "./processSelector.js";
+import {
+  getSelector,
+  isSelectorExisted,
+  seperateSelector,
+} from "./processSelector.js";
 
 // string => number
 // 들어온 입력값을 처리해 출력값을 계산
