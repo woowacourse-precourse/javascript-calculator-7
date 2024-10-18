@@ -9,7 +9,17 @@ class App {
       return;
     }
 
-    Console.print(str);
+    let delimiter = /[,:]/;
+    let numbersStr = str;
+
+    const customDelimiterMatch = str.match(/^\/\/(.)\\n(.*)$/);
+    if (customDelimiterMatch) {
+      delimiter = new RegExp(`[${customDelimiterMatch[1]}:,]`);
+      numbersStr = customDelimiterMatch[2];
+    }
+
+    Console.print(delimiter);
+    Console.print(numbersStr);
   }
 }
 
