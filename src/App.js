@@ -24,6 +24,8 @@ function stringCalculator(input) {
   if (!isEmptyString(input)) {
     throw new Error("ERROR : 빈 문자열이 입력되었습니다.");
   }
+
+  checkCustomDelimiterPosition(input);
   var parsedArray = [];
 
   const customDelimiter = /^\/\/(.)\n(.*)/;
@@ -56,7 +58,6 @@ function parseDefaultDelimiter(input) {
   var parsedArray = input.split(/[,:]/);
   return parsedArray;
 }
-
 
 function parseCustomDelimiter(numbers, customDelimiter) {
   const regex = new RegExp(`[${customDelimiter},:]`);
@@ -97,6 +98,12 @@ function checkSpecialCharacters(resultSepArray) {
       throw new Error("[ERROR] 구분자가 아닌 특수문자가 포함되어 있습니다.");
     }
   });
+}
+
+function checkCustomDelimiterPosition(input) {
+  if (input.includes('//') && !input.startsWith('//')) {
+    throw new Error("[ERROR] 커스텀 구분자는 맨 앞에 위치해야 합니다.");
+  }
 }
 
 function convertNumArray(resultSepArray) {
