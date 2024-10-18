@@ -27,10 +27,9 @@ class App {
       return finalNumbers;
     }
     
-
     const isAllNum = function isAllNumericStrings(array) {
       return array.every(element => 
-        typeof element === 'string' && /^\d+$/.test(element)
+        typeof element === "string" && /^\d+$/.test(element)
       );
     }
   
@@ -52,13 +51,10 @@ class App {
      }  
     } catch(error) {
       if (error.message === "spaceInInput") {
-        Console.print("[ERROR] 공백 없이 입력해 주세요!")
         throw new Error("[ERROR] 공백 없이 입력해 주세요!");
       } else if (error.message === "notAllNum") {
-        Console.print("[ERROR] 구분자와 숫자만 입력해주세요!");
-        throw new Error("[ERROR] 구분자와 숫자만 입력해주세요!")
+        throw new Error("[ERROR] 구분자와 숫자만 입력해주세요!");
       } else {
-        Console.print(`[ERROR] 알 수 없는 에러 발생: ${error.message}`);
         throw new Error(`[ERROR] 알 수 없는 에러 발생: ${error.message}`);
       }  
     }
