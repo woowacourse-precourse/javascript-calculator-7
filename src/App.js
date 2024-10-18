@@ -38,6 +38,12 @@ class App {
       numbers = input.split(/[,|:]/).map(Number);
     }
 
+    // 4번 기능: 음수가 포함된 경우 에러를 발생시킴
+    const negativeNumbers = numbers.filter((num) => num < 0);
+    if (negativeNumbers.length > 0) {
+      throw new Error("[ERROR] 음수는 입력할 수 없습니다.");
+    }
+
     // 합산 결과 반환
     return numbers.reduce((sum, num) => sum + num, 0);
   }
