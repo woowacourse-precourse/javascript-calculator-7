@@ -4,7 +4,7 @@ class App {
     const input_data = await MissionUtils.Console.readLineAsync(); // 문자열을 입력 받는다.
     const [index, sep] = this.separator(input_data); // 커스텀 구분자가 있다면 커스텀 구분자를 찾는다.
     const string_data = input_data.slice(index); // 커스텀 구분자 이후의 문자열만을 다룬다.
-    const num_list = [...this.separateNum(string_data, sep)]; // 기본 구분자와 커스텀 구분자를 이용하여 문자열을 분리한다.
+    const num_list = this.separateNum(string_data, sep).split(" "); // 기본 구분자와 커스텀 구분자를 이용하여 문자열을 분리한다.
     const sum = this.addNum(num_list); // 분리된 숫자들을 더한다.
     MissionUtils.Console.print(`결과 : ${sum}`); // 결과를 출력한다.
   }
@@ -20,7 +20,9 @@ class App {
     return sum;
   }
   separateNum(str, sep) {
-    str = str.replace(":", "").replace(",", "").replace(sep, "");
+    str = str.replace(":", " ").replace(",", " ");
+    if (sep !== "") str.replace(sep, " ");
+
     return str;
   }
   separator(str) {
