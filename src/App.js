@@ -1,9 +1,9 @@
 import { MissionUtils } from "@woowacourse/mission-utils";
-import { Calculator } from "./Calculator";
+import { Calculator } from "./Calculator.js";
 class App {
   async run() {
     // 사용자로부터 입력을 비동기로 받는다
-    const input = await MissionUtils.Console.readLineAsync();
+    const input = await MissionUtils.Console.readLineAsync("입력 : ");
     const calculator = new Calculator(); // 계산 객체 생성
     // 비동기 입력 오류 상황 예외처리
     try {
