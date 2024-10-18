@@ -28,9 +28,9 @@ class App {
 
   getSeparator(str) {
     const customSeparator = str.match(App.CUSTOM_SEPARATOR_REGEXP);
-
-    if (customSeparator) return customSeparator[0].replace('\\', '\\\\');
-    return App.DEFAULT_SEPARATOR;
+    return customSeparator
+      ? customSeparator[0].replace('\\', '\\\\')
+      : App.DEFAULT_SEPARATOR;
   }
 
   extractContent(str) {
