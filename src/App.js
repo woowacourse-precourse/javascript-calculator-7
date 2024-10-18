@@ -115,7 +115,8 @@ class App {
       numberString = numberString.split(separator).join(nextSeparator);
     });
 
-    if (Number.isNaN(Number(numberString))) {
+    const targetNumber = Number(numberString);
+    if (Number.isNaN(targetNumber) || targetNumber < 0) {
       throw new Error(
         '0 이상의 양수만 계산 가능합니다. 각 수는 커스텀 구분자 또는 기본 구분자(쉼표(,), 콜론(:))로 구분해주세요.',
       );
