@@ -4,10 +4,13 @@ import { OUTPUT_MESSSAGE } from './constants/message.js';
 import Calculator from './Calculator.js';
 
 class App {
+  constructor() {
+    this.inputHandler = new Input();
+  }
+
   async run() {
     try {
-      const inputHandler = new Input();
-      const input = await inputHandler.getInput();
+      const input = await this.inputHandler.getInput();
 
       const calculator = new Calculator(input);
       const sum = calculator.calculate();

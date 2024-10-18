@@ -1,26 +1,53 @@
 import { ERROR_MESSAGE } from './constants/error.js';
 
+const CUSTOM_DELIMITER_PREFIX = '//';
+const CUSTOM_DELIMITER_SEPARATOR = '\\n';
+const DEFAULT_DELIMITERS = [',', ':'];
+
 export default class Calculator {
   constructor(input) {
     this.input = input;
-    this.delimiter = [',', ':'];
+    this.delimiter = [...DEFAULT_DELIMITERS];
+  }
+
+  calculate() {
+    this.parseCustomDelimiter();
+    this.validateInput();
+
+    const input = this.splitInput();
+    return this.sum(input);
+  }
+
+  parseCustomDelimiter() {
+    if (this.input.startsWith(CUSTOM_DELIMITER_PREFIX)) {
+      const [customDelimiter, numberPart] = this.input.split(CUSTOM_DELIMITER_SEPARATOR)
+      this.delimiter.push(customDelimiter.slice(2));
+      this.input = numberPart;
+    }
   }
 
   validateInput() {
+    this.validateNumberAndDelimiter();
+    this.validateNoFirstOrLastDelimiter();
+    this.validateNoConsecutiveDelimiter();
+  }
+
+  validateNumberAndDelimiter() {
     const isInputValid = new RegExp(`^[0-9${this.delimiter.join('')}\n]*$`);
-    
     if (!isInputValid.test(this.input)) {
       throw new Error(ERROR_MESSAGE.INVALID_INPUT);
     }
+  }
 
-    // 첫번째 혹은 마지막 숫자 뒤에 delimiter 불가능
+  validateNoFirstOrLastDelimiter() {
     for (let i=0; i<this.delimiter.length; i++) {
       if (this.input.startsWith(this.delimiter[i]) || this.input.endsWith(this.delimiter[i])) {
         throw new Error(ERROR_MESSAGE.END_WITH_DELIMITER);
       }
     }
+  }  
 
-    // 연속된 delimiter 불가능
+  validateNoConsecutiveDelimiter() {
     const isConsecutiveDelimiter = new RegExp(`[${this.delimiter.join('')}]{2,}`);
     
     if (isConsecutiveDelimiter.test(this.input)) {
@@ -28,27 +55,13 @@ export default class Calculator {
     }
   }
 
-
-  customDelimiter() {
-    if (this.input.startsWith('//')) {
-      const [customDelimiter, numberPart] = this.input.split('\\n')
-      this.delimiter.push(customDelimiter.slice(2));
-      this.input = numberPart;
-    }
+  splitInput() {
+    const splitRegexp = new RegExp(`[${this.delimiter.join('')}\n]`)
+    return this.input.split(splitRegexp);
   }
 
-
-
-  calculate() {
-    this.customDelimiter();
-
-    this.validateInput();
-
-    const input = this.input.split(new RegExp(`[${this.delimiter.join('')}\n]`));
-
-    const sum = input.map(Number).reduce((acc, cur) => acc + cur, 0);
-    return sum;
+  sum(input) {
+    return input.map(Number).reduce((acc, cur) => acc + cur, 0);
   }
-
 
 }
