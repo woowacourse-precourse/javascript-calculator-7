@@ -55,17 +55,22 @@ class App {
     const allSeparator = separator;
 
     if (customSep !== '') {
-      const escapedSep = SPECIAL_CHARACTERS.includes(customSep)
-        ? escapeRegex(customSep)
-        : customSep;
-
-      allSeparator.push(escapedSep);
+      allSeparator.push(this.escapedSeparator(customSep));
     }
 
-    Console.print(allSeparator);
+    if (customSep === ' ') {
+      throw Error(errorString(CONSOLE_MESSAGE.SEPARATOR_EMPTY_ERROR));
+    }
+
     const sepToRegex = new RegExp(allSeparator.join('|'));
 
     return str.split(sepToRegex);
+  }
+
+  escapedSeparator(separator) {
+    return SPECIAL_CHARACTERS.includes(separator)
+      ? escapeRegex(separator)
+      : separator;
   }
 
   checkNumber(num) {
