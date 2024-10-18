@@ -1,13 +1,11 @@
 import { Console } from '@woowacourse/mission-utils';
-import User from './User.js';
+import { getUserInput } from './User.js';
 
-class Calculator {
-    async run() {
-        const user = new User();
-        const userInput = await user.getUserInput();
+// 구분자 저장 리스트
+const delimiters = [',', ':'];
 
-        Console.print(userInput);
-    }
+export const runCalculator = async () => {
+    const userInput = await getUserInput();
+
+    Console.print(userInput);
 }
-
-export default Calculator;
