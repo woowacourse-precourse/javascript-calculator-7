@@ -1,3 +1,5 @@
+import readline from 'readline';
+
 const displayInputGuide = function displayInputGuideFunc() {
   console.log(` ---------------------------[ 문자열 덧셈 계산기 ]---------------------------
 | 1. 입력한 문자열에서 숫자를 추출하여 더하는 프로그램입니다.                |
@@ -10,4 +12,16 @@ const displayInputGuide = function displayInputGuideFunc() {
 `);
 };
 
-export default displayInputGuide;
+const getUserInput = function getUserInputFunc(callback) {
+  const rl = readline.createInterface({
+    input: process.stdin,
+    output: process.stdout,
+  });
+
+  rl.question('입력: ', input => {
+    callback(input);
+    rl.close();
+  });
+};
+
+export { displayInputGuide, getUserInput };
