@@ -4,6 +4,7 @@ class App {
   async run() {
     const inputStr = await this.getString();
     const customSeperator = this.getCustom(inputStr);
+    const strArr = this.separateStr(inputStr, customSeperator);
   }
 
   async getString(){
@@ -21,6 +22,15 @@ class App {
     const customSeperator = str.match(regex);
 
     return customSeperator ? customSeperator[1] : null;
+  }
+
+  separateStr(str, customSeperator = null){
+    const delimiters = new RegExp(`[,:${customSeperator}]`)
+
+    const strArr = str.split(delimiters);
+    Console.print(strArr);
+
+    return strArr;
   }
 }
 
