@@ -24,3 +24,11 @@ function customSeparator(text) {
      */
   }
 }
+
+function getCustomSeparator(customText) {
+  const CUSTOM_TEXT_LENGTH = customText.length;
+  const CUSTOM_TEXT_ACTUAL_RANGE = CUSTOM_TEXT_LENGTH - 2;
+
+  let resultSeparator = customText.slice(2, CUSTOM_TEXT_ACTUAL_RANGE);
+  return resultSeparator;
+}
