@@ -68,7 +68,7 @@ describe("문자열 계산기", () => {
     mockQuestions(inputs);
 
     const logSpy = getLogSpy();
-    const outputs = ["[ERROR] 알파벳 또는 한글이 포함되어 있습니다."];
+    const outputs = ["[ERROR] 숫자가 아닌 문자가 포함되어 있습니다."];
 
     const app = new App();
     await app.run();
@@ -98,7 +98,7 @@ describe("문자열 계산기", () => {
     mockQuestions(inputs);
 
     const logSpy = getLogSpy();
-    const outputs = ["[ERROR] 구분자가 아닌 특수문자가 포함되어 있습니다."];
+    const outputs = ["[ERROR] 숫자가 아닌 문자가 포함되어 있습니다."];
 
     const app = new App();
     await app.run();
@@ -152,5 +152,4 @@ describe("문자열 계산기", () => {
       expect(logSpy).toHaveBeenCalledWith(expect.stringContaining(output));
     });
   });
-
 });

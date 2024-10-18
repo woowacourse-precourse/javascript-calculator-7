@@ -13,7 +13,7 @@ class App {
   }
 }
 
-function isEmptyString(input) {
+function checkEmptyString(input) {
   if (input.trim() === "") {
     return 0;
   }
@@ -21,7 +21,7 @@ function isEmptyString(input) {
 }
 
 function stringCalculator(input) {
-  if (!isEmptyString(input)) {
+  if (!checkEmptyString(input)) {
     throw new Error("ERROR : 빈 문자열이 입력되었습니다.");
   }
 
@@ -29,30 +29,32 @@ function stringCalculator(input) {
   checkMultipleDelimiter(input);
   var parsedArray = [];
 
+  const newLineInput = newLineProcess(input); // 문자 \n을 실제 개행문자로 바꿔버린다음 매칭
   const customDelimiter = /^\/\/(.)\n(.*)/;
-  const customDelimiterFlag = input.match(customDelimiter);
+  const customDelimiterFlag = newLineInput.match(customDelimiter);
 
   if (!customDelimiterFlag) {
-    parsedArray = parseDefaultDelimiter(input);
+    parsedArray = parseDefaultDelimiter(newLineInput);
   }
   else {
     const customDelimiter = customDelimiterFlag[1];
     const numbers = customDelimiterFlag[2];
-    parsedArray = parseCustomDelimiter(numbers, customDelimiter);
+    parsedArray = parseCustomDelimiter(numbers, customDelimiter); // 최초로 구분자 및 커스텀 구분자로 구분된 parsedArray
   }
 
-  var resultSepArray = convertArray(parsedArray);
+  checkIncludesNonNumber(parsedArray);
+  checkNegativeNumbers(parsedArray);
 
-  checkNegativeNumbers(resultSepArray);
-  checkFAlphabetsAndKorean(resultSepArray);
-  checkSpecialCharacters(resultSepArray);
-
-  var resultNumArray = convertNumArray(resultSepArray);
+  var resultNumArray = convertNumArray(parsedArray);
 
   const resultSum = calculateSum(resultNumArray);
 
   return resultSum;
 
+}
+
+function newLineProcess(input) {
+  return input.replace(/\\n/g, "\n");
 }
 
 function parseDefaultDelimiter(input) {
@@ -66,37 +68,20 @@ function parseCustomDelimiter(numbers, customDelimiter) {
   return parsedArray;
 }
 
-function convertArray(parsedArray) {
-  let resultArray = [];
+function checkNegativeNumbers(parsedArray) {
   parsedArray.forEach((item) => {
-    const splitItem = item.split('');
-    resultArray = resultArray.concat(splitItem);
-  });
-  return resultArray;
-}
-
-function checkNegativeNumbers(resultSepArray) {
-  resultSepArray.forEach((item) => {
-    if (item === '-') {
+    const parsedNum = parseInt(item, 10);
+    if (parsedNum < 0) {
       throw new Error("[ERROR] 음수가 포함되어 있습니다.");
     }
   });
 }
 
-function checkFAlphabetsAndKorean(resultSepArray) {
-  const regex = /[a-zA-Z가-힣]/;
-  resultSepArray.forEach((item) => {
-    if (regex.test(item)) {
-      throw new Error("[ERROR] 알파벳 또는 한글이 포함되어 있습니다.");
-    }
-  });
-}
-
-function checkSpecialCharacters(resultSepArray) {
-  const regex = /[^0-9a-zA-Z가-힣,-]/;
-  resultSepArray.forEach((item) => {
-    if (regex.test(item)) {
-      throw new Error("[ERROR] 구분자가 아닌 특수문자가 포함되어 있습니다.");
+function checkIncludesNonNumber(parsedArray) {
+  const nonNumberPattern = /[^\d\s-]+/g;
+  parsedArray.forEach((item) => {
+    if (nonNumberPattern.test(item)) {
+      throw new Error("[ERROR] 숫자가 아닌 문자가 포함되어 있습니다.");
     }
   });
 }
@@ -114,13 +99,13 @@ function checkMultipleDelimiter(input) {
   }
 }
 
-function convertNumArray(resultSepArray) {
-  var convertNumArray = resultSepArray.map((item) => parseInt(item, 10));
+function convertNumArray(parsedArray) {
+  var convertNumArray = parsedArray.map((item) => parseInt(item, 10));
   return convertNumArray;
 }
 
-function calculateSum(resultNumArray) {
-  let resultSum = resultNumArray.reduce((acc, curr) => acc + curr, 0);
+function calculateSum(parsedArray) {
+  let resultSum = parsedArray.reduce((acc, curr) => acc + curr, 0);
   return resultSum;
 }
 
