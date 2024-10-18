@@ -1,9 +1,10 @@
-import { Console } from "@woowacourse/mission-utils";
-
 const add = (inputString) => {
   const separator = /[,:]/;
   const number = inputString.split(separator).map(Number);
-  Console.print(number);
+  const sum = number.reduce((accumulator, currentValue) => {
+    return accumulator + currentValue;
+  });
+  return sum;
 };
 
 export default add;
