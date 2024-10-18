@@ -17,8 +17,6 @@ export class Calculator {
     if (this.checkCustom(input)) result = this.checkCustom(input);
     // 기본 구분자
     else result = input.split(regexText);
-    console.log(result);
-
     // result type :  array<string>
     result = this.changeFloat(result); // 정수는 정수로 소수는 소수로 형변환
     if (this.checkMin(result)) return { error: true }; // 음수 체크
