@@ -96,3 +96,25 @@
 
 - [] customDelimiter: 커스텀 구분자 (없을 수도 있음)
 - [] calculationString: 실제 계산에 사용할 숫자 문자열
+
+## 구현 순서
+
+1. 입력을 받아 그대로의 문자열을 출력
+   a. DelimiterManager - constructor() - 객체 생성
+   a. ResultPrinter - print(result) - 문자열을 그대로 출력
+
+2. 입력받은 문자열을 커스텀 구분자 문자열과 숫자 문자열로 나누어 입력받고 이를 각각 출력
+   a. StringParser - parseInput(input) - 각각 문자열 추출해서 ParseInput에 넣기
+   b. ParsedInput - customDelimiter - 구분자 보관함
+   c. ParsedInput - calculationString - 계산할 문자열 보관함
+   d. ResultPrinter - print(result) - 각각 출력하게 임시 변경
+
+3. 커스텀 구분자 가져와서 구분자 배열에 넣고 출력해보기
+   a. DelimiterManager - delimiters - 현재 사용중인 구분자 배열 생성
+   b. DelimiterManager - addCustomDelimiter(delimiter) - 새로운 구분자를 배열에 쪼개서 넣기
+   c. DelimiterManager - getDelimiters() - 구분자 배열 반환
+   d. ResultPrinter - print(result) - 구분자 배열과 숫자 문자열을 각각 출력하게 변경
+
+4. 구분자를 기준으로 계산
+   a. StringParser - extractNumbers(calculationString, delimiters) - 구분자 기준으로 숫자 추출
+   b. ResultPrinter - print(result) - 숫자를 받아서 계산해주고 결과를 출력
