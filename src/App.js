@@ -1,7 +1,7 @@
 import Calculator from "./Calculator.js";
-import View from "./View.js";
 import Splitter from "./Splitter.js";
 import Validator from "./Validator.js";
+import View from "./View.js";
 
 class App {
   #splitter;
@@ -12,8 +12,7 @@ class App {
 
   async run() {
     const userInput = await View.readUserInput();
-    // TODO : 커스텀 구분자를 사용하는 경우에 //{구분자 1문자}\n 형식이 맞는지 확인해야 함.
-    const numbers = this.#splitter.splitToNumber(userInput);
+    const numbers = this.#splitter.split(userInput);
     Validator.validateNumberArray(numbers);
     const sum = Calculator.sum(numbers);
     View.printResult(sum);
