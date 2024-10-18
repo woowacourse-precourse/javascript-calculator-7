@@ -1,4 +1,5 @@
 import { errorMessage } from './constant.js';
+import UserInputHandler from './userInputHandler.js';
 
 export default class Validator {
   static validateCustomSeparator(input) {
@@ -13,22 +14,21 @@ export default class Validator {
   }
 
   static validateStartsWith(input) {
-    if (this.checkStartWidthDubbleSlash(input)) return;
+    if (this.#checkStartWidthDubbleSlash(input)) return;
     if (this.#checkStartWithNumber(input)) return;
     throw new Error(errorMessage.invalidInputFormat);
   }
 
-  static checkStartWidthDubbleSlash(input) {
-    const regExp = /^(\/\/)/;
-    return regExp.test(input);
+  static #checkStartWidthDubbleSlash(input) {
+    return /^(\/\/)/.test(input);
   }
 
   static #checkStartWithNumber(input) {
-    const regExp = /^[1-9]/;
-    return regExp.test(input);
+    return /^[1-9]/.test(input);
   }
 
   static #checkConflictingSeparators(input, customSeperator) {
+    // 구분자가 연속으로 나오는지 확인하는 패턴
     const regExpString = customSeperator
       ? `${customSeperator}{2,}|${customSeperator}[,:]|[,:]{2,}|[,:]${customSeperator}`
       : `,{2,}|:{2,}|,:|:,`;
@@ -40,22 +40,21 @@ export default class Validator {
   }
 
   static #checkMissingNewLine(input) {
-    const newLineRegExp = /\\n/;
-    if (!newLineRegExp.test(input))
-      throw new Error(errorMessage.missingNewLine);
+    if (!/\\n/.test(input)) throw new Error(errorMessage.missingNewLine);
   }
 
   static #checkCustomSeparator(input) {
-    const splitInput = input.split(/(?:\/\/|\\n)/);
-    if (splitInput[1] === '')
+    const customSeparator = UserInputHandler.getCustomSeparator(input);
+    if (customSeparator === '')
       throw new Error(errorMessage.missingCustomSeparator);
-    if (splitInput[1] === '.')
+    if (customSeparator === '.')
       throw new Error(errorMessage.invalidDotForCustomSepartor);
-    if (Number(splitInput[1]))
+    if (Number(customSeparator))
       throw new Error(errorMessage.invalidNumberForCustomSepartor);
   }
 
   static #checkIncludeZero(input, customSeparator) {
+    // 구분자 다음 바로 0이 오는지 확인하는 패턴
     const separatorRegExp = new RegExp(
       `[${customSeparator ? customSeparator + '|[,:]' : '[,:]'}]0`,
     );
@@ -67,9 +66,8 @@ export default class Validator {
     const separatorRegExp = new RegExp(
       `${customSeparator ? customSeparator + '|[,:]' : '[,:]'}`,
     );
-    const splitedInput = input.split(separatorRegExp).join('');
+    const splitedInput = Number(input.split(separatorRegExp).join(''));
 
-    if (!Number(splitedInput))
-      throw new Error(errorMessage.invalidSeparatorUsage);
+    if (splitedInput) throw new Error(errorMessage.invalidSeparatorUsage);
   }
 }
