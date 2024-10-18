@@ -18,6 +18,8 @@ export class Calculator {
     // 기본 구분자
     else result = input.split(regexText);
     // result type :  array<string>
+    if (this.checkNone(result)) return { error: true };
+    if (this.checkNotNum(result)) return { error: true };
     result = this.changeFloat(result); // 정수는 정수로 소수는 소수로 형변환
     if (this.checkMin(result)) return { error: true }; // 음수 체크
     return { error: false, numbers: result };
@@ -65,6 +67,13 @@ export class Calculator {
     }
     return false;
   }
+
+  checkNone = (result) => {
+    for (let index = 0; index < result.length; index++) {
+      if (result[index] == "") return true;
+    }
+    return false;
+  };
 
   // add 함수내 파라미터를 레스트 파라미터로 설정
   add(...numbers) {
