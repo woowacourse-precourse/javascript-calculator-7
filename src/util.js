@@ -2,8 +2,7 @@ import { Console } from '@woowacourse/mission-utils';
 import { outputMessage } from './constant.js';
 
 export async function inputText() {
-  Console.print(outputMessage.startMessage);
-  return await Console.readLineAsync('');
+  return await Console.readLineAsync(`${outputMessage.startMessage}\n`);
 }
 
 export function printSumResult(result) {
