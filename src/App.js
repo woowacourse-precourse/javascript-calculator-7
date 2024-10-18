@@ -1,4 +1,3 @@
-import { Console } from "@woowacourse/mission-utils";
 import Calculator from "./Calculator.js";
 import View from "./View.js";
 import Splitter from "./Splitter.js";
@@ -17,7 +16,7 @@ class App {
     const numbers = this.#splitter.splitToNumber(userInput);
     Validator.validateNumberArray(numbers);
     const sum = Calculator.sum(numbers);
-    Console.print(sum);
+    View.printResult(sum);
   }
 }
 

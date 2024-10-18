@@ -7,6 +7,10 @@ class View {
     const line = await Console.readLineAsync(View.#USER_INPUT_MESSAGE);
     return line;
   }
+
+  static printResult(result) {
+    Console.print(result);
+  }
 }
 
 export default View;
