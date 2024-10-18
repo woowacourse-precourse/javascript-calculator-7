@@ -1,3 +1,4 @@
+import extractNumbersFromInput from "./controller/input/extractNumbersFromInput.js";
 import getInput from "./ui/getInput.js";
 import printStartMessage from "./ui/PrintStartMessage.js";
 
@@ -13,7 +14,8 @@ class Calculator {
 
   async handleInput() {
     const input = await getInput();
-    console.log(input);
+    const extractNum = extractNumbersFromInput(input);
+    console.log(extractNum);
   }
 }
 
