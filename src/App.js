@@ -60,7 +60,7 @@ class App {
             SEPERATOR_ADD_PART[i + 2] === "\n"
           )
             SEPARATOR_ARR.push(SEPERATOR_ADD_PART[i + 1]);
-          else throw ERR_MESSAGE;
+          else throw new Error(ERR_MESSAGE);
         }
       }
 
@@ -72,21 +72,20 @@ class App {
       // 마지막 배열의 모든 문자 요소가 구분자 배열에 포함되있는 지 확인
       for (let PARTS = 0; PARTS < CALCULATE_PART.length; PARTS++) {
         if (PARTS % 2 === 1 && !SEPARATOR_ARR.includes(CALCULATE_PART[PARTS])) {
-          throw ERR_MESSAGE;
+          throw new Error(ERR_MESSAGE);
         } else if (
           PARTS % 2 === 0 &&
           typeof CALCULATE_PART[PARTS] !== "number"
         ) {
-          throw ERR_MESSAGE;
+          throw new Error(ERR_MESSAGE);
         }
       }
 
       // 모두 일치하면 문자열에서 추출한 모든 숫자의 합 출력
       const RESULT = NUM_ARR.reduce((acc, val) => acc + val);
       Console.print("결과 : " + RESULT);
-    } catch (err) {
-      // await expect(err).resolves.toBe();
-      console.error(err);
+    } catch (error) {
+      throw error;
     }
   }
 }
