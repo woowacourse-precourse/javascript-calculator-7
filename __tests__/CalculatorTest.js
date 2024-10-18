@@ -4,8 +4,13 @@ const calculator = new Calculator();
 
 describe("sum()", () => {
   const { sum } = calculator;
-  test("숫자의 합 구하기", async () => {
+
+  test("숫자 배열이 주어졌을 때 숫자의 합 반환", async () => {
     expect(sum([1, 2, 3])).toBe(6);
+  });
+
+  test("빈 배열이 주어졌을 때 0 반환", async () => {
+    expect(sum([])).toBe(0);
   });
 });
 
