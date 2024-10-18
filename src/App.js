@@ -7,19 +7,14 @@ class App {
   }
 
   async run() {
-    try {
-      // 1. 사용자에게 문자열을 입력 받는다.
-      const STR = await this.readLine('덧셈할 문자열을 입력해 주세요.\n');
-      // 2. 입력받은 문자열을 처리한다.
-      this.processString(STR);
-      // 3. 배열의 숫자를 모두 더해 반환한다.
-      const RESULT = this.numbers.reduce((sum, cur) => sum + cur, 0);
-      // 4. 반환된 숫자를 출력한다.
-      this.printResult(`결과 : ${RESULT}`);
-    }
-    catch (err) {
-      Console.print(err.message);
-    }
+    // 1. 사용자에게 문자열을 입력 받는다.
+    const STR = await this.readLine('덧셈할 문자열을 입력해 주세요.\n');
+    // 2. 입력받은 문자열을 처리한다.
+    this.processString(STR);
+    // 3. 배열의 숫자를 모두 더해 반환한다.
+    const RESULT = this.numbers.reduce((sum, cur) => sum + cur, 0);
+    // 4. 반환된 숫자를 출력한다.
+    this.printResult(`결과 : ${this.parseResult(RESULT)}`);
   }
 
   /**
@@ -37,10 +32,9 @@ class App {
    * @param str
    */
   processString(str) {
-    // 커스텀 구분자를 배열에 저장하고 //와 \n을 제거한 문자열을 반환한다.
+    // 커스텀 구분자를 배열에 저장하고 문자열 앞부분의 //와 \n을 제거한 문자열을 반환한다.
     const STRING_AFTER_PROCESS = this.processCustomSeparator(str);
     this.separateNumbers(STRING_AFTER_PROCESS); // 배열에 있는 모든 구분자를 통해 숫자를 분리해 배열에 저장한다.
-    this.checkValidNumber(); // 숫자가 양수가 아니면 throw
   }
 
   /**
@@ -60,7 +54,7 @@ class App {
    * return = "1;2-3"
    */
   processCustomSeparator(str) {
-    const REGEX = /^\/\/.\\n/; // 글자 앞부분에 //.\n 형식이 있는 경우
+    const REGEX = /^\/\/.\\n/; // 문자열 앞부분에 //.\n 형식이 있는 경우
     while (str.match(REGEX)) {
       this.separator.push(str[2]);
       str = str.substring(5);
@@ -78,23 +72,28 @@ class App {
     const REGEX = new RegExp(`[${this.separator.join('')}]`, 'g');
     const SPLITTED_STR = str.split(REGEX);
     SPLITTED_STR.forEach(string => {
-      if (!Number(string)) { // NaN인 경우
-        this.throwError();
-      } else if (Number(string) <= 0) { // 0이거나 음수인 경우
-        this.throwError();
-      }
-      this.numbers.push(Number.parseInt(string, 10));
+      this.checkValidNumber(string);
+      this.numbers.push(parseFloat(string));
     });
   }
 
   /**
    * this.numbers의 숫자들이 허용 범위(양수) 안에 있는지 확인한다.
-   * @throws {Error} 숫자가 양수가 아닐 때
+   * @throws {Error} 숫자가 양수가 아닐 때, 숫자가 아닌 문자가 포함된 경우
    */
-  checkValidNumber() {
-    this.numbers.forEach(number => {
-      if (number <= 0 || !number) this.throwError(); // 양수가 아니거나 NaN인 경우 throw
-    });
+  checkValidNumber(str) {
+    const REGEX = /[^0-9.\-+]/
+    /*
+    javascript의 parse함수는 앞에서부터 parse가 가능한 부분까지 처리 후 반환한다. ex) 3a4 -> 3
+    따라서 별도의 문자열 검사가 필요함.
+     */
+    if (REGEX.test(str)) {
+      this.throwError();
+    }
+    const NUM = parseFloat(str);
+    if (isNaN(NUM) || NUM <= 0) {
+      this.throwError();
+    }
   }
 
   /**
@@ -103,6 +102,16 @@ class App {
    */
   printResult(message) {
     Console.print(message);
+  }
+
+  /**
+   * param을 출력 양식에 맞게 변형한다.
+   * @param num
+   * @return {number} 정수 : num<br>실수 : 소수점 셋째 자리에서 반올림한 값
+   */
+  parseResult(num) {
+    if (num % 1 === 0) return num;
+    return Math.round(num * 1000) / 1000;
   }
 }
 
