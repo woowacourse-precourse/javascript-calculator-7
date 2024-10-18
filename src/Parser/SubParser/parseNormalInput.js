@@ -1,5 +1,5 @@
 import sumAllNumbers from '../../Util/sumAllNumbers.js';
-import { validateNormalInput } from '../../Validator/Validator.js';
+import { validateNormalInput } from '../../Validator/validator.js';
 import { ERROR_MESSAGES, ERROR_PREFIX } from '../../Constraints/Constraints.js';
 
 export default function parseNormalInput(str) {
