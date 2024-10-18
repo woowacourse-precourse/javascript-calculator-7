@@ -2,7 +2,7 @@ import init from './calculator/init.js';
 
 class App {
   async run() {
-    init();
+    await init();
   }
 }
 
