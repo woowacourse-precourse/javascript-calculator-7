@@ -1,33 +1,33 @@
 import { errorMessage } from './constant.js';
 
 export default class Validator {
-  validateCustomSeparator(input) {
+  static validateCustomSeparator(input) {
     this.#checkIncludeNewLine(input);
     this.#checkIncludeEmptyString(input);
   }
 
-  validateUsedSeparator(input, customSeparator) {
+  static validateUsedSeparator(input, customSeparator) {
     this.#checkUseOtherSeperator(input, customSeparator);
     this.#checkSeperatorConflict(input, customSeparator);
   }
 
-  validateStartsWith(input) {
+  static validateStartsWith(input) {
     if (this.checkStartWidthDubbleSlash(input)) return;
     if (this.#checkStartWithNumber(input)) return;
     throw new Error(errorMessage.useNumberOrSlash);
   }
 
-  checkStartWidthDubbleSlash(input) {
+  static checkStartWidthDubbleSlash(input) {
     const regExp = /^(\/\/)/;
     return regExp.test(input);
   }
 
-  #checkStartWithNumber(input) {
+  static #checkStartWithNumber(input) {
     const regExp = /^[1-9]/;
     return regExp.test(input);
   }
 
-  #checkSeperatorConflict(input, customSeperator) {
+  static #checkSeperatorConflict(input, customSeperator) {
     const regExpString = customSeperator
       ? `${customSeperator}{2,}|${customSeperator}[,:]|[,:]{2,}|[,:]${customSeperator}`
       : `,{2,}|:{2,}|,:|:,`;
@@ -38,17 +38,17 @@ export default class Validator {
     }
   }
 
-  #checkIncludeNewLine(input) {
+  static #checkIncludeNewLine(input) {
     const newLineRegExp = /\\n/;
     if (!newLineRegExp.test(input)) throw new Error(errorMessage.useNewLine);
   }
 
-  #checkIncludeEmptyString(input) {
+  static #checkIncludeEmptyString(input) {
     const splitInput = input.split(/(?:\/\/|\\n)/);
     if (splitInput[1] === '') throw new Error(errorMessage.useCoustomSeparator);
   }
 
-  #checkUseOtherSeperator(input, customSeparator) {
+  static #checkUseOtherSeperator(input, customSeparator) {
     const separatorRegExp = new RegExp(
       `${customSeparator ? customSeparator + '|' : ''}[,:]`,
     );
