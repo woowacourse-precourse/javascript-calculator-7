@@ -6,11 +6,6 @@ async function getUserInputData() {
   return userInputData;
 }
 
-// 숫자 추출
-function extractNumber(userInputData) {
-
-}
-
 class NumberExtractor {
   orgUserInputData
   userInputData
@@ -46,6 +41,11 @@ class NumberExtractor {
     if (customDeliString == undefined) return false
   
     this.customDelemter = customDeliString[0].charAt(2)
+
+    if (isNaN(this.customDelemter) == false) {
+      throw new Error("[ERROR] - 커스텀 구분자는 '문자'로 설정되어야 합니다.");
+    }
+
     this.userInputData = this.userInputData.replace(customDeliRegExp, '')
 
     return true
@@ -63,11 +63,8 @@ class NumberExtractor {
     const deliRegExp = new RegExp(`${this.delemeter[0]}|${this.delemeter[1]}|${this.delemeter[2]}`, 'g')
     this.userInputData = this.userInputData.split(deliRegExp);
 
-    console.log(this.userInputData)
-
     if (this.checkError() == true) {
-      // todo: throw error 
-      Console.print("error")
+      throw new Error("[ERROR] - 구분자에 해당하지 않는 문자가 존재합니다.");
     }
   }
 
@@ -80,28 +77,43 @@ class NumberExtractor {
 }
 
 class Calculator {
+  numArr
+  result
 
-  addNumber() {
-    let result = BigInt(0)
-
-    for (let i=0; i < numberArr.length; i++) {
-      result += BigInt(numberArr[i])
-    }
-  
-    return result
+  constructor(numArr) {
+    this.numArr = numArr
+    this.result = BigInt(0)
   }
 
+  addAllNum() {
+    for (let i=0; i < this.numArr.length; i++) {
+      this.result = this.addNumber(this.result, BigInt(this.numArr[i]))
+    }
+    return this.result
+  }
+
+  addNumber(left, right) {
+    return left + right;
+  }
 }
 
-
 class ErrorHandler {
+  constructor() {
+
+  }
 }
 
 class App {
   async run() {
     const userInput = await getUserInputData();
-    const numberextractor = new NumberExtractor(userInput);
-    numberextractor.extractNumber();
+
+    const numberExtractor = new NumberExtractor(userInput);
+    const numArr = numberExtractor.extractNumber();
+
+    const calcultor = new Calculator(numArr);
+    const result = calcultor.addAllNum();
+
+    Console.print("결과 : " + result.toString())
   }
 }
 
