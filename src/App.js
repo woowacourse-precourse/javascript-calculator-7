@@ -21,7 +21,7 @@ class App {
 
       if ((split_input = re.exec(INPUT)) !== null) {
         // "//;\n1;2;3" => 6
-        //split_input에는 //;\n 이 부분만 들어감.
+        //split_input에는 //;\n 이 부분만 들어감
         let new_re = split_input[1]; //새로운 구분자를 new_re에 저장
         let new_input = INPUT.replace(re, "");
         OUTPUT = new_input.split(new_re).map(Number);
