@@ -27,6 +27,16 @@ class App {
 
     if (customSeparatorFormat) {
       const customDelimiter = customSeparatorFormat[1]; // 커스텀 구분자를 추출
+
+      // 7번 기능: 커스텀 구분자로 숫자나 .을 사용할 수 없음
+      if (customDelimiter === ".") {
+        throw new Error("[ERROR] .은 구분자로 사용할 수 없습니다.");
+      }
+
+      if (!isNaN(customDelimiter)) {
+        throw new Error("[ERROR] 숫자는 구분자로 사용할 수 없습니다.");
+      }
+
       if (customDelimiter === "," || customDelimiter === ":") {
         throw new Error(
           "[ERROR] 커스텀 구분자는 기본 구분자와 겹칠 수 없습니다."
