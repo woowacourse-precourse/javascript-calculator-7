@@ -36,6 +36,16 @@ export default class Calculator {
   }
 
   /**
+   * @returns {Array<number>}
+   */
+  split() {
+    return this.separators
+      .reduce((inp, sep) => inp.replaceAll(sep, ' '), this.value)
+      .split(' ')
+      .map(Number);
+  }
+
+  /**
    * @param {number} value
    * @returns {boolean}
    */
