@@ -15,5 +15,7 @@ module.exports = {
     "no-restricted-syntax": "off",
     "no-await-in-loop": "off",
     "no-return-await": "off",
+    "no-console": "off",
+    "no-restricted-globals": "off",
   },
 };
