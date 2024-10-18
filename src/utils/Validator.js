@@ -14,13 +14,16 @@ class Validator {
   }
 
   // 계산될 배열에 대한 유효성 검사 메서드
-  static parseNumber(arr) {
-    arr.forEach((item) => {
-      if (Number.isNaN(item)) {
+  static beforeCalculate(arr) {
+    arr.forEach((item, idx) => {
+      if (Number.isNaN(Number(item))) {
         throw new Error(ERROR_MESSAGE.CHAR_NOT_ALLOWED);
       }
       if (item < 0) {
         throw new Error(ERROR_MESSAGE.NEGATIVE_NOT_ALLOWED);
+      }
+      if (arr[idx] === '') {
+        throw new Error(ERROR_MESSAGE.CONSECUTIVE_SEPARATORS_NOT_ALLOWED);
       }
     });
   }

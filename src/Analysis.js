@@ -1,5 +1,5 @@
-import { PATTERN } from './constant';
-import Util from './utils/PatternUtil';
+import { PATTERN } from './constant/index.js';
+import PatternUtil from './utils/PatternUtil.js';
 
 class Analysis {
   #seperators;
@@ -10,8 +10,8 @@ class Analysis {
 
   getInfo(str) {
     const { newSeperators, deletedList } = this.#findSeperators(str);
-    const cleanedString = Util.removePattern(str, deletedList);
-    const seperatedArr = this.#splitString(cleanedString);
+    const cleanedString = PatternUtil.removePattern(str, deletedList);
+    const seperatedArr = this.#splitString(cleanedString, newSeperators);
 
     return { newSeperators, seperatedArr };
   }
@@ -20,7 +20,7 @@ class Analysis {
     const newSeperators = [...this.#seperators];
     const deletedList = [];
 
-    Util.findPattern(str, PATTERN).forEach((item) => {
+    PatternUtil.findPattern(str, PATTERN).forEach((item) => {
       deletedList.push(item[0]);
       newSeperators.push(item[1]);
     });
@@ -28,9 +28,9 @@ class Analysis {
     return { newSeperators, deletedList };
   }
 
-  #splitString(str) {
-    const regexp = new RegExp(`[${this.#seperators.join('')}]`);
-    return str.split(regexp).filter((item) => item.length);
+  #splitString(str, newSeperators) {
+    const regexp = new RegExp(newSeperators.map((char) => char && `\\${char}`, 'g').join('|'));
+    return str.split(regexp);
   }
 }
 

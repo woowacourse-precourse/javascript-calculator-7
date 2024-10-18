@@ -5,5 +5,6 @@ export const ERROR_MESSAGE = Object.freeze({
   SEPERATOR_BLANK_ERROR: '[ERROR] 커스텀 구분자로 빈 값은 입력할 수 없습니다.',
   CHAR_NOT_ALLOWED: '[ERROR] 등록되지 않은 문자가 포함되어 있습니다.',
   NEGATIVE_NOT_ALLOWED: '[ERROR] 음수는 허용되지 않습니다.',
+  CONSECUTIVE_SEPARATORS_NOT_ALLOWED: '[ERROR] 커스텀 구분자는 연속으로 입력될 수 없습니다.',
 });
 export const PATTERN = /\/\/(.*?)\\n/g;

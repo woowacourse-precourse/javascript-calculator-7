@@ -13,7 +13,7 @@ class App {
     const { newSeperators, seperatedArr } = analysis.getInfo(this.#str);
 
     Validator.customSeperator(newSeperators);
-    Validator.parseNumber(seperatedArr);
+    Validator.beforeCalculate(seperatedArr);
 
     const answer = ArrayUtil.sum(seperatedArr);
     IOManager.output(answer);
