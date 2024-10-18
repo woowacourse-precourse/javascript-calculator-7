@@ -1,5 +1,6 @@
 import { errorMessage } from './constant.js';
 import UserInputHandler from './userInputHandler.js';
+import { getSeparatorConflictPattern, getSeparatorPattern } from './regExp.js';
 
 export default class Validator {
   static validateCustomSeparator(input) {
@@ -28,13 +29,7 @@ export default class Validator {
   }
 
   static #checkConflictingSeparators(input, customSeperator) {
-    // 구분자가 연속으로 나오는지 확인하는 패턴
-    const regExpString = customSeperator
-      ? `${customSeperator}{2,}|${customSeperator}[,:]|[,:]{2,}|[,:]${customSeperator}`
-      : `,{2,}|:{2,}|,:|:,`;
-
-    const regExp = new RegExp(regExpString);
-    if (regExp.test(input)) {
+    if (getSeparatorConflictPattern(customSeperator).test(input)) {
       throw new Error(errorMessage.conflictingSeparators);
     }
   }
@@ -55,17 +50,12 @@ export default class Validator {
 
   static #checkIncludeZero(input, customSeparator) {
     // 구분자 다음 바로 0이 오는지 확인하는 패턴
-    const separatorRegExp = new RegExp(
-      `[${customSeparator ? customSeparator + '|[,:]' : '[,:]'}]0`,
-    );
-
+    const separatorRegExp = getSeparatorPattern(customSeparator, 0);
     if (separatorRegExp.test(input)) throw new Error(errorMessage.usePositive);
   }
 
   static #checkInvalidSeparatorUsage(input, customSeparator) {
-    const separatorRegExp = new RegExp(
-      `${customSeparator ? customSeparator + '|[,:]' : '[,:]'}`,
-    );
+    const separatorRegExp = getSeparatorPattern(customSeparator);
     const splitedInput = Number(input.split(separatorRegExp).join(''));
 
     if (splitedInput) throw new Error(errorMessage.invalidSeparatorUsage);
