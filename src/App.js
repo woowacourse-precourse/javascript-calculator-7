@@ -69,7 +69,7 @@ class App {
   }
 
   printResult(input) {
-    const result = input.reduce((acc, cur) => acc + cur, 0);
+    const result = input.reduce((acc, cur) => acc + cur * 10, 0) / 10;
 
     Console.print(`${PRINT_MESSAGES.FINAL_RESULT}${result}`);
   }
