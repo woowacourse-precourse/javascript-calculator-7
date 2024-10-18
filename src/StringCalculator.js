@@ -1,6 +1,22 @@
 class StringCalculator {
   static CUSTOM_DELIMITER_PATTERN = /^\/\/(.)\n/;
 
+  parseAndAdd(input) {
+    this.validateInput(input);
+    const customDelimiter = this.extractCustomDelimiter(input);
+    const numbers = this.splitInputByDelimiter(input, customDelimiter);
+    this.checkNegativeNumbers(numbers);
+    return this.calculateSum(numbers);
+  }
+
+  checkNegativeNumbers(numbers) {
+    for (const num of numbers) {
+      if (num < 0) {
+        throw new Error("[ERROR] 음수는 입력할 수 없습니다.");
+      }
+    }
+  }
+
   validateInput(input) {
     // 빈 문자열 검사
     if (!input || input.trim() === "") {
@@ -13,7 +29,7 @@ class StringCalculator {
     }
 
     // 기본 구분자 검사
-    const validPattern = /^(\d+|,|:)+$/;
+    const validPattern = /^(-?\d+|,|:)+$/;
     if (!validPattern.test(input)) {
       throw new Error(
         "[ERROR] 입력값에 허용되지 않는 문자가 포함되어 있습니다."
@@ -46,4 +62,5 @@ class StringCalculator {
     return sum;
   }
 }
+
 export default StringCalculator;
