@@ -1,3 +1,4 @@
+// 예외 처리 함수
 export function ValidateValue(DIVISIONVALUES) {
   for (const DIVISIONVALUE of DIVISIONVALUES) {
     if (DIVISIONVALUE.trim == "") {
