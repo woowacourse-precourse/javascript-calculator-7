@@ -41,24 +41,24 @@ class App {
 
   solve = (input) => {
     if (input.length === 0) {
-      Console.print("결과 :", 0);
-    } else {
-      const separatedInput = this.findCustomSeparator(input);
-
-      // 구분자를 기준으로 문자열을 나눈다.
-      const separators = new RegExp(`[${[...this.separator].join("")}]`);
-      const numbers = separatedInput.split(separators);
-
-      // 숫자가 유효한지 확인한다.
-      if (this.checkNumberValidity(numbers)) {
-        // 문자열을 숫자로 변환한다.
-        const parsedNumbers = numbers.map((number) => Number(number));
-        // 숫자를 모두 더한다.
-        return parsedNumbers.reduce((acc, cur) => acc + cur, 0);
-      } else {
-        return this.ERROR_MESSAGE;
-      }
+      return 0;
     }
+
+    const separatedInput = this.findCustomSeparator(input);
+
+    // 구분자를 기준으로 문자열을 나눈다.
+    const separators = new RegExp(`[${[...this.separator].join("")}]`);
+    const numbers = separatedInput.split(separators);
+
+    // 숫자가 유효한지 확인한다.
+    if (this.checkNumberValidity(numbers)) {
+      // 문자열을 숫자로 변환한다.
+      const parsedNumbers = numbers.map((number) => Number(number));
+      // 숫자를 모두 더한다.
+      return parsedNumbers.reduce((acc, cur) => acc + cur, 0);
+    }
+
+    return this.ERROR_MESSAGE;
   };
 
   async run() {
