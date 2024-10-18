@@ -2,8 +2,8 @@
 import { Console } from '@woowacourse/mission-utils';
 import User from '../user/User.js';
 import { GAME_MESSAGE } from '../constants/gameMessages.js';
-import { delimiter } from '../constants/delimiter.js';
-import { go } from '../util/Util.js';
+import { DELIMITER } from '../constants/delimiter.js';
+import { _go } from '../util/util.js';
 
 //덧셈기 게임 관리
 class Calculator {
@@ -20,7 +20,7 @@ class Calculator {
   /**@param {string} input */
   calculate(input) {
     //실제 계산 로직
-    go(
+    _go(
       input,
       this.parseInput,
 
@@ -45,7 +45,7 @@ class Calculator {
       const customDelimiter = delimiterPart.slice(2);
       return numbersPart.split(customDelimiter);
     }
-    return input.split(delimiter);
+    return input.split(DELIMITER);
   }
 
   /**@param {number} result */
