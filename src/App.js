@@ -18,15 +18,17 @@ class App {
   calculate(inputString) {
     const DEFAULT_DELIMITERS = [',', ':'];
     let delimiters = [...DEFAULT_DELIMITERS];
+    
+    let newInputString = inputString;
 
     if (this.checkCustomSplitStringByDelimiter(inputString)) {
       delimiters = this.getMergedDelimiters(inputString, delimiters);
-      inputString = this.getStrippedString(inputString);
+      newInputString = this.getStrippedString(inputString);
     }
 
-    this.isValidString(inputString, delimiters);
+    this.isValidString(newInputString, delimiters);
 
-    const stringArray = this.splitStringByDelimiter(inputString, delimiters);
+    const stringArray = this.splitStringByDelimiter(newInputString, delimiters);
     const numberArray = this.returnNumbers(stringArray);
 
     return this.add(numberArray);

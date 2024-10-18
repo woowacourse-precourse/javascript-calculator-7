@@ -14,5 +14,6 @@ module.exports = {
   rules: {
     "no-restricted-syntax": "off",
     "no-await-in-loop": "off",
+    "no-return-await": "off",
   },
 };
