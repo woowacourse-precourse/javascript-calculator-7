@@ -1,4 +1,5 @@
 import { PATTERN } from './constant/index.js';
+import ArrayUtil from './utils/ArrayUtil.js';
 import PatternUtil from './utils/PatternUtil.js';
 
 class Analysis {
@@ -11,7 +12,7 @@ class Analysis {
   getInfo(str) {
     const { newSeperators, deletedList } = this.#findSeperators(str);
     const cleanedString = PatternUtil.removePattern(str, deletedList);
-    const seperatedArr = this.#splitString(cleanedString, newSeperators);
+    const seperatedArr = ArrayUtil.splitFromSeperator(cleanedString, newSeperators);
 
     return { newSeperators, seperatedArr };
   }
@@ -26,11 +27,6 @@ class Analysis {
     });
 
     return { newSeperators, deletedList };
-  }
-
-  #splitString(str, newSeperators) {
-    const regexp = new RegExp(newSeperators.map((char) => char && `\\${char}`, 'g').join('|'));
-    return str.split(regexp);
   }
 }
 
