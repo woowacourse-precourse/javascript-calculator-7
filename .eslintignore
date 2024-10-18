@@ -1,5 +1,6 @@
 # 제외할 파일
 __tests__/ApplicationTest.js
+src/index.js
 
 # Logs
 logs

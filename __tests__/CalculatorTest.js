@@ -1,4 +1,4 @@
-import App from '../src/App.js';
+import App from '../src/App';
 
 describe('문자열 계산기', () => {
   let app;
