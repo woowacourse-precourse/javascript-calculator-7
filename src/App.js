@@ -17,6 +17,9 @@ class App {
       const customSeparator = userInput.match(regex);
 
       if (customSeparator) {
+        if (customSeparator.index > 0) {
+          return this.ERROR_MESSAGE;
+        }
         this.separator.add(customSeparator[1]);
       }
       userInput = userInput.replace(regex, "");
@@ -45,6 +48,10 @@ class App {
     }
 
     const separatedInput = this.findCustomSeparator(input);
+
+    if (separatedInput === this.ERROR_MESSAGE) {
+      return this.ERROR_MESSAGE;
+    }
 
     // 구분자를 기준으로 문자열을 나눈다.
     const separators = new RegExp(`[${[...this.separator].join("")}]`);
