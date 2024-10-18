@@ -4,7 +4,7 @@ class App {
   async run() {
     const input = await Console.readLineAsync('덧셈할 문자열을 입력해 주세요.\n');
   
-    let delimiters = ['.', ':'];
+    let delimiters = [',', ':'];
     let inputString = input;
     if (this.isCustom(input)) {
       const [customDelimiter, newInputString] = this.splitCustom(input);
@@ -12,8 +12,11 @@ class App {
       inputString = newInputString;
     }
 
-    
-    Console.print(`결과 : ${inputString}`);
+    let result = 0;
+    const numbers = this.getNumbersFromString(inputString, delimiters);
+    console.log(numbers)
+
+    Console.print(`결과 : ${result}`);
   }
 
   /** 커스텀 구분자 스트링인지 확인 */
@@ -28,6 +31,15 @@ class App {
     return [customDelimiter, inputString];
   }
 
+  getNumbersFromString(inputString, delimiters) {
+    const numbers = []; 
+    inputString.split('').forEach((str) => {
+      if (!delimiters.includes(str)) {
+        numbers.push(parseInt(str));
+      }
+    })
+    return numbers;
+  }
   
 }
 
