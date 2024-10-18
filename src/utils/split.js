@@ -1,5 +1,9 @@
 import { DEFAULT_DELIMITER_STRING } from '../constant.js';
-import { isValidDelimiterLength, isValidNumberArray } from './validation.js';
+import {
+  isPositive,
+  isValidDelimiterLength,
+  isValidNumberArray,
+} from './validation.js';
 
 function findCustomDelimiter(string) {
   const regExp = /\/\/.*\\n/;
@@ -25,6 +29,7 @@ export default function splitWithCustomDelimiter(string) {
 
   customDelimiter && isValidDelimiterLength(customDelimiter);
   isValidNumberArray(numberArr);
+  isPositive(numberArr);
 
   return numberArr.map(BigInt);
 }

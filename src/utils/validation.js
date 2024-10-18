@@ -18,3 +18,11 @@ export function isValidNumberArray(numberArr) {
     }
   });
 }
+
+export function isPositive(numberArr) {
+  numberArr.forEach((val) => {
+    if (val < 0) {
+      throw new ValidationError('덧셈할 문자열은 양수로 구성되어야 합니다.');
+    }
+  });
+}
