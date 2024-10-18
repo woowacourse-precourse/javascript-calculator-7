@@ -81,9 +81,15 @@ describe('문자열 계산기', () => {
     test('숫자 10개 입력', async () => {
       await runCalculatorTestCorrect('1,2:3,4:5,6:7,8:9,10', '55');
     });
+    test('큰 수 입력', async () => {
+      await runCalculatorTestCorrect('999999999,1', '1000000000');
+    });
   });
 
   describe('예외 테스트', () => {
+    test('0 입력', async () => {
+      await runCalculatorTestError('0');
+    });
     test('음수 입력', async () => {
       await runCalculatorTestError('-1,2,3');
     });
@@ -95,6 +101,15 @@ describe('문자열 계산기', () => {
     });
     test('숫자 외의 문자 입력', async () => {
       await runCalculatorTestError('\\;\na');
+    });
+    test('숫자 중간에 커스텀 구분자 사용', async () => {
+      await runCalculatorTestError('1,2:3//;\n4;5');
+    });
+    test('구분자를 마지막에 삽입', async () => {
+      await runCalculatorTestError('1,2,');
+    });
+    test('커스텀 구분자 지정이 올바르지 않은 경우', async () => {
+      await runCalculatorTestError('//\n1,2,3');
     });
   });
 });
