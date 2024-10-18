@@ -12,7 +12,7 @@
   "singleQuote": true,
   "tabWidth": 2,
   "trailingComma": "all",
-  "useTabs": false,
+  "useTabs": true,
   "vueIndentScriptAndStyle": true,
   "rangeStart": 0,
   "requirePragma": false,
