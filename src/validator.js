@@ -3,7 +3,7 @@ import { errorMessage } from './constant.js';
 export default class Validator {
   static validateCustomSeparator(input) {
     this.#checkIncludeNewLine(input);
-    this.#checkIncludeEmptyString(input);
+    this.#checkCustomSeparator(input);
   }
 
   static validateUsedSeparator(input, customSeparator) {
@@ -14,7 +14,7 @@ export default class Validator {
   static validateStartsWith(input) {
     if (this.checkStartWidthDubbleSlash(input)) return;
     if (this.#checkStartWithNumber(input)) return;
-    throw new Error(errorMessage.useNumberOrSlash);
+    throw new Error(errorMessage.invalidInputFormat);
   }
 
   static checkStartWidthDubbleSlash(input) {
@@ -34,18 +34,22 @@ export default class Validator {
 
     const regExp = new RegExp(regExpString);
     if (regExp.test(input)) {
-      throw new Error(errorMessage.useSeperatorConflict);
+      throw new Error(errorMessage.conflictingSeparators);
     }
   }
 
   static #checkIncludeNewLine(input) {
     const newLineRegExp = /\\n/;
-    if (!newLineRegExp.test(input)) throw new Error(errorMessage.useNewLine);
+    if (!newLineRegExp.test(input))
+      throw new Error(errorMessage.missingNewLine);
   }
 
-  static #checkIncludeEmptyString(input) {
+  static #checkCustomSeparator(input) {
     const splitInput = input.split(/(?:\/\/|\\n)/);
-    if (splitInput[1] === '') throw new Error(errorMessage.useCoustomSeparator);
+    if (splitInput[1] === '')
+      throw new Error(errorMessage.missingCustomSeparator);
+    if (splitInput[1] === '.')
+      throw new Error(errorMessage.invalidCustomSepartor);
   }
 
   static #checkUseOtherSeperator(input, customSeparator) {
@@ -55,6 +59,6 @@ export default class Validator {
     const splitedInput = input.split(separatorRegExp).join('');
 
     if (!Number(splitedInput))
-      throw new Error(errorMessage.useCustomOrBasicSeparator);
+      throw new Error(errorMessage.invalidSeparatorUsage);
   }
 }

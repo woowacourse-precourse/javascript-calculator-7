@@ -1,18 +1,20 @@
 export const errorMessage = {
   usePositive: '[ERROR] 양수만 입력해 주세요',
 
-  useCommaOrColon: '[ERROR] 구분자로 쉼표와 클론만 사용해 주세요',
+  invalidSeparator: '[ERROR] 구분자로 쉼표와 클론만 사용해 주세요',
 
-  useNewLine: '[ERROR] "\\n"을 포함시켜 주세요',
+  missingNewLine: '[ERROR] "\\n"을 포함시켜 주세요',
 
-  useCoustomSeparator: '[ERROR] 커스텀 구분자를 입력해 주세요',
+  missingCustomSeparator: '[ERROR] 커스텀 구분자를 입력해 주세요',
 
-  useCustomOrBasicSeparator:
+  invalidSeparatorUsage:
     '[ERROR] 커스텀 구분자 혹은 쉼표와 클론만 사용해 주세요',
 
-  useNumberOrSlash: '[ERROR] 입력값을 확인해 주세요',
+  invalidInputFormat: '[ERROR] 입력값을 확인해 주세요',
 
-  useSeperatorConflict: `[ERROR] 구분자는 동시에 나올 수 없습니다.`,
+  conflictingSeparators: `[ERROR] 구분자는 동시에 나올 수 없습니다.`,
+
+  invalidCustomSepartor: `[ERROR] "."은 커스텀 구분자로 사용할 수 없습니다.`,
 };
 
 export const outputMessage = {
