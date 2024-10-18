@@ -7,6 +7,12 @@ class App {
     if (!input) {
       throw new Error('[Error] 문자열이 입력되지 않았습니다.');
     }
+
+    const createSeparatorPattern = ([...separator]) => {
+      return new RegExp(separator.join('|'));
+    };
+
+    const nums = input.split(createSeparatorPattern([',', ':']));
   }
 }
 
