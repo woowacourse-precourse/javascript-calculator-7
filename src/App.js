@@ -36,9 +36,7 @@ class App {
       this.delimiter.push(customDelimiter);
 
       // 커스텀 구분자를 제거한다.
-      this.answer = this.answer.replaceAll(customDelimiterPrefix, "");
-      this.answer = this.answer.replaceAll(customDelimiterSuffix, "");
-      this.answer = this.answer.replace(customDelimiter, "");
+      this.answer = this.answer.slice(5);
     }
   }
 }
