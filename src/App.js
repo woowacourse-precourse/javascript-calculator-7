@@ -14,7 +14,9 @@ class App {
 
     let result = 0;
     const numbers = this.getNumbersFromString(inputString, delimiters);
-    console.log(numbers)
+    numbers.forEach((number) => {
+      result += number;
+    })
 
     Console.print(`결과 : ${result}`);
   }
@@ -31,6 +33,7 @@ class App {
     return [customDelimiter, inputString];
   }
 
+  /** 문자열에서 숫자 추출 */
   getNumbersFromString(inputString, delimiters) {
     const numbers = []; 
     inputString.split('').forEach((str) => {
