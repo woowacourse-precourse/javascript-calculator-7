@@ -11,6 +11,14 @@ class App {
     this.#input = await Console.readLineAsync(
       "덧셈할 문자열을 입력해 주세요.\n"
     );
+
+    if (this.isInValidInput()) {
+      throw new Error("[ERROR]: 에러입니다.");
+    }
+  }
+
+  isInValidInput() {
+    return true;
   }
 }
 
