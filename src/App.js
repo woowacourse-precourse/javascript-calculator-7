@@ -1,5 +1,7 @@
 import { Console } from "@woowacourse/mission-utils";
 
+const customSeparatorReg = new RegExp(/\/\/.*\\n/);
+
 class CalculateError extends Error {
   constructor(message) {
     super();
@@ -53,6 +55,7 @@ class App {
       });
       this.sum = parsedNumbers.reduce((acc, cur) => acc + cur, 0);
     }
+    Console.print(`결과 : ${this.sum}`);
   }
   checkCustomSeparatorError(userInput) {
     if (userInput.slice(0, 2) !== "//")
