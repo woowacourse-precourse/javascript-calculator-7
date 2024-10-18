@@ -22,9 +22,8 @@ class App {
     const stringified = stringifyToJSON(input);
     const separator = this.getSeparator(stringified);
     const content = this.extractContent(stringified);
-    const separatorRegExp = convertCharacterClassRegex(separator);
 
-    return content.split(separatorRegExp);
+    return this.splitContent(content, separator);
   }
 
   getSeparator(str) {
@@ -36,6 +35,11 @@ class App {
 
   extractContent(str) {
     return str.replace(App.CUSTOM_SEPARATOR_REGEXP, '').replace(/^"|"$/g, '');
+  }
+
+  splitContent(content, separator) {
+    const separatorRegExp = convertCharacterClassRegex(separator);
+    return content.split(separatorRegExp);
   }
 
   calculateSum(input) {
