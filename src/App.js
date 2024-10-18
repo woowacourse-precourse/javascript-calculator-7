@@ -1,5 +1,6 @@
 import { Console } from '@woowacourse/mission-utils';
 import parseInput from './parseInput.js';
+import sumInput from './sumInput.js'
 
 class App {
   async run() {
@@ -11,9 +12,10 @@ class App {
         throw new Error('[ERROR] 입력값이 비었습니다.');
       }
 
-      const test = await parseInput(inputStr);
+      const parseNum = await parseInput(inputStr);
+      const sumNum = await sumInput(parseNum);
 
-      Console.print(test);
+      Console.print(sumNum);
 
     } catch (error) {
       Console.print(error.message);
