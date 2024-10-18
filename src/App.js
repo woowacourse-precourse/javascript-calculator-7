@@ -12,11 +12,20 @@ class App {
     }
     return delimiter;
   }
+
+  getNumbers(str, delimiter) {
+    if (str.startsWith("//")) {
+      const [_, numbers] = str.split("\\n"); 
+      return numbers.split(delimiter); 
+    }
+    return str.split(delimiter); 
+  }
   
   async run() {
     const str = await this.receiveInput();
     const delimiter = this.getDelimiter(str);
-    MissionUtils.Console.print(delimiter);
+    const numbers = this.getNumbers(str, delimiter);
+    MissionUtils.Console.print(numbers);
   }
 }
 
