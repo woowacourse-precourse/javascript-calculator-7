@@ -7,9 +7,7 @@ function getCustomSeparator(customText) {
 }
 
 function customSeparator(text) {
-  // FIXME: 배열을 사용해서 정규식을 생성할지 literal에 작성된 것을 사용할지 정해야함
-  const CUSTOM_SEPERATOR = ['//', '\\n'];
-  const CUSTOM_REGEX = /\/\/\w+\n/g;
+  const CUSTOM_REGEX = /\/\/(.*)\\n/g
   const IS_NOT_CUSTOM = -1;
   
   const RESULT = new Map([
@@ -17,6 +15,7 @@ function customSeparator(text) {
     ['text', null]
   ])
   
+
   if(text.search(CUSTOM_REGEX) === IS_NOT_CUSTOM) {
     RESULT.set('text', text);
     return RESULT;
@@ -34,25 +33,28 @@ function customSeparator(text) {
 }
 
 function separator(userInput) {
-  const DEFAULT_SEPARATOR = [',', ':'];
+  const SEPARATORS = [',', ':'];
 
   let customSeparatorResult = customSeparator(userInput);
+
   let userCustomSeparator = customSeparatorResult.get('customSeparatorString');
   let userCalculateString = customSeparatorResult.get('text');
 
   if(userCustomSeparator === null) {
-    const SEPARATOR_REGEX = new RegExp(`[${DEFAULT_SEPARATOR.join('')}]`,'g');
+    const SEPARATOR_REGEX = new RegExp(`[${SEPARATORS.join('')}]`,'g');
     
     let userStringArray = userCalculateString.split(SEPARATOR_REGEX);
     
     return userStringArray; 
   } else {
-    let separators = DEFAULT_SEPARATOR.push(userCustomSeparator);
+    SEPARATORS.push(userCustomSeparator);
 
-    const SEPARATOR_REGEX = new RegExp(`[${separators.join('')}]`, 'g');
+    const SEPARATOR_REGEX = new RegExp(`[${SEPARATORS.join('')}]`, 'g');
 
     let userStringArray = userCalculateString.split(SEPARATOR_REGEX);
 
     return userStringArray;
   };
 };
+
+export default separator;
