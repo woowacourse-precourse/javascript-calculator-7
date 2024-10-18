@@ -10,6 +10,16 @@ export function isMatch(regEx, value) {
 
 /**
  *
+ * @param {string} searchString
+ * @param {string} value
+ * @returns {boolean}
+ */
+export function isStartsWith(searchString, value) {
+  return value.startsWith(searchString);
+}
+
+/**
+ *
  * @param {Array | object} object
  * @returns {Array | object}
  */

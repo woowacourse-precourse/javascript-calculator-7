@@ -1,4 +1,10 @@
-import { isMatch, isNumericString, isPositiveNumber, shallowCopy } from '../src/lib/utils';
+import {
+  isMatch,
+  isNumericString,
+  isPositiveNumber,
+  isStartsWith,
+  shallowCopy,
+} from '../src/lib/utils';
 
 describe('utils', () => {
   describe('isMatch', () => {
@@ -16,6 +22,26 @@ describe('utils', () => {
       const value = '1;2;3';
 
       const result = isMatch(regEx, value);
+
+      expect(result).toBe(false);
+    });
+  });
+
+  describe('isStartsWith', () => {
+    it('주어진 문자열이 searchString으로 시작하는 경우 true를 반한환다', () => {
+      const value = '//;\n1;2;3';
+      const searchString = '//';
+
+      const result = isStartsWith(searchString, value);
+
+      expect(result).toBe(true);
+    });
+
+    it('주어진 문자열이 searchString으로 시작하지 않는 경우 false를 반한환다', () => {
+      const value = '1;2//;\n;3';
+      const searchString = '//';
+
+      const result = isStartsWith(searchString, value);
 
       expect(result).toBe(false);
     });

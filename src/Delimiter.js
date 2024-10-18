@@ -1,4 +1,4 @@
-import { isMatch, shallowCopy } from './lib/utils.js';
+import { isMatch, isStartsWith, shallowCopy } from './lib/utils.js';
 
 class Delimiter {
   /** @type {object} */
@@ -16,7 +16,10 @@ class Delimiter {
    * @returns {boolean}
    */
   #hasCustomDelimiter(value) {
-    return isMatch(this.#customDelimiterRegEx, value);
+    return (
+      isStartsWith(this.#defaultDelimiterMatchers[0], value) &&
+      isMatch(this.#customDelimiterRegEx, value)
+    );
   }
 
   /**
