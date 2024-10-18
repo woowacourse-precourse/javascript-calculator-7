@@ -7,13 +7,14 @@ class Calculator {
             const userInput = await this.GetUserInput();
             const result = this.validateInput(userInput);
             if (result) MissionUtils.Console.print(`결과 : ${result}`);
+            MissionUtils.Console.print('문자열 덧셈 계산기를 종료합니다.');
         } catch (error) {
             throw error;
         }
     }
 
     async GetUserInput() {
-        const userInput = await MissionUtils.Console.readLineAsync('덧셈할 문자열을 입력해주세요.(쉼표와 콜론 외에 //와 \\n 사이에 입력한 문자열을 커스텀 구분자로 사용 가능합니다.):\n');
+        const userInput = await MissionUtils.Console.readLineAsync('덧셈할 문자열을 입력해주세요.(쉼표와 콜론 외에 //로 시작해 \\n 사이에 입력한 문자열을 커스텀 구분자로 사용 가능합니다.):\n');
         
         return userInput;
     }
