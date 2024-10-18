@@ -5,6 +5,7 @@ import { _go, extractCustomDelimiter } from '../util/util.js';
 import outputView from '../view/outputView.js';
 import throwError from '../util/errorThrower.js';
 import { ERROR_MESSAGE } from '../constants/errorMessages.js';
+import { GAME_MESSAGE } from '../constants/gameMessages.js';
 
 //덧셈기 게임 관리
 class Calculator {
@@ -15,7 +16,7 @@ class Calculator {
 
   /**@returns {Promise<void>} */
   async start() {
-    const input = await this.user.readAnswer();
+    const input = await this.user.readAnswer(GAME_MESSAGE.START);
     this.processCalculation(input);
   }
 
