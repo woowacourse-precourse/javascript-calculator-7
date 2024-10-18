@@ -1,6 +1,6 @@
 import { Console } from '@woowacourse/mission-utils';
 
-import { PRINT_MESSAGES } from './constants.js';
+import { PRINT_MESSAGES, ERROR_MESSAGES } from './constants.js';
 
 const customSeparationSymbolRegex = /\/\/(.*?)\\n/;
 const customSeparationSymbolsRegex = /\/\/(.*?)\\n/g;
@@ -78,35 +78,29 @@ class App {
     additionArray.forEach((num) => {
       // 배열에 NaN인 값이 있으면 첫 입력에 잘못된 값이 포함되어 있다는 의미
       if (isNaN(num)) {
-        throw new Error(
-          '[ERROR] 잘못된 값이 포함되어 있습니다. 숫자 혹은 구분자만 입력해 주세요.'
-        );
+        throw new Error(ERROR_MESSAGES.WRONG_INPUT);
       }
 
       if (num <= 0) {
-        throw new Error('[ERROR] 합을 구하는 숫자는 양수만 입력해 주세요.');
+        throw new Error(ERROR_MESSAGES.NEGATIVE_NUMBER);
       }
     });
   }
 
   validateCustomSeparationSymbols(customSymbols) {
-    const symbolRegex = /[!@#$%^&*().?";{}|<>]/;
+    const symbolRegex = /[!@#$%^&*()?";{}|<>]/;
 
     customSymbols.forEach((symbol) => {
       if (symbol.length !== 1) {
-        throw new Error('[ERROR] 커스텀 구분자는 한 글자만 입력해 주세요.');
+        throw new Error(ERROR_MESSAGES.WRONG_SYMBOL_LENGTH);
       }
 
       if (this.separationSymbols.includes(symbol)) {
-        throw new Error(
-          '[ERROR] 커스텀 구분자는 기본 구분자와 겹치지 않아야 합니다.'
-        );
+        throw new Error(ERROR_MESSAGES.DUPLICATE_SYMBOL);
       }
 
       if (!symbolRegex.test(symbol)) {
-        throw new Error(
-          '[ERROR] 커스텀 구분자는 기본 구분자를 제외한 특수문자만 입력해 주세요.'
-        );
+        throw new Error(ERROR_MESSAGES.WRONG_SYMBOL_TYPE);
       }
     });
   }
