@@ -28,14 +28,15 @@ const parseInput = (inputStr) => {
             throw new Error('[ERROR] 숫자열로 변환되지 않는 입력이 포함됐습니다.');
         }
 
-        // 음수가 있는지 검사
-        if (resultNum.every(x => x < 0)) {
+        // 음수가 있는지 검사 
+        // -> every()메소드를 쓰면 모두 음수여야 에러를 던지므로 some()메소드로 변경해 음수가 하나라도 포함되어있을경우 에러반환
+        if (resultNum.some(x => x < 0)) {
             throw new Error('[ERROR] 음수가 포함되어있습니다. 양수를 입력해주세요.');
         }
 
         return resultNum;
     } catch (error) {
-        throw new Error(error.message);
+        throw error;
     }
 };
 
