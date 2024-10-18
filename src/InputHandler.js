@@ -10,7 +10,7 @@ class InputHandler {
   }
 
   printError(error) {
-    Console.print(`[ERROR] ${error.message}`);
+    throw new Error(`[ERROR] ${error.message}`);
   }
 }
 
