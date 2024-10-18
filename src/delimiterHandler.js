@@ -1,3 +1,5 @@
+import { validateMixedDelimiters } from './validator.js';
+
 function parseDefaultDelimiters(userInput) {
   const defaultDelimiterPattern = /[,:]/g;
   const delimiterSeparatedArray = userInput.split(defaultDelimiterPattern);
@@ -6,6 +8,8 @@ function parseDefaultDelimiters(userInput) {
 }
 
 function parseCustomDelimiters(userInput) {
+  validateMixedDelimiters(userInput);
+
   const customDelimitersPattern = /^\/\/(.*?)\\n/;
   const match = userInput.match(customDelimitersPattern);
 
