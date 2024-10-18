@@ -1,7 +1,7 @@
-import View from './app/View.js';
-import Validator from './app/Validator.js';
-import Calculator from './app/Calculator.js';
-import Delimiter from './app/Delimiter.js';
+import View from './View.js';
+import Validator from './Validator.js';
+import Calculator from './Calculator.js';
+import Delimiter from './Delimiter.js';
 
 class App {
   /** @type {View} */

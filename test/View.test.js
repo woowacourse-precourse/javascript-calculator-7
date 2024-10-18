@@ -1,5 +1,5 @@
 import { MissionUtils } from '@woowacourse/mission-utils';
-import View from '../src/View';
+import View from '../src/app/View';
 
 const getReadLineAsyncSpy = () => {
   const readLineAsyncSpy = jest.spyOn(MissionUtils.Console, 'readLineAsync');

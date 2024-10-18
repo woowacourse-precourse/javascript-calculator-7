@@ -1,7 +1,7 @@
-import Delimiter from '../src/Delimiter';
-import Error from '../src/Error';
+import Delimiter from '../src/app/Delimiter';
+import Error from '../src/app/Error';
 import SchemaValidator from '../src/lib/SchemaValidator';
-import Validator from '../src/Validator';
+import Validator from '../src/app/Validator';
 
 describe('Validator', () => {
   /** @type {Validator} */

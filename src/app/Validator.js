@@ -1,5 +1,5 @@
-import { isNumericString, isPositiveNumber } from './lib/utils.js';
-import SchemaValidator from './lib/SchemaValidator.js';
+import { isNumericString, isPositiveNumber } from '../lib/utils.js';
+import SchemaValidator from '../lib/SchemaValidator.js';
 import Error from './Error.js';
 
 class Validator {
