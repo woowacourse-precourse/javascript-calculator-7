@@ -6,7 +6,7 @@ class CalculatorView {
   }
 
   outputView() {
-    Console.print(`결과: ${RESULT}`);
+    Console.print(`결과 : ${RESULT}`);
   }
 
   errorView(error) {
