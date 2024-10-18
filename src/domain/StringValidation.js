@@ -6,7 +6,8 @@ class StringValidation {
     if (inputValue === '')
       return ERROR_CODES.EMPTY_STRING;
 
-    if ((!inputValue.startsWith('//') && isNaN(inputValue[0])) || isNaN(inputValue[inputValue.length - 1]))
+    if ((!inputValue.startsWith('//') && (isNaN(inputValue[0])) || inputValue[0] === ' ') 
+      || (isNaN(inputValue[inputValue.length - 1]) || inputValue[inputValue.length - 1] === ' '))
       return ERROR_CODES.LEADING_TRAILING_CHARACTER;
 
     if (inputValue.startsWith('//') && !inputValue.includes('\\n'))
@@ -18,10 +19,12 @@ class StringValidation {
     if (inputValue.startsWith('//') && inputValue.substring(2, inputValue.indexOf('\\n')).length >= 2)
       return ERROR_CODES.MULTIPLE_CUSTOM_DELIMITERS;
 
-    if (inputValue.startsWith('//') && !isNaN(inputValue.substring(2, inputValue.indexOf('\\n'))))
+    if (inputValue.startsWith('//') && (!isNaN(inputValue.substring(2, inputValue.indexOf('\\n'))) 
+      && inputValue.substring(2, inputValue.indexOf('\\n')) !== ' '))
       return ERROR_CODES.NUMERIC_CUSTOM_DELIMITER;
 
-    if (inputValue.startsWith('//') && isNaN(inputValue[inputValue.indexOf('\\n') + 2]))
+    if (inputValue.startsWith('//') && (isNaN(inputValue[inputValue.indexOf('\\n') + 2])) 
+      || inputValue[inputValue.indexOf('\\n') + 2] === ' ')
       return ERROR_CODES.INVALID_CHARACTER_AFTER_CUSTOM_DELIMITER;
 
     let parsedValue = inputValue;
