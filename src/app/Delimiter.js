@@ -28,7 +28,20 @@ class Delimiter {
    * @returns {string}
    */
   #getCustomDelimiter(value) {
-    return value.split('//')[1].split('\\n')[0];
+    const [start, end] = this.#defaultDelimiterMatchers;
+
+    return value.split(start)[1].split(end)[0];
+  }
+
+  /**
+   *
+   * @param {string} value
+   * @returns {string}
+   */
+  #removeCustomDelimiterMatchers(value) {
+    const [start, end] = this.#defaultDelimiterMatchers;
+
+    return value.split(start)[1].split(end)[1];
   }
 
   /**
@@ -40,8 +53,7 @@ class Delimiter {
     const delimiter = shallowCopy(this.#defaultDelimiters);
 
     if (this.#hasCustomDelimiter(value)) {
-      delimiter.unshift(this.#getCustomDelimiter(value));
-      delimiter.unshift(...this.#defaultDelimiterMatchers);
+      delimiter.push(this.#getCustomDelimiter(value));
     }
 
     return delimiter;
@@ -73,6 +85,10 @@ class Delimiter {
    */
   getDelimitedString(value) {
     let delimitedString = [value];
+
+    if (this.#hasCustomDelimiter(value)) {
+      delimitedString = [this.#removeCustomDelimiterMatchers(value)];
+    }
 
     this.#getDelimiter(value).forEach((delimiter) => {
       delimitedString = this.#delimite(delimiter, delimitedString);
