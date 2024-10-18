@@ -22,7 +22,7 @@ describe("add test", () => {
 // regex 함수 테스트 코드 정의
 describe("regex test", () => {
   const noneTest = "";
-  const testInput = "//;\\n1;2;3";
+  const testInput = "//;\n1;2;3";
   const noneCustomTestInput = "1:2:3";
   const minTest = "-3;-2;1";
 
@@ -46,44 +46,67 @@ describe("regex test", () => {
   });
 });
 
-describe("regex_random_test", () => {
-  const random = Math.random();
-  let testInput = "";
-  const randomNumberList = [];
-  for (let i = 0; i < Math.floor(random * 10); i++) {
+// 랜덤으로 숫자를 제외한 아스키 제공
+const getRandomAscii = () => {
+  let randomAscii = "";
+  while (true) {
+    let randomNum = Math.floor(Math.random() * 100); // 0~99 범위 난수
+    if (randomNum < 48 || randomNum > 57) {
+      // 숫자 범위(48~57)를 제외
+      randomAscii = String.fromCharCode(randomAscii);
+      break;
+    }
+  }
+  return randomAscii;
+};
+const getRandomList = (random, count) => {
+  const randomNumberList = []; // 랜덤으로 생성된 숫자를
+  for (let i = 0; i < Math.floor(random * count); i++) {
     const inpurtRandomNumber = Math.floor(Math.random() * 10);
     randomNumberList.push(inpurtRandomNumber);
   }
-  if (random * 10 >= 5) {
-    let randomAscii = Math.floor(random * 100);
-    randomAscii = String.fromCharCode(randomAscii);
-    testInput += `//${randomAscii}\\n`;
-    for (let i = 0; i < randomNumberList.length; i++) {
-      testInput += randomNumberList[i];
-      if (i === randomNumberList.length - 1) break;
-      const randomDevider = Math.random() * 10;
-      if (randomDevider >= 7) testInput += ":";
-      else if (randomDevider >= 4) testInput += ",";
-      else testInput += randomAscii;
+  return randomNumberList;
+};
+
+describe("regex_random_test", () => {
+  for (let i = 0; i < 100; i++) {
+    const count = 10; // 숫자의 개수 아무리 큰수가 들어가도 강건한 테스트를 위함
+    const random = Math.random();
+    let testInput = "";
+    const randomNumberList = getRandomList(random, count); // 랜덤으로 생성된 숫자를 배열에 담는다
+    const randomAscii = getRandomAscii(); // 랜덤으로 아스키 넣는다
+
+    // 커스텀 구분자가 있는경우
+    if (random * 10 >= 5) {
+      testInput += `//${randomAscii}\n`;
+      for (let i = 0; i < randomNumberList.length; i++) {
+        testInput += randomNumberList[i];
+        if (i === randomNumberList.length - 1) break;
+        const randomDevider = Math.random() * 10;
+        if (randomDevider >= 7) testInput += ":";
+        else if (randomDevider >= 4) testInput += ",";
+        else testInput += randomAscii;
+      }
     }
-  } else {
-    for (let i = 0; i < randomNumberList.length; i++) {
-      testInput += randomNumberList[i];
-      if (i === randomNumberList.length - 1) break;
-      const randomDevider = Math.random() * 10;
-      if (randomDevider >= 5) testInput += ":";
-      else testInput += ",";
+    //커스텀 구분자가 없는 경우
+    else {
+      for (let i = 0; i < randomNumberList.length; i++) {
+        testInput += randomNumberList[i];
+        if (i === randomNumberList.length - 1) break;
+        const randomDevider = Math.random() * 10;
+        if (randomDevider >= 5) testInput += ":";
+        else testInput += ",";
+      }
     }
+    test(`random : ${testInput}`, () => {
+      expect(calculator.testRegex(testInput)).toEqual(
+        randomNumberList.length != 0
+          ? {
+              error: false,
+              numbers: randomNumberList,
+            }
+          : 0
+      );
+    });
   }
-  console.log(testInput);
-  test(`random : ${testInput}`, () => {
-    expect(calculator.testRegex(testInput)).toEqual(
-      randomNumberList.length != 0
-        ? {
-            error: false,
-            numbers: randomNumberList,
-          }
-        : 0
-    );
-  });
 });
