@@ -52,19 +52,30 @@ class App {
       return ['0'];
     }
 
+    const allSeparator = this.validateAndAddSeparator(separator, customSep);
+
+    const sepToRegex = new RegExp(allSeparator.join('|'));
+
+    return str.split(sepToRegex);
+  }
+
+  validateAndAddSeparator(separator, customSep) {
     const allSeparator = separator;
 
+    if (allSeparator.includes(customSep)) {
+      throw Error(errorString(CONSOLE_MESSAGE.SEPARATOR_DUPLICATE_ERROR));
+    }
+
     if (customSep !== '') {
-      allSeparator.push(this.escapedSeparator(customSep));
+      const escapedSep = this.escapedSeparator(customSep);
+      allSeparator.push(escapedSep);
     }
 
     if (customSep === ' ') {
       throw Error(errorString(CONSOLE_MESSAGE.SEPARATOR_EMPTY_ERROR));
     }
 
-    const sepToRegex = new RegExp(allSeparator.join('|'));
-
-    return str.split(sepToRegex);
+    return allSeparator;
   }
 
   escapedSeparator(separator) {

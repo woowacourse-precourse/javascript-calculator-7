@@ -25,4 +25,5 @@ export const CONSOLE_MESSAGE = {
     "구분자 형식이 잘못되었습니다. '//'로 시작하는 커스텀 구분자를 사용해 주세요.",
   SEPARATOR_LENGTH_ERROR: '구분자는 한 글자여야 합니다.',
   SEPARATOR_EMPTY_ERROR: '구분자가 비어 있습니다.',
+  SEPARATOR_DUPLICATE_ERROR: '커스텀 구분자가 기본 구분자와 중복됩니다.',
 };
