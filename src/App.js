@@ -49,11 +49,10 @@ class App {
       const separators = new RegExp(`[${[...this.separator].join("")}]`);
       const numbers = separatedInput.split(separators);
 
-      // 문자열을 숫자로 변환한다.
-      const parsedNumbers = numbers.map((number) => parseInt(number));
-
       // 숫자가 유효한지 확인한다.
-      if (this.checkNumberValidity(parsedNumbers)) {
+      if (this.checkNumberValidity(numbers)) {
+        // 문자열을 숫자로 변환한다.
+        const parsedNumbers = numbers.map((number) => parseInt(number));
         // 숫자를 모두 더한다.
         return parsedNumbers.reduce((acc, cur) => acc + cur, 0);
       } else {
