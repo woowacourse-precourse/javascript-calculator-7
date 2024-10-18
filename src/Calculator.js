@@ -43,17 +43,17 @@ class Calculator {
         
         // 구분자가 연속됐는지
         const regex = /,,|,:|:,|::/g;
-        const isRepeated = regex.test(userInput)
+        const isSepRepeated = regex.test(userInput)
 
         // 구분자가 문자열 앞 또는 뒤에 오는지
-        const isAtStartOrEnd = separatedStr[0] === "" || separatedStr[separatedStr.length -1] === "";
+        const isSepAtStartOrEnd = separatedStr[0] === "" || separatedStr[separatedStr.length -1] === "";
 
         // 구분자가 아닌 문자가 포함되어 있는지(구분자가 연속되거나 문자열 앞 뒤에 올 때도 해당)
-        const includeInvalidStr = isRepeated || isAtStartOrEnd || separatedStr.filter(Boolean).map(Number).some(v => Number.isNaN(v));  
+        const includeInvalidStr = isSepRepeated || isSepAtStartOrEnd || separatedStr.filter(Boolean).map(Number).some(v => Number.isNaN(v));  
         
         // 숫자 배열
         const numbers = !includeInvalidStr ? separatedStr.filter(Boolean).map(Number) : 
-        userInput?.match(/-?\d+/g).map(Number);
+        userInput.match(/-?\d+/g)?.map(Number);
         
         if(numbers && numbers.length > 0) {
             // 양수인지
