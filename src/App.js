@@ -1,28 +1,29 @@
 import { CUSTOM_SEPARATOR_REGEXP, DEFAULT_SEPARATOR } from './constants.js';
 import {
-  getStringifiedString,
-  getUserInput,
-  checkTheNumberArray,
-  getOrRegExpFromString,
-  getSum,
+  stringifyToJSON,
+  readLineAsync,
+  validatePositiveNumberArray,
+  convertCharacterClassRegex,
+  sumArray,
   printResult,
-  getNumberArray,
+  convertNumberArray,
 } from './utils.js';
 
 class App {
   async run() {
-    const userInput = await getUserInput();
-    const stringifiedUserInput = getStringifiedString(userInput);
+    const userInput = await readLineAsync();
+    const stringifiedUserInput = stringifyToJSON(userInput);
     const { separator, newUserInput } = this.getSeparator(stringifiedUserInput);
-    const separatorRegExp = getOrRegExpFromString(separator);
+    const separatorRegExp = convertCharacterClassRegex(separator);
 
     const separatedUserInput = newUserInput.split(separatorRegExp);
 
-    checkTheNumberArray(separatedUserInput);
+    validatePositiveNumberArray(separatedUserInput);
 
-    const separatedUserInputsNumberArray = getNumberArray(separatedUserInput);
+    const separatedUserInputsNumberArray =
+      convertNumberArray(separatedUserInput);
 
-    const sumOfUserInput = getSum(separatedUserInputsNumberArray);
+    const sumOfUserInput = sumArray(separatedUserInputsNumberArray);
 
     printResult(sumOfUserInput);
   }
