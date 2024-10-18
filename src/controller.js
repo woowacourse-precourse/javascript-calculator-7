@@ -13,6 +13,7 @@ class CalculatorController {
       this.view.outputView(RESULT);
     } catch (error) {
       this.view.errorView(error);
+      throw error;
     }
   }
 }
