@@ -1,4 +1,4 @@
-import { REGEX_META_LETTER, SELECTOR_REGEX } from "../data/constants";
+import { REGEX_META_LETTER, SELECTOR_REGEX } from "../data/constants.js";
 
 // string => boolean
 // 구분자 지정문이 있는지 확인

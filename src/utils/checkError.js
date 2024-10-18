@@ -1,4 +1,4 @@
-import { WRONG_INPUT_ERROR } from "../data/errorMessage";
+import { WRONG_INPUT_ERROR } from "../data/errorMessage.js";
 
 // string => Error?
 // 입력받은 값 유효성 검사
