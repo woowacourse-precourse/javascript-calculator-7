@@ -12,24 +12,29 @@ class App {
       '덧셈할 문자열을 입력해 주세요.\n'
     );
 
-    let result;
+    try {
+      let result;
 
-    if (userStr == '') {
-      // 빈 문자열인 경우
-      result = 0;
-    } else if (REGEX1.test(userStr)) {
-      //, 또는 : 구분자 문자열
-      result = this.add_num(userStr);
-    } else if (REGEX2.test(userStr)) {
-      // 커스텀 구분자 문자열
-      const params = this.extract_delimiter(userStr);
-      result = this.add_num(params[0], params[1]);
-    } else {
-      //에러
+      if (userStr == '') {
+        // 빈 문자열인 경우
+        result = 0;
+      } else if (REGEX1.test(userStr)) {
+        //, 또는 : 구분자 문자열
+        result = this.add_num(userStr);
+      } else if (REGEX2.test(userStr)) {
+        // 커스텀 구분자 문자열
+        const params = this.extract_delimiter(userStr);
+        result = this.add_num(params[0], params[1]);
+      } else {
+        //에러
+        throw '[ERROR] 입력 형식을 지켜주세요';
+      }
+
+      //결과 출력
+      Console.print(`결과 : ${result}`);
+    } catch (e) {
+      Console.print(e);
     }
-
-    //결과 출력
-    Console.print(`결과 : ${result}`);
   }
 
   //커스텀 구분자 추출
@@ -45,7 +50,7 @@ class App {
     if (REGEX3.test(extractedStr)) {
       return [extractedStr, delimiter];
     } else {
-      //Err
+      throw '[ERROR] 커스텀 구분자와 양수만을 사용해주세요';
     }
   }
 
