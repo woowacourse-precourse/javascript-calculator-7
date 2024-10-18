@@ -49,4 +49,19 @@ describe("문자열 계산기", () => {
 
     await expect(app.run()).rejects.toThrow("[ERROR]");
   });
+
+  test("예외 테스트3 - 두 자릿수 이상의 양수와 구분자 사용", async () => {
+    const inputs = ["10,2:3"];
+    mockQuestions(inputs);
+
+    const logSpy = getLogSpy();
+    const outputs = ["결과 : 15"];
+
+    const app = new App();
+    await app.run();
+
+    outputs.forEach((output) => {
+      expect(logSpy).toHaveBeenCalledWith(expect.stringContaining(output));
+    });
+  });
 });

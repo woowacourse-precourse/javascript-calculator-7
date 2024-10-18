@@ -14,27 +14,33 @@ class App {
       const inputArray = [...input];
       const numArray = [];
 
+      let string = '';
+      let isPrevSeparator = true;
+      let numArrayIndex = 0;
+
       // 쉼표(,) 또는 콜론(:)을 구분자로 가지는 문자열의 경우, 구분자를 기준으로 숫자 추출하기
-      inputArray.forEach((str, index) => {
-          const number = parseInt(str, 10);
-
-          if (index % 2 === 0) { // 짝수
-              numArray.push(number);
-
-              if (isNaN(number)) {
-                  throw Error('[ERROR] 입력값이 올바르지 않습니다.');
+      inputArray.forEach((char, index) => {
+          if (!(isNaN(char))) { // 숫자
+              isPrevSeparator = false;
+              string = string + char;
+              numArrayIndex++;
+              if (index === inputArray.length -1) {
+                  numArray.push(string);
               }
-          } else { // 홀수
-              if (!separators.includes(str)) {
-                  throw Error('[ERROR] 올바르지 않은 연산자를 사용했습니다.');
-              }
+          }
+          if (separators.includes(char)) { // 구분자
+              numArray.push(string);
+              string = '';
+              isPrevSeparator = true;
+          } else if (!separators.includes(char) && isNaN(char)) {
+              throw Error('[ERROR] 올바르지 않은 연산자를 사용했습니다.');
           }
       });
 
       // 분리한 각 숫자의 합을 반환하기
-      const result = numArray.reduce((acc, curr) =>
-          acc + curr, 0
-      );
+      const result = numArray
+          .map((str) => parseInt(str,10))
+          .reduce((acc, curr) => acc+ curr, 0);
 
       return MissionUtils.Console.print(`결과 : ${result}`);
   }
