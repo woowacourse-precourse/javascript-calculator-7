@@ -15,7 +15,7 @@ export class Calculator {
   setCustomDelimiter(userInput) {
     const CUSTOM_END_INDEX = userInput.indexOf(CUSTOM_END);
 
-    if (this.isSetCustomDelimiter(userInput, CUSTOM_END_INDEX)) {
+    if (Calculator.isSetCustomDelimiter(userInput, CUSTOM_END_INDEX)) {
       this.#customDelimiter = userInput.slice(
         CUSTOM_START.length,
         CUSTOM_END_INDEX
@@ -23,13 +23,13 @@ export class Calculator {
       this.#string = userInput.slice(CUSTOM_END_INDEX + CUSTOM_END.length);
     }
 
-    if (!this.isSetCustomDelimiter(userInput, CUSTOM_END_INDEX)) {
+    if (!Calculator.isSetCustomDelimiter(userInput, CUSTOM_END_INDEX)) {
       this.#customDelimiter = undefined;
       this.#string = userInput;
     }
   }
 
-  isSetCustomDelimiter(userInput, customEndIndex) {
+  static isSetCustomDelimiter(userInput, customEndIndex) {
     if (userInput.startsWith(CUSTOM_START) && customEndIndex !== -1) {
       return true;
     }
@@ -43,6 +43,7 @@ export class Calculator {
     if (this.#customDelimiter !== undefined) {
       Validator.customDelimiterLength(this.#customDelimiter);
       Validator.isCustomDelimiterString(this.#customDelimiter);
+      Validator.duplicatedSet(this.#string);
     }
 
     Validator.containUndelimitedChars(this.#string, this.#customDelimiter);

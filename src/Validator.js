@@ -1,3 +1,8 @@
+import { Console } from "@woowacourse/mission-utils";
+import { Calculator } from "./Calculator.js";
+
+const CUSTOM_END = "\n";
+
 export class Validator {
   static customDelimiterLength(customDelimiter) {
     if (customDelimiter.length !== 1) {
@@ -10,6 +15,14 @@ export class Validator {
   static isCustomDelimiterString(customDelimiter) {
     if (/\d/.test(customDelimiter)) {
       throw new Error("[ERROR] 숫자는 커스텀 구분자로 지정할 수 없습니다.");
+    }
+  }
+
+  static duplicatedSet(string) {
+    const CUSTOM_END_INDEX = string.indexOf(CUSTOM_END);
+
+    if (Calculator.isSetCustomDelimiter(string, CUSTOM_END_INDEX)) {
+      throw new Error("[ERROR] 커스텀 구분자는 한 번만 지정할 수 있습니다.");
     }
   }
 
