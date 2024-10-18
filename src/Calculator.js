@@ -92,7 +92,11 @@ export default class Calculator {
 
     this.#extractNumbers();
 
-    // TODO: Check if the numbers are negative
+    this.#numbers.forEach((num) => {
+      if (num <= 0) {
+        throw new Error('[ERROR]: Negative number is not allowed');
+      }
+    })
   }
 
   /**
