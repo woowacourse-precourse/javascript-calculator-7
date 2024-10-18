@@ -12,6 +12,19 @@ class CustomSeparatorError extends CalculateError {
     super(message);
   }
 }
+
+class ValidateError extends CalculateError {
+  constructor(message) {
+    super(message);
+  }
+}
+
+class ParseError extends CalculateError {
+  constructor(message) {
+    super(message);
+  }
+}
+
 class App {
   constructor() {
     this.sum = 0;
@@ -30,12 +43,15 @@ class App {
     }
     this.separator = this.separatorArray.join("");
     if (userInput.length > 0) {
+      this.checkValidateError(userInput);
       const separatorReg = new RegExp(`[${this.separator}]`, "g");
       const numbers = userInput.replace(separatorReg, " ").split(" ");
       const parsedNumbers = numbers.map((number) => {
         const num = parseInt(number, 10);
+        this.checkParseError(num);
         return num;
       });
+      this.sum = parsedNumbers.reduce((acc, cur) => acc + cur, 0);
     }
   }
   checkCustomSeparatorError(userInput) {
@@ -50,6 +66,15 @@ class App {
       throw new CustomSeparatorError(
         "커스텀 구분자는 한 글자만 사용 가능합니다."
       );
+  }
+  checkValidateError(userInput) {
+    const validateSeparator = new RegExp(`^[0-9${this.separator}]+$`, "g");
+    if (!validateSeparator.test(userInput))
+      throw new ValidateError("잘못된 입력입니다.");
+  }
+  checkParseError(num) {
+    if (!num) throw new ParseError("잘못된 입력입니다");
+    if (num < 0) throw new ParseError("양수를 입력해주세요");
   }
 }
 
