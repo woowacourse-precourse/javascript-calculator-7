@@ -23,11 +23,12 @@ class App {
     let sum = 0;
     nums.forEach(num => {
       if(num<0){
-        throw new Error("[ERROR] : 음수를 입력했습니다");
+        throw new Error("[ERROR] : 음수를 입력했습니다");//음수가 있으면 error
       }
       sum += Number(num);
     })
-    
+
+    if(isNaN(sum)){ throw new Error("[ERROR] : 잘못된 입력입니다 ");}//잘못된
     sum = "결과 : "+ sum; //출력할 결과
     Console.print(sum);
   }
