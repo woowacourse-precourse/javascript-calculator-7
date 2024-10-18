@@ -2,6 +2,7 @@ import View from './View.js';
 import Validator from './Validator.js';
 import Calculator from './Calculator.js';
 import Delimiter from './Delimiter.js';
+import SchemaValidator from '../lib/SchemaValidator.js';
 
 class App {
   /** @type {View} */
@@ -16,6 +17,13 @@ class App {
   /** @type {Calculator} */
   #calculator;
 
+  /**
+   *
+   * @param {View} view
+   * @param {Validator} validator
+   * @param {Delimiter} delimiter
+   * @param {Calculator} calculator
+   */
   constructor(view, validator, delimiter, calculator) {
     this.#view = view;
     this.#validator = validator;
@@ -24,20 +32,21 @@ class App {
   }
 
   async run() {
-    try {
-      const input = await this.#view.input('덧셈할 문자열을 입력해 주세요.');
+    const input = await this.#view.input('덧셈할 문자열을 입력해 주세요.');
 
-      const delimitedString = this.#delimiter.getDelimitedString(input);
+    const delimitedString = this.#delimiter.getDelimitedString(input);
 
-      this.#validator.validate(delimitedString);
+    this.#validator.validate(delimitedString);
 
-      const result = this.#calculator.calculate(delimitedString);
+    const result = this.#calculator.calculate(delimitedString);
 
-      this.#view.output(`결과 : ${result}`);
-    } catch (error) {
-      this.#view.output(error);
-    }
+    this.#view.output(`결과 : ${result}`);
   }
 }
 
-export default App;
+export default new App(
+  new View(),
+  new Validator(new SchemaValidator()),
+  new Delimiter(),
+  new Calculator(),
+);
