@@ -3,6 +3,7 @@ import { Console } from "@woowacourse/mission-utils";
 class App {
   async run() {
     const inputStr = await this.getString();
+    const customSeperator = this.getCustom(inputStr);
   }
 
   async getString(){
@@ -13,6 +14,13 @@ class App {
       Console.print('Error: ' + error.message);
       return null;
     }
+  }
+
+  getCustom(str){
+    const regex = /\/\/(.*?)\\n/;
+    const customSeperator = str.match(regex);
+
+    return customSeperator ? customSeperator[1] : null;
   }
 }
 
