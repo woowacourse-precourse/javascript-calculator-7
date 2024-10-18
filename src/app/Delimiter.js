@@ -62,11 +62,11 @@ class Delimiter {
   /**
    *
    * @param {string} delimiter
-   * @param {Array<string>} value
+   * @param {Array<string>} values
    * @returns {Array<string>}
    */
-  #delimite(delimiter, value) {
-    return value.flatMap((aValue) => aValue.split(delimiter));
+  #delimite(delimiter, values) {
+    return values.flatMap((value) => value.split(delimiter));
   }
 
   /**
