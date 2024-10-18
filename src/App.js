@@ -2,21 +2,18 @@ import { Console } from "@woowacourse/mission-utils";
 
 class App {
   async run() {
+    const delimiters = [',', ':'];
     //사용자의 입력값 받기
     const input = await Console.readLineAsync("덧셈할 문자열을 입력해 주세요.\n");
     //사용자의 입력값이 커스텀 구분자를 정의하며 시작하는지 검사
     if (input.startsWith("//")) {
       //커스텀 구분자를 정의하며 시작했다면 커스텀 구분자 추출
-      const { delimiters, formula } = this.extractionCustomDelimiter(input);
-      console.log(delimiters, formula);
+      const formula = this.extractionCustomDelimiter(input, delimiters);
     }
-    if (!input.startsWith("//")) {
 
-    }
   }
 
-  extractionCustomDelimiter(input) {
-    const delimiters = [',', ':'];
+  extractionCustomDelimiter(input, delimiters) {
     const specialCharRegex = /^[!@#$%^&*()_\-+=\[\]{};:'",.<>?/\\|~`]+$/;
     let formula = input;
     //커스텀 구분자 정의를 시작했지만 \n을 사용하여 닫지 않은 경우
@@ -35,7 +32,7 @@ class App {
         formula = formula.slice(indexEndDef + 2);
       }
     }
-    return { delimiters, formula };
+    return formula;
   };
 };
 
