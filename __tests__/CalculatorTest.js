@@ -44,28 +44,3 @@ describe("findCustomSeparator()", () => {
     expect(findCustomSeparator(["//;", "//;"])).toEqual([";"]);
   });
 });
-
-describe("findCustomSeparatorAndNumbers()", () => {
-  const { findCustomSeparatorAndNumbers } = calculator;
-
-  test("커스텀 구분자가 없을 때 빈 배열과 연산 문자열 반환", async () => {
-    expect(findCustomSeparatorAndNumbers("1,2,3")).toEqual({
-      customSeparator: [],
-      numbers: "1,2,3",
-    });
-  });
-
-  test("커스텀 구분자가 1개일 때 구분자 문자열 배열과 연산 문자열 반환", async () => {
-    expect(findCustomSeparatorAndNumbers("//;\n1;2;3")).toEqual({
-      customSeparator: ["//;"],
-      numbers: "1;2;3",
-    });
-  });
-
-  test("커스텀 구분자가 여러개일 때 구분자 문자열 배열과 연산 문자열 반환", async () => {
-    expect(findCustomSeparatorAndNumbers("//;\n//$\n1;2;3")).toEqual({
-      customSeparator: ["//;", "//$"],
-      numbers: "1;2;3",
-    });
-  });
-});

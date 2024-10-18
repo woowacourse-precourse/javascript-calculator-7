@@ -9,6 +9,18 @@ class Input {
       // reject 되는 경우
     }
   }
+
+  /**
+    *
+    * @param {string} text - 입력으로 주어진 문자열
+    * @returns {{customSeparator: string[], numbers: string}}
+    */
+  findCustomSeparatorAndNumbers(text) {
+    const customSeparatorAndNumbers = text.split("\n");
+    // TODO: 원본 배열을 건드는 게 바람직한 일일까?
+    const numbers = customSeparatorAndNumbers.pop();
+    return { customSeparator: customSeparatorAndNumbers, numbers };
+  }
 }
 
 export default Input;
