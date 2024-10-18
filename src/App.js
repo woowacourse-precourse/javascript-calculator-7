@@ -14,17 +14,13 @@ class App {
   }
 
   async run() {
-    try {
-      const numberArray = (await this.askNumbers())
-        .findSeparator()
-        .extractNumbers();
-      const convertedNumbers = numberArray.map(Number);
-      const sum = App.calculate(convertedNumbers);
+    const numberArray = (await this.askNumbers())
+      .findSeparator()
+      .extractNumbers();
+    const convertedNumbers = numberArray.map(Number);
+    const sum = App.calculate(convertedNumbers);
 
-      Console.print(`결과 : ${sum}`);
-    } catch (error) {
-      Console.print(`[ERROR] ${error.message}`);
-    }
+    Console.print(`결과 : ${sum}`);
   }
 
   static calculate(numberArray) {
@@ -103,7 +99,7 @@ class App {
     const prefix = prefixString.slice(0, 2);
     if (prefix !== '//') {
       throw new Error(
-        '커스텀 구분자를 선택하신 경우, 구분자를 "//"와 "\\n" 사이에 입력해주세요.',
+        '[ERROR] 커스텀 구분자를 선택하신 경우, 구분자를 "//"와 "\\n" 사이에 입력해주세요.',
       );
     }
   }
@@ -118,7 +114,7 @@ class App {
     const targetNumber = Number(numberString);
     if (Number.isNaN(targetNumber) || targetNumber < 0) {
       throw new Error(
-        '0 이상의 양수만 계산 가능합니다. 각 수는 커스텀 구분자 또는 기본 구분자(쉼표(,), 콜론(:))로 구분해주세요.',
+        '[ERROR] 0 이상의 양수만 계산 가능합니다. 각 수는 커스텀 구분자 또는 기본 구분자(쉼표(,), 콜론(:))로 구분해주세요.',
       );
     }
   }
@@ -126,7 +122,7 @@ class App {
   static isValidSeparator(separator) {
     if (separator.length !== 1) {
       throw new Error(
-        '문자 또는 기호/특수문자 1자로 커스텀 구분자를 입력해주세요.',
+        '[ERROR] 문자 또는 기호/특수문자 1자로 커스텀 구분자를 입력해주세요.',
       );
     }
   }
