@@ -1,6 +1,6 @@
 export class ValidateError {
   static validateCustomDelimiterFormat(input) {
-    const customDelimiterPattern = /^\/\/.\n/;
+    const customDelimiterPattern = /^\/\/.\\n/;
     if (!customDelimiterPattern.test(input)) {
       throw new Error('커스텀 구분자 지정 형식이 잘못되었습니다');
     }
