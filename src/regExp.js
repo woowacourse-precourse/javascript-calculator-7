@@ -6,10 +6,13 @@ export function getSeparatorConflictPattern(customSeparator) {
   );
 }
 
-export function getSeparatorPattern(customSeparator, followingChar = '') {
+export function getSeparatorPattern(customSeparator, followingChar = null) {
   const defaultSeparators = '[,:]';
   const separator = customSeparator
     ? customSeparator + '|' + defaultSeparators
     : defaultSeparators;
-  return new RegExp(`${separator}${followingChar}`);
+
+  return followingChar === null
+    ? new RegExp(`${separator}`)
+    : new RegExp(`[${separator}]${followingChar}`);
 }
