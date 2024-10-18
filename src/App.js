@@ -12,7 +12,7 @@ class App {
   addNum(numList) {
     var sum = 0;
     for (var i = 0; i < numList.length; i++) {
-      if (isNaN(parseInt(numList[i]))) {
+      if (isNaN(parseInt(numList[i])) || parseInt(numList[i]) < 0) {
         throw new Error("[ERROR]");
       }
       sum += parseInt(numList[i]);
