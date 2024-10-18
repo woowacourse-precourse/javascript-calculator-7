@@ -1,13 +1,14 @@
-import { MissionUtils } from "@woowacourse/mission-utils";
+import { MissionUtils } from '@woowacourse/mission-utils';
+
 class App {
   async run() {
-      const inputString = await this.getInputString();
-      const result = this.calculate(inputString);
-      this.printResult(result);
+    const inputString = await this.getInputString();
+    const result = this.calculate(inputString);
+    this.printResult(result);
   }
 
-  async getInputString() {    
-    return await MissionUtils.Console.readLineAsync("덧셈할 문자열을 입력해 주세요.\n");
+  async getInputString() {
+    return await MissionUtils.Console.readLineAsync('덧셈할 문자열을 입력해 주세요.\n');
   }
 
   printResult(result) {
@@ -15,44 +16,42 @@ class App {
   }
 
   calculate(inputString) {
-    const DEFAULT_DELIMITERS  = [",", ":"];
+    const DEFAULT_DELIMITERS = [',', ':'];
     let delimiters = DEFAULT_DELIMITERS;
 
-    if(this.checkCustomSplitStringByDelimiter(inputString)){
+    if (this.checkCustomSplitStringByDelimiter(inputString)) {
       delimiters = this.getMergedDelimiters(inputString, delimiters);
       inputString = this.getStrippedString(inputString);
     }
-    
-      this.isValidString(inputString, delimiters);
 
-      const stringArray = this.splitStringByDelimiter(inputString, delimiters);
-      const numberArray = this.returnNumbers(stringArray);
-      
-      return this.add(numberArray);    
+    this.isValidString(inputString, delimiters);
+
+    const stringArray = this.splitStringByDelimiter(inputString, delimiters);
+    const numberArray = this.returnNumbers(stringArray);
+
+    return this.add(numberArray);
   }
 
   add(numbers) {
     const initialValue = 0;
-    
-    return numbers.reduce((accumulator, number) => 
-      accumulator + number, initialValue);
+
+    return numbers.reduce((accumulator, number) => accumulator + number, initialValue);
   }
 
   splitStringByDelimiter(inputString, delimiters) {
     let currentToken = '';
-    let TokenArray = [];
+    const TokenArray = [];
 
-    for(const element of inputString) {
-      if(delimiters.includes(element)) {
+    for (const element of inputString) {
+      if (delimiters.includes(element)) {
         TokenArray.push(currentToken);
         currentToken = '';
-      }
-      else {
+      } else {
         currentToken += element;
       }
     }
-   
-    if(currentToken !== ''){
+
+    if (currentToken !== '') {
       TokenArray.push(currentToken);
     }
 
@@ -60,7 +59,7 @@ class App {
   }
 
   checkCustomSplitStringByDelimiter(inputString) {
-    return (inputString[0] === '/' && inputString[1] === '/' 
+    return (inputString[0] === '/' && inputString[1] === '/'
       && inputString[3] === '\\' && inputString[4] === 'n');
   }
 
@@ -70,25 +69,24 @@ class App {
   }
 
   getStrippedString(inputString) {
-    return inputString.slice(5,);
+    return inputString.slice(5);
   }
 
   isValidString(inputString, delimiters) {
-    for(const element of inputString) {
+    for (const element of inputString) {
       const isNotInclude = !delimiters.includes(element);
 
-      if(isNaN(element) && isNotInclude) {
-        console.error(`유효하지 않은 입력: ${element}`); 
-        throw new Error("[ERROR]");
+      if (isNaN(element) && isNotInclude) {
+        console.error(`유효하지 않은 입력: ${element}`);
+        throw new Error('[ERROR]');
       }
     }
     return true;
   }
 
   returnNumbers(inputArray) {
-    return inputArray.map(element => Number(element));
+    return inputArray.map((element) => Number(element));
   }
 }
 
 export default App;
-
