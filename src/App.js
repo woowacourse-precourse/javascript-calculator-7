@@ -85,7 +85,7 @@ class App {
   }
 
   returnNumbers(inputArray) {
-    return inputArray.map((element) => Number(element));
+    return inputArray.map(Number);
   }
 }
 
