@@ -4,6 +4,10 @@ import { inputText, printSumResult } from './ioUtil.js';
 class App {
   async run() {
     const userInput = await inputText();
+    if (userInput === '') {
+      printSumResult(0);
+      return;
+    }
 
     CalculatorService.validateUserInput(userInput);
 

@@ -58,6 +58,7 @@ export default class Validator {
   }
 
   static #checkInvalidSeparatorUsage(input, customSeparator) {
+    if (input === '') return;
     const splitedInput = Number(
       getSplitedBySeparator(input, customSeparator).join(''),
     );
