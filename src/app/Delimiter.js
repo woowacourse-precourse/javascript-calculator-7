@@ -8,7 +8,7 @@ class Delimiter {
   #defaultDelimiters = [',', ':'];
 
   /** @type {Array<string>} */
-  #defaultDelimiterMatchers = ['//', '\\n'];
+  #customDelimiterMatchers = ['//', '\\n'];
 
   /**
    *
@@ -17,7 +17,7 @@ class Delimiter {
    */
   #hasCustomDelimiter(value) {
     return (
-      isStartsWith(this.#defaultDelimiterMatchers[0], value) &&
+      isStartsWith(this.#customDelimiterMatchers[0], value) &&
       isMatch(this.#customDelimiterRegEx, value)
     );
   }
@@ -28,7 +28,7 @@ class Delimiter {
    * @returns {string}
    */
   #getCustomDelimiter(value) {
-    const [start, end] = this.#defaultDelimiterMatchers;
+    const [start, end] = this.#customDelimiterMatchers;
 
     return value.split(start)[1].split(end)[0];
   }
@@ -39,7 +39,7 @@ class Delimiter {
    * @returns {string}
    */
   #removeCustomDelimiterMatchers(value) {
-    const [start, end] = this.#defaultDelimiterMatchers;
+    const [start, end] = this.#customDelimiterMatchers;
 
     return value.split(start)[1].split(end)[1];
   }
