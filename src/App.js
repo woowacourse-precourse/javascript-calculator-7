@@ -5,11 +5,13 @@ class strToArr {
     const SEPERATOR_ADD_STR = str.substring(0, idx + 1);
 
     // 문자열에서 숫자와 영문자를 제외한 문자를 분리하고 추출
-    const SPLIT_STR = [...new Set(SEPERATOR_ADD_STR.match(/[^a-zA-Z0-9\s]/g))];
+    const SPLIT_STR = [SEPERATOR_ADD_STR, "\n"];
 
     // 추출된 문자들을 이스케이프 처리하여 정규식으로 반환
-    const ESCAPE_STR = SPLIT_STR.map((char) => `\\${char}`).join("");
-    const DYNAMIC_REGEX = new RegExp(`(\\/\\/|[${ESCAPE_STR}]|\\n)`, "g");
+    const ESCAPE_STR = SPLIT_STR.map((char) =>
+      char.replace(/[^a-zA-Z0-9가-힣]/g, "\\$&")
+    ).join("|");
+    const DYNAMIC_REGEX = new RegExp(`(\\/\\/|${ESCAPE_STR})`, "g");
 
     // 개행 문자를 실제 '\n'으로 바꾸기
     const REPLACED_STR = SEPERATOR_ADD_STR.replace(/\\n/g, "\n");
@@ -20,7 +22,7 @@ class strToArr {
 
   async calculateParts(str, idx) {
     const CALCULATE_STR = str.substring(idx + 1);
-    return CALCULATE_STR.match(/\d+|[^a-zA-Z0-9\s]/g).map((item) =>
+    return CALCULATE_STR.match(/\d+|[^\w\s]+/g).map((item) =>
       item.match(/\d+/) ? Number(item) : item
     );
   }
