@@ -1,4 +1,3 @@
-/* eslint-disable */
 import { Console } from '@woowacourse/mission-utils';
 
 function isInputEmpty(input) {
@@ -34,9 +33,21 @@ function hasCustomSeparator(input) {
   return false;
 }
 
+function extractCustomSeparator(input) {
+  return [input.slice(input.indexOf('\\n') + 2), input.match(/\/\/(.*?)\\n/)[1]];
+}
+
 class App {
   async run() {
-    const input = await Console.readLineAsync('덧셈할 문자열을 입력해 주세요.\n');
+    let input = await Console.readLineAsync('덧셈할 문자열을 입력해 주세요.\n');
+
+    const separators = [',', ':'];
+
+    if (hasCustomSeparator(input)) {
+      const [slicedInput, customSeparator] = extractCustomSeparator(input);
+      input = slicedInput;
+      separators.push(customSeparator);
+    }
   }
 }
 
