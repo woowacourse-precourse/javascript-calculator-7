@@ -1,4 +1,18 @@
 class App {
+  async run() {
+    try {
+      console.log(this.add('')); // 0
+      console.log(this.add('1,2')); // 3
+      console.log(this.add('1,2,3')); // 6
+      console.log(this.add('1,2:3')); // 6
+      console.log(this.add('//;\n1;2;3')); // 6
+      console.log(this.add('//|\n1|2|3')); // 6
+      console.log(this.add('1,\n2')); // [ERROR] Invalid input
+    } catch (error) {
+      console.error(error.message);
+    }
+  }
+
   /**
    * 문자열 덧셈 계산기 함수
    * @param {string} input - 입력된 문자열
