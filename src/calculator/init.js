@@ -1,9 +1,5 @@
 import { MissionUtils } from '@woowacourse/mission-utils';
-import {
-  hasCustomSeparator,
-  setCustomSeparator,
-  splitBySeparators,
-} from './separator.js';
+import { Calculator } from './calculator.js';
 
 const getInput = async () => {
   try {
@@ -16,26 +12,13 @@ const getInput = async () => {
   }
 };
 
-const processInputString = (inputString) => {
-  if (hasCustomSeparator(inputString)) {
-    return setCustomSeparator(inputString);
-  } else {
-    return {
-      separators: new Set([',', ':']),
-      remainingString: inputString,
-    };
-  }
-};
-
-const sumArrayElements = (arr) => {
-  return arr.reduce((acc, element) => acc + element, 0);
-};
-
 const init = async () => {
+  const calculator = new Calculator();
+
   const inputString = await getInput();
-  const { separators, remainingString } = processInputString(inputString);
-  const calculationArr = splitBySeparators(separators, remainingString);
-  MissionUtils.Console.print(`결과 : ${sumArrayElements(calculationArr)}`);
+  const result = calculator.calculate(inputString.trim());
+
+  MissionUtils.Console.print(`결과 : ${result}`);
 };
 
 export default init;
