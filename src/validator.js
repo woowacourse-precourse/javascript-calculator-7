@@ -57,7 +57,7 @@ export default class Validator {
 
   static #checkIncludeZero(input, customSeparator) {
     const separatorRegExp = new RegExp(
-      `${customSeparator ? customSeparator + '|[,:]' : '[,:]'}0`,
+      `[${customSeparator ? customSeparator + '|[,:]' : '[,:]'}]0`,
     );
 
     if (separatorRegExp.test(input)) throw new Error(errorMessage.usePositive);
