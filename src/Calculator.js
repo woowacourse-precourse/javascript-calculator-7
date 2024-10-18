@@ -1,8 +1,5 @@
-import { Console } from "@woowacourse/mission-utils";
 import { Validator } from "./Validator.js";
-
-const CUSTOM_START = "//";
-const CUSTOM_END = "\\n";
+import { CUSTOM_DELIMITER_STATEMENT } from "./constants/constants.js";
 
 export class Calculator {
   #string;
@@ -14,14 +11,16 @@ export class Calculator {
   }
 
   setCustomDelimiter(userInput) {
-    const CUSTOM_END_INDEX = userInput.indexOf(CUSTOM_END);
+    const CUSTOM_END_INDEX = userInput.indexOf(CUSTOM_DELIMITER_STATEMENT.END);
 
     if (Calculator.isSetCustomDelimiter(userInput, CUSTOM_END_INDEX)) {
       this.#customDelimiter = userInput.slice(
-        CUSTOM_START.length,
+        CUSTOM_DELIMITER_STATEMENT.START.length,
         CUSTOM_END_INDEX
       );
-      this.#string = userInput.slice(CUSTOM_END_INDEX + CUSTOM_END.length);
+      this.#string = userInput.slice(
+        CUSTOM_END_INDEX + CUSTOM_DELIMITER_STATEMENT.END.length
+      );
     }
 
     if (!Calculator.isSetCustomDelimiter(userInput, CUSTOM_END_INDEX)) {
@@ -31,11 +30,17 @@ export class Calculator {
   }
 
   static isSetCustomDelimiter(userInput, customEndIndex) {
-    if (userInput.startsWith(CUSTOM_START) && customEndIndex !== -1) {
+    if (
+      userInput.startsWith(CUSTOM_DELIMITER_STATEMENT.START) &&
+      customEndIndex !== -1
+    ) {
       return true;
     }
 
-    if (!userInput.startsWith(CUSTOM_START) || customEndIndex === -1) {
+    if (
+      !userInput.startsWith(CUSTOM_DELIMITER_STATEMENT.START) ||
+      customEndIndex === -1
+    ) {
       return false;
     }
   }
