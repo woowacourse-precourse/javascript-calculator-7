@@ -1,6 +1,6 @@
 import Validator from './Validator.js';
-import UserInputHandler from './userInputHandler.js';
 import {
+  sum,
   getCustomSeparator,
   getRemovedCustomSeparator,
   getSplitedBySeparator,
@@ -9,7 +9,7 @@ import {
 export default class CalculatorService {
   static sumUserInput(input, customSeparator) {
     const splitedUserInput = getSplitedBySeparator(input, customSeparator);
-    return UserInputHandler.sum(splitedUserInput);
+    return sum(splitedUserInput);
   }
 
   static validateUserInput(input) {
@@ -26,6 +26,6 @@ export default class CalculatorService {
       return { customSeparator, processedUserInput };
     }
 
-    return { customSeparator: null, processedUesrInput: input };
+    return { customSeparator: null, processedUserInput: input };
   }
 }
