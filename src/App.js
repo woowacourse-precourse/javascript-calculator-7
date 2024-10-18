@@ -1,5 +1,13 @@
+import displayInputGuide from './inputHandler.js';
+
 class App {
-  async run() {}
+  constructor() {
+    this.inputHandler = { displayInputGuide };
+  }
+
+  async run() {
+    this.inputHandler.displayInputGuide();
+  }
 }
 
 export default App;
