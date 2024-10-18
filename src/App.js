@@ -14,7 +14,12 @@ async function getString() {
 
 // 4. 유효한 입력인지 확인
 function vaildateInput(inputString, customString) {
-  // 양수이며, 구분자 하나에 문자 하나 inputString = /^(\/\/\D\\n)?(\d+[:,${customString}]?){1, }(\d+)/
+  const regex = new RegExp(`(\/\/\D\\n)?(\s|(\d+[:,${customString}]?)+(\d+))`);
+  if (!inputString.match(regex)) {
+    throw new Error('[ERROR]');
+  } else {
+    return inputString;
+  }
 }
 
 // 3. 커스텀구분자를 설정하는 기능
@@ -52,9 +57,9 @@ class App {
     try {
       const inputString = await getString();
       // 유효한 입력인지 확인
-      const vaildInput = vaildateInput(inputString);
+      vaildateInput(inputString);
     } catch (error) {
-      Console.print();
+      console.error(error.message);
     }
 
     //const inputString = await getString();
