@@ -7,10 +7,7 @@ export function getSeparatorConflictPattern(customSeparator) {
 }
 
 export function getSeparatorPattern(customSeparator, followingChar = '0') {
-  const defaultSeparators = '[,:]';
-  const separator = customSeparator
-    ? `${customSeparator}|${defaultSeparators}`
-    : defaultSeparators;
+  const separator = customSeparator ? `[${customSeparator}:,]` : `[:,]`;
 
   return new RegExp(`${separator}${followingChar}`);
 }
