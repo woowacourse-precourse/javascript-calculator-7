@@ -6,6 +6,10 @@ class Validator {
   /** @type {SchemaValidator} */
   #validator;
 
+  /**
+   *
+   * @param {SchemaValidator} validator
+   */
   constructor(validator) {
     this.#validator = validator;
   }
