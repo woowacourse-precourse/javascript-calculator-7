@@ -6,6 +6,10 @@ export default class Calculator {
         const delimiters = this.getDelimiters(input)
         const tokens = this.splitByDelimiters(input, delimiters)
 
+        this.isValidInput(tokens)
+
+        return tokens.reduce((acc, cur) => acc + cur, 0)
+
 
     }
 
@@ -22,9 +26,17 @@ export default class Calculator {
         let tokens = []
         for (let item of input) {
             if (!delimiters.includes(item)) {
-                tokens.push(item)
+                tokens.push(Number(item))
             }
         }
         return tokens
+    }
+
+    isValidInput(tokens) {
+        for (let item of tokens) {
+            if (typeof item !== 'number' || isNaN(item)) {
+                throw new Error("[ERROR]")
+            }
+        }
     }
 }
