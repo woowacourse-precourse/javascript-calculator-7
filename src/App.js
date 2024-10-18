@@ -40,6 +40,7 @@ class App {
       hap += Number(num);
       return hap;
     }, 0);
+    Console.print(result);
   }
 }
 
