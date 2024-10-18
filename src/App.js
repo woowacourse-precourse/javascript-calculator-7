@@ -5,12 +5,14 @@ class App {
     const delimiters = [',', ':'];
     //사용자의 입력값 받기
     const input = await Console.readLineAsync("덧셈할 문자열을 입력해 주세요.\n");
+    let formula = input;
     //사용자의 입력값이 커스텀 구분자를 정의하며 시작하는지 검사
     if (input.startsWith("//")) {
       //커스텀 구분자를 정의하며 시작했다면 커스텀 구분자 추출
-      const formula = this.extractionCustomDelimiter(input, delimiters);
+      formula = this.extractionCustomDelimiter(input, delimiters);
     }
-
+    //수식 유효성 검사
+    this.validateFormula(formula, delimiters)
   }
 
   extractionCustomDelimiter(input, delimiters) {
@@ -34,6 +36,23 @@ class App {
     }
     return formula;
   };
+
+  validateFormula(formula, delimiters) {
+    if (delimiters.join('').indexOf('-') === -1 && /-(\d+)/.test(formula)) {
+      throw new Error("[ERROR] 음수는 허용되지 않습니다.");
+    }
+
+    // 숫자 유효성 검사 (숫자와 구분자만 존재하는지 확인)
+    const validFormulaRegex = new RegExp(`^([0-9]+|[${delimiters.join('')}])+$`);
+    if (!validFormulaRegex.test(formula)) {
+      throw new Error("[ERROR] 유효하지 않은 형식입니다.");
+    }
+
+    // 연속된 구분자 방지
+    if (/([,;:!@#$%^&*()_\-+=\[\]{};:'",.<>?/\\|~`]){2,}/.test(formula)) {
+      throw new Error("[ERROR] 구분자가 연속으로 사용되었습니다.");
+    }
+  }
 };
 
 export default App;
