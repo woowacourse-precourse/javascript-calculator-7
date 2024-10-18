@@ -22,6 +22,9 @@ class App {
     //배열에 있는 수를 sum에 더해줌
     let sum = 0;
     nums.forEach(num => {
+      if(num<0){
+        throw new Error("[ERROR] : 음수를 입력했습니다");
+      }
       sum += Number(num);
     })
     
