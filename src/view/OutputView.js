@@ -2,7 +2,7 @@
 import { Console } from '@woowacourse/mission-utils';
 import { GAME_MESSAGE } from '../constants/gameMessages.js';
 
-const OutputView = {
+const outputView = {
   /**@param {number} result */
   printResult(result) {
     this.printMessage(`${GAME_MESSAGE.RESULT} ${result}`);
@@ -14,4 +14,4 @@ const OutputView = {
   },
 };
 
-export default OutputView;
+export default outputView;

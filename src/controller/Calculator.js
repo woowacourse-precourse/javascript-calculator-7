@@ -2,7 +2,7 @@
 import User from '../user/User.js';
 import { DELIMITER } from '../constants/delimiter.js';
 import { _go, extractCustomDelimiter } from '../util/util.js';
-import OutputView from '../view/OutputView.js';
+import outputView from '../view/outputView.js';
 import throwError from '../util/errorThrower.js';
 import { ERROR_MESSAGE } from '../constants/errorMessages.js';
 
@@ -29,7 +29,7 @@ class Calculator {
       (numbers) => numbers.map(Number),
       this.calculate,
       /**@type {(result: number) => void}   */
-      (result) => OutputView.printResult(result)
+      (result) => outputView.printResult(result)
     );
   }
 
