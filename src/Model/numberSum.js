@@ -14,7 +14,7 @@ const NumberSum = userInput => {
   for (let i = 0; i < splitNumbers.length; i += 1) {
     totalNumberSum += parseInt(splitNumbers[i]);
   }
-  Console.print('결과: ' + totalNumberSum);
+  Console.print('결과 : ' + totalNumberSum);
 };
 
 export default NumberSum;
