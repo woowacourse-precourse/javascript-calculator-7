@@ -15,7 +15,7 @@ class App {
       const parseNum = await parseInput(inputStr);
       const sumNum = await sumInput(parseNum);
 
-      Console.print(sumNum);
+      Console.print('결과 : ' + sumNum);
 
     } catch (error) {
       Console.print(error.message);
