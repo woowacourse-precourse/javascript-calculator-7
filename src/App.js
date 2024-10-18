@@ -59,10 +59,8 @@ class App {
   }
 
   checkCustomSplitStringByDelimiter(inputString) {
-    return (
-      inputString.startsWith('//') && 
-      inputString[3] === '\\' && 
-      inputString[4] === 'n');
+    return (inputString[0] === '/' && inputString[1] === '/'
+      && inputString[3] === '\\' && inputString[4] === 'n');
   }
 
   getMergedDelimiters(inputString, delimiters) {
