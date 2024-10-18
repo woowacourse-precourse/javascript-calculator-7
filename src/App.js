@@ -1,43 +1,46 @@
 const { Console } = await import("@woowacourse/mission-utils");
 class App {
   async run() {
+    Console.print("덧셈할 문자열을 입력해 주세요.");
+
+    let result = 0;
     let input = await Console.readLineAsync("");
     input = input.replace(" ", ""); // 공백 제거
 
     const type = this.checkType(input);
-    
+
     switch(type) {
       case "default":
-        if (checkDefaultValidation(input) == false) {
-          throw validationError();
+        if (this.checkDefaultValidation(input) == false) {
+          throw this.validationError();
         }
 
-        calculateDefault();
+        result = this.calculateDefault(input);
         break;
       case "custom":
-        if (checkCustomValidation(input) == false) {
-          throw validationError();
+        if (this.checkCustomValidation(input) == false) {
+          throw this.validationError();
         }
 
-        calculateCustom();
+        result = this.calculateCustom(input);
         break;
       default:
-        if (checkDefaultValidation(input) == false) {
-          throw validationError();
+        if (this.checkDefaultValidation(input) == false) {
+          throw this.validationError();
         }
 
-        calculateDefault();
+        result = this.calculateDefault(input);
         break;
     }
 
-    Console.print(input);
+    Console.print("결과 : " + result);
   }
 
   // 기본형인지 커스텀 타입인지 구분하는 메서드
   checkType(input) {
-    const regExp = new RegExp(/^(\/\/.\\n)/g);
+    const regExp = new RegExp(/^(\/\/.+\\n)/g);
 
-    if (input.test(regExp) === true) {
+    if (input.match(regExp) !== null) {
       return "custom";
     }
 
@@ -65,7 +68,7 @@ class App {
       dividerRegExp += `\\` + divider[i];
     }
 
-    const regExp = new RegExp(`^\\/\\/${dividerRegExp}\\\n\\d+(${dividerRegExp}\\d+)*$`, 'g');
+    const regExp = new RegExp(`^\\/\\/${dividerRegExp}\\\\n\\d+(${dividerRegExp}\\d+)*$`, 'g');
 
     // 첫 시작이 //특수문자\n 가 아니거나
     // 끝 문자가 숫자가 아니거나
@@ -89,7 +92,7 @@ class App {
   calculateCustom(input) {
     const divider = this.getCustomDivider(input);
     const sum = input
-      .slice(divider.length + 2)
+      .slice(divider.length + 4)
       .split(divider)
       .map((str) => Number(str))
       .reduce((prev, curr) => prev + curr, 0);
@@ -98,7 +101,7 @@ class App {
   }
 
   getCustomDivider(input) {
-    return input.slice(2, input.indexOf("\n"));;
+    return input.substring(2, input.search(/\\n/));
   }
 
   validationError() {
