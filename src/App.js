@@ -26,6 +26,7 @@ function stringCalculator(input) {
   }
 
   checkCustomDelimiterPosition(input);
+  checkMultipleDelimiter(input);
   var parsedArray = [];
 
   const customDelimiter = /^\/\/(.)\n(.*)/;
@@ -103,6 +104,13 @@ function checkSpecialCharacters(resultSepArray) {
 function checkCustomDelimiterPosition(input) {
   if (input.includes('//') && !input.startsWith('//')) {
     throw new Error("[ERROR] 커스텀 구분자는 맨 앞에 위치해야 합니다.");
+  }
+}
+
+function checkMultipleDelimiter(input) {
+  const multipleDelimiterPattern = /[,|:]{2,}/;
+  if (multipleDelimiterPattern.test(input)) {
+    throw new Error("[ERROR] 구분자가 여러개 사용되었습니다.");
   }
 }
 
