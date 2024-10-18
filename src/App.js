@@ -1,8 +1,9 @@
-import io from "./io/io.js";
+import Calculator from "./calculator.js";
 
 class App {
   async run() {
-    io();
+    const myCalculator = new Calculator();
+    await myCalculator.run();
   }
 }
 
