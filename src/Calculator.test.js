@@ -53,12 +53,11 @@ describe("regex test", () => {
   });
 });
 
-// 랜덤으로 숫자를 제외한 아스키 제공
 const getRandomAscii = () => {
   let randomAscii = "";
+  let randomNum = Math.floor(Math.random() * 100 + 26); // 0~99 범위 난수
   while (true) {
-    let randomNum = Math.floor(Math.random() * 100); // 0~99 범위 난수
-    if (randomNum < 48 || randomNum > 57) {
+    if (randomNum < 126 || randomNum > 32) {
       // 숫자 범위(48~57)를 제외
       randomAscii = String.fromCharCode(randomAscii);
       break;
