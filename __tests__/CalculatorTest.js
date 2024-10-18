@@ -29,19 +29,19 @@ describe("findCustomSeparator()", () => {
   const { findCustomSeparator } = calculator;
 
   test("커스텀 구분자가 없을 때 등록하지 않음", async () => {
-    expect(findCustomSeparator("")).toEqual([]);
+    expect(findCustomSeparator([])).toEqual([]);
   });
 
   test("커스텀 구분자 1개 등록", async () => {
-    expect(findCustomSeparator("//;")).toEqual([";"]);
+    expect(findCustomSeparator(["//;"])).toEqual([";"]);
   });
 
   test("서로 다른 커스텀 구분자 여러 개 등록", async () => {
-    expect(findCustomSeparator("//;//$")).toEqual([";", "$"]);
+    expect(findCustomSeparator(["//;", "//$"])).toEqual([";", "$"]);
   });
 
   test("같은 커스텀 구분자 여러 개 등록", async () => {
-    expect(findCustomSeparator("//;//;")).toEqual([";"]);
+    expect(findCustomSeparator(["//;", "//;"])).toEqual([";"]);
   });
 });
 

@@ -6,18 +6,19 @@ class Calculator {
     */
   findCustomSeparatorAndNumbers(text) {
     const customSeparatorAndNumbers = text.split("\n");
+    // TODO: 원본 배열을 건드는 게 바람직한 일일까?
     const numbers = customSeparatorAndNumbers.pop();
     return { customSeparator: customSeparatorAndNumbers, numbers };
   }
 
   /**
     *
-    * @param {string} text - "//"로 시작하는 커스텀 구분자들의 문자열
+    * @param {string[]} separators - "//"로 시작하는 커스텀 구분자들의 문자열 배열
     * @returns {string[]}
     */
-  findCustomSeparator(text) {
-    if (!text) return [];
-    return [...new Set(text.split("//").slice(1))];
+  findCustomSeparator(separators) {
+    if (!separators.length) return [];
+    return [...new Set(separators.map((sep) => sep.split("//")[1]))];
   }
 
   /**
