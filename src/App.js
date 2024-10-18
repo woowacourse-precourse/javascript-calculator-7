@@ -89,7 +89,9 @@ class App {
   }
 
   async run() {
-    const userInput = await this.console.read("덧셈할 문자열을 입력해 주세요.");
+    const userInput = await this.console.read(
+      "덧셈할 문자열을 입력해 주세요.\n"
+    );
     this.calculator.extractCustomSeperator(userInput);
     const processedInput = this.calculator.replaceAllSeperators(userInput);
     const validInputArray = this.calculator.validateInput(processedInput);
