@@ -108,14 +108,27 @@ describe("문자열 계산기", () => {
     });
   });
 
-
-
   test("숫자 하나만 입력", async () => {
     const inputs = ["1"];
     mockQuestions(inputs);
 
     const logSpy = getLogSpy();
     const outputs = ["결과 : 1"];
+
+    const app = new App();
+    await app.run();
+
+    outputs.forEach((output) => {
+      expect(logSpy).toHaveBeenCalledWith(expect.stringContaining(output));
+    });
+  });
+
+  test("커스텀 구분자의 위치 선언이 잘못된 경우", async () => {
+    const inputs = ["1,2:3//*\n"];
+    mockQuestions(inputs);
+
+    const logSpy = getLogSpy();
+    const outputs = ["[ERROR] 커스텀 구분자는 맨 앞에 위치해야 합니다."];
 
     const app = new App();
     await app.run();

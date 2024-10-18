@@ -100,7 +100,8 @@ function checkSpecialCharacters(resultSepArray) {
 }
 
 function convertNumArray(resultSepArray) {
-  return resultSepArray.map((item) => parseInt(item, 10));
+  var convertNumArray = resultSepArray.map((item) => parseInt(item, 10));
+  return convertNumArray;
 }
 
 function calculateSum(resultNumArray) {
