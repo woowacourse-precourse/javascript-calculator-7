@@ -65,6 +65,9 @@ class App {
       await this.getSeparator();
       await this.validateInput();
       this.calculateSum();
+
+      // 결과 출력
+      Console.print(`결과 : ${this.result}`);
     } catch (error) {
       throw new Error(error);
     }
