@@ -8,6 +8,9 @@ class App {
 
     // 구분자를 저장하는 배열
     this.delimiter = [",", ":"];
+
+    // 구분자에 따라 분리된 배열을 저장
+    this.splitArray = [];
   }
 
   async run() {
@@ -17,8 +20,13 @@ class App {
   // "덧셈할 문자열을 입력해 주세요."란 문장의 출력과 함께 문자열을 입력 받습니다.
   input() {
     Console.readLine("덧셈할 문자열을 입력해 주세요.\n", (answer) => {
-      this.answer = answer;
-      this.isCustom(this.answer);
+      try {
+        this.answer = answer;
+        this.isCustom(this.answer);
+        this.splitByDelimiter();
+      } catch (error) {
+        console.log(error);
+      }
     });
   }
 
@@ -38,6 +46,13 @@ class App {
       // 커스텀 구분자를 제거한다.
       this.answer = this.answer.slice(5);
     }
+  }
+
+  // 구분자에 따라 배열로 분리한다.
+  splitByDelimiter() {
+    const REG_EXP = new RegExp(`[${this.delimiter.join("")}]`, "g");
+    this.splitArray = this.answer.split(REG_EXP);
+    this.answer = this.splitArray.join("");
   }
 }
 
