@@ -10,7 +10,7 @@ class App {
     }
 
     let delimiters = [',', ':'];
-    const customDelimiter = inputString.match(/\/\/(.*?)\\n/);
+    const customDelimiter = inputString.match(/^\/\/(.*?)\\n/);
     let numbers = inputString;
 
     if (customDelimiter) {
@@ -18,7 +18,9 @@ class App {
       numbers = inputString.split('\\n')[1];
     }
 
-    const delimiterRegex = new RegExp(`[${delimiters.join('')}]`);
+    const delimiterRegex = new RegExp(
+      `[${delimiters.join('').replace(/\\/g, '\\\\')}]`
+    );
     const numberArray = numbers.split(delimiterRegex);
 
     const hasInvalidNumber = numberArray.some((num) => !/^\d+$/.test(num));
