@@ -9,6 +9,11 @@ class App {
   async run() {
     this.#str = await IOManager.input();
 
+    if (this.#isEmptyInput()) {
+      IOManager.output(0);
+      return;
+    }
+
     const analysis = new Analysis([',', ':']);
     const { newSeperators, seperatedArr } = analysis.getInfo(this.#str);
 
@@ -17,6 +22,10 @@ class App {
 
     const answer = ArrayUtil.sum(seperatedArr);
     IOManager.output(answer);
+  }
+
+  #isEmptyInput() {
+    return this.#str === '';
   }
 }
 
