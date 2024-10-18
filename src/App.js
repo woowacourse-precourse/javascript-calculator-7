@@ -12,37 +12,41 @@ import {
 class App {
   async run() {
     const userInput = await readLineAsync();
-    const stringifiedUserInput = stringifyToJSON(userInput);
+    const processedInput = this.processInput(userInput);
+    const sum = this.calculateSum(processedInput);
+    printResult(sum);
+  }
 
+  processInput(input) {
+    const stringifiedUserInput = stringifyToJSON(input);
     const separator = this.getSeparator(stringifiedUserInput);
     const userInputWithoutSeparator =
       this.extractSeparator(stringifiedUserInput);
-
     const separatorRegExp = convertCharacterClassRegex(separator);
 
-    const separatedUserInput = userInputWithoutSeparator.split(separatorRegExp);
-
-    validatePositiveNumberArray(separatedUserInput);
-
-    const separatedUserInputsNumberArray =
-      convertNumberArray(separatedUserInput);
-
-    const sumOfUserInput = sumArray(separatedUserInputsNumberArray);
-
-    printResult(sumOfUserInput);
+    return userInputWithoutSeparator.split(separatorRegExp);
   }
 
   getSeparator(str) {
     const customSeparator = str.match(CUSTOM_SEPARATOR_REGEXP);
+
     if (customSeparator) return customSeparator[0].replace('\\', '\\\\');
     return DEFAULT_SEPARATOR;
   }
 
   extractSeparator(str) {
     const customSeparator = str.match(CUSTOM_SEPARATOR_REGEXP);
+
     if (customSeparator)
       return str.replace(CUSTOM_SEPARATOR_REGEXP, '').slice(1, -1);
     return str.slice(1, -1);
+  }
+
+  calculateSum(input) {
+    validatePositiveNumberArray(input);
+    const separatedUserInputsNumberArray = convertNumberArray(input);
+
+    return sumArray(separatedUserInputsNumberArray);
   }
 }
 
