@@ -111,8 +111,8 @@ class App {
   static isValidNumbers(separators, numbers) {
     let numberString = numbers;
     separators.forEach((separator, index) => {
-      const nextSeparator = separators[index + 1];
-      numberString = numbers.split(separator).join(nextSeparator ?? '');
+      const nextSeparator = separators[index + 1] ?? '';
+      numberString = numberString.split(separator).join(nextSeparator);
     });
 
     if (Number.isNaN(Number(numberString))) {
