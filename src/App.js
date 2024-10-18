@@ -17,6 +17,14 @@ class App {
       return result;
     }
   }
+
+  sum(splitedList) {
+    let result = splitedList.reduce((acc, cur) => {
+      return parseInt(acc) + parseInt(cur);
+    }, 0);
+
+    return result;
+  }
 }
 
 export default App;
