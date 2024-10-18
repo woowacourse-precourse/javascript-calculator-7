@@ -1,4 +1,5 @@
 import { MissionUtils } from "@woowacourse/mission-utils";
+import { IncludeZeroError } from "./Error";
 
 class Input {
   async getPlusString() {
@@ -28,6 +29,7 @@ class Input {
    * @returns
    */
   validateNumbers(numbers) {
+    if (numbers.includes("0")) throw new IncludeZeroError();
     return numbers;
   }
 }

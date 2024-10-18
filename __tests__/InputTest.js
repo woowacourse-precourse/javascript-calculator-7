@@ -1,5 +1,6 @@
 import { MissionUtils } from "@woowacourse/mission-utils";
 import Input from "../src/Input";
+import { IncludeZeroError } from "../src/Error";
 
 const { Console } = MissionUtils;
 
@@ -77,5 +78,9 @@ describe("validateNumbers()", () => {
 
   test("연산 문자열이 구분자와 양수로 이루어져 있으면 문자열 그대로 반환", () => {
     expect(validateNumbers("1,2,3")).toBe("1,2,3");
+  });
+
+  test("연산 문자열에 0이 포함되어 있으면 IncludeZeroError 반환", () => {
+    expect(() => validateNumbers("0,1,2")).toThrow(IncludeZeroError);
   });
 });
