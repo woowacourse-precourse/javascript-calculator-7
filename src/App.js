@@ -23,6 +23,7 @@ class App {
 
     // "//"와 "\\n"사이에 커스텀 구분자가 있을 경우
     if (this.customSeperators.every(e => str.includes(e))) {
+      this.checkCustomSeperator(str)
       return
     };
 
@@ -33,6 +34,18 @@ class App {
 
     // 그 외의 경우 예외처리
     this.printError('알 수 없는 오류가 발생했습니다 앱을 다시 실행해주세요');
+  }
+
+  checkCustomSeperator(customStr) {
+    const start = customStr.indexOf('//');
+    const end = customStr.indexOf('\\n');
+    const customSeperator = customStr.slice(start + 2, end);
+
+    ////와 \\n사이에 아무 문자가 없을 경우
+    if (!customSeperator) {
+      return this.printError('커스텀 구분자는 //와 \\n사이에 있어야 합니다');
+    }    
+    return
   }
 
 
