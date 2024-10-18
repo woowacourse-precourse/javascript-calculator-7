@@ -23,4 +23,16 @@ describe("StringCalculator", () => {
       expect(() => calculator.validateInput("//;\n1")).not.toThrow();
     });
   });
+
+  describe("extractCustomDelimiter", () => {
+    test("커스텀 구분자를 추출한다", () => {
+      const calculator = new StringCalculator();
+      expect(calculator.extractCustomDelimiter("//;\n1;2;3")).toBe(";");
+    });
+
+    test("커스텀 구분자가 없으면 null을 반환한다", () => {
+      const calculator = new StringCalculator();
+      expect(calculator.extractCustomDelimiter("1,2:3")).toBe(null);
+    });
+  });
 });
