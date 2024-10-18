@@ -27,6 +27,8 @@ export class Calculator {
   // 커스텀 구분자 확인 함수
   checkCustom(string) {
     let customInput = string.match(/^\/\/(.)\\n/); // ; 추출
+    //  커스텀 구분자가 숫자일때 false 출력
+    if (isNaN(customInput)) return false;
     // 커스텀 구분자가 있는 케이스
     if (customInput) {
       let sliceInput = string.split("\\n")[1];

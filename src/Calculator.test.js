@@ -78,7 +78,7 @@ describe("regex_random_test", () => {
   console.log(testInput);
   test(`random : ${testInput}`, () => {
     expect(calculator.testRegex(testInput)).toEqual(
-      randomNumberList != []
+      randomNumberList.length != 0
         ? {
             error: false,
             numbers: randomNumberList,
