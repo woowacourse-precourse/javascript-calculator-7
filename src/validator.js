@@ -2,13 +2,13 @@ import { errorMessage } from './constant.js';
 
 export default class Validator {
   static validateCustomSeparator(input) {
-    this.#checkIncludeNewLine(input);
+    this.#checkMissingNewLine(input);
     this.#checkCustomSeparator(input);
   }
 
   static validateUsedSeparator(input, customSeparator) {
-    this.#checkUseOtherSeperator(input, customSeparator);
-    this.#checkSeperatorConflict(input, customSeparator);
+    this.#checkInvalidSeparatorUsage(input, customSeparator);
+    this.#checkConflictingSeparators(input, customSeparator);
     this.#checkIncludeZero(input, customSeparator);
   }
 
@@ -28,7 +28,7 @@ export default class Validator {
     return regExp.test(input);
   }
 
-  static #checkSeperatorConflict(input, customSeperator) {
+  static #checkConflictingSeparators(input, customSeperator) {
     const regExpString = customSeperator
       ? `${customSeperator}{2,}|${customSeperator}[,:]|[,:]{2,}|[,:]${customSeperator}`
       : `,{2,}|:{2,}|,:|:,`;
@@ -39,7 +39,7 @@ export default class Validator {
     }
   }
 
-  static #checkIncludeNewLine(input) {
+  static #checkMissingNewLine(input) {
     const newLineRegExp = /\\n/;
     if (!newLineRegExp.test(input))
       throw new Error(errorMessage.missingNewLine);
@@ -63,7 +63,7 @@ export default class Validator {
     if (separatorRegExp.test(input)) throw new Error(errorMessage.usePositive);
   }
 
-  static #checkUseOtherSeperator(input, customSeparator) {
+  static #checkInvalidSeparatorUsage(input, customSeparator) {
     const separatorRegExp = new RegExp(
       `${customSeparator ? customSeparator + '|[,:]' : '[,:]'}`,
     );
