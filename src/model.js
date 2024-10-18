@@ -10,6 +10,10 @@ class CalculatorModel {
     }
 
     const { SEPARATOR, NUMBERS } = this.parseInput(input);
+    if (NUMBERS.length === 0) {
+      return 0;
+    }
+
     this.validateNumbers(NUMBERS);
 
     return NUMBERS.reduce((sum, num) => sum + num, 0);
@@ -36,12 +40,13 @@ class CalculatorModel {
 
   // 숫자 목록을 검증하는 함수
   validateNumbers(NUMBERS) {
+    const FREFIX_ERROR = "[ERROR]";
     for (const num of NUMBERS) {
       if (isNaN(num)) {
-        throw new Error("[ERROR] 숫자가 아닌 값이 포함되었습니다.");
+        throw new Error(`${FREFIX_ERROR} 숫자가 아닌 값이 포함되었습니다`);
       }
       if (num < 0) {
-        throw new Error("[ERROR] 음수는 허용되지 않습니다.");
+        throw new Error(`${FREFIX_ERROR} 음수는 입력할 수 없습니다`);
       }
     }
   }
