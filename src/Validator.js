@@ -35,12 +35,12 @@ class Validator {
 
   /**
    *
-   * @param {Array<string>} value
+   * @param {Array<string>} values
    * @throws {string}
    */
-  validate(value) {
+  validate(values) {
     this.#validator
-      .validate(value)
+      .validate(values)
       .with(this.#hasAllowedDelimiters, {
         message: Validator.ERROR_MESSAGE.HAS_NOT_ALLOWED_DELIMITER,
       })
