@@ -17,15 +17,13 @@ export default class CalculatorService {
   }
 
   static parseUserInput(input) {
-    let customSeparator = null;
-    let processedUserInput = null;
-
-    if (Validator.checkStartWidthDubbleSlash(input)) {
+    if (input.startsWith('//')) {
       Validator.validateCustomSeparator(input);
       customSeparator = UserInputHandler.getCustomSeparator(input);
       processedUserInput = UserInputHandler.getRemovedCustomSeparator(input);
+      return { customSeparator, processedUserInput };
     }
 
-    return { customSeparator, processedUserInput: processedUserInput || input };
+    return { customSeparator: null, processedUesrInput: input };
   }
 }
