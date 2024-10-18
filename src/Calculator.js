@@ -20,13 +20,14 @@ class Calculator {
     }
 
     validateInput(input) {
-        let result = 0;
+        let result = 0; // 덧셈 결과
         let userInput = input.trim();
+        let isPositiveNum = false; // 양수인지 판단하는 변수
+        const DEFAULT_SEPARATORS = [',',':'];   // default 구분자
         
         // 입력값이 없을 때 throw new Error
         if(!userInput) throw new Error(errorMessage.NO_INPUT);
 
-        const separators = [',',':'];
 
         // 커스텀 구분자가 있는지
         if(userInput.startsWith("//")) {
@@ -40,14 +41,20 @@ class Calculator {
         }
         
         // 쉼표 또는 콜론 구분자가 있는지
-        const hasDefaultSeparator = separators.some(v => userInput.includes(v));
+        const hasDefaultSeparator = DEFAULT_SEPARATORS.some(v => userInput.includes(v));
 
-        // 구분자가 아닌 문자가 포함되어 있는지
-        const includeInvalidStr = userInput.split(/[,|:]/).filter(Boolean).map(Number).some(v => Number.isNaN(v));
-
-        let isPositiveNum = false;
+        // 기본 구분자를 기준으로 나눈 문자열 배열
+        const separatedStr = userInput.split(/[,|:]/);
         
-        const numbers = hasDefaultSeparator ? userInput.split(/[,|:]/).filter(Boolean).map(Number) : 
+        // 구분자가 연속됐는지
+        const regex = /,,|,:|:,|::/g;
+        const isRepeated = regex.test(userInput)
+
+        // 구분자가 아닌 문자가 포함되어 있는지(구분자가 연속됐을 때도 해당)
+        const includeInvalidStr = isRepeated || separatedStr.filter(Boolean).map(Number).some(v => Number.isNaN(v))  
+        
+        // 숫자 배열
+        const numbers = hasDefaultSeparator ? separatedStr.filter(Boolean).map(Number) : 
         userInput.match(/-?\d+/g).map(Number);
         
         if(numbers && numbers.length > 0) {
@@ -55,7 +62,7 @@ class Calculator {
             // 양수인지
             isPositiveNum = numbers.every(v => v > 0);
 
-            // 올바른 값일 때 합계 구하기
+            // 올바른 입력 값일 때 합계 구하기
             if(isPositiveNum && !includeInvalidStr) {
                const sum = numbers.reduce((acc, curr) => acc + curr, 0);
                result = sum;
@@ -71,8 +78,8 @@ class Calculator {
     handleError(hasDefaultSeparator, isPositiveNum, includeInvalidStr) {
         if(!hasDefaultSeparator && !isPositiveNum) {
             throw new Error(errorMessage.NONE_OF_THE_VALUE);
-        } else if(includeInvalidStr) {
-            throw new Error(errorMessage.INCLUDE_INVALID_VALUE);
+        } else if(includeInvalidStr && isPositiveNum) {
+            throw new Error(errorMessage.NO_SEPARATOR);
         } else if(!isPositiveNum) {
             throw new Error(errorMessage.NOT_POSITIVE_NUM);
         }
