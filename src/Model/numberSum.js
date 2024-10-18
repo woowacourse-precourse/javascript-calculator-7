@@ -1,3 +1,4 @@
+import { Console } from '@woowacourse/mission-utils';
 import UserInput from '../View/UserInput.js';
 
 // 구분자 쉼표나 콜론 기준으로 숫자 추출
@@ -10,10 +11,10 @@ const NumberSum = userInput => {
   const splitNumbers = removeStr.split('');
   let totalNumberSum = 0;
 
-  for (let i = 0; i < splitNumbers.length; i++) {
+  for (let i = 0; i < splitNumbers.length; i += 1) {
     totalNumberSum += parseInt(splitNumbers[i]);
   }
-  console.log('결과: ', totalNumberSum);
+  Console.print('결과: ' + totalNumberSum);
 };
 
 export default NumberSum;

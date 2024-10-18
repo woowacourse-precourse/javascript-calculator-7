@@ -9,6 +9,7 @@ class App {
     const input = await UserInput();
     if (notCustomConditionCheck(input) === true || customConditionCheck(input) === true) {
       numberSum(input);
+      return;
     } else {
       throw new Error('[ERROR] 잘못된 입력입니다.');
     }
