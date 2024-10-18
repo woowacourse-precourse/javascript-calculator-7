@@ -9,6 +9,13 @@ class App {
       this.userOutput(NUMBERS);
     } catch (error) {}
   }
+
+  async userInput() {
+    const inputWords = Console.readLineAsync(
+      "덧셈할 문자열을 입력해 주세요.\n"
+    );
+    return inputWords;
+  }
 }
 
 export default App;
