@@ -38,6 +38,8 @@ class App {
       );
       const num_list = this.#get_number_list(user_string);
       const result = this.#get_sum_of_number(num_list);
+
+      Console.print(`결과 : ${result}`);
     } catch (error) {
       return error;
     }
