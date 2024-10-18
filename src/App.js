@@ -3,6 +3,7 @@ import { Console } from "@woowacourse/mission-utils";
 class App {
   async run() {
     let separator = [];
+    let customSeperator = [];
 
     try {
       let string = await Console.readLineAsync(
@@ -12,9 +13,13 @@ class App {
 
       // "//", "\n"이 있다면 커스텀 구분자 지정
       if (separator) {
-        const customSeperator = separator[1];
+        customSeperator = separator[1];
         string = separator[2];
       }
+
+      // 기본 구분자, 커스텀 구분자 기준으로 숫자 배열 생성
+      const regexp = new RegExp(`[,:${customSeperator}]`);
+      const numArr = string.split(regexp).map(Number);
     } catch (error) {}
   }
 }
