@@ -1,9 +1,10 @@
-import { validateMixedDelimiters } from './validator.js';
+import { validateMixedDelimiters, validateOnlyDelimiter } from './validator.js';
 
 function parseDefaultDelimiters(userInput) {
   const defaultDelimiterPattern = /[,:]/g;
   const delimiterSeparatedArray = userInput.split(defaultDelimiterPattern);
 
+  validateOnlyDelimiter(delimiterSeparatedArray);
   return delimiterSeparatedArray;
 }
 
@@ -22,6 +23,7 @@ function parseCustomDelimiters(userInput) {
     .split('\\n')[1]
     .split(customDelimiter);
 
+  validateOnlyDelimiter(delimiterSeparatedArray);
   return delimiterSeparatedArray;
 }
 

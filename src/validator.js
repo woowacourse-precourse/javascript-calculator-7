@@ -17,3 +17,9 @@ export function validateMixedDelimiters(userInput) {
       '[ERROR] 기본 구분자와 커스텀 구분자를 혼합하여 사용할 수 없습니다.',
     );
 }
+
+export function validateOnlyDelimiter(delimiterSeparated) {
+  const isOnlyDelimeter = delimiterSeparated.every((value) => value === '');
+
+  if (isOnlyDelimeter) throw new Error('[ERROR] 구분자만 입력할 수 없습니다.');
+}
