@@ -63,10 +63,13 @@ export function parseNumbers(input) {
   const cleanedNumbers = splitByDefaultDelimiters.map((value) =>
     value === '' ? '0' : value,
   );
-  MissionUtils.Console.print(input.indexOf('\\n'));
-
-  MissionUtils.Console.print(splitByDefaultDelimiters);
-  MissionUtils.Console.print(cleanedNumbers.map(Number));
 
   return cleanedNumbers.map(Number);
+}
+
+// 계산
+export function calculate(input) {
+  const numArr = parseNumbers(input);
+  const sum = numArr.reduce((acc, current) => acc + current, 0); // 배열의 합 계산
+  return sum;
 }
