@@ -18,13 +18,12 @@ class App {
   }
 
   processInput(input) {
-    const stringifiedUserInput = stringifyToJSON(input);
-    const separator = this.getSeparator(stringifiedUserInput);
-    const userInputWithoutSeparator =
-      this.extractSeparator(stringifiedUserInput);
+    const stringified = stringifyToJSON(input);
+    const separator = this.getSeparator(stringified);
+    const content = this.extractContent(stringified);
     const separatorRegExp = convertCharacterClassRegex(separator);
 
-    return userInputWithoutSeparator.split(separatorRegExp);
+    return content.split(separatorRegExp);
   }
 
   getSeparator(str) {
@@ -34,7 +33,7 @@ class App {
     return DEFAULT_SEPARATOR;
   }
 
-  extractSeparator(str) {
+  extractContent(str) {
     const customSeparator = str.match(CUSTOM_SEPARATOR_REGEXP);
 
     if (customSeparator)
@@ -44,9 +43,9 @@ class App {
 
   calculateSum(input) {
     validatePositiveNumberArray(input);
-    const separatedUserInputsNumberArray = convertNumberArray(input);
+    const numberArray = convertNumberArray(input);
 
-    return sumArray(separatedUserInputsNumberArray);
+    return sumArray(numberArray);
   }
 }
 
