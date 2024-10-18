@@ -1,10 +1,10 @@
 // @ts-check
-import { Console } from '@woowacourse/mission-utils';
 import User from '../user/User.js';
-import { GAME_MESSAGE } from '../constants/gameMessages.js';
 import { DELIMITER } from '../constants/delimiter.js';
-import { _go } from '../util/util.js';
+import { _go, extractCustomDelimiter } from '../util/util.js';
 import OutputView from '../view/OutputView.js';
+import throwError from '../util/errorThrower.js';
+import { ERROR_MESSAGE } from '../constants/errorMessages.js';
 
 //덧셈기 게임 관리
 class Calculator {
@@ -13,6 +13,7 @@ class Calculator {
     this.user = user;
   }
 
+  /**@returns {Promise<void>} */
   async start() {
     const input = await this.user.readAnswer();
     this.calculate(input);
@@ -24,16 +25,21 @@ class Calculator {
     _go(
       input,
       this.parseInput,
-
       /**@type {(numbers:string[]) => number[]}  */
       (numbers) => numbers.map(Number),
-
-      /**@type {(numbers:number[]) => number}   */
-      (numbers) => numbers.reduce((acc, cur) => acc + cur),
-
+      this.operation,
       /**@type {(result: number) => void}   */
       (result) => OutputView.printResult(result)
     );
+  }
+
+  /**
+   *
+   * @param {number[]} numbers
+   * @returns {void}
+   */
+  operation(numbers) {
+    throwError(`${ERROR_MESSAGE.NO_OPERATION} ${numbers}`);
   }
 
   /**
@@ -41,9 +47,9 @@ class Calculator {
    * @returns {string[]}
    */
   parseInput(input) {
-    if (input.startsWith('//')) {
-      const [delimiterPart, numbersPart] = input.split('\\n');
-      const customDelimiter = delimiterPart.slice(2);
+    const customDelimiter = extractCustomDelimiter(input);
+    if (customDelimiter) {
+      const [, numbersPart] = input.split('\\n');
       return numbersPart.split(customDelimiter);
     }
     return input.split(DELIMITER);
