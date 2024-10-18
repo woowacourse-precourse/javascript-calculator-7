@@ -32,9 +32,7 @@ class App {
     const customSeparatorMatchedString = str.match(CUSTOM_SEPARATOR_REGEXP);
     if (customSeparatorMatchedString)
       return {
-        separator: customSeparatorMatchedString[0]
-          .slice(2, -2)
-          .replace('\\', '\\\\'),
+        separator: customSeparatorMatchedString[1].replace('\\', '\\\\'),
         newUserInput: str.replace(CUSTOM_SEPARATOR_REGEXP, '').slice(1, -1),
       };
     return {
