@@ -27,7 +27,7 @@ class App {
       inputWithoutCustomSeparationSymbols
     );
 
-    this.validateWrongNumber(separatedInput);
+    this.validateAdditionNumbers(separatedInput);
 
     this.printResult(separatedInput);
   }
@@ -54,7 +54,7 @@ class App {
       (m) => m[1]
     );
 
-    this.validateWrongCustomSeparationSymbols(customSeparationSymbols);
+    this.validateCustomSeparationSymbols(customSeparationSymbols);
 
     return customSeparationSymbols;
   }
@@ -74,24 +74,27 @@ class App {
     Console.print(`${PRINT_MESSAGES.FINAL_RESULT}${result}`);
   }
 
-  validateWrongNumber(additionArray) {
+  validateAdditionNumbers(additionArray) {
     additionArray.forEach((num) => {
+      // 배열에 NaN인 값이 있으면 첫 입력에 잘못된 값이 포함되어 있다는 의미
       if (isNaN(num)) {
-        throw new Error('[ERROR] 숫자가 입력되지 않았습니다.');
+        throw new Error(
+          '[ERROR] 잘못된 값이 포함되어 있습니다. 숫자 혹은 구분자만 입력해 주세요.'
+        );
       }
 
       if (num <= 0) {
-        throw new Error('[ERROR] 양수의 숫자만 입력해 주세요.');
+        throw new Error('[ERROR] 합을 구하는 숫자는 양수만 입력해 주세요.');
       }
     });
   }
 
-  validateWrongCustomSeparationSymbols(customSymbols) {
+  validateCustomSeparationSymbols(customSymbols) {
     const symbolRegex = /[!@#$%^&*().?";{}|<>]/;
 
     customSymbols.forEach((symbol) => {
       if (symbol.length !== 1) {
-        throw new Error('[ERROR] 커스텀 구분자는 한 글자씩 입력해 주세요.');
+        throw new Error('[ERROR] 커스텀 구분자는 한 글자만 입력해 주세요.');
       }
 
       if (this.separationSymbols.includes(symbol)) {
@@ -102,7 +105,7 @@ class App {
 
       if (!symbolRegex.test(symbol)) {
         throw new Error(
-          '[ERROR] 커스텀 구분자는 기본 구분자를 제외한 특수문자만 포함할 수 있습니다.'
+          '[ERROR] 커스텀 구분자는 기본 구분자를 제외한 특수문자만 입력해 주세요.'
         );
       }
     });
