@@ -26,12 +26,28 @@ class App {
     return numbers.reduce((total, num) => total + Number(num), 0);
   }
 
+  checkNumbers(numbers) {
+    numbers.forEach((num) => {
+      if (isNaN(Number(num)) || Number(num) < 0) {
+        throw new Error("[ERROR] 잘못된 값이 입력되었습니다.");
+      }
+    });
+  }
+
   async run() {
-    const str = await this.receiveInput();
-    const delimiter = this.getDelimiter(str);
-    const numbers = this.getNumbers(str, delimiter);
-    const sum = this.getSum(numbers);
-    MissionUtils.Console.print("결과 : " + sum);
+    try {
+      const str = await this.receiveInput();
+      const delimiter = this.getDelimiter(str);
+      const numbers = this.getNumbers(str, delimiter);
+      
+      this.checkNumbers(numbers);
+
+      const sum = this.getSum(numbers);
+      MissionUtils.Console.print("결과 : " + sum);
+    } catch (error) {
+      MissionUtils.Console.print(error.message);
+      throw error;
+    }
   }
 }
 
