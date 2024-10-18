@@ -5,7 +5,7 @@ class App {
     const str = await Console.readLineAsync("덧셈할 문자열을 입력해 주세요.\n");
 
     if (str.trim() === "") {
-      Console.print(0);
+      Console.print(`결과 : 0`);
       return;
     }
 
@@ -18,13 +18,10 @@ class App {
       numbersStr = customDelimiterMatch[2];
     }
 
-    Console.print(`delimiter: ${delimiter}`);
-    Console.print(`numbersStr: ${numbersStr}`);
-
     const numbers = numbersStr.split(delimiter);
-    Console.print(`numbers: ${numbers}`);
 
     const validNumbers = [];
+
     for (const numStr of numbers) {
       const num = Number(numStr.trim());
       if (isNaN(num) || num < 0) {
@@ -32,10 +29,9 @@ class App {
       }
       validNumbers.push(num);
     }
-    Console.print(`validNumbers: ${validNumbers}`);
 
     const sum = validNumbers.reduce((acc, curr) => acc + curr, 0);
-    Console.print(`결과: ${sum}`);
+    Console.print(`결과 : ${sum}`);
   }
 }
 
