@@ -21,7 +21,7 @@ class App {
       const convertedNumbers = numberArray.map(Number);
       const sum = App.calculate(convertedNumbers);
 
-      Console.print(sum);
+      Console.print(`결과 : ${sum}`);
     } catch (error) {
       Console.print(`[ERROR] ${error.message}`);
     }
