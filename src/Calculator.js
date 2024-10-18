@@ -100,7 +100,7 @@ export default class Calculator {
    * @returns {Calculator} The Calculator instance.
    */
   computeSum() {
-    // TODO: Implement the sum calculation
+    this.#result = this.#numbers.reduce((acc, num) => acc + Number(num), 0);
     return this;
   }
 }
