@@ -27,5 +27,10 @@ const splitStringByDelimiters = (userInput) => {
     const regex = new RegExp(`[${delimiters.join('')}]`, 'g');
     const splitedString = userInput.split(regex);
 
-    Console.print(splitedString);
+    Console.print(convertToNumberList(splitedString));
+}
+
+// 문자 리스트를 숫자 리스트로 변환하는 메서드
+const convertToNumberList = (splitedString) => {
+    return splitedString.map(Number);
 }
