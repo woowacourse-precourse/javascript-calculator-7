@@ -10,6 +10,7 @@ class App {
       MissionUtils.Console.print(`결과 : ${result}`);
     } catch (error) {
       MissionUtils.Console.print(error.message);
+      throw error
     }
   }
 }
