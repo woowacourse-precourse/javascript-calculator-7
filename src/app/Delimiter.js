@@ -74,7 +74,7 @@ class Delimiter {
    * @param {string} value
    * @returns {Array<string>}
    */
-  getDelimitedString(value) {
+  splitByDelimiters(value) {
     let delimitedString = [value];
 
     if (this.#hasCustomDelimiter(value)) {

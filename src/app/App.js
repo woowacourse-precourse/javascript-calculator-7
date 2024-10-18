@@ -34,7 +34,7 @@ class App {
   async run() {
     const input = await this.#view.input('덧셈할 문자열을 입력해 주세요.');
 
-    const delimitedString = this.#delimiter.getDelimitedString(input);
+    const delimitedString = this.#delimiter.splitByDelimiters(input);
 
     this.#validator.validate(delimitedString);
 
