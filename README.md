@@ -59,22 +59,34 @@ git checkout -b bin778
 ### 테스트 케이스 작성
 
 1. "//"와 "\n" 사이의 문자가 2개 이상일 경우
+
 ```
-Input: //.\n//;\n1;2.3;4 => Output: 결과 : 10
-Input: //.\n//;\n//?\n1;2.3;4?5,6?7 => Output: 결과 : 28
+Input: "//.\n//;\n1;2.3;4" => Output: 결과 : 10
+Input: "//.\n//;\n//?\n1;2.3;4?5,6?7" => Output: 결과 : 28
 ```
 
 2. "//"와 "\n" 사이에 있는 문자가 2개 이상일 경우
+
 ```
-Input: //;?;\n1;?;2:3 => Output: 결과 : 6
+Input: "//;?;\n1;?;2:3" => Output: 결과 : 6
 ```
 
 3. "//"와 "\n"사이에 있는 문자가 숫자일 경우
+
 ```
-Input: //7\n172:3 => Output: [ERROR]
+Input: "//7\n172:3" => Output: [ERROR]
 ```
 
 4. 숫자 사이에 구분자가 여러 개일 경우
+
 ```
-Input: 12,,,3,5,7 => Output: [ERROR]
+Input: "12,,,3,5,7" => Output: [ERROR]
+```
+
+5. 문자열에 아무 숫자도 없는 경우
+
+```
+Input: "" => 0
+Input: "//;\n" => Output: 0
+Input: "//;n" => Output: [ERROR]
 ```
