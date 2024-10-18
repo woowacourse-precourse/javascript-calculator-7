@@ -12,7 +12,6 @@ import { _pipe, extractCustomDelimiter } from '../util/util.js';
  */
 
 /**@type {ValidationFunction} */
-
 // 값을 입력하지 않은 경우
 const checkNotEmpty = (input) => {
   if (!input) throwError(ERROR_MESSAGE.NO_INPUT);
@@ -98,6 +97,13 @@ const checkValidDefaultDelimiter = (input) => {
   return input;
 };
 
+/**@type {ValidationFunction} */
+const checkNumberAfterCustomDelimiter = (input) => {
+  if (input.startsWith('//') && !/^\/\/.*\\n\d/.test(input))
+    throwError(ERROR_MESSAGE.NO_NUMBER_AFTER_CUSTOM_DELIMITER);
+  return input;
+};
+
 const validateInput = _pipe(
   checkNotEmpty,
   checkPositive,
@@ -109,7 +115,8 @@ const validateInput = _pipe(
   checkDemical,
   checkZero,
   checkCustomDelimiterWithNumbers,
-  checkValidDefaultDelimiter
+  checkValidDefaultDelimiter,
+  checkNumberAfterCustomDelimiter
 );
 
 export { validateInput };

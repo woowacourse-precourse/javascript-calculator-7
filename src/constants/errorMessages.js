@@ -13,6 +13,8 @@ const ERROR_MESSAGE = Object.freeze({
   NO_NEGATIVE_NUMBER: '음수는 입력할 수 없습니다.',
   NO_ZERO: '0은 입력할 수 없습니다.',
   NO_DECIMAL_NUMBERS: '소수점이 포함된 숫자 형태는 입력할 수 없습니다.',
+  NO_NUMBER_AFTER_CUSTOM_DELIMITER:
+    '커스텀 구분자 지정 이후에는 숫자를 입력해주세요.',
   NO_CALCULATE: '자식 클래스에 calculate 메서드를 정의하세요. 현재 입력 값:',
 });
 
