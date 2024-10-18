@@ -24,6 +24,7 @@ class App {
         this.answer = answer;
         this.isCustom(this.answer);
         this.splitByDelimiter();
+        this.isValid();
       } catch (error) {
         console.log(error);
       }
@@ -53,6 +54,15 @@ class App {
     const REG_EXP = new RegExp(`[${this.delimiter.join("")}]`, "g");
     this.splitArray = this.answer.split(REG_EXP);
     this.answer = this.splitArray.join("");
+  }
+
+  // 사용자가 잘못된 값을 입력했는지를 검증합니다.
+  isValid() {
+    let isNumber = (currentValue) =>
+      currentValue.trim() !== "" && !isNaN(currentValue);
+    if (!this.splitArray.every(isNumber)) {
+      throw new Error("[ERROR]");
+    }
   }
 }
 
