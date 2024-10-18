@@ -5,7 +5,7 @@ class CalculatorView {
     return await Console.readLineAsync("문자열을 입력하세요:\n");
   }
 
-  outputView() {
+  outputView(RESULT) {
     Console.print(`결과 : ${RESULT}`);
   }
 
