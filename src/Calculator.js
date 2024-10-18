@@ -4,19 +4,18 @@ import { errorMessage } from "./utils/errorMessage.js";
 class Calculator {
     async start() {
         try {
-            await this.GetUserInput();
+            const userInput = await this.GetUserInput();
+            const result = this.validateInput(userInput);
+            if (result) MissionUtils.Console.print(`결과 : ${result}`);
         } catch (error) {
-            MissionUtils.Console.print(error.message); 
-            throw new Error('[ERROR]');
+            throw error;
         }
     }
 
     async GetUserInput() {
         const userInput = await MissionUtils.Console.readLineAsync('덧셈할 문자열을 입력해주세요.(쉼표와 콜론 외에 //와 \\n 사이에 입력한 문자열을 커스텀 구분자로 사용 가능합니다.):\n');
         
-        // 올바른 값인지 확인
-        const result = this.validateInput(userInput);
-        if (result) MissionUtils.Console.print(`결과 : ${result}`);
+        return userInput;
     }
 
     validateInput(input) {
@@ -45,15 +44,17 @@ class Calculator {
         // 구분자가 아닌 문자가 포함되어 있는지
         const includeInvalidStr = userInput.split(/[,|:]/).filter(Boolean).map(Number).some(v => Number.isNaN(v));
 
-        // 양수인지
         let isPositiveNum = false;
-       
+        
         const numbers = hasDefaultSeparator ? userInput.split(/[,|:]/).filter(Boolean).map(Number) : 
         userInput.match(/-?\d+/g).map(Number);
-
+        
         if(numbers && numbers.length > 0) {
+
+            // 양수인지
             isPositiveNum = numbers.every(v => v > 0);
-            // 올바른 값일 때
+
+            // 올바른 값일 때 합계 구하기
             if(isPositiveNum && !includeInvalidStr) {
                const sum = numbers.reduce((acc, curr) => acc + curr, 0);
                result = sum;
