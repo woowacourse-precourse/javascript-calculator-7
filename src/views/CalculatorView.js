@@ -18,3 +18,8 @@ export function getUserInput(callback) {
 export function displayErrorMessage(message) {
   MissionUtils.Console.print(`[ERROR]: ${message}`);
 }
+
+// 결과 출력 함수
+export function resultOutput(result) {
+  MissionUtils.Console.print(`결과: ${result}`);
+}
