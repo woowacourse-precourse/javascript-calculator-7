@@ -5,7 +5,7 @@ import { ERROR_MESSAGES, ERROR_PREFIX } from '../Constraints/Constraints.js';
 // 에러를 처리하는 함수
 
 function isFirstCharNumber(str) {
-  // 백업용 가드절. 로직에 악영향을 끼치면 폐기할것.
+  // 백업용 가드절. 로직에 악영향을 끼치면 폐기예정
   if (!str || str.length === 0) {
     throw new Error(`${ERROR_PREFIX}${ERROR_MESSAGES.EMPTY_STRING}`);
   }
