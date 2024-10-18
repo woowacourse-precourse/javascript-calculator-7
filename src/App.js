@@ -76,6 +76,7 @@ class App {
   async askNumbers() {
     const inputString =
       await Console.readLineAsync('덧셈할 문자열을 입력해 주세요.');
+    App.validate(inputString);
     this.#input = inputString;
     return this;
   }
@@ -83,7 +84,27 @@ class App {
   static isCustomSeparator(input) {
     const numberArray = input.split(',').join(':').split(':');
     const numbers = Number(numberArray.join(''));
-    return !Number.isNaN(numbers);
+    return Number.isNaN(numbers);
+  }
+
+  static validate(input) {
+    if (App.isCustomSeparator(input)) {
+      const [prefixString, numbers] = input.split('\\n');
+      const prefix = prefixString.slice(0, 2);
+      if (prefix !== '//' || !numbers) {
+        throw new Error(
+          '커스텀 구분자를 선택하신 경우, 구분자를 "//"와 "\\n" 사이에 입력해주세요.',
+        );
+      }
+
+      const separator = prefixString.slice(2);
+      const numberString = numbers.split(separator).join('');
+      if (Number.isNaN(Number(numberString))) {
+        throw new Error(
+          '숫자만 계산가능 합니다. 각 숫자는 입력하신 커스텀 구분자로 구분해주세요.',
+        );
+      }
+    }
   }
 }
 
