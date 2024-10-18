@@ -52,6 +52,32 @@ export default class Calculator {
   }
 
   /**
+   * Check if the input string has a custom delimiter.
+   * @returns {boolean} Whether the input string has a custom delimiter.
+   */
+  #hasCustomDelimiter() {
+    const CUSTOM_DELIMITER_REGEX = /^\/\/(.)?\\n/;
+    return CUSTOM_DELIMITER_REGEX.test(this.#input);
+  }
+
+  /**
+   * Extract the numbers from the input string.
+   * @returns {void} Nothing.
+   */
+  #extractNumbers() {
+    const HAS_CUSTOM_DELIMITER = this.#hasCustomDelimiter();
+    const START_IDX = HAS_CUSTOM_DELIMITER ? this.#input.indexOf('\\n') + 2 : 0;
+
+    const DELIMITER_SEPARATE_REGEX = new RegExp(`[${this.#delimiters.join('')}]`)
+
+    // Extract numbers from the input
+    this.#numbers = this.#input.substring(START_IDX)
+      .split(DELIMITER_SEPARATE_REGEX)
+      .filter((num) => num !== '')
+      .map((num) => Number(num));
+  }
+
+  /**
    * Check if the input matches the required format.
    * @throws {Error} If the input is invalid.
    */
@@ -63,6 +89,10 @@ export default class Calculator {
     if (!INPUT_FORMAT_REGEX.test(this.#input)) {
       throw new Error('[ERROR]: Invalid input')
     }
+
+    this.#extractNumbers();
+
+    // TODO: Check if the numbers are negative
   }
 
   /**
