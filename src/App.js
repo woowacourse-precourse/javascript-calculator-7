@@ -8,7 +8,7 @@ class App {
       throw new Error('[Error] 문자열이 입력되지 않았습니다.');
     }
 
-    const createSeparatorPattern = (customSeparator) => {
+    const createSeparatorPattern = customSeparator => {
       const separator = [',', ':'];
       if (customSeparator) {
         separator.push(customSeparator);
@@ -33,6 +33,13 @@ class App {
     } else {
       nums = input.split(createSeparatorPattern());
     }
+    const result = nums.reduce((hap, num) => {
+      if (isNaN(num)) {
+        throw new Error('[Error] 잘못된 값이 입력되었습니다.');
+      }
+      hap += Number(num);
+      return hap;
+    }, 0);
   }
 }
 
