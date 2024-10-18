@@ -50,6 +50,7 @@ class Calculator {
       numString = calcResult.numString;
       numSum = calcResult.numSum;
       hasDecimalPoint = calcResult.hasDecimalPoint;
+      this.validator.checkValidInput(userInput, idx, customSep);
     });
 
     if (numString !== '') {
