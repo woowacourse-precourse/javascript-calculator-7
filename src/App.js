@@ -24,6 +24,10 @@ class App {
       if (lineBreakStringIndex !== 3) {
         return true;
       }
+
+      if (Number.isInteger(Number(this.#input[2]))) {
+        return true;
+      }
     }
 
     return false;
