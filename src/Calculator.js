@@ -21,7 +21,10 @@ export default class Calculator {
   parseCustomDelimiter() {
     if (this.input.startsWith(CUSTOM_DELIMITER_PREFIX)) {
       const [customDelimiter, numberPart] = this.input.split(CUSTOM_DELIMITER_SEPARATOR)
+      
+      this.validateCustomEmptyDelimiter(customDelimiter)
       this.delimiter.push(customDelimiter.slice(2));
+      console.log(this.delimiter)
       this.input = numberPart;
     }
   }
@@ -36,6 +39,12 @@ export default class Calculator {
     const isInputValid = new RegExp(`^[0-9${this.delimiter.join('')}\n]*$`);
     if (!isInputValid.test(this.input)) {
       throw new Error(ERROR_MESSAGE.INVALID_INPUT);
+    }
+  }
+
+  validateCustomEmptyDelimiter(customDelimiter) {
+    if(customDelimiter.length === 2) {
+      throw new Error(ERROR_MESSAGE.CUSTOM_DELIMITER_EMPTY);
     }
   }
 

@@ -134,4 +134,11 @@ describe('문자열 계산기', () => {
     await expect(app.run()).rejects.toThrow('[ERROR]');
   });
 
+  test('커스텀 입력 아무것도 없을 경우 예외 처리', async () => {
+    const inputs = ['//\\n1,2,3'];
+    mockQuestions(inputs);
+    const app = new App();
+    await expect(app.run()).rejects.toThrow('[ERROR]');
+  });
+
 });
