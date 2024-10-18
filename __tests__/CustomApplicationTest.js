@@ -18,7 +18,7 @@ const getLogSpy = () => {
 
 describe('문자열 계산기', () => {
   test('공백은 0으로 처리한다.', async () => {
-    const inputs = [''];
+    const inputs = ['', '    '];
     mockQuestions(inputs);
 
     const logSpy = getLogSpy();
@@ -32,14 +32,14 @@ describe('문자열 계산기', () => {
     });
   });
 
-  test('-(하이픈)을 구분자로 가지는 문자열을 전달한 경우, 구분자를 기준으로 분리한 각 숫자의 합을 반환한다.', async () => {
-    const inputs = ['//-\\n1,2-3', '//-\\n1-2-30'];
+  test('구분자로 가지는 문자열을 전달한 경우, 구분자를 기준으로 분리한 각 숫자의 합을 반환한다.', async () => {
+    const inputs = ['//-\\n1,2-3', '//-\\n1-2-30', '///\\n1/2:4'];
 
     mockQuestions(inputs);
 
-    for (const [i] of inputs.entries()) {
+    for (let i = 0; inputs.length; i++) {
       const logSpy = getLogSpy();
-      const outputs = ['결과 : 6', '결과 : 33'];
+      const outputs = ['결과 : 6', '결과 : 33', '결과 : 7'];
 
       const app = new App();
       await app.run();

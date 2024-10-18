@@ -18,5 +18,6 @@ module.exports = {
     "no-console": "off",
     "no-restricted-globals": "off",
     "class-methods-use-this": "off",
+    "no-plusplus": "off",
   },
 };
