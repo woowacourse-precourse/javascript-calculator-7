@@ -41,8 +41,35 @@ describe('문자열 계산기', () => {
     await expect(app.run()).rejects.toThrow('[ERROR]');
   });
 
-  test('예외 테스트(숫자구분자)', async () => {
+  test('예외 테스트(숫자 구분자)', async () => {
     const inputs = ['//3\\n1'];
+    mockQuestions(inputs);
+
+    const app = new App();
+
+    await expect(app.run()).rejects.toThrow('[ERROR]');
+  });
+
+  test('예외 테스트(연속적인 구분자 입력)', async () => {
+    const inputs = ['//?\\n1?,2,3'];
+    mockQuestions(inputs);
+
+    const app = new App();
+
+    await expect(app.run()).rejects.toThrow('[ERROR]');
+  });
+
+  test('예외 테스트(커스텀 구분자로 등록되지 않은 문자 입력)', async () => {
+    const inputs = ['//----\\n1----3--2'];
+    mockQuestions(inputs);
+
+    const app = new App();
+
+    await expect(app.run()).rejects.toThrow('[ERROR]');
+  });
+
+  test('예외 테스트(커스텀 구분자가 빈 값)', async () => {
+    const inputs = ['//\\n1,3,2'];
     mockQuestions(inputs);
 
     const app = new App();
