@@ -51,6 +51,16 @@ class App {
     return numbers.reduce((acc, curr) => acc + curr, 0);
   }
 
+  /**
+   * 정규표현식에 사용할 문자열 이스케이프 처리
+   * @param {string} string - 이스케이프할 문자열
+   * @returns {string} - 이스케이프된 문자열
+   */
+  //특수문자 이스케이프 처리  (* -> \*) -> 정규식에서 특수문자를 리터럴 문자로 인식
+  escapeRegExp(string) {
+    return string.replace(/[.*+?^${}()|[\]\\]/g, '\\$&');
+  }
+
 }
 
 export default App
