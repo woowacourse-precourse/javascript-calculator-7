@@ -31,6 +31,10 @@ class App {
       sum += Number(numbers[i]);
     }
 
+    if (isNaN(sum)) {
+      throw new Error("[ERROR] 잘못된 입력입니다.");
+    }
+
     Console.print("결과 : " + sum);
   }
 }
