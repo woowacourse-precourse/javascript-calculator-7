@@ -14,6 +14,12 @@ class App {
       if (this.isUsedCustomSeparator(input)) {
         this.addCustomSeparator(input, separator);
       }
+
+      const pattern = this.sliceCustomPattern(input);
+      const numberStringWithSeparators = input.slice(pattern.length);
+      const nums = numberStringWithSeparators
+        .split(new RegExp(`[${separator.join("")}]`))
+        .map(Number);
     }
   }
 
