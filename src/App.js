@@ -2,9 +2,17 @@ import { Console } from "@woowacourse/mission-utils";
 
 class App {
   async run() {
-    const inputStr = await this.getString();
-    const customSeperator = this.getCustom(inputStr);
-    const strArr = this.separateStr(inputStr, customSeperator);
+    let inputStr = await this.getString();
+
+    let strArr = [];
+    if(inputStr.includes('//') && inputStr.includes('\\n')){
+      const customSeperator = this.getCustom(inputStr);
+      inputStr = inputStr.split('\\n')[1];
+      strArr = this.separateStr(inputStr, customSeperator);
+    }
+    else{
+      strArr = this.separateStr(inputStr);
+    }
   }
 
   async getString(){
