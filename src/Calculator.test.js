@@ -45,3 +45,40 @@ describe("regex test", () => {
     expect(calculator.testRegex(minTest)).toEqual({ error: true });
   });
 });
+
+describe("regex_random_test", () => {
+  const random = Math.random();
+  let testInput = "";
+  const randomNumberList = [];
+  for (let i = 0; i < Math.floor(random * 10); i++) {
+    const inpurtRandomNumber = Math.floor(Math.random() * 10);
+    randomNumberList.push(inpurtRandomNumber);
+  }
+  if (random * 10 >= 5) {
+    let randomAscii = Math.floor(random * 100);
+    randomAscii = String.fromCharCode(randomAscii);
+    testInput += `//${randomAscii}\\n`;
+    for (let i = 0; i < randomNumberList.length; i++) {
+      testInput += randomNumberList[i];
+      const randomDevider = Math.random() * 10;
+      if (randomDevider >= 7) testInput += ":";
+      else if (randomDevider >= 4) testInput += ",";
+      else testInput += randomAscii;
+    }
+  } else {
+    for (let i = 0; i < randomNumberList.length; i++) {
+      testInput += randomNumberList[i];
+      if (i === randomNumberList.length - 1) break;
+      const randomDevider = Math.random() * 10;
+      if (randomDevider >= 5) testInput += ":";
+      else testInput += ",";
+    }
+  }
+  console.log(testInput);
+  test(`random : ${testInput}`, () => {
+    expect(calculator.testRegex(testInput)).toEqual({
+      error: false,
+      numbers: randomNumberList,
+    });
+  });
+});
