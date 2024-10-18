@@ -1,6 +1,7 @@
 import { Console } from '@woowacourse/mission-utils';
 import { CALCULATOR_MESSAGE, ERROR_MESSAGE } from './constants.js';
 import {
+  failCharSeparator,
   failIsNumbers,
   failVaildSeparator,
   failNumberRange,
@@ -29,17 +30,18 @@ class App {
       number === '' ? 0 : number
     );
 
-    this.checkInput(numbers);
+    this.checkNumbers(numbers);
     this.sum = numbers.reduce((acc, cur) => acc + Number(cur), 0);
   }
 
   splitInput() {
     if (this.input.startsWith('//')) {
-      const [customDelimiter, separatedInput] = this.input
+      const [customSeparator, separatedInput] = this.input
         .slice(2)
         .split('\\n');
 
-      return separatedInput.split(customDelimiter);
+      this.checkSeperator(customSeparator);
+      return separatedInput.split(customSeparator);
     }
 
     return this.input.split(/,|:/);
@@ -49,7 +51,13 @@ class App {
     Console.print(CALCULATOR_MESSAGE.CALCULATOR_RESULT + this.sum);
   }
 
-  checkInput(Input) {
+  checkSeperator(seperator) {
+    if (failCharSeparator(seperator)) {
+      throw new Error(ERROR_MESSAGE.INVALID_CHARACTER);
+    }
+  }
+
+  checkNumbers(Input) {
     if (failIsNumbers(Input)) {
       throw new Error(ERROR_MESSAGE.INVALID_NUMBER);
     }

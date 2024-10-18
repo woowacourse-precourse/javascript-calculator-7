@@ -1,4 +1,6 @@
-/** @format */
+export function failCharSeparator(seperator) {
+  return seperator.length !== 1 || !isNaN(seperator);
+}
 
 export function failIsNumbers(input) {
   return input.some((number) => isNaN(parseInt(number)));
