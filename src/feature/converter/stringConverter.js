@@ -1,12 +1,3 @@
-function defaultSeparator(text) {
-  // FIXME: 배열을 사용해서 정규식을 생성할지 literal에 작성된 것을 사용할지 정해야함
-  const DEFAULT_SEPARATOR = [',', ':'];
-  const SEPARATOR_REGEX = /[,:]/g;
-
-  let convertedText = text.split(SEPARATOR_REGEX);
-  return convertedText;
-};
-
 function getCustomSeparator(customText) {
   const CUSTOM_TEXT_LENGTH = customText.length;
   const CUSTOM_TEXT_ACTUAL_RANGE = CUSTOM_TEXT_LENGTH - 2;
@@ -41,3 +32,27 @@ function customSeparator(text) {
     return RESULT;
   }
 }
+
+function separator(userInput) {
+  const DEFAULT_SEPARATOR = [',', ':'];
+
+  let customSeparatorResult = customSeparator(userInput);
+  let userCustomSeparator = customSeparatorResult.get('customSeparatorString');
+  let userCalculateString = customSeparatorResult.get('text');
+
+  if(userCustomSeparator === null) {
+    const SEPARATOR_REGEX = new RegExp(`[${DEFAULT_SEPARATOR.join('')}]`,'g');
+    
+    let userStringArray = userCalculateString.split(SEPARATOR_REGEX);
+    
+    return userStringArray; 
+  } else {
+    let separators = DEFAULT_SEPARATOR.push(userCustomSeparator);
+
+    const SEPARATOR_REGEX = new RegExp(`[${separators.join('')}]`, 'g');
+
+    let userStringArray = userCalculateString.split(SEPARATOR_REGEX);
+
+    return userStringArray;
+  };
+};
