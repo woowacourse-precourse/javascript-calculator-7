@@ -2,7 +2,6 @@ import { Console } from "@woowacourse/mission-utils";
 
 class App {
   async run() {
-    //함수: 구분자 인식 및 문자열 절단
     const separateInput = function separateInputWithSeperator(userInput) {
       //커스텀 구분자 인식
       let numbers = userInput;
@@ -34,44 +33,36 @@ class App {
         typeof element === 'string' && /^\d+$/.test(element)
       );
     }
-
-    //error 함수
-    const errorMessage = function printErrorMessage(errortype) {
-      if (errortype === "spaceInInput") {
-        Console.print("[ERROR] 공백 없이 입력해 주세요!");
-      } else if (errortype === "notAllNum") {
-        Console.print("[ERROR] 구분자와 숫자만 입력해주세요!");
+  
+    try {
+      //유저에게 입력받기
+      let userInput = await Console.readLineAsync("덧셈할 문자열을 입력해주세요.\n");
+      if (userInput.includes(" ")) {
+        throw new Error("spaceInInput");
+      } else {
+        userInput = separateInput(userInput);
       }
-      
+
+      //숫자만으로 이루어진 배열인지 체크하고 더하기
+      if (isAllNum(userInput)) {
+        const inputSum = userInput.reduce((sum, num) => sum + Number(num), 0);
+        Console.print(`결과 : ${inputSum}`);
+      } else {
+        throw new Error("notAllNum");
+     }  
+    } catch(error) {
+      if (error.message === "spaceInInput") {
+        Console.print("[ERROR] 공백 없이 입력해 주세요!")
+        throw new Error("[ERROR] 공백 없이 입력해 주세요!");
+      } else if (error.message === "notAllNum") {
+        Console.print("[ERROR] 구분자와 숫자만 입력해주세요!");
+        throw new Error("[ERROR] 구분자와 숫자만 입력해주세요!")
+      } else {
+        Console.print(`[ERROR] 알 수 없는 에러 발생: ${error.message}`);
+        throw new Error(`[ERROR] 알 수 없는 에러 발생: ${error.message}`);
+      }  
     }
-    //함수 선언 끝
-
-    //App start
-    //유저에게 입력받기
-    let userInput = await Console.readLineAsync("덧셈할 문자열을 입력해주세요.\n");
-    if (userInput.includes(" ")) {
-      errorMessage("spaceInInput");
-      return;
-    } else {
-      userInput = separateInput(userInput);
-    }
-
-    //숫자만으로 이루어진 배열인지 체크
-    //숫자만 있으면 더하기
-    if (isAllNum(userInput)) {
-      const inputSum = userInput.reduce((sum, num) => sum + Number(num), 0);
-      Console.print(`결과 : ${inputSum}`);
-    } else {
-      errorMessage("notAllNum");
-      return;
-    }
-    //구분자가 없으면?
-
-
   }   
 }
-
-const app = new App();
-app.run();
 
 export default App;
