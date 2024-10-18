@@ -1,8 +1,6 @@
+import { PRE_SEPERATORS, REGEX_META_LETTER, SELECTOR_REGEX } from "../data/constants.js";
+import { WRONG_INPUT_ERROR } from "../data/errorMessage.js";
 import getSum from "./getSum.js";
-
-const PRE_SEPERATORS = [",", ":"];
-const SELECTOR_REGEX = /^\/\/(.+)\\n(.*)/;
-const REGEX_META_LETTER = /[\\\^\$\.\|\[\]\(\)\*\+\?\{\}]/;
 
 // string => number
 // 들어온 입력값을 처리해 출력값을 계산
@@ -87,7 +85,7 @@ const checkError = (restString, seperatorJoinString) => {
   const numbersRegexString = `^\\d+((${seperatorJoinString})\\d+)*$`;
   const numbersRegex = new RegExp(numbersRegexString);
   if (!numbersRegex.test(restString)) {
-    throw new Error("[ERROR] 입력이 잘못 되었습니다.");
+    throw new Error(`[ERROR] ${WRONG_INPUT_ERROR}`);
   }
 };
 
