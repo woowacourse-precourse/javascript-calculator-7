@@ -10,6 +10,7 @@ export class Controller {
     this.inputString;
     this.delimiter = [',', ':'];
     this.valueString;
+    this.values;
   }
   async getUserInput() {
     this.inputString = await user.getInputString();
@@ -24,5 +25,8 @@ export class Controller {
     } else {
       this.valueString = this.inputString;
     }
+  }
+  extractValues() {
+    this.values = calculator.extractValues(this.delimiter, this.valueString);
   }
 }
