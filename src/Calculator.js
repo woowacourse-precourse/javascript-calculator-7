@@ -15,23 +15,15 @@ export default class Calculator {
   }
 
   customDelimiter() {
-    const customDelimiter = this.input.split('\\n')[0].slice(2);
-    const input = this.input.split('\\n')[1];
-
-    const isInputValid = new RegExp(`^[0-9${customDelimiter}\n]*$`);
-    if (!isInputValid.test(input)) {
-        throw new Error(ERROR_MESSAGE.INVALID_INPUT);
-        }
-
-    const sum = input.split(new RegExp(`[${customDelimiter}\n]`)).map(Number).reduce((acc, cur) => acc + cur, 0);
-    return sum;
+    if (this.input.startsWith('//')) {
+      const [customDelimiter, numberPart] = this.input.split('\\n')
+      this.delimiter.push(customDelimiter.slice(2));
+      this.input = numberPart;
+    }
   }
 
   calculate() {
-    if(this.input.startsWith('//')){
-        const customSum = this.customDelimiter();
-        return customSum;
-    }
+    this.customDelimiter();
 
     this.validateInput();
 
