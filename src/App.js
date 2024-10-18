@@ -35,7 +35,7 @@ class App {
 
   // 기본형인지 커스텀 타입인지 구분하는 메서드
   checkType(input) {
-    const regExp = new RegExp(/^(\/\/\D\\n)/g);
+    const regExp = new RegExp(/^(\/\/.\\n)/g);
 
     if (input.test(regExp) === true) {
       return "custom";
@@ -44,12 +44,12 @@ class App {
     return "default";
   }
 
-  checkDefaultValidation(input) {
-    // 첫 문자나 끝 문자가 숫자가 아니거나
-    // 콤마와 세미콜론이 아닌 구분자를 포함하고 있거나
-    // 콤마와 세미콜론이 연속적으로 사용될 때 
+  checkDefaultValidation(input) { 
     const regExp = new RegExp(/^\d+([,:]\d+)*$/g);
 
+    // 첫 문자나 끝 문자가 숫자가 아니거나
+    // 콤마와 세미콜론이 아닌 구분자를 포함하고 있거나
+    // 콤마와 세미콜론이 연속적으로 사용될 때
     if (regExp.test(input) === false) {
       return false;
     }
@@ -58,7 +58,24 @@ class App {
   }
 
   checkCustomValidation(input) {
+    const endIdx = input.indexOf("\n");
+    const divider = input.slice(2, endIdx);
+    let dividerRegExp = "";
 
+    for (let i = 0; i < divider.length; i++) {
+      dividerRegExp += `\\` + divider[i];
+    }
+
+    const regExp = new RegExp(`^\\/\\/${dividerRegExp}\\\n\\d+(${dividerRegExp}\\d+)*$`, 'g');
+
+    // 첫 시작이 //특수문자\n 가 아니거나
+    // 끝 문자가 숫자가 아니거나
+    // 특수문자 구분자가 아닌 다른 구분자가 있을 때
+    if (regExp.test(input) === false) {
+      return false;
+    }
+
+    return true;
   }
 
   calculateDefault() {
