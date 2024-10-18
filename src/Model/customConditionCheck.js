@@ -31,25 +31,28 @@ function separatorTextInputCheck(userInput) {
 
 // 3. 숫자가 양수로 이루어진지 체크하기
 function positiveNumberCheck(userInput) {
-  let positiveNumberCheckCount;
+  // Console.print('userInput: ' + userInput);
+  let positiveNumberCheckCount = 0;
   const numberCount = (userInput.length - 5) / 2 + 1;
-  // Console.print(parseInt(numberCount));
-
+  const numberCountForInt = parseInt(numberCount);
   for (let i = 5; i < userInput.length; i += 1) {
     if (i % 2 === 1 && Number(userInput[i]) > 0) {
       positiveNumberCheckCount += 1;
     }
   }
+  // Console.print('[***] positiveNumberCheckCount: ' + positiveNumberCheckCount);
+  // Console.print('[***] numberCountForInt: ' + numberCountForInt);
 
-  if (positiveNumberCheckCount === numberCount) {
+  if (positiveNumberCheckCount === numberCountForInt) {
     return true;
   }
-  false;
+  return false;
 }
 
 const customConditionCheck = userInput => {
   // Console.print('[디버깅] conditionTextInputCheck(userInput)' + conditionTextInputCheck(userInput));
   // Console.print('[디버깅] separatorTextInputCheck(userInput)' + separatorTextInputCheck(userInput));
+  // Console.print('[디버깅] positiveNumberCheck(userInput)' + positiveNumberCheck(userInput));
 
   if (conditionTextInputCheck(userInput) && separatorTextInputCheck(userInput) && positiveNumberCheck(userInput)) {
     return true;
