@@ -6,6 +6,8 @@ const CHECK_NUMBER_REGEX = /^[0-9]*$/;
 class App {
   // 기본 구분자
   #REGEX = [",", ":"];
+  // 총 합
+  #SUM = 0;
 
   // 이스케이프 처리를 위한 내부 함수
   #escapeRegExp() {
@@ -46,7 +48,13 @@ class App {
       throw new Error("[ERROR]");
     }
 
-    console.log("결과 : ");
+    // 총합 계산
+    splitInputArr.forEach((splitInput) => {
+      this.#SUM += Number(splitInput);
+    });
+
+    // 총합 출력
+    MissionUtils.Console.print(`결과 : ${this.#SUM}`);
   }
 }
 
