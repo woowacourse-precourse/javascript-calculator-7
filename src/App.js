@@ -1,8 +1,10 @@
 import Calculator from './controller/Calculator.js';
+import User from './user/User.js';
 
 class App {
   constructor() {
-    this.calculator = new Calculator();
+    const user = new User();
+    this.calculator = new Calculator(user);
   }
   async run() {
     await this.calculator.start();

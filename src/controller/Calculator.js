@@ -7,8 +7,9 @@ import { go } from '../util/Util.js';
 
 //덧셈기 게임 관리
 class Calculator {
-  constructor() {
-    this.user = new User();
+  /**@param {User} user */
+  constructor(user) {
+    this.user = user;
   }
 
   async start() {
