@@ -8,11 +8,31 @@ class App {
       throw new Error('[Error] 문자열이 입력되지 않았습니다.');
     }
 
-    const createSeparatorPattern = ([...separator]) => {
+    const createSeparatorPattern = (customSeparator) => {
+      const separator = [',', ':'];
+      if (customSeparator) {
+        separator.push(customSeparator);
+      }
       return new RegExp(separator.join('|'));
     };
+    let nums = [];
 
-    const nums = input.split(createSeparatorPattern([',', ':']));
+    if (input.match(/^\/\//)) {
+      const customSeparator = input.match(/^\/\/(.+?)\\n/);
+
+      if (!customSeparator) {
+        if (!input.match(/\\n/)) {
+          throw new Error('[Error] \\n이 입력되지 않았습니다.');
+        }
+        throw new Error('[Error] 커스텀 구분자가 입력되지 않았습니다.');
+      }
+
+      nums = input
+        .split('\\n')[1]
+        .split(createSeparatorPattern(customSeparator[1]));
+    } else {
+      nums = input.split(createSeparatorPattern());
+    }
   }
 }
 
