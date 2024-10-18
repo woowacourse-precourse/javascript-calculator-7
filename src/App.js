@@ -90,20 +90,27 @@ class App {
   static validate(input) {
     if (App.isCustomSeparator(input)) {
       const [prefixString, numbers] = input.split('\\n');
-      const prefix = prefixString.slice(0, 2);
-      if (prefix !== '//' || !numbers) {
-        throw new Error(
-          '커스텀 구분자를 선택하신 경우, 구분자를 "//"와 "\\n" 사이에 입력해주세요.',
-        );
-      }
+      App.isValidCustomFormat(prefixString, numbers);
+      App.isValidNumbersFormat(prefixString, numbers);
+    }
+  }
 
-      const separator = prefixString.slice(2);
-      const numberString = numbers.split(separator).join('');
-      if (Number.isNaN(Number(numberString))) {
-        throw new Error(
-          '숫자만 계산가능 합니다. 각 숫자는 입력하신 커스텀 구분자로 구분해주세요.',
-        );
-      }
+  static isValidCustomFormat(prefixString, numbers) {
+    const prefix = prefixString.slice(0, 2);
+    if (prefix !== '//' || !numbers) {
+      throw new Error(
+        '커스텀 구분자를 선택하신 경우, 구분자를 "//"와 "\\n" 사이에 입력해주세요.',
+      );
+    }
+  }
+
+  static isValidNumbersFormat(prefixString, numbers) {
+    const separator = prefixString.slice(2);
+    const numberString = numbers.split(separator).join('');
+    if (Number.isNaN(Number(numberString))) {
+      throw new Error(
+        '숫자만 계산가능 합니다. 각 숫자는 입력하신 커스텀 구분자로 구분해주세요.',
+      );
     }
   }
 }
