@@ -3,6 +3,10 @@ import { Console } from "@woowacourse/mission-utils";
 class App {
   separator = new Set([":", ","]);
 
+  isValidateNumber = (number) => {
+    return !isNaN(number) && number >= 0;
+  };
+
   findCustomSeparator = (input) => {
     // 커스텀 구분자가 있는지 확인한다.
     // "//"와 "\n" 사이에 위치하는 문자를 커스텀 구분자로 사용한다
@@ -20,14 +24,14 @@ class App {
     return userInput;
   };
 
-  validateNumber = (numbers) => {
+  checkNumberValidity = (numbers) => {
     if (numbers.length === 0) {
       throw new Error("[ERROR]");
     }
 
-    // 8. 숫자가 아닌 문자나 기호로만 이루어진 경우 에러 반환
-    // 9. 숫자가 아닌 문자가 하나라도 포함되어 있으면 에러 반환
-    if (numbers.some((number) => isNaN(number))) {
+    // 숫자가 아닌 값이 포함되어 있는지 확인한다.
+    // 음수가 포함되어 있다면 예외를 발생시킨다.
+    if (numbers.some((number) => !this.isValidateNumber(number))) {
       throw new Error("[ERROR]");
     }
 
@@ -49,7 +53,7 @@ class App {
         const parsedNumbers = numbers.map((number) => parseInt(number));
 
         // 숫자가 유효한지 확인한다.
-        if (this.validateNumber(parsedNumbers)) {
+        if (this.checkNumberValidity(parsedNumbers)) {
           // 숫자를 모두 더한다.
           const sum = parsedNumbers.reduce((acc, cur) => acc + cur, 0);
           Console.print(`결과 : ${sum}`);
