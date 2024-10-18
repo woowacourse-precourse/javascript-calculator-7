@@ -6,7 +6,7 @@ class App {
     const INPUT = await Console.readLineAsync('덧셈할 문자열을 입력해주세요.');
 
     const CALC = new Calculator();
-    CALC.setInput(input)
+    CALC.setInput(INPUT)
       .computeSum();
 
     // TODO: Print the result of the calculation
