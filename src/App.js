@@ -1,4 +1,5 @@
 import { Console } from '@woowacourse/mission-utils';
+import { hasNegative } from './utils/hasNegative.js';
 import { isEmptyOrNull } from './utils/isEmptyOrNull.js';
 import { splitByCustomSeparator } from './utils/splitByCustomSeparator.js';
 import { splitByDefaultSeparators } from './utils/splitByDefaultSeparators.js';
@@ -8,6 +9,8 @@ class App {
 		try {
 			const res = await Console.readLineAsync('덧셈할 문자열을 입력해 주세요. \n');
 			let answer = null;
+
+			hasNegative(res);
 
 			if (isEmptyOrNull(res)) {
 				answer = 0;
