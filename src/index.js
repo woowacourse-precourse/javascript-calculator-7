@@ -1,4 +1,7 @@
 import App from "./App.js";
 
 const app = new App();
-await app.run();
+
+(async () => {
+    await app.run();
+  })();
