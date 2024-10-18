@@ -44,6 +44,15 @@ function separator(userInput) {
     const SEPARATOR_REGEX = new RegExp(`[${SEPARATORS.join('')}]`,'g');
     
     let userStringArray = userCalculateString.split(SEPARATOR_REGEX);
+
+    userStringArray.map((userInput) => {
+      let checkValue = Number(userInput);
+      if(Number.isNaN(checkValue)) {
+        let errorMessage = '기본 구분자 이외의 커스텀 구분자가 존재합니다. 입력 형식에 맞게 커스텀 구분자를 입력해주세요.';
+        const ERROR = new Error(errorMessage);
+        throw ERROR;
+      }
+    })
     
     return userStringArray; 
   } else {
