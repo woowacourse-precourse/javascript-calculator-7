@@ -36,6 +36,12 @@ class App {
     this.printError('알 수 없는 오류가 발생했습니다 앱을 다시 실행해주세요');
   }
 
+  isContainNum(str) {
+    return str.split('').some(char =>
+      !isNaN(char) && char !== ' '
+    );
+  }
+
   checkCustomSeperator(customStr) {
     const start = customStr.indexOf('//');
     const end = customStr.indexOf('\\n');
@@ -44,7 +50,10 @@ class App {
     ////와 \\n사이에 아무 문자가 없을 경우
     if (!customSeperator) {
       return this.printError('커스텀 구분자는 //와 \\n사이에 있어야 합니다');
-    }    
+    }
+    if (this.isContainNum(customStr)) {
+      return this.printError('커스텀 구분자 사이에 숫자가 있으면 안됩니다');
+    }
     return
   }
 
