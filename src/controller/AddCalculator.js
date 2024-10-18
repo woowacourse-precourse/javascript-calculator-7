@@ -7,7 +7,7 @@ class AddCalculator extends Calculator {
    * @param {number[]} numbers
    * @returns {number}
    */
-  operation(numbers) {
+  calculate(numbers) {
     return _reduce((acc, cur) => acc + cur, 0, numbers);
   }
 }

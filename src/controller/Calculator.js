@@ -16,18 +16,18 @@ class Calculator {
   /**@returns {Promise<void>} */
   async start() {
     const input = await this.user.readAnswer();
-    this.calculate(input);
+    this.processCalculation(input);
   }
 
   /**@param {string} input */
-  calculate(input) {
+  processCalculation(input) {
     //실제 계산 로직
     _go(
       input,
       this.parseInput,
       /**@type {(numbers:string[]) => number[]}  */
       (numbers) => numbers.map(Number),
-      this.operation,
+      this.calculate,
       /**@type {(result: number) => void}   */
       (result) => OutputView.printResult(result)
     );
@@ -38,8 +38,8 @@ class Calculator {
    * @param {number[]} numbers
    * @returns {void}
    */
-  operation(numbers) {
-    throwError(`${ERROR_MESSAGE.NO_OPERATION} ${numbers}`);
+  calculate(numbers) {
+    throwError(`${ERROR_MESSAGE.NO_CALCULATE} ${numbers}`);
   }
 
   /**
