@@ -1,4 +1,5 @@
 import { Console } from "@woowacourse/mission-utils";
+import Calculator from "./Calculator.js";
 import inputView from "./inputView.js";
 import Splitter from "./Splitter.js";
 import Validator from "./Validator.js";
@@ -15,7 +16,8 @@ class App {
     // TODO : 커스텀 구분자를 사용하는 경우에 //{구분자 1문자}\n 형식이 맞는지 확인해야 함.
     const numbers = this.#splitter.splitToNumber(userInput);
     Validator.validateNumberArray(numbers);
-    Console.print(numbers);
+    const sum = Calculator.sum(numbers);
+    Console.print(sum);
   }
 }
 
