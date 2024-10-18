@@ -17,7 +17,7 @@ class App {
 
   calculate(inputString) {
     const DEFAULT_DELIMITERS = [',', ':'];
-    let delimiters = DEFAULT_DELIMITERS;
+    let delimiters = [...DEFAULT_DELIMITERS];
 
     if (this.checkCustomSplitStringByDelimiter(inputString)) {
       delimiters = this.getMergedDelimiters(inputString, delimiters);
