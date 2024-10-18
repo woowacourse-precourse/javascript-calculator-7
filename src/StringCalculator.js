@@ -15,6 +15,7 @@ export class StringCalculator {
 
   calculateSum(values) {
     let sumValue = 0;
+    if (values === '') return sumValue;
     for (let value of values) {
       sumValue = sumValue + Number(value);
     }
