@@ -18,8 +18,11 @@ class App {
       numbersStr = customDelimiterMatch[2];
     }
 
-    Console.print(delimiter);
-    Console.print(numbersStr);
+    Console.print(`delimiter: ${delimiter}`);
+    Console.print(`numbersStr: ${numbersStr}`);
+
+    const numbers = numbersStr.split(delimiter);
+    Console.print(`numbers: ${numbers}`);
   }
 }
 
