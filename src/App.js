@@ -12,10 +12,10 @@ class App {
     );
 
     try {
-      let result = processUserInput(userStr);
+      let result = this.processUserInput(userStr);
       Console.print(`결과 : ${result}`);
     } catch (e) {
-      Console.print(e);
+      Console.print(e.message);
     }
   }
 
