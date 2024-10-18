@@ -2,6 +2,11 @@ function validateNegativeNumber(number) {
   if (number < 0) throw new Error('[ERROR] 음수는 포함할 수 없습니다.');
 }
 
+export function validateEmptyString(userInput) {
+  if (userInput === '') return 0;
+  return null;
+}
+
 export function validateNumbers(parsedArray) {
   return parsedArray.map((value) => {
     const number = Number(value);
