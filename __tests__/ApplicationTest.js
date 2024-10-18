@@ -55,7 +55,7 @@ describe('문자열 계산기', () => {
         await runCalculatorTestCorrect('//;v\n1v23;456', '480');
       });
     });
-    describe('특수한 구분자 2개', () => {
+    describe('특수한 구분자 3개', () => {
       test('숫자 1개 입력', async () => {
         await runCalculatorTestCorrect('//;v\b\n1', '1');
       });
