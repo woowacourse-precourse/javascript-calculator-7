@@ -47,7 +47,7 @@ describe("문자열 계산기", () => {
     });
   });
 
-  test.skip("예외 테스트", async () => {
+  test("예외 테스트", async () => {
     const inputs = ["-1,2,3"];
     mockQuestions(inputs);
 

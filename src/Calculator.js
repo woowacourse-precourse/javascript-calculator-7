@@ -32,7 +32,11 @@ class Calculator {
 
     numbers.forEach((number, index, array) => {
       if (!isNaN(number)) {
-        array[index] = Number(number);
+        if (Number(number) < 0) {
+          throw new Error("[ERROR] 숫자가 아닌 값을 입력할 수 없습니다.");
+        } else {
+          array[index] = Number(number);
+        }
       } else {
         throw new Error("[ERROR] 숫자가 아닌 값을 입력할 수 없습니다.");
       }
