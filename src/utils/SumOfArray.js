@@ -3,8 +3,8 @@
  * @param {number} arr
  * @returns number
  */
-const calculateSum = (arr) => {
+const sumOfArray = (arr) => {
   return arr.reduce((acc, curr) => acc + curr, 0);
 };
 
-export default calculateSum;
+export default sumOfArray;
