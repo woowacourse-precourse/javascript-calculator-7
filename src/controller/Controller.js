@@ -7,7 +7,8 @@ import { ERROR_CODES, VALID_STRING_CODE } from "../constants/constants.js";
 class Controller {
   async start() {
     const inputValue = await InputView.readStringInput();
-    const validationCode = Validation.validate(inputValue);
+    const validation = new Validation(inputValue);
+    const validationCode = validation.validate();
 
     const actions = {
       [ERROR_CODES.EMPTY_STRING]: () => OutputView.printResultValue(0),
