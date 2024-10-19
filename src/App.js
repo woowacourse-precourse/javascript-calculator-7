@@ -14,15 +14,15 @@ class App {
     }
 
     // 기본 구분자
-    let delimeter = [",", ";"];
-    let numbers = delimeter;
+    let delimeter = [",", ":"];
+    let numbers = strInput;
 
     // 2. 커스텀 구분자 파악하기
-    if(strInput.startWith("//")) {
+    if(strInput.startsWith("//")) {
       // 입력 문자열이 //로 시작하면 \n 이전까지의 문자를 커스텀 구분자로 설정
       const customDelimeterEnd = strInput.indexOf("\n"); 
-      delimeter = [strInput.subString(2, customDelimeterEnd)]; // 커스텀 구분자를 배열로 저장 
-      numbers = strInput.subString(customDelimeterEnd + 1); // \n 이후 숫자만 남기기
+      delimeter = [strInput.substring(2, customDelimeterEnd)]; // 커스텀 구분자를 배열로 저장 
+      numbers = strInput.substring(customDelimeterEnd + 1); // \n 이후 숫자만 남기기
     }
   }
 }
