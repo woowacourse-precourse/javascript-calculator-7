@@ -33,7 +33,7 @@ class Input {
    * @returns {{customSeparator: string[], numbers: string}}
    */
   findCustomSeparatorAndNumbers(text) {
-    const parts = text.split("\n");
+    const parts = text.split("\\n");
 
     const numbers = parts[parts.length - 1];
     const customSeparator = parts.slice(0, -1).map((sep) => sep.replace("//", ""));
