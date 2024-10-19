@@ -7,12 +7,12 @@ class App {
     const CAPTURE = new RegExp('//([^0-9])\\n', 'g');
     
     // 커스텀 구분자 그룹 캡처하기
-    const MATCHES = [...inputString.matchAll(CAPTURE)];
+    const matches = [...inputString.matchAll(CAPTURE)];
 
     // 커스텀 구분자만 추출하기
-    const DELIMETERS = MATCHES.map(match => match[1]);
+    const delimeters = matches.map(match => match[1]);
 
-    return DELIMETERS;
+    return delimeters;
   }
 
   // 2. 커스텀 구분자 부분 제거하기
@@ -21,9 +21,9 @@ class App {
     const CAPTURE = new RegExp('//([^0-9])\\n', 'g');
 
     // 커스텀 구분자 부분 제거하기
-    const MATH_EXPRESSION = inputString.replace(CAPTURE, '');
+    const mathExpression = inputString.replace(CAPTURE, '');
 
-    return MATH_EXPRESSION;
+    return mathExpression;
   }
 
   // 3. 구분자 기반 분리하기
@@ -32,18 +32,18 @@ class App {
     const DEFAULT_DELIMETERS = [':', ','];
 
     // 커스텀 구분자 이스케이프 처리
-    const ESCAPED_DELIMETERS = this.escapeSpecialChars(delimeters);
+    const escaped_delimeters = this.escapeSpecialChars(delimeters);
 
     // 모든 구분자
-    const ALL_DELIMETER = ESCAPED_DELIMETERS.concat(DEFAULT_DELIMETERS);
+    const allDelimeters = escaped_delimeters.concat(DEFAULT_DELIMETERS);
 
     // 모든 구분자를 split에 들어갈 표현식으로 만들기
-    const ALL_DELIMETER_REGEX = ALL_DELIMETER.join('|');
+    const allDelimetersRegex = allDelimeters.join('|');
 
     // 구분자 기반 분리하여 숫자 리스트 반환하기
-    const NUMBERS = expression.split(new RegExp(ALL_DELIMETER_REGEX));
+    const numbers = expression.split(new RegExp(allDelimetersRegex));
 
-    return NUMBERS;
+    return numbers;
   }
 
   // 3-1. 커스텀 구분자 전처리하기
@@ -51,20 +51,20 @@ class App {
     // 이스케이프 처리가 필요한 특수 문자 목록
     const EXCAPE_CHARS = /([.*+?^${}()|\[\]\\/])/g;
 
-    const ESCAPED_DELIMETERS = delimeters.map(del => del.replace(EXCAPE_CHARS, '\\$1'));
+    const escaped_delimeters = delimeters.map(del => del.replace(EXCAPE_CHARS, '\\$1'));
 
-    return ESCAPED_DELIMETERS;
+    return escaped_delimeters;
   }
 
   // 4. 덧셈 연산하기
   addAllNumbers(numbers) {
     if (this.isNumbersValid(numbers)) {
-      const SUM = numbers.reduce((prev, next) => prev + Number(number), 0);
+      const sum = numbers.reduce((prev, next) => prev + Number(next), 0);
 
-      return SUM;
+      return sum;
     }
     else {
-      return "[ERROR]";
+      throw Error("[ERROR] 잘못된 수식이 입력되었습니다.");
     }
   }
 
@@ -90,13 +90,12 @@ class App {
     const numbers = this.splitDelimeter(delimeters);
 
     // 4. 덧셈 연산하기
-    const sum = this.addAllNumbers(numbers);
-
-    if (sum != "[ERROR]") {
+    try {
+      const sum = this.addAllNumbers(numbers);
       Console.print("결과: ", sum);
     }
-    else {
-      Console.print("[ERROR] 잘못된 수식이 입력되었습니다.");
+    catch (e) {
+      Console.print(e);
     }
   }
 }
