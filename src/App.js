@@ -11,7 +11,7 @@ class App {
 
     const calculatorManager = new StringCalculatorManager(inputHandler, calculator, outputHandler);
 
-    calculatorManager.start();
+    await calculatorManager.start();
   }
 }
 
