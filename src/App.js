@@ -28,19 +28,22 @@ class App {
     MissionUtils.Console.print('계산 성공');
   }
   
-  //유효값을 검사하는 메서드 
-  isValid(inputArr,delimiters) {
+  isValid(inputArr, delimiters) {
     MissionUtils.Console.print(inputArr);
+    
     const isValidInput = inputArr.every((str, idx) => {
       if (idx % 2 === 0) { 
-        return !isNaN(str); 
+        // 숫자인지 확인
+        return !isNaN(parseFloat(str)) && isFinite(str); 
       } else { 
-        return isNaN(str) && delimiters.includes(str);
+        // 구분자가 올바른지 확인
+        return delimiters.includes(str);
       }
     });
+  
     return isValidInput; 
-    
-  }  
+  }
+  
   
   //입력받은 input 을 배열로 바꿔주는 메서드
   parseInputToArray(input){
