@@ -1,4 +1,4 @@
-import ErrorHandler from './ErrorHandler';
+import Validator from './Validator';
 import printMessage from './print-message';
 import Separator from './Separator';
 import userInput from './user-input';
@@ -12,7 +12,7 @@ class App {
     const separator = new Separator(input);
     const value = separator.separate();
 
-    ErrorHandler.validatePositiveNumbers(value);
+    Validator.validatePositiveNumbers(value);
     printMessage(RESULT_MESSAGE + calculateSum(value));
   }
 }

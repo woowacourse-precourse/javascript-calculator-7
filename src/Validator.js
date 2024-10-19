@@ -1,4 +1,4 @@
-class ErrorHandler {
+class Validator {
   static validatePositiveNumbers(arr) {
     for (const item of arr) {
       const number = Number(item);
@@ -9,4 +9,4 @@ class ErrorHandler {
   }
 }
 
-export default ErrorHandler;
+export default Validator;
