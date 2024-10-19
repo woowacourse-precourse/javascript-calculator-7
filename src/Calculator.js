@@ -1,4 +1,7 @@
-import { printOutput, userInput } from "./utils/missionUtils.js";
+import { 
+	printOutput, 
+	userInput 
+} from "./utils/missionUtils.js";
 import validateSeparatorFormat from "./utils/validateSeparatorFormat.js";
 import validatePositiveNumber from "./utils/validatePositiveNumber.js";
 import { getSum } from "./utils/calculate.js";
