@@ -51,9 +51,9 @@ class App {
     // 이스케이프 처리가 필요한 특수 문자 목록
     const EXCAPE_CHARS = /([.*+?^${}()|\[\]\\/])/g;
 
-    const escaped_delimeters = delimeters.map(del => del.replace(EXCAPE_CHARS, '\\$1'));
+    const escapedDelimeters = delimeters.map(del => del.replace(EXCAPE_CHARS, '\\$1'));
 
-    return escaped_delimeters;
+    return escapedDelimeters;
   }
 
   // 4. 덧셈 연산하기
