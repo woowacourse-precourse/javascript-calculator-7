@@ -5,11 +5,11 @@ export class UserInput {
     this.userInput = userInput;
   }
 
-  #DEFAULT_SEPARATOR = ",:";
+  static DEFAULT_SEPARATOR = ",:";
 
   splitInput() {
     return this.userInput.startsWith("/")
       ? separateString(/\\n/, this.userInput.slice(2))
-      : [this.#DEFAULT_SEPARATOR, this.userInput];
+      : [UserInput.DEFAULT_SEPARATOR, this.userInput];
   }
 }

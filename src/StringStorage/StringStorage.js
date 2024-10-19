@@ -1,3 +1,5 @@
+import { ERROE_MESSAGE } from "../constant";
+
 export class StringStorage {
   constructor(separator, string) {
     this.separator = separator;
@@ -5,11 +7,11 @@ export class StringStorage {
   }
 
   get separator() {
-    return this._separator
+    return this._separator;
   }
 
   get string() {
-    return this._string
+    return this._string;
   }
 
   set separator(separator) {
@@ -21,7 +23,7 @@ export class StringStorage {
       /^\s*$/.test(string) || /(?<!\d)-[1-9]\d*|\b-?0+\b/g.test(string);
 
     if (validate) {
-      throw new Error("[ERROR]");
+      throw new Error(ERROE_MESSAGE);
     }
     this._string = string;
   }

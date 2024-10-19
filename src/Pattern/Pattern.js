@@ -5,10 +5,29 @@ export class Pattern {
     this.chars = chars;
   }
 
+  static REGEX_SPECIAL_CAHRS = [
+    "\\",
+    "^",
+    "$",
+    ".",
+    "|",
+    "?",
+    "*",
+    "+",
+    "(",
+    ")",
+    "[",
+    "]",
+    "{",
+    "}",
+    "-",
+    "/",
+  ];
+
   makeOrPattern() {
     return this.chars
       .map((elem) => {
-        if (REGEX_SPECIAL_CAHRS.includes(elem)) {
+        if (Pattern.REGEX_SPECIAL_CAHRS.includes(elem)) {
           return "\\" + elem;
         } else {
           return elem;
