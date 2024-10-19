@@ -1,4 +1,4 @@
-import { printOutput, readInput } from "./utils.js";
+import { printOutput, readInput } from './utils.js';
 
 class Calculator {
   constructor(delimiterExtractor, splitter, converter, operation) {
@@ -23,7 +23,7 @@ class Calculator {
   }
 
   async promptUserInput() {
-    const inputValue = await readInput("덧셈할 문자열을 입력해 주세요.\n");
+    const inputValue = await readInput('덧셈할 문자열을 입력해 주세요.\n');
     return inputValue;
   }
 

@@ -1,7 +1,7 @@
-import { MissionUtils } from "@woowacourse/mission-utils";
+import { MissionUtils } from '@woowacourse/mission-utils';
 
 export async function readInput(string) {
-  let inputValue = "";
+  let inputValue = '';
 
   try {
     inputValue = await MissionUtils.Console.readLineAsync(string);

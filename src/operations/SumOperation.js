@@ -1,4 +1,4 @@
-import IOperation from "../interfaces/IOperation.js";
+import IOperation from '../interfaces/IOperation.js';
 
 class SumOperation extends IOperation {
   calculate(numbers) {

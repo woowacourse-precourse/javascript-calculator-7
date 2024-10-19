@@ -1,4 +1,4 @@
-import IDelimiterExtractor from "../interfaces/IDelimiterExtractor.js";
+import IDelimiterExtractor from '../interfaces/IDelimiterExtractor.js';
 
 class DelimiterExtractor extends IDelimiterExtractor {
   #defaultDelimiters;
@@ -6,7 +6,7 @@ class DelimiterExtractor extends IDelimiterExtractor {
 
   constructor() {
     super();
-    this.#defaultDelimiters = [",", ":"];
+    this.#defaultDelimiters = [',', ':'];
     this.#customDelimiter = null;
   }
 

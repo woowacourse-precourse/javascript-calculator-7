@@ -1,8 +1,8 @@
-import Calculator from "./Calculator.js";
-import NumberConverter from "./converters/NumberConverter.js";
-import DelimiterExtractor from "./delimiterExtractors/DelimiterExtractor.js";
-import SumOperation from "./operations/SumOperation.js";
-import StringSplitter from "./splitters/StringSplitter.js";
+import Calculator from './Calculator.js';
+import NumberConverter from './converters/NumberConverter.js';
+import DelimiterExtractor from './delimiterExtractors/DelimiterExtractor.js';
+import SumOperation from './operations/SumOperation.js';
+import StringSplitter from './splitters/StringSplitter.js';
 
 class App {
   async run() {
