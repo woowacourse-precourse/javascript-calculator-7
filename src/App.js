@@ -2,9 +2,14 @@ import readline from "readline";
 
 class App {
   async run() {
-    const input = await this.getInput();
-    const result = this.calculator(input);
-    console.log(`결과: ${result}`);
+    try {
+      const input = await this.getInput();
+      const result = this.calculator(input);
+      console.log(`결과: ${result}`);
+    } catch (error) {
+      console.error(error.message);
+      throw error;
+    }
   }
 
   getInput() {
@@ -23,7 +28,7 @@ class App {
 
   calculator(input) {
     if (input === "") {
-      return 0; // 입력 없으면 0 반환
+      throw new Error("[ERROR]");
     }
 
     // 기본 구분자
@@ -32,11 +37,10 @@ class App {
 
     // 입력을 // 로 시작했을 때 처리방법
     if (input.startsWith("//")) {
-      // 문자 그대로 '\n'을 찾아야 함
       const endOfSeparatorIndex = input.indexOf("\\n");
 
       if (endOfSeparatorIndex === -1) {
-        throw new Error("잘못된 입력: '\\n'을 찾을 수 없습니다.");
+        throw new Error("[ERROR]");
       }
 
       const customSeparators = input
@@ -52,7 +56,6 @@ class App {
         separator = new RegExp(escapedCustomSeparators.join("|") + "|,|:");
       }
 
-      // 입력으로 \n 을 받았을 때 +2 를 해줘야 한다 엔터랑은 다르다
       numbersPart = input.substring(endOfSeparatorIndex + 2).trim();
     }
 
@@ -60,14 +63,18 @@ class App {
     const splitNumbers = numbersPart.split(separator).map((value) => {
       const trimmedValue = value.trim();
       if (trimmedValue === "") {
-        return 0; // 빈 문자열이 있을 경우 0으로 처리
+        throw new Error("[ERROR]");
       }
+
       const num = Number(trimmedValue);
+      if (isNaN(num)) {
+        throw new Error("[ERROR]");
+      }
 
       return num;
     });
 
-    const sum = splitNumbers.reduce((acc, curr) => acc + curr, 0); // 숫자들을 모두 더함
+    const sum = splitNumbers.reduce((acc, curr) => acc + curr, 0);
     return sum;
   }
 }
