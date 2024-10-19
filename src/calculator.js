@@ -20,6 +20,9 @@ function calculator(operand) {
   checkNumber = checkNumber.split(regex);
 
   for (let i = 0; i < checkNumber.length; i++) {
+    if (isNaN(Number(checkNumber[i]))) {
+      throw new Error("[ERROR] 구분자가 아니거나 숫자가 아닌 문자가 존재해요"); // 구분자를 제외한 문자가 숫자가 아닌 경우
+    }
     sum += Number(checkNumber[i]);
   }
 
