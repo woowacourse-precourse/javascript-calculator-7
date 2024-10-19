@@ -31,12 +31,12 @@ class App { //하나의 메소드는 하나의 역할
         if (!isNaN(value)) {
             return value
         }
-        if (value === this.customSeparator) {
+        /*if (value === this.customSeparator) {
             return 0
         }
         if (value === "," || value === ":") {
             return 0
-        }
+        }*/
         throw new Error("[Error]: 에러발생")
     }
 
@@ -47,12 +47,16 @@ class App { //하나의 메소드는 하나의 역할
                 if (!isNaN(element)) {
                     tmpValue += element
                 }
+                if (isNaN(element) && element !== this.customSeparator && element !== ":" && element !== ",") {
+                    throw new Error("[Error]: 에러발생")
+                }
                 if (isNaN(param[idx + 1]) || idx === param.length - 1) {
                     arr.push(tmpValue)
                     tmpValue = ""
                 }
             }
         )
+        console.log(arr)
         return arr
     }
 
