@@ -10,3 +10,7 @@ export const getInput = async () => {
     console.error(error);
   }
 };
+
+export const printAnswer = (result) => {
+  Console.print(`결과 : ${result}`);
+};

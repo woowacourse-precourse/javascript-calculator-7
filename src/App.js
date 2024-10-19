@@ -3,7 +3,7 @@ import {
   sumByCustomSeparator,
 } from './utils/calculator.js';
 import { validation } from './utils/validate.js';
-import { getInput } from './utils/getInput.js';
+import { getInput, printAnswer } from './utils/inputOutputHelpers.js';
 import { findCustomSeparator } from './utils/separatorHelpers.js';
 
 class App {
@@ -18,6 +18,8 @@ class App {
     } else {
       result = sumByDefaultSeparator(receivedInput);
     }
+
+    printAnswer(result);
   }
 }
 
