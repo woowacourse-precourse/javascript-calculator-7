@@ -1,5 +1,3 @@
-import { MissionUtils } from '@woowacourse/mission-utils';
-
 // 에러 처리
 export function errorMessage(booleanData) {
   if (booleanData === 1) {
@@ -20,7 +18,7 @@ export function hasNonNumericError(input) {
 
 // 0이 있는 경우 예외
 export function hasZeroError(input) {
-  const hasZero = input.some((char) => char === '0') ? 2 : false; // 0이 하나라도 있으면 true
+  const hasZero = input.some((char) => /^0+$/.test(char)) ? 2 : false; // 0이 하나라도 있으면 true
   errorMessage(hasZero);
 }
 
