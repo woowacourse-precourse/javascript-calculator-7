@@ -38,9 +38,10 @@ class App {
 
   splitAndConvertToNumbers(input, separator) {
     if (typeof separator === "object") {
+      const [comma, semicolon] = separator;
       return input
-        .split(separator[0])
-        .flatMap((el) => el.split(separator[1]))
+        .split(comma)
+        .flatMap((el) => el.split(semicolon))
         .map(Number);
     } else return input.split(separator).map(Number);
   }
