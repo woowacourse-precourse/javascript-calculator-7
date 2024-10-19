@@ -1,3 +1,6 @@
+import replaceDelimitersToComma from '../utils/replaceDelimitersToComma.js';
+import addCustomDelimiter from '../utils/addCustomDelimiter.js';
+
 class StringPlusCalculator {
   constructor() {
     this.number = 0;
@@ -7,9 +10,13 @@ class StringPlusCalculator {
 
   calculate(input) {
     if (input.startsWith('//')) {
-      this.addCustomDelimiter(input);
+      this.delimiter = addCustomDelimiter(input, this.delimiter);
+      this.numberStartIdx = input.indexOf('\\n') + 2;
     }
-    const newCalculateString = this.replaceDelimitersToComma(input);
+    const newCalculateString = replaceDelimitersToComma(
+      input.slice(this.numberStartIdx),
+      this.delimiter,
+    );
     this.number = 0;
     let sum = '';
     for (let i = 0; i < newCalculateString.length; i += 1) {
@@ -32,40 +39,6 @@ class StringPlusCalculator {
     }
     this.number += Number(sum);
     return this.number;
-  }
-
-  replaceDelimitersToComma(input) {
-    const calculateString = input.slice(this.numberStartIdx);
-    let newCalculateString = calculateString;
-    for (let i = 0; i < this.delimiter.length; i += 1) {
-      const delimiter = this.delimiter[i].replace(
-        /[.*+?^${}()|[\]\\]/g,
-        '\\$&',
-      );
-      const regex = new RegExp(delimiter, 'g');
-      newCalculateString = newCalculateString.replace(regex, ',');
-    }
-    return newCalculateString;
-  }
-
-  addCustomDelimiter(input) {
-    let customDelimiter = '';
-    const newlineReplacedInput = input.replace(/\\n/, '\n');
-    for (let idx = 2; idx < newlineReplacedInput.length; idx += 1) {
-      const char = newlineReplacedInput[idx];
-      if (char === '\n') {
-        this.numberStartIdx = idx + 2;
-        break;
-      }
-      if (char === ' ') {
-        throw new Error('[ERROR] 커스텀 구분자에 공백이 포함될 수 없습니다.');
-      }
-      if (/\d/.test(char)) {
-        throw new Error('[ERROR] 커스텀 구분자에 숫자가 포함될 수 없습니다.');
-      }
-      customDelimiter += newlineReplacedInput[idx];
-    }
-    this.delimiter.push(customDelimiter);
   }
 }
 
