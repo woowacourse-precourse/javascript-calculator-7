@@ -27,13 +27,15 @@ class App {
   }
 
   customSeparator(inputStr) {
+    let defaultSeparator = ',|:';
     if(inputStr.startsWith('//')) {
       const endIndex = inputStr.indexOf('\\n');
-      const separator = inputStr.substring(2, endIndex);
+      const customSeparator = inputStr.substring(2, endIndex);
       const numStr = inputStr.slice(endIndex + 2);
+      const separator = `${defaultSeparator}|${customSeparator}`;
       return { separator, numStr }
     }
-    return { separator: ',|:', numStr: inputStr };
+    return { separator: defaultSeparator, numStr: inputStr };
   }
 
 }
