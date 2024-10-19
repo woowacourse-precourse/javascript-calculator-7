@@ -73,44 +73,20 @@ describe("findCustomSeparatorAndNumbers()", () => {
 });
 
 describe("validateNumbers()", () => {
-  let input;
-
-  beforeEach(() => {
-    input = new Input();
-  });
-
-  afterEach(jest.restoreAllMocks);
-
   test("연산 문자열이 구분자와 양수로 이루어져 있으면 문자열 그대로 반환", async () => {
-    const mockInput = ["1,2,3"];
-    mockQuestions(mockInput);
-    await input.getPlusString();
-
-    expect(input.validateNumbers()).toBe("1,2,3");
+    expect(Input.validateNumbers("1,2,3", [])).toBe("1,2,3");
   });
 
   test("연산 문자열에 0이 포함되어 있으면 IncludeZeroError 반환", async () => {
-    const mockInput = ["0,1,2"];
-    mockQuestions(mockInput);
-    await input.getPlusString();
-
-    expect(() => input.validateNumbers()).toThrow(IncludeZeroError);
+    expect(() => Input.validateNumbers("0,1,2", [])).toThrow(IncludeZeroError);
   });
 
   test("연산 문자열이 등록된 구분자와 양수로 이루어져 있으면 문자열 그대로 반환", async () => {
-    const mockInput = ["//;\n1,2;3"];
-    mockQuestions(mockInput);
-    await input.getPlusString();
-
-    expect(input.validateNumbers()).toBe("1,2;3");
+    expect(Input.validateNumbers("1,2;3", [";"])).toBe("1,2;3");
   });
 
   test("연산 문자열에 등록되지 않은 구분자가 포함되어 있으면 InvalidSeparatorError 반환", async () => {
-    const mockInput = ["//;\n1,2;;3"];
-    mockQuestions(mockInput);
-    await input.getPlusString();
-
-    expect(() => input.validateNumbers()).toThrow(InvalidSeparatorError);
+    expect(() => Input.validateNumbers("1,2;;3", [";"])).toThrow(InvalidSeparatorError);
   });
 });
 

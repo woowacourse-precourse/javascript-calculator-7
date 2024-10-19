@@ -41,15 +41,17 @@ class Input {
 
   /**
    * 연산 문자열이 구분자와 양수로만 이루어져 있는지 검증합니다.
+   * @param {string[]} numbers - 연산 문자열
+   * @param {string[]} customSeparator - 커스텀 구분자
    * @returns {string}
    */
-  validateNumbers() {
-    const isSeparator = (num) => num === "" || [",", ":"].includes(num) || this.customSeparator.includes(num);
+  static validateNumbers(numbers, customSeparator) {
+    const isSeparator = (num) => num === "" || [",", ":"].includes(num) || customSeparator.includes(num);
 
-    if (this.numbers.includes("0")) throw new IncludeZeroError();
-    if (!this.numbers.split(/[1-9]/).every(isSeparator)) throw new InvalidSeparatorError();
+    if (numbers.includes("0")) throw new IncludeZeroError();
+    if (!numbers.split(/[1-9]/).every(isSeparator)) throw new InvalidSeparatorError();
 
-    return this.numbers;
+    return numbers;
   }
 
   /**
