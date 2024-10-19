@@ -7,11 +7,13 @@ class App {
     let sum = 0;
 
     function checkIsCorrectChar(data) {
-      for (let i = 0; i < data.length; i++) {
-        if (!parseInt(data[i], 10) && !separator.includes(data[i])) {
-          throw new Error('[ERROR] 숫자 및 구분자가 아닌 값을 사용하고 있습니다');
+      const dataArray = data.split('');
+
+      dataArray.map((value) => {
+        if (!parseInt(value, 10) && !separator.includes(value)) {
+          throw new Error('[ERROR] 숫자 및 구분자가 아닌 값을 사용하고 있습니다.');
         }
-      }
+      })
 
       return true;
     };
@@ -20,7 +22,7 @@ class App {
 
       // \n이 커스텀 구분자 설정이 아닌 용도로 사용된 경우
       if (!data.startsWith('//')) {
-        throw new Error('[ERROR] 숫자 및 구분자가 아닌 값을 사용하고 있습니다');
+        throw new Error('[ERROR] 숫자 및 구분자가 아닌 값을 사용하고 있습니다.');
       };
 
       // 커스텀 문자가 한 글자가 아닌 경우
@@ -43,16 +45,18 @@ class App {
       }
 
       const regex = new RegExp(`[${separator}]`);
-      number = data.split(regex);
 
-      for (let i = 0; i < number.length; i++) {
-        if (checkIsCorrectChar(number[i])) {
-          if (number[i].length == 0) {
-            continue;
+      number = data.split(regex).map((value) => {
+        if (checkIsCorrectChar(value)) {
+          if (value === '') {
+            return 0;
+          } else {
+            return parseInt(value, 10);
           }
-          sum += parseInt(number[i], 10);
         }
-      }
+      });
+
+      sum = number.reduce((total, value) => total += value);
     };
 
     const data = await Console.readLineAsync('덧셈할 문자열을 입력해 주세요.\n');
