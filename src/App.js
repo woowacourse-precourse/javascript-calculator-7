@@ -14,7 +14,8 @@ class App {
       const customSeparator = custom.replace("//", "").replace("\\n", "");
       const stringToSeparate = numbersString.replace(custom, "");
       const separatedString = stringToSeparate.split(customSeparator);
-      Console.print(separatedString);
+      const numberArray = separatedString.map(Number);
+      Console.print(numberArray);
     } else {
       if (numbersString.includes(",") && numbersString.includes(";")) {
         const semicolonSeparatedString = numbersString.split(";");
@@ -22,13 +23,16 @@ class App {
           el.split(",")
         );
         const lastSeparatedString = commaSeparatedString.join(",").split(",");
-        Console.print(lastSeparatedString);
+        const numberArray = lastSeparatedString.map(Number);
+        Console.print(numberArray);
       } else if (numbersString.includes(",")) {
         const separatedString = numbersString.split(",");
-        Console.print(separatedString);
+        const numberArray = separatedString.map(Number);
+        Console.print(numberArray);
       } else if (numbersString.includes(";")) {
         const separatedString = numbersString.split(";");
-        Console.print(separatedString);
+        const numberArray = separatedString.map(Number);
+        Console.print(numberArray);
       } else {
         Console.print("[ERROR]");
       }
