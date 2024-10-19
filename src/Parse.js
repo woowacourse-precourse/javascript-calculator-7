@@ -5,7 +5,8 @@ export class Parse {
     // 커스텀 구분자가 있는 케이스
     if (customInput) {
       let sliceInput = input.split("\\n")[1];
-      const regexText = new RegExp(`[${customInput[1]},:]`); // 정규식 생성
+      customInput = customInput[1].replace(/[.*+?^${}()|[\]\\]/g, "\\$&");
+      const regexText = new RegExp(`[${customInput},:]`); // 정규식 생성
       const result = sliceInput.split(regexText);
       return result;
     }

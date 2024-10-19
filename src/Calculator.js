@@ -12,6 +12,7 @@ export class Calculator {
     const parse = new Parse();
     let parseInput = parse.changeToList(input);
     parseInput = parse.changeFloat(parseInput);
+    console.log(parseInput);
 
     // 3. 파싱된 결과 바탕으로 예외처리
     if (validate.deepValidate(parseInput).error) return false;
@@ -28,3 +29,4 @@ export class Calculator {
     return result;
   }
 }
+//,\n0:0,8:3:2,4,2,2

@@ -8,10 +8,19 @@ export class Validate {
 
   deepValidate(result) {
     // result type :  array<string>
+    console.log("0");
+
     if (this.checkNone(result)) return { error: true }; // "" 빈문자열 체크
+    console.log("1");
     if (this.checkNotNum(result)) return { error: true }; // "" 숫자인지 체크
+    console.log("2");
+
     if (this.checkSpace(result)) return { error: true }; // 공백 체크
+    console.log("3");
+
     if (this.checkMin(result)) return { error: true }; // 음수 체크
+    console.log("4");
+
     return { error: false, numbers: result };
   }
 
@@ -39,7 +48,7 @@ export class Validate {
 
   checkNone = (result) => {
     for (let index = 0; index < result.length; index++) {
-      if (result[index] == "") return true;
+      if (result[index] === "") return true;
     }
     return false;
   };

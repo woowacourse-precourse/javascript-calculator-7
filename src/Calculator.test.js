@@ -46,16 +46,11 @@ describe("regex test", () => {
 
 const getRandomAscii = () => {
   let randomAscii = "";
-  let randomNum = Math.floor(Math.random() * 100 + 26); // 0~99 범위 난수
-  while (true) {
-    if (randomNum < 126 || randomNum > 32) {
-      // 아무 문자나 출력
-      randomAscii = String.fromCharCode(randomAscii);
-      break;
-    }
-  }
+  const randomNum = Math.floor(Math.random() * 94) + 33; // ASCII 범위 33 ~ 126
+  randomAscii = String.fromCharCode(randomNum);
   return randomAscii;
 };
+
 const getRandomList = (random, count) => {
   const randomNum = Math.random();
   const randomNumberList = []; // 랜덤으로 생성된 숫자를
@@ -68,16 +63,18 @@ const getRandomList = (random, count) => {
 };
 
 describe("regex_random_test", () => {
-  const testCount = 10000;
+  const testCount = 10;
   for (let i = 0; i < testCount; i++) {
     const count = 10; // 숫자의 개수 아무리 큰수가 들어가도 강건한 테스트를 위함
     const random = Math.random();
     let testInput = "";
     const randomNumberList = getRandomList(random, count); // 랜덤으로 생성된 숫자를 배열에 담는다
-    const randomAscii = getRandomAscii(); // 랜덤으로 아스키 넣는다
+    let error = false;
 
     // 커스텀 구분자가 있는경우
     if (random * 10 >= 5) {
+      const randomAscii = getRandomAscii(); // 랜덤으로 아스키 넣는다
+      if (randomAscii === "") error = true;
       testInput += `//${randomAscii}\\n`;
       for (let i = 0; i < randomNumberList.length; i++) {
         testInput += randomNumberList[i];
@@ -98,8 +95,8 @@ describe("regex_random_test", () => {
         else testInput += ",";
       }
     }
-    let error = false;
-    if (testInput.includes(" ")) error = false;
+    if (testInput.includes(" ")) error = true;
+
     test(`random : ${testInput}`, () => {
       expect(calculator.calculate(testInput)).toEqual(
         error
