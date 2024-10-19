@@ -8,8 +8,13 @@ class App {
 				'덧셈할 문자열을 입력해주세요.\n'
 			);
 
-			// 2. 빈 문자열 처리
-			if (input === '') {
+			// 2. 잘못된 입력 에러 처리
+			if (typeof input !== 'string') {
+				throw new Error('[ERROR] 유효하지 않은 입력입니다.');
+			}
+
+			// 3. 빈 문자열이거나 null인 경우 '결과: 0' 출력
+			if (input.trim() === '' || input == null) {
 				Console.print('결과 : 0');
 				return;
 			}
@@ -33,7 +38,8 @@ class App {
 			const result = numArr && numArr.reduce((acc, cur) => acc + cur, 0);
 			Console.print(`결과 : ${result}`);
 		} catch (error) {
-			Console.print(error.message);
+			Console.print(`[ERROR] ${error.message}`);
+			throw error;
 		}
 	}
 }
