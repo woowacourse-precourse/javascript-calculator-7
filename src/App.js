@@ -57,6 +57,26 @@ class App {
 
         sum += num;
       }
+    } else {
+      const CUSTOM_DELIMITER = USERINFO.split(/[,|:]/);
+
+      for (let i = 0; i < CUSTOM_DELIMITER.length; i++) {
+        let num = CUSTOM_DELIMITER[i];
+
+        if (num === '' || isNaN(num)) {
+          // 공백일 때와 숫자가 아닐때 
+          throw new Error('[ERROR] 잘못된 문자열입니다.');
+        }
+
+
+        num = parseInt(num);
+        if (num <= 0) {
+          throw new Error('[ERROR] 양수가 아닙니다.');
+        }
+        sum += num
+      }
+    }
+
 }
 
 export default App;
