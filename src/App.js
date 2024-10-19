@@ -6,7 +6,7 @@ class App {
       const result = this.add(input);
       Console.print(`결과 : ${result}`);
     } catch (err) {
-      Console.print(error.message);
+      Console.print(err.message);
     }
   }
   add(input) {
