@@ -1,5 +1,10 @@
 import Errors from "../constants/Errors.js";
 
+/**
+ * 커스텀 구분자를 확인합니다.
+ * @param {string} input
+ * @returns string | boolean
+ */
 const checkCustomDelimiter = (input) => {
   if (input.startsWith("//")) {
     if (input.includes("\\n")) {

@@ -1,3 +1,9 @@
+/**
+ * 문자열을 구분자에 맞게 잘라 숫자 배열로 변환하는 함수
+ * @param {string} input
+ * @param {string} customDelimiter
+ * @returns number[]
+ */
 const cuttingInput = (input, customDelimiter) => {
   const PROCESSED_INPUT = customDelimiter
     ? String(input.slice(input.indexOf("\\n") + 2))
