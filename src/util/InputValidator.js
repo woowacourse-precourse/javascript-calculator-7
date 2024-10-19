@@ -1,48 +1,84 @@
 import { ErrorMessage, Delimiter, StaticNumber } from '../domain/Constants.js';
 
 const InputValidator = {
-  validateInputString(input) {
-    if (input === null || input.trim() === "") return [StaticNumber.INITIAL_SUM];
+  validateInputString(inputString) {
+    if (!inputString || inputString.trim() === '') {
+      return [StaticNumber.INITIAL_SUM];
+    }
 
-    const { delimiter, numbers } = this.parseInput(input);
-    const splitNumbers = numbers.split(delimiter);
+    let delimiters = [...Delimiter.DEFAULT];
+    let newInputString = inputString;
 
-    return splitNumbers.map(num => {
-      const trimmedNum = num.trim();
-      
-      if (trimmedNum === '') {
-        throw new Error(ErrorMessage.EMPTY_NUMBER);
-      }
+    if (this.hasCustomDelimiter(inputString)) {
+      delimiters = this.getCustomDelimiters(inputString, delimiters);
+      newInputString = this.stripCustomDelimiterPart(inputString);
+    }
 
-      const parsedNum = parseInt(trimmedNum, StaticNumber.RADIX);
-      
-      if (isNaN(parsedNum)) {
-        throw new Error(ErrorMessage.INVALID_NUMBER);
-      }
-
-      if (parsedNum < 0) {
-        throw new Error(ErrorMessage.NEGATIVE_NUMBER);
-      }
-
-      return parsedNum;
-    });
+    this.validateString(newInputString, delimiters);
+    const stringArray = this.splitByDelimiters(newInputString, delimiters);
+    return this.parseNumbers(stringArray);
   },
 
-  parseInput(input) {
-    if (input.startsWith(Delimiter.CUSTOM_PREFIX)) {
-      const [delimiterPart, numbersPart] = input.split(Delimiter.CUSTOM_SUFFIX);
-      if (!numbersPart) {
-        throw new Error(ErrorMessage.INVALID_CUSTOM_DELIMITER_FORMAT);
+  hasCustomDelimiter(inputString) {
+    return inputString.startsWith(Delimiter.CUSTOM_PREFIX) && inputString.includes(Delimiter.CUSTOM_SUFFIX);
+  },
+
+  getCustomDelimiters(inputString, delimiters) {
+    const customDelimiter = inputString[Delimiter.CUSTOM_PREFIX.length];
+    return [...delimiters, customDelimiter];
+  },
+
+  stripCustomDelimiterPart(inputString) {
+    return inputString.substring(inputString.indexOf(Delimiter.CUSTOM_SUFFIX) + Delimiter.CUSTOM_SUFFIX.length);
+  },
+
+  validateString(inputString, delimiters) {
+    for (const char of inputString) {
+      if (char === ' ') {
+        throw new Error(ErrorMessage.WHITESPACE);
       }
-      return {
-        delimiter: delimiterPart.slice(Delimiter.CUSTOM_PREFIX.length),
-        numbers: numbersPart
-      };
+      if (isNaN(char) && !delimiters.includes(char)) {
+        throw new Error(ErrorMessage.INVALID_CHARACTER);
+      }
     }
-    return {
-      delimiter: Delimiter.DEFAULT,
-      numbers: input
-    };
+  },
+
+  splitByDelimiters(inputString, delimiters) {
+    let currentToken = '';
+    const tokens = [];
+
+    for (const char of inputString) {
+      if (delimiters.includes(char)) {
+        if (currentToken !== '') {
+          tokens.push(currentToken);
+          currentToken = '';
+        }
+      } else {
+        currentToken += char;
+      }
+    }
+
+    if (currentToken !== '') {
+      tokens.push(currentToken);
+    }
+
+    return tokens;
+  },
+
+  parseNumbers(stringArray) {
+    return stringArray.map(str => {
+      if (str.includes(' ')) {
+        throw new Error(ErrorMessage.WHITESPACE);
+      }
+      const num = Number(str);
+      if (isNaN(num)) {
+        throw new Error(ErrorMessage.INVALID_NUMBER);
+      }
+      if (num < 0) {
+        throw new Error(ErrorMessage.NEGATIVE_NUMBER);
+      }
+      return num;
+    });
   }
 };
 
