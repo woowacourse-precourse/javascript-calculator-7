@@ -6,27 +6,38 @@ export class Calculator {
   #customDelimiter;
 
   constructor(userInput) {
-    this.setCustomDelimiter(userInput);
-    this.validate();
+    this.#setCustomDelimiter(userInput);
+    this.#validate();
   }
 
-  setCustomDelimiter(userInput) {
+  #setCustomDelimiter(userInput) {
     const CUSTOM_END_INDEX = userInput.indexOf(CUSTOM_DELIMITER_STATEMENT.END);
 
     if (Calculator.isSetCustomDelimiter(userInput, CUSTOM_END_INDEX)) {
-      this.#customDelimiter = userInput.slice(
-        CUSTOM_DELIMITER_STATEMENT.START.length,
+      this.#customDelimiter = this.extractCustomDelimiter(
+        userInput,
         CUSTOM_END_INDEX
       );
-      this.#string = userInput.slice(
-        CUSTOM_END_INDEX + CUSTOM_DELIMITER_STATEMENT.END.length
-      );
+      this.#string = this.extractString(CUSTOM_END_INDEX, userInput);
     }
 
     if (!Calculator.isSetCustomDelimiter(userInput, CUSTOM_END_INDEX)) {
       this.#customDelimiter = undefined;
       this.#string = userInput;
     }
+  }
+
+  extractCustomDelimiter(userInput, customEndIndex) {
+    return userInput.slice(
+      CUSTOM_DELIMITER_STATEMENT.START.length,
+      customEndIndex
+    );
+  }
+
+  extractString(customEndIndex, userInput) {
+    return userInput.slice(
+      customEndIndex + CUSTOM_DELIMITER_STATEMENT.END.length
+    );
   }
 
   static isSetCustomDelimiter(userInput, customEndIndex) {
@@ -45,7 +56,7 @@ export class Calculator {
     }
   }
 
-  validate() {
+  #validate() {
     if (this.#customDelimiter !== undefined) {
       Validator.customDelimiterLength(this.#customDelimiter);
       Validator.isCustomDelimiterString(this.#customDelimiter);
@@ -55,19 +66,22 @@ export class Calculator {
     Validator.containUndelimitedChars(this.#string, this.#customDelimiter);
   }
 
-  extract() {
-    const EXTRACTED_ARR = this.#string.split(/[^\d]+/).map(Number);
+  calculate() {
+    const EXTRACTED_ARR = this.extractNumber(this.#string);
+
+    return this.add(EXTRACTED_ARR);
+  }
+
+  extractNumber(string) {
+    const EXTRACTED_ARR = string.split(/[^\d]+/).map(Number);
 
     return EXTRACTED_ARR;
   }
 
-  add() {
-    const EXTRACTED_ARR = this.extract();
-    const SUM = EXTRACTED_ARR.reduce(
+  add(arr) {
+    return arr.reduce(
       (accumulateValue, currentValue) => accumulateValue + currentValue,
       0
     );
-
-    return SUM;
   }
 }
