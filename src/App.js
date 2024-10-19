@@ -6,7 +6,7 @@ class App {
       const input = await MissionUtils.Console.readLineAsync("덧셈할 문자열을 입력해 주세요.");
 
       if (input.length === 0) {
-        MissionUtils.Console.print('[ERROR] 입력값을 입력하지 않았습니다.');
+        MissionUtils.Console.print('결과 : 0');
         return;
       }
 
