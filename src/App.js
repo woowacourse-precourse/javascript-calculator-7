@@ -17,7 +17,7 @@ class App {
         Number
       )
     );
-    Console.print(RESULT, calculator.add());
+    Console.print(`${RESULT}${calculator.add()}`);
   }
 }
 
