@@ -3,9 +3,19 @@ import { Console } from "@woowacourse/mission-utils";
 class App {
   async run() {
     //문자열 입력받기
-    const inputString = await Console.readLineAsync(
+    let inputString = await Console.readLineAsync(
       "덧셈할 문자열을 입력해 주세요.\n"
     );
+
+    //커스텀 구분자 저장
+    let customSeperator = "";
+    if (inputString.startsWith("//") && inputString.includes("\\n")) {
+      inputString = inputString.split("\\n");
+      customSeperator = inputString[0].substring(2);
+      inputString = inputString[1];
+    }
+    Console.print(customSeperator);
+    Console.print(inputString);
   }
 }
 
