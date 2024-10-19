@@ -1,6 +1,7 @@
 import userInput from "./utils/missionUtils.js";
 import validateSeparatorFormat from "./utils/validateSeparatorFormat.js";
 import validatePositiveNumber from "./utils/validatePositiveNumber.js";
+import { getSum } from "./utils/calculate.js";
 
 class Calculator {
 	async runCalculator() {
@@ -9,6 +10,7 @@ class Calculator {
 			await validateSeparatorFormat(userOriginalInputValue);
 			await validatePositiveNumber(userOriginalInputValue);
 			const numbers = await this.getNumbers(userOriginalInputValue);
+			const sumNumber = await getSum(numbers);
 		} catch (error) {
 			console.error(error.message);
 		}
