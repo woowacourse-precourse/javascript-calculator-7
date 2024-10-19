@@ -9,7 +9,11 @@ class App {
       Console.print(error.message);
     }
   }
-  add(input) {}
+  add(input) {
+    if (!input) {
+      return 0;
+    }
+  }
 }
 
 export default App;
