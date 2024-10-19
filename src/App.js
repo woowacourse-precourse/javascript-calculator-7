@@ -6,15 +6,15 @@ class App {
       const input = await Console.readLineAsync(
         "덧셈할 문자열을 입력해 주세요.\n"
       );
-      const result = this.checkForMismatchedDelimiter(input, ";");
-      Console.print(`결과: ${result}`);
+      const rresult = this.calculateSum(input);
+      Console.print(`결과: ${rresult}`);
     } catch (error) {
       Console.print(`[ERROR] 에러 발생`);
     }
   }
 
   calculateSum(input) {
-    const numbers = this.parseNumbers(input);
+    const numbers = this.parseNumbers(input, ";");
     return numbers.reduce((sum, num) => sum + num, 0);
   }
 
@@ -43,10 +43,12 @@ class App {
     } else return true;
   }
 
-  parseNumbers(input) {
+  parseNumbers(input, customDelimiter) {
     const DEFAULT_DELIMITERS = /[,:]/g;
+    const delimiter = customDelimiter || DEFAULT_DELIMITERS;
+
     return input
-      .split(DEFAULT_DELIMITERS)
+      .split(delimiter)
       .map((num) => num.trim())
       .filter((num) => num !== "")
       .map(Number);
