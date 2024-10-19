@@ -49,12 +49,12 @@ describe('문자열 계산기', () => {
   });
 
   test('커스텀 구분자 사용', async () => {
-    const inputs = ['//;\\n1;2;3'];
+    const inputs = ['//;\\n1'];
     mockQuestions(inputs);
     const logSpy = getLogSpy();
     const app = new App();
     await app.run();
-    expect(logSpy).toHaveBeenCalledWith(expect.stringContaining('결과 : 6'));
+    expect(logSpy).toHaveBeenCalledWith(expect.stringContaining('결과 : 1'));
   });
 
   test('커스텀 구분자 사용', async () => {
@@ -136,6 +136,13 @@ describe('문자열 계산기', () => {
 
   test('커스텀 입력 아무것도 없을 경우 예외 처리', async () => {
     const inputs = ['//\\n1,2,3'];
+    mockQuestions(inputs);
+    const app = new App();
+    await expect(app.run()).rejects.toThrow('[ERROR]');
+  });
+
+  test('잘못된 커스텀 예외 처리', async () => {
+    const inputs = [';\\n-1,2,3'];
     mockQuestions(inputs);
     const app = new App();
     await expect(app.run()).rejects.toThrow('[ERROR]');

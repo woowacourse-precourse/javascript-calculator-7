@@ -20,13 +20,17 @@ export default class Calculator {
 
   parseCustomDelimiter() {
     if (this.input.startsWith(CUSTOM_DELIMITER_PREFIX)) {
-      const [customDelimiter, numberPart] = this.input.split(CUSTOM_DELIMITER_SEPARATOR)
+      const [customDelimiter, numberPart] = this.input.split(CUSTOM_DELIMITER_SEPARATOR);
       
-      this.validateCustomEmptyDelimiter(customDelimiter)
+      this.validateCustomEmptyDelimiter(customDelimiter);
       this.delimiter.push(customDelimiter.slice(2));
-      console.log(this.delimiter)
       this.input = numberPart;
     }
+  }
+
+  splitInput() {
+    const splitRegexp = new RegExp(`[${this.delimiter.join('')}\n]`);
+    return this.input.split(splitRegexp);
   }
 
   validateInput() {
@@ -62,11 +66,6 @@ export default class Calculator {
     if (isConsecutiveDelimiter.test(this.input)) {
       throw new Error(ERROR_MESSAGE.CONSECUTIVE_DELIMITER);
     }
-  }
-
-  splitInput() {
-    const splitRegexp = new RegExp(`[${this.delimiter.join('')}\n]`)
-    return this.input.split(splitRegexp);
   }
 
   sum(input) {
