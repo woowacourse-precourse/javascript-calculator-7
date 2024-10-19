@@ -1,4 +1,5 @@
 import {Console} from "@woowacourse/mission-utils";
+
 class App {
   constructor(){
     this.CUSTOM_SEPARATE = /^\/\/(.*)\\n/;
@@ -62,12 +63,6 @@ class App {
         throw new Error("[ERROR] " + this.LANGUAGE_ERROR_MESSAGE)
       return acc + number;
     },0);
-    // numbersArray.map((item) =>{
-    //   const number = parseInt(item.trim()); // 숫자로 변환
-    //   if(isNaN(number) || number < 1)
-    //     throw new Error("[ERROR] " + this.LANGUAGE_ERROR_MESSAGE)
-    //   return acc + number;
-    // });
     this.printResult(sum);
   }
 
