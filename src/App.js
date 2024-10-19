@@ -13,21 +13,35 @@ class App {
     this.#separatorList = [",", ":"];
   }
 
-  async printPlusString() {
-    const plusString = await Console.readLineAsync(
-      "덧셈할 문자열을 입력해 주세요.\n"
-    );
-    return plusString;
+  async run() {
+    const plusString = await this.readPlusString();
+    this.generatePlusString(plusString);
+
+    if (this.isNotEmptyString()) {
+      this.generatePlusResult();
+    }
+
+    this.printPlusResult();
   }
+
+  async readPlusString() {
+    return await Console.readLineAsync("덧셈할 문자열을 입력해 주세요.\n");
+  }
+
   generatePlusString(plusString) {
     this.#plusString = plusString;
   }
 
-  isEmptyString() {
-    if (this.#plusString === "") {
-      return true;
-    }
-    return false;
+  isNotEmptyString() {
+    return this.#plusString !== "";
+  }
+
+  generatePlusResult() {
+    let plusString = this.#plusString;
+    plusString = this.checkCustomPattern(plusString);
+    const separatorRegex = this.generateSeparatorRegExp();
+    const numberList = this.filterNumber(separatorRegex, plusString);
+    this.#plusResult = numberList.reduce((acc, curr) => acc + curr);
   }
 
   checkCustomPattern(originPlusString) {
@@ -57,6 +71,7 @@ class App {
 
   filterNumber(separatorRegex, plusString) {
     const numberList = plusString.split(separatorRegex).map(Number);
+
     for (let i = 0; i < numberList.length; i++) {
       if (isNaN(numberList[i])) {
         throw new Error(WRONG_SEPARATOR);
@@ -65,30 +80,12 @@ class App {
         throw new Error(WRONG_NUMBER);
       }
     }
-    return numberList;
-  }
 
-  generatePlusResult() {
-    let plusString = this.#plusString;
-    plusString = this.checkCustomPattern(plusString);
-    const separatorRegex = this.generateSeparatorRegExp();
-    const numberList = this.filterNumber(separatorRegex, plusString);
-    this.#plusResult = numberList.reduce((acc, curr) => acc + curr);
+    return numberList;
   }
 
   printPlusResult() {
     Console.print(`결과 : ${this.#plusResult}`);
-  }
-
-  async run() {
-    const plusString = await this.printPlusString();
-    this.generatePlusString(plusString);
-
-    if (!this.isEmptyString()) {
-      this.generatePlusResult();
-    }
-
-    this.printPlusResult();
   }
 }
 
