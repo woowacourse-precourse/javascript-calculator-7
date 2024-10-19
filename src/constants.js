@@ -8,3 +8,5 @@ export const CORRECT_CUSTOM_SEPARATOR = {
   PREFIX: "//",
   SUFFIX: "\\n",
 };
+
+export const ERROR_PREFIX = "[ERROR]: ";
