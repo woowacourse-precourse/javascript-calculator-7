@@ -92,10 +92,10 @@ class App {
     // 4. 덧셈 연산하기
     try {
       const sum = this.addAllNumbers(numbers);
-      Console.print("결과: ", sum);
+      Console.print(`결과 : ${sum}`);
     }
     catch (e) {
-      Console.print(e);
+      throw(e);
     }
   }
 }
