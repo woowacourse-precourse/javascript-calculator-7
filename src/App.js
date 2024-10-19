@@ -10,11 +10,19 @@ class App {
 
   // 입력값에서 숫자 추출하여 더하기
   result(userStr) {
-    let found = userStr.match(/\d+/g);
+    const regex = /[^,:\d]/;
+    const test = regex.test(userStr);
+    const found = userStr.match(/\d+/g);
 
     let num = 0;
     if (found === null) this.printresult(num);
     if (found !== null) {
+      if (test === true) {
+        MissionUtils.Console.print(
+          "[ERROR] 유효하지 않은 입력값입니다. 다시 입력해 주세요."
+        );
+        return;
+      }
       found.map((item) => (num += Number(item)));
       this.printresult(num);
     }
