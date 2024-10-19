@@ -50,6 +50,13 @@ describe("findCustomSeparatorAndNumbers()", () => {
   const input = new Input();
   const { findCustomSeparatorAndNumbers } = input;
 
+  test("빈 문자열일 때 빈 배열과 빈 문자열 반환", async () => {
+    expect(findCustomSeparatorAndNumbers("")).toEqual({
+      customSeparator: [],
+      numbers: "",
+    });
+  });
+
   test("커스텀 구분자가 없을 때 빈 배열과 연산 문자열 반환", async () => {
     expect(findCustomSeparatorAndNumbers("1,2,3")).toEqual({
       customSeparator: [],
