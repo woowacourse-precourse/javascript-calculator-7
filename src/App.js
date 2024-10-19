@@ -4,7 +4,7 @@ class App {
   // 1. 구분자 추출하기
   extractDelimeter(inputString) {
     // 커스텀 구분자 추출하기 위한 캡처 정의
-    const CAPTURE = new RegExp('//([^0-9])\\n', 'g');
+    const CAPTURE = new RegExp('//([^0-9])\\\\n', 'g');
     
     // 커스텀 구분자 그룹 캡처하기
     const matches = [...inputString.matchAll(CAPTURE)];
@@ -18,7 +18,7 @@ class App {
   // 2. 커스텀 구분자 부분 제거하기
   extractMathExpression(inputString) {
     // 커스텀 구분자 추출하기 위한 캡처 정의
-    const CAPTURE = new RegExp('//([^0-9])\\n', 'g');
+    const CAPTURE = new RegExp('//([^0-9])\\\\n', 'g');
 
     // 커스텀 구분자 부분 제거하기
     const mathExpression = inputString.replace(CAPTURE, '');
@@ -87,7 +87,7 @@ class App {
     const expression = this.extractMathExpression(inputString);
 
     // 3. 구분자 기반 분리하기 (숫자 리스트 반환)
-    const numbers = this.splitDelimeter(delimeters);
+    const numbers = this.splitDelimeter(expression, delimeters);
 
     // 4. 덧셈 연산하기
     try {
