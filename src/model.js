@@ -14,6 +14,7 @@ class CalculatorModel {
       NEGATIVE_NOT_ALLOWED: "[ERROR] 음수는 입력할 수 없습니다.",
       NUMBER_AS_SEPARATOR: "[ERROR] 숫자는 구분자로 쓸 수 없습니다.",
     };
+    this.regexNumber = /^(-?\d+(\.\d+)?)$/; // 숫자 정규 표현식
   }
 
   async calculate(input) {
@@ -75,7 +76,7 @@ class CalculatorModel {
     const trimmedNum = num.trim();
 
     // 숫자가 아닌 값 포함 체크
-    if (!/^(-?\d+(\.\d+)?)$/.test(trimmedNum)) {
+    if (!this.regexNumber.test(trimmedNum)) {
       throw new Error(this.errorMessages.INVALID_NUMBER);
     }
 
