@@ -3,7 +3,7 @@ import readline from "readline";
 class App {
   async run() {
     try {
-      const input = await this.getInput();
+      const input = await this.get_input();
       const result = this.calculator(input);
       console.log(`결과: ${result}`);
     } catch (error) {
@@ -12,7 +12,7 @@ class App {
     }
   }
 
-  getInput() {
+  get_input() {
     const rl = readline.createInterface({
       input: process.stdin,
       output: process.stdout,
@@ -33,40 +33,40 @@ class App {
 
     // 기본 구분자
     let separator = /,|:/;
-    let numbersPart = input;
+    let numbers_part = input;
 
     // 입력을 // 로 시작했을 때 처리방법
     if (input.startsWith("//")) {
-      const endOfSeparatorIndex = input.indexOf("\\n");
+      const end_of_separator_index = input.indexOf("\\n");
 
-      if (endOfSeparatorIndex === -1) {
+      if (end_of_separator_index === -1) {
         throw new Error("[ERROR]");
       }
 
-      const customSeparators = input
-        .substring(2, endOfSeparatorIndex)
+      const custom_separators = input
+        .substring(2, end_of_separator_index)
         .split("");
 
-      if (customSeparators.length > 0) {
+      if (custom_separators.length > 0) {
         // 각각의 구분자로 처리할 수 있도록 이스케이프 처리 필요함
-        const escapedCustomSeparators = customSeparators.map((sep) =>
+        const escaped_custom_separators = custom_separators.map((sep) =>
           sep.replace(/[.*+?^${}()|[\]\\]/g, "\\$&")
         );
 
-        separator = new RegExp(escapedCustomSeparators.join("|") + "|,|:");
+        separator = new RegExp(escaped_custom_separators.join("|") + "|,|:");
       }
 
-      numbersPart = input.substring(endOfSeparatorIndex + 2).trim();
+      numbers_part = input.substring(end_of_separator_index + 2).trim();
     }
 
     // 구분자를 기준으로 숫자 분리 및 변환
-    const splitNumbers = numbersPart.split(separator).map((value) => {
-      const trimmedValue = value.trim();
-      if (trimmedValue === "") {
+    const split_numbers = numbers_part.split(separator).map((value) => {
+      const trimmed_value = value.trim();
+      if (trimmed_value === "") {
         throw new Error("[ERROR]");
       }
 
-      const num = Number(trimmedValue);
+      const num = Number(trimmed_value);
       if (isNaN(num)) {
         throw new Error("[ERROR]");
       }
@@ -74,7 +74,7 @@ class App {
       return num;
     });
 
-    const sum = splitNumbers.reduce((acc, curr) => acc + curr, 0);
+    const sum = split_numbers.reduce((acc, curr) => acc + curr, 0);
     return sum;
   }
 }
