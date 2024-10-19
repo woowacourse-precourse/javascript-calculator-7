@@ -28,7 +28,7 @@ class Calculator {
   }
 
   displayResult(result) {
-    printOutput(`결과: ${result}`);
+    printOutput(`결과 : ${result}`);
   }
 }
 
