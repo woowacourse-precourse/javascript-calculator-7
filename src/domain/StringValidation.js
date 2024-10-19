@@ -1,6 +1,5 @@
 import { ERROR_CODES, VALID_STRING_CODE } from "../constants/constants.js";
 
-// TODO: 공백 처리 및 리팩토링
 class StringValidation {
   static validate(inputValue) {
     if (inputValue === '')
@@ -35,12 +34,12 @@ class StringValidation {
       delimiters.push(inputValue.substring(2, inputValue.indexOf('\\n')));
     }
 
-    const invalidCharacterRegex = new RegExp(`[^0-9${delimiters.join('')}]`);
-    // console.log(invalidCharacterRegex, invalidCharacterRegex.test(parsedValue));
+    const escapedDelimiters = delimiters.map(delimiter => delimiter.replace(/[.*+?^${}()|[\]\\]/g, '\\$&'));
+
+    const invalidCharacterRegex = new RegExp(`[^0-9${escapedDelimiters.join('')}]`);
     if (invalidCharacterRegex.test(parsedValue)) return ERROR_CODES.UNDEFINED_DELIMITER;
 
-    const consecutiveDelimiterRegex = new RegExp(`([${delimiters.join('')}]){2,}`);
-    // console.log(consecutiveDelimiterRegex, consecutiveDelimiterRegex.test(parsedValue));
+    const consecutiveDelimiterRegex = new RegExp(`([${escapedDelimiters.join('')}]){2,}`);
     if (consecutiveDelimiterRegex.test(parsedValue)) return ERROR_CODES.CONSECUTIVE_DELIMITERS;
 
     return VALID_STRING_CODE;

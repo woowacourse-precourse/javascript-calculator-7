@@ -19,15 +19,13 @@ class StringCalculator {
       const customDelimiter = this.inputValue.substring(2, this.inputValue.indexOf('\\n'));
       this.#delimiters.push(customDelimiter);
       this.inputValue = this.inputValue.substring(this.inputValue.indexOf('\\n') + 2);
-      // console.log(this.inputValue);
     }
   }
 
   #extractNumbers() {
-    const regex = new RegExp(`[${this.#delimiters.join('')}]`, 'g');
-    // console.log(regex);
+    const escapedDelimiters = this.#delimiters.map(delimiter => delimiter.replace(/[.*+?^${}()|[\]\\]/g, '\\$&'));
+    const regex = new RegExp(`[${escapedDelimiters.join('')}]`, 'g');
     this.#numbers = this.inputValue.split(regex).map(Number);
-    // console.log(this.#numbers);
   }
 
   #sumNumbers() {
