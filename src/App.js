@@ -11,7 +11,7 @@ class App {
       const output = addedNumbers(input);
       exportUserOutput(output);
     } else {
-      throw new Error('[ERROR] 잘못된 입력입니다.');
+      throw new Error('[ERROR] 잘못된 입력입니다. 프로그램을 종료하겠습니다.');
     }
   }
 }
