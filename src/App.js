@@ -4,28 +4,18 @@ function getUserInputAsync() {
   return Console.readLineAsync('덧셈할 문자열을 입력해 주세요.\n');
 }
 
-// 4. 유효한 입력인지 확인
-function vaildateInput(inputString, customString) {
-  let regex;
-  if (customString) {
-    regex = new RegExp(
-      `(\/\/${customString}\\n)?(\s|((\d+[:,${customString}]?)+(\d+))+$)` // 여기 제대로 안됨
-    );
-    if (inputString.match(regex)) {
-      console.log('커스텀 구분자');
-      return inputString;
-    } else {
-      throw new Error('[ERROR]');
-    }
-  } else {
-    regex = /\s|(\d+(([:,]\d+)+)?)$/;
-    if (inputString.match(regex)) {
-      console.log('그냥');
-      return inputString;
-    } else {
-      throw new Error('[ERROR]');
-    }
+function vaildateUserInput(userInput, customString) {
+  // TODO: 정규 표현식 리터럴로 바꾸기 버그 찾기
+  const regex = customString
+    ? new RegExp(
+        `(\/\/${customString}\\n)?(\s|((\d+[:,${customString}]?)+(\d+))+$)`
+      )
+    : new RegExp(`\s|(\d+(([:,]\d+)+)?)$`);
+
+  if (!userInput.match(regex)) {
+    throw new Error('[ERROR]');
   }
+  console.log('커스텀 구분자');
 }
 
 // 3. 커스텀구분자를 설정하는 기능
@@ -61,15 +51,15 @@ function computeResult(inputString, customString) {
 class App {
   async run() {
     const inputString = await getUserInputAsync();
+    const customString = customSeparator(inputString);
     try {
       // 유효한 입력인지 확인
-      vaildateInput(inputString);
+      vaildateUserInput(inputString);
     } catch (error) {
       console.error(error.message);
       throw error;
     }
     // 커스텀연산자가 있는지 확인
-    const customString = customSeparator(inputString);
     console.log(customString);
 
     const computeReturn = computeResult(inputString, customString);
