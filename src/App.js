@@ -2,29 +2,39 @@ import { Console } from '@woowacourse/mission-utils';
 
 // 1. 사용자의 입력을 받음
 async function getString() {
-  try {
-    const inputString = await Console.readLineAsync(
-      '덧셈할 문자열을 입력해 주세요.\n'
-    );
-    return inputString;
-  } catch (error) {
-    console.error('에러 발생:', error);
-  }
+  const inputString = await Console.readLineAsync(
+    '덧셈할 문자열을 입력해 주세요.\n'
+  );
+  return inputString;
 }
 
 // 4. 유효한 입력인지 확인
 function vaildateInput(inputString, customString) {
-  const regex = new RegExp(`(\/\/\D\\n)?(\s|(\d+[:,${customString}]?)+(\d+))`);
-  if (!inputString.match(regex)) {
-    throw new Error('[ERROR]');
+  let regex;
+  if (customString) {
+    regex = new RegExp(
+      `(\/\/${customString}\\n)?(\s|((\d+[:,${customString}]?)+(\d+))+$)` // 여기 제대로 안됨
+    );
+    if (inputString.match(regex)) {
+      console.log('커스텀 구분자');
+      return inputString;
+    } else {
+      throw new Error('[ERROR]');
+    }
   } else {
-    return inputString;
+    regex = /\s|(\d+(([:,]\d+)+)?)$/;
+    if (inputString.match(regex)) {
+      console.log('그냥');
+      return inputString;
+    } else {
+      throw new Error('[ERROR]');
+    }
   }
 }
 
 // 3. 커스텀구분자를 설정하는 기능
 function customSeparator(inputString) {
-  const regex = /^(?:\/\/)(\D)(?:\\n)/;
+  const regex = /^(\/\/\D\\n)/;
   const customString = inputString.match(regex);
 
   return customString ? customString[1] : null;
@@ -60,6 +70,7 @@ class App {
       vaildateInput(inputString);
     } catch (error) {
       console.error(error.message);
+      throw error;
     }
     // 커스텀연산자가 있는지 확인
     const customString = customSeparator(inputString);
