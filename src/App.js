@@ -22,6 +22,9 @@ class App {
         .map(Number);
 
       this.negativeNumberError(nums);
+
+      const answer = nums.reduce((a, b) => a + b, 0);
+      Console.print(`결과 : ${answer}`);
     }
   }
 
