@@ -4,7 +4,8 @@ class App {
   async run() {
     try {
       const nums = await this.getNums();
-      const result = this.getSum(nums)
+      const result = this.getSum(nums);
+      this.printResult(result);
     } catch (e) {
       Console.print("[ERROR] " + e.message);
     }
@@ -29,15 +30,15 @@ class App {
     }
 
     nums = nums.map((n) => {
-      const num = Number(n)
-      if(num < 0){
+      const num = Number(n);
+      if (num < 0) {
         throw new Error("음수는 입력하실 수 없습니다.");
       }
-      if(isNaN(num)){
+      if (isNaN(num)) {
         throw new Error("숫자가 아닌 값이 입력하실 수 없습니다.");
       }
-      return num
-    })
+      return num;
+    });
 
     return nums;
   }
@@ -46,8 +47,9 @@ class App {
     return nums.reduce((sum, num) => sum + num, 0);
   }
 
-
-
+  printResult(result = 0) {
+    Console.print(`결과 : ${result}`);
+  }
 }
 
 export default App;
