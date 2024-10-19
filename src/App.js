@@ -6,6 +6,12 @@ class App {
       Console.print(input);
   }
 }
+  function sumNumbers(input) {
+    if (input === "") {
+      return 0;
+    }
+
+}
 
 
 export default App;
