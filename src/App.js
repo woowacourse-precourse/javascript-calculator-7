@@ -85,6 +85,7 @@ class App {
     if (App.isCustomSeparator(input)) {
       const [prefixString, numbers] = input.split('\\n');
       const separator = prefixString.slice(2);
+
       App.isValidCustomFormat(prefixString, numbers);
       App.isValidSeparator(separator);
       App.isValidNumbers([separator], numbers);
