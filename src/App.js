@@ -20,6 +20,8 @@ class App {
     if (result === true) {
       let answer = qualifyNumArr.reduce((acc, cur) => acc + cur);
       Console.print(`결과 : ${answer}`);
+    } else if (result === false) {
+      throw new Error("[ERROR]: 구분자와 양수만 입력해주세요.");
     }
   }
 }
