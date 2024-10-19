@@ -1,47 +1,37 @@
+import DelimiterExtractor from "./DelimiterExtractor.js";
+import NumberConverter from "./NumberConverter.js";
+import StringSplitter from "./StringSplitter.js";
+import { printOutput, readInput } from "./utils.js";
+
 class Calculator {
-  constructor(inputValue) {
-    this.inputValue = inputValue;
-    this.delimiters = [",", ":"];
-    this.customDelimiter = null;
+  constructor() {
+    this.delimiterExtractor = new DelimiterExtractor();
+    this.splitter = new StringSplitter();
+    this.converter = new NumberConverter();
   }
 
-  hasCustomDelimiter() {
-    const delimiterPattern = /\/\/(.*?)\\n/;
+  async run() {
+    const inputValue = await this.promptUserInput();
 
-    const customDelimiter = this.inputValue.match(delimiterPattern);
+    const processedInput =
+      this.delimiterExtractor.extractCustomDelimiter(inputValue);
+    const delimiters = this.delimiterExtractor.getDelimiters();
 
-    if (customDelimiter) {
-      this.customDelimiter = customDelimiter[1];
-      this.inputValue = this.inputValue.slice(customDelimiter[0].length);
-      return true;
-    } else {
-      return false;
-    }
+    const splitValues = this.splitter.split(processedInput, delimiters);
+    const numbers = this.converter.convertAndValidate(splitValues);
+
+    const result = this.sumNumbers(numbers);
+
+    this.displayResult(result);
   }
 
-  addCustomDelimiter() {
-    if (this.hasCustomDelimiter()) {
-      this.delimiters.push(this.customDelimiter);
-    }
+  async promptUserInput() {
+    const inputValue = await readInput("덧셈할 문자열을 입력해 주세요.\n");
+    return inputValue;
   }
 
-  separator() {
-    this.addCustomDelimiter();
-    const delimitersRegex = new RegExp(`[${this.delimiters.join("")}]`);
-    const numbers = this.inputValue.split(delimitersRegex);
-
-    numbers.forEach((number, index, array) => {
-      if (!isNaN(number)) {
-        if (Number(number) < 0) {
-          throw new Error("[ERROR] 숫자가 아닌 값을 입력할 수 없습니다.");
-        } else {
-          array[index] = Number(number);
-        }
-      } else {
-        throw new Error("[ERROR] 숫자가 아닌 값을 입력할 수 없습니다.");
-      }
-    });
-    return numbers;
+  displayResult(result) {
+    printOutput(`결과: ${result}`);
   }
 
   sumNumbers(numbers) {

@@ -12,7 +12,7 @@ export async function readInput(string) {
   return inputValue;
 }
 
-export async function printOuput(string) {
+export async function printOutput(string) {
   try {
     MissionUtils.Console.print(string);
   } catch (err) {
