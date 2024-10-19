@@ -17,11 +17,11 @@ class App {
     const customSeperatorChunks = customSeperatorChunksRegex.exec(input)?.[0];
 
     if(customSeperatorChunks === null || customSeperatorChunks === undefined){
-      return {};
+      return {customSeperator: [], filteredInput: input};
     }
 
     const customSeperatorMatch = customSeperatorChunks.match(customSeperatorRegex);
-    const customSeperator = customSeperatorMatch.map((match) => match[2]);
+    const customSeperator = customSeperatorMatch ? customSeperatorMatch.map((match) => match[2]) : [];
     const filteredInput = input.slice(customSeperatorChunks.length);
 
     return {customSeperator, filteredInput};
@@ -29,10 +29,10 @@ class App {
 
   handleCustomSeperator(input){
     const defaultSeperator = [':', ','];
-    const {customSeperator, filteredInput} = this.extractCustomSeperator(input) || {};
-    const seperatorSet = new Set([...defaultSeperator, ...(customSeperator || [])]);
+    const {customSeperator, filteredInput} = this.extractCustomSeperator(input);
+    const seperatorSet = new Set([...defaultSeperator, ...customSeperator]);
 
-    return {seperatorSet, filteredInput: filteredInput || input};
+    return {seperatorSet, filteredInput};
   }
 
   extractPositiveNumbers(input, ...seperatorArray){
