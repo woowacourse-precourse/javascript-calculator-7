@@ -1,8 +1,10 @@
+import ErrorMessages from '../ErrorMessage.js'
+
 class StringValidator {
 
     checkCustomDelimiterPosition(input) { // 커스텀 구분자 선언 위치 체크 함수
         if (input.includes('//') && !input.startsWith('//')) {
-            throw new Error("[ERROR] 커스텀 구분자는 맨 앞에 선언 해야 합니다.");
+            throw new Error(ErrorMessages.ERROR_CUSTOM_DELIMITER_POSITION);
         }
     }
 
@@ -10,13 +12,13 @@ class StringValidator {
         const customDelimiterPattern = /\/\/./g;
         const matches = input.match(customDelimiterPattern);
         if (matches && matches.length > 1) {
-            throw new Error("[ERROR] 커스텀 구분자 선언은 한 번만 가능합니다.");
+            throw new Error(ErrorMessages.ERROR_MULTIPLE_DECLARE_CUSTOM_DELIMITER);
         }
     }
 
     checkEmptyString(input) { // 빈 문자열 체크 함수
         if (input.trim() === "") {
-            throw new Error("ERROR : 빈 문자열이 입력되었습니다.");
+            throw new Error(ErrorMessages.ERROR_EMPTY_STRING);
         }
     }
 
@@ -24,7 +26,7 @@ class StringValidator {
         parsedArray.forEach((item) => {
             const parsedNum = parseInt(item, 10);
             if (parsedNum < 0) {
-                throw new Error("[ERROR] 음수가 포함되어 있습니다.");
+                throw new Error(ErrorMessages.ERROR_NEGATIVE_NUMBER);
             }
         });
     }
@@ -33,7 +35,7 @@ class StringValidator {
         const nonNumberPattern = /[^\d\s-]+/g;
         parsedArray.forEach((item) => {
             if (nonNumberPattern.test(item)) {
-                throw new Error("[ERROR] 숫자가 아닌 문자가 포함되어 있습니다.");
+                throw new Error(ErrorMessages.ERROR_NON_NUMBER_CHARACTER);
             }
         });
     }
@@ -41,7 +43,7 @@ class StringValidator {
     checkMultipleDelimiter(input, customDelimiter) { // 커스텀, 기본 구분자 중복 사용 체크 함수 
         const multipleDelimiterPattern = customDelimiter ? new RegExp(`[${customDelimiter},:]{2,}`) : /[,|:]{2,}/;
         if (multipleDelimiterPattern.test(input)) {
-            throw new Error("[ERROR] 구분자가 여러개 사용되었습니다.");
+            throw new Error(ErrorMessages.ERROR_MULTIPLE_DELIMITER);
         }
     }
 }

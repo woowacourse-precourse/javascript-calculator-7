@@ -1,7 +1,7 @@
 import { Console } from "@woowacourse/mission-utils";
-import StringValidator from './StringValidator.js';
-import StringParsing from './StringParsingUtils.js';
-import StringCalculatorUtils from './StringCalculatorUtils.js'
+import StringValidator from './Utils/StringValidatorUtils.js';
+import StringParsing from './Utils/StringParsingUtils.js';
+import StringCalculatorUtils from './Utils/StringCalculatorUtils.js'
 
 const validator = new StringValidator();
 const parsing = new StringParsing();
