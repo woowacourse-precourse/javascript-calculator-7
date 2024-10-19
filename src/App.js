@@ -47,7 +47,7 @@ class App {
   async run() {
     const input = await getInput();
     const result = await processInput(input);
-    Console.print('결과 : ' + result);
+    Console.print(`결과 : ${result}`);
   }
 }
 
