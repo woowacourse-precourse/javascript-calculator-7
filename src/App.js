@@ -26,6 +26,7 @@ class App {
       this.printSum();
     } catch (error) {
       Console.print(error.message);
+      throw error;
     }
   }
 
@@ -63,9 +64,12 @@ class App {
 
   // 사용자가 잘못된 값을 입력했는지를 검증합니다.
   isValid() {
-    let isNumber = (currentValue) =>
-      currentValue.trim() !== "" && !isNaN(currentValue);
-    if (!this.splitArray.every(isNumber)) {
+    let isPositiveNumber = (currentValue) =>
+      currentValue.trim() !== "" &&
+      !isNaN(currentValue) &&
+      parseFloat(currentValue) > 0;
+
+    if (!this.splitArray.every(isPositiveNumber)) {
       throw new Error("[ERROR]");
     }
   }
