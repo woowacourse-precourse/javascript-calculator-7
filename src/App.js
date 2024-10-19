@@ -2,31 +2,30 @@ import {Console} from "@woowacourse/mission-utils";
 
 let separator = [",",":"];
 function findSeparator(input){
-  const inputArray=input.split("");
+  const INPUT_ARRAY=input.split("");
   if(input.slice(0,2)==="//"){
-    const start = input.indexOf("//")+2;
-    const end = input.indexOf("\\n");
-    if(start===1||end===-1){
+    const START = input.indexOf("//")+2;
+    const END = input.indexOf("\\n");
+    if(START===1||END===-1){
       throw new Error("[ERROR] 커스텀 구분자 추가를 위해선 //와 \\n 사이에 추가하고자 하는 구분자를 입력해주세요.")
     }else{
-      const customSeparator = input.slice(start, end);
+      const customSeparator = input.slice(START, END);
       separator.push(customSeparator);
       if(customSeparator.length>1||!isNaN(customSeparator)){
         throw new Error("[ERROR] 커스텀 구분자의 입력이 잘못됐습니다.")
       }else{
         separator.push(input.slice(customSeparator))
-        return inputArray.slice(end+2);
+        return INPUT_ARRAY.slice(END+2);
       }
     }
   }else{
-
-    return inputArray;
+    return INPUT_ARRAY;
   }
 }
 
 function getNumber(inputArray) {
   let currentNum = '';
-  const result=[];
+  const RESULT=[];
   let isContinuous=0;
   inputArray.forEach(string=>{
     if(separator.includes(string)){
@@ -35,7 +34,7 @@ function getNumber(inputArray) {
         throw new Error("[ERROR] 구분자가 연속으로 사용됐습니다.")
       }
       if(currentNum.length>0){
-        result.push(currentNum);
+        RESULT.push(currentNum);
         currentNum='';
       }
     }else{
@@ -44,9 +43,9 @@ function getNumber(inputArray) {
     }
   })
   if(currentNum !== ''){
-    result.push(currentNum);
+    RESULT.push(currentNum);
   }
-  return result;
+  return RESULT;
 }
 
 function calculate(input){
