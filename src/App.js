@@ -24,6 +24,10 @@ class App {
       delimeter = [strInput.substring(2, customDelimeterEnd)]; // 커스텀 구분자를 배열로 저장 
       numbers = strInput.substring(customDelimeterEnd + 1); // \n 이후 숫자만 남기기
     }
+
+    // 3. 커스텀 구분자 / 기본 구분자 문자열 분리하기
+    const delimiterRegex = new RegExp(`[${delimeter.join('')}]`);
+    const numbersArray = numbers.split(delimiterRegex);
   }
 }
 
