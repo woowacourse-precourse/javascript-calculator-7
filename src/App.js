@@ -10,7 +10,7 @@ const findSeparator = (input) => {
     const END = input.indexOf("\\n");
 
     if (START === 1 || END === -1) {
-      throw new Error("[ERROR] 커스텀 구분자 추가를 위해선 //와 \\n 사이에 추가하고자 하는 구분자를 입력해주세요.");
+      throw new Error("[ERROR] 커스텀 구분자 추가를 위해선 //와 \\n 사이에 추가하고자 하는 문자를 입력해주세요.");
     }
 
     const customSeparator = input.slice(START, END);
@@ -27,7 +27,7 @@ const findSeparator = (input) => {
     if(input[0]==="-"){
       return INPUT_ARRAY;
     }
-    throw new Error("[ERROR] 커스텀 구분자 추가를 위해선 //와 \\n 사이에 추가하고자 하는 구분자를 입력해주세요.")
+    throw new Error("[ERROR] 커스텀 구분자 추가를 위해선 //와 \\n 사이에 추가하고자 하는 문자를 입력해주세요.")
   }
   return INPUT_ARRAY;
 };
