@@ -40,17 +40,16 @@ class Input {
   }
 
   /**
-   *
-   * @param {string} numbers - 구분자와 숫자로 이루어진 문자열
-   * @returns
+   * 연산 문자열이 구분자와 양수로만 이루어져 있는지 검증합니다.
+   * @returns {string}
    */
-  validateNumbers(numbers) {
+  validateNumbers() {
     const isSeparator = (num) => num === "" || [",", ":"].includes(num) || this.customSeparator.includes(`//${num}`);
 
-    if (numbers.includes("0")) throw new IncludeZeroError();
-    if (!numbers.split(/[1-9]/).every(isSeparator)) throw new InvalidSeparatorError();
+    if (this.numbers.includes("0")) throw new IncludeZeroError();
+    if (!this.numbers.split(/[1-9]/).every(isSeparator)) throw new InvalidSeparatorError();
 
-    return numbers;
+    return this.numbers;
   }
 }
 
