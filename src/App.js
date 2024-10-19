@@ -10,7 +10,7 @@ class App {
     if (hasInvalidValue) Console.print("[ERROR]");
     if (!hasInvalidValue) {
       const result = this.calculateSum(numberArray);
-      Console.print(result);
+      Console.print(`결과 : ${result}`);
     }
   }
 
