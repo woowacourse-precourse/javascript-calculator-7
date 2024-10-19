@@ -22,8 +22,20 @@ class App {
 
 	// divide: 입력 문자열을 구분자 기준으로 분리하는 메서드
 	divide(input) {
-		// 기본 구분자 처리
-		return input.split(/,|:/).map(Number);
+		let separator = [",", ":"];
+		let str = input;
+
+		// 커스텀 구분자가 있는 경우
+		if (input.startsWith("//")) {
+			const endIndex = input.indexOf("\n");
+			const customSeparator = input.subString(2, endIndex);
+			separator.push(customSeparator);
+			str = input.subString(endIndex + 1);
+		}
+
+		// 기본 구분자 및 커스텀 구분자 처리
+		separator = separator.join("|");
+		return str.split(new RegExp(`${separator}`)).map(Number);
 	}
 }
 
