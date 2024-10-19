@@ -16,14 +16,14 @@ class CustomSeparatorValidator {
       };
     }
 
-    const lineBreakStringIndex = this.#target.indexOf(
+    const customSeparatorSuffix = this.#target.indexOf(
       CORRECT_CUSTOM_SEPARATOR.SUFFIX
     );
 
     const CORRECT_CUSTOM_SEPARATOR_INDEX = 2;
     const CORRECT_CUSTOM_SEPARATOR_PREFIX_INDEX = 3;
 
-    if (lineBreakStringIndex !== CORRECT_CUSTOM_SEPARATOR_PREFIX_INDEX) {
+    if (customSeparatorSuffix !== CORRECT_CUSTOM_SEPARATOR_PREFIX_INDEX) {
       return {
         success: false,
         errorMessage: "Custom Separator Length must be 1",
