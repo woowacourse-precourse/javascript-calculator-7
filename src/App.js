@@ -14,7 +14,7 @@ class App {
 			this.#validateEmptyOrNull();
 			this.#validateNegativeInput();
 			this.#parseAndSplitInput();
-			this.#handleArrayResult();
+			this.#validateResultAndCalculate();
 			this.#printResult();
 		} catch (err) {
 			this.#throwError(err);
@@ -63,11 +63,9 @@ class App {
 		}
 	}
 
-	#handleArrayResult() {
-		if (Array.isArray(this.#result)) {
-			this.#validateArrayInput();
-			this.#result = this.#calculateSum(this.#result);
-		}
+	#validateResultAndCalculate() {
+		this.#validateArrayInput();
+		this.#result = this.#calculateSum(this.#result);
 	}
 
 	#calculateSum(result) {
