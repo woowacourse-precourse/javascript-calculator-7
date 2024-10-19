@@ -3,7 +3,7 @@ import isCommaSemicolonConditionCheck from './Model/isCommaSemicolonConditionChe
 import addedNumbers from './Model/addedNumbers.js';
 import isCustomConditionCheck from './Model/isCustomConditionCheck.js';
 import exportUserOutput from './View/exportUserOutput.js';
-import exportErrorMessage from './Model/exportErrorMessage.js';
+import exportErrorMessage from './View/exportErrorMessage.js';
 
 class App {
   async run() {
