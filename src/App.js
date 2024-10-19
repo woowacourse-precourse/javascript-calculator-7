@@ -11,11 +11,14 @@ class App {
       MissionUtils.Console.print(ERRORMESSAGE);
     } else {
       // 커스텀한 구분자 저장
-      if(TARGET_STRING.startsWith("/")){
-        separator = separator + TARGET_STRING[2]
-      } 
+      if (TARGET_STRING.startsWith("//")) {
+        separator = TARGET_STRING[2];
+        const NUMBERS = TARGET_STRING.slice(5).split(separator);
+      } else {
+        // 커스텀한 구분자가 없을 경우(가장 basic한)
+        const NUMBERS = TARGET_STRING.split(/[:\,]/);
+      }
     }
-    MissionUtils.Console.print(validateInput(TARGET_STRING));
   }
 }
 
