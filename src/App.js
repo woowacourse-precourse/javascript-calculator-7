@@ -35,7 +35,10 @@ class App {
   }
 
   extractContent(str) {
-    return str.replace(App.CUSTOM_SEPARATOR_REGEXP, '').replace(/^"|"$/g, '');
+    return str
+      .replace(App.CUSTOM_SEPARATOR_REGEXP, '')
+      .replace(/^"|"$/g, '')
+      .replace('\\\\', '\\');
   }
 
   splitContent(content, separator) {
