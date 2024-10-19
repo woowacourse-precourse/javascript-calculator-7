@@ -2,25 +2,25 @@ import { Console } from "@woowacourse/mission-utils";
 
 class App {
     ERROR_MESSAGE = "[ERROR]";
-    separator = new Set([":", ","]);
+    delimiter = new Set([":", ","]);
 
     isValidateNumber = (number) => {
         return !isNaN(number) && number >= 0;
     };
 
-    findCustomSeparator = (input) => {
+    findCustomDelimiter = (input) => {
         // 커스텀 구분자가 있는지 확인한다.
         // "//"와 "\n" 사이에 위치하는 문자를 커스텀 구분자로 사용한다
         let userInput = input.slice(); // 불변성 유지
         const regex = /\/\/(.*?)\\n/;
         while (userInput.match(regex)) {
-            const customSeparator = userInput.match(regex);
+            const customDelimiter = userInput.match(regex);
 
-            if (customSeparator) {
-                if (customSeparator.index > 0) {
+            if (customDelimiter) {
+                if (customDelimiter.index > 0) {
                     return this.ERROR_MESSAGE;
                 }
-                this.separator.add(customSeparator[1]);
+                this.delimiter.add(customDelimiter[1]);
             }
             userInput = userInput.replace(regex, "");
         }
@@ -42,27 +42,39 @@ class App {
         return true;
     };
 
+    splitByDelimiters = (input) => {
+        const delimiters = new RegExp(`[${[...this.delimiter].join("")}]`);
+        return input.split(delimiters);
+    };
+
+    addNumbers = (numbers) => {
+        return numbers.reduce((acc, cur) => acc + cur, 0);
+    };
+
+    parseNumber = (input) => {
+        return input.map((number) => Number(number));
+    };
+
     solve = (input) => {
         if (input.length === 0) {
             return 0;
         }
 
-        const separatedInput = this.findCustomSeparator(input);
+        const strWithoutCustomDelimiters = this.findCustomDelimiter(input);
 
-        if (separatedInput === this.ERROR_MESSAGE) {
+        if (strWithoutCustomDelimiters === this.ERROR_MESSAGE) {
             return this.ERROR_MESSAGE;
         }
 
         // 구분자를 기준으로 문자열을 나눈다.
-        const separators = new RegExp(`[${[...this.separator].join("")}]`);
-        const numbers = separatedInput.split(separators);
+        const inputSplittedByDelimiters = this.splitByDelimiters(strWithoutCustomDelimiters);
 
         // 숫자가 유효한지 확인한다.
-        if (this.checkNumberValidity(numbers)) {
+        if (this.checkNumberValidity(inputSplittedByDelimiters)) {
             // 문자열을 숫자로 변환한다.
-            const parsedNumbers = numbers.map((number) => Number(number));
+            const parsedNumbers = this.parseNumber(inputSplittedByDelimiters);
             // 숫자를 모두 더한다.
-            return parsedNumbers.reduce((acc, cur) => acc + cur, 0);
+            return this.addNumbers(parsedNumbers);
         }
 
         return this.ERROR_MESSAGE;
