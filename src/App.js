@@ -15,7 +15,8 @@ class App {
       const stringToSeparate = numbersString.replace(custom, "");
       const separatedString = stringToSeparate.split(customSeparator);
       const numberArray = separatedString.map(Number);
-      Console.print(numberArray);
+      if (numberArray.includes(NaN)) Console.print("[ERROR]");
+      else Console.print(numberArray);
     } else {
       if (numbersString.includes(",") && numbersString.includes(";")) {
         const semicolonSeparatedString = numbersString.split(";");
@@ -24,15 +25,18 @@ class App {
         );
         const lastSeparatedString = commaSeparatedString.join(",").split(",");
         const numberArray = lastSeparatedString.map(Number);
-        Console.print(numberArray);
+        if (numberArray.includes(NaN)) Console.print("[ERROR]");
+        else Console.print(numberArray);
       } else if (numbersString.includes(",")) {
         const separatedString = numbersString.split(",");
         const numberArray = separatedString.map(Number);
-        Console.print(numberArray);
+        if (numberArray.includes(NaN)) Console.print("[ERROR]");
+        else Console.print(numberArray);
       } else if (numbersString.includes(";")) {
         const separatedString = numbersString.split(";");
         const numberArray = separatedString.map(Number);
-        Console.print(numberArray);
+        if (numberArray.includes(NaN)) Console.print("[ERROR]");
+        else Console.print(numberArray);
       } else {
         Console.print("[ERROR]");
       }
