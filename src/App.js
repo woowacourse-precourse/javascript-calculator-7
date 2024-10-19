@@ -9,8 +9,8 @@ class App {
       //문자열 분리
       //쉼표 또는 콜론
       if((/,|:/).test(input)){
-        const sep = input.split((/,|:/));
-        Console.print(sep);
+        const result = input.split((/,|:/)).map(Number).reduce((a,b)=>a+b,0); //합산
+        Console.print("결과: " + result);
       } 
 
       //커스텀 구분자
@@ -21,8 +21,8 @@ class App {
 
         //분리할 문자열
         const str = input.replace(/\/\/.*?\\n/,'');
-        const sep = str.split(customChar);
-        Console.print(sep);
+        const result = str.split(customChar).map(Number).reduce((a,b)=>a+b,0); //합산
+        Console.print("결과: " + result);
       } 
       
       else {
