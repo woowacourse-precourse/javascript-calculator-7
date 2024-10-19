@@ -5,22 +5,22 @@ class App {
   extractedNumbers = [];
 
   async run() {
-    const INPUT = await Console.readLineAsync(
-      '덧셈할 문자열을 입력해주세요.\n'
-    );
+    try {
+      const INPUT = await Console.readLineAsync(
+        '덧셈할 문자열을 입력해주세요.\n'
+      );
 
-    const PROCESSED_INPUT = this.handleCustomSeparator(INPUT);
+      const PROCESSED_INPUT = this.handleCustomSeparator(INPUT);
 
-    if (this.isEmpty(PROCESSED_INPUT)) {
-      this.printResult(0);
-    } else {
-      try {
+      if (this.isEmpty(PROCESSED_INPUT)) {
+        this.printResult(0);
+      } else {
         this.splitAndExtractNumbers(PROCESSED_INPUT);
         const SUM = this.calculateSum();
         this.printResult(SUM);
-      } catch (error) {
-        this.printError(error.message);
       }
+    } catch (error) {
+      this.handleError(error);
     }
   }
 
@@ -77,9 +77,8 @@ class App {
     Console.print(`결과 : ${result}`);
   }
 
-  printError(errorMessage) {
-    Console.print(`[ERROR] : ${errorMessage}`);
-    return;
+  handleError(error) {
+    throw new Error(`[ERROR] ${error.message}`);
   }
 }
 
