@@ -9,6 +9,7 @@ class App {
             MissionUtils.Console.print(`결과 : ${result}`);
         } catch (e) {
             MissionUtils.Console.print(e.message);
+            throw e;
         }
     }
 
@@ -38,6 +39,11 @@ class App {
         delimiter = new RegExp(delimiter);
 
         let numbers = input.split(delimiter).map(Number);
+
+        // 커스텀 구분자로 설정 되지 않은 문자가 입력시 예외를 발생시킨다.
+        if (numbers.some((num) => isNaN(num))) {
+            throw new Error('[ERROR] 올바르지 않은 입력입니다.');
+        }
 
         if (numbers.some((num) => num < 0)) {
             throw new Error('[ERROR] 음수는 입력할 수 없습니다.');
