@@ -3,7 +3,7 @@ import { MissionUtils } from "@woowacourse/mission-utils";
 class App {
   async run() {
       const input = await MissionUtils.Console.readLineAsync('덧셈할 문자열을 입력해 주세요.');
-
+      let inputString = input.toString();
       const separators = [",", ":"];
 
       // 아무 것도 입력하지 않았을 경우(""), 0으로 처리하기
@@ -11,7 +11,17 @@ class App {
           return MissionUtils.Console.print('결과 : 0');
       }
 
-      const inputArray = [...input];
+      //  문자열 앞부분의 "//"와 "\n" 사이에 위치하는 문자를 커스텀 구분자로 지정하기
+      if (inputString[0] === '/' && inputString[1] === '/') {
+          const searchLastWord = inputString.indexOf('\\n');
+          if (searchLastWord > 0) {
+              const customSeparator = inputString.slice(2, searchLastWord);
+              separators.push(customSeparator);
+              inputString = inputString.substring(searchLastWord + 2);
+          }
+      }
+
+      const inputArray = [...inputString];
       const numArray = [];
 
       let string = '';
