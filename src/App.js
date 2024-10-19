@@ -1,4 +1,5 @@
 import { Console } from '@woowacourse/mission-utils';
+import { checkForNaN } from './utils/checkForNaN.js';
 import { hasNegative } from './utils/hasNegative.js';
 import { isEmptyOrNull } from './utils/isEmptyOrNull.js';
 import { splitByCustomSeparator } from './utils/splitByCustomSeparator.js';
@@ -38,15 +39,11 @@ class App {
 		}
 	}
 
-	#checkForNaN(value) {
-		return value.some((v) => isNaN(v));
-	}
-
 	#validateArrayInput() {
 		if (this.#result[0] === this.#input) {
 			this.#throwError('[ERROR] : 구분자와 양수로 이루어진 값을 입력해주세요.');
 		}
-		if (this.#checkForNaN(this.#result)) {
+		if (checkForNaN(this.#result)) {
 			this.#throwError('[ERROR] : 입력값에 숫자 이외의 값이 포함되어 있어요.');
 		}
 	}
