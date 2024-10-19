@@ -55,17 +55,4 @@ describe("문자열 계산기", () => {
 
     await expect(app.run()).rejects.toThrow("[ERROR]");
   });
-
-  test.skip("추출된 숫자들을 받아와 덧셈 연산을 한다.", async () => {
-    const inputs = ["1,2,3"];
-    mockQuestions(inputs);
-
-    const logSpy = getLogSpy();
-    const outputs = 6;
-
-    const app = new App();
-    await app.run();
-
-    expect(logSpy).toHaveBeenCalledWith(outputs);
-  });
 });
