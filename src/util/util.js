@@ -9,8 +9,6 @@ const _reduce = (f, acc, iter) => {
   return acc;
 };
 
-const _go = (...args) => _reduce((a, f) => f(a), args);
-
 const _pipe =
   (...fns) =>
   (x) =>
@@ -26,4 +24,4 @@ const extractCustomDelimiter = (input) => {
   return null;
 };
 
-export { _reduce, _go, _pipe, extractCustomDelimiter };
+export { _reduce, _pipe, extractCustomDelimiter };

@@ -1,5 +1,5 @@
 // @ts-check
-import { DELIMITER } from '../constants/delimiter.js';
+import { DEFAULT_DELIMITER } from '../constants/delimiter.js';
 import { ERROR_MESSAGE } from '../constants/errorMessages.js';
 import throwError from '../util/errorThrower.js';
 import { _pipe, extractCustomDelimiter } from '../util/util.js';
@@ -91,7 +91,7 @@ const checkCustomDelimiterWithNumbers = (input) => {
 const checkValidDefaultDelimiter = (input) => {
   if (input.startsWith('//')) return input;
   const nonDigits = input.replace(/\d+/g, '');
-  if (!nonDigits.split('').every((char) => DELIMITER.test(char))) {
+  if (!nonDigits.split('').every((char) => DEFAULT_DELIMITER.test(char))) {
     throwError(ERROR_MESSAGE.INVALID_DELIMITER);
   }
   return input;
