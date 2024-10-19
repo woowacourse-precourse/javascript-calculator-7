@@ -44,6 +44,14 @@ class StringCalculator {
     }
   }
 
+  checkDelimiterUsage(numberTokens) {
+    numberTokens.forEach((token) => {
+      if (token.trim() === "") {
+        throw new Error("[ERROR] 구분자가 잘못 사용되었습니다.");
+      }
+    });
+  }
+
   extractCustomDelimiter(input) {
     const match = input.match(StringCalculator.CUSTOM_DELIMITER_PATTERN);
 
@@ -59,11 +67,15 @@ class StringCalculator {
     }
     return input;
   }
+
   splitNumbers(numberSection, customDelimiter) {
-    if (customDelimiter) {
-      return numberSection.split(customDelimiter).map(Number);
-    }
-    return numberSection.split(/,|:/).map(Number);
+    const numberTokens = customDelimiter
+      ? numberSection.split(customDelimiter)
+      : numberSection.split(/,|:/);
+
+    this.checkDelimiterUsage(numberTokens);
+
+    return numberTokens.map(Number);
   }
 
   calculateSum(numbers) {

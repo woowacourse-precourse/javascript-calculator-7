@@ -62,6 +62,22 @@ describe("StringCalculator", () => {
     });
   });
 
+  describe("checkDelimiterUsage", () => {
+    test("구분자 사이에 숫자가 없으면 에러를 발생시킨다", () => {
+      const calculator = new StringCalculator();
+      expect(() => calculator.checkDelimiterUsage(["1", "", "2"])).toThrow(
+        "[ERROR] 구분자가 잘못 사용되었습니다."
+      );
+    });
+
+    test("구분자가 올바르게 사용되면 에러가 발생하지 않는다", () => {
+      const calculator = new StringCalculator();
+      expect(() =>
+        calculator.checkDelimiterUsage(["1", "2", "3"])
+      ).not.toThrow();
+    });
+  });
+
   describe("splitNumbers", () => {
     test("커스텀 구분자를 사용하여 문자열을 나누고 숫자 배열을 반환한다", () => {
       const calculator = new StringCalculator();
