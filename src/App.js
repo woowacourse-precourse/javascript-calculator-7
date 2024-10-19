@@ -21,6 +21,10 @@ function sumNumbers(input) {
 
   if (input.startsWith("//")) {
     const customEndIndex = input.indexOf("\n");
+
+    if (delimiterEndIndex === -1) {
+      throw new Error("[ERROR] 유효하지 않은 구분자 형식입니다.");
+    }
 }
 
 export default App;
