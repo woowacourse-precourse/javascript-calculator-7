@@ -10,6 +10,10 @@ class Calculator {
     * @returns {number[]}
     */
   splitNumbers(text) {
+    if (/^\d+$/.test(text)) {
+      return [Number(text)];
+    }
+
     const regex = new RegExp(`,|:|${this.customSeparator}`);
     return text.split(regex).map(Number);
   }

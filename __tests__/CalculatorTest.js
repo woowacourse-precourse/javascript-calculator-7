@@ -10,6 +10,11 @@ describe("sum()", () => {
     const calculator = new Calculator([], "");
     expect(calculator.sum()).toBe(0);
   });
+
+  test("구분자 없이 입력했을 때 숫자 그대로 반환", async () => {
+    const calculator = new Calculator([], "123");
+    expect(calculator.sum()).toBe(123);
+  });
 });
 
 describe("splitNumbers()", () => {
