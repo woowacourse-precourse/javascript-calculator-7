@@ -10,10 +10,23 @@ class App {
       return Console.print("결과 : 0");
     }
 
-    // 구분자 처리
-    const separators = [",", ":"]; 
+    // 기본 구분자 
+    const separators = [",", ":"];
     for (const separator of separators) {
-      input = input.split(separator).join(","); 
+      input = input.split(separator).join(",");
+    }
+
+    // 커스텀 구분자 
+    if (input.startsWith("//")) {
+      const customSeparator = input.charAt(2); 
+      input = input.split(/\n/)[1]; 
+      input = input.split(customSeparator).join(","); 
+    }
+
+    // 잘못된 입력값 처리
+    const numbers = input.split(",").map(num => Number(num.trim()));
+    if (numbers.some(num => isNaN(num) || num < 0)) {
+      return Console.print("[ERROR] 음수 또는 잘못된 값을 입력했습니다.");
     }
 
     Console.print(input);
