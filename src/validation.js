@@ -2,6 +2,10 @@ export function failCharSeparator(seperator) {
   return seperator.length !== 1 || !isNaN(seperator);
 }
 
+export function failCustomEndIndex(endIndex) {
+  return endIndex === -1;
+}
+
 export function failIsNumbers(input) {
   return input.some((number) => isNaN(parseInt(number)));
 }

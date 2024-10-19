@@ -2,6 +2,7 @@ import { Console } from '@woowacourse/mission-utils';
 import { CALCULATOR_MESSAGE, ERROR_MESSAGE } from './constants.js';
 import {
   failCharSeparator,
+  failCustomEndIndex,
   failIsNumbers,
   failVaildSeparator,
   failNumberRange,
@@ -25,10 +26,17 @@ class App {
     );
   }
 
+  printResult() {
+    Console.print(CALCULATOR_MESSAGE.CALCULATOR_RESULT + this.sum);
+  }
+
   calculateResult() {
-    const numbers = this.splitInput().map((number) =>
-      number === '' ? 0 : number
-    );
+    const numbers = this.splitInput();
+
+    if (numbers.length === 1 && numbers[0] === '') {
+      this.sum = 0;
+      return;
+    }
 
     this.checkNumbers(numbers);
     this.sum = numbers.reduce((acc, cur) => acc + Number(cur), 0);
@@ -36,22 +44,21 @@ class App {
 
   splitInput() {
     if (this.input.startsWith('//')) {
-      const [customSeparator, separatedInput] = this.input
-        .slice(2)
-        .split('\\n');
+      const customEndIndex = this.input.indexOf('\\n');
+      const separator = this.input.slice(2, customEndIndex);
+      const separatedInput = this.input.slice(customEndIndex + 2);
 
-      this.checkSeperator(customSeparator);
-      return separatedInput.split(customSeparator);
+      this.checkSeperator(customEndIndex, separator);
+      return separatedInput.split(separator);
     }
 
     return this.input.split(/,|:/);
   }
 
-  printResult() {
-    Console.print(CALCULATOR_MESSAGE.CALCULATOR_RESULT + this.sum);
-  }
-
-  checkSeperator(seperator) {
+  checkSeperator(customEndIndex, seperator) {
+    if (failCustomEndIndex(customEndIndex)) {
+      throw new Error(ERROR_MESSAGE.INVALID_CUSTOM_END);
+    }
     if (failCharSeparator(seperator)) {
       throw new Error(ERROR_MESSAGE.INVALID_CHARACTER);
     }
