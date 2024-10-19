@@ -5,8 +5,12 @@ class DelimiterParser {
 
     if (match) {
       const [, delimiter, numbers] = match;
+
+      // 커스텀 구분자가 \인 경우, \\로 변환
+      const escapedDelimiter = delimiter === "\\" ? "\\\\" : delimiter;
+
       return {
-        numberStrings: numbers.split(new RegExp(`[${delimiter},:]`)),
+        numberStrings: numbers.split(new RegExp(`[${escapedDelimiter},:]`)),
         customDelimiter: delimiter,
       };
     }
