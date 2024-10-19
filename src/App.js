@@ -31,6 +31,12 @@ class App {
         }
     }
 
+    splitInput(input) {
+        if (!input) return 0;
+        const numbers = input.split(/[,:]/);
+        return numbers.map((number) => Number(number));
+    }
+
     throwError(message) {
         // 굳이 함수화가 필요할까?
         throw new Error(`[ERROR] ${message}`);
