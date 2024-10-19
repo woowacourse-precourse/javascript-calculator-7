@@ -19,5 +19,5 @@
 - [ ] 프로그래밍 요구 사항에서 달리 명시하지 않는 한 파일, 패키지 등의 이름을 바꾸거나 이동하지 않는다.
 - [ ] 자바스크립트 코드 컨벤션을 지키면서 프로그래밍한다.
 - [ ] 기본적으로 JavaScript Style Guide를 원칙으로 한다.
-- [ ] woowacourse/mission-utils에서 제공하는 Console API를 사용하여 구현해야 한다.
-  - [ ] 사용자의 값을 입력 및 출력하려면 Console.readLineAsync()와 Console.print()를 활용한다.
+- [x] woowacourse/mission-utils에서 제공하는 Console API를 사용하여 구현해야 한다.
+  - [x] 사용자의 값을 입력 및 출력하려면 Console.readLineAsync()와 Console.print()를 활용한다.
