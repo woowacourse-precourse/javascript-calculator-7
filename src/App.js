@@ -23,7 +23,7 @@ class App {
       this.customSeparate(userInput);
     }else if(this.isValidString(userInput, this.UNCOUTOM_SEPARATE)){
       this.unCustomSeparate(userInput);
-    }  
+    }else throw Error("[ERROR]" + this.LANGUAGE_ERROR_MESSAGE);  
   }
 
   //커스텀 구분자 처리 함수
