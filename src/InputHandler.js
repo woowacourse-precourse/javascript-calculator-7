@@ -14,7 +14,7 @@ class InputHandler {
 
   validateEmpty(input) {
     if (!input.trim()) {
-      throw new Error("빈 문자열은 허용되지 않습니다.");
+      throw new Error("[ERROR] 빈 문자열은 허용되지 않습니다.");
     }
   }
 }

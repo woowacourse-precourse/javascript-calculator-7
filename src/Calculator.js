@@ -29,7 +29,7 @@ class Calculator {
     } else if (DEFAULT_SEPARATOR.some(separator => inputString.includes(separator))) {
       return false
     } else {
-      throw new Error("구분자가 없습니다.");
+      throw new Error("[ERROR] 구분자가 없습니다.");
     }
   }
 
@@ -44,7 +44,7 @@ class Calculator {
 
   validateCustomSeparator(separator) {
     if (separator.length !== 1) {
-      throw new Error("커스텀 구분자는 하나의 문자여야 합니다.");
+      throw new Error("[ERROR] 커스텀 구분자는 하나의 문자여야 합니다.");
     }
   }
 
@@ -65,7 +65,7 @@ class Calculator {
   validateNumbers(splitResults) {
     // 숫자가 없는 경우
     if (splitResults.length === 0) {
-      throw new Error("숫자가 포함되어야 합니다.");
+      throw new Error("[ERROR] 숫자가 포함되어야 합니다.");
     }
 
     // 소숫점 숫자를 포함하는지 검증하고 예외 처리
@@ -74,7 +74,7 @@ class Calculator {
 
       // 숫자로 변환할 수 없는 값이 있으면 예외 처리
       if (isNaN(number)) {
-        throw new Error("잘못된 문자가 포함되었습니다.");
+        throw new Error("[ERROR] 잘못된 문자가 포함되었습니다.");
       }
 
       // 음수 숫자 예외 처리
@@ -84,7 +84,7 @@ class Calculator {
 
       // 소숫점 숫자 예외 처리
       if (item.includes('.')) {
-        throw new Error("소숫점 숫자는 허용되지 않습니다.");
+        throw new Error("[ERROR] 소숫점 숫자는 허용되지 않습니다.");
       }
     });
   }

@@ -6,7 +6,7 @@ class OutputHandler {
   }
 
   printErrorMessage(message) {
-    Console.print(`[Error] ${message}`);
+    Console.print(`${message}`);
   }
 
   printResult(result) {
