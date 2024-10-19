@@ -37,6 +37,11 @@ class App {
 
   parseNumbers(input) {
     const numbers = input.map(Number);
+    const negativeNumbers = numbers.filter((num) => num < 0);
+
+    if (negativeNumbers.length > 0) {
+      throw new Error(`음수는 입력할 수 없습니다`);
+    }
     return numbers;
   }
 
