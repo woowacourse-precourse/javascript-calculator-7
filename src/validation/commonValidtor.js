@@ -1,5 +1,5 @@
 import { CUSTOM_VALIDATOR } from "../constants.js";
-import { generateDelimiterCombinations } from "../utils.js";
+import { createDelimiterCombinationList } from "../utils.js";
 
 class CommonValidator {
   #target;
@@ -27,7 +27,7 @@ class CommonValidator {
       return false;
     }
 
-    const combinations = generateDelimiterCombinations(this.#separatorList);
+    const combinations = createDelimiterCombinationList(this.#separatorList);
 
     return combinations.every(
       (combination) => !this.#target.includes(combination)

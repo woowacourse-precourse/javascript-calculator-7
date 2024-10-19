@@ -1,4 +1,4 @@
-export const generateDelimiterCombinations = (
+export const createDelimiterCombinationList = (
   delimiters,
   minLength = 2,
   maxLength = 3
