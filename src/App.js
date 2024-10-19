@@ -11,10 +11,13 @@ class App {
     const createSeparatorPattern = customSeparator => {
       const separator = [',', ':'];
       if (customSeparator) {
-        separator.push(customSeparator);
+        separator.push(
+          customSeparator.replace(/[-\/\\^$*+?.()|[\]{}]/g, '\\$&'),
+        );
       }
       return new RegExp(separator.join('|'));
     };
+
     let nums = [];
 
     if (input.match(/^\/\//)) {
@@ -26,6 +29,11 @@ class App {
         }
         throw new Error('[ERROR] 커스텀 구분자가 입력되지 않았습니다.');
       }
+      if (!isNaN(customSeparator[1])) {
+        throw new Error(
+          '[ERROR] 커스텀 구분자는 문자나 특수문자만 가능합니다.',
+        );
+      }
 
       nums = input
         .split('\\n')[1]
@@ -35,8 +43,8 @@ class App {
     }
     const result = nums.reduce((hap, num) => {
       const number = Number(num);
-      if (isNaN(number)) {
-        throw new Error('[ERROR] 문자열이 아닌 숫자를 입력해 주세요.');
+      if (isNaN(number) || !number) {
+        throw new Error('[ERROR] 숫자를 입력해 주세요.');
       }
       if (number < 0) {
         throw new Error('[ERROR] 음수가 아닌 양수를 입력해 주세요.');
