@@ -14,20 +14,22 @@ class App {
   }
 
   handleCustomSeperator(input){
-    const seperatorSet = new Set([':', ',']);
-    const regex = /\/\/(.)\\n/g;
-    let matchData = null;
-    let lastIndex = 0;
+    const defaultSeperator = [':', ','];
+    const customSeperatorChunksRegex = /^(\/\/.\\n)+/g;
+    const customSeperatorRegex = /\/\/(.)\\n/g;
 
-    while((matchData = regex.exec(input)) !== null){
-      const customSeperator = matchData[0][2];
+    const customSeperatorChunks = customSeperatorChunksRegex.exec(input)?.at(0);
+    const customSeperatorMatch = customSeperatorChunks?.match(customSeperatorRegex);
 
-      seperatorSet.add(customSeperator);
-      lastIndex = matchData.index + matchData[0].length;
-    }
+    if(customSeperatorMatch === null || customSeperatorMatch === undefined){
+      const seperatorSet = new Set(defaultSeperator);
+      return [seperatorSet, input];
+    } 
 
-    const filteredInput = input.slice(lastIndex);
-    
+    const customSeperator = customSeperatorMatch.map((match) => match[2]);
+    const seperatorSet = new Set([...defaultSeperator, ...customSeperator]);
+    const filteredInput = input.slice(customSeperatorChunks.length);    
+
     return [seperatorSet, filteredInput];
   }
 
