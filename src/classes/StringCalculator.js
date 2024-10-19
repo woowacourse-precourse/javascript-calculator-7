@@ -5,6 +5,9 @@ class StringCalculator {
       if (Number.isNaN(value)) {
         throw new Error(`[ERROR] ${value} -> 숫자가 아닌 값입니다.`);
       }
+      if (value < 0) {
+        throw new Error(`[ERROR] ${value} -> 음수는 허용되지 않습니다.`);
+      }
     }
   }
 
