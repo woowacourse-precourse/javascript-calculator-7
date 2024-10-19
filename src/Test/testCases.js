@@ -146,6 +146,11 @@ export const customTestCases = [
     expectedOutput: 10,
     description: '구분자가 숫자가 사용되는 경우',
   },
+  {
+    input: '// \\n1 2 3',
+    expectedOutput: 6,
+    description: '구분자가 공백이 사용되는 경우',
+  },
 ];
 
 export const normalTestCases = [
