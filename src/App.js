@@ -26,7 +26,7 @@ function stringCalculator(input) {
 
   const { parsedArray, customDelimiter } = parsing.parsing(input);
 
-  checkingProcessAfterParsing(input, customDelimiter, parsedArray);
+  checkingProcessAfterParsing(parsedArray, customDelimiter);
 
   var resultNumArray = calculator.convertNumArray(parsedArray);
 
@@ -42,8 +42,8 @@ function checkingProcessBeforeParsing(input) {
   validator.checkMultipleDeclareCustomDelimiter(input);
 }
 
-function checkingProcessAfterParsing(input, customDelimiter, parsedArray) {
-  validator.checkMultipleDelimiter(input, customDelimiter);
+function checkingProcessAfterParsing(parsedArray, customDelimiter) {
+  validator.checkMultipleDelimiter(parsedArray, customDelimiter);
   validator.checkIncludesNonNumber(parsedArray);
   validator.checkNegativeNumbers(parsedArray);
 }
