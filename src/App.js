@@ -25,7 +25,7 @@ function handleEmptyInput(input) {
 // 기본 구분자로 문자열 분리 및 합산
 function sumWithDefaultDelimiters(input) {
   const delimiters = /[,|:]/;
-  validateDelimiters(input);
+
   const tokens = input.split(delimiters);
 
   if (tokens.some((token) => token === '')) {
@@ -45,6 +45,8 @@ function sumWithDefaultDelimiters(input) {
   if (numericValues.some((num) => num > Number.MAX_SAFE_INTEGER)) {
     throw new Error('[ERROR] 숫자가 허용된 범위를 초과했습니다.');
   }
+
+  validateDelimiters(input);
 
   return numericValues.reduce((acc, num) => acc + num, 0);
 }
@@ -71,7 +73,6 @@ function sumWithCustomDelimiter(input) {
     if (!numbersString) {
       throw new Error('[ERROR] 덧셈할 숫자가 없습니다.');
     }
-    validateDelimiters(numbersString, customDelimiter);
 
     const tokens = numbersString.split(delimiters);
 
@@ -92,6 +93,8 @@ function sumWithCustomDelimiter(input) {
     if (numericValues.some((num) => num > Number.MAX_SAFE_INTEGER)) {
       throw new Error('[ERROR] 숫자가 허용된 범위를 초과했습니다.');
     }
+
+    validateDelimiters(numbersString, customDelimiter);
 
     return numericValues.reduce((acc, num) => acc + num, 0);
   }
