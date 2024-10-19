@@ -24,7 +24,7 @@ class App {
       }
 
       const parsedNumbers = numbers.map((num) => {
-        const parsed = Number(num);
+        const parsed = Number(num.trim());
 
         if (isNaN(parsed)) {
           throw new Error("[ERROR] 잘못된 입력입니다.");
