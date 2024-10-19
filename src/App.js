@@ -78,7 +78,7 @@ class App {
   }
 
   printSum() {
-    Console.print(this.result);
+    Console.print(`결과 : ${this.result}`);
   }
 }
 
