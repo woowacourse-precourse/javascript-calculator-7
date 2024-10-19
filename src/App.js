@@ -8,6 +8,7 @@ class App {
     const userInput = await Console.readLineAsync(GAME_MESSAGES.START);
 
     const numbers = splitNumber(userInput);
+    const result = numbers.reduce((acc, cur) => acc + cur, 0);
 
     Console.print(GAME_MESSAGES.END + result);
   }
