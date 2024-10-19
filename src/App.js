@@ -1,7 +1,33 @@
 import { Console } from '@woowacourse/mission-utils';
 
-function getUserInputAsync() {
-  return Console.readLineAsync('덧셈할 문자열을 입력해 주세요.\n');
+class App {
+  async run() {
+    const userInput = await Console.readLineAsync(
+      '덧셈할 문자열을 입력해 주세요.\n'
+    );
+    const customSeparator = getCustomSeparator(userInput);
+
+    try {
+      vaildateUserInput(userInput, customSeparator);
+
+      const result = computeResult(userInput, customSeparator);
+      Console.print(`결과 : ${result}`);
+    } catch (error) {
+      Console.print(`[ERROR] ${error.message}`); // 스택 트레이스가 안 뜸
+      // throw new Error(`[ERROR] ${error.message}`); // 스택 트레이스가 뜸
+    }
+  }
+}
+
+export default App;
+
+function getCustomSeparator(userInput) {
+  const customSeparator = userInput.match(/^(\/\/\D\\n)/);
+
+  // TODO: 길이 1짜리 배열이 나올 가능성이 있는지 체크
+  return Array.isArray(customSeparator) && customSeparator.length
+    ? customSeparator[1]
+    : null;
 }
 
 function vaildateUserInput(userInput, customSeparator) {
@@ -15,16 +41,6 @@ function vaildateUserInput(userInput, customSeparator) {
   if (!userInput.match(regex)) {
     throw new Error('error occured');
   }
-  console.log('커스텀 구분자');
-}
-
-function getCustomSeparator(userInput) {
-  const customSeparator = userInput.match(/^(\/\/\D\\n)/);
-
-  // TODO: 길이 1짜리 배열이 나올 가능성이 있는지 체크
-  return Array.isArray(customSeparator) && customSeparator.length
-    ? customSeparator[1]
-    : null;
 }
 
 function computeResult(userInput, customSeparator) {
@@ -41,23 +57,3 @@ function computeResult(userInput, customSeparator) {
     .map(Number)
     .reduce((acc, cur) => acc + cur);
 }
-
-class App {
-  async run() {
-    const inputString = await getUserInputAsync();
-    const customSeparator = getCustomSeparator(inputString);
-
-    try {
-      vaildateUserInput(inputString, customSeparator);
-      console.log(customSeparator);
-
-      const result = computeResult(inputString, customSeparator);
-      Console.print(`결과 : ${result}`);
-    } catch (error) {
-      console.error(error.message);
-      throw new Error(`[ERROR] ${error.message}`);
-    }
-  }
-}
-
-export default App;
