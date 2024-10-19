@@ -1,42 +1,6 @@
 import App from '../src/App.js';
 import { MissionUtils } from '@woowacourse/mission-utils';
 
-const mockQuestions = inputs => {
-  MissionUtils.Console.readLineAsync = jest.fn();
-
-  MissionUtils.Console.readLineAsync.mockImplementation(() => {
-    const input = inputs.shift();
-    return Promise.resolve(input);
-  });
-};
-
-const getLogSpy = () => {
-  const logSpy = jest.spyOn(MissionUtils.Console, 'print');
-  logSpy.mockClear();
-  return logSpy;
-};
-
-const runCalculatorTestCorrect = async (input, output) => {
-  const inputs = [input];
-  const outputs = [`결과 : ${output}`];
-  mockQuestions(inputs);
-  const logSpy = getLogSpy();
-  const app = new App();
-  await app.run();
-  outputs.forEach(output => {
-    expect(logSpy).toHaveBeenCalledWith(expect.stringContaining(output));
-  });
-};
-
-const runCalculatorTestError = async input => {
-  const inputs = [input];
-  mockQuestions(inputs);
-
-  const app = new App();
-
-  await expect(app.run()).rejects.toThrow('[ERROR]');
-};
-
 describe('문자열 계산기', () => {
   describe('커스텀 구분자 사용', () => {
     test('숫자 1개 입력 시 해당 숫자를 출력한다.', async () => {
@@ -89,3 +53,39 @@ describe('문자열 계산기', () => {
     });
   });
 });
+
+function mockQuestions(inputs) {
+  MissionUtils.Console.readLineAsync = jest.fn();
+
+  MissionUtils.Console.readLineAsync.mockImplementation(() => {
+    const input = inputs.shift();
+    return Promise.resolve(input);
+  });
+}
+
+function getLogSpy() {
+  const logSpy = jest.spyOn(MissionUtils.Console, 'print');
+  logSpy.mockClear();
+  return logSpy;
+}
+
+async function runCalculatorTestCorrect(input, output) {
+  const inputs = [input];
+  const outputs = [`결과 : ${output}`];
+  mockQuestions(inputs);
+  const logSpy = getLogSpy();
+  const app = new App();
+  await app.run();
+  outputs.forEach(output => {
+    expect(logSpy).toHaveBeenCalledWith(expect.stringContaining(output));
+  });
+}
+
+async function runCalculatorTestError(input) {
+  const inputs = [input];
+  mockQuestions(inputs);
+
+  const app = new App();
+
+  await expect(app.run()).rejects.toThrow('[ERROR]');
+}
