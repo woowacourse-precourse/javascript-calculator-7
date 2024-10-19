@@ -89,4 +89,5 @@ Input: "12,,,3,5,7" => Output: [ERROR]
 Input: "" => 0
 Input: "//;\n" => Output: 0
 Input: "//;n" => Output: [ERROR]
+Input: "abcd" => Output: [ERROR]
 ```
