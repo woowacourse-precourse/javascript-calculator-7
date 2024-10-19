@@ -1,11 +1,7 @@
 import { Console } from '@woowacourse/mission-utils';
 
-// 1. 사용자의 입력을 받음
-async function getString() {
-  const inputString = await Console.readLineAsync(
-    '덧셈할 문자열을 입력해 주세요.\n'
-  );
-  return inputString;
+function getUserInputAsync() {
+  return Console.readLineAsync('덧셈할 문자열을 입력해 주세요.\n');
 }
 
 // 4. 유효한 입력인지 확인
@@ -64,7 +60,7 @@ function computeResult(inputString, customString) {
 
 class App {
   async run() {
-    const inputString = await getString();
+    const inputString = await getUserInputAsync();
     try {
       // 유효한 입력인지 확인
       vaildateInput(inputString);
