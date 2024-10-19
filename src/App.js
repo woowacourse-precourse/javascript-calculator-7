@@ -18,8 +18,8 @@ class App {
       return;
     }
 
-    let regex = /[^,:\d]/;
-    let customRegex = /\/\/.[^\\n]*\\n/;
+    const regex = /[^,:\d]/;
+    const customRegex = /\/\/.[^\\n]*\\n/;
     const customTest = customRegex.test(userStr);
 
     // 커스텀 구분자가 있을 때
@@ -33,18 +33,15 @@ class App {
         regex.test(customDeleted) &&
         customDeleted.indexOf(customDelimiter) === -1
       ) {
-        MissionUtils.Console.print(
-          "[ERROR] 유효하지 않은 입력값입니다. 다시 입력해 주세요."
-        );
-        return;
+        throw new Error("[ERROR] 유효하지 않은 입력값입니다.");
       }
 
-      const delimiters = customArr
+      const specialChars = customArr
         .concat([",", ":"])
         .map((c) => "\\" + c)
         .join("");
-      const specialChars = new RegExp(`[${delimiters}]`, "g");
-      const splitted = customDeleted.split(specialChars);
+      const delimiters = new RegExp(`[${specialChars}]`, "g");
+      const splitted = customDeleted.split(delimiters);
       splitted.forEach((item) => (num += Number(item)));
       this.printresult(num);
     }
@@ -52,10 +49,7 @@ class App {
     // 커스텀 구분자가 없을 때
     if (!customTest) {
       if (regex.test(userStr)) {
-        MissionUtils.Console.print(
-          "[ERROR] 유효하지 않은 입력값입니다. 다시 입력해 주세요."
-        );
-        return;
+        throw new Error("[ERROR] 유효하지 않은 입력값입니다.");
       }
       const found = userStr.match(/\d+/g);
       found.forEach((item) => (num += Number(item)));
