@@ -35,6 +35,10 @@ class App {
     if (parsedNumbers.some((num) => num < 0)) {
       throw new Error("[ERROR] 음수는 입력할 수 없습니다.");
     }
+
+    const result = parsedNumbers.reduce((sum, num) => sum + num, 0);
+
+    MissionUtils.Console.print(`결과 : ${result}`);
   }
 }
 
