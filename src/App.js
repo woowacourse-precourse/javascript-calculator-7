@@ -65,17 +65,23 @@ const getNumber = (inputArray) => {
 }
 
 const calculate = (input) => {
-  let result = 0;
+  let total = 0;
+
   getNumber(input).forEach((number)=>{
-    if (Number(number) < 0) {
+    let numValue = Number(number);
+
+    if (numValue < 0) {
       throw new Error("[ERROR] 양수를 입력해주세요.");
     }
+
     if (isNaN(number)) {
-      throw new Error("[ERROR] 올바른 숫자를 입력해주세요.");
+      throw new Error("[ERROR] 올바른 구분자를 입력해주세요.");
     }
-    result += Number(number);
+
+    total += Number(number);
   })
-  return result;
+
+  return total;
 }
 
 class App {
