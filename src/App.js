@@ -37,19 +37,22 @@ class App {
         "덧셈할 문자열을 입력해 주세요.\n"
       );
       const result = this.calculateSum(input);
-      Console.print(`결과: ${result}`);
+      Console.print(`결과 : ${result}`);
     } catch (error) {
       Console.print(`[ERROR] ${error.name}: ${error.message}`);
     }
   }
 
   calculateSum(input) {
-    this.validateInput(input);
-    let numberString = input;
+    this.checkEmptyString(input);
     const customDelimiter = this.extractCustomDelimiter(input);
+    let numberString = this.getNumberString(input, customDelimiter);
+
+    if (this.checkSingleNumber(numberString)) {
+      return Number(numberString);
+    }
 
     if (customDelimiter) {
-      numberString = this.getNumberString(input, customDelimiter);
       this.checkForMismatchedDelimiter(numberString, customDelimiter);
     } else {
       this.checkForDefaultDelimiter(numberString);
@@ -61,13 +64,17 @@ class App {
     return numbers.reduce((sum, num) => sum + num, 0);
   }
 
-  validateInput(input) {
+  checkEmptyString(input) {
     if (!input) {
       throw new CustomError(
         ERROR.EMPTY_STRING.message,
         ERROR.EMPTY_STRING.name
       );
     }
+  }
+
+  checkSingleNumber(numberString) {
+    return !isNaN(numberString) && numberString.trim() !== "";
   }
 
   extractCustomDelimiter(input) {
