@@ -8,6 +8,9 @@ class App {
 
   add(numbers) {
     if(numbers === '') return 0;
+
+    const numArr = numbers.split(/[,|:]/).map(Number);
+    return numArr.reduce((acc, num) => acc + num, 0);
   }
 }
 
