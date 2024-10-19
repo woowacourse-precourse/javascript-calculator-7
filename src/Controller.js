@@ -18,7 +18,11 @@ export class Controller {
   }
   separateInput() {
     if (this.inputString.startsWith('//')) {
-      ValidateError.validateCustomDelimiterFormat(this.inputString);
+      try {
+        ValidateError.validateCustomDelimiterFormat(this.inputString);
+      } catch (err) {
+        throw new Error('[ERROR] ' + err.message);
+      }
       const { customDelimiter, valueString } =
         calculator.separateCustomDelimiter(this.inputString);
       this.delimiter.push(customDelimiter);
@@ -31,9 +35,13 @@ export class Controller {
     this.values = calculator.extractValues(this.delimiter, this.valueString);
   }
   validateValues() {
-    ValidateError.validateNoNegativeNumbers(this.values);
-    ValidateError.validateAllowedDelimiters(this.values);
-    ValidateError.validateNonEmptySplitValues(this.values);
+    try {
+      ValidateError.validateNoNegativeNumbers(this.values);
+      ValidateError.validateAllowedDelimiters(this.values);
+      ValidateError.validateNonEmptySplitValues(this.values);
+    } catch (err) {
+      throw new Error('[ERROR] ' + err.message);
+    }
   }
   getTotalSum() {
     this.sumValue = calculator.calculateSum(this.values);
