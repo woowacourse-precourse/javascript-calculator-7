@@ -16,10 +16,10 @@ class Calculator {
       const newString = inputString.substring(5); //커스텀 구분자를 표시하는 부분 제거
 
       numbers = this.getNumbers(newString, customSeparators);
-
+      return this.doAddition(numbers);
     } else {
       numbers = this.getNumbers(inputString, DEFAULT_SEPARATOR);
-
+      return this.doAddition(numbers);
     }
   }
 
@@ -84,9 +84,10 @@ class Calculator {
     });
   }
 
-
-  doAddition() {
-
+  doAddition(numbers) {
+    return numbers
+      .map(number => Number(number))
+      .reduce((acc, cur) => acc + cur, 0);
   }
 }
 
