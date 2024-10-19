@@ -5,7 +5,6 @@ export default class Calculator {
 
         const delimiters = this.getDelimiters(input)
         const tokens = this.splitByDelimiters(input, delimiters)
-
         this.isValidInput(tokens)
 
         return tokens.reduce((acc, cur) => acc + cur, 0)
@@ -18,8 +17,8 @@ export default class Calculator {
         let customDelimiter = input.match(/\/\/(.*?)\\n/g);
 
         if (customDelimiter) {
-            customDelimiter = customDelimiter.map(item => item.slice(2, -2))
-        }
+            customDelimiter = customDelimiter.map(item => item.slice(2, -2)).filter(delimiter => delimiter !== "")
+        }// //와 \n 사이에 아무것도 들어오지 않을 경우 기본 구분자를 사용하도록
 
         return customDelimiter ? [...defaulDelimiters, ...customDelimiter] : defaulDelimiters
     }
