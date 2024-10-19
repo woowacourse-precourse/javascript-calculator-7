@@ -34,11 +34,11 @@ class App {
   async run() {
     const input = await this.#view.input('덧셈할 문자열을 입력해 주세요.');
 
-    const delimitedString = this.#delimiter.splitByDelimiters(input);
+    const delimitedInputs = this.#delimiter.splitByDelimiters(input);
 
-    this.#validator.validate(delimitedString);
+    this.#validator.validate(delimitedInputs);
 
-    const result = this.#calculator.calculate(delimitedString);
+    const result = this.#calculator.calculate(delimitedInputs);
 
     this.#view.output(`결과 : ${result}`);
   }
