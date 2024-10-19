@@ -28,13 +28,12 @@ class App {
       const customSeparator = input.slice(start + 2, end);
       const stringToSeparate = input.replace(input.slice(start, end + 2), "");
       return this.splitAndConvertToNumbers(stringToSeparate, customSeparator);
-    } else if (hasCommaAndSemicolon) {
+    }
+    if (hasCommaAndSemicolon)
       return this.splitAndConvertToNumbers(input, [comma, semicolon]);
-    } else if (hasComma) {
-      return this.splitAndConvertToNumbers(input, comma);
-    } else if (hasSemicolon) {
-      return this.splitAndConvertToNumbers(input, semicolon);
-    } else Console.print("[ERROR]");
+    if (hasComma) return this.splitAndConvertToNumbers(input, comma);
+    if (hasSemicolon) return this.splitAndConvertToNumbers(input, semicolon);
+    return Console.print("[ERROR]");
   }
 
   splitAndConvertToNumbers(input, separator) {
