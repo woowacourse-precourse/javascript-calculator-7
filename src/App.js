@@ -1,16 +1,15 @@
+import { Console } from '@woowacourse/mission-utils';
+
 class App {
   async run() {
     try {
-      console.log(this.add('')); // 0
-      console.log(this.add('1,2')); // 3
-      console.log(this.add('1,2,3')); // 6
-      console.log(this.add('1,2:3')); // 6
-      console.log(this.add('//;\n1;2;3')); // 6
-      console.log(this.add('//|\n1|2|3')); // 6
-      console.log(this.add('1,\n2')); // [ERROR] Invalid input
+      // 사용자 입력 받기
+      await Console.readLine('덧셈할 문자열을 입력해 주세요.\n', (userInput) => {
+        Console.print(`결과: ${this.add(userInput)}`);
+      });
     } catch (error) {
-      console.error(error.message);
-    }
+      Console.print(error.message);
+    } 
   }
 
   /**
@@ -22,19 +21,21 @@ class App {
     if (input === '') return 0;
 
     // 1-1. 기본 구분자 설정
-    let delimiter = /[,:]/; 
+    let delimiter = /[,:]/;
 
     // 1-2. 커스텀 delim 설정
     if (input.startsWith('//')) {
       const delimiterEnd = input.indexOf('\n');
+
       if (delimiterEnd === -1) {
         throw new Error('[ERROR] Invalid custom delimiter format.');
       }
-    
+
       const customDelimiter = input.substring(2, delimiterEnd);
+
       //RegExp : 정규표현식 객체 생성 
       //escapeRegExp : 이스케이프 문자열 -> 정규표현식 객체 변환
-      delimiter = new RegExp(`${this.escapeRegExp(customDelimiter)}`);
+      delimiter = new RegExp(`[${this.escapeRegExp(customDelimiter)}]`);
       input = input.substring(delimiterEnd + 1);
     }
 
@@ -60,7 +61,6 @@ class App {
   escapeRegExp(string) {
     return string.replace(/[.*+?^${}()|[\]\\]/g, '\\$&');
   }
-
 }
 
-export default App
+export default App;
