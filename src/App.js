@@ -10,7 +10,7 @@ class App {
   async getUserInput() {
     try {
       const userInput = await MissionUtils.Console.readLineAsync('덧셈할 문자열을 입력해 주세요.\n');
-      if (userInput === '') throw new Error('[Error]');
+      if (userInput === '') throw new Error('[ERROR]');
 
       this.input = userInput;
     } catch (error) {
@@ -21,7 +21,7 @@ class App {
   checkIsValidNumber(n) {
     try {
       const num = Number(n);
-      if (Number.isNaN(num) || num < 0 ) throw new Error('[Error]')
+      if (Number.isNaN(num) || num < 0 ) throw new Error('[ERROR]')
       return num;
     } catch(error) {
       throw error;
@@ -59,6 +59,7 @@ class App {
       MissionUtils.Console.print(`결과 : ${this.output}`);
     } catch (error) {
       MissionUtils.Console.print(error.message);
+      throw error;
     }
   }
 }
