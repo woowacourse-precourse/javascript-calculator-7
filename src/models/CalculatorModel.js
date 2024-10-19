@@ -1,32 +1,23 @@
-// --- 에러 처리 ---
-export function errorMessage(booleanData) {
-  if (booleanData === 1) {
-    throw new Error('[ERROR] : 구분자가 아닌 문자는 입력할 수 없습니다.');
-  }
-  if (booleanData === 2) {
-    throw new Error('[ERROR] : 0은 입력할 수 없습니다.');
-  }
+// --- 에러 던지기 ---
+export function validateCustomError(code) {
+  const errorMessage = {
+    1: '[ERROR] : 구분자가 아닌 문자는 입력할 수 없습니다.',
+    2: '[ERROR] : 0은 입력할 수 없습니다.',
+  };
+
+  throw new Error(errorMessage[code]);
 }
 
-// --- 양수가 아닌게 있는 경우 예외 ---
-export function hasNonNumericError(input) {
-  const nonNumeric = input.map(Number).some((char) => !/^\d+$/.test(char))
-    ? 1
-    : false; // 문자가 아닌 값이 하나라도 있으면 true
-  errorMessage(nonNumeric);
-}
-
-// --- 0이 있는 경우 예외 ---
-export function checkForZero(input) {
-  const hasZero = input.some((char) => /^0+$/.test(char)) ? 2 : false; // 0이 하나라도 있으면 true
-  errorMessage(hasZero);
-}
-
-// --- 예외처리 모음 함수 ---
+// --- 예외처리 함수 ---
 // 양수가 아닌 수가 입력되거나, 구분자가 아닌 문자가 입력 된 경우
-export function validateParsedNumbers(input) {
-  hasNonNumericError(input);
-  checkForZero(input);
+export function checkForErrors(input) {
+  const containsNonNumeric = input
+    .map(Number)
+    .some((char) => !/^\d+$/.test(char));
+  const containsZero = input.some((char) => /^0+$/.test(char));
+
+  if (containsNonNumeric) validateCustomError(1);
+  if (containsZero) validateCustomError(2);
 }
 
 // --- 구분자 추출 함수 ---
@@ -37,7 +28,7 @@ export function extractDelimiter(input) {
 }
 
 // --- 커스텀구분자 입력 부분 제외 ---
-export function deleteCustom(customDelimiter, input) {
+export function removeDelimiterSection(customDelimiter, input) {
   return customDelimiter ? input.substring(input.indexOf('\\n') + 2) : input;
 }
 
@@ -56,6 +47,7 @@ export function splitString(customDelimiter, processedInput, defaultDelimiter) {
   return splitByDefaultDelimiters;
 }
 
+// --- 빈 문자열은 0 반환 ---
 export function cleanAndConvertToNumbers(inputArr) {
   const cleanedNumbers = inputArr.map((value) => (value === '' ? '0' : value));
   return cleanedNumbers.map(Number);
@@ -65,17 +57,16 @@ export function cleanAndConvertToNumbers(inputArr) {
 export function parseNumbers(input) {
   const dafaultDelimiter = /,|:/; // 기본구분자
   const customDelimiter = extractDelimiter(input); // 커스터 구분자 추출
-  const processedInput = deleteCustom(customDelimiter, input); // 커스텀 부분 제외한 문자열
-  
-  
+  const processedInput = removeDelimiterSection(customDelimiter, input); // 커스텀 부분 제외한 문자열
+
   // 구분자로 문자열 나누기
   const splitByDelimiters = splitString(
     customDelimiter,
     processedInput,
     dafaultDelimiter,
-  ); 
+  );
 
-  validateParsedNumbers(splitByDelimiters);   /// 예외처리
+  checkForErrors(splitByDelimiters);
 
   // 빈 문자열이 있으면 '0'으로 대체
   return cleanAndConvertToNumbers(splitByDelimiters);
