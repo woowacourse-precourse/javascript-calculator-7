@@ -46,11 +46,15 @@ class App {
   }
 
   validateNumber(num) {
-    if (!isNaN(num)) {
-      return true;
-    } else {
-      return false;
+    if (isNaN(num)) {
+      throw new Error('숫자가 아닌 문자를 입력하셨습니다');
     }
+
+    if (num <= 0) {
+      throw new Error('양수를 입력해주세요');
+    }
+
+    return true;
   }
 
   splitAndExtractNumbers(input) {
@@ -62,10 +66,9 @@ class App {
     }
 
     for (const NUM of NUMBERS) {
-      if (!this.validateNumber(NUM)) {
-        throw new Error(`숫자가 아닌 문자를 입력하셨습니다`);
+      if (this.validateNumber(NUM)) {
+        this.extractedNumbers.push(Number(NUM));
       }
-      this.extractedNumbers.push(Number(NUM));
     }
   }
 
