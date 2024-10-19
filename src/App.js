@@ -29,8 +29,12 @@ class App {
     return numString.split(splitter);
   }
 
-  convertNumber (numString) {
+  formatFromNumStringToNumber (numString) {
     if (numString === '') return 0;
+
+    const isOnlyNumber = numString.match(/^[0-9]+$/);
+
+    if (isOnlyNumber) return +numString;
   }
 }
 
