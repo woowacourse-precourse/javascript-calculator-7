@@ -5,37 +5,43 @@ export default class Calculator {
 
         const delimiters = this.getDelimiters(input)
         const tokens = this.splitByDelimiters(input, delimiters)
-        console.log(delimiters)
 
-        // this.isValidInput(tokens)
+        this.isValidInput(tokens)
 
-        // return tokens.reduce((acc, cur) => acc + cur, 0)
+        return tokens.reduce((acc, cur) => acc + cur, 0)
 
 
     }
 
     getDelimiters(input) {
         const defaulDelimiters = [",", ":"]
-        const customDelimiter = input.match(/\/\/(.*?)\\n/g).map(item => item.slice(2, -2));
+        let customDelimiter = input.match(/\/\/(.*?)\\n/g);
+
+        if (customDelimiter) {
+            customDelimiter = customDelimiter.map(item => item.slice(2, -2))
+        }
 
         return customDelimiter ? [...defaulDelimiters, ...customDelimiter] : defaulDelimiters
     }
 
     splitByDelimiters(input, delimiters) {
-        input = input.replace(/\/\/.*?\\n/g, ''); // 커스텀부분 문자열 부분 삭제
+        input = input.replace(/\/\/.*?\\n/g, delimiters[0]); // 커스텀부분 문자열 인식 부분을 구분자로 변경(커스텀구분자가 2개 이상일 경우 뒤에 나오는 숫자와 앞에 나오는 숫자가 겹치는 것을 방지)
 
-        let tokens = []
-        for (let item of input) {
-            if (!delimiters.includes(item)) {
-                tokens.push(Number(item))
-            }
-        }
+        const delimitersRegex = new RegExp(delimiters.map(delimiter => {
+            return delimiter.replace(/[.*+?^${}()|[\]\\]/g, '\\$&');  // 특수 문자 이스케이프
+        }).join('|'), 'g');
+
+        const tokens = input.split(delimitersRegex)
+            .filter(item => item !== "")   // 빈 문자열 제거
+            .map(item => Number(item));
+
+
         return tokens
     }
 
     isValidInput(tokens) {
         for (let item of tokens) {
-            if (typeof item !== 'number' || isNaN(item)) {
+            if (typeof item !== 'number' || isNaN(item) || item < 0) {
                 throw new Error("[ERROR]")
             }
         }
