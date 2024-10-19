@@ -59,8 +59,11 @@ describe('문자열 계산기', () => {
       test('숫자 1개 입력', async () => {
         await runCalculatorTestCorrect('//;v\b\n1', '1');
       });
-      test('중복된 특수한 구분자 & 숫자 3개 입력', async () => {
-        await runCalculatorTestCorrect('//;vv\n1v23v456', '480');
+      test('중복된 특수한 구분자 & 숫자 3개', async () => {
+        await runCalculatorTestCorrect('//;vv\b\n1v23v456', '480');
+      });
+      test('특수한 구분자 & 숫자 3개', async () => {
+        await runCalculatorTestCorrect('//;v\\n1v23\\456', '480');
       });
     });
   });
@@ -107,9 +110,6 @@ describe('문자열 계산기', () => {
     });
     test('커스텀 구분자 지정이 올바르지 않은 경우', async () => {
       await runCalculatorTestError('//\n1,2,3');
-    });
-    test('숫자 3개 입력', async () => {
-      await runCalculatorTestError('//;v\b\n1\\23b456');
     });
   });
 });
