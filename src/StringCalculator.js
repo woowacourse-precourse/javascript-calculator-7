@@ -2,11 +2,32 @@ class StringCalculator {
   static CUSTOM_DELIMITER_PATTERN = /^\/\/(.)\\n/;
 
   parseAndAdd(input) {
-    this.validateInput(input);
+    this.checkEmptyInput(input);
+
     const customDelimiter = this.extractCustomDelimiter(input);
-    const numbers = this.splitInputByDelimiter(input, customDelimiter);
+    const numberSection = this.getNumberSection(input, customDelimiter);
+    this.checkInvalidCharacters(numberSection, customDelimiter);
+
+    const numbers = this.splitNumbers(numberSection, customDelimiter);
     this.checkNegativeNumbers(numbers);
+
     return this.calculateSum(numbers);
+  }
+
+  checkInvalidCharacters(numbersSection, customDelimiter) {
+    let validPattern = /^(-?\d+|,|:)+$/;
+    if (customDelimiter) {
+      const escapedDelimiter = customDelimiter.replace(
+        /[.*+?^${}()|[\]\\]/g,
+        "\\$&"
+      );
+      validPattern = new RegExp(`^(-?\\d+|${escapedDelimiter})+$`);
+    }
+    if (!validPattern.test(numbersSection)) {
+      throw new Error(
+        "[ERROR] 입력값에 허용되지 않는 문자가 포함되어 있습니다."
+      );
+    }
   }
 
   checkNegativeNumbers(numbers) {
@@ -17,23 +38,9 @@ class StringCalculator {
     }
   }
 
-  validateInput(input) {
-    // 빈 문자열 검사
+  checkEmptyInput(input) {
     if (!input || input.trim() === "") {
       throw new Error("[ERROR] 입력값이 빈 문자열입니다.");
-    }
-
-    // 커스텀 구분자 여부 검사 (커스텀 구분자가 있으면 통과, 나중에 처리)
-    if (StringCalculator.CUSTOM_DELIMITER_PATTERN.test(input)) {
-      return;
-    }
-
-    // 기본 구분자 검사
-    const validPattern = /^(-?\d+|,|:)+$/;
-    if (!validPattern.test(input)) {
-      throw new Error(
-        "[ERROR] 입력값에 허용되지 않는 문자가 포함되어 있습니다."
-      );
     }
   }
 
@@ -46,12 +53,17 @@ class StringCalculator {
     return null;
   }
 
-  splitInputByDelimiter(input, customDelimiter) {
+  getNumberSection(input, customDelimiter) {
     if (customDelimiter) {
-      const numbersSection = input.split("\\n")[1];
-      return numbersSection.split(customDelimiter).map(Number);
+      return input.split("\\n")[1];
     }
-    return input.split(/,|:/).map(Number);
+    return input;
+  }
+  splitNumbers(numberSection, customDelimiter) {
+    if (customDelimiter) {
+      return numberSection.split(customDelimiter).map(Number);
+    }
+    return numberSection.split(/,|:/).map(Number);
   }
 
   calculateSum(numbers) {
