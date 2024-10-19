@@ -3,7 +3,6 @@ class Calculator {
         if(input === "") {
             return 0;
         }
-
         const { delimiter, numberString } = this.extractDelimiterAndNumbers(input);
         const numbers = this.splitNumbers(numberString, delimiter);
         
@@ -13,11 +12,12 @@ class Calculator {
     extractDelimiterAndNumbers(input) {
         if(input.startsWith('//') && input.indexOf('\\n' >= 3)) {
             const customDelimiterStartIndex = input.indexOf('\\n');
-            const delimiter = input.slice(2,customDelimiterStartIndex);
-            const numberString = input.substring(customDelimiterStartIndex + 2); 
-            return { delimiter, numberString };
+            const customDelimiter = input.slice(2,customDelimiterStartIndex);
+            const numberString = input.slice(customDelimiterStartIndex + 2); 
+            
+            return { delimiter : new RegExp(`[${customDelimiter},:]`), numberString };
         }
-        return { delimiter: /[,|:]/, numberString: input };
+        return { delimiter: /[,:]/, numberString: input };
     }
 
     splitNumbers(numberString, delimiter) {
