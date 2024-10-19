@@ -45,6 +45,11 @@ class App {
       sum += num;
     }
 
+    // 음수 예외 처리
+    if (numbers.some((num) => num <= 0)) {
+      throw new Error("[ERROR] 양수만 입력할 수 있습니다.");
+    }
+
     // 결과 출력
     MissionUtils.Console.print(`결과 : ${sum}`);
   }
