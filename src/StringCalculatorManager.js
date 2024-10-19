@@ -5,8 +5,9 @@ class StringCalculatorManager {
     this.calculator = calculator;
   }
 
-  start() {
+  async start() {
     this.outputHandler.printStartMessage();
+    this.inputString = await this.inputHandler.readString();
   }
 }
 
