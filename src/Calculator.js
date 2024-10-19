@@ -1,39 +1,43 @@
 export class Calculator {
+  static DEFAULT_DELIMITERS = [',', ':'];
+  static DEFAULT_DELIMITER_REGEX = /[,:]/;
+  
   constructor() {
-    this.defaultDelimiters = [',', ':'];
-    this.separatorRegex = /[,:]/;
+    this.delimiterRegex = Calculator.DEFAULT_DELIMITER_REGEX;
     this.customDelimiter = null;
   }
 
   calculate(input) {
-    if (input === '') return 0;
+    let inputString = input;
 
-    if (this.hasCustomDelimiter(input)) {
-      input = input.split('\\n')[1];
+    if (inputString === '') return 0;
+
+    if (this.hasCustomDelimiter(inputString)) {
+      inputString = inputString.split('\\n')[1];
     }
 
-    const numbers = this.parseNumbers(input);
+    const numbers = this.parseNumbers(inputString);
     const sum = this.sumNumbers(numbers);
 
     return sum;
   }
 
   hasCustomDelimiter(input) {
-    const regex = /^\/\/(.*)\\n/;
-    const match = input.match(regex);
+    const customDelimiterRegex = /^\/\/(.*)\\n/;
+    const match = input.match(customDelimiterRegex);
 
     if (match) {
       this.setCustomDelimiter(match[1]);
-      this.separatorRegex = new RegExp(
-        `[${this.customDelimiter}${this.defaultDelimiters.join('')}]`
+      this.delimiterRegex = new RegExp(
+        `[${this.customDelimiter}${Calculator.DEFAULT_DELIMITERS.join('')}]`
       );
       return true;
     } else return false;
   }
 
   parseNumbers(input) {
-    return input.split(this.separatorRegex).map((stringNumber) => {
-      const number = Number(stringNumber.trim());
+    return input.split(this.delimiterRegex).map((numString) => {
+      const number = Number(numString.trim());
       if (number <= 0 || isNaN(number)) throw new Error('[ERROR]');
       else return number;
     });
