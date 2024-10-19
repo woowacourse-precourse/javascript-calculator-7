@@ -18,7 +18,9 @@ class App {
 
     const modifiedInput = this.findAndRemoveCustomDelimiters(input, delimiters);
 
-    this.splitAndAddNumbers(modifiedInput, delimiters, numbers);
+    const splitedInput = this.splitNumbers(modifiedInput, delimiters);
+
+    this.addNumbers(splitedInput, numbers);
 
     const sum = this.calculator(numbers);
 
@@ -55,24 +57,29 @@ class App {
     return modifiedInput;
   }
 
-  splitAndAddNumbers(modifiedInput, delimiters, numbers) {
+  splitNumbers(modifiedInput, delimiters) {
     let splitedInput = [modifiedInput];
 
     delimiters.forEach((delimiter) => {
-        splitedInput = splitedInput.flatMap((part) => part.split(delimiter));
+      splitedInput = splitedInput.flatMap((part) => part.split(delimiter));
     });
 
+    return splitedInput;
+  }
+
+  addNumbers(splitedInput, numbers) {
     splitedInput.forEach((numStr) => {
-        if (numStr === "") {
-            throw new Error("[ERROR]: 구분자는 연속으로 올 수 없습니다.");
-        }
-        const num = Number(numStr);
-        if (this.isNaturalNumber(num)) {
-            numbers.push(num);
-        } else if (numStr !== "") {
-            throw new Error("[ERROR]: 유효하지 않은 문자열 입력입니다.");
-        }
+      if (numStr === "") {
+        throw new Error("[ERROR]: 구분자는 연속으로 올 수 없습니다.");
+      }
+      const num = Number(numStr);
+      if (this.isNaturalNumber(num)) {
+        numbers.push(num);
+      } else if (numStr !== "") {
+        throw new Error("[ERROR]: 유효하지 않은 문자열 입력입니다.");
+      }
     });
   }
 }
+
 export default App;
