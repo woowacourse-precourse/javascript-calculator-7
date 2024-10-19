@@ -9,6 +9,8 @@ class App {
         const inputText = await this.getInputText();
         const parsedText = this.parseInputText(inputText);
 
+        if (parsedText === "") Console.print("결과 : 0");
+
         Console.print(parsedText.split(";")); // 확인
     }
 
