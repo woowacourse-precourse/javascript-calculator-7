@@ -3,6 +3,18 @@ import { Console } from "@woowacourse/mission-utils";
 class CalculatorModel {
   constructor() {
     this.defaultSeparators = [",", ":"];
+
+    // 에러 메시지 상수 정의
+    this.errors = {
+      whitespace: "[ERROR] 공백은 구분자로 쓸 수 없습니다.",
+      invalidSeparator:
+        "[ERROR] 허용되지 않은 구분자 또는 숫자가 아닌 값이 포함되어 있습니다.",
+      negativeNumber: "[ERROR] 음수는 입력할 수 없습니다.",
+      emptyEnd: "[ERROR] 입력의 마지막은 숫자여야 합니다.",
+      invalidInput: "[ERROR] 잘못된 입력입니다.",
+      decimalInputNotAllowed:
+        "[ERROR] 구분자가 '.'일 경우 소수를 입력할 수 없습니다.",
+    };
   }
 
   async calculate(input) {
@@ -23,7 +35,7 @@ class CalculatorModel {
 
     // 공백이 구분자로 사용될 경우 처리
     if (numbersString.includes(" ")) {
-      throw new Error("[ERROR] 공백은 구분자로 쓸 수 없습니다.");
+      throw new Error(this.errors.whitespace);
     }
 
     // 커스텀 구분자가 .인 경우 처리
@@ -31,20 +43,18 @@ class CalculatorModel {
       const userchoice = await this.getUserChoice();
 
       if (userchoice === "1") {
-        throw new Error(
-          "[ERROR] 구분자가 '.'일 경우 소수를 입력할 수 없습니다."
-        );
+        throw new Error(this.errors.decimalInputNotAllowed);
       }
       if (userchoice === "2") {
         return this.calculateInteger(numbersString, separators);
       }
 
-      throw new Error("[ERROR] 잘못된 입력입니다."); // 예외 처리
+      throw new Error(this.errors.invalidInput); // 예외 처리
     }
 
     // 입력의 끝단이 구분자인지 확인하는 에러 처리
     if (this.endWithSeparators(numbersString, separators)) {
-      throw new Error("[ERROR] 입력의 마지막은 숫자여야 합니다.");
+      throw new Error(this.errors.emptyEnd);
     }
 
     const regex = new RegExp(`[${separators.join("")}]+`);
@@ -53,14 +63,12 @@ class CalculatorModel {
 
       // 숫자가 아닌 값 포함 체크
       if (!/^(-?\d+(\.\d+)?)$/.test(trimmedNum)) {
-        throw new Error(
-          "[ERROR] 허용되지 않은 구분자 또는 숫자가 아닌 값이 포함되어 있습니다."
-        );
+        throw new Error(this.errors.invalidSeparator);
       }
 
       const parsedNum = parseFloat(trimmedNum);
       if (parsedNum < 0) {
-        throw new Error("[ERROR] 음수는 입력할 수 없습니다.");
+        throw new Error(this.errors.negativeNumber);
       }
 
       return parsedNum;
