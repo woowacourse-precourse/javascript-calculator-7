@@ -47,5 +47,31 @@ describe("문자열 계산기", () => {
         expect(logSpy).toHaveBeenCalledWith(expect.stringContaining(output));
       });
     });
+
+    test("커스텀 구분자 한 글자 사용", async () => {
+      const inputs = ["//;\\n1;2"];
+      mockQuestions(inputs);
+
+      const logSpy = getLogSpy();
+      const outputs = ["결과 : 1,2"];
+
+      const app = new App();
+      await app.run();
+
+      outputs.forEach((output) => {
+        expect(logSpy).toHaveBeenCalledWith(expect.stringContaining(output));
+      });
+    });
+
+    test("커스텀 구분자가 여러 글자일 경우 예외 처리", async () => {
+      const inputs = ["//;;\\n1;2"];
+      mockQuestions(inputs);
+
+      const app = new App();
+
+      await expect(app.run()).rejects.toThrow(
+        "[ERROR] 커스텀 구분자는 한 글자여야 합니다."
+      );
+    });
   });
 });

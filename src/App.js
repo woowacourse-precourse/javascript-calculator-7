@@ -14,7 +14,12 @@ class App {
       return;
     }
 
-    const numbersAsString = this.replaceSeparators(input);
+    const customSeparator = this.getCustomSeparator(input);
+    if (customSeparator) {
+      input = this.removeCustomSeparatorDefinition(input); // 커스텀 구분자 제거
+    }
+
+    const numbersAsString = this.replaceSeparators(input, customSeparator);
     const inputList = numbersAsString.split(","); // 쉼표로 나누기
     Console.print(`결과 : ${inputList}`);
   }
@@ -23,12 +28,34 @@ class App {
     return input.trim() === ""; // 비어있음 체크
   }
 
-  replaceSeparators(input) {
+  getCustomSeparator(input) {
+    if (input.startsWith("//")) {
+      const separator = input.split("\\n")[0].slice(2); // 커스텀 구분자 가져오기
+      if (separator.length !== 1) {
+        throw new Error("[ERROR] 커스텀 구분자는 한 글자여야 합니다."); // 오류 처리
+      }
+      return separator.charAt(0); // 첫 글자 반환
+    }
+    return null; // 없으면 null 반환
+  }
+
+  removeCustomSeparatorDefinition(input) {
+    return input.split("\\n").slice(1).join("\n"); // 첫 줄 제거
+  }
+
+  replaceSeparators(input, customSeparator) {
     let result = input;
-    this.separators.forEach((separator) => {
+    const allSeparators = [...this.separators]; // 모든 구분자
+
+    if (customSeparator) {
+      allSeparators.push(customSeparator); // 커스텀 구분자 추가
+    }
+
+    allSeparators.forEach((separator) => {
       result = result.split(separator).join(","); // 쉼표로 변환
     });
-    return result;
+
+    return result; // 변환된 문자열 반환
   }
 }
 
