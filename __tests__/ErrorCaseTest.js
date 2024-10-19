@@ -38,4 +38,22 @@ describe("에러를 발생시키는 예외상황 테스트", () => {
       await expect(app.run()).rejects.toThrow("[ERROR]");
     }
   });
+  test("구분자를 설정하는 문자열이 완전하지 않은 경우", async () => {
+    const inputs = ["1//;1,2,3,4", ";\\n1;2,3,4"];
+    mockMultipleQuestions(inputs);
+
+    const app = new App();
+    for (const _ of inputs) {
+      await expect(app.run()).rejects.toThrow("[ERROR]");
+    }
+  });
+  test("구분자의 길이가 1이 아닌 경우", async () => {
+    const inputs = ["//;;\\n1;;2;;3;;4", "//dd\\n1dd2dd3dd4"];
+    mockMultipleQuestions(inputs);
+
+    const app = new App();
+    for (const _ of inputs) {
+      await expect(app.run()).rejects.toThrow("[ERROR]");
+    }
+  });
 });
