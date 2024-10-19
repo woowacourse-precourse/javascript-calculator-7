@@ -8,7 +8,7 @@ class App {
 
       const numArr = input.split(regex).map(Number);
       const sum = numArr.reduce((acc, current) => acc + current, 0);
-      Console.print(sum);
+      Console.print("결과 : " + sum);
     } catch (error) {
       Console.print(error);
     }
