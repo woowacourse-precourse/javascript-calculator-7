@@ -11,6 +11,8 @@ class App {
     const separatorRegex = /\/\/(.*?)\\n(.*)/;
     const matched = inputs.match(separatorRegex);
 
+    if (matched && matched[0] !== inputs) throw new Error('[ERROR] 커스텀 구분자가 문자열의 첫번째에 위치하지 않습니다.');
+
     return {
       separator: matched?.[1] ?? null,
       numString: matched?.[2] ?? inputs
