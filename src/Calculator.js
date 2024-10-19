@@ -32,7 +32,11 @@ export class Calculator {
   }
 
   parseNumbers(input) {
-    return input.split(this.separatorRegex).map((num) => Number(num.trim()));
+    return input.split(this.separatorRegex).map((stringNumber) => {
+      const number = Number(stringNumber.trim());
+      if (number <= 0 || isNaN(number)) throw new Error('[ERROR]');
+      else return number;
+    });
   }
 
   sumNumbers(numbers) {

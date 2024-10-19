@@ -9,7 +9,7 @@ class App {
   async run() {
     const input = await Console.readLineAsync("Input: ")
     const value = this.calculator.calculate(input)
-    Console.print(value)
+    Console.print(`결과 : ${value}`)
   }
 }
 
