@@ -1,3 +1,5 @@
+import ProcessorValidator from '../validators/ProcessorValidator.js';
+
 class StringInputProcessor {
   constructor() {
     this.customDelimiterRegEx = /\/\/(.*?)\r?\n/g;
@@ -7,8 +9,10 @@ class StringInputProcessor {
 
   processInput(input) {
     if (!input) {
-      return [];
+      return 0;
     }
+
+    ProcessorValidator.validateInputFormat(input);
 
     input = input.replace(/\\n/g, '\n');
 
@@ -35,9 +39,13 @@ class StringInputProcessor {
     let currentNumber = '';
     let currentDelimiter = '';
 
+    ProcessorValidator.validateFirstChar(numbersString[0]);
+
     for (let char of numbersString) {
       if (/[0-9]/.test(char)) {
-        this.validateAccumulatedDelimiter(currentDelimiter, allDelimiters);
+        if (currentDelimiter) {
+          ProcessorValidator.validateDelimiter(currentDelimiter, allDelimiters);
+        }
         currentDelimiter = '';
         currentNumber += char;
       } else {
@@ -47,30 +55,19 @@ class StringInputProcessor {
       }
     }
 
-    if (currentNumber) {
-      numbersArray.push(Number(currentNumber));
-    }
+    ProcessorValidator.validateLastChar(
+      currentNumber,
+      currentDelimiter,
+      numbersArray,
+      allDelimiters
+    );
 
     return numbersArray;
-  }
-
-  validateAccumulatedDelimiter(accumulatingChar, allDelimiters) {
-    if (accumulatingChar) {
-      this.validateDelimiter(accumulatingChar, allDelimiters);
-    }
   }
 
   addAccumulatedNumber(numbersArray, accumulatingNumber) {
     if (accumulatingNumber) {
       numbersArray.push(Number(accumulatingNumber));
-    }
-  }
-
-  validateDelimiter(char, allDelimiters) {
-    if (!allDelimiters.has(char)) {
-      throw new Error(
-        `[ERROR] 허용되지 않은 구분자: ${char} 가 입력되었습니다. 입력 문자열을 확인해주세요.`
-      );
     }
   }
 }
