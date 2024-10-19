@@ -19,6 +19,11 @@ class App {
 
       let numbers = input.split(delimiter).map((v) => +v);
 
+      numbers.forEach((v) => {
+        if (v < 0)
+          throw new Error("[ERROR] 잘못된 입력입니다. 음수가 입력에 포함됩니다.")
+      })
+
       let sum = numbers.reduce((acc, cur) => acc + cur, 0);
 
       Console.print(`결과 : ${sum}`);
@@ -29,7 +34,7 @@ class App {
       Console.print(err.message);
       return;
     }
-
+    
   }
 
   getDelimiter(input) {
