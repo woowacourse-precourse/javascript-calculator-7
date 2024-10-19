@@ -1,16 +1,9 @@
 import { MissionUtils } from '@woowacourse/mission-utils';
-import { printInputMessage, getUserInput } from './views/CalculatorView.js';
+import { getUserInput } from './views/CalculatorView.js';
 import { parseNumbers, calculate } from './models/CalculatorModel.js';
 
 // View 테스트
 describe('문자열 계산기 View', () => {
-  test('입력 안내 문구 출력', () => {
-    const consoleSpy = jest.spyOn(MissionUtils.Console, 'print');
-    printInputMessage();
-    expect(consoleSpy).toHaveBeenCalledWith('덧셈할 문자열을 입력해 주세요.');
-    consoleSpy.mockRestore();
-  });
-
   test('사용자 입력', () => {
     const consoleSpy = jest
       .spyOn(MissionUtils.Console, 'readLineAsync')
@@ -39,7 +32,9 @@ describe('문자열 계산기 model', () => {
     try {
       parseNumbers('1.2,3'); // 구분자가 잘못된 입력으로 에러 발생 예상
     } catch (error) {
-      expect(error.message).toBe('구분자가 아닌 문자는 입력할 수 없습니다.');
+      expect(error.message).toBe(
+        '[ERROR] : 구분자가 아닌 문자는 입력할 수 없습니다.',
+      );
       // 에러 발생 후 추가 로직이 없으면 사실상 프로그램 종료
     }
   });
@@ -52,8 +47,13 @@ describe('문자열 계산기 model', () => {
     try {
       parseNumbers('00,1,2,3'); // 구분자가 잘못된 입력으로 에러 발생 예상
     } catch (error) {
-      expect(error.message).toBe('0은 입력할 수 없습니다.');
+      expect(error.message).toBe('[ERROR] : 0은 입력할 수 없습니다.');
       // 에러 발생 후 추가 로직이 없으면 사실상 프로그램 종료
     }
+  });
+
+  test('빈문자열 0반환', () => {
+    const result = calculate('');
+    expect(result).toBe(0);
   });
 });
