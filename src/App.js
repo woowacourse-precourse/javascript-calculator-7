@@ -1,8 +1,13 @@
 import { Console } from "@woowacourse/mission-utils";
 
 async function getUserInputData() {
-  const userInputData = await Console.readLineAsync("덧셈할 문자열을 입력해 주세요.\n");  
+  const userInputData = await Console.readLineAsync("덧셈할 문자열을 입력해 주세요.\n"); 
+  if (isEmpty(userInputData) === true) makeError("입력 오류가 발생했습니다.")
   return userInputData;
+}
+
+function isEmpty(string) {
+  return string === null || string === undefined ? true : false;
 }
 
 function escapeRegExp(string) {
@@ -15,7 +20,6 @@ function makeError(errorMsg) {
 
 class DelimeterApi {
   delimeter = []
-  
   customFormatStart
   customFormatEnd
 
@@ -44,12 +48,8 @@ class DelimeterApi {
   }
 
   getregExp() {
-    console.log(this.delimeter)
-
     const escapedDelimeter = this.delimeter.map(delimeter => escapeRegExp(delimeter));
     const regExpString = escapedDelimeter.join('|');
-
-    console.log(regExpString);
 
     return new RegExp(regExpString, 'g')
   }
@@ -57,7 +57,6 @@ class DelimeterApi {
 
 class NumberExtractor {
   delimeterApi
-
   orgUserInputData
   userInputData
 
@@ -71,11 +70,7 @@ class NumberExtractor {
 
   extractNumber() {
     this.userInputData = this.delimeterApi.parseCustomDelimeter(this.orgUserInputData)
-
-    console.log(this.userInputData)
-
     this.splitByDelimeter()
-
     return this.userInputData;
   }
 
@@ -94,7 +89,7 @@ class NumberExtractor {
   }
 }
 
-class Calculator {
+class CalculatorApi {
   numArr
   result
 
@@ -125,7 +120,7 @@ class App {
     const numberExtractor = new NumberExtractor(userInput);
     const numArr = numberExtractor.extractNumber();
 
-    const calcultor = new Calculator(numArr);
+    const calcultor = new CalculatorApi(numArr);
     const result = calcultor.addAllNum();
 
     Console.print("결과 : " + result.toString())
