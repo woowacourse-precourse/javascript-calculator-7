@@ -3,18 +3,17 @@ import { Console } from '@woowacourse/mission-utils';
 class App {
   //
   extractAndSum(input) {
-    // 1. 문자열에서 숫자만을 추출한다.(문자나 공백등을 입력했을 경우를 고려)
-    const numbers = input.match(/\d+/g).map(Number);
-
+  // 1.(숫자추출) 구분자를 제외한 일반문자 공백처리
+  const CleanInput = input.replace(/[^\d\s,:\-]/g, '');
   
+  //2.(기본구분자 분리)
+  const numbers = CleanInput.split(/\s+|[,:\-]/)
+                            .filter(item => item.trim() !== '' && !isNaN(item))
+                            .map(Number);
 
 
-
-
-
-    
-    //4. 숫자의 합을 반환 : reduce(누적값,현재요소=> 초기값) 각 요소를 순회하면서 누적 값을 계산함
-    return numbers.reduce((acc, num) => acc+num, 0);
+  // 4. 숫자의 합을 반환 : reduce(누적값, 현재요소 => 초기값) 각 요소를 순회하면서 누적값 계산
+  return numbers.reduce((acc, num) => acc + num, 0);
   }
 
   // App 실행
