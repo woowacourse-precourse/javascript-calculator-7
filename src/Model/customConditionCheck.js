@@ -11,7 +11,7 @@ const conditionTextInputCheck = userInput => {
 };
 
 // 2. 구분자 사용 입력 체크
-function separatorTextInputCheck(userInput) {
+const separatorTextInputCheck = userInput => {
   let allSpeparatorTrueCheck = 0;
   let loofCountForallSpeparatorTrueCheck = 0;
   for (let i = 6; i < userInput.length; i += 1) {
@@ -25,7 +25,7 @@ function separatorTextInputCheck(userInput) {
   if (allSpeparatorTrueCheck === loofCountForallSpeparatorTrueCheck) {
     return true;
   }
-}
+};
 
 // 3. 숫자가 양수로 이루어진지 체크하기
 function positiveNumberCheck(userInput) {
