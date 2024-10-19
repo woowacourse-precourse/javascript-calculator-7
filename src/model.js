@@ -21,6 +21,11 @@ class CalculatorModel {
   }
 
   async parseInput(input) {
+    // 빈 문자열일 경우 0 반환
+    if (input.trim() === "") {
+      return 0;
+    }
+
     let separators = [...this.defaultSeparators];
     let numbersString = input;
 
