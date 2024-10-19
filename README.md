@@ -4,7 +4,7 @@
 - [x] 커스텀 구분자 처리
 - [x] 문자열 구분자로 구분
 - [x] 추출한 숫자 더하기
-- [ ] 잘못된 값 입력한 경우 에러 처리 & 종료
+- [x] 입력값 잘못된 경우 에러 처리 & 종료
 
 ## 📚 공부
 - [x] git 커밋 메시지 공부
@@ -65,4 +65,31 @@
 - reduce() 메서드를 사용해 배열을 돌면서 배열에 있는 값들을 모두 더해 sum에 저장해 반환하였다.
 - 배열에 있는 값들이 모두 문자열이기 때문에 Number()를 사용해 숫자로 변환했다.
 
+### 입력값 잘못된 경우 에러 처리 & 종료
+```
+  checkInput(strArr){
+    for(let i = 0; i < strArr.length; i++){
+      const num = Number(strArr[i]);
+      Console.print(num + " ");
+      if(isNaN(num) || num < 0)
+        throw new Error("[ERROR]");
+    }
+  }
+```
+- 입력값이 구분자와 양수 외에 다른 문자로 이루어져 있는지 확인하는 메서드이다.
+- strArr 배열의 값들을 Number() 메서드를 사용해 숫자로 변경했다.
+- Number() 메서드를 사용했을 때 숫자로 바뀌지 않는 문자면 NaN이 저장되므로 isNaN() 메서드를 사용해서 숫자인지 아닌지 확인했다.
+- 제대로 변경된 숫자는 음수인지 아닌지 확인했다.
+- 두 조건 중 하나라도 만족하지 않으면 `throw new Error()`를 사용해 메시지와 함께 `Error`를 발생시킨후 애플리케이션을 종료했다.
+
 ## ⭐️ 결과 ⭐️ 
+### test 결과
+![alt text](image.png)
+
+### 옳은 입력
+![alt text](image-1.png)
+![alt text](image-2.png)
+
+### 잘못된 입력 시
+![alt text](image-3.png)
+![alt text](image-4.png)
