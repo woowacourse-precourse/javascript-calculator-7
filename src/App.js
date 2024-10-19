@@ -42,6 +42,9 @@ class App {
     if (negativeNumbers.length > 0) {
       throw new Error(`음수는 입력할 수 없습니다`);
     }
+    if (numbers.some(isNaN)) {
+      throw new Error("숫자가 아닌 값이 포함되어 있습니다.");
+    }
     return numbers;
   }
 
