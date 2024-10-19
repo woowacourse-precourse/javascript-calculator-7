@@ -35,6 +35,10 @@ class Calculator {
       numberString = parts[1];
     }
 
+    if (!numberString || numberString.trim() === "") {
+      throw new Error("[ERROR] 구분자 이후에 숫자가 입력되지 않았습니다.");
+    }
+
     const regex = new RegExp(`[${delimiters.join("")}]`);
     const numbers = numberString.split(regex).map((num) => {
       const parsed = Number(num);
