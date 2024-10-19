@@ -13,10 +13,17 @@ class App {
 		if (input === "") return 0;
 
 		// 구분자 기준 문자열 처리 기능 구현
+		const numbers = this.divide(input);
 
 		// 숫자 유효성 검사 기능 구현
 
 		// 숫자 합산 기능 구현
+	}
+
+	// divide: 입력 문자열을 구분자 기준으로 분리하는 메서드
+	divide(input) {
+		// 기본 구분자 처리
+		return input.split(/,|:/).map(Number);
 	}
 }
 
