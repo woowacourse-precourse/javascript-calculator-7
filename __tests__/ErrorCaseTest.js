@@ -39,7 +39,7 @@ describe("에러를 발생시키는 예외상황 테스트", () => {
     }
   });
   test("구분자를 설정하는 문자열이 완전하지 않은 경우", async () => {
-    const inputs = ["1//;1,2,3,4", ";\\n1;2,3,4"];
+    const inputs = ["//;1,2,3,4", ";\\n1;2,3,4"];
     mockMultipleQuestions(inputs);
 
     const app = new App();
