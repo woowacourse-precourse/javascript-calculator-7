@@ -55,4 +55,13 @@ describe("문자열 계산기", () => {
 			expect(logSpy).toHaveBeenCalledWith(expect.stringContaining(output));
 		});
 	});
+
+	test("커스텀 구분자 위치 예외 테스트", async () => {
+		const inputs = ["1!2//!\n"];
+		mockQuestions(inputs);
+
+		const app = new App();
+
+		await expect(app.run()).rejects.toThrow("[ERROR]");
+	});
 });
