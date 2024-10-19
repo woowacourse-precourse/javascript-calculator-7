@@ -28,7 +28,7 @@ const separatorTextInputCheck = userInput => {
 };
 
 // 3. 숫자가 양수로 이루어진지 체크하기
-function positiveNumberCheck(userInput) {
+const positiveNumberCheck = userInput => {
   let positiveNumberCheckCount = 0;
   const NUMBER_COUNT = (userInput.length - 5) / 2 + 1;
   const NUMBER_COUNT_FOR_INT = parseInt(NUMBER_COUNT, 10);
@@ -42,7 +42,7 @@ function positiveNumberCheck(userInput) {
     return true;
   }
   return false;
-}
+};
 
 const customConditionCheck = userInput => {
   if (conditionTextInputCheck(userInput) && separatorTextInputCheck(userInput) && positiveNumberCheck(userInput)) {
