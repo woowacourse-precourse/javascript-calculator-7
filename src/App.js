@@ -1,6 +1,7 @@
 import { Console } from "@woowacourse/mission-utils";
 
 const SEPARATORS = [",",":"];
+const escapeRegExp = (string) => string.replace(/[.*+?^${}()|[\]\\]/g, '\\$&');
 
 const findSeparator = (input) => {
   if(input.startsWith("//")){
@@ -27,36 +28,9 @@ const findSeparator = (input) => {
   return input;
 };
 
-const getNumber = (inputArray) => {
-  let currentNum = '';
-  const RESULT = [];
-  let isContinuous = 0;
-
-  inputArray.forEach((string, index) => {
-    if (SEPARATORS.includes(string)) {
-      isContinuous += 1;
-      if (isContinuous > 1) {
-        throw new Error("[ERROR] 구분자가 연속으로 사용됐습니다.");
-      }
-
-      if(index === inputArray.length - 1){
-        throw new Error("[ERROR] 구분자 뒤에 올 숫자를 입력해주세요.")
-      }
-
-      if (currentNum.length > 0) {
-        RESULT.push(currentNum);
-        currentNum = '';
-      }
-    } else {
-      isContinuous = 0;
-      currentNum += string;
-    }
-  });
-
-  if (currentNum !== '') {
-    RESULT.push(currentNum);
-  }
-  return RESULT;
+const getNumber = (input) => {
+  const regexSeparator = new RegExp(SEPARATORS.map(escapeRegExp).join('|'));
+  return input.split(regexSeparator);
 }
 
 const calculate = (input) => {
