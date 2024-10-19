@@ -8,6 +8,10 @@ class OutputHandler {
   printErrorMessage(message) {
     Console.print(`[Error] ${message}`);
   }
+
+  printResult(result) {
+    Console.print(`결과 : ${result}`);
+  }
 }
 
 export default OutputHandler;

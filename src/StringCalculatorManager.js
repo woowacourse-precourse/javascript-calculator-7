@@ -9,7 +9,8 @@ class StringCalculatorManager {
     try {
       this.outputHandler.printStartMessage();
       this.inputString = await this.inputHandler.readString();
-      this.results = this.calculator.calculate(this.inputString);
+      const results = this.calculator.calculate(this.inputString);
+      this.outputHandler.printResult(results);
     } catch (error) {
       this.outputHandler.printErrorMessage(error.message);
     }
