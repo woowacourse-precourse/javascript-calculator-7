@@ -13,10 +13,10 @@ class StringCalculatorController {
             const input = await InputView.readInputStirng();
             const numbers = InputValidator.validateInputString(input);
             const result = this.calculator.calculate(numbers);
-            OutputView.printResult(result);
+            await OutputView.printResult(result);
         } catch (error) {
-            OutputView.printErrorMessage(error.message);
-            throw error; // 예외를 다시 던져서 테스트에서 감지할 수 있게 함
+            await OutputView.printErrorMessage(error.message);
+            throw error;
         }
     }
 }

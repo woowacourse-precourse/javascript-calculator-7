@@ -3,7 +3,6 @@ import { GuideMessage } from "../domain/Constants.js";
 
 
 const OutputView = {
-
     async printResult(result) {
         await Console.print(`${GuideMessage.RESULT}${result}`);
     },
@@ -11,7 +10,6 @@ const OutputView = {
     printErrorMessage(message) {
         Console.print(message);
     }
-
 }
 
 export default OutputView;
