@@ -17,7 +17,7 @@ class App {
     let delimeter = [",", ";"];
     let numbers = delimeter;
 
-    // 커스텀 구분자 파악하기
+    // 2. 커스텀 구분자 파악하기
     if(strInput.startWith("//")) {
       // 입력 문자열이 //로 시작하면 \n 이전까지의 문자를 커스텀 구분자로 설정
       const customDelimeterEnd = strInput.indexOf("\n"); 
