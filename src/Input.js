@@ -2,27 +2,20 @@ import { MissionUtils } from "@woowacourse/mission-utils";
 import { IncludeZeroError, InvalidSeparatorError, InvalidCustomSeparatorError } from "./Error/index.js";
 
 class Input {
-  customSeparator;
+  async getCustomSeparatorAndNumbers() {
+    const plusString = await this.getPlusString();
+    const { customSeparator, numbers } = this.findCustomSeparatorAndNumbers(plusString);
 
-  numbers;
+    Input.validateSeparators(customSeparator);
+    Input.validateNumbers(numbers, customSeparator);
 
-  constructor() {
-    this.customSeparator = [];
-    this.numbers = "";
+    return { customSeparator, numbers };
   }
 
   async getPlusString() {
     const plusString = await MissionUtils.Console.readLineAsync(
       "덧셈할 문자열을 입력해 주세요.\n",
     );
-    const { customSeparator, numbers } = this.findCustomSeparatorAndNumbers(plusString);
-
-    Input.validateSeparators(customSeparator);
-    Input.validateNumbers(numbers, customSeparator);
-
-    this.customSeparator = customSeparator;
-    this.numbers = numbers;
-
     return plusString;
   }
 

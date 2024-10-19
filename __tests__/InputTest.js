@@ -139,3 +139,30 @@ describe("에러메시지 출력", () => {
     }
   });
 });
+
+describe("getCustomSeparatorAndNumbers()", () => {
+  let input;
+
+  beforeEach(() => {
+    input = new Input();
+  });
+
+  afterEach(jest.restoreAllMocks);
+
+  test("정상 입력이 들어왔을 때 커스텀 문자 배열과 연산자 문자열 반환", async () => {
+    const mockInput = ["//;\\n1;2;3"];
+    const spy = getConsoleSpy();
+    mockQuestions(mockInput, spy);
+
+    const result = await input.getCustomSeparatorAndNumbers("//;\\n1;2;3");
+    expect(result).toEqual({ customSeparator: [";"], numbers: "1;2;3" });
+  });
+
+  test("비정상 입력 시 에러 반환", async () => {
+    const mockInput = ["1;2;3"];
+    const spy = getConsoleSpy();
+    mockQuestions(mockInput, spy);
+
+    await expect(() => input.getCustomSeparatorAndNumbers("1;2;3")).rejects.toThrow(InvalidSeparatorError);
+  });
+});
