@@ -6,6 +6,12 @@ class App {
       "덧셈할 문자열을 입력해 주세요.\n"
     );
 
+    for (const element of inputString) {
+      if (element === "0") {
+        throw new Error("[ERROR]: 0은 양수가 아닙니다.");
+      }
+    }
+
     let splitArr;
     if (inputString.startsWith("//")) {
       let customDelimiter = extractCustomDelimiter(inputString);
