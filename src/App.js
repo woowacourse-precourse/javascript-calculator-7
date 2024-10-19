@@ -17,6 +17,12 @@ class App {
         numArr = this.splitByDelimiter(input);
       }
 
+      let regex = /[^0-9]/;
+      const flag = numArr.some((element) => regex.test(element));
+      if (flag) {
+        this.throwError('타입 에러');
+      }
+
       const result = this.getSum(numArr);
       Console.print(`결과 : ${result}`);
     } catch (error) {
@@ -27,9 +33,12 @@ class App {
   throwError(message) {
     switch (message) {
       case '음수':
+      case '타입 에러':
         Console.print(`[ERROR] : 구분자와 양수로 구성된 문자열이어야 합니다.`);
+        break;
       case '빈 문자열':
         Console.print(`[ERROR] : 빈 문자열입니다.`);
+        break;
     }
     throw new Error('[ERROR]');
   }
