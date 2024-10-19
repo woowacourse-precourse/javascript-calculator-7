@@ -1,4 +1,4 @@
-import { Calculator } from "./Calculator";
+import { Calculator } from "./Calculator.js";
 const calculator = new Calculator();
 
 // add 함수 테스트 코드 정의
@@ -63,17 +63,18 @@ const getRandomList = (random, count) => {
 };
 
 describe("regex_random_test", () => {
-  const testCount = 10;
+  const testCount = 1000000;
   for (let i = 0; i < testCount; i++) {
     const count = 10; // 숫자의 개수 아무리 큰수가 들어가도 강건한 테스트를 위함
     const random = Math.random();
     let testInput = "";
-    const randomNumberList = getRandomList(random, count); // 랜덤으로 생성된 숫자를 배열에 담는다
+    let randomNumberList = getRandomList(random, count); // 랜덤으로 생성된 숫자를 배열에 담는다
     let error = false;
     // 커스텀 구분자가 있는경우
     if (random * 10 >= 5) {
       const randomAscii = getRandomAscii(); // 랜덤으로 아스키 넣는다
       if (randomAscii === "") error = true;
+      if (!isNaN(randomAscii)) error = true;
       testInput += `//${randomAscii}\\n`;
       for (let i = 0; i < randomNumberList.length; i++) {
         testInput += randomNumberList[i];
@@ -82,6 +83,15 @@ describe("regex_random_test", () => {
         if (randomDevider >= 7) testInput += ":";
         else if (randomDevider >= 4) testInput += ",";
         else testInput += randomAscii;
+      }
+      if (randomAscii === ".") {
+        randomNumberList = randomNumberList.flatMap((number) => {
+          if (number % 1 !== 0) {
+            // 소수인지 확인
+            return number.toString().split(".").map(Number); // 소수점을 기준으로 분리한 후 숫자로 변환
+          }
+          return number; // 정수는 그대로 반환
+        });
       }
     }
     //커스텀 구분자가 없는 경우
@@ -99,7 +109,7 @@ describe("regex_random_test", () => {
     test(`random : ${testInput}`, () => {
       expect(calculator.calculate(testInput)).toEqual(
         error
-          ? `[ERROR]`
+          ? false
           : randomNumberList.length != 0
           ? `결과 : ${calculator.add(...randomNumberList)}`
           : `결과 : 0`
