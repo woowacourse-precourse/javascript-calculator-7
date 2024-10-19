@@ -20,6 +20,9 @@ class App {
 
       let sum = numbers.reduce((acc, cur) => acc + cur, 0);
 
+      Console.print(sum);
+      return;
+
     }
     catch (err) {
       Console.print(err.message);
