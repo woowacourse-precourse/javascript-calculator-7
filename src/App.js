@@ -12,10 +12,10 @@ class App {
 	async run() {
 		try {
 			await this.#getUserInput();
-			this.#validateEmptyOrNull();
-			this.#validateNegativeInput();
+			this.#validateInput();
 			this.#parseAndSplitInput();
-			this.#validateResultAndCalculate();
+			this.#validateSplitResult();
+			this.#result = this.#calculateSum(this.#result);
 			this.#printResult();
 		} catch (err) {
 			this.#throwError(err);
@@ -26,20 +26,17 @@ class App {
 		this.#input = await Console.readLineAsync('덧셈할 문자열을 입력해 주세요. \n');
 	}
 
-	#validateEmptyOrNull() {
+	#validateInput() {
 		if (isEmptyOrNull(this.#input)) {
 			this.#result = 0;
 			return;
 		}
-	}
-
-	#validateNegativeInput() {
 		if (hasNegative(this.#input)) {
 			this.#throwError('[ERROR] : 양수만 입력할 수 있어요.');
 		}
 	}
 
-	#validateArrayInput() {
+	#validateSplitResult() {
 		if (this.#result[0] === this.#input) {
 			this.#throwError('[ERROR] : 구분자와 양수로 이루어진 값을 입력해주세요.');
 		}
@@ -58,11 +55,6 @@ class App {
 		} else {
 			this.#result = splitByDefaultSeparators(this.#input);
 		}
-	}
-
-	#validateResultAndCalculate() {
-		this.#validateArrayInput();
-		this.#result = this.#calculateSum(this.#result);
 	}
 
 	#calculateSum(result) {
