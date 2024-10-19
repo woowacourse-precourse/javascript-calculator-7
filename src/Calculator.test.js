@@ -70,7 +70,6 @@ describe("regex_random_test", () => {
     let testInput = "";
     const randomNumberList = getRandomList(random, count); // 랜덤으로 생성된 숫자를 배열에 담는다
     let error = false;
-
     // 커스텀 구분자가 있는경우
     if (random * 10 >= 5) {
       const randomAscii = getRandomAscii(); // 랜덤으로 아스키 넣는다
