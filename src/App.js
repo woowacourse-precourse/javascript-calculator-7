@@ -7,7 +7,7 @@ class App {
       const input = await Console.readLineAsync("덧셈할 문자열을 입력해 주세요.\n");
 
       const numArr = input.split(regex).map(Number);
-      const sum = 0;
+      const sum = numArr.reduce((acc, current) => acc + current, 0);
       Console.print(sum);
     } catch (error) {
       Console.print(error);
