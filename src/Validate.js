@@ -2,11 +2,11 @@ export class Validate {
   basicValidate(input) {
     if (this.checkEmpty(input)) return 0;
     // 커스텀 구분자 숫자인지 확인
-    else if (this.checkCustomError(input)) return { error: true };
-    else return { error: false };
+    if (this.checkCustomError(input)) return { error: true };
+    return { error: false };
   }
   checkEmpty = (result) => {
-    if (result == "") return true;
+    if (result === "") return true;
   };
   checkCustomError = (result) => {
     let customInput = result.match(/^\/\/(.)\\n/); // ; 추출
@@ -26,8 +26,7 @@ export class Validate {
   }
 
   checkLength(result) {
-    if (result.length > 10000) return false;
-    else return true;
+    return result.length > 10000;
   }
   // 숫자 아닌 값 확인
   checkNotNum(result) {
@@ -44,17 +43,17 @@ export class Validate {
     return false;
   }
 
-  checkNone = (result) => {
+  checkNone(result) {
     for (let index = 0; index < result.length; index++) {
       if (result[index] === "") return true;
     }
     return false;
-  };
-  checkSpace = (result) => {
+  }
+  checkSpace(result) {
     let regexSpace = /\s/;
     for (let index = 0; index < result.length; index++) {
       if (regexSpace.test(result[index])) return true;
     }
     return false;
-  };
+  }
 }
