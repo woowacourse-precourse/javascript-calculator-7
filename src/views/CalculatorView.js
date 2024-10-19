@@ -1,11 +1,9 @@
 import { MissionUtils } from '@woowacourse/mission-utils';
 
-export function printInputMessage() {
-  MissionUtils.Console.print('덧셈할 문자열을 입력해 주세요.');
-}
+
 
 export function getUserInput(callback) {
-  MissionUtils.Console.readLineAsync('')
+  MissionUtils.Console.readLineAsync('덧셈할 문자열을 입력해 주세요.\n')
     .then((input) => {
       callback(input);
     }) // 입력된 값 callback 전달
@@ -21,5 +19,5 @@ export function displayErrorMessage(message) {
 
 // 결과 출력 함수
 export function resultOutput(result) {
-  MissionUtils.Console.print(`결과: ${result}`);
+  MissionUtils.Console.print(`결과 : ${result}`);
 }
