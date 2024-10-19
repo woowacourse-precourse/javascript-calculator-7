@@ -10,32 +10,55 @@ class App {
 
   // 입력값에서 숫자 추출하여 더하기
   result(userStr) {
-    const regex = /[^,:\d]/;
-    const test = regex.test(userStr);
-    const found = userStr.match(/\d+/g);
-
     let num = 0;
-    if (found === null) this.printresult(num);
-    if (found !== null) {
-      const customRegex = /\/\/.[^\\n]*\\n/;
-      const customTest = customRegex.test(userStr);
-      if (customTest === false) {
-        if (test) {
-          MissionUtils.Console.print(
-            "[ERROR] 유효하지 않은 입력값입니다. 다시 입력해 주세요."
-          );
-          return;
-        }
-        found.map((item) => (num += Number(item)));
-        this.printresult(num);
+
+    // 빈 문자열을 입력했을 때
+    if (userStr === "") {
+      this.printresult(num);
+      return;
+    }
+
+    let regex = /[^,:\d]/;
+    let customRegex = /\/\/.[^\\n]*\\n/;
+    const customTest = customRegex.test(userStr);
+
+    // 커스텀 구분자가 있을 때
+    if (customTest) {
+      const customArr = userStr.match(/(?<=\/\/).*?(?=\\n)/);
+      const customDelimiter = customArr.join("");
+      const reg = /\/\/.[^\\n]*\\n/gim;
+      const customDeleted = userStr.replace(reg, "");
+
+      if (
+        regex.test(customDeleted) &&
+        customDeleted.indexOf(customDelimiter) === -1
+      ) {
+        MissionUtils.Console.print(
+          "[ERROR] 유효하지 않은 입력값입니다. 다시 입력해 주세요."
+        );
         return;
       }
 
-      const custom = userStr.match(/(?<=\/\/).*?(?=\\n)/).join("");
-      const reg = /\/\/.[^\\n]*\\n/gim;
-      const customDeleted = userStr.replace(reg, "");
-      const splitted = customDeleted.split(custom);
-      splitted.map((item) => (num += Number(item)));
+      const delimiters = customArr
+        .concat([",", ":"])
+        .map((c) => "\\" + c)
+        .join("");
+      const specialChars = new RegExp(`[${delimiters}]`, "g");
+      const splitted = customDeleted.split(specialChars);
+      splitted.forEach((item) => (num += Number(item)));
+      this.printresult(num);
+    }
+
+    // 커스텀 구분자가 없을 때
+    if (!customTest) {
+      if (regex.test(userStr)) {
+        MissionUtils.Console.print(
+          "[ERROR] 유효하지 않은 입력값입니다. 다시 입력해 주세요."
+        );
+        return;
+      }
+      const found = userStr.match(/\d+/g);
+      found.forEach((item) => (num += Number(item)));
       this.printresult(num);
     }
   }
