@@ -8,7 +8,8 @@ class App {
 
     try {
       const inputStr = await Console.readLineAsync('덧셈할 문자열을 입력해주세요.\n> ');
-      if (inputStr.length <= 0 || inputStr == null) {
+
+      if (inputStr.trim().length === 0 || inputStr === null) {
         throw new Error('[ERROR] 입력값이 비었습니다.');
       }
 
