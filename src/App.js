@@ -6,9 +6,9 @@ class App {
     );
     const numberArray = this.extractNumbers(input);
     const hasInvalidValue = numberArray.includes(NaN);
-    const hasNegativeNumber = numberArray.filter(el => el < 0)
+    const hasNegativeNumber = numberArray.filter(el => el < 0).length
 
-    if (hasInvalidValue || hasNegativeNumber) Console.print("[ERROR]");
+    if (hasInvalidValue || hasNegativeNumber) throw new Error("[ERROR]");
     if (!hasInvalidValue && !hasNegativeNumber) {
       const result = this.calculateSum(numberArray);
       Console.print(`결과 : ${result}`);
