@@ -14,7 +14,8 @@ class Calculator {
       return [Number(text)];
     }
 
-    const regex = new RegExp(`,|:|${this.customSeparator}`);
+    const separators = [",", ":", ...this.customSeparator];
+    const regex = new RegExp(separators.join("|"));
     return text.split(regex).map(Number);
   }
 

@@ -1,12 +1,17 @@
 import Calculator from "../src/Calculator";
 
 describe("sum()", () => {
-  test("숫자 배열이 주어졌을 때 숫자의 합 반환", async () => {
+  test("한자리 숫자와 구분자 문자열이 주어졌을 때 숫자의 합 반환", async () => {
     const calculator = new Calculator([], "1,2,3");
     expect(calculator.sum()).toBe(6);
   });
 
-  test("빈 배열이 주어졌을 때 0 반환", async () => {
+  test("여러자리 숫자와 구분자 문자열이 주어졌을 때 숫자의 합 반환", async () => {
+    const calculator = new Calculator([], "12,345");
+    expect(calculator.sum()).toBe(357);
+  });
+
+  test("빈 문자열이 주어졌을 때 0 반환", async () => {
     const calculator = new Calculator([], "");
     expect(calculator.sum()).toBe(0);
   });
