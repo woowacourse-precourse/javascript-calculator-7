@@ -31,28 +31,28 @@ describe("Input 클래스", () => {
   });
 });
 
-// describe("문자열 계산기", () => {
-//   test("커스텀 구분자 사용", async () => {
-//     const inputs = ["//;\\n1"];
-//     mockQuestions(inputs);
+describe("문자열 계산기", () => {
+  test("커스텀 구분자 사용", async () => {
+    const inputs = ["//;\\n1"];
+    mockQuestions(inputs);
 
-//     const logSpy = getLogSpy();
-//     const outputs = ["결과 : 1"];
+    const logSpy = getLogSpy();
+    const outputs = ["결과 : 1"];
 
-//     const app = new App();
-//     await app.run();
+    const app = new App();
+    await app.run();
 
-//     outputs.forEach((output) => {
-//       expect(logSpy).toHaveBeenCalledWith(expect.stringContaining(output));
-//     });
-//   });
+    outputs.forEach((output) => {
+      expect(logSpy).toHaveBeenCalledWith(expect.stringContaining(output));
+    });
+  });
 
-//   test("예외 테스트", async () => {
-//     const inputs = ["-1,2,3"];
-//     mockQuestions(inputs);
+  test("예외 테스트", async () => {
+    const inputs = ["-1,2,3"];
+    mockQuestions(inputs);
 
-//     const app = new App();
+    const app = new App();
 
-//     await expect(app.run()).rejects.toThrow("[ERROR]");
-//   });
-// });
+    await expect(app.run()).rejects.toThrow("[ERROR]");
+  });
+});
