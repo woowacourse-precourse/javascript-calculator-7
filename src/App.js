@@ -8,8 +8,13 @@ class App {
       );
 
       let numArr = [];
-      numArr = this.splitByDelimiter(input);
-      Console.print(numArr);
+      if (input.startsWith('//')) {
+        numArr = this.splitByCustom(input);
+        Console.print(numArr);
+      } else {
+        numArr = this.splitByDelimiter(input);
+        Console.print(numArr);
+      }
     } catch (error) {
       Console.print('에러:', error);
     }
@@ -17,6 +22,13 @@ class App {
 
   splitByDelimiter(input) {
     return input.split(/,|:/).map(Number);
+  }
+
+  splitByCustom(input) {
+    const custom = input.match(/\/\/(.+)\\n/);
+    const regex = new RegExp(custom[1]);
+    const newInput = input.match(/(?<=\\n).+/g);
+    return newInput[0].split(regex).map(Number);
   }
 }
 
