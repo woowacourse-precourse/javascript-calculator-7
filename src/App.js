@@ -3,11 +3,11 @@ import { Console } from "@woowacourse/mission-utils";
 class App {
   async run() {
     try {
-      const input = await this.getUserInput(); //사용자 입력
-      const result = this.calculateSum(input); //결과값 계산
-      Console.print(`결과: ${result}`); //결과 출력
+      const input = await this.getUserInput();
+      const result = this.calculateSum(input);
+      Console.print(`결과 : ${result}`);
     } catch (error) {
-      Console.print(error.message); //에러처리
+      Console.print(error.message);
       throw error;
     }
   }
@@ -16,11 +16,16 @@ class App {
     const input = await Console.readLineAsync(
       "덧셈할 문자열을 입력해 주세요.\n"
     );
+    if (input.trim() === "") {
+      throw new Error("[ERROR] 입력이 비어있습니다.");
+    }
     return input;
   }
   calculateSum(input) {
-    let numbers = input;
+    if (input === "") return 0;
+
     let delimiter = /[,:]/;
+    let numbers = input;
 
     const processedInput = input.replace(/\\n/g, "\n");
 
@@ -31,19 +36,24 @@ class App {
         delimiter = new RegExp(this.escapeRegExp(customDelimiter), "g");
         numbers = matches[2];
       } else {
+        throw new Error("[ERROR] 잘못된 입력 형식입니다.");
       }
     }
 
-    const parseNumbers = numbers.split(delimiter).map((num) => {
+    const parsedNumbers = numbers.split(delimiter).map((num) => {
       const trimmed = num.trim();
-      if (trimmed === "") {
-        return 0;
-      }
+      if (trimmed === "") return 0;
       const parsed = parseInt(trimmed, 10);
+      if (isNaN(parsed)) {
+        throw new Error(`[ERROR] 잘못된 입력값: ${trimmed}`);
+      }
+      if (parsed < 0) {
+        throw new Error(`[ERROR] 음수는 허용되지 않습니다: ${parsed}`);
+      }
       return parsed;
     });
 
-    return parseNumbers.reduce((sum, num) => sum + num, 0);
+    return parsedNumbers.reduce((sum, num) => sum + num, 0);
   }
 
   escapeRegExp(string) {
