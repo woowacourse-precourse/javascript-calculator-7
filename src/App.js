@@ -1,8 +1,9 @@
 import getUserInput from './IO/inputHandler.js';
-import parseInput from './delimiterHandler.js';
+import splitStringByDelimiter from './utils/delimiterHandler.js';
 import sumCalculation from './calculator.js';
-import { isEmptyString, validateNumbers } from './validator.js';
+import { isEmptyString } from './validator.js';
 import printResult from './IO/printResult.js';
+import convertStringToNumber from './utils/numberHandler.js';
 
 class App {
   async run() {
@@ -13,8 +14,8 @@ class App {
       return;
     }
 
-    const rawValues = parseInput(userInput);
-    const numbers = validateNumbers(rawValues);
+    const splitValues = splitStringByDelimiter(userInput);
+    const numbers = convertStringToNumber(splitValues);
     const result = sumCalculation(numbers);
     printResult(result);
   }
