@@ -2,7 +2,8 @@ import { Console } from '@woowacourse/mission-utils';
 
 class App {
   async run() {
-    const input = await Console.readLineAsync('계산할 문자열을 입력해 주세요\n');
+    const input =
+      await Console.readLineAsync('계산할 문자열을 입력해 주세요\n');
     if (!input) {
       throw new Error('[ERROR] 문자열이 입력되지 않았습니다.');
     }
@@ -33,10 +34,14 @@ class App {
       nums = input.split(createSeparatorPattern());
     }
     const result = nums.reduce((hap, num) => {
-      if (isNaN(num)) {
-        throw new Error('[ERROR] 잘못된 값이 입력되었습니다.');
+      const number = Number(num);
+      if (isNaN(number)) {
+        throw new Error('[ERROR] 문자열이 아닌 숫자를 입력해 주세요.');
       }
-      hap += Number(num);
+      if (number < 0) {
+        throw new Error('[ERROR] 음수가 아닌 양수를 입력해 주세요.');
+      }
+      hap += number;
       return hap;
     }, 0);
     Console.print(`결과 : ${result}`);
