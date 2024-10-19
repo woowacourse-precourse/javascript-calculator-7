@@ -36,7 +36,11 @@ class App {
           const numbersArray = userInput.split('\\n')[1].split(separator[1]);
           this.sum(numbersArray);
         }
-      }
+        else{
+          throw Error("[ERROR]" + this.SEPARATOR_ERROR_MESSAGE);
+        }
+      }else throw Error("[ERROR]" + this.SEPARATOR_ERROR_MESSAGE)
+
   }
 
   //비커스텀 구분자 처리 함수
