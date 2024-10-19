@@ -1,26 +1,23 @@
-import DelimiterExtractor from "./DelimiterExtractor.js";
-import NumberConverter from "./NumberConverter.js";
-import StringSplitter from "./StringSplitter.js";
 import { printOutput, readInput } from "./utils.js";
 
 class Calculator {
-  constructor() {
-    this.delimiterExtractor = new DelimiterExtractor();
-    this.splitter = new StringSplitter();
-    this.converter = new NumberConverter();
+  constructor(delimiterExtractor, splitter, converter, operation) {
+    this.delimiterExtractor = delimiterExtractor;
+    this.splitter = splitter;
+    this.converter = converter;
+    this.operation = operation;
   }
 
   async run() {
     const inputValue = await this.promptUserInput();
 
-    const processedInput =
-      this.delimiterExtractor.extractCustomDelimiter(inputValue);
+    const processedInput = this.delimiterExtractor.extractDelimiter(inputValue);
     const delimiters = this.delimiterExtractor.getDelimiters();
 
     const splitValues = this.splitter.split(processedInput, delimiters);
     const numbers = this.converter.convertAndValidate(splitValues);
 
-    const result = this.sumNumbers(numbers);
+    const result = this.operation.calculate(numbers);
 
     this.displayResult(result);
   }
@@ -32,14 +29,6 @@ class Calculator {
 
   displayResult(result) {
     printOutput(`결과: ${result}`);
-  }
-
-  sumNumbers(numbers) {
-    const sumResult = numbers.reduce((acc, cur) => {
-      return acc + cur;
-    }, 0);
-
-    return sumResult;
   }
 }
 
