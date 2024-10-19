@@ -22,9 +22,11 @@ class strToArr {
 
   async calculateParts(str, idx) {
     const CALCULATE_STR = str.substring(idx + 1);
-    return CALCULATE_STR.match(/\d+|[^\w\s]+/g).map((item) =>
-      item.match(/\d+/) ? Number(item) : item
-    );
+    return CALCULATE_STR.match(/\d+|[^\w\s]+/g) === null
+      ? [0]
+      : CALCULATE_STR.match(/\d+|[^\w\s]+/g).map((item) =>
+          item.match(/\d+/) ? Number(item) : item
+        );
   }
 }
 
@@ -36,9 +38,15 @@ class App {
         "덧셈할 문자열을 입력해주세요.\n"
       );
 
+      // 문자열에 숫자나 기호가 없으면 예외 처리
+      if (/^[a-zA-Z가-힣]+$/g.test(PLUS_OP_STR)) throw new Error(ERR_MESSAGE);
+
       // 구분자, 숫자 배열
       const SEPARATOR_ARR = [",", ":"];
-      const NUM_ARR = PLUS_OP_STR.match(/\d+/g).map(Number);
+      const NUM_ARR =
+        PLUS_OP_STR.match(/\d+/g) === null
+          ? [0]
+          : PLUS_OP_STR.match(/\d+/g).map(Number);
 
       // 'n' 기준 문자 인덱스 생성
       const LAST_N_CHAR_INDEX = PLUS_OP_STR.lastIndexOf("n");
@@ -82,8 +90,8 @@ class App {
       }
 
       // 모두 일치하면 문자열에서 추출한 모든 숫자의 합 출력
-      const RESULT = NUM_ARR.reduce((acc, val) => acc + val);
-      Console.print("결과 : " + RESULT);
+      const OP_RESULT = NUM_ARR.reduce((acc, val) => acc + val);
+      Console.print("결과 : " + OP_RESULT);
     } catch (error) {
       throw error;
     }
