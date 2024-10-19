@@ -32,8 +32,7 @@ class App {
     } else if (hasCommaAndSemicolon) {
       return input
         .split(",")
-        .map((el) => el.split(";"))
-        .flat()
+        .flatMap((el) => el.split(";"))
         .map(Number);
     } else if (hasComma) {
       return input.split(comma).map(Number);
