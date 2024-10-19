@@ -4,6 +4,7 @@ class App {
   async run() {
     try {
       const nums = await this.getNums();
+      const result = this.getSum(nums)
     } catch (e) {
       Console.print("[ERROR] " + e.message);
     }
@@ -40,6 +41,13 @@ class App {
 
     return nums;
   }
+
+  getSum(nums = []) {
+    return nums.reduce((sum, num) => sum + num, 0);
+  }
+
+
+
 }
 
 export default App;
