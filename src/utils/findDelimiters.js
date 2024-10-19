@@ -19,7 +19,7 @@ export function findDelimiters(input){
     for (let word of splitArray){
         // 1. 맨 처음에 “//” 문자가 나오지 않으면 무조건 숫자부터 시작 ( 요구사항에 “문자열 앞부분” 이라는 말이 있기 떄문)
         // "//" 이 단어의 처음에 없으면 숫자 시작이므로 추출한 구분자 리턴
-        if(!word.startsWith("//")){
+        if(!word.startsWith("//") && !isNaN(word[0])){
             return delimiters;
         }
         
