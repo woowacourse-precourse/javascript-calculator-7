@@ -12,8 +12,6 @@ const extractNumbersFromInput = (input) => {
 
   const numbers = input.split(delimiter);
 
-  console.log(numbers);
-
   return { numbers, customSeparator };
 };
 

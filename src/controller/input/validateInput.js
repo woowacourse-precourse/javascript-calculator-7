@@ -7,8 +7,6 @@ import extractNumbersFromInput from "./extractNumbersFromInput.js";
 const validateInput = (input) => {
   const { numbers, customSeparator } = extractNumbersFromInput(input);
 
-  console.log(customSeparator);
-
   if (!validateCorrectInput(numbers))
     throw new Error(ErrorMessage.WRONG_INPUT_MESSAGE);
 
