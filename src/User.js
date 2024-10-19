@@ -1,6 +1,6 @@
 import { Console } from "@woowacourse/mission-utils";
 import { MESSAGES } from "./constants/Messages.js";
-import { DELIMETERS } from "./constants/Delimeters.js";
+import { DELIMITERS } from "./constants/Delimeters.js";
 import { seperateCustomDelimiter } from "./handleCustomDelimiter.js";
 import validator from "./utils/validator.js";
 
@@ -9,7 +9,7 @@ class User {
   #delimiters;
 
   constructor() {
-    this.#delimiters = [...DELIMETERS];
+    this.#delimiters = [...DELIMITERS];
   }
 
   async readNumber() {
