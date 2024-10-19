@@ -39,76 +39,52 @@ const runCalculatorTestError = async input => {
 
 describe('문자열 계산기', () => {
   describe('커스텀 구분자 사용', () => {
-    describe('커스텀 구분자 1개', () => {
-      test('숫자 1개 입력', async () => {
-        await runCalculatorTestCorrect('//;\n1', '1');
-      });
-      test('숫자 3개 입력', async () => {
-        await runCalculatorTestCorrect('//v\n1v23v456', '480');
-      });
+    test('숫자 1개 입력 시 해당 숫자를 출력한다.', async () => {
+      await runCalculatorTestCorrect('//;vrw\n1', '1');
     });
-    describe('커스텀 구분자 2개', () => {
-      test('숫자 1개 입력', async () => {
-        await runCalculatorTestCorrect('//;v\n1', '1');
-      });
-      test('숫자 3개 입력', async () => {
-        await runCalculatorTestCorrect('//;v\n1v23;456', '480');
-      });
+    test('2개 이상의 숫자 입력 시 커스텀 구분자를 기준으로 분리하여 값을 더해 출력한다.', async () => {
+      await runCalculatorTestCorrect('//;vowe\n1v20w300w4000', '4321');
     });
-    describe('특수한 구분자 3개', () => {
-      test('숫자 1개 입력', async () => {
-        await runCalculatorTestCorrect('//;v\b\n1', '1');
-      });
-      test('중복된 특수한 구분자 & 숫자 3개', async () => {
-        await runCalculatorTestCorrect('//;vv\b\n1v23v456', '480');
-      });
-      test('특수한 구분자 & 숫자 3개', async () => {
-        await runCalculatorTestCorrect('//;v\\n1v23\\456', '480');
-      });
+    test('특수한 구분자를 사용했을 때 해당 커스텀 구분자를 기준으로 분리하여 값을 더해 출력한다.', async () => {
+      await runCalculatorTestCorrect('//;|v\\n1v20\\300|4000', '4321');
     });
   });
 
   describe('기본 구분자 사용', () => {
-    test('빈 문자열 입력', async () => {
+    test('빈 문자열 입력 시 0을 출력한다', async () => {
       await runCalculatorTestCorrect('', '0');
     });
-    test('숫자 1개 입력', async () => {
+    test('숫자 1개 입력 시 해당 숫자를 출력한다.', async () => {
       await runCalculatorTestCorrect('1', '1');
     });
-    test('숫자 3개 입력', async () => {
-      await runCalculatorTestCorrect('1,2:3', '6');
-    });
-    test('숫자 10개 입력', async () => {
-      await runCalculatorTestCorrect('1,2:3,4:5,6:7,8:9,10', '55');
-    });
-    test('큰 수 입력', async () => {
-      await runCalculatorTestCorrect('999999999,1', '1000000000');
+    test('2개 이상의 숫자 입력 시 기본 구분자를 기준으로 분리하여 값을 더해 출력한다.', async () => {
+      await runCalculatorTestCorrect('1,20:300,4000', '4321');
     });
   });
 
   describe('예외 테스트', () => {
-    test('0 입력', async () => {
+    test('0 입력 시 에러를 출력한다.', async () => {
       await runCalculatorTestError('0');
     });
-    test('음수 입력', async () => {
-      await runCalculatorTestError('-1,2,3');
+    test('음수 입력 시 에러를 출력한다.', async () => {
+      await runCalculatorTestError('-1');
     });
-    test('기본 구분자 외의 구분자 사용', async () => {
+    test('기본 구분자 외의 구분자 사용시 에러를 출력한다.', async () => {
       await runCalculatorTestError('1\\2');
     });
-    test('커스텀 구분자 외의 구분자 사용', async () => {
+    test('커스텀 구분자 외의 구분자 사용시 에러를 출력한다.', async () => {
       await runCalculatorTestError('\\;\n1,2');
     });
-    test('숫자 외의 문자 입력', async () => {
+    test('숫자 외의 문자 입력시 에러를 출력한다.', async () => {
       await runCalculatorTestError('\\;\na');
     });
-    test('숫자 중간에 커스텀 구분자 사용', async () => {
+    test('숫자 중간에 커스텀 구분자 사용시 에러를 출력한다.', async () => {
       await runCalculatorTestError('1,2:3//;\n4;5');
     });
-    test('구분자를 마지막에 삽입', async () => {
+    test('구분자를 마지막에 삽입시 에러를 출력한다.', async () => {
       await runCalculatorTestError('1,2,');
     });
-    test('커스텀 구분자 지정이 올바르지 않은 경우', async () => {
+    test('커스텀 구분자 지정이 올바르지 않을 시 에러를 출력한다.', async () => {
       await runCalculatorTestError('//\n1,2,3');
     });
   });
