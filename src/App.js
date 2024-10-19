@@ -15,9 +15,13 @@ class App {
     } else {
       words = input.split(/[,|:]/).map(Number);
     }
-
-    const sum = words.reduce((acc, curr) => acc + curr);
-    Console.print("결과: " + sum);
+    Console.print(words);
+    if (words.includes(NaN) || words.includes(null) || words.includes(undefined)) {
+      Console.print("[ERROR] 숫자를 입력해주세요.");
+    } else {
+      const sum = words.reduce((acc, curr) => acc + curr);
+      Console.print("결과: " + sum);
+    }
   }
 }
 
