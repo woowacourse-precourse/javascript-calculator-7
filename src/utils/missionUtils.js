@@ -1,6 +1,6 @@
 import { MissionUtils } from "@woowacourse/mission-utils";
 
-export default async function userInput(string) {
+export async function userInput(string) {
 	let returnValue;
 	try {
 		returnValue = await MissionUtils.Console.readLineAsync(string);
@@ -9,4 +9,8 @@ export default async function userInput(string) {
 		throw error;
 	}
 	return returnValue;
+}
+
+export function printOutput(string) {
+	return MissionUtils.Console.print(string);
 }
