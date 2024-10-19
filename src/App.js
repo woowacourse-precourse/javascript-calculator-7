@@ -1,7 +1,10 @@
 import { Console } from '@woowacourse/mission-utils';
 
 const DEFAULT_DELIMITER_REGEX = /,|:/;
-const CUSTOM_DELIMITER_REGEX = /^\/\/(.+?)\\n/;
+const CUSTOM_DELIMITER_REGEX = /^\/\/([\s\S]*?)\\n/;
+
+const SPACE_REGEX = /\s/;
+const REGEX_META_CHARACTERS = /[-\/\\^$*+?.()|[\]{}]/g;
 
 class App {
   async run() {
@@ -12,8 +15,29 @@ class App {
 
       if (CUSTOM_DELIMITER_REGEX.test(inputValue)) {
         const [matchedString, customDelimiter] = inputValue.match(CUSTOM_DELIMITER_REGEX);
+
+        if (!customDelimiter || SPACE_REGEX.test(customDelimiter)) {
+          throw new Error('[ERROR] 커스텀 구분자가 입력되지 않았습니다.');
+        }
+
+        if (customDelimiter.length !== 1) {
+          throw new Error('[ERROR] 커스텀 구분자는 1글자만 가능합니다.');
+        }
+
+        if (!isNaN(Number(customDelimiter))) {
+          throw new Error('[ERROR] 커스텀 구분자로 숫자를 사용할 수 없습니다.');
+        }
+
         const parsedString = inputValue.replace(matchedString, '');
-        operands = this.parseInputValueToOperandsByDelimiter(parsedString, customDelimiter);
+
+        if (!parsedString) {
+          throw new Error('[ERROR] 유효한 피연산자가 없습니다.');
+        }
+
+        operands = this.parseInputValueToOperandsByDelimiter(
+          parsedString,
+          new RegExp(customDelimiter.replace(REGEX_META_CHARACTERS, '\\$&'))
+        );
       } else {
         operands = this.parseInputValueToOperandsByDelimiter(inputValue, DEFAULT_DELIMITER_REGEX);
       }
