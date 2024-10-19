@@ -40,3 +40,5 @@ class Controller {
     Console.print(`${Messages.OUTPUT_MESSAGE}${SUM}`);
   }
 }
+
+export default Controller;
