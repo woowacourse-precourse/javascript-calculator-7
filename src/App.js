@@ -6,9 +6,10 @@ class App {
     );
     const numberArray = this.extractNumbers(input);
     const hasInvalidValue = numberArray.includes(NaN);
+    const hasNegativeNumber = numberArray.filter(el => el < 0)
 
-    if (hasInvalidValue) Console.print("[ERROR]");
-    if (!hasInvalidValue) {
+    if (hasInvalidValue || hasNegativeNumber) Console.print("[ERROR]");
+    if (!hasInvalidValue && !hasNegativeNumber) {
       const result = this.calculateSum(numberArray);
       Console.print(`결과 : ${result}`);
     }
@@ -34,7 +35,7 @@ class App {
       return this.splitAndConvertToNumbers(input, [COMMA, SEMICOLON]);
     if (hasComma) return this.splitAndConvertToNumbers(input, COMMA);
     if (hasSemicolon) return this.splitAndConvertToNumbers(input, SEMICOLON);
-    return Console.print("[ERROR]");
+    return [NaN];
   }
 
   splitUsingCustomDelimiterAndConvertToNumbers(input, customDelimiterPrefix, customDelimiterSuffix) {
