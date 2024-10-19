@@ -1,4 +1,4 @@
-import Errors from "../constants/Errors";
+import Errors from "../constants/Errors.js";
 
 const checkErrors = (numbersArray) => {
   if (numbersArray.some((number) => isNaN(Number(number)))) {

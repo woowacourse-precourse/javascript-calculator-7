@@ -1,11 +1,9 @@
-import checkCustomDelimiter from "./CheckCustomDelimiter";
-
 const cuttingInput = (input, customDelimiter) => {
   const PROCESSED_INPUT = customDelimiter
-    ? input.slice(input.indexOf("\\n") + 2)
-    : input;
+    ? String(input.slice(input.indexOf("\\n") + 2))
+    : String(input);
 
-  const DELIMITER_REGEX = new RegExp(`[,:${CUSTOM_DELIMITER}]`);
+  const DELIMITER_REGEX = new RegExp(`[,:${customDelimiter}]`);
 
   return PROCESSED_INPUT.split(DELIMITER_REGEX).map(Number);
 };

@@ -1,4 +1,4 @@
-import Errors from "../constants/Errors";
+import Errors from "../constants/Errors.js";
 
 const checkCustomDelimiter = (input) => {
   if (input.startsWith("//")) {
