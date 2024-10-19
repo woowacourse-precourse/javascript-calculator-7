@@ -22,6 +22,8 @@ class App {
     const allDelimiter = this.addDelimiter(customDelimiter); // 3.모든 구분자 ( 기본 구분자 배열에 커스컴 구분자 추가 ) 반환 기능
     const delimiterRegex = this.regexDelimiters(allDelimiter); // 4.구분자를 정규 표현식으로 바꾸는 기능
     this.checkForInvalidCharacters(input, delimiterRegex);  // 5.정해진 구분자, 숫자 외 다른 문자 있는지 확인하는 기능 - 유효성 체크
+    const numbers = this.splitAndExtractNumbers(input, delimiterRegex); // 6.구분자를 기준으로 숫자를 추출하는 기능
+    Console.print(numbers);
 
     return 0;
   }
@@ -66,6 +68,15 @@ class App {
         throw new Error(); // 허용되지 않는 문자가 있을 경우 에러 발생
       }
     }
+  }
+
+  // 6.구분자를 기준으로 숫자를 추출하는 기능
+  splitAndExtractNumbers(input, delimiter) {
+    if (input.startsWith('//')) {
+      input = input.split("\\n")[1]; 
+    }
+
+    return input.split(delimiter).map(Number);
   }
 }
 
