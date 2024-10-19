@@ -1,10 +1,34 @@
+import { Console } from "@woowacourse/mission-utils";
+
 const seperatorChar = [",", ":"];
+
 class App {
   async run() {
-    if (!checkObj.valid) {
-      Console.print(checkObj.value);
+    let USER_INPUT = await Console.readLineAsync(
+      "덧셈할 문자열을 입력해 주세요."
+    );
+    let inputString = String.raw`${USER_INPUT}`;
+
+    let obj = this.findCustomCharNList(inputString);
+    let { customCharString, numberList } = obj;
+
+    if (customCharString) {
+      customCharString.split("").forEach((elem) => {
+        seperatorChar.push(elem);
+      });
+    } else {
+      // 커스텀 구분자가 없는 경우
+      // 일반인 경우
+      numberList = inputString;
+    }
+
+    let statusOfNumberList = this.checkNumberList(numberList);
+
+    if (!statusOfNumberList.valid) {
+      Console.print(`결과 : ${statusOfNumberList.value}`);
       return;
     }
+
     /**
      * 1.,가 있다면 ,기준으로 배열로 분리한다.
      * 2.:가 있다면 그 안에 분리 되지 않은 :를 기준으로 분리한다.
@@ -30,6 +54,9 @@ class App {
         }
       }
     }
+
+    let result = this.sum(splitedList);
+    Console.print(`결과 : ${result}`);
   }
 
   /**
@@ -57,8 +84,6 @@ class App {
 
     const hasPreChar = preCharRegex.test(input);
     const hasEndChar = afterCharRegex.test(input);
-
-    console.log(`hasEndChar : ${hasEndChar}`);
 
     if (hasPreChar && hasEndChar) {
       let [customCharStr, numberList] = input.split(afterCharRegex);
