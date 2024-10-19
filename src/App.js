@@ -3,7 +3,8 @@ import { MissionUtils } from "@woowacourse/mission-utils";
 class App {
   async run() {
     const userString = await this.getUserString();
-    // MissionUtils.Console.print(userString);
+    const customDelimiter = this.getCustomDelimiter(userString);
+    //MissionUtils.Console.print(customDelimiter);
   }
 
   //문자열 입력 받기
@@ -14,6 +15,16 @@ class App {
       );
       return userString;
     } catch (error) {}
+  }
+
+  //커스텀 구분자 추출
+  getCustomDelimiter(string) {
+    const customDelimiter = string.match(/\/\/(.+)\\n/);
+    if (customDelimiter) {
+      return customDelimiter[1];
+    } else {
+      return false;
+    }
   }
 }
 
