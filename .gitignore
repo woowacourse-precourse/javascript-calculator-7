@@ -22,4 +22,6 @@ dist-ssr
 *.njsproj
 *.sln
 *.sw?
+
 src/Leftovers
+__tests__/AdditionalApplicationTest.js

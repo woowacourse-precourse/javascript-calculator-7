@@ -9,6 +9,7 @@ function isFirstCharNumber(str) {
   if (!str || str.length === 0) {
     throw new Error(`${ERROR_PREFIX}${ERROR_MESSAGES.EMPTY_STRING}`);
   }
+
   // 첫 번째 문자가 숫자인지 확인
   return /^\d/.test(str);
 }
@@ -16,6 +17,9 @@ function isFirstCharNumber(str) {
 export default function parseString(str) {
   try {
     // 문자열의 첫 번째 문자가 숫자인지 확인
+    if (!str && str === '') {
+      return 0;
+    }
     if (isFirstCharNumber(str)) {
       // 숫자로 시작하면 일반 입력을 처리
       return parseNormalInput(str);

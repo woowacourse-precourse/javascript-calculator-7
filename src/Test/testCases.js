@@ -191,7 +191,7 @@ export const normalTestCases = [
   },
   {
     input: ',1,2',
-    expectedError: `${ERROR_PREFIX}${ERROR_MESSAGES.INVALID_NUMBER_INPUT}`,
+    expectedError: `${ERROR_PREFIX}${ERROR_MESSAGES.INVALID_INPUT_FORMAT}`,
     description:
       '문자열 시작 부분에 구분자가 있을 경우 에러를 발생시켜야 합니다.',
   },
@@ -207,7 +207,7 @@ export const normalTestCases = [
   },
   {
     input: 'abc',
-    expectedError: `${ERROR_PREFIX}${ERROR_MESSAGES.INVALID_NUMBER_INPUT}`,
+    expectedError: `${ERROR_PREFIX}${ERROR_MESSAGES.INVALID_INPUT_FORMAT}`,
     description: '숫자가 아닌 값이 있을 경우 에러를 발생시켜야 합니다.',
   },
   {
@@ -218,8 +218,8 @@ export const normalTestCases = [
   },
   {
     input: '   ',
-    expectedOutput: 0,
-    description: '공백 문자열은 0으로 처리되어야 합니다.',
+    expectedError: `${ERROR_PREFIX}${ERROR_MESSAGES.INVALID_INPUT_FORMAT}`,
+    description: '여러 공백으로 이루어진 문자열은 에러를 발생시켜야 합니다. ',
   },
   {
     input: null,
@@ -243,12 +243,12 @@ export const normalTestCases = [
   },
   {
     input: '-1,2',
-    expectedError: `${ERROR_PREFIX}${ERROR_MESSAGES.INVALID_NUMBER_INPUT}`,
+    expectedError: `${ERROR_PREFIX}${ERROR_MESSAGES.INVALID_INPUT_FORMAT}`,
     description: '음수와 양수의 조합을 처리해야 합니다.',
   },
   {
     input: '-1.5,2.5',
-    expectedError: `${ERROR_PREFIX}${ERROR_MESSAGES.INVALID_NUMBER_INPUT}`,
+    expectedError: `${ERROR_PREFIX}${ERROR_MESSAGES.INVALID_INPUT_FORMAT}`,
     description: '음수 소수와 양수 소수의 합을 처리해야 합니다.',
   },
 ];
