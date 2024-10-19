@@ -1,4 +1,4 @@
-import Constant from "./constants/Constant";
+import Constant from "./constants/Constant.js";
 
 class Validate {
   validateValue(arr) {
