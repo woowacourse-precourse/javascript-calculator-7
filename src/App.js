@@ -17,6 +17,10 @@ class App {
     return -1;
   }
 
+  convertToNumberArray(input, sep) {
+    return input.split(sep).map(Number);
+  }
+
   async run() {
     const input = await Console.readLineAsync("덧셈할 문자열을 입력해 주세요.\n");
   }
