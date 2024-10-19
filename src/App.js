@@ -1,20 +1,27 @@
 import { Console } from '@woowacourse/mission-utils';
 
 const DEFAULT_DELIMITER_REGEX = /,|:/;
+const CUSTOM_DELIMITER_REGEX = /^\/\/(.+?)\\n/;
 
 class App {
   async run() {
     try {
       const inputValue = await this.getInputValue();
-      const parsedNumbers = this.parseInputValueToNumbersByDelimiter(
-        inputValue,
-        DEFAULT_DELIMITER_REGEX
-      );
 
-      const result = this.getSum(parsedNumbers);
+      let operands = [];
+
+      if (CUSTOM_DELIMITER_REGEX.test(inputValue)) {
+        const [matchedString, customDelimiter] = inputValue.match(CUSTOM_DELIMITER_REGEX);
+        const parsedString = inputValue.replace(matchedString, '');
+        operands = this.parseInputValueToOperandsByDelimiter(parsedString, customDelimiter);
+      } else {
+        operands = this.parseInputValueToOperandsByDelimiter(inputValue, DEFAULT_DELIMITER_REGEX);
+      }
+
+      const result = this.getSum(operands);
       Console.print(`결과 : ${result}`);
     } catch (err) {
-      Console.print(err.message);
+      Console.print(err);
     }
   }
 
@@ -28,8 +35,8 @@ class App {
     return inputValue;
   }
 
-  parseInputValueToNumbersByDelimiter(inputValue, delimiterRegex) {
-    return inputValue.split(delimiterRegex).map(Number);
+  parseInputValueToOperandsByDelimiter(value, delimiterRegex) {
+    return value.split(delimiterRegex).map(Number);
   }
 
   getSum(numbers) {
