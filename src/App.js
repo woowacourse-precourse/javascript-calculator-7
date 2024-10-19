@@ -1,6 +1,5 @@
 import { Console } from "@woowacourse/mission-utils";
 
-
 function generateError(errorMsg) {
   throw new Error("[ERROR] " + errorMsg);
 }
@@ -25,14 +24,20 @@ class DelimeterApi {
 
     const parsedData = string.match(customRegExp);
     if (parsedData === null) return string
-  
-    const customDelimeter = parsedData[0].charAt(2)
-    if (isNaN(customDelimeter) === false) {
+
+    this.delimeter.push(this.getCustomDelimeter(parsedData[0]));
+
+    return string.replace(customRegExp, '')
+  }
+
+  getCustomDelimeter(string) {
+    const customDelimeter = string.charAt(2)
+
+    if (isNaN(customDelimeter) === false && customDelimeter !== ' ') {
       generateError("커스텀 구분자는 숫자가 아닌 문자로 설정되어야 합니다.")
     }
 
-    this.delimeter.push(customDelimeter);
-    return string.replace(customRegExp, '')
+    return customDelimeter
   }
 
   escapeRegExp(string) {
