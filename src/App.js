@@ -17,19 +17,39 @@ class App {
       const result = this.getSum(numArr);
       Console.print(`결과 : ${result}`);
     } catch (error) {
-      Console.print('에러:', error);
+      throw error;
     }
   }
 
+  throwError(message) {
+    switch (message) {
+      case '음수':
+        Console.print(`[ERROR] : 구분자와 양수로 구성된 문자열이어야 합니다.`);
+    }
+    throw new Error('[ERROR]');
+  }
+
   splitByDelimiter(input) {
-    return input.split(/,|:/).map(Number);
+    const numArr = input.split(/,|:/).map(Number);
+    for (let i = 0; i < numArr.length; i++) {
+      if (numArr[i] < 0) {
+        this.throwError('음수');
+      }
+    }
+    return numArr;
   }
 
   splitByCustom(input) {
     const custom = input.match(/\/\/(.+)\\n/);
     const regex = new RegExp(custom[1]);
     const newInput = input.match(/(?<=\\n).+/g);
-    return newInput[0].split(regex).map(Number);
+    const numArr = newInput[0].split(regex).map(Number);
+    for (let i = 0; i < numArr.length; i++) {
+      if (numArr[i] < 0) {
+        this.throwError('음수');
+      }
+    }
+    return numArr;
   }
 
   getSum(numArr) {
