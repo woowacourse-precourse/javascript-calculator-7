@@ -23,6 +23,14 @@ class App {
         throw new Error("잘못된 값을 입력하였습니다. 다시 입력해주세요.");
       }
 
+      let sum = 0;
+      this.getNumbers(answer, isCustom, delimiters).forEach(item => {
+        sum += parseInt(item, 10);
+      });
+
+      if(sum === NaN) throw new Error("잘못된 값을 입력하였습니다. 다시 입력해주세요.");
+      this.printResult(sum);
+
     } catch (error) {
       print('[ERROR] : ' + error.message);
       return;
@@ -53,6 +61,19 @@ class App {
     
     return rst === "" ? false : true;
   }
+
+  // 숫자들 가져오기
+  getNumbers(str, isCustom, delimiters) {
+    let rst = "";
+    if(isCustom) {
+      rst = str.replace(new RegExp(/^\/\/(.*?)\\n/, 'g'), ""); 
+    }
+
+    rst = rst ? rst : str;
+
+    return  rst.split(new RegExp(`${delimiters}`, 'g'));
+  }
+
 }
 
 
