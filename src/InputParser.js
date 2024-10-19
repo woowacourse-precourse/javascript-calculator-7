@@ -1,21 +1,14 @@
 import { DEFAULT_SEPARATOR, CUSTOM_SEPARATOR } from './constant';
+import extractCustomSeparator from './extract-custom-separator';
 class InputParser {
   constructor(input) {
     this.input = input;
     this.value = [];
-    this.customMatch;
   }
 
   // 기본 구분자로 분리
   splitByDefaultSeparator() {
     this.value = this.input.split(DEFAULT_SEPARATOR);
-  }
-
-  // 커스텀 구분자 추출 및 확인
-  hasCustomSeparator() {
-    this.customMatch = this.input.match(CUSTOM_SEPARATOR);
-    if (!this.customMatch) return false;
-    return true;
   }
 
   // 커스텀 구분자로 분리
@@ -27,8 +20,13 @@ class InputParser {
 
   // 분리 실행
   separate() {
-    if (this.hasCustomSeparator()) this.splitByCustomSeparator();
-    else this.splitByDefaultSeparator();
+    const customSeparatorResult = extractCustomSeparator(this.input);
+    if (customSeparatorResult) {
+      const { separator, inputWithoutSeparator } = customSeparatorResult;
+      this.value = inputWithoutSeparator.split(separator);
+    } else {
+      this.splitByDefaultSeparator();
+    }
 
     return this.value;
   }
