@@ -1,22 +1,22 @@
-import getUserInput from './inputHandler.js';
+import getUserInput from './IO/inputHandler.js';
 import parseInput from './delimiterHandler.js';
 import sumCalculation from './calculator.js';
-import { validateEmptyString, validateNumbers } from './validator.js';
-import { MissionUtils } from '@woowacourse/mission-utils';
+import { isEmptyString, validateNumbers } from './validator.js';
+import printResult from './IO/printResult.js';
 
 class App {
   async run() {
     const userInput = await getUserInput();
 
-    if (userInput === '') {
-      const result = validateEmptyString(userInput);
-      return MissionUtils.Console.print(`결과 : ${result}`);
+    if (isEmptyString(userInput)) {
+      printResult();
+      return;
     }
 
     const rawValues = parseInput(userInput);
     const numbers = validateNumbers(rawValues);
     const result = sumCalculation(numbers);
-    return MissionUtils.Console.print(`결과 : ${result}`);
+    printResult(result);
   }
 }
 

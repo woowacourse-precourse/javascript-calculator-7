@@ -7,9 +7,9 @@ function validateNegativeNumber(number) {
     );
 }
 
-export function validateEmptyString(userInput) {
-  if (userInput === '') return 0;
-  return null;
+export function isEmptyString(userInput) {
+  if (userInput === '') return true;
+  return false;
 }
 
 export function validateNumbers(parsedArray) {
