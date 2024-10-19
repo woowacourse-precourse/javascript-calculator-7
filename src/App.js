@@ -13,7 +13,7 @@ function vaildateUserInput(userInput, customSeparator) {
     : new RegExp(`\s|(\d+(([:,]\d+)+)?)$`);
 
   if (!userInput.match(regex)) {
-    throw new Error('[ERROR]');
+    throw new Error('error occured');
   }
   console.log('커스텀 구분자');
 }
@@ -46,18 +46,17 @@ class App {
   async run() {
     const inputString = await getUserInputAsync();
     const customSeparator = getCustomSeparator(inputString);
+
     try {
-      // 유효한 입력인지 확인
       vaildateUserInput(inputString, customSeparator);
+      console.log(customSeparator);
+
+      const result = computeResult(inputString, customSeparator);
+      Console.print(`결과 : ${result}`);
     } catch (error) {
       console.error(error.message);
-      throw error;
+      throw new Error(`[ERROR] ${error.message}`);
     }
-    // 커스텀연산자가 있는지 확인
-    console.log(customSeparator);
-
-    const computeReturn = computeResult(inputString, customSeparator);
-    Console.print(`결과 : ${computeReturn}`);
   }
 }
 
