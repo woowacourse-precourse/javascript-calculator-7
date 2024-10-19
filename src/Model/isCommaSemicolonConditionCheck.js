@@ -3,7 +3,7 @@ let tureCountForNumber = 0;
 let tureCountForSeparator = 0;
 
 // TODO: 리팩토링
-const notCustomConditionCheck = userInput => {
+const isCommaSemicolonConditionCheck = userInput => {
   for (let i = 0; i < userInput.length; i += 1) {
     if ((i % 2 === 0 && !isNaN(userInput[i]) && userInput[i] > 0) === true) {
       tureCountForNumber += 1;
@@ -18,4 +18,4 @@ const notCustomConditionCheck = userInput => {
   }
 };
 
-export default notCustomConditionCheck;
+export default isCommaSemicolonConditionCheck;
