@@ -17,7 +17,10 @@ function sumNumbers(input) {
   if (input === "") {
     return 0;
   }
+  input = input.replace(/\\n/g, "\n");
 
+  if (input.startsWith("//")) {
+    const customEndIndex = input.indexOf("\n");
 }
 
 export default App;
