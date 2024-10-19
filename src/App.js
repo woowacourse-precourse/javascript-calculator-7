@@ -56,13 +56,18 @@ class App {
 
   //덧셈 함수
   sum(numbersArray){
-    let sum = 0;
-    numbersArray.map((item) =>{
-      const number = parseInt(item.trim()); // 숫자로 변환
+    const sum = numbersArray.reduce((acc,item) => {
+      const number = parseInt(item.trim());
       if(isNaN(number) || number < 1)
         throw new Error("[ERROR] " + this.LANGUAGE_ERROR_MESSAGE)
-      sum += number;
-    } );
+      return acc + number;
+    },0);
+    // numbersArray.map((item) =>{
+    //   const number = parseInt(item.trim()); // 숫자로 변환
+    //   if(isNaN(number) || number < 1)
+    //     throw new Error("[ERROR] " + this.LANGUAGE_ERROR_MESSAGE)
+    //   return acc + number;
+    // });
     this.printResult(sum);
   }
 
