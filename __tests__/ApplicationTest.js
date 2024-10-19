@@ -32,5 +32,20 @@ describe("문자열 계산기", () => {
         expect(logSpy).toHaveBeenCalledWith(expect.stringContaining(output));
       });
     });
+
+    test("기본 구분자(쉼표, 콜론)로 문자열 나누기", async () => {
+      const inputs = ["1,2:3"];
+      mockQuestions(inputs);
+
+      const logSpy = getLogSpy();
+      const outputs = ["결과 : 1,2,3"];
+
+      const app = new App();
+      await app.run();
+
+      outputs.forEach((output) => {
+        expect(logSpy).toHaveBeenCalledWith(expect.stringContaining(output));
+      });
+    });
   });
 });

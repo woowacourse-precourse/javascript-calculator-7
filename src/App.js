@@ -13,10 +13,22 @@ class App {
       Console.print("결과 : 0");
       return;
     }
+
+    const numbersAsString = this.replaceSeparators(input);
+    const inputList = numbersAsString.split(","); // 쉼표로 나누기
+    Console.print(`결과 : ${inputList}`);
   }
 
   isEmptyInput(input) {
     return input.trim() === ""; // 비어있음 체크
+  }
+
+  replaceSeparators(input) {
+    let result = input;
+    this.separators.forEach((separator) => {
+      result = result.split(separator).join(","); // 쉼표로 변환
+    });
+    return result;
   }
 }
 
