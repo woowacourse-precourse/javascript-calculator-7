@@ -19,9 +19,7 @@ function findSeparator(input){
       }
     }
   }else{
-    if(isNaN(inputArray[0])){
-      throw new Error("[ERROR] 입력 형식을 지켜주세요.")
-    }
+
     return inputArray;
   }
 }
@@ -41,13 +39,8 @@ function getNumber(inputArray) {
         currentNum='';
       }
     }else{
-      if(!isNaN(currentNum)){
-        currentNum += string;
-        isContinuous=0;
-      }
-      else{
-        throw new Error("[ERROR] 잘못된 구분자가 사용됐습니다.")
-      }
+      isContinuous=0;
+      currentNum += string;
     }
   })
   if(currentNum !== ''){
@@ -57,12 +50,14 @@ function getNumber(inputArray) {
 }
 
 function calculate(input){
-  console.log(input);
   if(isNaN(input[input.length-1])){
     throw new Error("[ERROR] 더할 숫자 없이 구분자만 입력됐습니다.")
   }
   let result = 0;
   getNumber(input).map((number)=>{
+    if(Number(number)<0){
+      throw new Error("[ERROR] 양수를 입력해주세요.")
+    }
     if(isNaN(number)){
       throw new Error("[ERROR] 올바른 숫자를 입력해주세요.")
     }
