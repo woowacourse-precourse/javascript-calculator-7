@@ -48,4 +48,12 @@ describe('문자열 계산기 model', () => {
     const result2 = calculate('5, 6');
     expect(result2).toEqual(11);
   });
+  test('0이 1개 이상 입력되면 오류', () => {
+    try {
+      parseNumbers('00,1,2,3'); // 구분자가 잘못된 입력으로 에러 발생 예상
+    } catch (error) {
+      expect(error.message).toBe('0은 입력할 수 없습니다.');
+      // 에러 발생 후 추가 로직이 없으면 사실상 프로그램 종료
+    }
+  });
 });
