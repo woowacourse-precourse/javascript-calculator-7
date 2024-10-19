@@ -1,4 +1,4 @@
-import { DEFAULT_SEPARATOR, CUSTOM_SEPARATOR } from './constant';
+import { SEPARATOR } from './constant';
 import extractCustomSeparator from './util/extract-custom-separator';
 class InputParser {
   constructor(input) {
@@ -8,7 +8,7 @@ class InputParser {
 
   // 기본 구분자로 분리
   splitByDefaultSeparator() {
-    this.value = this.input.split(DEFAULT_SEPARATOR);
+    this.value = this.input.split(SEPARATOR.DEFAULT);
   }
 
   // 커스텀 구분자로 분리
