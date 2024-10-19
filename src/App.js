@@ -4,7 +4,7 @@ class App {
   async run() {
     const inputs = await Console.readLineAsync('덧셈할 문자열을 입력해 주세요.\n');
 
-    this.extractSeparatorsAndNumString(inputs);
+    const numStringArray = this.convertNumStringArray(inputs);
   }
 
   extractSeparatorsAndNumString(inputs) {
@@ -17,6 +17,16 @@ class App {
       separator: matched?.[1] ?? null,
       numString: matched?.[2] ?? inputs
     }
+  }
+
+  convertNumStringArray (inputs) {
+    const defaultSeparators = [',', ':'];
+    const {separator, numString} = this.extractSeparatorsAndNumString(inputs);
+    
+    const separators = [...defaultSeparators, separator];
+    const splitter = new RegExp(`[${separators.join('|')}]`);
+
+    return numString.split(splitter);
   }
 }
 
