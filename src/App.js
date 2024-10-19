@@ -6,20 +6,19 @@ class App {
   }
 
   getDelimiter(str) {
-    let delimiter = /,|:/;
-    if (str.startsWith("//")) {
-      const [_, customDelimiter] = str.match(/\/\/(.*?)\\n/);
-      delimiter = new RegExp(/,|:/.source + '|' + customDelimiter);
+    if (!str.startsWith("//")) {
+      return /,|:/;
     }
-    return delimiter;
+    const [_, customDelimiter] = str.match(/\/\/(.*?)\\n/);
+    return new RegExp(/,|:/.source + '|' + customDelimiter);
   }
 
   getNumbers(str, delimiter) {
-    if (str.startsWith("//")) {
-      const [_, numbers] = str.split("\\n"); 
-      return numbers.split(delimiter); 
+    if (!str.startsWith("//")) {
+      return str.split(delimiter); 
     }
-    return str.split(delimiter); 
+    const [_, numbers] = str.split("\\n"); 
+    return numbers.split(delimiter); 
   }
 
   getSum(numbers) {
