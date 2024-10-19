@@ -3,26 +3,30 @@ import { ERROR_MESSAGES } from "../constants/Messages";
 
 const validator = {
   validateString(string) {
-    if (!this.startWithCustomDelimiter(string)) return ERROR_MESSAGES.shouldStartWithDelimiter;
+    if (!this.startWithCustomDelimiter(string))
+      throw new Error(ERROR_MESSAGES.shouldStartWithDelimiter);
     if (!this.duplicatedCustomDelimiterInput(string))
-      return ERROR_MESSAGES.duplicatedDelimiterInput;
-    return "";
+      throw new Error(ERROR_MESSAGES.duplicatedDelimiterInput);
+    return;
   },
 
   validateCustomDelimiter(delimiter) {
-    if (!this.delimiterNotIncludingNumber(delimiter)) return ERROR_MESSAGES.numberNotAllowed;
-    if (!this.invalidDelimiterLength(delimiter)) return ERROR_MESSAGES.invalidDelimiterLength;
-    return "";
+    if (!this.delimiterNotIncludingNumber(delimiter))
+      throw new Error(ERROR_MESSAGES.numberNotAllowed);
+    if (!this.invalidDelimiterLength(delimiter))
+      throw new Error(ERROR_MESSAGES.invalidDelimiterLength);
+    return;
   },
 
   validateValueToSum(valueArray) {
     if (!this.valueIsIntegerBiggerThenZero(valueArray))
-      return ERROR_MESSAGES.shouldBePositiveInteger;
-    return "";
+      throw new Error(ERROR_MESSAGES.shouldBePositiveInteger);
+    return;
   },
 
   startWithCustomDelimiter(string) {
-    return string.indexOf(CUSTOM_DELIMITER_INPUT.start) === 0;
+    const index = string.indexOf(CUSTOM_DELIMITER_INPUT.start);
+    return index === 0 || index === -1;
   },
 
   duplicatedCustomDelimiterInput(string) {
