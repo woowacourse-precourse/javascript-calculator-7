@@ -2,30 +2,27 @@ import { Console } from '@woowacourse/mission-utils';
 
 import { PRINT_MESSAGES, ERROR_MESSAGES } from './constants.js';
 
-const customSeparationSymbolRegex = /\/\/(.*?)\\n/;
-const customSeparationSymbolsRegex = /\/\/(.*?)\\n/g;
+const customDelimiterRegex = /\/\/(.*?)\\n/;
+const customDelimitersRegex = /\/\/(.*?)\\n/g;
 
 class App {
   constructor() {
-    this.separationSymbols = [',', ':'];
+    this.delimiters = [',', ':'];
   }
 
   async run() {
     const input = await this.getInputForAddition();
     const inputWithoutSpace = this.removeSpace(input);
 
-    if (this.isCustomSeparationSymbolExist(inputWithoutSpace)) {
-      const customSeparationSymbols =
-        this.extractCustomSeparationSymbols(inputWithoutSpace);
-      this.separationSymbols.push(...customSeparationSymbols);
+    if (this.isCustomDelimiterExist(inputWithoutSpace)) {
+      const customDelimiters = this.extractCustomDelimiters(inputWithoutSpace);
+      this.delimiters.push(...customDelimiters);
     }
 
-    const inputWithoutCustomSeparationSymbols =
-      this.removeCustomSeparationSymbols(inputWithoutSpace);
+    const inputWithoutCustomDelimiters =
+      this.removeCustomDelimiters(inputWithoutSpace);
 
-    const separatedInput = this.separateInput(
-      inputWithoutCustomSeparationSymbols
-    );
+    const separatedInput = this.separateInput(inputWithoutCustomDelimiters);
 
     this.validateAdditionNumbers(separatedInput);
 
@@ -44,27 +41,27 @@ class App {
     return input.replace(/\s/g, '');
   }
 
-  isCustomSeparationSymbolExist(input) {
-    return customSeparationSymbolRegex.test(input);
+  isCustomDelimiterExist(input) {
+    return customDelimiterRegex.test(input);
   }
 
-  extractCustomSeparationSymbols(input) {
-    const customSeparationSymbols = Array.from(
-      input.matchAll(customSeparationSymbolsRegex),
+  extractCustomDelimiters(input) {
+    const customDelimiters = Array.from(
+      input.matchAll(customDelimitersRegex),
       (m) => m[1]
     );
 
-    this.validateCustomSeparationSymbols(customSeparationSymbols);
+    this.validateCustomDelimiters(customDelimiters);
 
-    return customSeparationSymbols;
+    return customDelimiters;
   }
 
-  removeCustomSeparationSymbols(input) {
-    return input.replace(customSeparationSymbolsRegex, '');
+  removeCustomDelimiters(input) {
+    return input.replace(customDelimitersRegex, '');
   }
 
   separateInput(input) {
-    const separationRegex = new RegExp(`[${this.separationSymbols.join('')}]`);
+    const separationRegex = new RegExp(`[${this.delimiters.join('')}]`);
     return input.split(separationRegex).map((char) => Number(char));
   }
 
@@ -87,19 +84,19 @@ class App {
     });
   }
 
-  validateCustomSeparationSymbols(customSymbols) {
+  validateCustomDelimiters(customDelimiters) {
     const symbolRegex = /[!@#$%^&*()?";{}|<>]/;
 
-    customSymbols.forEach((symbol) => {
-      if (symbol.length !== 1) {
+    customDelimiters.forEach((delimiter) => {
+      if (delimiter.length !== 1) {
         throw new Error(ERROR_MESSAGES.WRONG_SYMBOL_LENGTH);
       }
 
-      if (this.separationSymbols.includes(symbol)) {
+      if (this.delimiters.includes(delimiter)) {
         throw new Error(ERROR_MESSAGES.DUPLICATE_SYMBOL);
       }
 
-      if (!symbolRegex.test(symbol)) {
+      if (!symbolRegex.test(delimiter)) {
         throw new Error(ERROR_MESSAGES.WRONG_SYMBOL_TYPE);
       }
     });
