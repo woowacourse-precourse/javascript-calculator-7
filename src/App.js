@@ -5,6 +5,7 @@ class App {
   #input;
   separatorList = [",", ":"];
   #validator;
+  #inputNumberList = [];
 
   constructor() {
     this.#validator = new Validator();
@@ -12,15 +13,22 @@ class App {
 
   async run() {
     await this.readInput();
+
     if (Validator.isInValid(this.#input, this.separatorList)) {
       throw new Error("[ERROR]: 에러입니다.");
     }
+
+    this.generateInputNumberList();
   }
 
   async readInput() {
     this.#input = await Console.readLineAsync(
       "덧셈할 문자열을 입력해 주세요.\n"
     );
+  }
+
+  generateInputNumberList() {
+    this.#inputNumberList = this.#input.match(/[0-9]+/g).map(Number);
   }
 }
 
