@@ -45,12 +45,17 @@ class App {
 
     // 구분자 배열에 포함되지 않은 문자 -> 숫자로 변환
     inputString.split('').forEach((str) => {
+      // [ERROR] 음수 처리
       if (str === '-' && !delimiters.includes('-')) {
-        throw new Error('구분자와 양수로 이뤄진 문자열을 작성해주세요.');
+        throw new Error('[ERROR] 구분자와 양수로 이뤄진 문자열을 작성해주세요.');
       }
 
       // 두 자리 이상의 정수를 처리하기 위해 문자열의 합으로 처리
       if (!delimiters.includes(str)) {
+        // [ERROR] 구분자가 아닌 문자, 숫자도 아닌 경우
+        if (!parseInt(str) && parseInt(str) !== 0) { // 0이 falsy값인걸 잊지말자 ㄱ-
+          throw new Error('[ERROR] 기본 구분자와 커스텀 구분자만 사용해주세요.');
+        }
         numStr += str;
       } else {
         numbers.push(parseInt(numStr));
