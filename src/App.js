@@ -3,39 +3,39 @@ import { Console } from "@woowacourse/mission-utils";
 class App {
   async run() {
     try {
-      const INPUT = await this.userInput();
-      const USER = this.userSeparator(INPUT);
-      const NUMBERS = this.parseNumbers(USER);
-      this.userOutput(NUMBERS);
+      const input = await this.getUserInput();
+      const user = this.separateUserInput(input);
+      const numbers = this.parseNumbers(user);
+      this.printUserOutput(numbers);
     } catch (error) {}
   }
 
-  async userInput() {
-    const inputWords = Console.readLineAsync(
+  async getUserInput() {
+    const inputWords = await Console.readLineAsync(
       "덧셈할 문자열을 입력해 주세요.\n"
     );
     return inputWords;
   }
 
-  userSeparator(INPUT) {
-    if (INPUT.startsWith("//")) {
-      const indexCustom = INPUT.indexOf("\\n");
-      const customDelimiter = INPUT.substring(2, indexCustom);
-      INPUT = INPUT.substring(indexCustom + 2);
-      console.log(INPUT);
-      return INPUT.split(customDelimiter);
-    } else if (INPUT.includes(",") || INPUT.includes(";")) {
-      return INPUT.split(/[,;]/);
+  separateUserInput(input) {
+    if (input.startsWith("//")) {
+      const indexCustom = input.indexOf("\\n");
+      const customDelimiter = input.substring(2, indexCustom);
+      input = input.substring(indexCustom + 2);
+      console.log(input);
+      return input.split(customDelimiter);
+    } else if (input.includes(",") || input.includes(";")) {
+      return input.split(/[,;]/);
     }
-    return INPUT;
+    return input;
   }
 
-  parseNumbers(INPUT) {
-    return INPUT.map(Number);
+  parseNumbers(input) {
+    return input.map(Number);
   }
 
-  userOutput(NUMBERS) {
-    const sum = NUMBERS.reduce((acc, curr) => acc + curr, 0);
+  printUserOutput(numbers) {
+    const sum = numbers.reduce((acc, curr) => acc + curr, 0);
     Console.print(`결과: ${sum}`);
   }
 }
