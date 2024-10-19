@@ -1,4 +1,3 @@
-import { Console } from '@woowacourse/mission-utils';
 import UserInput from './View/UserInput.js';
 import notCustomConditionCheck from './Model/notCustomConditionCheck.js';
 import numberSum from './Model/numberSum.js';
