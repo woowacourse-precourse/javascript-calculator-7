@@ -10,7 +10,11 @@ class App {
     hasRun = true;
 
     // Calculator 실행
-    await runCalculator();
+    try {
+      await runCalculator();
+    } catch (error) {
+      throw error;
+    }
   }
 }
 
