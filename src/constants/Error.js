@@ -1,4 +1,4 @@
-import CALCULATOR from './Calculator';
+import CALCULATOR from './Calculator.js';
 
 const ERROR = Object.freeze({
   prefix: '[ERROR]',
