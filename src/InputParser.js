@@ -1,5 +1,5 @@
 import { DEFAULT_SEPARATOR, CUSTOM_SEPARATOR } from './constant';
-class Separator {
+class InputParser {
   constructor(input) {
     this.input = input;
     this.value = [];
@@ -34,4 +34,4 @@ class Separator {
   }
 }
 
-export default Separator;
+export default InputParser;

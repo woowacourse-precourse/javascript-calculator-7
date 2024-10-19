@@ -1,6 +1,6 @@
 import Validator from './Validator';
 import printMessage from './print-message';
-import Separator from './Separator';
+import InputParser from './InputParser';
 import userInput from './user-input';
 import calculateSum from './calculate';
 import { PROMPT_USER_INPUT, RESULT_MESSAGE } from './constant';
@@ -9,7 +9,7 @@ class App {
   async run() {
     const input = await userInput(PROMPT_USER_INPUT);
 
-    const separator = new Separator(input);
+    const separator = new InputParser(input);
     const value = separator.separate();
 
     Validator.validatePositiveNumbers(value);
