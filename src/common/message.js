@@ -1,4 +1,4 @@
-export const StartMessage = "덧셈할 문자열을 입력해 주세요.";
+export const StartMessage = "덧셈할 문자열을 입력해 주세요.\n";
 
 export const ResultMessage = "결과 : ";
 

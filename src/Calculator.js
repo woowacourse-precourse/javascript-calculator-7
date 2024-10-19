@@ -2,16 +2,10 @@ import extractNumbersFromInput from "./controller/input/extractNumbersFromInput.
 import validateInput from "./controller/input/validateInput.js";
 import getInput from "./ui/getInput.js";
 import printResult from "./ui/printResult.js";
-import printStartMessage from "./ui/PrintStartMessage.js";
 
 class Calculator {
-  main() {
-    this.start();
-  }
-
-  start() {
-    printStartMessage();
-    this.handleInput();
+  async main() {
+    await this.handleInput();
   }
 
   async handleInput() {
