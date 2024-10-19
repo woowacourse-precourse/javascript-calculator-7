@@ -3,8 +3,7 @@ import Constant from "./constants/Constant.js";
 
 class View {
   async inputPrompt() {
-    let userInput = await Console.readLineAsync(Constant.INPUT_MESSAGE);
-    return userInput;
+    return await Console.readLineAsync(Constant.INPUT_MESSAGE);
   }
 
   outputView(result) {

@@ -1,9 +1,7 @@
 class Calculate {
   sum(arr) {
     let sum = 0;
-    for (let num of arr) {
-      sum += num;
-    }
+    arr.forEach((num) => (sum += num));
     return sum;
   }
 }
