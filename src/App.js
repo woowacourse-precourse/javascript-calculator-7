@@ -48,8 +48,15 @@ class App {
 			// 8. 정의된 구분자를 통해 분리 후 숫자로 변환
 			numArr = numArr.split(regex).map((v) => Number(v));
 
-			// 결과 출력
+			// 9. 음수를 입력했을 경우 에러 출력
+			if (numArr.find((v) => v < 0)) {
+				throw new Error('[ERROR] 음수는 입력할 수 없습니다.');
+			}
+
+			// 10. 최종 배열 합산
 			const result = numArr.reduce((acc, cur) => acc + cur, 0);
+
+			// 결과 출력
 			Console.print(`결과 : ${result}`);
 		} catch (error) {
 			// 에러 메시지 출력
