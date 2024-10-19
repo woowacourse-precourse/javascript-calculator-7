@@ -60,7 +60,7 @@ const calculate = (input) => {
     throw new Error("[ERROR] 더할 숫자 없이 구분자만 입력됐습니다.");
   }
   let result = 0;
-  getNumber(input).map((number)=>{
+  getNumber(input).forEach((number)=>{
     if (Number(number) < 0) {
       throw new Error("[ERROR] 양수를 입력해주세요.");
     }
