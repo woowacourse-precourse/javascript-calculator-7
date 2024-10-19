@@ -18,7 +18,7 @@ const getLogSpy = () => {
 
 describe("문자열 계산기", () => {
   test("커스텀 구분자 사용", async () => {
-    const inputs = ["//;\\n1", ""];
+    const inputs = ["//;\\n1"];
     mockQuestions(inputs);
 
     const logSpy = getLogSpy();
