@@ -3,34 +3,36 @@ import { MissionUtils } from "@woowacourse/mission-utils";
 class App {
   async run() {
     const input = await MissionUtils.Console.readLineAsync('덧셈할 문자열을 입력해 주세요.\n');
-
     const [seperatorSet, filteredInput] = this.handleCustomSeperator(input);
-
     const extractedNumbers = this.extractPositiveNumbers(filteredInput, ...seperatorSet);
-
     const sum = this.sumArray(...extractedNumbers);
     
     this.print(sum);
   }
 
-  handleCustomSeperator(input){
-    const defaultSeperator = [':', ','];
+  extractCustomSeperator(input){
     const customSeperatorChunksRegex = /^(\/\/.\\n)+/g;
     const customSeperatorRegex = /\/\/(.)\\n/g;
 
-    const customSeperatorChunks = customSeperatorChunksRegex.exec(input)?.at(0);
-    const customSeperatorMatch = customSeperatorChunks?.match(customSeperatorRegex);
+    const customSeperatorChunks = customSeperatorChunksRegex.exec(input)?.[0];
 
-    if(customSeperatorMatch === null || customSeperatorMatch === undefined){
-      const seperatorSet = new Set(defaultSeperator);
-      return [seperatorSet, input];
-    } 
+    if(customSeperatorChunks === null || customSeperatorChunks === undefined){
+      return {};
+    }
 
+    const customSeperatorMatch = customSeperatorChunks.match(customSeperatorRegex);
     const customSeperator = customSeperatorMatch.map((match) => match[2]);
-    const seperatorSet = new Set([...defaultSeperator, ...customSeperator]);
-    const filteredInput = input.slice(customSeperatorChunks.length);    
+    const filteredInput = input.slice(customSeperatorChunks.length);
 
-    return [seperatorSet, filteredInput];
+    return {customSeperator, filteredInput};
+  }
+
+  handleCustomSeperator(input){
+    const defaultSeperator = [':', ','];
+    const {customSeperator, filteredInput} = this.extractCustomSeperator(input) || {};
+    const seperatorSet = new Set([...defaultSeperator, ...(customSeperator || [])]);
+
+    return [seperatorSet, filteredInput || input];
   }
 
   extractPositiveNumbers(input, ...seperatorArray){
