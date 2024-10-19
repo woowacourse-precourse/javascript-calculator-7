@@ -14,6 +14,8 @@ class App {
       strArr = this.separateStr(inputStr);
     }
 
+    this.checkInput(strArr);
+
     const sum = this.getSum(strArr);
     Console.print("결과 : " + sum);
   }
@@ -41,6 +43,16 @@ class App {
     const strArr = str.split(delimiters);
 
     return strArr;
+  }
+
+  checkInput(strArr){
+    for(let i = 0; i < strArr.length; i++){
+      if(!isNaN(strArr[i])){
+        if(Number(strArr[i]) < 0){
+          throw new Error("[ERROR]");
+        }
+      }
+    }
   }
 
   getSum(strArr){
