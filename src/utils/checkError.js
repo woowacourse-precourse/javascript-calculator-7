@@ -17,7 +17,7 @@ const checkError = (restString, seperatorJoinString) => {
   const numbersRegex = new RegExp(numbersRegexString);
 
   // 에러 없음
-  if (numbersRegex.test(restString)) {
+  if (numbersRegex.test(restString) | restString === "") {
     return;
   }
 
