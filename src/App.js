@@ -12,7 +12,6 @@ class App {
 		const input = await Console.readLineAsync(MESSAGE.INPUT_MESSAGE);
 		return input;
 	}
-
 	checkCustomSeparator(string) {
 		if (string.length >= 5) {
 			const firstTwoChars = string.substring(0, 2);
@@ -62,12 +61,11 @@ class App {
 		return true;
 	}
 
-	sumNumbers() {
-		return this.numbers.reduce((acc, curr) => acc + curr, 0);
+	sumNumbers(numbers) {
+		return numbers.reduce((acc, curr) => acc + curr, 0);
 	}
 
-	printEndMessage() {
-		let sum = this.sumNumbers();
+	printEndMessage(sum) {
 		Console.print(MESSAGE.END_MESSAGE + sum);
 	}
 
@@ -87,7 +85,8 @@ class App {
 		}
 
 		this.updateNumberFromString(input);
-		this.printEndMessage();
+		const sum = this.sumNumbers(this.numbers);
+		this.printEndMessage(sum);
 	}
 }
 
