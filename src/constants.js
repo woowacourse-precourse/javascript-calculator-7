@@ -1,3 +1,7 @@
+/**
+ * 메세지 , 디폴트 구분자 상수
+ */
+
 const ERROR_MESSAGE = {
   WRONG_INPUT_STRING: Object.freeze(`[ERROR] 입력 형식이 잘못되었습니다.`),
   WRONG_INPUT_STRING_NEGATIVE: Object.freeze(

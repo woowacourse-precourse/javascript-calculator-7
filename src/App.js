@@ -2,6 +2,10 @@ import CalculatorGenerator from "./CalculatorGenerator.js";
 import OutputView from "./OutputView.js";
 import InputView from "./InputView.js";
 
+/**
+ * 계산기 메인
+ */
+
 class App {
   async run() {
     try {

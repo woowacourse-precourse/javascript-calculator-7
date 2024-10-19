@@ -1,5 +1,9 @@
 import { DEFAULT_DELIMITER, ERROR_MESSAGE } from "./constants.js";
 
+/**
+ * 계산 처리 기능
+ */
+
 const CalculatorGenerator = {
   async getResult(inputString) {
     if (this.checkCustomDelimiter(inputString)) {
