@@ -26,7 +26,6 @@ function separatorTextInputCheck(userInput) {
   if (allSpeparatorTrueCheck === loofCountForallSpeparatorTrueCheck) {
     return true;
   }
-  return ;
 }
 
 // 3. 숫자가 양수로 이루어진지 체크하기
