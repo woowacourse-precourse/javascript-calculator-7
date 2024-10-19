@@ -5,7 +5,11 @@ class App {
 
   async run() {
     const input = await this.#view.readInputString();
-    this.#view.printOutputString(input);
+
+    const DELIMITERS = /[,|:]/;
+    const splittedInput = input.split(DELIMITERS);
+
+    splittedInput.forEach((split) => this.#view.printOutputString(split));
   }
 }
 
