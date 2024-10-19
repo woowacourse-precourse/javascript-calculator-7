@@ -1,9 +1,7 @@
 import { Console } from '@woowacourse/mission-utils';
-import { printMessage } from './print-message';
-import { PROMPT_USER_INPUT } from './constant';
 
-async function userInput() {
-  return await Console.readLineAsync(PROMPT_USER_INPUT);
+async function userInput(message) {
+  return await Console.readLineAsync(message);
 }
 
 export default userInput;
