@@ -1,10 +1,11 @@
-import { Console } from '@woowacourse/mission-utils';
+import View from './View/View.js';
 
-const INPUT_MESSAGE = '덧셈할 문자열을 입력해 주세요.\n';
 class App {
+  #view = new View();
+
   async run() {
-    const input = await Console.readLineAsync(INPUT_MESSAGE);
-    Console.print(input);
+    const input = await this.#view.readInputString();
+    this.#view.printOutputString(input);
   }
 }
 
