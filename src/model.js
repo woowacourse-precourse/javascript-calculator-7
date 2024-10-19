@@ -27,12 +27,15 @@ class CalculatorModel {
     const regex = new RegExp(`[${separators.join("")}]+`);
     const numbers = numbersString.split(regex).map((num) => {
       const trimmedNum = num.trim();
-      const parsedNum = parseFloat(trimmedNum);
 
-      if (isNaN(parsedNum)) {
-        throw new Error("[ERROR] 숫자가 아닌 값이 포함되었습니다.");
+      //숫자가 아닌 값 포함 체크
+      if (!/^\d+(\.\d+)?$/.test(trimmedNum)) {
+        throw new Error(
+          "[ERROR] 허용되지 않은 구분자 또는 숫자가 아닌 값이 포함되어 있습니다."
+        );
       }
 
+      const parsedNum = parseFloat(trimmedNum);
       if (parsedNum < 0) {
         throw new Error("[ERROR] 음수는 입력할 수 없습니다.");
       }
