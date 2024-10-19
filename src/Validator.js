@@ -1,4 +1,4 @@
-import { Calculator } from "./Calculator.js";
+import { Operand } from "./Operand.js";
 import { ERROR_MESSAGE } from "./constants/constants.js";
 import { CUSTOM_DELIMITER_STATEMENT } from "./constants/constants.js";
 import { DELIMITER } from "./constants/constants.js";
@@ -21,7 +21,7 @@ export class Validator {
   static duplicatedSet(string) {
     const CUSTOM_END_INDEX = string.indexOf(CUSTOM_DELIMITER_STATEMENT.END);
 
-    if (Calculator.isSetCustomDelimiter(string, CUSTOM_END_INDEX)) {
+    if (Operand.isSetCustomDelimiter(string, CUSTOM_END_INDEX)) {
       throw new Error(ERROR_MESSAGE.TAG + ERROR_MESSAGE.DUPLICATED_SET);
     }
   }
