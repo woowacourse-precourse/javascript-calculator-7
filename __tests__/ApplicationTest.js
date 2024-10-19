@@ -123,12 +123,42 @@ describe("문자열 계산기", () => {
     });
   });
 
+  test("커스텀 구분자가 /인 경우", async () => {
+    const inputs = ["///\n1/2/3"];
+    mockQuestions(inputs);
+
+    const logSpy = getLogSpy();
+    const outputs = ["결과 : 6"];
+
+    const app = new App();
+    await app.run();
+
+    outputs.forEach((output) => {
+      expect(logSpy).toHaveBeenCalledWith(expect.stringContaining(output));
+    });
+  });
+
+  test("커스텀 구분자가 \\인 경우", async () => {
+    const inputs = ["//\\\\n1\\2\\3"];
+    mockQuestions(inputs);
+
+    const logSpy = getLogSpy();
+    const outputs = ["결과 : 6"];
+
+    const app = new App();
+    await app.run();
+
+    outputs.forEach((output) => {
+      expect(logSpy).toHaveBeenCalledWith(expect.stringContaining(output));
+    });
+  });
+
   test("커스텀 구분자의 위치 선언이 잘못된 경우", async () => {
     const inputs = ["1,2:3//*\n"];
     mockQuestions(inputs);
 
     const logSpy = getLogSpy();
-    const outputs = ["[ERROR] 커스텀 구분자는 맨 앞에 위치해야 합니다."];
+    const outputs = ["[ERROR] 커스텀 구분자는 맨 앞에 선언 해야 합니다."];
 
     const app = new App();
     await app.run();

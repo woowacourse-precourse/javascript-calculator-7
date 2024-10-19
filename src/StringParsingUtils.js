@@ -8,6 +8,7 @@ class StringParsing {
 
         if (!customDelimiterFlag) {
             parsedArray = this.parseDefaultDelimiter(newLineInput);
+            customDelimiter = null;
         }
         else {
             customDelimiter = customDelimiterFlag[1];
@@ -28,6 +29,9 @@ class StringParsing {
     }
 
     parseCustomDelimiter(numbers, customDelimiter) { // 커스텀, 기본 구분자로 파싱
+        if (customDelimiter === "\\") {
+            customDelimiter = "\\\\";
+        }
         const regex = new RegExp(`[${customDelimiter},:]`);
         var parsedArray = numbers.split(regex);
         return parsedArray;

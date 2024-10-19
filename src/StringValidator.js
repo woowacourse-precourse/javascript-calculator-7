@@ -38,7 +38,7 @@ class StringValidator {
         });
     }
 
-    checkMultipleDelimiter(input, customDelimiter) { // 커스텀, 기본 구분자 중복 사용 체크 함수
+    checkMultipleDelimiter(input, customDelimiter) { // 커스텀, 기본 구분자 중복 사용 체크 함수 
         const multipleDelimiterPattern = customDelimiter ? new RegExp(`[${customDelimiter},:]{2,}`) : /[,|:]{2,}/;
         if (multipleDelimiterPattern.test(input)) {
             throw new Error("[ERROR] 구분자가 여러개 사용되었습니다.");
