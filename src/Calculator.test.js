@@ -28,25 +28,25 @@ describe("regex test", () => {
   const appInputTest = "//;\\n1";
 
   test("공백", () => {
-    expect(calculator.testRegex(noneTest)).toEqual(0);
+    expect(calculator.calculate(noneTest)).toEqual(0);
   });
   test("//;\\n1;2;3", () => {
-    expect(calculator.testRegex(testInput)).toEqual({
+    expect(calculator.calculate(testInput)).toEqual({
       error: false,
       numbers: [1, 2, 3],
     });
   });
   test("1:2:3", () => {
-    expect(calculator.testRegex(noneCustomTestInput)).toEqual({
+    expect(calculator.calculate(noneCustomTestInput)).toEqual({
       error: false,
       numbers: [1, 2, 3],
     });
   });
   test("-3;-2;1", () => {
-    expect(calculator.testRegex(minTest)).toEqual({ error: true });
+    expect(calculator.calculate(minTest)).toEqual({ error: true });
   });
   test(appInputTest, () => {
-    expect(calculator.testRegex(appInputTest)).toEqual({
+    expect(calculator.calculate(appInputTest)).toEqual({
       error: false,
       numbers: [1],
     });
@@ -58,7 +58,7 @@ const getRandomAscii = () => {
   let randomNum = Math.floor(Math.random() * 100 + 26); // 0~99 범위 난수
   while (true) {
     if (randomNum < 126 || randomNum > 32) {
-      // 숫자 범위(48~57)를 제외
+      // 아무 문자나 출력
       randomAscii = String.fromCharCode(randomAscii);
       break;
     }
@@ -66,9 +66,11 @@ const getRandomAscii = () => {
   return randomAscii;
 };
 const getRandomList = (random, count) => {
+  const randomNum = Math.random();
   const randomNumberList = []; // 랜덤으로 생성된 숫자를
   for (let i = 0; i < Math.floor(random * count); i++) {
-    const inpurtRandomNumber = Math.floor(Math.random() * 10);
+    let inpurtRandomNumber = Math.random() * 10;
+    if (randomNum * 10 > 5) inpurtRandomNumber = Math.floor(inpurtRandomNumber);
     randomNumberList.push(inpurtRandomNumber);
   }
   return randomNumberList;
@@ -106,7 +108,7 @@ describe("regex_random_test", () => {
       }
     }
     test(`random : ${testInput}`, () => {
-      expect(calculator.testRegex(testInput)).toEqual(
+      expect(calculator.calculate(testInput)).toEqual(
         randomNumberList.length != 0
           ? {
               error: false,

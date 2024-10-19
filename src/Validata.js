@@ -1,4 +1,20 @@
+import { Parse } from "./Parse";
+
 export class Validate {
+  deepValidate(result) {
+    // result type :  array<string>
+    if (this.checkNone(result)) return { error: true }; // "" 빈문자열 체크
+    if (this.checkNotNum(result)) return { error: true }; // "" 숫자인지 체크
+    if (this.checkSpace(result)) return { error: true }; // 공백 체크
+    if (this.checkMin(result)) return { error: true }; // 음수 체크
+    return { error: false, numbers: result };
+  }
+  basicValidate(input) {
+    if (this.checkEmpty(input)) return 0;
+    // 커스텀 구분자 숫자인지 확인
+    if (this.checkCustomNumber(input)) return { error: true };
+  }
+
   checkLength(result) {
     if (result.length > 10000) return false;
     else return true;
