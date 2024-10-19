@@ -9,12 +9,10 @@ class App {
   async run() {
     await this.readInput();
 
-    if (!new Validator(this.#input, this.separatorList).isValid()) {
-      throw new Error("[ERROR]: 에러입니다.");
-    }
+    const validator = new Validator(this.#input, this.separatorList);
+    validator.check();
 
     this.generateInputNumberList();
-
     this.printResult();
   }
 

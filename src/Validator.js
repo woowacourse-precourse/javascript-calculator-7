@@ -11,8 +11,14 @@ class Validator {
     ];
   }
 
-  isValid() {
-    return this.#validatorList.every((validator) => validator.isValid());
+  check() {
+    const isValid = this.#validatorList.every((validator) =>
+      validator.isValid()
+    );
+
+    if (!isValid) {
+      throw new Error("[ERROR]: 에러입니다.");
+    }
   }
 }
 
