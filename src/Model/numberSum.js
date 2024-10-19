@@ -1,8 +1,4 @@
-import { Console } from '@woowacourse/mission-utils';
-import UserInput from '../View/UserInput.js';
-
 // 구분자 쉼표나 콜론 기준으로 숫자 추출
-
 const NumberSum = userInput => {
   const REGULAR_EXPRESSION = /[^0-9]/g;
   const REMOVE_STR = userInput.replace(REGULAR_EXPRESSION, '');

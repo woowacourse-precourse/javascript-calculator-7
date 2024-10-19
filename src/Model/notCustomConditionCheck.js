@@ -1,5 +1,3 @@
-import UserInput from '../View/UserInput.js';
-
 let loopCount = 0;
 let tureCountForNumber = 0;
 let tureCountForSeparator = 0;

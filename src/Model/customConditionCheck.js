@@ -1,7 +1,3 @@
-import UserInput from '../View/UserInput.js';
-
-// TO DO: 리펙토링 -> 화살표 함수 공부 후, 모두 통일하기
-
 // 1. //+구분자+\n 입력 체크
 const conditionTextInputCheck = userInput => {
   if (userInput[0] === '/' && userInput[1] === '/' && userInput[3] === '\\' && userInput[4] === 'n') {

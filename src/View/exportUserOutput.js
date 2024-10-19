@@ -7,4 +7,3 @@ const exportUserOutput = totalNumberSum => {
 };
 
 export default exportUserOutput;
-ㅎ
