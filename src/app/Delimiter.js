@@ -75,17 +75,17 @@ class Delimiter {
    * @returns {Array<string>}
    */
   splitByDelimiters(value) {
-    let delimitedString = [value];
+    let delimitedValues = [value];
 
     if (this.#hasCustomDelimiter(value)) {
-      delimitedString = [this.#removeCustomDelimiterMatchers(value)];
+      delimitedValues = [this.#removeCustomDelimiterMatchers(value)];
     }
 
     this.#getDelimiter(value).forEach((delimiter) => {
-      delimitedString = this.#delimite(delimiter, delimitedString);
+      delimitedValues = this.#delimite(delimiter, delimitedValues);
     });
 
-    return filterEmpty(delimitedString);
+    return filterEmpty(delimitedValues);
   }
 }
 
