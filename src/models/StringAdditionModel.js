@@ -1,13 +1,16 @@
 import StringValidator from "./StringValidator.js";
 import DelimiterParser from "./DelimiterParser.js";
+import StringCalculator from "./StringCalculator.js";
 
-class StringCalculator {
+class StringAdditionModel {
   constructor(
     validator = new StringValidator(),
-    delimiterParser = new DelimiterParser()
+    delimiterParser = new DelimiterParser(),
+    calculator = new StringCalculator()
   ) {
     this.validator = validator;
     this.parser = delimiterParser;
+    this.calculator = calculator;
   }
 
   // 입력값을 받아 최종 결과를 반환하는 메서드
@@ -30,7 +33,7 @@ class StringCalculator {
     // 문자열을 숫자로 변환
     const numbers = this.parseNumbers(numberStrings);
 
-    return this.calculateSum(numbers);
+    return this.calculator.calculate(numbers);
   }
 
   // \n을 개행문자로 변환하는 메서드
@@ -59,11 +62,6 @@ class StringCalculator {
   parseNumbers(numberStrings) {
     return numberStrings.map((number) => parseInt(number, 10));
   }
-
-  // 숫자 배열을 받아 합을 구하는 메서드
-  calculateSum(numbers) {
-    return numbers.reduce((acc, cur) => acc + cur, 0);
-  }
 }
 
-export default StringCalculator;
+export default StringAdditionModel;

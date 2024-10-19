@@ -1,20 +1,16 @@
-import StringCalculator from "./StringCalculator.js";
-import InputHandler from "./InputHandler.js";
+import StringAdditionModel from "./models/StringAdditionModel.js";
+import StringAdditionView from "./views/StringAdditionView.js";
+import StringAdditionController from "./controllers/StringAdditionController.js";
 
 class App {
   constructor() {
-    this.calculator = new StringCalculator();
-    this.inputHandler = new InputHandler();
+    const model = new StringAdditionModel();
+    const view = new StringAdditionView();
+    this.controller = new StringAdditionController(model, view);
   }
 
   async run() {
-    try {
-      const input = await this.inputHandler.getInput();
-      const result = this.calculator.calculate(input);
-      this.inputHandler.printResult(result);
-    } catch (error) {
-      this.inputHandler.printError(error);
-    }
+    await this.controller.run();
   }
 }
 

@@ -1,6 +1,6 @@
 import { Console } from "@woowacourse/mission-utils";
 
-class InputHandler {
+class StringAdditionView {
   async getInput() {
     return await Console.readLineAsync("덧셈할 문자열을 입력해 주세요.\n");
   }
@@ -9,9 +9,9 @@ class InputHandler {
     Console.print(`결과 : ${result}`);
   }
 
-  printError(error) {
+  throwError(error) {
     throw new Error(`[ERROR] ${error.message}`);
   }
 }
 
-export default InputHandler;
+export default StringAdditionView;
