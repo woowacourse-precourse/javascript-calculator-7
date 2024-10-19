@@ -9,8 +9,7 @@ class App {
     
     //문자열에서 기본연산자 추출 => 기댓값 : [1,2,3]
     const nums = extractNums(inputStr,basicOperators);
-    
-    Console.print(nums);
+    Console.print(`결과 : ${calculateSum(nums)}`);
   }
 }
 
@@ -30,4 +29,11 @@ function extractNums(inputStr,basicOperators){
   return nums;
 }
 
+function calculateSum(nums){
+  return nums.reduce((acc, cur) => {
+    return acc + cur;
+  }, 0);
+}
+
 export default App;
+
