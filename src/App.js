@@ -10,11 +10,12 @@ class App {
       let numArr = [];
       if (input.startsWith('//')) {
         numArr = this.splitByCustom(input);
-        Console.print(numArr);
       } else {
         numArr = this.splitByDelimiter(input);
-        Console.print(numArr);
       }
+
+      const result = this.getSum(numArr);
+      Console.print(`결과 : ${result}`);
     } catch (error) {
       Console.print('에러:', error);
     }
@@ -29,6 +30,14 @@ class App {
     const regex = new RegExp(custom[1]);
     const newInput = input.match(/(?<=\\n).+/g);
     return newInput[0].split(regex).map(Number);
+  }
+
+  getSum(numArr) {
+    let sum = 0;
+    for (let i = 0; i < numArr.length; i++) {
+      sum += numArr[i];
+    }
+    return sum;
   }
 }
 
