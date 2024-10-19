@@ -1,5 +1,5 @@
 class Validator {
-  static isInValid(input, separatorList) {
+  isInValid(input, separatorList) {
     if (input.startsWith("//")) {
       const lineBreakStringIndex = input.indexOf("\\n");
 

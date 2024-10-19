@@ -4,17 +4,13 @@ import Validator from "./Validator.js";
 class App {
   #input;
   separatorList = [",", ":"];
-  #validator;
+  #validator = new Validator();
   #inputNumberList = [];
-
-  constructor() {
-    this.#validator = new Validator();
-  }
 
   async run() {
     await this.readInput();
 
-    if (Validator.isInValid(this.#input, this.separatorList)) {
+    if (this.#validator.isInValid(this.#input, this.separatorList)) {
       throw new Error("[ERROR]: 에러입니다.");
     }
 
