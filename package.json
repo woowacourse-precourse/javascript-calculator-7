@@ -11,7 +11,8 @@
     "@babel/core": "^7.25.8",
     "@babel/preset-env": "^7.25.8",
     "babel-jest": "^29.6.0",
-    "jest": "^29.6.0"
+    "jest": "^29.6.0",
+    "nodemon": "^3.1.7"
   },
   "dependencies": {
     "@woowacourse/mission-utils": "^2.2.0"

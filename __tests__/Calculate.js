@@ -20,7 +20,7 @@ const getLogSpy = () => {
 
 describe("문자열 계산기", () => {
   test("커스텀 구분자 사용", async () => {
-    const inputs = ["//;\\n1;2;3"]; // 커스텀 구분자 ; 사용
+    const inputs = ["//;\n1;2;3"]; // 커스텀 구분자 ; 사용
     mockQuestions(inputs); // 입력 모킹
 
     const logSpy = getLogSpy(); // 출력 모킹
