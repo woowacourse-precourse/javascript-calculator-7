@@ -14,5 +14,4 @@ const validateCorrectInput = (input) => {
   }
   return true;
 };
-
 export default validateCorrectInput;

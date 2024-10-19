@@ -1,4 +1,5 @@
 import extractNumbersFromInput from "./controller/input/extractNumbersFromInput.js";
+import validateInput from "./controller/input/validateInput.js";
 import getInput from "./ui/getInput.js";
 import printStartMessage from "./ui/PrintStartMessage.js";
 
@@ -14,9 +15,8 @@ class Calculator {
 
   async handleInput() {
     const input = await getInput();
+    validateInput(input);
     const { numbers, delimiter } = extractNumbersFromInput(input);
-    console.log(numbers);
-    console.log(delimiter);
   }
 }
 
