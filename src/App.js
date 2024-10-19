@@ -29,7 +29,6 @@ class App { //하나의 메소드는 하나의 역할
 
     isSeparator(value) {//구분자 판단
         if (!isNaN(value)) {
-            console.log(value)
             return value
         }
         if (value === this.customSeparator) {
@@ -45,9 +44,6 @@ class App { //하나의 메소드는 하나의 역할
         let arr = []
         let tmpValue = "";
         param.forEach((element, idx) => { //구분자가 숫자 값이면? 문자 값이라 했으니 문자만?
-                if (element !== this.customSeparator && element !== ":" && element !== ",") {
-                    throw new Error("[Error]: 에러발생")
-                }
                 if (!isNaN(element)) {
                     tmpValue += element
                 }
@@ -66,7 +62,6 @@ class App { //하나의 메소드는 하나의 역할
 
     calculator(arr) { //계산 담당
         for (const element of arr) {
-
             this.sum += Number(this.isSeparator(element))
         }
     }
