@@ -10,7 +10,13 @@ class App {
     if(numbers === '') return 0;
 
     const { separator, numStr } = this.customSeparator(numbers);
-    const numArr = numStr.split(new RegExp(`[${separator}]`)).map(Number);
+    const numArr = numStr.split(new RegExp(`[${separator}]`)).map( num => {
+      const parsedNum = Number(num);
+      if(isNaN(parsedNum) || parsedNum < 0) {
+        throw new Error('[ERROR] 유효하지 않은 입력입니다.');
+      }
+      return parsedNum;
+    });
     return numArr.reduce((acc, num) => acc + num, 0);
   }
 
