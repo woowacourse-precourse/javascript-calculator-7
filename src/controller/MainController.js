@@ -1,11 +1,11 @@
-import { StringCalculator } from './StringCalculator.js';
-import { UserInterface } from './UserInterface.js';
-import { ValidateError } from './ValidateError.js';
+import { StringCalculator } from '../model/StringCalculator.js';
+import { ValidateError } from '../model/ValidateError.js';
+import { UserInterface } from '../view/UserInterface.js';
 
 const user = new UserInterface();
 const calculator = new StringCalculator();
 
-export class Controller {
+export class MainController {
   constructor() {
     this.inputString;
     this.delimiter = [',', ':'];

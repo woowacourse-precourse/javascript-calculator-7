@@ -1,8 +1,8 @@
-import { Controller } from './Controller.js';
+import { MainController } from './controller/MainController.js';
 
 class App {
   async run() {
-    const controller = new Controller();
+    const controller = new MainController();
 
     await controller.getUserInput();
     controller.separateInput();
