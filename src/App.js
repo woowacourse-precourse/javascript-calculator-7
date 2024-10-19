@@ -17,11 +17,16 @@ class App {
   }
 
   async run() {
-    await this.input();
-    this.isCustom(this.answer);
-    this.splitByDelimiter();
-    this.isValid();
-    this.getSum();
+    try {
+      await this.input();
+      this.isCustom(this.answer);
+      this.splitByDelimiter();
+      this.isValid();
+      this.getSum();
+      this.printSum();
+    } catch (error) {
+      Console.print(error.message);
+    }
   }
 
   // "덧셈할 문자열을 입력해 주세요."란 문장의 출력과 함께 문자열을 입력 받습니다.
@@ -70,6 +75,10 @@ class App {
     this.result = this.splitArray
       .map((num) => parseFloat(num))
       .reduce((acc, cur) => acc + cur, 0);
+  }
+
+  printSum() {
+    Console.print(this.result);
   }
 }
 
