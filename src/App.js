@@ -20,7 +20,6 @@ class App {
 
   checkIsValidNumber(n) {
     try {
-      MissionUtils.Console.print(`n : ${n}`);
       const num = Number(n);
       if (Number.isNaN(num) || num < 0 ) throw new Error('[Error]')
       return num;
@@ -29,11 +28,11 @@ class App {
     } 
   }
 
-  async add() {
+  add() {
     try {
       const reg = new RegExp(this.delimeter.join('|'))
       this.output = this.input.split(reg)
-        .map(this.checkIsValidNumber)
+        .map((n) => this.checkIsValidNumber(n))
         .reduce((acc, cur) => acc + cur, 0);
     } catch(error) {
       throw error;
@@ -43,9 +42,8 @@ class App {
   async run() {
     try {
       await this.getUserInput();
-      await this.add();
-
-      MissionUtils.Console.print(`결과값 : ${this.output}`);
+      this.add();
+      MissionUtils.Console.print(`결과 : ${this.output}`);
     } catch (error) {
       MissionUtils.Console.print(error.message);
     }
