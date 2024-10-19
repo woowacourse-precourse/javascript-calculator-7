@@ -5,10 +5,10 @@ class App {
       "덧셈할 문자열을 입력해 주세요.\n"
     );
     const numberArray = this.extractNumbers(input);
+    const hasInvalidValue = numberArray.includes(NaN);
 
-    if (numberArray.includes(NaN)) {
-      Console.print("[ERROR]");
-    } else {
+    if (hasInvalidValue) Console.print("[ERROR]");
+    if (!hasInvalidValue) {
       const result = this.calculateSum(numberArray);
       Console.print(result);
     }
