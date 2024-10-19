@@ -94,7 +94,7 @@ describe("문자열 계산기", () => {
   });
 
   test("구분자 외 다른 특수문자 사용", async () => {
-    const inputs = ["1;2,3"];
+    const inputs = ["1@2,3"];
     mockQuestions(inputs);
 
     const logSpy = getLogSpy();
@@ -140,6 +140,21 @@ describe("문자열 계산기", () => {
 
   test("구분자가 2개 이상 사용된 경우", async () => {
     const inputs = ["1,,2:3"];
+    mockQuestions(inputs);
+
+    const logSpy = getLogSpy();
+    const outputs = ["[ERROR] 구분자가 여러개 사용되었습니다."];
+
+    const app = new App();
+    await app.run();
+
+    outputs.forEach((output) => {
+      expect(logSpy).toHaveBeenCalledWith(expect.stringContaining(output));
+    });
+  });
+
+  test("커스텀 구분자가 2개 이상 사용된 경우", async () => {
+    const inputs = ["//*\n1**2:3"];
     mockQuestions(inputs);
 
     const logSpy = getLogSpy();
