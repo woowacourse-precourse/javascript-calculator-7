@@ -3,12 +3,12 @@ import UserInput from '../View/UserInput.js';
 // TO DO: 리펙토링 -> 화살표 함수 공부 후, 모두 통일하기
 
 // 1. //+구분자+\n 입력 체크
-function conditionTextInputCheck(userInput) {
+const conditionTextInputCheck = userInput => {
   if (userInput[0] === '/' && userInput[1] === '/' && userInput[3] === '\\' && userInput[4] === 'n') {
     return true;
   }
   return false;
-}
+};
 
 // 2. 구분자 사용 입력 체크
 function separatorTextInputCheck(userInput) {
