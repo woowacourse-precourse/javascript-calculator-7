@@ -1,26 +1,24 @@
 export class Calculator {
-  constructor() {
-    this.calculationString = '';
-    this.result = 0;
-    this.separatorPattern = ',|:';
-  }
+  #calculationString = '';
+  #result = 0;
+  #separatorRegexPattern = ',|:';
+  #CHECK_CUSTOM_PATTERN_REGEX = new RegExp('^/');
+  #EXTRACT_SEPARATOR_AND_STRING_REGEX = new RegExp('^//(.+?)\\\\n([\\s\\S]*)');
 
-  // 문자열의 시작이 '/'인지 확인하여 커스텀 구분자 사용 여부를 반환
+  // 커스텀 구분자 사용 여부를 확인
   hasCustomSeparator() {
-    const pattern = new RegExp('^/');
-    return pattern.test(this.calculationString);
+    return this.#CHECK_CUSTOM_PATTERN_REGEX.test(this.#calculationString);
   }
 
-  // 커스텀 구분자를 설정하고, 계산할 문자열을 추출
-  setCustomSeparator() {
-    const customSeparatorPattern = new RegExp('^//(.+?)\\\\n([\\s\\S]*)');
-    const isCustomSeparatorMatch = this.calculationString.match(
-      customSeparatorPattern
+  // 커스텀 구분자를 추출하고 계산할 문자열을 업데이트
+  extractCustomSeparator() {
+    const separatorAndStringMatch = this.#calculationString.match(
+      this.#EXTRACT_SEPARATOR_AND_STRING_REGEX
     );
 
-    if (isCustomSeparatorMatch) {
-      // 커스텀 구분자 유효성 확인
-      const customSeparator = isCustomSeparatorMatch[1].trim();
+    if (separatorAndStringMatch) {
+      const customSeparator = separatorAndStringMatch[1].trim();
+
       if (customSeparator.length > 1) {
         throw new Error('[ERROR] 커스텀 구분자는 단일 문자를 사용해야합니다.');
       }
@@ -29,11 +27,11 @@ export class Calculator {
         throw new Error('[ERROR] 커스텀 구분자는 숫자를 사용할 수 없습니다.');
       }
 
-      // 정규식 표현에 커스텀 구분자 추가
-      this.separatorPattern += '|\\' + customSeparator;
+      // 커스텀 구분자를 구분자 정규식 패턴에 추가
+      this.#separatorRegexPattern += '|\\' + customSeparator;
 
       // 계산할 문자열을 업데이트
-      this.calculationString = isCustomSeparatorMatch[2].trim();
+      this.#calculationString = separatorAndStringMatch[2].trim();
     } else {
       throw new Error(
         '[ERROR] 커스텀 구분자 지정 형식에 맞지 않거나 커스텀 구분자가 작성되지 않았습니다.'
@@ -41,14 +39,14 @@ export class Calculator {
     }
   }
 
-  // 구분자를 사용해 계산할 문자열을 숫자로 변환하고, 덧셈을 수행
+  // 계산할 문자열을 구분자로 나누고 숫자로 변환하여 덧셈을 수행
   calculateString() {
-    const calculationArr = this.calculationString.split(
-      new RegExp(`[${this.separatorPattern}]`)
+    const calculationArray = this.#calculationString.split(
+      new RegExp(`[${this.#separatorRegexPattern}]`)
     );
 
     // 배열의 각 요소를 숫자로 변환하고 유효성 검사 후 반환
-    calculationArr
+    calculationArray
       .filter((element) => element !== '')
       .forEach((element) => {
         const num = Number(element);
@@ -65,20 +63,22 @@ export class Calculator {
           );
         }
 
-        this.result += num;
+        this.#result += num;
       });
   }
 
-  // 입력 문자열을 처리하여 결과를 반환
+  // 입력 문자열을 계산하여 결과를 반환
   calculate(inputString) {
-    if (inputString !== '') {
-      this.calculationString = inputString;
+    if (inputString) {
+      this.#calculationString = inputString;
+
       if (this.hasCustomSeparator()) {
-        this.setCustomSeparator();
+        this.extractCustomSeparator();
       }
+
       this.calculateString();
     }
 
-    return this.result;
+    return this.#result;
   }
 }
