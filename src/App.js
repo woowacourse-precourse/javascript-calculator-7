@@ -64,7 +64,7 @@ class App {
       return sum;
     }
     else {
-      throw Error("[ERROR] 잘못된 수식이 입력되었습니다.");
+      throw Error("[ERROR]");
     }
   }
 
