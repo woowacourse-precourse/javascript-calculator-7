@@ -78,7 +78,7 @@ class App {
   }
 
   async run() {
-    const inputString = Console.readLineAsync("덧셈할 문자열을 입력해 주세요.\n");
+    const inputString = await Console.readLineAsync("덧셈할 문자열을 입력해 주세요.\n");
 
     // 1. 구분자 추출하기
     const delimeters = this.extractDelimeter(inputString);
