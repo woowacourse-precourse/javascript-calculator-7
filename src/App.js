@@ -7,7 +7,9 @@ class App {
       const user = this.separateUserInput(input);
       const numbers = this.parseNumbers(user);
       this.printUserOutput(numbers);
-    } catch (error) {}
+    } catch (error) {
+      Console.print("[ERROR] " + error.message);
+    }
   }
 
   async getUserInput() {
@@ -18,6 +20,9 @@ class App {
   }
 
   separateUserInput(input) {
+    if (input === "") {
+      return [0];
+    }
     if (input.startsWith("//")) {
       const indexCustom = input.indexOf("\\n");
       const customDelimiter = input.substring(2, indexCustom);
@@ -27,16 +32,17 @@ class App {
     } else if (input.includes(",") || input.includes(";")) {
       return input.split(/[,;]/);
     }
-    return input;
+    throw new Error("잘못된 입력입니다.");
   }
 
   parseNumbers(input) {
-    return input.map(Number);
+    const numbers = input.map(Number);
+    return numbers;
   }
 
   printUserOutput(numbers) {
     const sum = numbers.reduce((acc, curr) => acc + curr, 0);
-    Console.print(`결과: ${sum}`);
+    Console.print(`${sum}`);
   }
 }
 
