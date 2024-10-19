@@ -48,7 +48,6 @@ class App {
   checkInput(strArr){
     for(let i = 0; i < strArr.length; i++){
       const num = Number(strArr[i]);
-      Console.print(num + " ");
       if(isNaN(num) || num < 0)
         throw new Error("[ERROR]");
     }
