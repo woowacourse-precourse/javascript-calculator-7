@@ -22,14 +22,32 @@ class App {
     let numbers = input;
     let delimiter = /[,:]/;
 
-    const parsedNumbers = numbers.split(delimiter).map((num) => {
+    const processedInput = input.replace(/\\n/g, "\n");
+
+    if (processedInput.startsWith("//")) {
+      const matches = processedInput.match(/^\/\/([^\n]+)\n(.*)$/s);
+      if (matches) {
+        const customDelimiter = matches[1];
+        delimiter = new RegExp(this.escapeRegExp(customDelimiter), "g");
+        numbers = matches[2];
+      } else {
+      }
+    }
+
+    const parseNumbers = numbers.split(delimiter).map((num) => {
       const trimmed = num.trim();
-      if (trimmed === "") return 0;
+      if (trimmed === "") {
+        return 0;
+      }
       const parsed = parseInt(trimmed, 10);
       return parsed;
     });
 
-    return parsedNumbers.reduce((sum, num) => sum + num, 0);
+    return parseNumbers.reduce((sum, num) => sum + num, 0);
+  }
+
+  escapeRegExp(string) {
+    return string.replace(/[.*+?^${}()|[\]\\]/g, "\\$&");
   }
 }
 
