@@ -3,7 +3,7 @@ import { MissionUtils } from "@woowacourse/mission-utils";
 class App {
   async run() {
     const input = await MissionUtils.Console.readLineAsync('덧셈할 문자열을 입력해 주세요.\n');
-    const [seperatorSet, filteredInput] = this.handleCustomSeperator(input);
+    const {seperatorSet, filteredInput} = this.handleCustomSeperator(input);
     const extractedNumbers = this.extractPositiveNumbers(filteredInput, ...seperatorSet);
     const sum = this.sumArray(...extractedNumbers);
     
@@ -32,7 +32,7 @@ class App {
     const {customSeperator, filteredInput} = this.extractCustomSeperator(input) || {};
     const seperatorSet = new Set([...defaultSeperator, ...(customSeperator || [])]);
 
-    return [seperatorSet, filteredInput || input];
+    return {seperatorSet, filteredInput: filteredInput || input};
   }
 
   extractPositiveNumbers(input, ...seperatorArray){
