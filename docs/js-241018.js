@@ -1,20 +1,25 @@
-let input;
-
-// 특수문자 색출 함수
-function checkInputDelimiter(input) {}
-
-function sumNumbers(array) {
-	let result = 0;
-	for (let i = 0; i < array.length; i++) {
-		result = Number(array[i]) + result;
-	}
-	return result;
-}
-
 let tester1 = "//;\\n1";
 let tester2 = "//;\n1;2;3;";
 let tester3 = "1,2:3";
 let tester4 = "-1,2,3";
+
+let input;
+
+function checkNumberSign(number) {
+	return Math.sign(number);
+}
+
+function sumNumbers(array) {
+	let result = 0;
+	for (let i = 0; i < array.length; i++) {
+		if (checkNumberSign(array[i]) >= 0) {
+			result = Number(array[i]) + result;
+		} else {
+			throw new Error("양수가 아닙니다.");
+		}
+	}
+	return result;
+}
 
 function testerFn(input) {
 	let regexes = {
@@ -28,7 +33,6 @@ function testerFn(input) {
 	let delimiter;
 	let reg;
 	let input_array;
-	let result = 0;
 
 	try {
 		if (input.match(regexes.check_special_chracter) || input.match(regexes.check_empty_string)) {
@@ -39,18 +43,16 @@ function testerFn(input) {
 				reg = RegExp(`[\\\\/\\sA-Za-z${delimiter}]`, "g");
 
 				input_array = input.split(reg);
-				for (let i = 0; i < input_array.length; i++) {
+				/* 	for (let i = 0; i < input_array.length; i++) {
 					result = Number(input_array[i]) + result;
-				}
+				} */
 			} else {
 				input_array = input.split(regexes.normal_delimiter);
-				for (let i = 0; i < input_array.length; i++) {
-					result = Number(input_array[i]) + result;
-				}
 			}
-			console.log(`결과 : ${result}`);
+			const answer = sumNumbers(input_array);
+			console.log(`결과 : ${answer}`);
 		}
 	} catch (e) {
-		throw new Error("[ERROR] 잘못된 문자열을 입력하셨습니다.");
+		console.error(e);
 	}
 }
