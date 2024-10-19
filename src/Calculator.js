@@ -10,7 +10,8 @@ export class Calculator {
 
     // 2. 파싱 실행
     const parse = new Parse();
-    const parseInput = parse.changeToList(input);
+    let parseInput = parse.changeToList(input);
+    console.log(parseInput);
 
     // 3. 파싱된 결과 바탕으로 예외처리
     if (validate.deepValidate(parseInput).error) return false;
@@ -21,7 +22,9 @@ export class Calculator {
   // add 함수내 파라미터를 레스트 파라미터로 설정
   add(...numbers) {
     let result = 0;
-    numbers.forEach((number) => (result += number));
-    return numbers;
+    numbers.forEach((number) => {
+      result += number;
+    });
+    return result;
   }
 }

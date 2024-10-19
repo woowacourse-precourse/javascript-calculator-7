@@ -9,7 +9,7 @@ export class Parse {
       // 특수기호가 커스텀 문자일경우 / 추가
       const regexText = new RegExp(`[${customInput},:]`); // 정규식 생성
       const result = sliceInput.split(regexText);
-      return result;
+      return this.changeFloat(result);
     }
     const regexText = /[,:]/; // 기본 구분자 설정
     return this.changeFloat(input.split(regexText));
