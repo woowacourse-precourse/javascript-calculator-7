@@ -6,7 +6,7 @@ class App {
       const input = await Console.readLineAsync(
         "덧셈할 문자열을 입력해 주세요.\n"
       );
-      const result = this.hasDefaultDelimiter(input);
+      const result = this.checkForMismatchedDelimiter(input, ";");
       Console.print(`결과: ${result}`);
     } catch (error) {
       Console.print(`[ERROR] 에러 발생`);
@@ -35,6 +35,12 @@ class App {
   hasDefaultDelimiter(numberString) {
     const DEFAULT_DELIMITERS = /[,:]/g;
     return DEFAULT_DELIMITERS.test(numberString);
+  }
+
+  checkForMismatchedDelimiter(numberString, customDelimiter) {
+    if (!numberString.includes(customDelimiter)) {
+      throw new Error();
+    } else return true;
   }
 
   parseNumbers(input) {
