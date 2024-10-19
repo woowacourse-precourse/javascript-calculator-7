@@ -20,6 +20,8 @@ class App {
       const nums = numberStringWithSeparators
         .split(new RegExp(`[${separator.join("")}]`))
         .map(Number);
+
+      this.negativeNumberError(nums);
     }
   }
 
@@ -53,6 +55,18 @@ class App {
       .split(/[//,\\n]/)
       .filter((i) => i.length > 0);
     separator.push(...customSeparator);
+  }
+
+  hasNegativeNumber(nums) {
+    return nums.some((n) => n < 0);
+  }
+
+  negativeNumberError(nums) {
+    const hasNegativeNumber = this.hasNegativeNumber(nums);
+
+    if (hasNegativeNumber) {
+      throw new Error("[ERROR] 음수가 포함되어 있습니다. 양수만 작성해주세요.");
+    }
   }
 }
 
