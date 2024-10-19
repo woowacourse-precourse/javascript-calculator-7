@@ -1,34 +1,51 @@
 import { Console } from "@woowacourse/mission-utils";
 import { MESSAGES } from "./constants/Messages.js";
+import { DELIMETERS } from "./constants/Delimeters.js";
+import { seperateCustomDelimiter } from "./handleCustomDelimiter.js";
+import validator from "./utils/validator.js";
 
 class User {
+  #numbersString;
   #delimiters;
 
   constructor() {
-    this.#delimiters = [",", ":"];
+    this.#delimiters = [...DELIMETERS];
   }
+
   async readNumber() {
     const answer = await Console.readLineAsync(MESSAGES.inputNumber);
-    const numbers = this.#splitString(answer);
-    const sum = this.#calculateNumbers(numbers);
-    this.#printResult(sum);
+    validator.validateString(answer);
+    this.handleCustomDelimiter(answer);
+    const numbers = this.splitString(this.#numbersString);
+    const sum = this.calculateNumbers(numbers);
+    this.printResult(sum);
   }
 
-  #printResult(sum) {
-    console.log(MESSAGES.result + sum);
+  handleCustomDelimiter(string) {
+    const { customDelimiter, numbersString } = seperateCustomDelimiter(string);
+    this.#delimiters = [...this.#delimiters, customDelimiter];
+    this.#numbersString = numbersString;
   }
 
-  #splitString(answer) {
-    return this.#delimiters.reduce(
-      (acc, delimiter) => {
-        return acc.flatMap((string) => string.split(delimiter));
-      },
-      [answer]
-    );
+  printResult(sum) {
+    Console.print(MESSAGES.result + sum);
   }
 
-  #calculateNumbers(numbers) {
-    return numbers.map(Number).reduce((acc, number) => acc + number);
+  splitString(answer) {
+    const numbers = this.#delimiters
+      .reduce(
+        (acc, delimiter) => {
+          return acc.flatMap((string) => string.split(delimiter));
+        },
+        [answer]
+      )
+      .map(Number);
+    validator.validateValueToSum(numbers);
+    return numbers;
+  }
+
+  calculateNumbers(numbers) {
+    return numbers.reduce((acc, number) => acc + number, 0);
   }
 }
 
