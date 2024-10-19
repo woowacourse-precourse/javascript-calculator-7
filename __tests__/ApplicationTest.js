@@ -34,11 +34,11 @@ describe("문자열 계산기", () => {
   });
 
   test("정상 문자열 입력 2", async () => {
-    const inputs = ["//*\n1,2*3:4"];
+    const inputs = ["//*\n11,2*3:4"];
     mockQuestions(inputs);
 
     const logSpy = getLogSpy();
-    const outputs = ["결과 : 10"];
+    const outputs = ["결과 : 20"];
 
     const app = new App();
     await app.run();
