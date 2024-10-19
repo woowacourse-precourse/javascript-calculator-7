@@ -13,7 +13,7 @@
 ## 함수 구현
 
 ### InputView
-- getUserInput : : 사용자 입력을 받아 유효한 경우 반환하며, 그렇지 않은 경우 에러 처리
+- getUserInput : 사용자 입력을 받아 유효한 경우 반환하며, 그렇지 않은 경우 에러 처리
 
 ### OutputView
 - printResult : 계산된 결과값을 출력
