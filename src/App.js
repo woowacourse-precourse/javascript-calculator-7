@@ -4,12 +4,30 @@ const getInput = async () =>
   Console.readLineAsync('덧셈할 문자열을 입력해 주세요.\n');
 
 const processInput = async (str) => {
-  if (str === '') return 0;
   const sepArr = [',', ':'];
+
+  if (str.startsWith('/')) {
+    const separator = extractCustomSeparator(str);
+    if (separator !== null) {
+      const customSepArr = [...sepArr, separator];
+      const arr = splitAndValidateNumbers(str, customSepArr);
+      if (arr !== null) return sumNumbers(arr);
+      throw new Error('[ERROR]');
+    }
+    throw new Error('[ERROR]');
+  }
 
   const arr = splitAndValidateNumbers(str, sepArr);
   if (arr !== null) return sumNumbers(arr);
   throw new Error('[ERROR]');
+};
+
+const extractCustomSeparator = (str) => {
+  const customSet = str.slice(0, 5); // 커스텀 구분자 지정 문자열
+  if (customSet[1] === '/' && customSet[3] === '\\' && customSet[4] === 'n') {
+    return customSet[2];
+  }
+  return null;
 };
 
 const splitAndValidateNumbers = (str, sepArr) => {
