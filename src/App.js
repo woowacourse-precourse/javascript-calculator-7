@@ -4,23 +4,23 @@ import Validate from "./Validate.js";
 import Calculate from "./calculate.js";
 
 class App {
-  constructor() {}
+  constructor() {
+    this.view = new View();
+    this.separator = new Separator();
+    this.validate = new Validate();
+    this.calculate = new Calculate();
+  }
 
   async run() {
-    const view = new View();
-    const separator = new Separator();
-    const validate = new Validate();
-    const calculate = new Calculate();
+    const userInput = await this.view.inputPrompt();
 
-    const userInput = await view.inputPrompt();
+    const customSeparator = this.separator.isCustomSeparator(userInput);
+    const inputArr = this.separator.userValueArr(userInput, customSeparator);
 
-    const customSeparator = separator.isCustomSeparator(userInput);
-    const inputArr = separator.userValueArr(userInput, customSeparator);
+    const verifiedArr = this.validate.validateValue(inputArr);
+    const result = this.calculate.sum(verifiedArr);
 
-    const verifiedArr = validate.validateValue(inputArr);
-    const result = calculate.sum(verifiedArr);
-
-    view.outputView(result);
+    this.view.outputView(result);
   }
 }
 
