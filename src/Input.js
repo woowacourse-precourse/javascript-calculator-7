@@ -12,19 +12,18 @@ class Input {
   }
 
   async getPlusString() {
-    try {
-      const plusString = await MissionUtils.Console.readLineAsync(
-        "덧셈할 문자열을 입력해 주세요.\n",
-      );
-      const { customSeparator, numbers } = this.findCustomSeparatorAndNumbers(plusString);
+    const plusString = await MissionUtils.Console.readLineAsync(
+      "덧셈할 문자열을 입력해 주세요.\n",
+    );
+    const { customSeparator, numbers } = this.findCustomSeparatorAndNumbers(plusString);
 
-      this.customSeparator = customSeparator;
-      this.numbers = numbers;
+    Input.validateSeparators(customSeparator);
+    Input.validateNumbers(numbers, customSeparator);
 
-      return plusString;
-    } catch (error) {
-      // reject 되는 경우
-    }
+    this.customSeparator = customSeparator;
+    this.numbers = numbers;
+
+    return plusString;
   }
 
   /**
