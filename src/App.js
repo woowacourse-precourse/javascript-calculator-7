@@ -6,13 +6,9 @@ class App {
   }
 
   async run() {
-    try {
-      const input = await Console.readLineAsync('덧셈할 문자열을 입력해 주세요.\n');
-      const result = this.calculate(input);
-      console.log(`결과 : ${result}`);
-    } catch (e) {
-      console.error(e.message);
-    }
+    const input = await Console.readLineAsync('덧셈할 문자열을 입력해 주세요.\n');
+    const result = this.calculate(input);
+    Console.print(`결과 : ${result}`);
   }
 
   calculate(input) {
@@ -26,10 +22,10 @@ class App {
   parseInput(input) {
     const separators = [...this.defaultSeparators]; // 기본 구분자 추가
     let mainString = input;
-
     // 커스텀 구분자 처리
     if (input.startsWith('//')) {
       const customIndex = input.indexOf('\\n');
+      // console.log(customIndex);
       if (customIndex !== 3) {
         throw new Error('[ERROR] 커스텀 구분자를 잘못 입력했습니다.');
       }
@@ -49,7 +45,6 @@ class App {
 
     return numArray.map(num => {
       const number = parseInt(num, 10);
-      console.log(number);
       if (Number.isNaN(number) || number < 0) {
         throw new Error('[ERROR] 잘못된 입력입니다. 양수를 입력해 주세요.');
       }
