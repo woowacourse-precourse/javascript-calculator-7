@@ -24,9 +24,11 @@ class StringCalculator{ // 계산을 위한 클래스
       // 숫자로 변환(입력값을 split으로 구분자로 나누고 map을 돌아 숫자마다 십진수값으로 변환)
       const NUMBERS = inputs.split(DELIMITER).map((num)=>{
         const PARSED = parseInt(num,10);//십진수
+        if (isNaN(PARSED)) throw new Error("[ERROR] 숫자가 아닌 값이 포함되어 있습니다.");
         if (PARSED < 0) { // 음수 체크
           throw new Error(`[ERROR] 음수는 허용되지 않습니다: ${PARSED}`);
         }
+
         return PARSED;
       });
 
@@ -49,7 +51,7 @@ class App { // 입력과 출력하는 클래스
         const RESULT = this.calculator.add(INPUT);
         MissionUtils.Console.print(`결과 : ${RESULT}`);
       }catch(error){
-        console.error(error.message);
+        console.error(error.message); 
         throw error; 
       }
   }
