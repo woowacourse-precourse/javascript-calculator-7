@@ -11,12 +11,12 @@ class App {
 	async run() {
 		try {
 			await this.#getUserInput();
-			this.#checkForNegativeInput();
+			this.#validateNegativeInput();
 			this.#parseAndSplitInput();
 			this.#handleArrayResult();
 			this.#printResult();
 		} catch (err) {
-			this.#handleError(err);
+			this.#throwError(err);
 		}
 	}
 
@@ -24,8 +24,23 @@ class App {
 		this.#input = await Console.readLineAsync('덧셈할 문자열을 입력해 주세요. \n');
 	}
 
-	#checkForNegativeInput() {
-		hasNegative(this.#input);
+	#checkForNaN(value) {
+		return value.some((v) => isNaN(v));
+	}
+
+	#validateNegativeInput() {
+		if (hasNegative(this.#input)) {
+			this.#throwError('[ERROR] : 양수만 입력할 수 있어요.');
+		}
+	}
+
+	#validateArrayInput() {
+		if (this.#result[0] === this.#input) {
+			this.#throwError('[ERROR] : 구분자와 양수로 이루어진 값을 입력해주세요.');
+		}
+		if (this.#checkForNaN(this.#result)) {
+			this.#throwError('[ERROR] : 입력값에 숫자 이외의 값이 포함되어 있어요.');
+		}
 	}
 
 	#parseAndSplitInput() {
@@ -40,9 +55,7 @@ class App {
 
 	#handleArrayResult() {
 		if (Array.isArray(this.#result)) {
-			if (this.#result[0] === this.#input) {
-				throw new Error('[ERROR]: 구분자와 양수로 이루어진 값을 입력해주세요.');
-			}
+			this.#validateArrayInput();
 			this.#result = this.#calculateSum(this.#result);
 		}
 	}
@@ -50,9 +63,6 @@ class App {
 	#calculateSum(result) {
 		let sum = 0;
 		for (const v of result) {
-			if (isNaN(v)) {
-				throw new Error('[ERROR]: 입력값에 숫자 이외의 값이 포함되어 있어요.');
-			}
 			sum += +v;
 		}
 		return sum;
@@ -62,7 +72,7 @@ class App {
 		Console.print(`결과 : ${this.#result}`);
 	}
 
-	#handleError(err) {
+	#throwError(err) {
 		throw new Error(err);
 	}
 }
