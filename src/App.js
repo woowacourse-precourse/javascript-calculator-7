@@ -16,6 +16,11 @@ class App {
 
     let qualifyNumArr = splitArr.map(Number);
     const result = checkPositiveNumber(qualifyNumArr);
+
+    if (result === true) {
+      let answer = qualifyNumArr.reduce((acc, cur) => acc + cur);
+      Console.print(`결과 : ${answer}`);
+    }
   }
 }
 
