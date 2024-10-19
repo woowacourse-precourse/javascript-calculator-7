@@ -61,6 +61,8 @@ class App {
     let sum = 0;
     numbersArray.map((item) =>{
       const number = parseInt(item.trim()); // 숫자로 변환
+      if(isNaN(number) || number < 1)
+        throw new Error("[ERROR] " + this.LANGUAGE_ERROR_MESSAGE)
       sum += number;
     } );
     this.printResult(sum);
