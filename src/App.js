@@ -13,6 +13,8 @@ class App {
     } else {
       splitArr = splitDelimiter(inputString);
     }
+
+    let qualifyNumArr = splitArr.map(Number);
   }
 }
 
