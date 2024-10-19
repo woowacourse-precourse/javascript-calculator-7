@@ -1,4 +1,5 @@
 import { CUSTOM_VALIDATOR } from "../constants.js";
+import { generateDelimiterCombinations } from "../utils.js";
 
 class CommonValidator {
   #target;
@@ -26,34 +27,11 @@ class CommonValidator {
       return false;
     }
 
-    const combinations = this.generateDelimiterCombinations(
-      this.#separatorList
-    );
+    const combinations = generateDelimiterCombinations(this.#separatorList);
 
     return combinations.every(
       (combination) => !this.#target.includes(combination)
     );
-  }
-
-  generateDelimiterCombinations(delimiters, minLength = 2, maxLength = 3) {
-    const result = [];
-
-    function backtrack(combination, start) {
-      if (combination.length >= minLength) {
-        result.push(combination.join(""));
-      }
-
-      if (combination.length === maxLength) {
-        return;
-      }
-
-      for (let i = 0; i < delimiters.length; i++) {
-        backtrack([...combination, delimiters[i]], i);
-      }
-    }
-
-    backtrack([], -1);
-    return result;
   }
 }
 
