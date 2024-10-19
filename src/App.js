@@ -4,11 +4,11 @@ function getUserInputAsync() {
   return Console.readLineAsync('덧셈할 문자열을 입력해 주세요.\n');
 }
 
-function vaildateUserInput(userInput, customString) {
+function vaildateUserInput(userInput, customSeparator) {
   // TODO: 정규 표현식 리터럴로 바꾸기 버그 찾기
-  const regex = customString
+  const regex = customSeparator
     ? new RegExp(
-        `(\/\/${customString}\\n)?(\s|((\d+[:,${customString}]?)+(\d+))+$)`
+        `(\/\/${customSeparator}\\n)?(\s|((\d+[:,${customSeparator}]?)+(\d+))+$)`
       )
     : new RegExp(`\s|(\d+(([:,]\d+)+)?)$`);
 
@@ -18,20 +18,21 @@ function vaildateUserInput(userInput, customString) {
   console.log('커스텀 구분자');
 }
 
-// 3. 커스텀구분자를 설정하는 기능
-function customSeparator(inputString) {
-  const regex = /^(\/\/\D\\n)/;
-  const customString = inputString.match(regex);
+function getCustomSeparator(inputString) {
+  const customSeparator = inputString.match(/^(\/\/\D\\n)/);
 
-  return customString ? customString[1] : null;
+  // TODO: 길이 1짜리 배열이 나올 가능성이 있는지 체크
+  return Array.isArray(customSeparator) && customSeparator.length
+    ? customSeparator[1]
+    : null;
 }
 
 // 2. :나 , 커스텀 구분자로 구분된 문자열의 합 반환
-function computeResult(inputString, customString) {
+function computeResult(inputString, customSeparator) {
   let regex;
   let formattedInput;
-  if (customString) {
-    regex = new RegExp(`[\\n:,${customString}]`);
+  if (customSeparator) {
+    regex = new RegExp(`[\\n:,${customSeparator}]`);
     formattedInput = inputString.toString().replace(/^(?:\/\/)(\D)(?:\\n)/, ''); // 숫자만 남기기
   } else {
     regex = /[:,]/;
@@ -51,18 +52,18 @@ function computeResult(inputString, customString) {
 class App {
   async run() {
     const inputString = await getUserInputAsync();
-    const customString = customSeparator(inputString);
+    const customSeparator = getCustomSeparator(inputString);
     try {
       // 유효한 입력인지 확인
-      vaildateUserInput(inputString);
+      vaildateUserInput(inputString, customSeparator);
     } catch (error) {
       console.error(error.message);
       throw error;
     }
     // 커스텀연산자가 있는지 확인
-    console.log(customString);
+    console.log(customSeparator);
 
-    const computeReturn = computeResult(inputString, customString);
+    const computeReturn = computeResult(inputString, customSeparator);
     Console.print(`결과 : ${computeReturn}`);
   }
 }
