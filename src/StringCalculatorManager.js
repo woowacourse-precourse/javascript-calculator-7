@@ -6,8 +6,13 @@ class StringCalculatorManager {
   }
 
   async start() {
-    this.outputHandler.printStartMessage();
-    this.inputString = await this.inputHandler.readString();
+    try {
+      this.outputHandler.printStartMessage();
+      this.inputString = await this.inputHandler.readString();
+      this.results = this.calculator.calculate(this.inputString);
+    } catch (error) {
+      this.outputHandler.printErrorMessage(error.message);
+    }
   }
 }
 
