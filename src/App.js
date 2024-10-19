@@ -14,19 +14,19 @@ class App {
     }
 
     // 기본 구분자
-    let delimeter = [",", ":"];
+    let delimiter = [",", ":"];
     let numbers = strInput;
 
     // 2. 커스텀 구분자 파악하기
     if(strInput.startsWith("//")) {
       // 입력 문자열이 //로 시작하면 \n 이전까지의 문자를 커스텀 구분자로 설정
-      const customDelimeterEnd = strInput.indexOf("\n"); 
-      delimeter = [strInput.substring(2, customDelimeterEnd)]; // 커스텀 구분자를 배열로 저장 
-      numbers = strInput.substring(customDelimeterEnd + 1); // \n 이후 숫자만 남기기
+      const customDelimiterEnd = strInput.indexOf("\n"); 
+      delimiter = [strInput.substring(2, customDelimiterEnd)]; // 커스텀 구분자를 배열로 저장 
+      numbers = strInput.substring(customDelimiterEnd + 1); // \n 이후 숫자만 남기기
     }
 
     // 3. 커스텀 구분자 / 기본 구분자 문자열 분리하기
-    const delimiterRegex = new RegExp(`[${delimeter.join('')}]`);
+    const delimiterRegex = new RegExp(`[${delimiter.join('')}]`);
     const numbersArray = numbers.split(delimiterRegex);
   }
 }
