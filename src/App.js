@@ -5,7 +5,7 @@ const SEPARATORS = [",",":"];
 const findSeparator = (input) => {
   const INPUT_ARRAY = input.split("");
   if (input.slice(0,2) === "//") {
-    const START = input.indexOf("//");
+    const START = input.indexOf("//") + 2;
     const END = input.indexOf("\\n");
     if (START === 1 || END === -1) {
       throw new Error("[ERROR] 커스텀 구분자 추가를 위해선 //와 \\n 사이에 추가하고자 하는 구분자를 입력해주세요.");
@@ -17,6 +17,13 @@ const findSeparator = (input) => {
       }
       SEPARATORS.push(input.slice(customSeparator))
       return INPUT_ARRAY.slice(END + 2);
+    }
+  }
+  else{
+    if(input[0]==="-"){
+      throw new Error("[ERROR] 양수를 입력해주세요.");
+    } else if (isNaN(input[0])){
+      throw new Error("[ERROR] 커스텀 구분자 추가를 위해선 //와 \\n 사이에 추가하고자 하는 구분자를 입력해주세요.")
     }
   }
   return INPUT_ARRAY;
