@@ -16,35 +16,31 @@ const getLogSpy = () => {
   return logSpy;
 };
 
+const simulateWithInput = async (inputs,expectedOutputs) => {
+  mockQuestions(inputs);
+  const logSpy = getLogSpy();
+
+  const app = new App();
+  await app.run();
+
+  expectedOutputs.forEach((output) => {
+    expect(logSpy).toHaveBeenCalledWith(expect.stringContaining(output));
+  });
+}
+
 describe("문자열 계산기", () => {
   test("커스텀 구분자 사용", async () => {
     const inputs = ["//;\\n1"];
-    mockQuestions(inputs);
-
-    const logSpy = getLogSpy();
     const outputs = ["결과 : 1"];
 
-    const app = new App();
-    await app.run();
-
-    outputs.forEach((output) => {
-      expect(logSpy).toHaveBeenCalledWith(expect.stringContaining(output));
-    });
+    await simulateWithInput(inputs,outputs);
   });
 
   test("기본 구분자와 커스텀 구분자 동시 사용", async () => {
     const inputs = ["//;\\n1;2,3"];
-    mockQuestions(inputs);
-
-    const logSpy = getLogSpy();
     const outputs = ["결과 : 6"];
 
-    const app = new App();
-    await app.run();
-
-    outputs.forEach((output) => {
-      expect(logSpy).toHaveBeenCalledWith(expect.stringContaining(output));
-    });
+    await simulateWithInput(inputs,outputs);
   });
 
   test("예외 테스트", async () => {
