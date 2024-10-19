@@ -84,12 +84,13 @@
 
 ## ⭐️ 결과 ⭐️ 
 ### test 결과
-![alt text](image.png)
+<img width="724" alt="스크린샷 2024-10-20 오전 12 10 06" src="https://github.com/user-attachments/assets/2b7d3b9f-d0a5-40b5-905a-be14662cdf95">
 
 ### 옳은 입력
-![alt text](image-1.png)
-![alt text](image-2.png)
+<img width="368" alt="스크린샷 2024-10-20 오전 12 10 29" src="https://github.com/user-attachments/assets/9239e8b6-6740-4c94-8135-9f14b0c3e7ea">
+<img width="432" alt="스크린샷 2024-10-20 오전 12 10 50" src="https://github.com/user-attachments/assets/d6573731-e522-42c7-9f8c-0302844686ae">
+
 
 ### 잘못된 입력 시
-![alt text](image-3.png)
-![alt text](image-4.png)
+<img width="739" alt="스크린샷 2024-10-20 오전 12 11 32" src="https://github.com/user-attachments/assets/1b11e2e0-1f9a-4b0b-9da0-0c3146c971cb">
+<img width="722" alt="스크린샷 2024-10-20 오전 12 12 06" src="https://github.com/user-attachments/assets/8f03dc35-93c4-408d-88d7-4a25cbba1dcb">
