@@ -19,6 +19,8 @@ class App {
     }
 
     this.generateInputNumberList();
+
+    this.printResult();
   }
 
   async readInput() {
@@ -33,6 +35,14 @@ class App {
 
   getResult() {
     return this.#inputNumberList.reduce((acc, current) => acc + current);
+  }
+
+  printResult() {
+    Console.print(this.getPrintResult());
+  }
+
+  getPrintResult() {
+    return `결과 : ${this.getResult()}`;
   }
 }
 
