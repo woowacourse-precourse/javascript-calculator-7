@@ -21,6 +21,7 @@ class App {
         .split(new RegExp(`[${separator.join("")}]`))
         .map(Number);
 
+      this.nanError(nums);
       this.negativeNumberError(nums);
 
       const answer = nums.reduce((a, b) => a + b, 0);
@@ -69,6 +70,20 @@ class App {
 
     if (hasNegativeNumber) {
       throw new Error("[ERROR] 음수가 포함되어 있습니다. 양수만 작성해주세요.");
+    }
+  }
+
+  hasNaN(nums) {
+    return nums.some((n) => isNaN(n));
+  }
+
+  nanError(nums) {
+    const hasNaN = this.hasNaN(nums);
+
+    if (hasNaN) {
+      throw new Error(
+        "[ERROR] 커스텀 구분자를 제외한 문자가 포함되어 있습니다."
+      );
     }
   }
 }
