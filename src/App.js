@@ -6,7 +6,7 @@ class App {
       const input = await Console.readLineAsync(
         "덧셈할 문자열을 입력해 주세요.\n"
       );
-      const result = this.extractCustomDelimiter(input);
+      const result = this.getNumberString(input, ";");
       Console.print(`결과: ${result}`);
     } catch (error) {
       Console.print(`[ERROR] 에러 발생`);
@@ -22,6 +22,14 @@ class App {
     const CUSTOM_DELIMITER_REGEX = /^\/\/(.+?)\\n/;
     const customDelimiterMatch = input.match(CUSTOM_DELIMITER_REGEX);
     return customDelimiterMatch[1];
+  }
+
+  getNumberString(input, customDelimiter) {
+    const CUSTOM_DELIMITER_REGEX = /^\/\/(.+?)\\n/;
+    const customDelimiterLength = customDelimiter
+      ? input.match(CUSTOM_DELIMITER_REGEX)[0].length
+      : 0;
+    return input.slice(customDelimiterLength).trim();
   }
 
   parseNumbers(input) {
