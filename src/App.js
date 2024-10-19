@@ -8,8 +8,8 @@ class App {
             result = 0;
         } else if (inputStr.slice(0, 2) === '//') {
             let endIndex = inputStr.indexOf("\\n");
-            const std = inputStr.slice(2, endIndex);
-            let nums = inputStr.slice(endIndex + 2).split(std);
+            const std = inputStr.slice(2, endIndex)
+            let nums = inputStr.slice(5).split(std);
             try {
                 result = this.#SUM(nums)
             } catch (e) {
@@ -31,8 +31,10 @@ class App {
     #SUM = (nums) => {
         let result = 0
         for (const num of nums) {
-            if (!isNaN(parseFloat(num)) && num > 0) {
+            if (num.size <=  10 && !isNaN(parseFloat(num)) && num > 0) {
                 result += Number(num);
+            } else if (num.size > 10) {
+                throw new Error('[ERROR] 숫자 범위를 넘어갑니다.');
             } else {
                 throw new Error('[ERROR] 잘못된 입력입니다.');
             }
