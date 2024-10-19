@@ -7,4 +7,4 @@
 - [x] **splitInputByDelimiter**: 문자열을 구분자로 나누어 숫자 배열을 반환
 - [x] **calculateSum**: 숫자 배열을 합산하여 결과를 반환
 - [x] **parseAndAdd**: 문자열을 받아 구분자에 따라 숫자를 더한 결과를 반환
-- [ ] **run(App.js)**: 사용자 입력을 받아 결과를 출력
+- [x] **run(App.js)**: 사용자 입력을 받아 결과를 출력

@@ -19,15 +19,15 @@ describe("StringCalculator", () => {
     test("정상적인 입력일 경우 에러가 발생하지 않는다", () => {
       const calculator = new StringCalculator();
       expect(() => calculator.validateInput("1,2:3")).not.toThrow();
-      expect(() => calculator.validateInput("//^\n1^2^3")).not.toThrow();
-      expect(() => calculator.validateInput("//;\n1")).not.toThrow();
+      expect(() => calculator.validateInput("//^\\n1^2^3")).not.toThrow();
+      expect(() => calculator.validateInput("//;\\n1")).not.toThrow();
     });
   });
 
   describe("extractCustomDelimiter", () => {
     test("커스텀 구분자를 추출한다", () => {
       const calculator = new StringCalculator();
-      expect(calculator.extractCustomDelimiter("//;\n1;2;3")).toBe(";");
+      expect(calculator.extractCustomDelimiter("//;\\n1;2;3")).toBe(";");
     });
 
     test("커스텀 구분자가 없으면 null을 반환한다", () => {
@@ -39,7 +39,7 @@ describe("StringCalculator", () => {
   describe("splitInputByDelimiter", () => {
     test("커스텀 구분자를 사용하여 문자열을 나누고 숫자 배열을 반환한다", () => {
       const calculator = new StringCalculator();
-      expect(calculator.splitInputByDelimiter("//;\n1;2;3", ";")).toEqual([
+      expect(calculator.splitInputByDelimiter("//;\\n1;2;3", ";")).toEqual([
         1, 2, 3,
       ]);
     });
@@ -72,8 +72,8 @@ describe("StringCalculator", () => {
 
     test("커스텀 구분자로 문자열을 더한 결과를 반환한다", () => {
       const calculator = new StringCalculator();
-      expect(calculator.parseAndAdd("//;\n1;2;3")).toBe(6);
-      expect(calculator.parseAndAdd("//;\n1")).toBe(1);
+      expect(calculator.parseAndAdd("//;\\n1;2;3")).toBe(6);
+      expect(calculator.parseAndAdd("//;\\n1")).toBe(1);
     });
 
     test("빈 문자열이 입력되면 에러가 발생한다", () => {
@@ -95,7 +95,7 @@ describe("StringCalculator", () => {
       expect(() => calculator.parseAndAdd("1,-2,3")).toThrow(
         "[ERROR] 음수는 입력할 수 없습니다."
       );
-      expect(() => calculator.parseAndAdd("//;\n1;-2;3")).toThrow(
+      expect(() => calculator.parseAndAdd("//;\\n1;-2;3")).toThrow(
         "[ERROR] 음수는 입력할 수 없습니다."
       );
     });

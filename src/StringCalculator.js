@@ -1,5 +1,5 @@
 class StringCalculator {
-  static CUSTOM_DELIMITER_PATTERN = /^\/\/(.)\n/;
+  static CUSTOM_DELIMITER_PATTERN = /^\/\/(.)\\n/;
 
   parseAndAdd(input) {
     this.validateInput(input);
@@ -48,7 +48,7 @@ class StringCalculator {
 
   splitInputByDelimiter(input, customDelimiter) {
     if (customDelimiter) {
-      const numbersSection = input.split("\n")[1];
+      const numbersSection = input.split("\\n")[1];
       return numbersSection.split(customDelimiter).map(Number);
     }
     return input.split(/,|:/).map(Number);
