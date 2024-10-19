@@ -33,10 +33,12 @@ class Input {
    * @returns {{customSeparator: string[], numbers: string}}
    */
   findCustomSeparatorAndNumbers(text) {
-    const customSeparatorAndNumbers = text.split("\n");
-    // TODO: 원본 배열을 건드는 게 바람직한 일일까?
-    const numbers = customSeparatorAndNumbers.pop();
-    return { customSeparator: customSeparatorAndNumbers.map((sep) => sep.replace("//", "")), numbers };
+    const parts = text.split("\n");
+
+    const numbers = parts[parts.length - 1];
+    const customSeparator = parts.slice(0, -1).map((sep) => sep.replace("//", ""));
+
+    return { customSeparator, numbers };
   }
 
   /**
