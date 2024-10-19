@@ -13,6 +13,7 @@ class Calculator {
 			const sumNumber = await getSum(numbers);
 		} catch (error) {
 			console.error(error.message);
+			throw new Error(`${error.message}`);
 		}
 	}
 
