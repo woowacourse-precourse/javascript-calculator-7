@@ -4,9 +4,11 @@ export default class Controller {
   async control(model, viewIn, viewOut) {
     const input = await viewIn.getInput();
     const numbers = model.extractNumbers(input);
+    const total = model.total(numbers);
 
-    Console.print("numbers:" + numbers);
-    // Todo: 결과값 구하기
-    // Todo: 사용자에게 결과값 보여주기
+    Console.print("total:" + total);
+
+    // Todo: 결과 보여주는 매서드 생성
+    // viewOut.showResult(total);
   }
 }

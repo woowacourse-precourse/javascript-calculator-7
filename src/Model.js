@@ -11,4 +11,8 @@ export default class Model {
 
     return numbers;
   }
+
+  total(numbers) {
+    return numbers.reduce((total, number) => total + parseInt(number, 10), 0);
+  }
 }
