@@ -36,7 +36,7 @@ class Input {
     const customSeparatorAndNumbers = text.split("\n");
     // TODO: 원본 배열을 건드는 게 바람직한 일일까?
     const numbers = customSeparatorAndNumbers.pop();
-    return { customSeparator: customSeparatorAndNumbers, numbers };
+    return { customSeparator: customSeparatorAndNumbers.map((sep) => sep.replace("//", "")), numbers };
   }
 
   /**
@@ -44,7 +44,7 @@ class Input {
    * @returns {string}
    */
   validateNumbers() {
-    const isSeparator = (num) => num === "" || [",", ":"].includes(num) || this.customSeparator.includes(`//${num}`);
+    const isSeparator = (num) => num === "" || [",", ":"].includes(num) || this.customSeparator.includes(num);
 
     if (this.numbers.includes("0")) throw new IncludeZeroError();
     if (!this.numbers.split(/[1-9]/).every(isSeparator)) throw new InvalidSeparatorError();
