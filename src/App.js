@@ -18,6 +18,7 @@ class App {
         // 커스텀한 구분자가 없을 경우(가장 basic한)
         const NUMBERS = TARGET_STRING.split(/[:\,]/);
       }
+      const SUM = NUMBERS.reduce((sum, n) => sum + parseInt(n), 0);
     }
   }
 }
