@@ -1,9 +1,22 @@
-import { REGEX_META_LETTER, SELECTOR_REGEX } from "../data/constants.js";
+import {
+  END_LETTER,
+  REGEX_META_LETTER,
+  START_LETTER,
+} from "../data/constants.js";
 
 // string => boolean
 // 구분자 지정문이 있는지 확인
 export const isSelectorExisted = (stringForCheck) => {
-  return SELECTOR_REGEX.test(stringForCheck);
+  return stringForCheck.startsWith(START_LETTER);
+};
+
+// string => [string, string]
+// 지정된 구분자와 숫자배열 문자열 분리
+export const seperateSelector = (beginningString) => {
+  const endLetterIndex = beginningString.indexOf(END_LETTER);
+  const selectorPart = beginningString.substring(START_LETTER.length, endLetterIndex)
+  const noSelectorPart = beginningString.substring(endLetterIndex+END_LETTER.length)
+  return [selectorPart, noSelectorPart]
 };
 
 // string => string
@@ -20,11 +33,4 @@ export const getSelector = (selectorPart) => {
   }
 
   return selector;
-};
-
-// string => [string, string]
-// 지정된 구분자와 숫자배열 문자열 분리
-export const seperateSelector = (beginningString) => {
-  const regexCheckedData = SELECTOR_REGEX.exec(beginningString);
-  return [regexCheckedData[1], regexCheckedData[2]];
 };
