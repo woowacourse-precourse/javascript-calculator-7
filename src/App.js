@@ -36,12 +36,18 @@ const getNumber = (inputArray) => {
   let currentNum = '';
   const RESULT = [];
   let isContinuous = 0;
-  inputArray.forEach((string) => {
+
+  inputArray.forEach((string, index) => {
     if (SEPARATORS.includes(string)) {
       isContinuous += 1;
       if (isContinuous > 1) {
         throw new Error("[ERROR] 구분자가 연속으로 사용됐습니다.");
       }
+
+      if(index === inputArray.length - 1){
+        throw new Error("[ERROR] 구분자 뒤에 올 숫자를 입력해주세요.")
+      }
+
       if (currentNum.length > 0) {
         RESULT.push(currentNum);
         currentNum = '';
@@ -59,9 +65,6 @@ const getNumber = (inputArray) => {
 }
 
 const calculate = (input) => {
-  if (isNaN(input[input.length - 1])) {
-    throw new Error("[ERROR] 더할 숫자 없이 구분자만 입력됐습니다.");
-  }
   let result = 0;
   getNumber(input).forEach((number)=>{
     if (Number(number) < 0) {
