@@ -5,7 +5,15 @@ class App {
     const inputValue = await this.getInputValue();
     let result = inputValue;
 
-    Console.print(`결과 : ${result}`);
+    try {
+      if (!inputValue) {
+        throw new Error('[ERROR] 입력값이 없습니다.');
+      }
+
+      Console.print(`결과 : ${result}`);
+    } catch (err) {
+      Console.print(err);
+    }
   }
 
   async getInputValue() {
