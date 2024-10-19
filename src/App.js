@@ -14,7 +14,7 @@ class App {
     }
   }
   calculateSum(input) {
-    const numbers = input.split("").map(Number);
+    const numbers = input.split(/[, :]/).map(Number);
     return numbers.reduce((sum, number) => sum + number, 0);
   }
 }
