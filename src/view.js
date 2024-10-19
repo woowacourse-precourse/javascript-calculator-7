@@ -1,12 +1,19 @@
 import { Console } from "@woowacourse/mission-utils";
 
 class CalculatorView {
-  async inputView() {
-    return await Console.readLineAsync("덧셈할 문자열을 입력해 주세요.\n");
+  constructor() {
+    this.messages = {
+      INPUT_PROMPT: "덧셈할 문자열을 입력해 주세요.\n",
+      RESULT_PREFIX: "결과 : ",
+    };
   }
 
-  outputView(RESULT) {
-    Console.print(`결과 : ${RESULT}`);
+  async inputView() {
+    return await Console.readLineAsync(this.messages.INPUT_PROMPT);
+  }
+
+  outputView(result) {
+    Console.print(`${this.messages.RESULT_PREFIX}${result}`);
   }
 
   errorView(error) {
