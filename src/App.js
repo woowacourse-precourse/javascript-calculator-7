@@ -29,7 +29,7 @@ class App {
   }
 
   handleCustomSeparator(input) {
-    const CUSTOM_SEPARATOR_REGEX = /^\/\/(.)\\n(.*)$/;
+    const CUSTOM_SEPARATOR_REGEX = /^\/\/(.|\s)\\n(.*)$/;
     let remainingString = input;
     let match;
 
@@ -37,7 +37,7 @@ class App {
       const CUSTOM_SEPARATOR = match[1];
       remainingString = match[2];
 
-      if (!isNaN(CUSTOM_SEPARATOR)) {
+      if (CUSTOM_SEPARATOR !== ' ' && !isNaN(CUSTOM_SEPARATOR)) {
         throw new Error('커스텀 구분자로 숫자를 사용할 수 없습니다');
       }
 
