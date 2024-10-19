@@ -10,14 +10,14 @@ class App {
     let input = await Console.readLineAsync("덧셈할 문자열을 입력해 주세요.\n");
 
     try {
-      const result = this.calculateSum(input);
+      const result = this.getResult(input);
       Console.print(`결과 : ${result}`);
     } catch (error) {
       throw error;
     }
   }
 
-  calculateSum(input) {
+  getResult(input) {
     if (!input) {
       throw new Error(ERROR_EMPTY_STRING);
     }
