@@ -68,7 +68,17 @@ class App {
       throw new Error('[ERROR] 입력값에 유효한 구분자가 없습니다.');
     }
 
-    return value.split(delimiterRegex).map(Number);
+    const operands = value.split(delimiterRegex).map(Number);
+
+    if (operands.some((operand) => isNaN(operand))) {
+      throw new Error('[ERROR] 숫자가 아닌 피연산자가 포함되어 있습니다.');
+    }
+
+    if (operands.some((operand) => operand < 0)) {
+      throw new Error('[ERROR] 음수 피연산자는 허용되지 않습니다.');
+    }
+
+    return operands;
   }
 
   getSum(numbers) {
