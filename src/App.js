@@ -1,6 +1,6 @@
 import { Console } from "@woowacourse/mission-utils";
 
-let separator = [",",":"];
+const SEPARATORS = [",",":"];
 
 const findSeparator = (input) => {
   const INPUT_ARRAY = input.split("");
@@ -11,11 +11,11 @@ const findSeparator = (input) => {
       throw new Error("[ERROR] 커스텀 구분자 추가를 위해선 //와 \\n 사이에 추가하고자 하는 구분자를 입력해주세요.");
     } else {
       const customSeparator = input.slice(START, END);
-      separator.push(customSeparator);
+      SEPARATORS.push(customSeparator);
       if (customSeparator.length > 1 || !isNaN(customSeparator)){
         throw new Error("[ERROR] 커스텀 구분자의 입력이 잘못됐습니다.")
       }
-      separator.push(input.slice(customSeparator))
+      SEPARATORS.push(input.slice(customSeparator))
       return INPUT_ARRAY.slice(END + 2);
     }
   }
@@ -27,7 +27,7 @@ const getNumber = (inputArray) => {
   const RESULT = [];
   let isContinuous = 0;
   inputArray.forEach((string) => {
-    if (separator.includes(string)) {
+    if (SEPARATORS.includes(string)) {
       isContinuous += 1;
       if (isContinuous > 1) {
         throw new Error("[ERROR] 구분자가 연속으로 사용됐습니다.");
