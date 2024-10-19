@@ -27,7 +27,7 @@ class Calculator {
 
     // 커스텀 구분자 처리
     if (input.startsWith("//")) {
-      const parts = input.split("\n");
+      const parts = input.split("\\n");
       if (parts.length < 2 || parts[0].length < 3) {
         throw new Error("[Error] 잘못된 구분자 포맷입니다.");
       }
