@@ -9,6 +9,9 @@ class App {
         try {
             const input = await this.getUserInput();
             this.validateInput(input);
+            const numbers = this.splitInput(input);
+            const sum = this.sumNumbers(numbers);
+            Console.print(`결과: ${sum}`);
         } catch (error) {
             Console.print(error.message);
         }
@@ -32,9 +35,13 @@ class App {
     }
 
     splitInput(input) {
-        if (!input) return 0;
+        if (!input) return [0];
         const numbers = input.split(/[,:]/);
         return numbers.map((number) => Number(number));
+    }
+
+    sumNumbers(numbers) {
+        return numbers.reduce((acc, cur) => acc + cur, 0);
     }
 
     throwError(message) {
