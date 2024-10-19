@@ -46,6 +46,7 @@ class App {
       Console.print(`결과 : ${result}`);
     } catch (err) {
       Console.print(err);
+      throw err;
     }
   }
 
