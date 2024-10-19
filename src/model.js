@@ -30,19 +30,14 @@ class CalculatorModel {
     if (customSeparatorMatch) {
       const customSeparator = customSeparatorMatch[1].trim();
 
-      // 커스텀 구분자가 숫자인지 체크
-      if (!isNaN(customSeparator)) {
-        throw new Error(this.errorMessages.NUMBER_AS_SEPARATOR);
-      }
+      this.validateCustomSeparator(customSeparator); // 커스텀 구분자 유효성 검사
 
       separators.push(customSeparator);
       numbersString = input.slice(customSeparatorMatch[0].length);
     }
 
-    // 공백이 구분자로 사용될 경우 처리
-    if (numbersString.includes(" ")) {
-      throw new Error(this.errorMessages.INVALID_SPACE);
-    }
+    // 공백 구분자 체크
+    this.validateNoSpaceSeparator(numbersString);
 
     // 커스텀 구분자가 .인 경우 처리
     if (separators.includes(".")) {
@@ -59,9 +54,7 @@ class CalculatorModel {
     }
 
     // 입력의 끝단이 구분자인지 확인하는 에러 처리
-    if (this.endWithSeparators(numbersString, separators)) {
-      throw new Error(this.errorMessages.INVALID_END);
-    }
+    this.validateInputEndsWithNumber(numbersString, separators);
 
     const regex = new RegExp(`[${separators.join("")}]+`);
     const numbers = numbersString
@@ -74,16 +67,10 @@ class CalculatorModel {
 
   processNumber(num) {
     const trimmedNum = num.trim();
-
-    // 숫자가 아닌 값 포함 체크
-    if (!this.regexNumber.test(trimmedNum)) {
-      throw new Error(this.errorMessages.INVALID_NUMBER);
-    }
+    this.validateIsNumber(trimmedNum); // 숫자 유효성 검사
 
     const parsedNum = parseFloat(trimmedNum);
-    if (parsedNum < 0) {
-      throw new Error(this.errorMessages.NEGATIVE_NOT_ALLOWED);
-    }
+    this.validateNoNegativeNumber(parsedNum); // 음수 유효성 검사
 
     return parsedNum;
   }
@@ -109,6 +96,38 @@ class CalculatorModel {
   endWithSeparators(input, separators) {
     const lastChar = input.trim().slice(-1);
     return separators.some((sep) => sep === lastChar);
+  }
+
+  // 유효성 검사 메서드들
+
+  validateCustomSeparator(separator) {
+    if (!isNaN(separator)) {
+      throw new Error(this.errorMessages.NUMBER_AS_SEPARATOR);
+    }
+  }
+
+  validateNoSpaceSeparator(numbersString) {
+    if (numbersString.includes(" ")) {
+      throw new Error(this.errorMessages.INVALID_SPACE);
+    }
+  }
+
+  validateInputEndsWithNumber(numbersString, separators) {
+    if (this.endWithSeparators(numbersString, separators)) {
+      throw new Error(this.errorMessages.INVALID_END);
+    }
+  }
+
+  validateIsNumber(trimmedNum) {
+    if (!this.regexNumber.test(trimmedNum)) {
+      throw new Error(this.errorMessages.INVALID_NUMBER);
+    }
+  }
+
+  validateNoNegativeNumber(parsedNum) {
+    if (parsedNum < 0) {
+      throw new Error(this.errorMessages.NEGATIVE_NOT_ALLOWED);
+    }
   }
 }
 
