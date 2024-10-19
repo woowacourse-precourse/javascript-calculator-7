@@ -3,17 +3,15 @@ import { Console } from "@woowacourse/mission-utils";
 class CalculatorModel {
   constructor() {
     this.defaultSeparators = [",", ":"];
-
-    // 에러 메시지 상수 정의
-    this.errors = {
-      whitespace: "[ERROR] 공백은 구분자로 쓸 수 없습니다.",
-      invalidSeparator:
-        "[ERROR] 허용되지 않은 구분자 또는 숫자가 아닌 값이 포함되어 있습니다.",
-      negativeNumber: "[ERROR] 음수는 입력할 수 없습니다.",
-      emptyEnd: "[ERROR] 입력의 마지막은 숫자여야 합니다.",
-      invalidInput: "[ERROR] 잘못된 입력입니다.",
-      decimalInputNotAllowed:
+    this.errorMessages = {
+      INVALID_SPACE: "[ERROR] 공백은 구분자로 쓸 수 없습니다.",
+      DECIMAL_NOT_ALLOWED:
         "[ERROR] 구분자가 '.'일 경우 소수를 입력할 수 없습니다.",
+      INVALID_INPUT: "[ERROR] 잘못된 입력입니다.",
+      INVALID_END: "[ERROR] 입력의 마지막은 숫자여야 합니다.",
+      INVALID_NUMBER:
+        "[ERROR] 허용되지 않은 구분자 또는 숫자가 아닌 값이 포함되어 있습니다.",
+      NEGATIVE_NOT_ALLOWED: "[ERROR] 음수는 입력할 수 없습니다.",
     };
   }
 
@@ -35,57 +33,58 @@ class CalculatorModel {
 
     // 공백이 구분자로 사용될 경우 처리
     if (numbersString.includes(" ")) {
-      throw new Error(this.errors.whitespace);
+      throw new Error(this.errorMessages.INVALID_SPACE);
     }
 
     // 커스텀 구분자가 .인 경우 처리
     if (separators.includes(".")) {
-      const userchoice = await this.getUserChoice();
+      const userChoice = await this.getUserChoice();
 
-      if (userchoice === "1") {
-        throw new Error(this.errors.decimalInputNotAllowed);
+      if (userChoice === "1") {
+        throw new Error(this.errorMessages.DECIMAL_NOT_ALLOWED);
       }
-      if (userchoice === "2") {
+      if (userChoice === "2") {
         return this.calculateInteger(numbersString, separators);
       }
 
-      throw new Error(this.errors.invalidInput); // 예외 처리
+      throw new Error(this.errorMessages.INVALID_INPUT);
     }
 
     // 입력의 끝단이 구분자인지 확인하는 에러 처리
     if (this.endWithSeparators(numbersString, separators)) {
-      throw new Error(this.errors.emptyEnd);
+      throw new Error(this.errorMessages.INVALID_END);
     }
 
     const regex = new RegExp(`[${separators.join("")}]+`);
-    const numbers = numbersString.split(regex).map((num) => {
-      const trimmedNum = num.trim();
-
-      // 숫자가 아닌 값 포함 체크
-      if (!/^(-?\d+(\.\d+)?)$/.test(trimmedNum)) {
-        throw new Error(this.errors.invalidSeparator);
-      }
-
-      const parsedNum = parseFloat(trimmedNum);
-      if (parsedNum < 0) {
-        throw new Error(this.errors.negativeNumber);
-      }
-
-      return parsedNum;
-    });
+    const numbers = numbersString
+      .split(regex)
+      .map(this.processNumber.bind(this));
 
     const sum = numbers.reduce((acc, cur) => acc + cur, 0);
     return sum;
   }
 
-  calculateInteger(numbersString, separators) {
+  processNumber(num) {
+    const trimmedNum = num.trim();
+
+    // 숫자가 아닌 값 포함 체크
+    if (!/^(-?\d+(\.\d+)?)$/.test(trimmedNum)) {
+      throw new Error(this.errorMessages.INVALID_NUMBER);
+    }
+
+    const parsedNum = parseFloat(trimmedNum);
+    if (parsedNum < 0) {
+      throw new Error(this.errorMessages.NEGATIVE_NOT_ALLOWED);
+    }
+
+    return parsedNum;
+  }
+
+  async calculateInteger(numbersString, separators) {
     const regex = new RegExp(`[${separators.join("")}]+`);
     const integerNumbers = numbersString
       .split(regex)
-      .map((num) => {
-        const trimmedNum = num.trim();
-        return parseInt(trimmedNum, 10);
-      })
+      .map((num) => parseInt(num.trim(), 10))
       .filter((num) => !isNaN(num));
 
     const sum = integerNumbers.reduce((acc, cur) => acc + cur, 0);
