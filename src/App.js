@@ -2,15 +2,16 @@ import { Console } from "@woowacourse/mission-utils";
 
 class App {
   async run() {
-    const input = await Console.readLineAsync(
-      "덧셈할 문자열을 입력해 주세요.\n"
-    );
-    Consle.print(input);
-  }
-}
+    //입력받기
+    const input = await Console.readLineAsync("덧셈할 문자열을 입력해 주세요.\n");
 
-export default App;class App {
-  async run() {}
+    // 빈 문자열 처리
+    if (input === "") {
+      return Console.print("결과 : 0");
+    }
+
+    Console.print(input);
+  }
 }
 
 export default App;
