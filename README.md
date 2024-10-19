@@ -4,7 +4,7 @@
 
 ### 1️⃣ 덧셈할 문자열 입력 받기 : `덧셈할 문자열을 입력해 주세요.`
 
--   [ ] `@woowacourse/mission-utils` 의 `Console.readLineAsync()` 을 사용해 사용자의 값을 입력받기
+-   [x] `@woowacourse/mission-utils` 의 `Console.readLineAsync()` 을 사용해 사용자의 값을 입력받기
     ```
     덧셈할 문자열을 입력해 주세요.
     1,2:3
