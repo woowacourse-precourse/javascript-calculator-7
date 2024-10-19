@@ -42,10 +42,10 @@ class App {
 
   isValidNum(value) {
     if (isNaN(value)) {
-      //숫자가 아닐시 예외처리
+      throw new Error('[ERROR] Invalid input: Non-numeric value detected'); //숫자가 아닐시 예외처리
     }
     if (value < 0) {
-      //음수일시 예외처리
+      throw new Error('[ERROR] Negative numbers not allowed'); //음수일시 예외처리
     }
   }
 }
