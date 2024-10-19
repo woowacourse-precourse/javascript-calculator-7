@@ -51,6 +51,10 @@ class Input {
 
     return this.numbers;
   }
+
+  validateSeparators() {
+    return this.customSeparator;
+  }
 }
 
 export default Input;

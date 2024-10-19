@@ -113,3 +113,21 @@ describe("validateNumbers()", () => {
     expect(() => input.validateNumbers()).toThrow(InvalidSeparatorError);
   });
 });
+
+describe("validateSeparators()", () => {
+  let input;
+
+  beforeEach(() => {
+    input = new Input();
+  });
+
+  afterEach(jest.restoreAllMocks);
+
+  test("커스텀 구분자가 문자로 이루어져 있으면 입력값 그대로 반환", async () => {
+    const mockInput = ["//;\n//$\n1,2,3"];
+    mockQuestions(mockInput);
+    await input.getPlusString();
+
+    expect(input.validateSeparators()).toEqual([";", "$"]);
+  });
+});
