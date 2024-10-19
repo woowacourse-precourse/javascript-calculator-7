@@ -1,5 +1,3 @@
-import { Console } from '@woowacourse/mission-utils';
-
 class Calculator {
     calculate(input) {
         if(input === "") {
