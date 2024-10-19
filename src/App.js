@@ -1,5 +1,16 @@
 import { MissionUtils } from "@woowacourse/mission-utils";
 
+function sumNumber(input, splitunit){
+  if(input.indexOf("\\n") != -1)
+    input = input.substring(input.indexOf("\\n")+2, input.length);
+
+  const regex = new RegExp(`[${splitunit}]`);
+  let numberArr = input.split(regex).map(Number);
+  let sum = 0;
+  for(var number of numberArr) sum += number;
+  return sum;
+}
+
 function getSplitunit(input){
   if(input.indexOf("//") != -1 && input.indexOf("\\n") != -1){
     let start = input.indexOf("//") + 2;
@@ -21,6 +32,7 @@ class App {
   async run() {
     const input = await getText();
     let splitunit = getSplitunit(input);
+    let sum = sumNumber(input, splitunit);
   }
 }
 
