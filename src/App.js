@@ -1,46 +1,52 @@
-import { Console, MissionUtils } from "@woowacourse/mission-utils";
+import { Console } from "@woowacourse/mission-utils";
 
 class App {
+	checkNumberSign(number) {
+		return Math.sign(number);
+	}
+	sumInputNumbers(array) {
+		let result = 0;
+		for (let i = 0; i < array.length; i++) {
+			if (this.checkNumberSign(array[i]) >= 0) {
+				result = Number(array[i]) + result;
+			} else {
+				throw new Error("양수가 아닙니다");
+			}
+		}
+		return result;
+	}
 	async run() {
-		let regexes = {
-			check_special_chracter: RegExp(/[,;/\n]/, "g"), // 특수 문자 확인
-			check_empty_string: RegExp(/^$/), // 빈 문자열
+		const regexes = {
+			check_special_chracter: RegExp(/[,;/\n]/, "g"),
+			check_empty_string: RegExp(/^$/),
 			check_front: /^\/\//,
-			normal_delimiter: RegExp(/[,:]/, "g"),
-			custom_delimiter: /[^//]/,
+			split_normal: RegExp(/[,:]/, "g"),
+			split_custom: /[^//]/,
 		};
 
-		let input;
+		let custom_seperator;
+		let custom_regex;
+		let input_array = [];
 
-		input = await Console.readLineAsync(",(쉼표)와 ;(세미 콜론)와 숫자를 조합한 문자열을 입력해주세요. ex)1,2:3 ");
-
-		let delimiter;
-		let reg;
-		let input_array;
-		let result = 0;
+		let input = await Console.readLineAsync(",(쉼표)와 ;(세미 콜론)와 숫자를 조합한 문자열을 입력해주세요. ex)1,2:3 ");
 
 		try {
 			if (input.match(regexes.check_special_chracter) || input.match(regexes.check_empty_string)) {
 				let is_using_custom_reg = input.match(regexes.check_front);
 
 				if (is_using_custom_reg) {
-					delimiter = input.match(regexes.custom_delimiter)[0];
-					reg = RegExp(`[\\\\/\\sA-Za-z${delimiter}]`, "g");
+					custom_seperator = input.match(regexes.split_custom)[0];
+					custom_regex = RegExp(`[\\\\/\\sA-Za-z${custom_seperator}]`, "g");
 
-					input_array = input.split(reg);
-					for (let i = 0; i < input_array.length; i++) {
-						result = Number(input_array[i]) + result;
-					}
+					input_array = input.split(custom_regex);
 				} else {
-					input_array = input.split(regexes.normal_delimiter);
-					for (let i = 0; i < input_array.length; i++) {
-						result = Number(input_array[i]) + result;
-					}
+					input_array = input.split(regexes.split_normal);
 				}
-				Console.print(`결과 : ${result}`);
+				const answer = this.sumInputNumbers(input_array);
+				Console.print(`결과 : ${answer}`);
 			}
-		} catch (e) {
-			throw new Error("[ERROR] 잘못된 문자열을 입력하셨습니다.");
+		} catch (error) {
+			throw new Error(`[ERROR] ${error.message}`);
 		}
 	}
 }
