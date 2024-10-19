@@ -56,4 +56,13 @@ describe("에러를 발생시키는 예외상황 테스트", () => {
       await expect(app.run()).rejects.toThrow("[ERROR]");
     }
   });
+  test("더할 값에 양의 정수가가 아닌 값이 입력된 경우", async () => {
+    const inputs = ["-1,0,1", "0.5,-0.5"];
+    mockMultipleQuestions(inputs);
+
+    const app = new App();
+    for (const _ of inputs) {
+      await expect(app.run()).rejects.toThrow("[ERROR]");
+    }
+  });
 });
