@@ -7,8 +7,7 @@ class Calculator {
       const result = this.calculate(input);
       MissionUtils.Console.print(`결과 : ${result}`);
     } catch (error) {
-      MissionUtils.Console.print(error.message);
-      process.exit(1);
+      throw error;
     }
   }
 
@@ -29,7 +28,7 @@ class Calculator {
     if (input.startsWith("//")) {
       const parts = input.split("\\n");
       if (parts.length < 2 || parts[0].length < 3) {
-        throw new Error("[Error] 잘못된 구분자 포맷입니다.");
+        throw new Error("[ERROR] 잘못된 구분자 포맷입니다.");
       }
       const customDelimiter = parts[0].slice(2);
       delimiters.push(customDelimiter);
@@ -40,7 +39,10 @@ class Calculator {
     const numbers = numberString.split(regex).map((num) => {
       const parsed = Number(num);
       if (isNaN(parsed)) {
-        throw new Error("[Error] 입력에 숫자가 아닌 값이 포함되었습니다.");
+        throw new Error("[ERROR] 입력에 숫자가 아닌 값이 포함되었습니다.");
+      }
+      if (parsed < 0) {
+        throw new Error("[ERROR] 음수는 허용되지 않습니다.");
       }
       return parsed;
     });
