@@ -1,4 +1,3 @@
-import { Console } from '@woowacourse/mission-utils';
 import UserInput from '../View/UserInput.js';
 
 // TO DO: 리펙토링 -> 화살표 함수 공부 후, 모두 통일하기
