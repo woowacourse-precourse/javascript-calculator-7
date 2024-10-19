@@ -1,6 +1,6 @@
 const errorCheck = (inputString, number) => {
   if (!inputString.trim()) {
-    throw new Error("아무것도 입렵하지 않았습니다.");
+    throw new Error("아무것도 입력하지 않았습니다.");
   } else if (isNaN(inputString.slice(-1))) {
     throw new Error("마지막 입력을 숫자로 끝내주세요.");
   }
