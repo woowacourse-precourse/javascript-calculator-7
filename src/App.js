@@ -30,6 +30,10 @@ class App {
   generateInputNumberList() {
     this.#inputNumberList = this.#input.match(/[0-9]+/g).map(Number);
   }
+
+  getResult() {
+    return this.#inputNumberList.reduce((acc, current) => acc + current);
+  }
 }
 
 export default App;
