@@ -16,7 +16,7 @@ class Calculator {
   async handleInput() {
     const input = await getInput();
     validateInput(input);
-    const { numbers, delimiter } = extractNumbersFromInput(input);
+    const { numbers } = extractNumbersFromInput(input);
   }
 }
 

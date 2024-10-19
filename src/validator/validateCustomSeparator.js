@@ -1,9 +1,9 @@
-const validateCustomSeparator = (delimiter) => {
+const validateCustomSeparator = (customSeparator) => {
   if (
-    delimiter === "," ||
-    delimiter === ":" ||
-    delimiter.length > 1 ||
-    isNaN(delimiter) === true
+    customSeparator === "," ||
+    customSeparator === ":" ||
+    customSeparator.length > 1 ||
+    isNaN(customSeparator) === false
   )
     return false;
   return true;

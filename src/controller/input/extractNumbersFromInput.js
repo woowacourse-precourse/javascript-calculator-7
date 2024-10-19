@@ -14,7 +14,7 @@ const extractNumbersFromInput = (input) => {
 
   console.log(numbers);
 
-  return { numbers, delimiter };
+  return { numbers, customSeparator };
 };
 
 export default extractNumbersFromInput;

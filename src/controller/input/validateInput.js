@@ -5,7 +5,9 @@ import validateSeparteUse from "../../validator/validateSeparateUse.js";
 import extractNumbersFromInput from "./extractNumbersFromInput.js";
 
 const validateInput = (input) => {
-  const { numbers, delimiter } = extractNumbersFromInput(input);
+  const { numbers, customSeparator } = extractNumbersFromInput(input);
+
+  console.log(customSeparator);
 
   if (!validateCorrectInput(numbers))
     throw new Error(ErrorMessage.WRONG_INPUT_MESSAGE);
@@ -13,7 +15,7 @@ const validateInput = (input) => {
   if (!validateSeparteUse(input))
     throw new Error(ErrorMessage.WRONG_SEPARATOR_USE_MESSAGE);
 
-  if (!validateCustomSeparator(delimiter))
+  if (customSeparator !== null && !validateCustomSeparator(customSeparator))
     throw new Error(ErrorMessage.WRONG_CUSTOM_SEPARATOR_USE_MESSAGE);
 };
 
