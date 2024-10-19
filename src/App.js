@@ -71,7 +71,8 @@ class App {
     let input="";
     Console.print("덧셈할 문자열을 입력해 주세요.");
     input = await Console.readLineAsync(input);
-    Console.print("결과 : " + calculate(findSeparator(input)));
+    const RESULT = calculate(findSeparator(input))
+    Console.print(`결과 : ${RESULT}`);
   }
 }
 
