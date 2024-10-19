@@ -11,6 +11,9 @@ class App {
 
     // 구분자에 따라 분리된 배열을 저장
     this.splitArray = [];
+
+    // 결과값을 저장
+    this.result = 0;
   }
 
   async run() {
@@ -25,8 +28,12 @@ class App {
         this.isCustom(this.answer);
         this.splitByDelimiter();
         this.isValid();
+        this.getSum();
+
+        // 사용자의 값 출력
+        Console.print(this.result);
       } catch (error) {
-        console.log(error);
+        Console.print(error);
       }
     });
   }
@@ -63,6 +70,13 @@ class App {
     if (!this.splitArray.every(isNumber)) {
       throw new Error("[ERROR]");
     }
+  }
+
+  // 추출된 숫자값 배열을 순회하며 합을 구합니다.
+  getSum() {
+    this.result = this.splitArray
+      .map((num) => parseFloat(num))
+      .reduce((acc, cur) => acc + cur, 0);
   }
 }
 
