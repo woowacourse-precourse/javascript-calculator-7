@@ -1,110 +1,74 @@
 import { Console } from '@woowacourse/mission-utils';
+import { validateDelimiters, validateNumericValues } from './validate.js';
+import { ERROR_MESSAGES } from './errors.js';
+import { DEFAULT_DELIMITERS } from './constants.js';
 
-// 허용되지 않은 구분자 검사 함수
-function validateDelimiters(input, customDelimiter = null) {
-  let allowedDelimiters = [',', ':'];
-
-  if (customDelimiter) {
-    allowedDelimiters.push(customDelimiter);
-  }
-
-  // 알파벳이 포함되면 에러 발생
-  if (/[a-zA-Z]/.test(input)) {
-    throw new Error('[ERROR] 숫자 이외의 값이 포함되어 있습니다.');
-  }
-
-  // 정규식을 이용해 특수 문자 구분자만 허용
-  const invalidChars = input.split('').filter((char) => {
-    return (
-      !/\d/.test(char) &&
-      !new RegExp(`[${allowedDelimiters.join('')}]`).test(char)
-    );
-  });
-
-  if (invalidChars.length > 0) {
-    throw new Error('[ERROR] 허용되지 않은 구분자가 사용되었습니다.');
-  }
-}
-
-// 빈 문자열 처리
+//빈 문자열 처리
 function handleEmptyInput(input) {
   return input === '' ? 0 : null;
 }
 
-// 기본 구분자로 문자열 분리 및 합산
-function sumWithDefaultDelimiters(input) {
-  const delimiters = /[,|:]/;
-
-  const tokens = input.split(delimiters);
+// 구분자를 기준으로 문자열을 숫자로 변환
+function parseTokens(input, delimiters) {
+  const tokens = input.split(new RegExp(`[${delimiters.join('')}]`));
 
   if (tokens.some((token) => token === '')) {
-    throw new Error('[ERROR] 구분자 사이에 숫자가 없습니다.');
+    throw new Error(ERROR_MESSAGES.EMPTY_TOKEN);
   }
 
-  const numericValues = tokens.map(Number);
-
-  if (numericValues.some((num) => num < 0)) {
-    throw new Error('[ERROR] 양수 이외의 값이 포함되어 있습니다.');
-  }
-  validateDelimiters(input);
-
-  if (numericValues.some((num) => num > Number.MAX_SAFE_INTEGER)) {
-    throw new Error('[ERROR] 숫자가 허용된 범위를 초과했습니다.');
-  }
-
-  return numericValues.reduce((acc, num) => acc + num, 0);
+  return tokens.map(Number);
 }
 
-//커스텀 구분자로 문자열 분리 및 합산
-function sumWithCustomDelimiter(input) {
-  // 커스텀 구분자를 정규표현식으로 추출
+// 커스텀 구분자 추출
+function extractCustomDelimiter(input) {
   const match = input.match(/^\/\/(.)\n/);
   if (!match) {
-    throw new Error('[ERROR] 잘못된 커스텀 구분자 형식입니다.');
+    throw new Error(ERROR_MESSAGES.INVALID_CUSTOM_DELIMITER);
   }
+  return match[1];
+}
 
-  const customDelimiter = match[1]; // 커스텀 구분자
-  const numbersString = input.slice(match[0].length); // 구분자와 \n을 제외한 숫자 문자열
+// 커스텀 구분자로 합산
+function sumWithCustomDelimiter(input) {
+  const customDelimiter = extractCustomDelimiter(input);
+  const numbersString = input.slice(4); // 구분자 뒤에 오는 숫자 문자열
 
   if (!numbersString) {
-    throw new Error('[ERROR] 덧셈할 숫자가 없습니다.');
+    throw new Error(ERROR_MESSAGES.MISSING_NUMBER);
   }
 
-  // 구분자를 이용하여 숫자 문자열을 분리
-  const delimiters = new RegExp(`[${customDelimiter}|,|:]`);
-  const tokens = numbersString.split(delimiters);
-
-  if (tokens.some((token) => token === '')) {
-    throw new Error('[ERROR] 구분자 사이에 숫자가 없습니다.');
-  }
-
-  const numericValues = tokens.map(Number);
-
-  if (numericValues.some((num) => num < 0)) {
-    throw new Error('[ERROR] 양수 이외의 값이 포함되어 있습니다.');
-  }
-
-  // 구분자 검증
   validateDelimiters(numbersString, customDelimiter);
-
-  if (numericValues.some((num) => num > Number.MAX_SAFE_INTEGER)) {
-    throw new Error('[ERROR] 숫자가 허용된 범위를 초과했습니다.');
-  }
-
+  const numericValues = parseTokens(numbersString, [
+    customDelimiter,
+    ...DEFAULT_DELIMITERS,
+  ]);
+  validateNumericValues(numericValues);
   return numericValues.reduce((acc, num) => acc + num, 0);
 }
 
+// 기본 구분자로 합산
+function sumWithDefaultDelimiters(input) {
+  validateDelimiters(input);
+  const numericValues = parseTokens(input, DEFAULT_DELIMITERS);
+  validateNumericValues(numericValues);
+  return numericValues.reduce((acc, num) => acc + num, 0);
+}
+
+// 전체 합산 처리
 function sum(input) {
   const result = handleEmptyInput(input);
   if (result !== null) {
     return result;
   }
+
   if (input.startsWith('//')) {
     return sumWithCustomDelimiter(input);
   }
+
   return sumWithDefaultDelimiters(input);
 }
 
+// 프로그램 실행
 class App {
   async run() {
     const input = await Console.readLineAsync(
