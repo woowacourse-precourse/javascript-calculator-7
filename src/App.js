@@ -14,8 +14,10 @@ class App {
       customSeperator = inputString[0].substring(2);
       inputString = inputString[1];
     }
-    Console.print(customSeperator);
-    Console.print(inputString);
+
+    //문자열에서 숫자 추출하여 배열로 저장
+    const seperatorRegex = new RegExp(`[${customSeperator}:,]`);
+    const numbers = inputString.split(seperatorRegex).map(Number);
   }
 }
 
