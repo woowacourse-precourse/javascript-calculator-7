@@ -15,6 +15,9 @@ class App {
     }
 
     const remainingString = checkCustomDelimiter(input, delimiters);
+    const splitString = remainingString.split(
+      new RegExp(delimiters.join("|"), "g")
+    );
 
     Console.print(`입력 문자열 확인: ${input}`);
   }
