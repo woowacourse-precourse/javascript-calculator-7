@@ -2,13 +2,9 @@ import { Console } from "@woowacourse/mission-utils";
 
 class App {
   async run() {
-    try {
-      const nums = await this.getNums();
-      const result = this.getSum(nums);
-      this.printResult(result);
-    } catch (e) {
-      Console.print("[ERROR] " + e.message);
-    }
+    const nums = await this.getNums();
+    const result = this.getSum(nums);
+    this.printResult(result);
   }
 
   async getNums() {
@@ -21,7 +17,7 @@ class App {
     if (isCustom) {
       const temp = input.split("//")[1].split("\\n");
       if (temp.length < 2) {
-        throw new Error("올바른 커스텀 구분자 형식이 아닙니다.");
+        throw new Error("[ERROR] 올바른 커스텀 구분자 형식이 아닙니다.");
       }
       const customSeparator = temp[0];
       nums = temp[1].split(customSeparator);
@@ -32,10 +28,10 @@ class App {
     nums = nums.map((n) => {
       const num = Number(n);
       if (num < 0) {
-        throw new Error("음수는 입력하실 수 없습니다.");
+        throw new Error("[ERROR] 음수는 입력하실 수 없습니다.");
       }
       if (isNaN(num)) {
-        throw new Error("숫자가 아닌 값이 입력하실 수 없습니다.");
+        throw new Error("[ERROR] 숫자가 아닌 값이 입력하실 수 없습니다.");
       }
       return num;
     });
