@@ -1,6 +1,6 @@
 import checkCustomDelimiter from "./CheckCustomDelimiter";
 
-const processingInput = (input, customDelimiter) => {
+const cuttingInput = (input, customDelimiter) => {
   const PROCESSED_INPUT = customDelimiter
     ? input.slice(input.indexOf("\\n") + 2)
     : input;
@@ -10,4 +10,4 @@ const processingInput = (input, customDelimiter) => {
   return PROCESSED_INPUT.split(DELIMITER_REGEX).map(Number);
 };
 
-export default processingInput;
+export default cuttingInput;
