@@ -15,7 +15,7 @@ class App {
 
       // 유효한 입력값일 경우, 계산하는 메서드 를 실행
       if (this.isValid(inputArr, delimiters)) {
-        this.calculate();
+        this.calculate(inputArr);
       } else {
         MissionUtils.Console.print('[ERROR] 잘못된 값을 입력하셨습니다.');
         return;
@@ -24,13 +24,9 @@ class App {
       MissionUtils.Console.print(`[ERROR]: ${error}`);
       return;
     }
-    
-    MissionUtils.Console.print('계산 성공');
   }
   
-  isValid(inputArr, delimiters) {
-    MissionUtils.Console.print(inputArr);
-    
+  isValid(inputArr, delimiters) {    
     const isValidInput = inputArr.every((str, idx) => {
       if (idx % 2 === 0) { 
         // 숫자인지 확인
@@ -113,12 +109,24 @@ class App {
 
 
   // 입력값을 계산하는 메서드 
-  calculate() {
-    // 구분자를 기준으로 숫자들을 분리한다.
-    // 숫자 중 음수가 있는지 체크한다.
-    // 입력값중 숫자가 음수일경우 "[ERROR] 음수의 값을 입력하셨습니다."라는 메시지와 함께 앱을 종료시킨다.
-    // 양수이면 합산한다.
-    // 최종 합산된 값을 반환한다.  }
+  calculate(inputArr) {
+    // 숫자만 필터링
+    const numbers = inputArr.filter((str, idx) => idx % 2 === 0).map(Number); 
+  
+    // 음수가 있는지 체크
+    const negativeNumbers = numbers.filter(num => num < 0);
+    if (negativeNumbers.length > 0) {
+      MissionUtils.Console.print(`[ERROR] 음수의 값을 입력하셨습니다: ${negativeNumbers.join(', ')}`);
+      return;
     }
+  
+    // 양수 합산
+    const sum = numbers.reduce((acc, curr) => acc + curr, 0);
+  
+    // 최종 합산 결과 출력
+    MissionUtils.Console.print(`결과: ${sum}`);
+  }
+  
+  
 }
 export default App;
