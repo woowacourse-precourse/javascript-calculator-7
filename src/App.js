@@ -43,7 +43,7 @@ class App {
       const number = Number(word);
 
       if(isNaN(number) || number <= 0){
-        throw new Error('[ERROR] 올바른 구분자가 아니거나, 양의 정수가 아닌 값이 포함되어 있습니다.');
+        throw new Error(`[ERROR] ${word}는 잘못된 값입니다.`);
       }
       return number;
     })
