@@ -1,8 +1,8 @@
 import Validator from './Validator';
-import printMessage from './print-message';
+import printMessage from './util/print-message';
 import InputParser from './InputParser';
-import userInput from './user-input';
-import calculateSum from './calculate';
+import userInput from './util/user-input';
+import calculateSum from './util/calculate';
 import { PROMPT_USER_INPUT, RESULT_MESSAGE } from './constant';
 
 class App {

@@ -1,5 +1,5 @@
 import { DEFAULT_SEPARATOR, CUSTOM_SEPARATOR } from './constant';
-import extractCustomSeparator from './extract-custom-separator';
+import extractCustomSeparator from './util/extract-custom-separator';
 class InputParser {
   constructor(input) {
     this.input = input;

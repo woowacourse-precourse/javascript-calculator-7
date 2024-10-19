@@ -1,4 +1,4 @@
-import { CUSTOM_SEPARATOR } from './constant';
+import { CUSTOM_SEPARATOR } from '../constant';
 
 function extractCustomSeparator(input) {
   const customMatch = input.match(CUSTOM_SEPARATOR);
