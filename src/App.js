@@ -36,25 +36,17 @@ class App {
   }
 
   extractPositiveNumbers(input, ...seperatorArray){
-    const extractedNumbers = [];
-
     const seperatorRegex = new RegExp(`[${seperatorArray.join('|')}]`, 'g');
     const words = input.split(seperatorRegex);
 
-    const isValidInput = words.every((word) => {
+    const extractedNumbers = words.map((word) => {
       const number = Number(word);
 
       if(isNaN(number) || number <= 0){
-        return false;
+        throw new Error('[ERROR] 올바른 구분자가 아니거나, 양의 정수가 아닌 값이 포함되어 있습니다.');
       }
-      return true;
+      return number;
     })
-    
-    if(!isValidInput){
-      throw new Error('[ERROR] 올바른 구분자가 아니거나, 양의 정수가 아닌 값이 포함되어 있습니다.');
-    } else {
-      extractedNumbers.push(...words.map((word) => Number(word)));
-    }
 
     return extractedNumbers;
   }
