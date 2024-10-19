@@ -20,6 +20,16 @@ describe("sum()", () => {
     const calculator = new Calculator([], "123");
     expect(calculator.sum()).toBe(123);
   });
+
+  test("커스텀 구분자가 한 개 주어졌을 때 숫자의 합 반환", async () => {
+    const calculator = new Calculator([";"], "12;3");
+    expect(calculator.sum()).toBe(15);
+  });
+
+  test("커스텀 구분자가 여러 개 주어졌을 때 숫자의 합 반환", async () => {
+    const calculator = new Calculator([";", "?"], "12;3?4");
+    expect(calculator.sum()).toBe(19);
+  });
 });
 
 describe("splitNumbers()", () => {
