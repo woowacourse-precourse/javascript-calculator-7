@@ -1,4 +1,6 @@
-class NumberConverter {
+import IConverter from "../interfaces/IConverter.js";
+
+class NumberConverter extends IConverter {
   convertToNumber(value) {
     if (isNaN(value)) {
       throw new Error("[ERROR] 숫자가 아닌 값을 입력할 수 없습니다.");

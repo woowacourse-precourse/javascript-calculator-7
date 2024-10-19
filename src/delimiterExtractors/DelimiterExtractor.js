@@ -1,13 +1,16 @@
-class DelimiterExtractor {
+import IDelimiterExtractor from "../interfaces/IDelimiterExtractor.js";
+
+class DelimiterExtractor extends IDelimiterExtractor {
   #defaultDelimiters;
   #customDelimiter;
 
   constructor() {
+    super();
     this.#defaultDelimiters = [",", ":"];
     this.#customDelimiter = null;
   }
 
-  extractCustomDelimiter(inputValue) {
+  extractDelimiter(inputValue) {
     const delimiterPattern = /\/\/(.*?)\\n/;
     const customDelimiterMatch = inputValue.match(delimiterPattern);
 
