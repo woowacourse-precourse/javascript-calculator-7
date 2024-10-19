@@ -40,6 +40,10 @@ class App {
   }
 
   parseInputValueToOperandsByDelimiter(value, delimiterRegex) {
+    if (!delimiterRegex.test(value)) {
+      throw new Error('[ERROR] 입력값에 유효한 구분자가 없습니다.');
+    }
+
     return value.split(delimiterRegex).map(Number);
   }
 
