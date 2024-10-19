@@ -29,10 +29,10 @@ class App {
     const hasCustomSeparator = hasCustomDelimiterPrefix && hasCustomDelimiterSuffix;
 
     if (hasCustomSeparator) {
-      const start = input.indexOf(CUSTOM_DELIMITER_PREFIX);
-      const end = input.indexOf(CUSTOM_DELIMITER_SUFFIX);
-      const customSeparator = input.slice(start + 2, end);
-      const stringToSeparate = input.replace(input.slice(start, end + 2), "");
+      const customDelimiterPrefixIndex = input.indexOf(CUSTOM_DELIMITER_PREFIX);
+      const customDelimiterSuffixIndex = input.indexOf(CUSTOM_DELIMITER_SUFFIX);
+      const customSeparator = input.slice(customDelimiterPrefixIndex + 2, customDelimiterSuffixIndex);
+      const stringToSeparate = input.replace(input.slice(customDelimiterPrefixIndex, customDelimiterSuffixIndex + 2), "");
       return this.splitAndConvertToNumbers(stringToSeparate, customSeparator);
     }
     if (hasCommaAndSemicolon)
