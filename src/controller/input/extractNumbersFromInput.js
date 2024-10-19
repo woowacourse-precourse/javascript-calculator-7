@@ -12,7 +12,7 @@ const extractNumbersFromInput = (input) => {
 
   const numbers = input.split(delimiter);
 
-  return numbers;
+  return { numbers, delimiter };
 };
 
 export default extractNumbersFromInput;

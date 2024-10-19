@@ -14,8 +14,9 @@ class Calculator {
 
   async handleInput() {
     const input = await getInput();
-    const extractNum = extractNumbersFromInput(input);
-    console.log(extractNum);
+    const { numbers, delimiter } = extractNumbersFromInput(input);
+    console.log(numbers);
+    console.log(delimiter);
   }
 }
 
