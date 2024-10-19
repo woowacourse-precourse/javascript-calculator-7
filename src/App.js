@@ -11,6 +11,7 @@ class App {
 	async run() {
 		try {
 			await this.#getUserInput();
+			this.#validateEmptyOrNull();
 			this.#validateNegativeInput();
 			this.#parseAndSplitInput();
 			this.#handleArrayResult();
@@ -24,14 +25,21 @@ class App {
 		this.#input = await Console.readLineAsync('덧셈할 문자열을 입력해 주세요. \n');
 	}
 
-	#checkForNaN(value) {
-		return value.some((v) => isNaN(v));
+	#validateEmptyOrNull() {
+		if (isEmptyOrNull(this.#input)) {
+			this.#result = 0;
+			return;
+		}
 	}
 
 	#validateNegativeInput() {
 		if (hasNegative(this.#input)) {
 			this.#throwError('[ERROR] : 양수만 입력할 수 있어요.');
 		}
+	}
+
+	#checkForNaN(value) {
+		return value.some((v) => isNaN(v));
 	}
 
 	#validateArrayInput() {
@@ -44,10 +52,12 @@ class App {
 	}
 
 	#parseAndSplitInput() {
-		if (isEmptyOrNull(this.#input)) {
-			this.#result = 0;
-		} else if (this.#input.startsWith('//')) {
-			this.#result = splitByCustomSeparator(this.#input);
+		if (this.#input.startsWith('//')) {
+			const result = splitByCustomSeparator(this.#input);
+			if (result === null) {
+				this.#throwError('[ERROR] : 커스텀 구분자를 확인할 수 없어요.');
+			}
+			this.#result = result;
 		} else {
 			this.#result = splitByDefaultSeparators(this.#input);
 		}
