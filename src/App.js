@@ -34,7 +34,9 @@ class App {
 
     const isOnlyNumber = numString.match(/^[0-9]+$/);
 
-    if (isOnlyNumber) return +numString;
+    if (!isOnlyNumber) throw new Error('[ERROR] 숫자로 형변환 할 수 없습니다.');
+
+    return +numString;
   }
 }
 
