@@ -5,6 +5,7 @@ import {
   isPositiveNumber,
   isStartsWith,
   shallowCopy,
+  trimWhitespace,
 } from '../src/lib/utils';
 
 describe('utils', () => {
@@ -129,6 +130,16 @@ describe('utils', () => {
       const result = filterEmpty(values);
 
       expect(result).toEqual(['1', ',', '2']);
+    });
+  });
+
+  describe('trimWhitespace', () => {
+    it('좌우 공백을 제거한 문자열을 반환한다', () => {
+      const value = '   //n;\\n1;2;3  ';
+
+      const result = trimWhitespace(value);
+
+      expect(result).toBe('//n;\\n1;2;3');
     });
   });
 });

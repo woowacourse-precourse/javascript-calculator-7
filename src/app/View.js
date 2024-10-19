@@ -1,4 +1,5 @@
 import { Console } from '@woowacourse/mission-utils';
+import { trimWhitespace } from '../lib/utils';
 
 class View {
   /**
@@ -7,7 +8,9 @@ class View {
    * @returns {Promise<string>}
    */
   async input(query) {
-    return await Console.readLineAsync(`${query}\n`);
+    const value = await Console.readLineAsync(`${query}\n`);
+
+    return trimWhitespace(value);
   }
 
   /**

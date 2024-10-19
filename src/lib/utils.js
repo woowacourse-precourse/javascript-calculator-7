@@ -59,3 +59,12 @@ export function isPositiveNumber(value) {
 export function filterEmpty(values) {
   return values.filter((value) => value !== '');
 }
+
+/**
+ *
+ * @param {string} value
+ * @returns {string}
+ */
+export function trimWhitespace(value) {
+  return value.trim();
+}
