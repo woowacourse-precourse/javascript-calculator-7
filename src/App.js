@@ -8,7 +8,10 @@ class App {
             result = 0;
         } else if (inputStr.slice(0, 2) === '//') {
             let endIndex = inputStr.indexOf("\\n");
-            const std = inputStr.slice(2, endIndex)
+            const std = inputStr.slice(2, endIndex);
+            if (std.length > 1) {
+                throw new Error('[ERROR] 구분자는 문자여야 합니다.');
+            }
             let nums = inputStr.slice(5).split(std);
             try {
                 result = this.#SUM(nums)
