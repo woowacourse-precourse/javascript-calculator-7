@@ -16,15 +16,14 @@ class App {
         return separators + str.replace(/\/\/|\\n/g, '');
     }
 
-    makeOperandList(seps, str){
+    makeOperandList(seps, str) {
         const PATTERN = new RegExp(`[${seps}]`);
         let numbers = str.split(PATTERN) //유효한 구분자를 이용해 split하여 array로 만든다
 
         let operandList = numbers.reduce((arr, num) => {
-            if (!isNaN(num)){//숫자인 경우에는 리스트에 담는다
+            if (!isNaN(num)) {//숫자인 경우에는 리스트에 담는다
                 arr.push(+num) //숫자로 변경
-            }
-            else {//유효한 구분자를 이용했는데 숫자가 아닌 경우에는 에러
+            } else {//유효한 구분자를 이용했는데 숫자가 아닌 경우에는 에러
                 throw new Error("[ERROR] 유효하지 않은 구분자 포함")
             }
             return arr;
@@ -41,8 +40,6 @@ class App {
         let output = Console.readLineAsync(input)
 
         output.then((value) => {
-            Console.print(value) //입력값 임시 확인용 출력
-
             //2-1) 커스텀 구분자를 찾아냅니다.
             // 1) "\\n"를 포함한다면, 그를 기준으로 앞부분은 커스텀 구분자를 작성했다고 판단합니다.
             let splitIndex = value.lastIndexOf('\\n');
@@ -58,8 +55,12 @@ class App {
             //유효한 구분자
             const SEPARATORS = this.findSeparator(customSeps)
 
+            //2-2) 구분자를 이용해 숫자를 분리해냄
             let operandList = this.makeOperandList(SEPARATORS, operands)
+            //2-3) 총합 계산
+            let result = operandList.reduce((sum, num) => sum + num, 0)
 
+            Console.print("결과 : " + result)
 
         }).catch(() => {
             Console.print("[ERROR] 문자열을 입력해주세요.")
