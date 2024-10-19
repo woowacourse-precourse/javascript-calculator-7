@@ -56,6 +56,9 @@ class App { //하나의 메소드는 하나의 역할
                 }
             }
         )
+        if (arr[arr.length - 1] === "") {
+            throw new Error("[Error]: 에러발생")
+        }
         console.log(arr)
         return arr
     }
