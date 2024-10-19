@@ -6,10 +6,16 @@ class App {
       const input = await Console.readLineAsync(
         "덧셈할 문자열을 입력해 주세요.\n"
       );
-      Console.print(`결과: ${input}`);
+      const result = this.calculateSum(input);
+      Console.print(`결과: ${result}`);
     } catch (error) {
       Console.print(`[ERROR] 에러 발생`);
     }
+  }
+
+  calculateSum(input) {
+    const numbers = this.parseNumbers(input);
+    return numbers.reduce((sum, num) => sum + num, 0);
   }
 
   parseNumbers(input) {
