@@ -139,3 +139,13 @@ describe("validateSeparators()", () => {
     expect(() => input.validateSeparators()).toThrow(InvalidCustomSeparatorError);
   });
 });
+
+describe("에러메시지 출력", () => {
+  test("IncludeZeroError 에러 발생 시", () => {
+    try {
+      throw new IncludeZeroError();
+    } catch (error) {
+      expect(error.message).toBe("[ERROR] 입력 값에 0이 포함되어 있습니다.\n 구분자와 양수로 구성된 문자열을 입력해주세요.");
+    }
+  });
+});
