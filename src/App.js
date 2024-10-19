@@ -1,3 +1,5 @@
+import { Console } from "@woowacourse/mission-utils";
+
 class App {
   // 1. 구분자 추출하기
   extractDelimeter(inputString) {
@@ -62,7 +64,7 @@ class App {
       return SUM;
     }
     else {
-      return "[ERROR] 잘못된 수식이 입력되었습니다.";
+      return "[ERROR]";
     }
   }
 
@@ -75,7 +77,28 @@ class App {
     return isValid;
   }
 
-  async run() {}
+  async run() {
+    const inputString = Console.readLineAsync("덧셈할 문자열을 입력해 주세요.\n");
+
+    // 1. 구분자 추출하기
+    const delimeters = this.extractDelimeter(inputString);
+
+    // 2. 커스텀 구분자 부분 제거하기 (수식 구하기)
+    const expression = this.extractMathExpression(inputString);
+
+    // 3. 구분자 기반 분리하기 (숫자 리스트 반환)
+    const numbers = this.splitDelimeter(delimeters);
+
+    // 4. 덧셈 연산하기
+    const sum = this.addAllNumbers(numbers);
+
+    if (sum != "[ERROR]") {
+      Console.print("결과: ", sum);
+    }
+    else {
+      Console.print("[ERROR] 잘못된 수식이 입력되었습니다.");
+    }
+  }
 }
 
 export default App;
