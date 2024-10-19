@@ -18,7 +18,9 @@ class App {
   }
 
   sum(input) { //덧셈 함수
-
+    const delimiters = /[,|:]/;
+    const numbers = input.split(delimiters).map(Number);
+    Console.print("결과 : " + numbers.reduce((sum, number) => sum + number, 0));
   }
 }
 
