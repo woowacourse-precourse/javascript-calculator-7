@@ -5,6 +5,7 @@ class App {
 
     try {
 
+      Console.print("덧셈할 문자열을 입력해 주세요.");
       let input = await Console.readLineAsync("");
 
       let delimiter;
@@ -20,7 +21,7 @@ class App {
 
       let sum = numbers.reduce((acc, cur) => acc + cur, 0);
 
-      Console.print(sum);
+      Console.print(`결과 : ${sum}`);
       return;
 
     }
