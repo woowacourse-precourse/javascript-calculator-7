@@ -132,4 +132,13 @@ describe("문자열 계산기", () => {
 
     await expect(app.run()).rejects.toThrow();
   });
+
+  test("커스텀 구분자가 \\일 경우", async () => {
+    const inputs = ["//\\n1\\2\\3"];
+    mockQuestions(inputs);
+
+    const app = new App();
+
+    await expect(app.run()).rejects.toThrow();
+  });
 });
