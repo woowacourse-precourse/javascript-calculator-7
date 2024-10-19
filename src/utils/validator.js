@@ -1,5 +1,5 @@
-import { CUSTOM_DELIMITER_INPUT } from "../constants/Delimeters";
-import { ERROR_MESSAGES } from "../constants/Messages";
+import { CUSTOM_DELIMITER_INPUT } from "../constants/Delimeters.js";
+import { ERROR_MESSAGES } from "../constants/Messages.js";
 
 const validator = {
   validateString(string) {
@@ -43,7 +43,7 @@ const validator = {
   },
 
   delimiterNotIncludingNumber(delimiter) {
-    return !Number.isInteger(delimiter);
+    return !Number.isInteger(+delimiter);
   },
 
   valueIsIntegerBiggerThenZero(valueArray) {
