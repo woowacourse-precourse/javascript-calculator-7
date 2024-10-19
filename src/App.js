@@ -4,10 +4,10 @@ class App {
   async run() {
     try {
       // 사용자 입력 받기
-      await Console.readLine('덧셈할 문자열을 입력해 주세요.\n', (userInput) => {
-        const normalizedInput = this.normalizeInput(userInput); // 입력 정규화
-        Console.print(`결과: ${this.add(normalizedInput)}`);
-      });
+      const userInput= await Console.readLineAsync('덧셈할 문자열을 입력해 주세요.\n');
+      const normalizedInput = this.normalizeInput(userInput); // 입력 정규화
+      const result = this.add(normalizedInput);
+      Console.print(`결과: ${result}`);
     } catch (error) {
       Console.print(error.message);
     } 
