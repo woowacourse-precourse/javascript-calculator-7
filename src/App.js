@@ -7,13 +7,21 @@ class App {
       const result = this.calculateSum(input);
       Console.print(`결과 : ${result}`);
     } catch (error) {
-      Console.print('[ERROR]');
+      Console.print(error.message);
     }
   }
 
   calculateSum(input) {
     if (!input) return 0;
-    const numbers = input.split(/[,|:]/).map(Number);
+
+    const numbers = input.split(/[,|:]/).map((value) => {
+      const number = Number(value);
+      if (isNaN(number)) {
+        throw new Error('[ERROR] 입력이 잘못되었습니다.');
+      }
+      return number;
+    });
+
     return numbers.reduce((sum, number) => sum + number, 0);
   }
 }
