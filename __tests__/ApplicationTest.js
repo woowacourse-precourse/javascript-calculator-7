@@ -42,7 +42,7 @@ describe('문자열 계산기', () => {
   });
 
   test('구분자가 \\같은 특수 문자인 경우', async () => {
-    const inputs = ['//\\\\n-1\\2\\3'];
+    const inputs = ['//\\\\n1\\2\\3'];
     mockQuestions(inputs);
 
     const logSpy = getLogSpy();
@@ -93,7 +93,7 @@ describe('문자열 계산기', () => {
   });
 
   test('커스텀 구분자로 숫자를 지정한 경우', async () => {
-    const inputs = ['//1\\n1,2,314'];
+    const inputs = ['//1\\n2,2,314'];
     mockQuestions(inputs);
 
     const app = new App();
