@@ -21,7 +21,7 @@ class App {
         let numbers = str.split(PATTERN) //유효한 구분자를 이용해 split하여 array로 만든다
 
         let operandList = numbers.reduce((arr, num) => {
-            if (!isNaN(num)) {//숫자인 경우에는 리스트에 담는다
+            if (!isNaN(num) && Number(num) >= 0) {//숫자인 경우에는 리스트에 담는다
                 arr.push(+num) //숫자로 변경
             } else {//유효한 구분자를 이용했는데 숫자가 아닌 경우에는 에러
                 throw new Error("[ERROR] 유효하지 않은 구분자 포함")
