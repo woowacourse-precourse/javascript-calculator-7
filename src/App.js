@@ -13,6 +13,7 @@ class App {
       const customMatch = input.match(REGEX_CUSTOM_SEPARATOR);
       if (customMatch) {
         const customSeparator = customMatch[1]; // 캡처된 구분자
+        separators.push(customSeparator); // 기존 구분자 배열에 추가
         input = input.replace(REGEX_CUSTOM_SEPARATOR, "");
       }
 
