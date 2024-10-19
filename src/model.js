@@ -13,6 +13,10 @@ class CalculatorModel {
         "[ERROR] 허용되지 않은 구분자 또는 숫자가 아닌 값이 포함되어 있습니다.",
       NEGATIVE_NOT_ALLOWED: "[ERROR] 음수는 입력할 수 없습니다.",
       NUMBER_AS_SEPARATOR: "[ERROR] 숫자는 구분자로 쓸 수 없습니다.",
+      SPACE_BETWEEN_NUMBERS:
+        "[ERROR] 붙어있어야 할 문자들 사이에 공백이 있습니다.",
+      SPACE_IN_CUSTOM_SEPARATOR:
+        "[ERROR] 커스텀 구분자와 줄바꿈 사이에 공백이 있습니다.",
     };
   }
 
@@ -37,8 +41,17 @@ class CalculatorModel {
       numbersString = newNumbersString;
     }
 
+    // 커스텀 구분자 확인 및 공백 체크
+    if (this.checkForSpacesInCustomSeparator(input)) {
+      throw new Error(this.errorMessages.SPACE_IN_CUSTOM_SEPARATOR);
+    }
+
     // 공백이 구분자로 사용될 경우 처리
     if (numbersString.includes(" ")) {
+      // 숫자 사이의 공백인지 확인
+      if (/\d\s+\d/.test(numbersString)) {
+        throw new Error(this.errorMessages.SPACE_BETWEEN_NUMBERS);
+      }
       throw new Error(this.errorMessages.INVALID_SPACE);
     }
 
@@ -58,6 +71,15 @@ class CalculatorModel {
 
     // 입력의 끝단이 구분자인지 확인하는 에러 처리
     if (this.endWithSeparators(numbersString, separators)) {
+      throw new Error(this.errorMessages.INVALID_END);
+    }
+
+    // 마지막 값이 숫자인지 확인
+    const lastValue = numbersString
+      .trim()
+      .split(new RegExp(`[${separators.join("")}]+`))
+      .pop();
+    if (!/^(-?\d+(\.\d+)?)$/.test(lastValue)) {
       throw new Error(this.errorMessages.INVALID_END);
     }
 
@@ -86,6 +108,16 @@ class CalculatorModel {
     }
 
     return { extractedSeparators: null, newNumbersString: input };
+  }
+
+  // 커스텀 구분자와 줄바꿈 사이에 공백이 있는지 체크하는 메서드
+  checkForSpacesInCustomSeparator(input) {
+    const customSeparatorMatch = input.match(/^\/\/(.*?)\\n/);
+    if (customSeparatorMatch) {
+      // 커스텀 구분자와 줄바꿈 사이에 공백이 있는지 검사
+      return /\s/.test(customSeparatorMatch[0]);
+    }
+    return false;
   }
 
   processNumber(num) {
