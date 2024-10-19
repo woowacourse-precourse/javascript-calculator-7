@@ -34,14 +34,14 @@ function hasNullSeperatorError(seperatorArray){
     return seperatorArray.includes('');
 }
 
-function hasSeperatorError(expression, seperatorArray){
+function hasUndefinedCharacterrError(expression, seperatorArray){
     seperatorArray.map((seperator) => {
         expression = expression.replaceAll(seperator, NULL_STRING);
     })
     return NUMBER_PATTERN.test(expression);
 }
 
-function hasExpressionError(numArray){
+function hasInvalidExpressionError(numArray){
     return numArray.includes(NULL_STRING) || numArray.includes(SEPERATOR_SUBTITUTE.repeat(2));
 }
 
@@ -49,10 +49,10 @@ function checkExpressionError(expression, seperetorArray, numArray){
     if(hasNullSeperatorError(seperetorArray)){
         throw new Error(ERROR_MESSAGE.NULL_SEPERATOR);
     }
-    if(hasSeperatorError(expression, seperetorArray)){
-        throw new Error(ERROR_MESSAGE.OTHER_CHARACTER);
+    if(hasUndefinedCharacterrError(expression, seperetorArray)){
+        throw new Error(ERROR_MESSAGE.UNDEFINED_CHARACTER);
     }
-    if(hasExpressionError(numArray)){
+    if(hasInvalidExpressionError(numArray)){
         throw new Error(ERROR_MESSAGE.INVALID_EXPRESSION);
     }
 }
