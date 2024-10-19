@@ -6,9 +6,6 @@ export default class Controller {
     const numbers = model.extractNumbers(input);
     const total = model.total(numbers);
 
-    Console.print("total:" + total);
-
-    // Todo: 결과 보여주는 매서드 생성
-    // viewOut.showResult(total);
+    await viewOut.showResult(total);
   }
 }
