@@ -22,7 +22,19 @@ class App {
       numbers = input.split(/[,:]/);
     }
 
-    console.log("분리된 숫자:", numbers);
+    const parsedNumbers = numbers.map((num) => {
+      const parsed = Number(num);
+
+      if (isNaN(parsed)) {
+        throw new Error("[ERROR] 잘못된 입력입니다.");
+      }
+
+      return parsed;
+    });
+
+    if (parsedNumbers.some((num) => num < 0)) {
+      throw new Error("[ERROR] 음수는 입력할 수 없습니다.");
+    }
   }
 }
 
