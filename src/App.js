@@ -35,8 +35,19 @@ class App {
     return processedStr;
   }
 
+  addAll(arr) {
+    let sum = 0;
+
+    // arr을 순회하며 모든 원소 값을 더한다.
+    for(let num of arr) {
+      sum += num;
+    }
+
+    return sum;
+  }
+
   async run() {
-    console.log(this.splitDelim("//&\n1,23:5,7&8:22"));
+    console.log(this.addAll(this.splitDelim("//&\n1,23:5,7&8:22")));
   }
 }
 
