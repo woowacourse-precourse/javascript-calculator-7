@@ -6,13 +6,15 @@ import { DELIMITER } from "./constants/constants.js";
 export class Validator {
   static customDelimiterLength(customDelimiter) {
     if (customDelimiter.length !== 1) {
-      throw new Error(ERROR_MESSAGE.CUSTOM_DELIMITER_LENGTH);
+      throw new Error(
+        ERROR_MESSAGE.TAG + ERROR_MESSAGE.CUSTOM_DELIMITER_LENGTH
+      );
     }
   }
 
   static isCustomDelimiterString(customDelimiter) {
     if (/\d/.test(customDelimiter)) {
-      throw new Error(ERROR_MESSAGE.CUSTOM_DELIMITER_TYPE);
+      throw new Error(ERROR_MESSAGE.TAG + ERROR_MESSAGE.CUSTOM_DELIMITER_TYPE);
     }
   }
 
@@ -20,7 +22,7 @@ export class Validator {
     const CUSTOM_END_INDEX = string.indexOf(CUSTOM_DELIMITER_STATEMENT.END);
 
     if (Calculator.isSetCustomDelimiter(string, CUSTOM_END_INDEX)) {
-      throw new Error(ERROR_MESSAGE.DUPLICATED_SET);
+      throw new Error(ERROR_MESSAGE.TAG + ERROR_MESSAGE.DUPLICATED_SET);
     }
   }
 
@@ -34,7 +36,7 @@ export class Validator {
         (element) => !DELIMITER.includes(element) && isNaN(element)
       )
     ) {
-      throw new Error(ERROR_MESSAGE.UNDELIMIT_CHAR);
+      throw new Error(ERROR_MESSAGE.TAG + ERROR_MESSAGE.UNDELIMIT_CHAR);
     }
   }
 }
