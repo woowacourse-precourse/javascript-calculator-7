@@ -19,7 +19,8 @@ class App {
     }
 
     const customDelimiter = this.getCustomDelimiter(input); // 2.커스텀 구분자 확인 기능
-    Console.print(customDelimiter);
+    const allDelimiter = this.addDelimiter(customDelimiter); // 3.모든 구분자 ( 기본 구분자 배열에 커스컴 구분자 추가 ) 반환 기능
+    Console.print(allDelimiter);
 
     return 0;
   }
@@ -31,6 +32,17 @@ class App {
       return delimiterSection.substring(2);
     }
     return;
+  }
+
+  // 3.모든 구분자 ( 기본 구분자 배열에 커스컴 구분자 추가 ) 반환 기능
+  addDelimiter(customDelimiter) {
+    let allDelimiter = [',', ':'];
+  
+    if (customDelimiter) {
+      allDelimiter.push(customDelimiter);
+    }
+  
+    return allDelimiter;
   }
 }
 
