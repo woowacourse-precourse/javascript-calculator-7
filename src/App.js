@@ -13,7 +13,7 @@ const findSeparator = (input) => {
       const customSeparator = input.slice(START, END);
       SEPARATORS.push(customSeparator);
       if (customSeparator.length > 1 || !isNaN(customSeparator)){
-        throw new Error("[ERROR] 커스텀 구분자의 입력이 잘못됐습니다.")
+        throw new Error("[ERROR] 커스텀 구분자로 문자를 입력해주세요.");
       }
       SEPARATORS.push(input.slice(customSeparator))
       return INPUT_ARRAY.slice(END + 2);
