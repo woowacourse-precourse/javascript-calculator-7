@@ -1,11 +1,11 @@
 import { filterEmpty, isMatch, isStartsWith, shallowCopy } from '../lib/utils.js';
 
 class Delimiter {
-  /** @type {object} */
-  #customDelimiterRegEx = /\/\/.*\\n/;
-
   /** @type {Array<string>} */
   #defaultDelimiters = [',', ':'];
+
+  /** @type {object} */
+  #customDelimiterRegEx = /\/\/.*\\n/;
 
   /** @type {Array<string>} */
   #customDelimiterMatchers = ['//', '\\n'];
