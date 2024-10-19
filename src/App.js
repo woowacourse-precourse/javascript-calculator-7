@@ -63,9 +63,14 @@ class App {
 
   // 구분자에 따라 배열로 분리한다.
   splitByDelimiter() {
-    const REG_EXP = new RegExp(`[${this.delimiter.join("")}]`, "g");
+    // 각 구분자를 이스케이프 처리
+    const escapedDelimiters = this.delimiter.map((d) => {
+      return d.replace(/[.*+?^${}()|[\]\\]/g, "\\$&");
+    });
+
+    // 이스케이프 처리된 구분자로 정규 표현식 생성
+    const REG_EXP = new RegExp(`[${escapedDelimiters.join("")}]`, "g");
     this.splitArray = this.answer.split(REG_EXP);
-    this.answer = this.splitArray.join("");
   }
 
   // 사용자가 잘못된 값을 입력했는지를 검증합니다.
