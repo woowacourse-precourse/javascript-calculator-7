@@ -1,4 +1,4 @@
-import { splitBySeparator, findCustomSeparator } from './helper';
+import { splitBySeparator, findCustomSeparator } from './separatorHelpers.js';
 
 export const sumByDefaultSeparator = (text) => {
   const numberArray = splitBySeparator([',', ':'], text);

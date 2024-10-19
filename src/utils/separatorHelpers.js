@@ -1,3 +1,5 @@
+import { escapeRegExp } from './regexHelpers.js';
+
 export const findCustomSeparator = (text) => {
   const startIdx = text.indexOf('//');
 
@@ -8,10 +10,6 @@ export const findCustomSeparator = (text) => {
   if (newlineIdx === -1) return;
 
   return text.slice(startIdx + 2, newlineIdx);
-};
-
-export const escapeRegExp = (text) => {
-  return text.replace(/[.*+?^${}()|[\]\\]/g, '\\$&');
 };
 
 export const splitBySeparator = (separator, text) => {

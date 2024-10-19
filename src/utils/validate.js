@@ -1,4 +1,5 @@
-import { findCustomSeparator, escapeRegExp } from './helper.js';
+import { findCustomSeparator } from './separatorHelpers.js';
+import { escapeRegExp } from './regexHelpers.js';
 
 const checkOnlyNumber = (text) => {
   if (text !== '' && !isNaN(Number(text))) {

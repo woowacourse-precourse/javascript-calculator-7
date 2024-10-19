@@ -4,7 +4,7 @@ import {
 } from './utils/calculator.js';
 import { validation } from './utils/validate.js';
 import { getInput } from './utils/getInput.js';
-import { findCustomSeparator } from './utils/separator.js';
+import { findCustomSeparator } from './utils/separatorHelpers.js';
 
 class App {
   async run() {
