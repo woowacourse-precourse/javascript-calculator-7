@@ -1,5 +1,5 @@
 import { Console } from '@woowacourse/mission-utils';
-import { trimWhitespace } from '../lib/utils';
+import { trimWhitespace } from '../lib/utils.js';
 
 class View {
   /**
