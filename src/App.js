@@ -1,9 +1,14 @@
 import { Console } from "@woowacourse/mission-utils";
 import Validator from "./Validator.js";
+import {
+  INPUT_QUERY,
+  OUTPUT_PREFIX,
+  INITIAL_SEPARTORLIST,
+} from "./constants.js";
 
 class App {
   #input;
-  separatorList = [",", ":"];
+  separatorList = [...INITIAL_SEPARTORLIST];
   #inputNumberList = [];
 
   async run() {
@@ -17,9 +22,7 @@ class App {
   }
 
   async readInput() {
-    this.#input = await Console.readLineAsync(
-      "덧셈할 문자열을 입력해 주세요.\n"
-    );
+    this.#input = await Console.readLineAsync(INPUT_QUERY);
   }
 
   generateInputNumberList() {
@@ -35,7 +38,7 @@ class App {
   }
 
   getPrintResult() {
-    return `결과 : ${this.getResult()}`;
+    return `${OUTPUT_PREFIX}${this.getResult()}`;
   }
 }
 

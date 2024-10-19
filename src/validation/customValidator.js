@@ -1,3 +1,5 @@
+import { CUSTOM_VALIDATOR } from "../constants.js";
+
 class CustomSeparatorValidator {
   #target;
   #separatorList;
@@ -8,11 +10,11 @@ class CustomSeparatorValidator {
   }
 
   isValid() {
-    if (!this.#target.startsWith("//")) {
+    if (!this.#target.startsWith(CUSTOM_VALIDATOR.PREFIX)) {
       return true;
     }
 
-    const lineBreakStringIndex = this.#target.indexOf("\\n");
+    const lineBreakStringIndex = this.#target.indexOf(CUSTOM_VALIDATOR.SUFFIX);
 
     if (lineBreakStringIndex !== 3) {
       return false;

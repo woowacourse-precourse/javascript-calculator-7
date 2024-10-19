@@ -1,3 +1,5 @@
+import { CUSTOM_VALIDATOR } from "../constants.js";
+
 class CommonValidator {
   #target;
   #separatorList;
@@ -8,7 +10,7 @@ class CommonValidator {
   }
 
   getInitialTarget(target) {
-    if (target.startsWith("//")) {
+    if (target.startsWith(CUSTOM_VALIDATOR.PREFIX)) {
       return target.substring(5);
     }
     return target;
