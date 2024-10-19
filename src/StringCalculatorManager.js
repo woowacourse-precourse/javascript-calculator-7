@@ -13,6 +13,7 @@ class StringCalculatorManager {
       this.outputHandler.printResult(results);
     } catch (error) {
       this.outputHandler.printErrorMessage(error.message);
+      throw error
     }
   }
 }
