@@ -14,8 +14,20 @@ class App {
     if (!input) {
       return 0; //빈 문자열 처리
     }
-    const seperator = [',', ':'];
-    const numArr = input.split(new RegExp(`[${seperator.join('')}]`));
+    let seperator = [',', ':'];
+    let numString = input;
+
+    //커스텀 구분자 구현
+    if (input.startsWith('//')) {
+      const customSeperatorEnd = input.indexOf('\\n');
+      if (customSeperatorEnd === -1) {
+        throw new Error('[ERROR] Invalid input: Incorrect separator format');
+      }
+      const customSeperator = input.slice(2, customSeperatorEnd);
+      seperator.push(customSeperator);
+      numString = input.slice(customSeperatorEnd + 2);
+    }
+    const numArr = numString.split(new RegExp(`[${seperator.join('')}]`));
 
     return this.calSum(numArr);
   }
