@@ -51,13 +51,11 @@ class App {
 
   //문자열 구분자 유효성 검사
   isValidString(str,regex){
-    if(regex.test(str))
-      return true;
-    return false;
+    return regex.test(str);
   }
 
-   //덧셈 함수
-   sum(numbersArray){
+  //덧셈 함수
+  sum(numbersArray){
     let sum = 0;
     numbersArray.map((item) =>{
       const number = parseInt(item.trim()); // 숫자로 변환
