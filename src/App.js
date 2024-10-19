@@ -1,7 +1,7 @@
 import getUserInput from './View/getUserInput.js';
-import isCommaSemicolonConditionCheck from './Model/isCommaSemicolonConditionCheck.js';
+import isCommaSemicolonConditionCheck from './Controlloer/isCommaSemicolonConditionCheck.js';
 import addedNumbers from './Model/addedNumbers.js';
-import isCustomConditionCheck from './Model/isCustomConditionCheck.js';
+import isCustomConditionCheck from './Controlloer/isCustomConditionCheck.js';
 import exportUserOutput from './View/exportUserOutput.js';
 import exportErrorMessage from './View/exportErrorMessage.js';
 
