@@ -14,10 +14,12 @@ class App {
 }
 
 function stringCalculator(input) {
+
   checkEmptyString(input)
   checkCustomDelimiterPosition(input);
-  var parsedArray = [];
+  checkMultipleDeclareCustomDelimiter(input);
 
+  var parsedArray = [];
   const newLineInput = newLineProcess(input); // 문자 \n을 실제 개행문자로 바꿔버린다음 매칭
   const customDelimiterPattern = /^\/\/(.)\n(.*)/;
   const customDelimiterFlag = newLineInput.match(customDelimiterPattern);
@@ -86,6 +88,14 @@ function checkIncludesNonNumber(parsedArray) { // 숫자, 알파벳, 한글, 구
 function checkCustomDelimiterPosition(input) { // 커스텀 구분자 선언 위치 체크 함수
   if (input.includes('//') && !input.startsWith('//')) {
     throw new Error("[ERROR] 커스텀 구분자는 맨 앞에 위치해야 합니다.");
+  }
+}
+
+function checkMultipleDeclareCustomDelimiter(input) { // 커스텀 구분자 선언을 두 번이상 하는지 체크 함수
+  const customDelimiterPattern = /\/\/./g;
+  const matches = input.match(customDelimiterPattern);
+  if (matches && matches.length > 1) {
+    throw new Error("[ERROR] 커스텀 구분자 선언은 한 번만 가능합니다.");
   }
 }
 

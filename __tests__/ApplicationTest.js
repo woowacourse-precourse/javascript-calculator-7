@@ -167,4 +167,19 @@ describe("문자열 계산기", () => {
       expect(logSpy).toHaveBeenCalledWith(expect.stringContaining(output));
     });
   });
+
+  test("커스텀 구분자가 선언을 두 번이상 한 경우", async () => {
+    const inputs = ["//*\n//;\n1*2;3"];
+    mockQuestions(inputs);
+
+    const logSpy = getLogSpy();
+    const outputs = ["[ERROR] 커스텀 구분자 선언은 한 번만 가능합니다."];
+
+    const app = new App();
+    await app.run();
+
+    outputs.forEach((output) => {
+      expect(logSpy).toHaveBeenCalledWith(expect.stringContaining(output));
+    });
+  });
 });
