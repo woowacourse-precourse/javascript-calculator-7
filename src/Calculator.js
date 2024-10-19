@@ -5,19 +5,20 @@ export default class Calculator {
 
         const delimiters = this.getDelimiters(input)
         const tokens = this.splitByDelimiters(input, delimiters)
+        console.log(delimiters)
 
-        this.isValidInput(tokens)
+        // this.isValidInput(tokens)
 
-        return tokens.reduce((acc, cur) => acc + cur, 0)
+        // return tokens.reduce((acc, cur) => acc + cur, 0)
 
 
     }
 
     getDelimiters(input) {
         const defaulDelimiters = [",", ":"]
-        const customDelimiter = input.match(/\/\/(.*?)\\n/)
+        const customDelimiter = input.match(/\/\/(.*?)\\n/g).map(item => item.slice(2, -2));
 
-        return customDelimiter ? [...defaulDelimiters, customDelimiter[1]] : defaulDelimiters
+        return customDelimiter ? [...defaulDelimiters, ...customDelimiter] : defaulDelimiters
     }
 
     splitByDelimiters(input, delimiters) {
