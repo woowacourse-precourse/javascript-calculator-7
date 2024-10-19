@@ -21,6 +21,11 @@ class CalculatorModel {
       numbersString = input.slice(customSeparatorMatch[0].length);
     }
 
+    // 공백이 구분자로 사용될 경우 처리
+    if (numbersString.includes(" ")) {
+      throw new Error("[ERROR] 공백은 구분자로 쓸 수 없습니다.");
+    }
+
     // 커스텀 구분자가 .인 경우 처리
     if (separators.includes(".")) {
       const userchoice = await this.getUserChoice();
