@@ -28,6 +28,10 @@ class App {
 
     return numString.split(splitter);
   }
+
+  convertNumber (numString) {
+    if (numString === '') return 0;
+  }
 }
 
 export default App;
