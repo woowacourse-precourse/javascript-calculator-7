@@ -1,5 +1,5 @@
 import { MissionUtils } from "@woowacourse/mission-utils";
-import { IncludeZeroError, InvalidSeparatorError, InvalidCustomSeparatorError } from "./Error";
+import { IncludeZeroError, InvalidSeparatorError, InvalidCustomSeparatorError } from "./Error/index.js";
 
 class Input {
   customSeparator;
