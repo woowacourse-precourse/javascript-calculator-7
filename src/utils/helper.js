@@ -13,3 +13,13 @@ export const findCustomSeparator = (text) => {
 export const escapeRegExp = (text) => {
   return text.replace(/[.*+?^${}()|[\]\\]/g, '\\$&');
 };
+
+export const splitBySeparator = (separator, text) => {
+  const separatorString = separator.map((x) => escapeRegExp(x)).join('|');
+  const regex = new RegExp(`${separatorString}`, 'g');
+  const replacedText = text.replace(regex, ',');
+
+  const result = replacedText.split(',').map((x) => +x);
+
+  return result;
+};
