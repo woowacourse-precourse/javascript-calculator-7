@@ -14,7 +14,8 @@ class App {
         const numbers = this.splitInputText(parsedText);
         this.validateNumbers(numbers);
 
-        Console.print(numbers);
+        const result = this.sumNumbers(numbers);
+        Console.print(`결과 : ${result}`);
     }
 
     getInputText() {
@@ -58,6 +59,10 @@ class App {
         if (numbers.some(value => +value < 0)) {
             throw new Error("[ERROR] 음수는 입력할 수 없습니다.");
         }
+    }
+
+    sumNumbers(numbers) {
+        return numbers.reduce((acc, cur) => +cur + acc, 0);
     }
 }
 
