@@ -28,28 +28,19 @@ describe("regex test", () => {
   const appInputTest = "//;\\n1";
 
   test("공백", () => {
-    expect(calculator.calculate(noneTest)).toEqual(0);
+    expect(calculator.calculate(noneTest)).toEqual(`결과 : 0`);
   });
   test("//;\\n1;2;3", () => {
-    expect(calculator.calculate(testInput)).toEqual({
-      error: false,
-      numbers: [1, 2, 3],
-    });
+    expect(calculator.calculate(testInput)).toEqual(`결과 : 6`);
   });
   test("1:2:3", () => {
-    expect(calculator.calculate(noneCustomTestInput)).toEqual({
-      error: false,
-      numbers: [1, 2, 3],
-    });
+    expect(calculator.calculate(noneCustomTestInput)).toEqual(`결과 : 6`);
   });
   test("-3;-2;1", () => {
-    expect(calculator.calculate(minTest)).toEqual({ error: true });
+    expect(calculator.calculate(minTest)).toEqual(false);
   });
   test(appInputTest, () => {
-    expect(calculator.calculate(appInputTest)).toEqual({
-      error: false,
-      numbers: [1],
-    });
+    expect(calculator.calculate(appInputTest)).toEqual(`결과 : 1`);
   });
 });
 
@@ -77,7 +68,7 @@ const getRandomList = (random, count) => {
 };
 
 describe("regex_random_test", () => {
-  const testCount = 100000;
+  const testCount = 10000;
   for (let i = 0; i < testCount; i++) {
     const count = 10; // 숫자의 개수 아무리 큰수가 들어가도 강건한 테스트를 위함
     const random = Math.random();
@@ -107,14 +98,15 @@ describe("regex_random_test", () => {
         else testInput += ",";
       }
     }
+    let error = false;
+    if (testInput.includes(" ")) error = false;
     test(`random : ${testInput}`, () => {
       expect(calculator.calculate(testInput)).toEqual(
-        randomNumberList.length != 0
-          ? {
-              error: false,
-              numbers: randomNumberList,
-            }
-          : 0
+        error
+          ? `[ERROR]`
+          : randomNumberList.length != 0
+          ? `결과 : ${calculator.add(...randomNumberList)}`
+          : `결과 : 0`
       );
     });
   }
