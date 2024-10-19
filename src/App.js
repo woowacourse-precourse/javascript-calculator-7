@@ -23,14 +23,16 @@ class App {
 
   async run() {
     const input = await Console.readLineAsync('덧셈할 문자열을 입력해 주세요.\n');
+    const validationResult = this.validateInput(input);
+
     let sum = 0;
 
-    if (this.validateInput(input) === 0) {
+    if (validationResult === 0) {
       const numArr = this.convertToNumberArray(input, /[,:]/);
       numArr.forEach((num) => {
         sum += num;
       });
-    } else if (this.validateInput(input) === 1) {
+    } else if (validationResult === 1) {
       const numArr = this.convertToNumberArray(input.slice(5), input[2]);
       numArr.forEach((num) => {
         sum += num;
