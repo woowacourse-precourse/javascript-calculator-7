@@ -1,1 +1,1 @@
-export const DELIMITER = /[,:]/;
+export const DEFAULT_DELIMITER = /[,:]/;
