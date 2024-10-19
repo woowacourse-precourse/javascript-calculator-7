@@ -4,7 +4,7 @@ export const OUTPUT_PREFIX = "결과 : ";
 
 export const INITIAL_SEPARATOR_LIST = [",", ":"];
 
-export const CUSTOM_VALIDATOR = {
+export const CORRECT_CUSTOM_SEPARATOR = {
   PREFIX: "//",
   SUFFIX: "\\n",
 };

@@ -1,4 +1,4 @@
-import { CUSTOM_VALIDATOR } from "../constants.js";
+import { CORRECT_CUSTOM_SEPARATOR } from "../constants.js";
 import { createDelimiterCombinationList } from "../utils.js";
 
 class CommonValidator {
@@ -11,8 +11,10 @@ class CommonValidator {
   }
 
   getInitialTarget(target) {
-    if (target.startsWith(CUSTOM_VALIDATOR.PREFIX)) {
-      return target.substring(5);
+    const WITHOUT_CUSTOM_SEPARATOR_INDEX = 5;
+
+    if (target.startsWith(CORRECT_CUSTOM_SEPARATOR.PREFIX)) {
+      return target.substring(WITHOUT_CUSTOM_SEPARATOR_INDEX);
     }
     return target;
   }
@@ -29,8 +31,8 @@ class CommonValidator {
 
     const combinations = createDelimiterCombinationList(this.#separatorList);
 
-    return combinations.every(
-      (combination) => !this.#target.includes(combination)
+    return !combinations.some((combination) =>
+      this.#target.includes(combination)
     );
   }
 }

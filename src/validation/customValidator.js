@@ -1,4 +1,4 @@
-import { CUSTOM_VALIDATOR } from "../constants.js";
+import { CORRECT_CUSTOM_SEPARATOR } from "../constants.js";
 
 class CustomSeparatorValidator {
   #target;
@@ -10,17 +10,22 @@ class CustomSeparatorValidator {
   }
 
   isValid() {
-    if (!this.#target.startsWith(CUSTOM_VALIDATOR.PREFIX)) {
+    if (!this.#target.startsWith(CORRECT_CUSTOM_SEPARATOR.PREFIX)) {
       return true;
     }
 
-    const lineBreakStringIndex = this.#target.indexOf(CUSTOM_VALIDATOR.SUFFIX);
+    const lineBreakStringIndex = this.#target.indexOf(
+      CORRECT_CUSTOM_SEPARATOR.SUFFIX
+    );
 
-    if (lineBreakStringIndex !== 3) {
+    const CORRECT_CUSTOM_SEPARATOR_INDEX = 2;
+    const CORRECT_CUSTOM_SEPARATOR_PREFIX_INDEX = 3;
+
+    if (lineBreakStringIndex !== CORRECT_CUSTOM_SEPARATOR_PREFIX_INDEX) {
       return false;
     }
 
-    const customSeparator = this.#target[2];
+    const customSeparator = this.#target[CORRECT_CUSTOM_SEPARATOR_INDEX];
 
     if (
       this.#separatorList.includes(customSeparator) ||
