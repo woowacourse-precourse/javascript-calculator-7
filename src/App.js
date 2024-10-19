@@ -15,25 +15,35 @@ class App {
   }
 
   extractNumbers(input) {
-    const comma = ",";
-    const semicolon = ";";
-    const hasComma = input.includes(",");
-    const hasSemicolon = input.includes(";");
-    const hasCommaAndSemicolon = input.includes(",") && input.includes(";");
-    const hasCustomSeparator = input.includes("//") && input.includes("\\n");
+    const COMMA = ",";
+    const SEMICOLON = ";";
+    const CUSTOM_DELIMITER_PREFIX = "//";
+    const CUSTOM_DELIMITER_SUFFIX = "\\n";
+
+    const hasComma = this.hasSeparator(input, COMMA);
+    const hasSemicolon = this.hasSeparator(input, SEMICOLON);
+    const hasCustomDelimiterPrefix = this.hasSeparator(input, CUSTOM_DELIMITER_PREFIX);
+    const hasCustomDelimiterSuffix = this.hasSeparator(input, CUSTOM_DELIMITER_SUFFIX);
+
+    const hasCommaAndSemicolon = hasComma && hasSemicolon;
+    const hasCustomSeparator = hasCustomDelimiterPrefix && hasCustomDelimiterSuffix;
 
     if (hasCustomSeparator) {
-      const start = input.indexOf("//");
-      const end = input.indexOf("\\n");
+      const start = input.indexOf(CUSTOM_DELIMITER_PREFIX);
+      const end = input.indexOf(CUSTOM_DELIMITER_SUFFIX);
       const customSeparator = input.slice(start + 2, end);
       const stringToSeparate = input.replace(input.slice(start, end + 2), "");
       return this.splitAndConvertToNumbers(stringToSeparate, customSeparator);
     }
     if (hasCommaAndSemicolon)
-      return this.splitAndConvertToNumbers(input, [comma, semicolon]);
-    if (hasComma) return this.splitAndConvertToNumbers(input, comma);
-    if (hasSemicolon) return this.splitAndConvertToNumbers(input, semicolon);
+      return this.splitAndConvertToNumbers(input, [COMMA, SEMICOLON]);
+    if (hasComma) return this.splitAndConvertToNumbers(input, COMMA);
+    if (hasSemicolon) return this.splitAndConvertToNumbers(input, SEMICOLON);
     return Console.print("[ERROR]");
+  }
+
+  hasSeparator(input, separator) {
+    return input.includes(separator);
   }
 
   splitAndConvertToNumbers(input, separator) {
