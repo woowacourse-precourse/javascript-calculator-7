@@ -11,6 +11,15 @@ class App {
       Console.print(`[ERROR] 에러 발생`);
     }
   }
+
+  parseNumbers(input) {
+    const DEFAULT_DELIMITERS = /[,:]/g;
+    return input
+      .split(DEFAULT_DELIMITERS)
+      .map((num) => num.trim())
+      .filter((num) => num !== "")
+      .map(Number);
+  }
 }
 
 export default App;
