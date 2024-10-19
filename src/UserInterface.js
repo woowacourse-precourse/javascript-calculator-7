@@ -11,8 +11,4 @@ export class UserInterface {
   printResult(sumValue) {
     Console.print(`결과 : ${sumValue}`);
   }
-
-  printErrorMessage(errorMessge) {
-    Console.print(`[ERROR] ${errorMessge}`);
-  }
 }
