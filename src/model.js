@@ -19,6 +19,7 @@ class CalculatorModel {
         "[ERROR] 커스텀 구분자와 줄바꿈 사이에 공백이 있습니다.",
       CONSECUTIVE_DEFAULT_SEPARATORS:
         "[ERROR] 기본 구분자는 연속으로 사용할 수 없습니다.",
+      MISSING_CUSTOM_SEPARATOR: "[ERROR] 커스텀 구분자를 입력해주세요.",
     };
   }
 
@@ -107,6 +108,11 @@ class CalculatorModel {
     const customSeparatorMatch = input.match(/^\/\/(.*?)\\n/);
     if (customSeparatorMatch) {
       const customSeparator = customSeparatorMatch[1].trim();
+
+      // 커스텀 구분자가 비어있는 경우 처리
+      if (!customSeparator) {
+        throw new Error(this.errorMessages.MISSING_CUSTOM_SEPARATOR);
+      }
 
       // 커스텀 구분자가 숫자인지 체크
       if (!isNaN(customSeparator)) {
