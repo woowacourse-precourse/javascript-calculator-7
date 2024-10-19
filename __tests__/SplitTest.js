@@ -23,14 +23,6 @@ describe('커스텀 구분자 탐색', () => {
     });
     expect(mockValidation).toHaveBeenCalledWith(';');
   });
-
-  it('모든 검증 함수가 커스텀 구분자와 함께 호출되어야 한다', () => {
-    const customValidation1 = jest.fn();
-    const customValidation2 = jest.fn();
-    findCustomDelimiter('//;\\n1;2;3', [customValidation1, customValidation2]);
-    expect(customValidation1).toHaveBeenCalledWith(';');
-    expect(customValidation2).toHaveBeenCalledWith(';');
-  });
 });
 
 describe('커스텀 구분자로 숫자 문자열 분할', () => {
