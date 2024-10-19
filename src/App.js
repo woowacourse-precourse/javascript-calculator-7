@@ -10,7 +10,6 @@ class App {
       if (customSeparator !== "" && input[i] === customSeparator) {
         break;
       }
-
       num += input[i];
     }
     return { num, nextInput: input.slice(num.length + 1) };
@@ -39,11 +38,13 @@ class App {
     return { customSeparator: "", remainingInput: input };
   }
   async run() {
-    let input = await Console.readLineAsync("덧셈할 문자열을 입력해 주세요.\n");
+    const input = await Console.readLineAsync(
+      "덧셈할 문자열을 입력해 주세요.\n"
+    );
     const { customSeparator, remainingInput } =
       this.checkCustomSeparator(input);
     const sum = this.getNumSum(remainingInput, customSeparator);
-    Console.print(`결과: ${sum}`);
+    Console.print(`결과 : ${sum}`);
   }
 }
 
