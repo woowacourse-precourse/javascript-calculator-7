@@ -35,7 +35,9 @@ class Input {
     const parts = text.split("\\n");
 
     const numbers = parts[parts.length - 1];
-    const customSeparator = parts.slice(0, -1).map((sep) => sep.replace("//", ""));
+
+    const exceptDuplicateSep = [...new Set(parts.slice(0, -1))];
+    const customSeparator = exceptDuplicateSep.map((sep) => sep.replace("//", ""));
 
     return { customSeparator, numbers };
   }

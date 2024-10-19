@@ -77,6 +77,13 @@ describe("findCustomSeparatorAndNumbers()", () => {
       numbers: "1;2;3",
     });
   });
+
+  test("커스텀 구분자 중복 시 중복 제거된 배열 반환", async () => {
+    expect(findCustomSeparatorAndNumbers("//;\\n//;\\n1;2;3")).toEqual({
+      customSeparator: [";"],
+      numbers: "1;2;3",
+    });
+  });
 });
 
 describe("validateNumbers()", () => {

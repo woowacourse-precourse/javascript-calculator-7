@@ -1,16 +1,6 @@
 class Calculator {
   /**
     *
-    * @param {string[]} separators - "//"로 시작하는 커스텀 구분자들의 문자열 배열
-    * @returns {string[]}
-    */
-  findCustomSeparator(separators) {
-    if (!separators.length) return [];
-    return [...new Set(separators.map((sep) => sep.split("//")[1]))];
-  }
-
-  /**
-    *
     * @param {string} text
     * @param {string} customSeparator
     * @returns {number[]}
