@@ -41,6 +41,7 @@ class App {
     });
 
     const ANSWER = numbers.reduce((acc, cur) => acc + +cur, 0);
+    Console.print(`결과 : ${ANSWER}`);
   }
 }
 
