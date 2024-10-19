@@ -20,5 +20,4 @@ function sumNumbers(input) {
 
 }
 
-
 export default App;
