@@ -47,7 +47,7 @@ class CalculatorModel {
       const trimmedNum = num.trim();
 
       // 숫자가 아닌 값 포함 체크
-      if (!/^\d+(\.\d+)?$/.test(trimmedNum)) {
+      if (!/^(-?\d+(\.\d+)?)$/.test(trimmedNum)) {
         throw new Error(
           "[ERROR] 허용되지 않은 구분자 또는 숫자가 아닌 값이 포함되어 있습니다."
         );
