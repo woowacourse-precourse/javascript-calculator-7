@@ -17,13 +17,25 @@ class App {
     let num = 0;
     if (found === null) this.printresult(num);
     if (found !== null) {
-      if (test === true) {
-        MissionUtils.Console.print(
-          "[ERROR] 유효하지 않은 입력값입니다. 다시 입력해 주세요."
-        );
+      const customRegex = /\/\/.[^\\n]*\\n/;
+      const customTest = customRegex.test(userStr);
+      if (customTest === false) {
+        if (test) {
+          MissionUtils.Console.print(
+            "[ERROR] 유효하지 않은 입력값입니다. 다시 입력해 주세요."
+          );
+          return;
+        }
+        found.map((item) => (num += Number(item)));
+        this.printresult(num);
         return;
       }
-      found.map((item) => (num += Number(item)));
+
+      const custom = userStr.match(/(?<=\/\/).*?(?=\\n)/).join("");
+      const reg = /\/\/.[^\\n]*\\n/gim;
+      const customDeleted = userStr.replace(reg, "");
+      const splitted = customDeleted.split(custom);
+      splitted.map((item) => (num += Number(item)));
       this.printresult(num);
     }
   }
