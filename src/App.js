@@ -42,7 +42,7 @@ class App {
 
     let splitunit = getSplitunit(input);
     let sum = sumNumber(input, splitunit);
-    MissionUtils.Console.print(sum);
+    MissionUtils.Console.print(`결과 : ${sum}`);
   }
 }
 
