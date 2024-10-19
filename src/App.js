@@ -1,14 +1,18 @@
 import { MissionUtils } from "@woowacourse/mission-utils";
 
-function sumNumber(input, splitunit){
+function sumNumber(numberArr){
+  let sum = 0;
+  for(var number of numberArr) sum += number;
+  return sum;
+}
+
+function extractNumber(input, splitunit){
   if(input.indexOf("\\n") != -1)
     input = input.substring(input.indexOf("\\n")+2, input.length);
 
   const regex = new RegExp(`[${splitunit}]`);
   let numberArr = input.split(regex).map(Number);
-  let sum = 0;
-  for(var number of numberArr) sum += number;
-  return sum;
+  return numberArr;
 }
 
 function getSplitunit(input){
@@ -41,7 +45,8 @@ class App {
     if(!input) return;
 
     let splitunit = getSplitunit(input);
-    let sum = sumNumber(input, splitunit);
+    let numberArr = extractNumber(input, splitunit);
+    let sum = sumNumber(numberArr);
     MissionUtils.Console.print(`결과 : ${sum}`);
   }
 }
