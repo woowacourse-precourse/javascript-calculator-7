@@ -1,10 +1,15 @@
 import { MissionUtils } from "@woowacourse/mission-utils";
 
-class calculator {
-  constructor() {
-    this.calculateStart();
+class Calculator {
+  async start() {
+    await this.getInput();
   }
-  async calculateStart() {
-    MissionUtils.Console.print("덧셈할 문자열을 입력해 주세요.");
+
+  async getInput() {
+    const input = await MissionUtils.Console.readLineAsync(
+      "덧셈할 문자열을 입력해 주세요.\n"
+    );
   }
 }
+
+export default Calculator;
