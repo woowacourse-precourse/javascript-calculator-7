@@ -91,28 +91,12 @@ describe("validateNumbers()", () => {
 });
 
 describe("validateSeparators()", () => {
-  let input;
-
-  beforeEach(() => {
-    input = new Input();
-  });
-
-  afterEach(jest.restoreAllMocks);
-
   test("커스텀 구분자가 문자로 이루어져 있으면 입력값 그대로 반환", async () => {
-    const mockInput = ["//;\n//$\n1,2,3"];
-    mockQuestions(mockInput);
-    await input.getPlusString();
-
-    expect(input.validateSeparators()).toEqual([";", "$"]);
+    expect(Input.validateSeparators([";", "$"])).toEqual([";", "$"]);
   });
 
   test("커스텀 구분자로 숫자가 입력되면 InvalidCustomSeparatorError 반환", async () => {
-    const mockInput = ["//;\n//1\n1,2,3"];
-    mockQuestions(mockInput);
-    await input.getPlusString();
-
-    expect(() => input.validateSeparators()).toThrow(InvalidCustomSeparatorError);
+    expect(() => Input.validateSeparators([";", "1"])).toThrow(InvalidCustomSeparatorError);
   });
 });
 

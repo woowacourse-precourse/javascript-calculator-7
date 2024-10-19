@@ -56,13 +56,14 @@ class Input {
 
   /**
    * 커스텀 구분자가 문자로만 이루어져 있는지 검증합니다.
+   * @param {string[]} customSeparator - 커스텀 구분자
    * @returns {string[]}
    */
-  validateSeparators() {
+  static validateSeparators(customSeparator) {
     const isChar = (sep) => !(/^[0-9]$/.test(sep));
-    if (!this.customSeparator.every(isChar)) throw new InvalidCustomSeparatorError();
+    if (!customSeparator.every(isChar)) throw new InvalidCustomSeparatorError();
 
-    return this.customSeparator;
+    return customSeparator;
   }
 }
 
