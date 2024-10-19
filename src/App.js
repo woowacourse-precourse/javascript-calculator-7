@@ -18,8 +18,8 @@ function vaildateUserInput(userInput, customSeparator) {
   console.log('커스텀 구분자');
 }
 
-function getCustomSeparator(inputString) {
-  const customSeparator = inputString.match(/^(\/\/\D\\n)/);
+function getCustomSeparator(userInput) {
+  const customSeparator = userInput.match(/^(\/\/\D\\n)/);
 
   // TODO: 길이 1짜리 배열이 나올 가능성이 있는지 체크
   return Array.isArray(customSeparator) && customSeparator.length
@@ -27,26 +27,19 @@ function getCustomSeparator(inputString) {
     : null;
 }
 
-// 2. :나 , 커스텀 구분자로 구분된 문자열의 합 반환
-function computeResult(inputString, customSeparator) {
-  let regex;
-  let formattedInput;
-  if (customSeparator) {
-    regex = new RegExp(`[\\n:,${customSeparator}]`);
-    formattedInput = inputString.toString().replace(/^(?:\/\/)(\D)(?:\\n)/, ''); // 숫자만 남기기
-  } else {
-    regex = /[:,]/;
-    formattedInput = inputString.toString();
-  }
-  const splitString = formattedInput.split(regex);
-  console.log(splitString); // ERROR 처리를 위한 확인
+function computeResult(userInput, customSeparator) {
+  const regex = customSeparator
+    ? new RegExp(`[\\n:,${customSeparator}]`)
+    : new RegExp(`/[:,]/`);
 
-  const stringToNumber = splitString.map(Number);
-  const compute = stringToNumber.reduce((acc, cur) => {
-    return acc + cur;
-  });
+  const formattedUserInput = customSeparator
+    ? userInput.replace(/^(?:\/\/)(\D)(?:\\n)/, '')
+    : userInput;
 
-  return compute;
+  return formattedUserInput
+    .split(regex)
+    .map(Number)
+    .reduce((acc, cur) => acc + cur);
 }
 
 class App {
