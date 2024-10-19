@@ -16,6 +16,7 @@ class App {
 		const numbers = this.divide(input);
 
 		// 숫자 유효성 검사 기능 구현
+		this.validate(numbers);
 
 		// 숫자 합산 기능 구현
 	}
@@ -36,6 +37,17 @@ class App {
 		// 기본 구분자 및 커스텀 구분자 처리
 		separator = separator.join("|");
 		return str.split(new RegExp(`${separator}`)).map(Number);
+	}
+
+	// validate: 숫자 유효성을 검사하는 메서드
+	validate(numbers) {
+		const invalidNumbers = numbers.filter((num) => {
+			return typeof num !== "number" || isNaN(num) || num < 0;
+		});
+
+		if (invalidNumbers.length > 0) {
+			throw new Error("유효하지 않은 값을 포함하고 있습니다.");
+		}
 	}
 }
 
