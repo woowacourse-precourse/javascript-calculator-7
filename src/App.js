@@ -3,6 +3,7 @@ import isCommaSemicolonConditionCheck from './Model/isCommaSemicolonConditionChe
 import addedNumbers from './Model/addedNumbers.js';
 import isCustomConditionCheck from './Model/isCustomConditionCheck.js';
 import exportUserOutput from './View/exportUserOutput.js';
+import exportErrorMessage from './Model/exportErrorMessage.js';
 
 class App {
   async run() {
@@ -11,7 +12,7 @@ class App {
       const output = addedNumbers(input);
       exportUserOutput(output);
     } else {
-      throw new Error('[ERROR] 잘못된 입력입니다. 프로그램을 종료하겠습니다.');
+      exportErrorMessage();
     }
   }
 }
