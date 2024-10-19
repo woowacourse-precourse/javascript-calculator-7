@@ -1,8 +1,8 @@
-import { MissionUtils } from "@woowacourse/mission-utils";
+import { Console } from "@woowacourse/mission-utils";
 
 class App {
     async run() {
-        const input = await MissionUtils.Console.readLineAsync("덧셈할 문자열을 입력해 주세요.\n");
+        const input = await Console.readLineAsync("덧셈할 문자열을 입력해 주세요.\n");
         const { seperatorSet, filteredInput } = this.handleCustomSeperator(input);
         const extractedNumbers = this.extractPositiveNumbers(filteredInput, ...seperatorSet);
         const sum = this.sumArray(...extractedNumbers);
@@ -56,7 +56,7 @@ class App {
     }
 
     print(value) {
-        MissionUtils.Console.print(`결과 : ${value}`);
+        Console.print(`결과 : ${value}`);
     }
 }
 
