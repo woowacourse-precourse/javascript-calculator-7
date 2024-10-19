@@ -6,8 +6,8 @@
  */
 const cuttingInput = (input, customDelimiter) => {
   const PROCESSED_INPUT = customDelimiter
-    ? String(input.slice(input.indexOf("\\n") + 2))
-    : String(input);
+    ? input.slice(input.indexOf("\\n") + 2)
+    : input;
 
   const DELIMITER_REGEX = new RegExp(`[,:${customDelimiter}]`);
 
