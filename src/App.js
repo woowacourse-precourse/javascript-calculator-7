@@ -8,6 +8,23 @@ class App {
       this.printResult(0);
       return;
     }
+
+    const isCustom = this.isCustomDelimiter(answer);
+    let customDelimiter = "";
+
+    if(isCustom) {
+      customDelimiter = this.getCustomDelimiter(answer);
+    } 
+
+  }
+  
+  isCustomDelimiter(str) { 
+    const test = new RegExp(/^\/\/(.*?)\\n/,'g').test(str);
+    return str.includes("//") && str.includes("\\n") && test; 
+  }
+
+  getCustomDelimiter(str) {
+    return str.slice(str.indexOf("//") + 2, str.indexOf("\\n"));
   }
 
   printResult(result) {
