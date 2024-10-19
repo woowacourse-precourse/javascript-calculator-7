@@ -17,6 +17,10 @@ const ERROR = {
     name: "NotANumberError",
     message: "숫자가 아닌 값이 포함되어 있습니다.",
   },
+  NEGATIVE_NUMBER: {
+    name: "NegativeNumberError",
+    message: "음수는 입력할 수 없습니다.",
+  },
 };
 
 class CustomError extends Error {
@@ -108,6 +112,14 @@ class App {
       throw new CustomError(
         ERROR.NOT_A_NUMBER.message,
         ERROR.NOT_A_NUMBER.name
+      );
+    }
+
+    const negativeNumbers = numbers.filter((num) => num < 0);
+    if (negativeNumbers.length > 0) {
+      throw new CustomError(
+        ERROR.NEGATIVE_NUMBER.message,
+        ERROR.NEGATIVE_NUMBER.name
       );
     }
   }
