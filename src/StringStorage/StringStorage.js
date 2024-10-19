@@ -1,6 +1,6 @@
 export class StringStorage {
-  constructor(string, separator) {
-    this.string = string;
+  constructor(separator, string) {
     this.separator = separator;
+    this.string = string;
   }
 }
