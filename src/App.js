@@ -16,10 +16,13 @@ class App {
   }
 
   extractNumbers(input) {
-    const hasCustomSeparator = input.includes("//") && input.includes("\\n");
-    const hasCommaAndSemicolon = input.includes(",") && input.includes(";");
+    const comma = ",";
+    const semicolon = ";";
     const hasComma = input.includes(",");
     const hasSemicolon = input.includes(";");
+    const hasCommaAndSemicolon = input.includes(",") && input.includes(";");
+    const hasCustomSeparator = input.includes("//") && input.includes("\\n");
+
     if (hasCustomSeparator) {
       const start = input.indexOf("//");
       const end = input.indexOf("\\n");
@@ -33,9 +36,9 @@ class App {
         .flat()
         .map(Number);
     } else if (hasComma) {
-      return input.split(",").map(Number);
+      return input.split(comma).map(Number);
     } else if (hasSemicolon) {
-      return input.split(";").map(Number);
+      return input.split(semicolon).map(Number);
     } else Console.print("[ERROR]");
   }
 
