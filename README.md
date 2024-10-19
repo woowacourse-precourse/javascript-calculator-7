@@ -26,7 +26,7 @@
 
 필드:
 
-- [] delimiters: 현재 사용 중인 구분자들의 배열
+- [O] delimiters: 현재 사용 중인 구분자들의 배열
 
 메서드:
 
@@ -57,7 +57,7 @@
 
 메서드:
 
-- [] print(result): 계산 결과를 출력
+- [△] print(result): 계산 결과를 출력
 
 #### ErrorHandler
 
