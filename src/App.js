@@ -4,7 +4,6 @@ class App {
     const input = await Console.readLineAsync(
       "덧셈할 문자열을 입력해 주세요.\n"
     );
-
     const numberArray = this.extractNumbers(input);
 
     if (numberArray.includes(NaN)) {
@@ -28,17 +27,23 @@ class App {
       const end = input.indexOf("\\n");
       const customSeparator = input.slice(start + 2, end);
       const stringToSeparate = input.replace(input.slice(start, end + 2), "");
-      return stringToSeparate.split(customSeparator).map(Number);
+      return this.splitAndConvertToNumbers(stringToSeparate, customSeparator);
     } else if (hasCommaAndSemicolon) {
-      return input
-        .split(",")
-        .flatMap((el) => el.split(";"))
-        .map(Number);
+      return this.splitAndConvertToNumbers(input, [comma, semicolon]);
     } else if (hasComma) {
-      return input.split(comma).map(Number);
+      return this.splitAndConvertToNumbers(input, comma);
     } else if (hasSemicolon) {
-      return input.split(semicolon).map(Number);
+      return this.splitAndConvertToNumbers(input, semicolon);
     } else Console.print("[ERROR]");
+  }
+
+  splitAndConvertToNumbers(input, separator) {
+    if (typeof separator === "object") {
+      return input
+        .split(separator[0])
+        .flatMap((el) => el.split(separator[1]))
+        .map(Number);
+    } else return input.split(separator).map(Number);
   }
 
   calculateSum(numbers) {
