@@ -19,6 +19,12 @@ class App {
   async run() {
     try {
       await this.input();
+      // 빈 문자열일 경우 0을 출력한다.
+      if (this.answer === "") {
+        this.result = 0;
+        this.printSum();
+        return;
+      }
       this.isCustom(this.answer);
       this.splitByDelimiter();
       this.isValid();
