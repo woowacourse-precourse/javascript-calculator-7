@@ -23,14 +23,23 @@ function getSplitunit(input){
 async function getText() {
   try {
     const input = await MissionUtils.Console.readLineAsync('덧셈할 문자열을 입력해 주세요.');
+
+    if(!isNaN(input)){
+      throw new Error('[ERROR]');
+    }
     return input;
   } catch (error) {
+    MissionUtils.Console.print(error);
+    return null;
   }
 };
 
 class App {
   async run() {
     const input = await getText();
+
+    if(!input) return;
+
     let splitunit = getSplitunit(input);
     let sum = sumNumber(input, splitunit);
   }
