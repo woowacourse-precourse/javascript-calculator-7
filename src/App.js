@@ -19,6 +19,7 @@ class App {
 		this.validate(numbers);
 
 		// 숫자 합산 기능 구현
+		return numbers.reduce((acc, num) => acc + num, 0);
 	}
 
 	// divide: 입력 문자열을 구분자 기준으로 분리하는 메서드
