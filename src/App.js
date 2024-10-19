@@ -18,24 +18,17 @@ class App {
 
   async run() {
     await this.input();
+    this.isCustom(this.answer);
+    this.splitByDelimiter();
+    this.isValid();
+    this.getSum();
   }
 
   // "덧셈할 문자열을 입력해 주세요."란 문장의 출력과 함께 문자열을 입력 받습니다.
-  input() {
-    Console.readLine("덧셈할 문자열을 입력해 주세요.\n", (answer) => {
-      try {
-        this.answer = answer;
-        this.isCustom(this.answer);
-        this.splitByDelimiter();
-        this.isValid();
-        this.getSum();
-
-        // 사용자의 값 출력
-        Console.print(this.result);
-      } catch (error) {
-        Console.print(error);
-      }
-    });
+  async input() {
+    this.answer = await Console.readLineAsync(
+      "덧셈할 문자열을 입력해 주세요.\n"
+    );
   }
 
   // 사용자의 값이 커스텀 구분자인지 확인한다.
@@ -44,7 +37,7 @@ class App {
     let customDelimiterPrefix = answer.slice(0, 2);
     // 커스텀 구분자의 접미사를 확인하기 위한 변수
     let customDelimiterSuffix = answer.slice(3, 5);
-    //커스텀 구분자를 추출하기 위한 변수
+    // 커스텀 구분자를 추출하기 위한 변수
     let customDelimiter = answer.slice(2, 3);
 
     if (customDelimiterPrefix === "//" && customDelimiterSuffix === "\\n") {
