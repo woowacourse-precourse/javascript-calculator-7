@@ -1,4 +1,5 @@
 import { Console } from '@woowacourse/mission-utils';
+import {ERROR_MESSAGES} from "./const.js";
 
 class App {
   async run() {
@@ -18,9 +19,17 @@ class App {
     const { separator, numStr } = this.customSeparator(inputStr);
     const numArr = numStr.split(new RegExp(`[${separator}]`)).map( num => {
       const parsedNum = Number(num);
-      if(isNaN(parsedNum) || parsedNum < 0) {
-        throw new Error('[ERROR] 유효하지 않은 입력입니다.');
+
+      // 숫자가 아닌 값 처리
+      if (isNaN(parsedNum)) {
+        throw new Error(ERROR_MESSAGES.NOT_A_NUMBER);
       }
+
+      // 음수 값 처리
+      if (parsedNum < 0) {
+        throw new Error(ERROR_MESSAGES.NEGATIVE_NUMBER);
+      }
+
       return parsedNum;
     });
     return numArr.reduce((acc, num) => acc + num, 0);
@@ -30,6 +39,12 @@ class App {
     let defaultSeparator = ',|:';
     if(inputStr.startsWith('//')) {
       const endIndex = inputStr.indexOf('\\n');
+
+      // 잘못된 구분자 형식 처리
+      if (endIndex === -1) {
+        throw new Error(ERROR_MESSAGES.INVALID_SEPARATOR_FORMAT);
+      }
+
       const customSeparator = inputStr.substring(2, endIndex);
       const numStr = inputStr.slice(endIndex + 2);
       const separator = `${defaultSeparator}|${customSeparator}`;
