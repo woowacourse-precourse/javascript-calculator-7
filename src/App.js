@@ -59,7 +59,14 @@ class App {
       const number = parseInt(item.trim()); // 숫자로 변환
       sum += number;
     } );
+    this.printResult(sum);
   }
+
+  //결과 출력 함수
+  printResult(sum){
+    Console.print(`결과 : ${sum}`);
+  }
+
 }
 
 export default App;
