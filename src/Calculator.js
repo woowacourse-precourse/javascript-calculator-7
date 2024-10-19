@@ -77,6 +77,11 @@ class Calculator {
         throw new Error("잘못된 문자가 포함되었습니다.");
       }
 
+      // 음수 숫자 예외 처리
+      if (number < 0) {
+        throw new Error("[ERROR] 음수는 허용되지 않습니다.");
+      }
+
       // 소숫점 숫자 예외 처리
       if (item.includes('.')) {
         throw new Error("소숫점 숫자는 허용되지 않습니다.");
