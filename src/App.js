@@ -5,7 +5,7 @@ class App { //하나의 메소드는 하나의 역할
     customSeparator = ""//인스턴스 변수는 최대 2개
     async run() { //풀이 결과 반환 담당, 메소드명만 봐도 무슨역할인지 알 수 있게
         const input = await this.input()
-        if (input.slice(0, 2) === "//") {
+        if (input.startsWith("//")) {
             this.isCustom(input)
         } else { //else 추후 삭제
             this.calculator(this.toArray([...input]))
