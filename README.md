@@ -29,7 +29,7 @@ function extractMathExpression(inputString) {}
 ```javascript
 // INPUT: 구분자, 커스텀 구분자 리스트(delimeters), 
 // OUTPUT: 숫자 리스트
-function splitDelimeter(delimeters) {}
+function splitDelimeter(expression, delimeters) {}
 ```
 ## 3-1. 커스텀 구분자 전처리하기
 커스텀 구분자 중 '.'나 '*'과 같은 특수 문자는 정규 표현식 사용 시, 앞에 `\\`를 붙여서 이스케이프 처리를 해야 합니다.
