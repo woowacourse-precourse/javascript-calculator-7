@@ -18,6 +18,8 @@ class App {
 
       let numbers = input.split(delimiter).map((v) => +v);
 
+      let sum = numbers.reduce((acc, cur) => acc + cur, 0);
+
     }
     catch (err) {
       Console.print(err.message);
