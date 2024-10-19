@@ -54,6 +54,27 @@ class App {
     return ESCAPED_DELIMETERS;
   }
 
+  // 4. 덧셈 연산하기
+  addAllNumbers(numbers) {
+    if (this.isNumbersValid(numbers)) {
+      const SUM = numbers.reduce((prev, next) => prev + Number(number), 0);
+
+      return SUM;
+    }
+    else {
+      return "[ERROR] 잘못된 수식이 입력되었습니다.";
+    }
+  }
+
+  // 4-1. 숫자 유효 검증하기
+  isNumbersValid(numbers) {
+    // 숫자인 경우 true 반환
+    // 숫자가 아니거나, 숫자지만 음수 혹은 0인 경우 false 반환
+    const isValid = numbers.some(number => isNaN(Number(number)) || Number(number) <= 0);
+    
+    return isValid;
+  }
+
   async run() {}
 }
 
