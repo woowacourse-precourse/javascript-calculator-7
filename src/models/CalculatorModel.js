@@ -1,4 +1,4 @@
-// 에러 처리
+// --- 에러 처리 ---
 export function errorMessage(booleanData) {
   if (booleanData === 1) {
     throw new Error('[ERROR] : 구분자가 아닌 문자는 입력할 수 없습니다.');
@@ -8,7 +8,7 @@ export function errorMessage(booleanData) {
   }
 }
 
-// 양수가 아닌게 있는 경우 예외
+// --- 양수가 아닌게 있는 경우 예외 ---
 export function hasNonNumericError(input) {
   const nonNumeric = input.map(Number).some((char) => !/^\d+$/.test(char))
     ? 1
@@ -16,56 +16,72 @@ export function hasNonNumericError(input) {
   errorMessage(nonNumeric);
 }
 
-// 0이 있는 경우 예외
-export function hasZeroError(input) {
+// --- 0이 있는 경우 예외 ---
+export function checkForZero(input) {
   const hasZero = input.some((char) => /^0+$/.test(char)) ? 2 : false; // 0이 하나라도 있으면 true
   errorMessage(hasZero);
 }
 
-// 예외처리 모음 함수
-export function validateInput(input) {
-  // string배열 받음
-  // 양수나 0dl 아닌게 있는 경우
+// --- 예외처리 모음 함수 ---
+// 양수가 아닌 수가 입력되거나, 구분자가 아닌 문자가 입력 된 경우
+export function validateParsedNumbers(input) {
   hasNonNumericError(input);
-  // 0이 있는 경우
-  hasZeroError(input);
+  checkForZero(input);
 }
 
-// 숫자 파싱 함수
-export function parseNumbers(input) {
-  const delimiter = /,|:/; // 기본구분자
-
-  // 커스텀 구분자 추출
-  const customDelimiter = input.startsWith('//')
+// --- 구분자 추출 함수 ---
+export function extractDelimiter(input) {
+  return input.startsWith('//')
     ? input.substring(2, input.indexOf('\\n'))
     : null;
-  // 커스텀 부분 제외한 문자열
-  const processedInput = customDelimiter
-    ? input.substring(input.indexOf('\\n') + 2)
-    : input;
+}
 
-  // 커스텀 구분자로 나눈 문자 배열 (split 하면 배열로 만들어짐. )
+// --- 커스텀구분자 입력 부분 제외 ---
+export function deleteCustom(customDelimiter, input) {
+  return customDelimiter ? input.substring(input.indexOf('\\n') + 2) : input;
+}
+
+// --- 문자열을 구분자 기준으로 나누기 ---
+export function splitString(customDelimiter, processedInput, defaultDelimiter) {
+  // 커스텀 문자로 나누기
   const splitByCustomDelimiter = customDelimiter
     ? processedInput.split(customDelimiter)
     : [processedInput];
 
-  // 기본 구분자로 나눈 문자 배열
+  // 기본 구분자로 나누기
   const splitByDefaultDelimiters = splitByCustomDelimiter.flatMap((part) =>
-    part.split(delimiter),
+    part.split(defaultDelimiter),
   );
 
-  /// 예외처리 로직
-  validateInput(splitByDefaultDelimiters);
+  return splitByDefaultDelimiters;
+}
 
-  // 빈 문자열이 있으면 '0'으로 대체
-  const cleanedNumbers = splitByDefaultDelimiters.map((value) =>
-    value === '' ? '0' : value,
-  );
-
+export function cleanAndConvertToNumbers(inputArr) {
+  const cleanedNumbers = inputArr.map((value) => (value === '' ? '0' : value));
   return cleanedNumbers.map(Number);
 }
 
-// 계산
+// --- 숫자 파싱 로직 ---
+export function parseNumbers(input) {
+  const dafaultDelimiter = /,|:/; // 기본구분자
+  const customDelimiter = extractDelimiter(input); // 커스터 구분자 추출
+  const processedInput = deleteCustom(customDelimiter, input); // 커스텀 부분 제외한 문자열
+  
+  
+  // 구분자로 문자열 나누기
+  const splitByDelimiters = splitString(
+    customDelimiter,
+    processedInput,
+    dafaultDelimiter,
+  ); 
+
+  validateParsedNumbers(splitByDelimiters);   /// 예외처리
+
+  // 빈 문자열이 있으면 '0'으로 대체
+  return cleanAndConvertToNumbers(splitByDelimiters);
+}
+
+// --- 계산 ---
 export function calculate(input) {
   const numArr = parseNumbers(input);
   const sum = numArr.reduce((acc, current) => acc + current, 0); // 배열의 합 계산
