@@ -12,10 +12,11 @@ class App {
         delimiter = this.getDelimiter(input);
         input = input.split('\\n')[1];
       }
-      else{  //기본 구분자를 사용하는 경우
+      else {  //기본 구분자를 사용하는 경우
         delimiter = /[,:]/;
       }
 
+      let numbers = input.split(delimiter).map((v) => +v);
 
     }
     catch (err) {
