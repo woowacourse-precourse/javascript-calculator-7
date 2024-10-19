@@ -10,6 +10,8 @@ class App {
     if (inputString.startsWith("//")) {
       let customDelimiter = extractCustomDelimiter(inputString);
       splitArr = splitCustomDelimiter(inputString, customDelimiter);
+    } else {
+      splitArr = splitDelimiter(inputString);
     }
   }
 }
@@ -29,6 +31,11 @@ function splitCustomDelimiter(inputString, customDelimiter) {
   );
   const regex = new RegExp(`${customDelimiter}|,|:`);
   return remainString.split(regex);
+}
+
+function splitDelimiter(inputString) {
+  const regex = /,|:/;
+  return inputString.split(regex);
 }
 
 export default App;
