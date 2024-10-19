@@ -57,6 +57,14 @@ class App {
     return
   }
 
+  strToArrayHandler(arrToChange) {
+    const changedArray = arrToChange
+      .replaceAll(',', '')
+      .replaceAll(':', '')
+      .split('');
+    
+  }
+
 
   printError(msg) {
     Console.print('[ERROR]'+msg);
