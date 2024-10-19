@@ -11,7 +11,10 @@ class App {
 
         if (parsedText === "") Console.print("결과 : 0");
 
-        Console.print(parsedText.split(";")); // 확인
+        const numbers = this.splitInputText(parsedText);
+        this.validateNumbers(numbers);
+
+        Console.print(numbers);
     }
 
     getInputText() {
@@ -34,6 +37,27 @@ class App {
             throw new Error("[ERROR] 숫자는 구분자로 사용할 수 없습니다.");
         }
         this.defaultSeparators.push(customSeparator);
+    }
+
+    // 배열에서 구분자는 모두 + 로 바꾸고 +를 기준으로 쪼개기
+    splitInputText(input) {
+        for (const separator of this.defaultSeparators) {
+            input = input.split(separator).join("+");
+        }
+        return input.split("+");
+    }
+
+    // 최종 배열 내에 음수가 아닌 숫자들만 들어있는지 확인하는 함수
+    validateNumbers(numbers) {
+        // 숫자가 아닌 값이 존재하는지 확인하고 경고 처리
+        if (numbers.some(value => isNaN(+value))) {
+            throw new Error("[ERROR] 숫자만 입력할 수 있습니다.");
+        }
+
+        // 음수 값이 존재하는지 확인하고 경고 처리
+        if (numbers.some(value => +value < 0)) {
+            throw new Error("[ERROR] 음수는 입력할 수 없습니다.");
+        }
     }
 }
 
