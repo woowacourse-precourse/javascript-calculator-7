@@ -19,21 +19,33 @@ class CommonValidator {
     return target;
   }
 
-  isValid() {
+  parse() {
     if (
       this.#target.replaceAll(
         new RegExp(`[${this.#separatorList.join("")}0-9]`, "g"),
         ""
       ).length !== 0
     ) {
-      return false;
+      return {
+        success: false,
+        errorMessage: "Only separators and numbers can be entered",
+      };
     }
 
     const combinations = createDelimiterCombinationList(this.#separatorList);
 
-    return !combinations.some((combination) =>
+    const isIncludesMixedSeparator = combinations.some((combination) =>
       this.#target.includes(combination)
     );
+
+    return isIncludesMixedSeparator
+      ? {
+          success: false,
+          errorMessage: "Only separators and numbers can be entered",
+        }
+      : {
+          success: true,
+        };
   }
 }
 

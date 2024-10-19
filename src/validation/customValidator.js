@@ -9,9 +9,11 @@ class CustomSeparatorValidator {
     this.#separatorList = separatorList;
   }
 
-  isValid() {
+  parse() {
     if (!this.#target.startsWith(CORRECT_CUSTOM_SEPARATOR.PREFIX)) {
-      return true;
+      return {
+        success: true,
+      };
     }
 
     const lineBreakStringIndex = this.#target.indexOf(
@@ -22,21 +24,33 @@ class CustomSeparatorValidator {
     const CORRECT_CUSTOM_SEPARATOR_PREFIX_INDEX = 3;
 
     if (lineBreakStringIndex !== CORRECT_CUSTOM_SEPARATOR_PREFIX_INDEX) {
-      return false;
+      return {
+        success: false,
+        errorMessage: "Custom Separator Length must be 1",
+      };
     }
 
     const customSeparator = this.#target[CORRECT_CUSTOM_SEPARATOR_INDEX];
 
-    if (
-      this.#separatorList.includes(customSeparator) ||
-      Number.isInteger(Number(customSeparator))
-    ) {
-      return false;
+    if (this.#separatorList.includes(customSeparator)) {
+      return {
+        success: false,
+        errorMessage: "Custom Separator can't be initial separator",
+      };
+    }
+
+    if (Number.isInteger(Number(customSeparator))) {
+      return {
+        success: false,
+        errorMessage: "Custom Separator can't be number",
+      };
     }
 
     this.#separatorList.push(customSeparator);
 
-    return true;
+    return {
+      success: true,
+    };
   }
 }
 

@@ -1,3 +1,4 @@
+import CustomError from "./CustomError.js";
 import CommonValidator from "./validation/commonValidtor.js";
 import CustomSeparatorValidator from "./validation/customValidator.js";
 
@@ -11,14 +12,14 @@ class Validator {
     ];
   }
 
-  check() {
-    const isValid = this.#validatorList.every((validator) =>
-      validator.isValid()
-    );
+  parse() {
+    this.#validatorList.forEach((validator) => {
+      const { success, errorMessage = "" } = validator.parse();
 
-    if (!isValid) {
-      throw new Error("[ERROR]: 에러입니다.");
-    }
+      if (!success) {
+        throw new CustomError(errorMessage);
+      }
+    });
   }
 }
 

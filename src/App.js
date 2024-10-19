@@ -15,7 +15,7 @@ class App {
     await this.readInput();
 
     const validator = new Validator(this.#input, this.separatorList);
-    validator.check();
+    validator.parse();
 
     this.generateInputNumberList();
     this.printResult();
