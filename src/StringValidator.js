@@ -2,7 +2,7 @@ class StringValidator {
 
     checkCustomDelimiterPosition(input) { // 커스텀 구분자 선언 위치 체크 함수
         if (input.includes('//') && !input.startsWith('//')) {
-            throw new Error("[ERROR] 커스텀 구분자는 맨 앞에 위치해야 합니다.");
+            throw new Error("[ERROR] 커스텀 구분자는 맨 앞에 선언 해야 합니다.");
         }
     }
 
