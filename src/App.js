@@ -3,7 +3,7 @@ import { Console } from '@woowacourse/mission-utils';
 class App {
   async run() {
     const inputValue = await this.getInputValue();
-    const parsedInputValue = this.parseInputValueToNumber(inputValue);
+    const parsedInputValue = this.parseInputValueToNumberByDefaultDelimiter(inputValue);
 
     let result = this.getSum(parsedInputValue);
 
@@ -22,16 +22,13 @@ class App {
     return await Console.readLineAsync('덧셈할 문자열을 입력해 주세요.\n');
   }
 
-  parseInputValueToNumber(inputValue) {
+  parseInputValueToNumberByDefaultDelimiter(inputValue) {
     const defaultDelimiter = /,|:/;
     return inputValue.split(defaultDelimiter).map(Number);
   }
 
   getSum(numbers) {
-    return numbers.reduce(
-      (accumulator, currentValue) => accumulator + currentValue,
-      0
-    );
+    return numbers.reduce((accumulator, currentValue) => accumulator + currentValue, 0);
   }
 }
 
