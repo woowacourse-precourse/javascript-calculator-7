@@ -13,6 +13,9 @@ class App {
     else{
       strArr = this.separateStr(inputStr);
     }
+
+    const sum = this.getSum(strArr);
+    Console.print("결과 : " + sum);
   }
 
   async getString(){
@@ -36,9 +39,14 @@ class App {
     const delimiters = new RegExp(`[,:${customSeperator}]`)
 
     const strArr = str.split(delimiters);
-    Console.print(strArr);
 
     return strArr;
+  }
+
+  getSum(strArr){
+    const sum = strArr.reduce((accumulator, currentValue) => accumulator + Number(currentValue), 0);
+
+    return sum;
   }
 }
 
