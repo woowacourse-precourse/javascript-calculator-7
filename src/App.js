@@ -13,10 +13,7 @@ class App {
   }
 
   async getUserInput() {
-    const inputWords = await Console.readLineAsync(
-      "덧셈할 문자열을 입력해 주세요.\n"
-    );
-    return inputWords;
+    return await Console.readLineAsync("덧셈할 문자열을 입력해 주세요.\n");
   }
 
   separateUserInput(input) {
@@ -24,27 +21,30 @@ class App {
       return [0];
     }
     if (input.startsWith("//")) {
-      const indexCustom = input.indexOf("\\n");
-      const customDelimiter = input.substring(2, indexCustom);
-      input = input.substring(indexCustom + 2);
-      console.log(input);
-      return input.split(customDelimiter);
-    } else if (input.includes(",") || input.includes(";")) {
-      return input.split(/[,;]/);
+      const [customDelimiter, numbersPart] = this.extractDelimiter(input);
+      return numbersPart.split(customDelimiter);
     }
-    throw new Error("잘못된 입력입니다.");
+    return input.split(/[,;]/);
+  }
+
+  extractDelimiter(input) {
+    const indexCustom = input.indexOf("\\n");
+    const customDelimiter = input.substring(2, indexCustom);
+    const numbersPart = input.substring(indexCustom + 2);
+    return [customDelimiter, numbersPart];
   }
 
   parseNumbers(input) {
-    const numbers = input.map(Number);
-    const negativeNumbers = numbers.filter((num) => num < 0);
-
-    if (negativeNumbers.length > 0) {
-      throw new Error(`음수는 입력할 수 없습니다`);
-    }
-    if (numbers.some(isNaN)) {
-      throw new Error("숫자가 아닌 값이 포함되어 있습니다.");
-    }
+    const numbers = input.map((num) => {
+      const parsed = Number(num);
+      if (isNaN(parsed)) {
+        throw new Error("숫자가 아닌 값이 포함되어 있습니다.");
+      }
+      if (parsed < 0) {
+        throw new Error("음수는 입력할 수 없습니다.");
+      }
+      return parsed;
+    });
     return numbers;
   }
 
