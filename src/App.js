@@ -23,9 +23,8 @@ class App {
     const delimiterRegex = this.regexDelimiters(allDelimiter); // 4.구분자를 정규 표현식으로 바꾸는 기능
     this.checkForInvalidCharacters(input, delimiterRegex);  // 5.정해진 구분자, 숫자 외 다른 문자 있는지 확인하는 기능 - 유효성 체크
     const numbers = this.splitAndExtractNumbers(input, delimiterRegex); // 6.구분자를 기준으로 숫자를 추출하는 기능
-    Console.print(numbers);
 
-    return 0;
+    return this.sumNumbers(numbers); // 7.배열안의 모든 숫자를 덧셈하는 기능
   }
 
   // 2.커스텀 구분자 확인 기능
@@ -77,6 +76,11 @@ class App {
     }
 
     return input.split(delimiter).map(Number);
+  }
+
+  // 7.배열안의 모든 숫자를 덧셈하는 기능
+  sumNumbers(numbers) {
+    return numbers.reduce((sum, number) => sum + number, 0);
   }
 }
 
