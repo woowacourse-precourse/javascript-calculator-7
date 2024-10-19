@@ -13,7 +13,7 @@ class App {
   }
 
   async run() {
-    await this.#controller.handleCalculate();
+    await this.#controller.processCalculation();
   }
 }
 

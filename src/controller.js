@@ -4,11 +4,11 @@ class CalculatorController {
     this.view = view;
   }
 
-  async handleCalculate() {
+  async processCalculation() {
     try {
       const input = await this.view.inputView();
-      const RESULT = await this.model.calculate(input);
-      this.view.outputView(RESULT);
+      const result = await this.model.calculate(input);
+      this.view.outputView(result);
     } catch (error) {
       this.view.errorView(error);
       throw error;
