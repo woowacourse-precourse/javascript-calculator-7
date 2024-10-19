@@ -12,6 +12,7 @@ class CalculatorModel {
       INVALID_NUMBER:
         "[ERROR] 허용되지 않은 구분자 또는 숫자가 아닌 값이 포함되어 있습니다.",
       NEGATIVE_NOT_ALLOWED: "[ERROR] 음수는 입력할 수 없습니다.",
+      NUMBER_AS_SEPARATOR: "[ERROR] 숫자는 구분자로 쓸 수 없습니다.",
     };
   }
 
@@ -27,6 +28,12 @@ class CalculatorModel {
     const customSeparatorMatch = input.match(/^\/\/(.*?)\\n/);
     if (customSeparatorMatch) {
       const customSeparator = customSeparatorMatch[1].trim();
+
+      // 커스텀 구분자가 숫자인지 체크
+      if (!isNaN(customSeparator)) {
+        throw new Error(this.errorMessages.NUMBER_AS_SEPARATOR);
+      }
+
       separators.push(customSeparator);
       numbersString = input.slice(customSeparatorMatch[0].length);
     }
