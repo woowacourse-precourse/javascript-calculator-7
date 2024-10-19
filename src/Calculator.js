@@ -26,9 +26,7 @@ export default class Calculator {
     splitByDelimiters(input, delimiters) {
         input = input.replace(/\/\/.*?\\n/g, delimiters[0]); // 커스텀부분 문자열 인식 부분을 구분자로 변경(커스텀구분자가 2개 이상일 경우 뒤에 나오는 숫자와 앞에 나오는 숫자가 겹치는 것을 방지)
 
-        const delimitersRegex = new RegExp(delimiters.map(delimiter => {
-            return delimiter.replace(/[.*+?^${}()|[\]\\]/g, '\\$&');  // 특수 문자 이스케이프
-        }).join('|'), 'g');
+        const delimitersRegex = new RegExp(delimiters.join('|'), 'g');
 
         const tokens = input.split(delimitersRegex)
             .filter(item => item !== "")   // 빈 문자열 제거
