@@ -1,4 +1,4 @@
-import { Console } from "@woowacourse/mission-utils";
+import { Console } from '@woowacourse/mission-utils';
 
 class App {
   validateInput(input) {
@@ -22,21 +22,21 @@ class App {
   }
 
   async run() {
-    const input = await Console.readLineAsync("덧셈할 문자열을 입력해 주세요.\n");
+    const input = await Console.readLineAsync('덧셈할 문자열을 입력해 주세요.\n');
     let sum = 0;
 
     if (this.validateInput(input) === 0) {
       const numArr = this.convertToNumberArray(input, /[,:]/);
       numArr.forEach((num) => {
         sum += num;
-      })
+      });
     } else if (this.validateInput(input) === 1) {
       const numArr = this.convertToNumberArray(input.slice(5), input[2]);
       numArr.forEach((num) => {
         sum += num;
-      })
+      });
     } else {
-      throw new Error("[ERROR]: 잘못된 값을 입력했습니다");
+      throw new Error('[ERROR]: 잘못된 값을 입력했습니다');
     }
 
     Console.print(`결과 : ${sum}`);
