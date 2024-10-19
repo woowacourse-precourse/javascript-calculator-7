@@ -19,6 +19,7 @@ class App {
   }
 
   processInput(input) {
+    if (input === '') return [];
     const stringified = stringifyToJSON(input);
     const separator = this.getSeparator(stringified);
     const content = this.extractContent(stringified);
