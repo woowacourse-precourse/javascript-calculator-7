@@ -1,5 +1,6 @@
 class App {
   async run() {}
+
   /**
    *
    * @param {*} input
@@ -67,6 +68,36 @@ class App {
     }, 0);
 
     return result;
+  }
+
+  /**
+   * 불필요한 검사 막기 위한 함수
+   * @param {*} numberList 순회할 가치가 있는 숫자 "리스트" 형식만 들어와야함
+   * @returns
+   * 
+   *  let checkObj = {
+      valid: true,
+      value: null,
+    };
+   * 
+   */
+  checkNumberList(numberList) {
+    let checkObj = {
+      valid: true,
+      value: null,
+    };
+
+    if (numberList.length === 0) {
+      checkObj.valid = false;
+      checkObj.value = 0;
+    }
+
+    if (numberList.length == 1) {
+      checkObj.valid = false;
+      checkObj.value = numberList[0];
+    }
+
+    return checkObj;
   }
 }
 
