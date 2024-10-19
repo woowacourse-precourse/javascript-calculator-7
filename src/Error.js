@@ -11,3 +11,10 @@ export class IncludeZeroError extends ValidationError {
     this.name = "IncludeZeroError";
   }
 }
+
+export class InvalidSeparatorError extends ValidationError {
+  constructor() {
+    super();
+    this.name = "InvalidSeparatorError";
+  }
+}

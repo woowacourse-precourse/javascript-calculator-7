@@ -1,6 +1,6 @@
 import { MissionUtils } from "@woowacourse/mission-utils";
 import Input from "../src/Input";
-import { IncludeZeroError } from "../src/Error";
+import { IncludeZeroError, InvalidSeparatorError } from "../src/Error";
 
 const { Console } = MissionUtils;
 
@@ -95,5 +95,21 @@ describe("validateNumbers()", () => {
     await input.getPlusString();
 
     expect(() => input.validateNumbers("0,1,2")).toThrow(IncludeZeroError);
+  });
+
+  test("연산 문자열이 등록된 구분자와 양수로 이루어져 있으면 문자열 그대로 반환", async () => {
+    const mockInput = ["//;\n1,2;3"];
+    mockQuestions(mockInput);
+    await input.getPlusString();
+
+    expect(input.validateNumbers("1,2;3")).toBe("1,2;3");
+  });
+
+  test("연산 문자열에 등록되지 않은 구분자가 포함되어 있으면 InvalidSeparatorError 반환", async () => {
+    const mockInput = ["//;\n1,2;;3"];
+    mockQuestions(mockInput);
+    await input.getPlusString();
+
+    expect(() => input.validateNumbers("1,2;;3")).toThrow(InvalidSeparatorError);
   });
 });
