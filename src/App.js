@@ -155,6 +155,31 @@ class App {
 
     return checkObj;
   }
+
+  getSeperatorRegex(seperatorCharList) {
+
+    // let finalRe = new RegExp(lower.source + "|" + upper.source);
+    // todo: 특수기호도 잘 인식되는지 마지막에 확인할것
+    let regexArr = seperatorCharList.map((elem) => {
+      if (elem === "\\") {
+        return new RegExp("\\" + elem);
+      } else {
+        return new RegExp(elem);
+      }
+    });
+
+    let regexString = "";
+
+    for (let i = 0; i < regexArr.length; i++) {
+      if (i === regexArr.length - 1) {
+        regexString += regexArr[i].source;
+      } else {
+        regexString += regexArr[i].source + "|";
+      }
+    }
+
+    return new RegExp(regexString);
+  }
 }
 
 export default App;
