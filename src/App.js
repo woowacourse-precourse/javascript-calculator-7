@@ -6,6 +6,8 @@ class App {
 
     const numStringArray = this.convertNumStringArray(inputs);
     const sum = this.sumNumStringArray(numStringArray);
+
+    Console.print(`결과 : ${sum}`); // 5
   }
 
   extractSeparatorsAndNumString(inputs) {
