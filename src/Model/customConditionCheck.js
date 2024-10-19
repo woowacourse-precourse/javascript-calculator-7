@@ -31,7 +31,7 @@ function separatorTextInputCheck(userInput) {
 function positiveNumberCheck(userInput) {
   let positiveNumberCheckCount = 0;
   const numberCount = (userInput.length - 5) / 2 + 1;
-  const numberCountForInt = parseInt(numberCount);
+  const numberCountForInt = parseInt(numberCount, 10);
   for (let i = 5; i < userInput.length; i += 1) {
     if (i % 2 === 1 && Number(userInput[i]) > 0) {
       positiveNumberCheckCount += 1;
