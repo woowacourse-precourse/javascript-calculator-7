@@ -1,4 +1,5 @@
 import { Console } from "@woowacourse/mission-utils";
+const CUSTOM_DISTINCT_REGEX = /^(\/\/.+\n)|\s+/g;
 
 class Caculator {
   async calculate () {
@@ -13,6 +14,15 @@ class Caculator {
     } catch (error) {
       
     }
+  }
+
+  extractNumbers(delimiters, formula) {
+    let parsedFormula = formula.replace(CUSTOM_DISTINCT_REGEX, "");
+    for (let delimiter of delimiters ) {
+      parsedFormula = parsedFormula.replaceAll(delimiter, " ");
+    }
+    const numbers = parsedFormula.split(" ").map(Number);
+    return numbers;
   }
 
   addNumbers(numbers) {

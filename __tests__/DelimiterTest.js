@@ -10,6 +10,6 @@ describe("구분자", () => {
   test("사용할 수 있는 구분자를 모두 구한다.", () => {
     const inputTest = "//(;\n";
     const result = delimiters.detect(inputTest);
-    expect(result).toEqual([",", ":", "(;"]);
+    expect(result).toEqual(["(;", ",", ":"]);
   })
 });

@@ -6,7 +6,7 @@ class Delimiters {
     if (!customDeli) {
       return this.BASE_DELIMITER;
     }
-    const uniqueDelimiters = new Set([...this.BASE_DELIMITER, customDeli[1]])
+    const uniqueDelimiters = new Set([customDeli[1], ...this.BASE_DELIMITER]) // 커스텀 구분자를 먼저 처리하도록
     return [...uniqueDelimiters];
   }
 }
