@@ -3,12 +3,12 @@ import Validator from "./Validator.js";
 import {
   INPUT_QUERY,
   OUTPUT_PREFIX,
-  INITIAL_SEPARTORLIST,
+  INITIAL_SEPARATOR_LIST,
 } from "./constants.js";
 
 class App {
   #input;
-  separatorList = [...INITIAL_SEPARTORLIST];
+  separatorList = [...INITIAL_SEPARATOR_LIST];
   #inputNumberList = [];
 
   async run() {
