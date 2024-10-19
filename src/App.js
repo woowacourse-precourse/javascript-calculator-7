@@ -58,7 +58,7 @@ class App {
   // 합계 함수
   calculateSum(numberList) {
     if (numberList.length === 0) {
-      return 0;
+      throw new Error(this.errorMessage)
     }
     return numberList.reduce((acc, numStr) => {
       const num = this.validateNumber(numStr);
