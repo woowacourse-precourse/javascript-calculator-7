@@ -37,11 +37,18 @@ class App {
     };
 
     function getNumberFromData (data) {
+      if (data.length == 0) {
+        return true;
+      }
+
       const regex = new RegExp(`[${separator}]`);
       number = data.split(regex);
 
-      for(let i = 0; i < number.length; i++){
-        if(checkIsCorrectChar(number[i])){
+      for (let i = 0; i < number.length; i++) {
+        if (checkIsCorrectChar(number[i])) {
+          if (number[i].length == 0) {
+            continue;
+          }
           sum += parseInt(number[i], 10);
         }
       }
