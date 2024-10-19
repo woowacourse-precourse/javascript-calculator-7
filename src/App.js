@@ -9,7 +9,12 @@ class App {
         } else if (inputStr.slice(0, 2) === '//') {
             let endIndex = inputStr.indexOf("\\n");
             const std = inputStr.slice(2, endIndex);
-            let nums = inputStr.slice(endIndex + 2).split(std);
+            if (std.length > 1) {
+                throw new Error("[ERROR] 구분자는 문자여야 합니다.");
+            }else if (std===' '){
+                throw new Error("[ERROR] 구분자는 공백일 수 없습니다");
+            }
+            let nums = inputStr.slice(5).split(std);
             try {
                 result = this.#SUM(nums)
             } catch (e) {
@@ -31,8 +36,10 @@ class App {
     #SUM = (nums) => {
         let result = 0
         for (const num of nums) {
-            if (!isNaN(parseFloat(num)) && num > 0) {
+            if (num.length <=  10 && !isNaN(parseFloat(num)) && num > 0) {
                 result += Number(num);
+            } else if (num.length > 10) {
+                throw new Error('[ERROR] 숫자 범위를 넘어갑니다.');
             } else {
                 throw new Error('[ERROR] 잘못된 입력입니다.');
             }
