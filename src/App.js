@@ -5,6 +5,7 @@ class App {
     const inputs = await Console.readLineAsync('덧셈할 문자열을 입력해 주세요.\n');
 
     const numStringArray = this.convertNumStringArray(inputs);
+    const sum = this.sumNumStringArray(numStringArray);
   }
 
   extractSeparatorsAndNumString(inputs) {
@@ -28,6 +29,10 @@ class App {
 
     return numString.split(splitter);
   }
+
+  sumNumStringArray(arr) {
+    return arr.reduce((acc, numStr) => acc + this.formatFromNumStringToNumber(numStr), 0);
+  } 
 
   formatFromNumStringToNumber (numString) {
     if (numString === '') return 0;
