@@ -4,30 +4,33 @@ const SEPARATORS = [",",":"];
 
 const findSeparator = (input) => {
   const INPUT_ARRAY = input.split("");
+
   if (input.slice(0,2) === "//") {
     const START = input.indexOf("//") + 2;
     const END = input.indexOf("\\n");
+
     if (START === 1 || END === -1) {
       throw new Error("[ERROR] 커스텀 구분자 추가를 위해선 //와 \\n 사이에 추가하고자 하는 구분자를 입력해주세요.");
-    } else {
-      const customSeparator = input.slice(START, END);
-      SEPARATORS.push(customSeparator);
-      if (customSeparator.length > 1 || !isNaN(customSeparator)){
-        throw new Error("[ERROR] 커스텀 구분자로 문자를 입력해주세요.");
-      }
-      SEPARATORS.push(input.slice(customSeparator))
-      return INPUT_ARRAY.slice(END + 2);
     }
+
+    const customSeparator = input.slice(START, END);
+    SEPARATORS.push(customSeparator);
+
+    if (customSeparator.length > 1 || !isNaN(customSeparator)){
+      throw new Error("[ERROR] 커스텀 구분자로 문자를 입력해주세요.");
+    }
+
+    return INPUT_ARRAY.slice(END + 2);
   }
-  else{
+
+  if (isNaN(input[0])) {
     if(input[0]==="-"){
-      throw new Error("[ERROR] 양수를 입력해주세요.");
-    } else if (isNaN(input[0])){
-      throw new Error("[ERROR] 커스텀 구분자 추가를 위해선 //와 \\n 사이에 추가하고자 하는 구분자를 입력해주세요.")
+      return INPUT_ARRAY;
     }
+    throw new Error("[ERROR] 커스텀 구분자 추가를 위해선 //와 \\n 사이에 추가하고자 하는 구분자를 입력해주세요.")
   }
   return INPUT_ARRAY;
-}
+};
 
 const getNumber = (inputArray) => {
   let currentNum = '';
