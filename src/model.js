@@ -17,6 +17,8 @@ class CalculatorModel {
         "[ERROR] 붙어있어야 할 문자들 사이에 공백이 있습니다.",
       SPACE_IN_CUSTOM_SEPARATOR:
         "[ERROR] 커스텀 구분자와 줄바꿈 사이에 공백이 있습니다.",
+      CONSECUTIVE_DEFAULT_SEPARATORS:
+        "[ERROR] 기본 구분자는 연속으로 사용할 수 없습니다.",
     };
   }
 
@@ -53,6 +55,14 @@ class CalculatorModel {
         throw new Error(this.errorMessages.SPACE_BETWEEN_NUMBERS);
       }
       throw new Error(this.errorMessages.INVALID_SPACE);
+    }
+
+    // 기본 구분자의 연속 사용 체크
+    const consecutiveSeparatorRegex = new RegExp(
+      `[${this.defaultSeparators.join("")}]{2,}`
+    );
+    if (consecutiveSeparatorRegex.test(numbersString)) {
+      throw new Error(this.errorMessages.CONSECUTIVE_DEFAULT_SEPARATORS);
     }
 
     // 커스텀 구분자가 .인 경우 처리
