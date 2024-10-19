@@ -28,18 +28,21 @@ class App {
     const hasCommaAndSemicolon = hasComma && hasSemicolon;
     const hasCustomSeparator = hasCustomDelimiterPrefix && hasCustomDelimiterSuffix;
 
-    if (hasCustomSeparator) {
-      const customDelimiterPrefixIndex = input.indexOf(CUSTOM_DELIMITER_PREFIX);
-      const customDelimiterSuffixIndex = input.indexOf(CUSTOM_DELIMITER_SUFFIX);
-      const customSeparator = input.slice(customDelimiterPrefixIndex + 2, customDelimiterSuffixIndex);
-      const stringToSeparate = input.replace(input.slice(customDelimiterPrefixIndex, customDelimiterSuffixIndex + 2), "");
-      return this.splitAndConvertToNumbers(stringToSeparate, customSeparator);
-    }
+    if (hasCustomSeparator)
+      return this.splitUsingCustomDelimiterAndConvertToNumbers(input, CUSTOM_DELIMITER_PREFIX, CUSTOM_DELIMITER_SUFFIX);
     if (hasCommaAndSemicolon)
       return this.splitAndConvertToNumbers(input, [COMMA, SEMICOLON]);
     if (hasComma) return this.splitAndConvertToNumbers(input, COMMA);
     if (hasSemicolon) return this.splitAndConvertToNumbers(input, SEMICOLON);
     return Console.print("[ERROR]");
+  }
+
+  splitUsingCustomDelimiterAndConvertToNumbers(input, customDelimiterPrefix, customDelimiterSuffix) {
+    const customDelimiterPrefixIndex = input.indexOf(customDelimiterPrefix);
+    const customDelimiterSuffixIndex = input.indexOf(customDelimiterSuffix);
+    const customDelimiter = input.slice(customDelimiterPrefixIndex + 2, customDelimiterSuffixIndex);
+    const stringToSeparate = input.replace(input.slice(customDelimiterPrefixIndex, customDelimiterSuffixIndex + 2), "");
+    return this.splitAndConvertToNumbers(stringToSeparate, customDelimiter);
   }
 
   hasSeparator(input, separator) {
