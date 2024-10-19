@@ -1,6 +1,5 @@
 import CheckDelimiter from './CheckDelimiter.js';
 import CheckStrLen from './CheckStrLen.js';
-import ResultNumber from './ResultNumber.js';
 import ValidateInputData from './ValidateInputData.js';
 
 const ParseStr = (str) => {
@@ -12,7 +11,9 @@ const ParseStr = (str) => {
 
   const [DELIMITER_SET, FIND_CUSTOM] = CheckDelimiter(str);
   const PARSE_NUMBERS = ValidateInputData(str, DELIMITER_SET, FIND_CUSTOM);
-  const RESULT = ResultNumber(PARSE_NUMBERS);
+  const RESULT = PARSE_NUMBERS.reduce((p, n) => {
+    return parseInt(p, 10) + parseInt(n, 10);
+  }, 0);
   return RESULT;
 };
 
