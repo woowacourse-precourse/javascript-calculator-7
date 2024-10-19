@@ -18,7 +18,7 @@ class App {
       if (input.startsWith("//")) {
         const newLineIndex = input.toString().indexOf("\\n");
         if (newLineIndex === -1) {
-          throw new Error("[ERROR] 커스텀 구분자 형식이 올바르지 않습니다.");
+          throw new Error("[ERROR]");
         }
         const customSeparator = input.substring(2, newLineIndex);
         separators = [customSeparator];
@@ -32,8 +32,8 @@ class App {
 
       const numberArray = numbers.split(separatorRegex).map((n) => {
         const num = Number(n);
-        if (isNaN(num)) {
-          throw new Error(`[ERROR] 유효하지 않은 입력값입니다: ${n}`);
+        if (isNaN(num) || num < 0) {
+          throw new Error("[ERROR]");
         }
         return num;
       });
