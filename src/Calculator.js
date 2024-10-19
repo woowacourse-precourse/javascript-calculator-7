@@ -2,13 +2,21 @@ import { MissionUtils } from "@woowacourse/mission-utils";
 
 class Calculator {
   async start() {
-    await this.getInput();
+    const input = await this.getInput();
+    try {
+      const result = this.calculate(input);
+      MissionUtils.Console.print(`결과 : ${result}`);
+    } catch (error) {
+      MissionUtils.Console.print(error.message);
+      process.exit(1);
+    }
   }
 
   async getInput() {
     const input = await MissionUtils.Console.readLineAsync(
       "덧셈할 문자열을 입력해 주세요.\n"
     );
+    return input;
   }
 
   calculate(input) {
