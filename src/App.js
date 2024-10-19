@@ -1,17 +1,19 @@
 import { Console } from "@woowacourse/mission-utils";
 class App {
   async run() {
-    const input = await Console.readLineAsync(
-      "덧셈할 문자열을 입력해 주세요.\n"
-    );
+    const INPUT_MESSAGE = "덧셈할 문자열을 입력해 주세요.\n"
+    const RESULT = "결과 : "
+    const ERROR = "[ERROR]"
+
+    const input = await Console.readLineAsync(INPUT_MESSAGE);
     const numberArray = this.extractNumbers(input);
     const hasInvalidValue = numberArray.includes(NaN);
     const hasNegativeNumber = numberArray.filter(el => el < 0).length
 
-    if (hasInvalidValue || hasNegativeNumber) throw new Error("[ERROR]");
+    if (hasInvalidValue || hasNegativeNumber) throw new Error(ERROR);
     if (!hasInvalidValue && !hasNegativeNumber) {
       const result = this.calculateSum(numberArray);
-      Console.print(`결과 : ${result}`);
+      Console.print(`${RESULT}${result}`);
     }
   }
 
