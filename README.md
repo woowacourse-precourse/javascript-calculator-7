@@ -13,4 +13,4 @@
 - 사용자가 잘못된 값을 입력할 경우 "[ERROR]"로 시작하는 메시지와 함께 Error를 발생시키기 위한 함수 **stopOperator()** <br>
 
 ### 코드 컨벤션
-- [JavaScript Style Guide]("https://github.com/woowacourse/woowacourse-docs/tree/main/styleguide/javascript")
+[JavaScript Style Guide](https://github.com/woowacourse/woowacourse-docs/tree/main/styleguide/javascript)
