@@ -19,6 +19,7 @@ class App {
         const NUMBERS = TARGET_STRING.split(/[:\,]/);
       }
       const SUM = NUMBERS.reduce((sum, n) => sum + parseInt(n), 0);
+      MissionUtils.Console.print(`출력 : ${SUM}`);
     }
   }
 }
