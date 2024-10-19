@@ -5,7 +5,8 @@ class App {
     try {
       // 사용자 입력 받기
       await Console.readLine('덧셈할 문자열을 입력해 주세요.\n', (userInput) => {
-        Console.print(`결과: ${this.add(userInput)}`);
+        const normalizedInput = this.normalizeInput(userInput); // 입력 정규화
+        Console.print(`결과: ${this.add(normalizedInput)}`);
       });
     } catch (error) {
       Console.print(error.message);
@@ -61,6 +62,14 @@ class App {
   escapeRegExp(string) {
     return string.replace(/[.*+?^${}()|[\]\\]/g, '\\$&');
   }
+  /**
+   * 입력 문자열을 정규화하여 줄바꿈 문자를 처리
+   * @param {string} input - 사용자 입력 문자열
+   * @returns {string} - 정규화된 문자열
+   */
+    normalizeInput(input) {
+      return input.replace(/\\n/g, '\n'); // \\n을 실제 \n로 변환
+    }
 }
 
 export default App;
