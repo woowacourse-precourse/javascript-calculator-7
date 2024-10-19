@@ -1,5 +1,5 @@
 import { MissionUtils } from "@woowacourse/mission-utils";
-import { IncludeZeroError, InvalidSeparatorError } from "./Error";
+import { IncludeZeroError, InvalidSeparatorError, InvalidCustomSeparatorError } from "./Error";
 
 class Input {
   customSeparator;
@@ -52,7 +52,14 @@ class Input {
     return this.numbers;
   }
 
+  /**
+   * 커스텀 구분자가 문자로만 이루어져 있는지 검증합니다.
+   * @returns {string[]}
+   */
   validateSeparators() {
+    const isChar = (sep) => !(/^[0-9]$/.test(sep));
+    if (!this.customSeparator.every(isChar)) throw new InvalidCustomSeparatorError();
+
     return this.customSeparator;
   }
 }

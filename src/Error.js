@@ -18,3 +18,10 @@ export class InvalidSeparatorError extends ValidationError {
     this.name = "InvalidSeparatorError";
   }
 }
+
+export class InvalidCustomSeparatorError extends ValidationError {
+  constructor() {
+    super();
+    this.name = "InvalidCustomSeparatorError";
+  }
+}

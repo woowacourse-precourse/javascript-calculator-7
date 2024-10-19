@@ -1,6 +1,6 @@
 import { MissionUtils } from "@woowacourse/mission-utils";
 import Input from "../src/Input";
-import { IncludeZeroError, InvalidSeparatorError } from "../src/Error";
+import { IncludeZeroError, InvalidSeparatorError, InvalidCustomSeparatorError } from "../src/Error";
 
 const { Console } = MissionUtils;
 
@@ -129,5 +129,13 @@ describe("validateSeparators()", () => {
     await input.getPlusString();
 
     expect(input.validateSeparators()).toEqual([";", "$"]);
+  });
+
+  test("커스텀 구분자로 숫자가 입력되면 InvalidCustomSeparatorError 반환", async () => {
+    const mockInput = ["//;\n//1\n1,2,3"];
+    mockQuestions(mockInput);
+    await input.getPlusString();
+
+    expect(() => input.validateSeparators()).toThrow(InvalidCustomSeparatorError);
   });
 });
