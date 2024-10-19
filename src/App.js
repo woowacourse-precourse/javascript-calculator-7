@@ -39,7 +39,7 @@ class App {
 
     for (const char of chars) {
       const isValid = this.isValidChar(char);
-      
+
       // 유효하지 않으면 에러 발생
       if (!isValid) {
         const errorMsg = isNaN(Number(char))
@@ -58,15 +58,18 @@ class App {
     this.result = this.numbers.reduce((acc, num) => acc + Number(num), 0);
   }
 
+  // 결과 출력
+  printResult() {
+    Console.print(`결과 : ${this.result}`);
+  }
+
   async run() {
     try {
       await this.getUserInput();
       await this.getSeparator();
       await this.validateInput();
       this.calculateSum();
-
-      // 결과 출력
-      Console.print(`결과 : ${this.result}`);
+      this.printResult();
     } catch (error) {
       throw new Error(error);
     }
