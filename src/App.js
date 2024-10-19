@@ -15,6 +15,7 @@ class App {
     }
 
     let qualifyNumArr = splitArr.map(Number);
+    const result = checkPositiveNumber(qualifyNumArr);
   }
 }
 
@@ -38,6 +39,15 @@ function splitCustomDelimiter(inputString, customDelimiter) {
 function splitDelimiter(inputString) {
   const regex = /,|:/;
   return inputString.split(regex);
+}
+
+function checkPositiveNumber(qualifyNumArr) {
+  for (const element of qualifyNumArr) {
+    if (element < 0 || Number.isNaN(element) === true) {
+      return false;
+    }
+  }
+  return true;
 }
 
 export default App;
