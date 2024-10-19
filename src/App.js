@@ -29,6 +29,8 @@ class App {
       const customDelimiter = parts[0].substring(2);  // "//" 이후의 커스텀 구분자 추출
       delimiters = new RegExp(`[${customDelimiter},|:]`);  // 커스텀 구분자와 기본 구분자 포함
       numbersPart = parts[1];
+    } else if (isNaN(input[0]) || input[0] === "-") { //커스텀 구분자가 아니거나, 음수로 시작하는 경우 처리
+      throw new Error("커스텀 구분자를 사용하지 않는다면 양수로 시작해야 합니다.");
     }
 
     const numbers = numbersPart.split(delimiters).map(Number);
@@ -41,7 +43,7 @@ class App {
       throw new Error("커스텀 구분자 양식이 잘못됐습니다.");
     }
   }
-  
+
   isValidNumber(input) { //숫자 유효성 검사
     if (isNaN(input) || input < 1) {
       throw new Error("계산식에 구분자, 양수 이외의 값이 존재합니다.");
