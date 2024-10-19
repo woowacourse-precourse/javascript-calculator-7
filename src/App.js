@@ -17,11 +17,14 @@ class App {
     }
   }
 
+
   sum(input) { //덧셈 함수
     let delimiters = /[,|:]/;
     let numbersPart = input;
 
     if (input.startsWith("//")) { // 커스텀 구분자 처리
+      this.isValidCustom(input);
+
       const parts = input.split("\\n");  // 사용자가 입력한 "\n" 문자열을 기준으로 분리
       const customDelimiter = parts[0].substring(2);  // "//" 이후의 커스텀 구분자 추출
       delimiters = new RegExp(`[${customDelimiter},|:]`);  // 커스텀 구분자와 기본 구분자 포함
@@ -29,8 +32,23 @@ class App {
     }
 
     const numbers = numbersPart.split(delimiters).map(Number);
+    numbers.forEach(number => this.isValidNumber(number)); //구분자,양수 이외의 값 존재여부 파악.
     Console.print("결과 : " + numbers.reduce((sum, number) => sum + number, 0));
   }
+
+  isValidCustom(input) { //커스텀 구분자 유효성 검사
+    if (input.indexOf("\\n") !== 3 || !isNaN(input[2])) {
+      throw new Error("커스텀 구분자 양식이 잘못됐습니다.");
+    }
+  }
+  
+  isValidNumber(input) { //숫자 유효성 검사
+    if (isNaN(input) || input < 1) {
+      throw new Error("계산식에 구분자, 양수 이외의 값이 존재합니다.");
+    }
+  }
+
+
 }
 
 export default App;
