@@ -33,14 +33,14 @@ class App {
             let customSeps = ''; //커스텀 구분자 부분
             let operands = value;//계산의 대상이 될 부분
 
-            if(splitIndex !== -1){ //커스텀 구분자가 존재한다면 값을 변경
-                customSeps = value.substring(0, splitIndex+2);
-                operands = value.substring(splitIndex +2);
+            if (splitIndex !== -1) { //커스텀 구분자가 존재한다면 값을 변경
+                customSeps = value.substring(0, splitIndex + 2);
+                operands = value.substring(splitIndex + 2);
             }
 
             //유효한 구분자
             const SEPARATORS = this.findSeparator(customSeps)
-            Console.readLineAsync(SEPARATORS)
+
 
         }).catch(() => {
             Console.print("[ERROR] 문자열을 입력해주세요.")
