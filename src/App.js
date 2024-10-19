@@ -34,6 +34,7 @@ class App {
         //구분자에 대한 유효성 검사
         if(this.isValidString(userInput.split('\\n')[1],new RegExp(`^[1-9${separator}]`))){
           const numbersArray = userInput.split('\\n')[1].split(separator[1]);
+          this.sum(numbersArray);
         }
       }
   }
@@ -41,6 +42,7 @@ class App {
   //비커스텀 구분자 처리 함수
   unCustomSeparate(userInput){
     const numbersArray = userInput.split(this.UNCOUTOM_SEPARATE);
+    this.sum(numbersArray);
   }
 
   //문자열 구분자 유효성 검사
@@ -50,6 +52,14 @@ class App {
     return false;
   }
 
+   //덧셈 함수
+   sum(numbersArray){
+    let sum = 0;
+    numbersArray.map((item) =>{
+      const number = parseInt(item.trim()); // 숫자로 변환
+      sum += number;
+    } );
+  }
 }
 
 export default App;
