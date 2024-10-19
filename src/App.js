@@ -21,7 +21,6 @@ class App {
       this.seps.push(this.inputs[2]);
       this.customeFlag = true;
     } else {
-    
       this.customeFlag = false;
     }
   }
@@ -116,12 +115,12 @@ class App {
   }
 
   async run() {
-    this.debugFlag = true;
+    this.debugFlag = false;
 
     const testInput = 
     ["//^\\n1^23^4,6,10", "1,2,3,4,5", "//^\\n-1^3,1,2",
       "//&\\n11&2&3,5,7", "1/2/3/4/5", "//(\\n1(2(3(4",
-      "//-\\n1-2-34"
+      "//-\\n1-2-34", ""
     ];
 
     if(this.debugFlag) {
