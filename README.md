@@ -26,8 +26,8 @@
 
 ## ✅ 라이브러리
 
-- [ ] @woowacourse/mission-utils에서 제공하는 Console API를 사용하여 구현해야 한다.
-- [ ] 사용자의 값을 입력 및 출력하려면 Console.readLineAsync()와 Console.print()를 활용한다.
+- [O] @woowacourse/mission-utils에서 제공하는 Console API를 사용하여 구현해야 한다.
+- [O] 사용자의 값을 입력 및 출력하려면 Console.readLineAsync()와 Console.print()를 활용한다.
 
 <br/>
 <br/>
@@ -36,8 +36,8 @@
 
 - [O] 문자열 덧셈 계산기 저장소를 fork하고 clone하는 것으로 시작한다.
 - [O] 기능을 구현하기 전 [README.md](http://README.md) 에 구현할 기능 목록을 정리해 추가한다.
-- [ ] Git의 커밋 단위는 앞 단계에서 [REAME.md](http://REAME.md) 에 정리한 **기능 목록 단위로 추가**한다.
-  - [ ] [AngularJS Git Commit Message Conventions](https://gist.github.com/stephenparish/9941e89d80e2bc58a153)을 참고해 커밋 메시지를 작성한다.
+- [O] Git의 커밋 단위는 앞 단계에서 [REAME.md](http://REAME.md) 에 정리한 **기능 목록 단위로 추가**한다.
+  - [O] [AngularJS Git Commit Message Conventions](https://gist.github.com/stephenparish/9941e89d80e2bc58a153)을 참고해 커밋 메시지를 작성한다.
 
 <br/>
 <br/>
@@ -105,7 +105,7 @@
 
     > ❕`map()` 또는 `reduce()`를 사용하여 배열의 숫자들의 합을 계산한다.
 
-- [ ] **음수 입력 처리**
+- [O] **음수 입력 처리**
   - 음수가 포함된 경우 `[ERROR] 음수는 입력할 수 없습니다.`를 출력하고 프로그램을 종료한다.
 
 ### 5️⃣. 결과 출력
