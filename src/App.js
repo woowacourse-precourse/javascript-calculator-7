@@ -1,7 +1,5 @@
 import { Console } from "@woowacourse/mission-utils";
 
-const ERROR_MSG = "[ERROR]";
-
 class App {
   constructor() {
     this.separators = new RegExp(`[,:]`);
@@ -29,7 +27,7 @@ class App {
   }
 
   // 문자별로 유효한 값인지 확인
-  async isValidChar(char) {
+  isValidChar(char) {
     return (
       this.separators.test(char) || (!isNaN(Number(char)) && Number(char) >= 0)
     );
@@ -40,15 +38,16 @@ class App {
     const chars = this.userInput.split(this.separators);
 
     for (const char of chars) {
-      const isValid = await this.isValidChar(char);
-
+      const isValid = this.isValidChar(char);
+      
       // 유효하지 않으면 에러 발생
       if (!isValid) {
-        if (isNaN(Number(char))) {
-          throw new Error("[ERROR] 구분자가 아닌 문자는 입력할 수 없습니다.");
-        }
-        throw new Error("[ERROR] 음수는 입력할 수 없습니다.");
+        const errorMsg = isNaN(Number(char))
+          ? "[ERROR] 구분자가 아닌 문자는 입력할 수 없습니다."
+          : "[ERROR] 음수는 입력할 수 없습니다.";
+        throw new Error(errorMsg);
       }
+
       // 유효한 경우 숫자로 변환
       this.numbers.push(Number(char));
     }
