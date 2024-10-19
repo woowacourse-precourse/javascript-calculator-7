@@ -33,7 +33,7 @@ describe("문자열 계산기", () => {
   });
 
   test("커스텀 구분자 사용", async () => {
-    const inputs = ["//;\\n1;2;3"];
+    const inputs = ["//;\n1;2;3"];
     mockQuestions(inputs);
 
     const logSpy = getLogSpy();
@@ -63,7 +63,7 @@ describe("문자열 계산기", () => {
   });
 
   test("숫자가 아닌 입력 처리", async () => {
-    const inputs = ["1,a,3"];
+    const inputs = ["1,b,c"];
     mockQuestions(inputs);
 
     const app = new App();
@@ -83,7 +83,7 @@ describe("문자열 계산기", () => {
   });
 
   test("구분자 사이에 숫자가 없는 경우", async () => {
-    const inputs = ["1,,3"];
+    const inputs = ["1::3"];
     mockQuestions(inputs);
 
     const app = new App();
@@ -103,7 +103,7 @@ describe("문자열 계산기", () => {
   });
 
   test("허용되지 않은 구분자 사용", async () => {
-    const inputs = ["1#2*3"];
+    const inputs = ["1!2@3"];
     mockQuestions(inputs);
 
     const app = new App();
@@ -113,7 +113,7 @@ describe("문자열 계산기", () => {
   });
 
   test("커스텀 구분자 지정 후 숫자 생략", async () => {
-    const inputs = ["//;\\n"];
+    const inputs = ["//;\n"];
     mockQuestions(inputs);
 
     const app = new App();
