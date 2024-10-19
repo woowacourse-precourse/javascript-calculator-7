@@ -1,6 +1,4 @@
-import { MissionUtils } from "@woowacourse/mission-utils";
-
-const Console = MissionUtils.Console;
+import { Console } from "@woowacourse/mission-utils";
 
 class App {
     async run() {
