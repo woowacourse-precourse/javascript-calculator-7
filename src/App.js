@@ -1,58 +1,46 @@
 import { Console } from "@woowacourse/mission-utils";
 class App {
   async run() {
-    const numbersString = await Console.readLineAsync(
+    const input = await Console.readLineAsync(
       "덧셈할 문자열을 입력해 주세요.\n"
     );
-    const isCustomSeparator =
-      numbersString.includes("//") && numbersString.includes("\\n");
-    if (isCustomSeparator) {
-      Console.print("둘다있음");
-      const start = numbersString.indexOf("//");
-      const end = numbersString.indexOf("\\n") + 2;
-      const custom = numbersString.slice(start, end);
-      const customSeparator = custom.replace("//", "").replace("\\n", "");
-      const stringToSeparate = numbersString.replace(custom, "");
-      const separatedString = stringToSeparate.split(customSeparator);
-      const numberArray = separatedString.map(Number);
-      if (numberArray.includes(NaN)) Console.print("[ERROR]");
-      else {
-        const result = numberArray.reduce((acc, cur) => acc + cur);
-        Console.print(result);
-      }
+
+    const numberArray = this.extractNumbers(input);
+
+    if (numberArray.includes(NaN)) {
+      Console.print("[ERROR]");
     } else {
-      if (numbersString.includes(",") && numbersString.includes(";")) {
-        const semicolonSeparatedString = numbersString.split(";");
-        const commaSeparatedString = semicolonSeparatedString.map((el) =>
-          el.split(",")
-        );
-        const lastSeparatedString = commaSeparatedString.join(",").split(",");
-        const numberArray = lastSeparatedString.map(Number);
-        if (numberArray.includes(NaN)) Console.print("[ERROR]");
-        else {
-          const result = numberArray.reduce((acc, cur) => acc + cur);
-          Console.print(result);
-        }
-      } else if (numbersString.includes(",")) {
-        const separatedString = numbersString.split(",");
-        const numberArray = separatedString.map(Number);
-        if (numberArray.includes(NaN)) Console.print("[ERROR]");
-        else {
-          const result = numberArray.reduce((acc, cur) => acc + cur);
-          Console.print(result);
-        }
-      } else if (numbersString.includes(";")) {
-        const separatedString = numbersString.split(";");
-        const numberArray = separatedString.map(Number);
-        if (numberArray.includes(NaN)) Console.print("[ERROR]");
-        else {
-          const result = numberArray.reduce((acc, cur) => acc + cur);
-          Console.print(result);
-        }
-      } else {
-        Console.print("[ERROR]");
-      }
+      const result = this.calculateSum(numberArray);
+      Console.print(result);
     }
+  }
+
+  extractNumbers(input) {
+    const hasCustomSeparator = input.includes("//") && input.includes("\\n");
+    const hasCommaAndSemicolon = input.includes(",") && input.includes(";");
+    const hasComma = input.includes(",");
+    const hasSemicolon = input.includes(";");
+    if (hasCustomSeparator) {
+      const start = input.indexOf("//");
+      const end = input.indexOf("\\n");
+      const customSeparator = input.slice(start + 2, end);
+      const stringToSeparate = input.replace(input.slice(start, end + 2), "");
+      return stringToSeparate.split(customSeparator).map(Number);
+    } else if (hasCommaAndSemicolon) {
+      return input
+        .split(",")
+        .map((el) => el.split(";"))
+        .flat()
+        .map(Number);
+    } else if (hasComma) {
+      return input.split(",").map(Number);
+    } else if (hasSemicolon) {
+      return input.split(";").map(Number);
+    } else Console.print("[ERROR]");
+  }
+
+  calculateSum(numbers) {
+    return numbers.reduce((acc, cur) => acc + cur, 0);
   }
 }
 
