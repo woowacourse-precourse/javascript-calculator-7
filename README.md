@@ -32,7 +32,7 @@
 
 ### 4️⃣ 결과 출력
 
--   [ ] `@woowacourse/mission-utils` 의 `Console.print()` 을 사용해 계산 결과 출력
+-   [x] `@woowacourse/mission-utils` 의 `Console.print()` 을 사용해 계산 결과 출력
     ```
     결과 : 6
     ```
