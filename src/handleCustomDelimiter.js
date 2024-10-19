@@ -1,4 +1,5 @@
 import { CUSTOM_DELIMITER_INPUT } from "./constants/Delimeters.js";
+import validator from "./utils/validator.js";
 
 export const seperateCustomDelimiter = (string) => {
   const startIndex = string.lastIndexOf(CUSTOM_DELIMITER_INPUT.start);
@@ -10,6 +11,7 @@ export const seperateCustomDelimiter = (string) => {
     endIndex + CUSTOM_DELIMITER_INPUT.end.length
   );
   const customDelimiter = exportDelimiter(customDelimiterInput);
+  validator.validateCustomDelimiter(customDelimiter);
   return { customDelimiter, numbersString };
 };
 
@@ -20,5 +22,3 @@ export const exportDelimiter = (customDelimiterInput) => {
     .filter((el) => el)
     .join("");
 };
-
-//
