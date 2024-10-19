@@ -26,13 +26,6 @@ class CalculatorModel {
       throw new Error("[ERROR] 공백은 구분자로 쓸 수 없습니다.");
     }
 
-    // 구분자를 포함한 입력인지 체크
-    if (!separators.some((sep) => numbersString.includes(sep))) {
-      throw new Error(
-        "[ERROR] 구분자를 포함하여 지정된 입력방식을 지켜주세요."
-      );
-    }
-
     // 커스텀 구분자가 .인 경우 처리
     if (separators.includes(".")) {
       const userchoice = await this.getUserChoice();
