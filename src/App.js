@@ -35,6 +35,8 @@ class App {
       numArr.forEach((num) => {
         sum += num;
       })
+    } else {
+      throw new Error("[ERROR]: 잘못된 값을 입력했습니다");
     }
 
     Console.print(`결과 : ${sum}`);
