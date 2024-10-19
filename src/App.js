@@ -3,7 +3,7 @@ import { MissionUtils } from "@woowacourse/mission-utils";
 class App {
   constructor () {
     this.input = ''
-    this.delimeter = [',', ':']
+    this.delimiter = [',', ':']
     this.output = 0
   }
 
@@ -28,11 +28,23 @@ class App {
     } 
   }
 
+  checkCustomDelimiter() {
+    const getCustomDelimiterRegExp = /\/\/([\s\S]*?)\\n([\s\S]*)/;
+    const matchResult = this.input.match(getCustomDelimiterRegExp);
+    if (matchResult) {
+      const customDelimiter = matchResult[1];
+      for (const c of customDelimiter) {
+        this.delimiter.push(c)
+      }
+      this.input = matchResult[2]
+    }
+  }
+
   add() {
     try {
-      const reg = new RegExp(this.delimeter.join('|'))
+      const reg = new RegExp(`[${this.delimiter.join()}]`)
       this.output = this.input.split(reg)
-        .map((n) => this.checkIsValidNumber(n))
+        .map(this.checkIsValidNumber)
         .reduce((acc, cur) => acc + cur, 0);
     } catch(error) {
       throw error;
@@ -42,6 +54,7 @@ class App {
   async run() {
     try {
       await this.getUserInput();
+      this.checkCustomDelimiter();
       this.add();
       MissionUtils.Console.print(`결과 : ${this.output}`);
     } catch (error) {
