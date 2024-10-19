@@ -1,56 +1,25 @@
 import { Console } from "@woowacourse/mission-utils";
+import Input from "./Input.js";
+import Separator from "./Separator.js";
+import Validator from "./Validator.js";
+import Calculator from "./Calculator.js";
 
 class App {
   async run() {
     // 문자열 입력
-    Console.print("덧셈할 문자열을 입력해 주세요.");
-    const input = await Console.readLineAsync("");
+    const input = await new Input().getInput();
 
     // 입력값이 비어 있는 경우 0 출력
-    if (input === "") {
-      Console.print(0);
-      return;
-    }
+    if (!input) return Console.print("결과 : 0");
 
-    let numbers;
+    // 구분자에 따른 배열 처리
+    let numbers = new Separator().process(input);
 
-    // 커스텀 구분자 처리
-    const PATTERN = /^\/\/(.*)\\n(.*)$/;
-    const MATCH = input.match(PATTERN);
-
-    if (MATCH) {
-      const CUSTOM = MATCH[1]; // 커스텀 구분자
-      const NUMS = MATCH[2]; // 숫자부분
-
-      numbers = NUMS.split(CUSTOM);
-    } else {
-      // 기본 구분자 처리
-      numbers = input.split(/,|:/);
-    }
-
-    // 연속된 구분자 처리
-    if (numbers.some((num) => num === "")) {
-      throw new Error("[ERROR] 연속된 구분자는 사용할 수 없습니다.");
-    }
-
-    // 숫자로 변환, 문자 예외 처리
-    numbers = numbers.map((num) => {
-      if (isNaN(Number(num))) {
-        throw new Error("[ERROR] 문자는 입력할 수 없습니다.");
-      }
-      return Number(num);
-    });
-
-    // 음수 예외 처리
-    if (numbers.some((num) => num <= 0)) {
-      throw new Error("[ERROR] 양수만 입력할 수 있습니다.");
-    }
+    // 예외처리
+    new Validator().validate(numbers);
 
     // 합 계산
-    let sum = 0;
-    for (const num of numbers) {
-      sum += num;
-    }
+    const sum = new Calculator().sum(numbers);
 
     // 결과 출력
     Console.print(`결과 : ${sum}`);
