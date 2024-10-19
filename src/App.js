@@ -9,9 +9,21 @@ class App {
   add(numbers) {
     if(numbers === '') return 0;
 
-    const numArr = numbers.split(/[,|:]/).map(Number);
+    const { separator, numStr } = this.customSeparator(numbers);
+    const numArr = numStr.split(new RegExp(`[${separator}]`)).map(Number);
     return numArr.reduce((acc, num) => acc + num, 0);
   }
+
+  customSeparator(numbers) {
+    if(numbers.startsWith('//')) {
+      const endIndex = numbers.indexOf('\\n');
+      const separator = numbers.substring(2, endIndex);
+      const numStr = numbers.slice(endIndex + 2);
+      return { separator, numStr }
+    }
+    return { separator: ',|:', numStr: numbers };
+  }
+
 }
 
 export default App;
