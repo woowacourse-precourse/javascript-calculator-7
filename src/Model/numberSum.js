@@ -12,7 +12,7 @@ const NumberSum = userInput => {
   let totalNumberSum = 0;
 
   for (let i = 0; i < splitNumbers.length; i += 1) {
-    totalNumberSum += parseInt(splitNumbers[i]);
+    totalNumberSum += parseInt(splitNumbers[i], 10);
   }
   Console.print('결과 : ' + totalNumberSum);
 };
