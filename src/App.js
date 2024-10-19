@@ -8,6 +8,7 @@ class App {
       Console.print(`결과 : ${result}`);
     } catch (error) {
       Console.print(`[ERROR] ${error.message}`);
+      throw error;
     }
   }
 
@@ -37,18 +38,18 @@ class App {
 
     // 숫자가 하나도 없는 경우
     if (numbers.length === 0) {
-      throw new Error("잘못된 값을 입력하였습니다.");
+      throw new Error("[ERROR] 잘못된 값을 입력하였습니다.");
     }
 
     // 음수나 NaN 처리
     if (numbers.some(n => isNaN(n) || n < 0)) {
-      throw new Error("잘못된 값을 입력하였습니다.");
+      throw new Error(" [ERROR] 잘못된 값을 입력하였습니다.");
     }
 
     // 연속된 구분자가 있을 경우
     for (let i = 0; i < input.length - 1; i++) {
       if (delimiter.test(input[i]) && delimiter.test(input[i + 1])) {
-        throw new Error("잘못된 값을 입력하였습니다.");
+        throw new Error(" [ERROR] 잘못된 값을 입력하였습니다.");
       }
     }
 
