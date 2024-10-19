@@ -3,33 +3,28 @@ import { Console } from "@woowacourse/mission-utils";
 const SEPARATORS = [",",":"];
 
 const findSeparator = (input) => {
-  const INPUT_ARRAY = input.split("");
-
-  if (input.slice(0,2) === "//") {
+  if(input.startsWith("//")){
     const START = input.indexOf("//") + 2;
     const END = input.indexOf("\\n");
 
     if (START === 1 || END === -1) {
-      throw new Error("[ERROR] 커스텀 구분자 추가를 위해선 //와 \\n 사이에 추가하고자 하는 문자를 입력해주세요.");
+      throw new Error("[ERROR] 커스텀 구분자 추가를 위해선 //와 \\n 사이에 추가하고자 하는 문자(공백 제외)를 입력해주세요.");
     }
 
     const customSeparator = input.slice(START, END);
     SEPARATORS.push(customSeparator);
 
-    if (customSeparator.length > 1 || !isNaN(customSeparator)){
-      throw new Error("[ERROR] 커스텀 구분자로 문자를 입력해주세요.");
+    if (!isNaN(customSeparator)){
+      throw new Error("[ERROR] 커스텀 구분자 추가를 위해선 //와 \\n 사이에 추가하고자 하는 문자(공백 제외)를 입력해주세요.");
     }
 
-    return INPUT_ARRAY.slice(END + 2);
+    return input.slice(END + 2);
   }
 
   if (isNaN(input[0])) {
-    if(input[0]==="-"){
-      return INPUT_ARRAY;
-    }
-    throw new Error("[ERROR] 커스텀 구분자 추가를 위해선 //와 \\n 사이에 추가하고자 하는 문자를 입력해주세요.")
+    throw new Error("[ERROR] 양수(정수)를 입력해주세요.");
   }
-  return INPUT_ARRAY;
+  return input;
 };
 
 const getNumber = (inputArray) => {
