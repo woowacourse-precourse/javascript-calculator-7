@@ -1,30 +1,35 @@
 import { Console } from '@woowacourse/mission-utils';
 
+const DEFAULT_DELIMITER_REGEX = /,|:/;
+
 class App {
   async run() {
-    const inputValue = await this.getInputValue();
-    const parsedInputValue = this.parseInputValueToNumberByDefaultDelimiter(inputValue);
-
-    let result = this.getSum(parsedInputValue);
-
     try {
-      if (!inputValue) {
-        throw new Error('[ERROR] 입력값이 없습니다.');
-      }
+      const inputValue = await this.getInputValue();
+      const parsedNumbers = this.parseInputValueToNumbersByDelimiter(
+        inputValue,
+        DEFAULT_DELIMITER_REGEX
+      );
 
+      const result = this.getSum(parsedNumbers);
       Console.print(`결과 : ${result}`);
     } catch (err) {
-      Console.print(err);
+      Console.print(err.message);
     }
   }
 
   async getInputValue() {
-    return await Console.readLineAsync('덧셈할 문자열을 입력해 주세요.\n');
+    const inputValue = await Console.readLineAsync('덧셈할 문자열을 입력해 주세요.\n');
+
+    if (!inputValue) {
+      throw new Error('[ERROR] 입력값이 없습니다.');
+    }
+
+    return inputValue;
   }
 
-  parseInputValueToNumberByDefaultDelimiter(inputValue) {
-    const defaultDelimiter = /,|:/;
-    return inputValue.split(defaultDelimiter).map(Number);
+  parseInputValueToNumbersByDelimiter(inputValue, delimiterRegex) {
+    return inputValue.split(delimiterRegex).map(Number);
   }
 
   getSum(numbers) {
