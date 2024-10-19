@@ -1,10 +1,10 @@
 // 에러 처리
 export function errorMessage(booleanData) {
   if (booleanData === 1) {
-    throw new Error('구분자가 아닌 문자는 입력할 수 없습니다.');
+    throw new Error('[ERROR] : 구분자가 아닌 문자는 입력할 수 없습니다.');
   }
   if (booleanData === 2) {
-    throw new Error('0은 입력할 수 없습니다.');
+    throw new Error('[ERROR] : 0은 입력할 수 없습니다.');
   }
 }
 
