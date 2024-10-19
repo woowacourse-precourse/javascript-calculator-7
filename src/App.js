@@ -6,10 +6,14 @@ class App {
     // 1. 문자열에서 숫자만을 추출한다.(문자나 공백등을 입력했을 경우를 고려)
     const numbers = input.match(/\d+/g).map(Number);
 
-    //아무것도 입력하지 않았을때 우선 0반환
-    if (!numbers) return 0;
+  
 
-    //reduce(누적값,현재요소=> 초기값) 각 요소를 순회하면서 누적 값을 계산함
+
+
+
+
+    
+    //4. 숫자의 합을 반환 : reduce(누적값,현재요소=> 초기값) 각 요소를 순회하면서 누적 값을 계산함
     return numbers.reduce((acc, num) => acc+num, 0);
   }
 
