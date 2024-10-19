@@ -20,8 +20,8 @@ class App {
           throw new Error('[ERROR] 커스텀 구분자가 입력되지 않았습니다.');
         }
 
-        if (customDelimiter.length !== 1) {
-          throw new Error('[ERROR] 커스텀 구분자는 1글자만 가능합니다.');
+        if (customDelimiter.length < 1) {
+          throw new Error('[ERROR] 커스텀 구분자는 1글자 이상 가능합니다.');
         }
 
         if (!isNaN(Number(customDelimiter))) {
@@ -64,10 +64,6 @@ class App {
   }
 
   parseInputValueToOperandsByDelimiter(value, delimiterRegex) {
-    if (!delimiterRegex.test(value)) {
-      throw new Error('[ERROR] 입력값에 유효한 구분자가 없습니다.');
-    }
-
     const operands = value.split(delimiterRegex).map(Number);
 
     if (operands.some((operand) => isNaN(operand))) {
