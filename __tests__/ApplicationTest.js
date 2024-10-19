@@ -51,4 +51,31 @@ describe("문자열 계산기", () => {
 
     await expect(app.run()).rejects.toThrow("[ERROR]");
   });
+
+  test("문자 포함 예외 테스트", async () => {
+    const inputs = ["a,2,3"];
+    mockQuestions(inputs);
+
+    const app = new App();
+
+    await expect(app.run()).rejects.toThrow("[ERROR]");
+  });
+
+  test("연속된 구분자 예외 테스트", async () => {
+    const inputs = ["1,,2,3"];
+    mockQuestions(inputs);
+
+    const app = new App();
+
+    await expect(app.run()).rejects.toThrow("[ERROR]");
+  });
+
+  test("잘못된 커스텀 구분자 예외 테스트", async () => {
+    const inputs = ["//.n 1.2.3"];
+    mockQuestions(inputs);
+
+    const app = new App();
+
+    await expect(app.run()).rejects.toThrow("[ERROR]");
+  });
 });
