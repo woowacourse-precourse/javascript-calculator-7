@@ -1,3 +1,5 @@
+import { Console } from '@woowacourse/mission-utils';
+
 class App {
   constructor() {
     this.isError = false;
@@ -44,6 +46,12 @@ class App {
     const customSeperator = await this.checkSeparator(inputString);
     const separatedNumberArray = await this.separateNumber(inputString, customSeperator);
     const sum = await this.getSum(separatedNumberArray);
+
+    if (!this.isError) {
+      Console.print(`결과 : ${sum}`);
+    } else {
+      throw new Error('[ERROR]');
+    }
   }
 }
 
