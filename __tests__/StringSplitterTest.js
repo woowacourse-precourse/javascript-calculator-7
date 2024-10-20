@@ -16,5 +16,18 @@ describe('String Splitter 테스트', () => {
         expect(stringSplitter.split()).toEqual(expectedOutput);
       },
     );
+
+    test.each([
+      { input: '//;\\n1', expectedOutput: ['1'] },
+      { input: '//,\\n2,3', expectedOutput: ['2', '3'] },
+      { input: '//:\\n4:5', expectedOutput: ['4', '5'] },
+      { input: '//;\\n6;7', expectedOutput: ['6', '7'] },
+    ])(
+      '커스텀 구분자를 사용한 경우, 입력 "$input"에 대해 문자열을 분리',
+      ({ input, expectedOutput }) => {
+        const stringSplitter = new StringSplitter(input);
+        expect(stringSplitter.split()).toEqual(expectedOutput);
+      },
+    );
   });
 });
