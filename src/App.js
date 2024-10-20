@@ -1,5 +1,6 @@
 import { MissionUtils } from '@woowacourse/mission-utils';
 
+
 class App {
   async run() {
     const input = await MissionUtils.Console.readLineAsync('덧셈할 문자열을 입력해 주세요.');
@@ -8,8 +9,7 @@ class App {
       const result = this.calculate(input);
       MissionUtils.Console.print(`결과 : ${result}`);
     } catch (e) {
-      MissionUtils.Console.print('[ERROR] 잘못된 형식의 입력입니다.');
-      throw e;
+      throw new Error('[ERROR] 잘못된 형식의 입력입니다.');
     }
   }
 
