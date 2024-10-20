@@ -35,14 +35,14 @@ class App {
       if (!(input.slice(3, 5) === '\\n')) {
         throw new Error('[ERROR] 커스텀 구분자는 한 글자를 초과할 수 없습니다.');
       }
-      
+
       delimiter = input[2];
 
       if (!isNaN(delimiter)) {
         throw new Error('[ERROR] 커스텀 구분자로 숫자는 지정할 수 없습니다.')
       }
 
-      input = input.slice(5)
+      input = input.slice(5);
     } else {
       delimiter = /[,:]/;
     }
@@ -62,9 +62,9 @@ class App {
         throw new Error('[ERROR] 구분자와 양수 이외의 문자는 입력할 수 없습니다.');
       }
 
-      const parsedNum = parseInt(num);
+      const parsedNum = parseInt(num, 10);
       return parsedNum;
-    });
+    })
   }
 
   calculateSum(numbers) {
