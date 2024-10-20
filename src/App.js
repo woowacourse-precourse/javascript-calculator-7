@@ -78,6 +78,10 @@ class App {
   async run() {
     let input = await Console.readLineAsync('덧셈할 문자열을 입력해 주세요.\n');
 
+    if (isInputEmpty(input)) {
+      return Console.print('결과: 0');
+    }
+
     const separators = [',', ':'];
 
     if (hasCustomSeparator(input)) {
