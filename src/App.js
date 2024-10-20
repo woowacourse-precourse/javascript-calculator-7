@@ -64,6 +64,10 @@ class App {
 
       // 사용자가 등록한 커스텀 구분자의 유효성을 검증한다.
       this.validation.isValidSeperator(customSeperator);
+
+      // 커스텀 구분자를 구분자 리스트에 추가한다.
+      CALCULATOR.seperator.push(customSeperator);
+      console.log(CALCULATOR.seperator);
     }
 
     this.validation.hasInvalidSeperator(input);
