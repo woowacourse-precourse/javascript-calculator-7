@@ -1,12 +1,22 @@
 import { Console } from "@woowacourse/mission-utils";
 
 class App {
+  static DEFAULT_DELIMITERS = [",", ":"];
   async run() {
     const input = await Console.readLineAsync(
       "덧셈할 문자열을 입력해 주세요.\n"
     );
 
     Console.print("결과 : " + input);
+  }
+
+  parseInput(input) {
+    if (input.startsWith("//")) {
+      const [delimiterPart, numbersString] = input.split("\n");
+      const delimiter = delimiterPart.slice(2);
+      return { delimiter, numbersString };
+    }
+    return { delimiter: App.DEFAULT_DELIMITERS, numbersString: input };
   }
 
   validateNumbers(numbers) {
