@@ -1,6 +1,6 @@
 export const checkIsPositive = (array) => {
   const result = array.every((element) => {
-    if (Number(element) !== NaN) {
+    if (!isNaN(Number(element))) {
       return element > 0;
     } else {
       throw new Error("ERROR: 배열의 요소에 문자가 있습니다.");
