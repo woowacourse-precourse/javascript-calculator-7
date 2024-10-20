@@ -23,8 +23,9 @@ class App {
   
     //예외 처리
     //음수를 입력하는 경우
+    //'//'와 '\\n'사이가 공백일 경우
     const NEGATIVES = NUMBERS.filter(num => num < 0);
-    if (NEGATIVES.length > 0) {
+    if (NEGATIVES.length > 0 || INPUT.indexOf('\\n') === 3 ) {
       throw new Error ("[ERROR]")
     } else {
       Console.print(`결과 : ${RESULT}`);
