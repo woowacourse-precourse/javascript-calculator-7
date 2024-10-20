@@ -31,7 +31,7 @@ class StringValidator {
         });
     }
 
-    checkIncludesNonNumber(parsedArray) {
+    checkIncludesNonNumber(parsedArray) { // 공백 제거하고 다른 문자가 있는지 체크 함수
         parsedArray.forEach((item) => {
             if (!/^[-]?\d+$/.test(item.trim())) {
                 throw new Error(ErrorMessages.ERROR_NON_NUMBER_CHARACTER);
@@ -39,7 +39,7 @@ class StringValidator {
         });
     }
 
-    checkEmptyOrSpace(parsedArray) {
+    checkEmptyOrSpace(parsedArray) { // 공백이 있는지 ㅎ체크 함수
         parsedArray.forEach((item) => {
             if (item.trim() === "") {
                 throw new Error(ErrorMessages.ERROR_NON_NUMBER_CHARACTER);
