@@ -26,7 +26,7 @@ export function validateInput(input) {
   const hasNonNumeric = input.map(Number).some((char) => isNonNumeric(char));
   const hasZero = input.some((char) => isZero(char));
 
-  if (hasNonNumeric) throwError('INVALID_CHARACTTER');
+  if (hasNonNumeric) throwError('INVALID_CHARACTER');
   if (hasZero) throwError('ZERO_NOT_ALLOWED');
 }
 
