@@ -1,6 +1,5 @@
 import { Console } from '@woowacourse/mission-utils';
-import { validateDelimiters, validateNumericValues } from './validate.js';
-import { ERROR_MESSAGES } from './errors.js';
+import { validate } from './validate.js';
 import { DEFAULT_DELIMITERS } from './constants.js';
 
 //빈 문자열 처리
@@ -11,52 +10,35 @@ function handleEmptyInput(input) {
 // 구분자를 기준으로 문자열을 숫자로 변환
 function parseTokens(input, delimiters) {
   const tokens = input.split(new RegExp(`[${delimiters.join('')}]`));
-
-  if (tokens.some((token) => token === '')) {
-    throw new Error(ERROR_MESSAGES.EMPTY_TOKEN);
-  }
-
+  validate.emptyToken(tokens); // 구분자 사이 숫자 검증
   return tokens.map(Number);
-}
-
-// 커스텀 구분자 추출
-function extractCustomDelimiter(input) {
-  const match = input.match(/^\/\/(.)\n/);
-  if (!match) {
-    throw new Error(ERROR_MESSAGES.INVALID_CUSTOM_DELIMITER);
-  }
-  return match[1];
 }
 
 // 커스텀 구분자로 합산
 function sumWithCustomDelimiter(input) {
-  const customDelimiter = extractCustomDelimiter(input);
+  const customDelimiter = validate.customDelimiter(input); // 커스텀 구분자 검증
   const numbersString = input.slice(4); // 구분자 뒤에 오는 숫자 문자열
-
-  if (!numbersString) {
-    throw new Error(ERROR_MESSAGES.MISSING_NUMBER);
-  }
-
-  validateDelimiters(numbersString, customDelimiter);
-  const numericValues = parseTokens(numbersString, [
+  validate.missingNumber(numbersString); // 숫자 누락 검증
+  validate.delimiters(numbersString, customDelimiter); // 구분자 검증
+  const numberValues = parseTokens(numbersString, [
     customDelimiter,
     ...DEFAULT_DELIMITERS,
   ]);
-  validateNumericValues(numericValues);
-  return numericValues.reduce((acc, num) => acc + num, 0);
+  validate.numberValues(numberValues); // 숫자 값 검증
+  return numberValues.reduce((acc, num) => acc + num, 0);
 }
 
 // 기본 구분자로 합산
 function sumWithDefaultDelimiters(input) {
-  validateDelimiters(input);
-  const numericValues = parseTokens(input, DEFAULT_DELIMITERS);
-  validateNumericValues(numericValues);
-  return numericValues.reduce((acc, num) => acc + num, 0);
+  validate.delimiters(input); // 구분자 검증
+  const numberValues = parseTokens(input, DEFAULT_DELIMITERS); // 숫자 변환 및 검증
+  validate.numberValues(numberValues); // 숫자 값 검증
+  return numberValues.reduce((acc, num) => acc + num, 0);
 }
 
 // 전체 합산 처리
 function sum(input) {
-  const result = handleEmptyInput(input);
+  const result = handleEmptyInput(input); // 빈 문자열 처리
   if (result !== null) {
     return result;
   }
