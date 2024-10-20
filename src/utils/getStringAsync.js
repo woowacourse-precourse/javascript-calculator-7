@@ -7,9 +7,7 @@ const getStringAsync = async () => {
         );
         return inputValue;
     } catch (error) {
-        MissionUtils.Console.print(
-            '입력을 거부하셨습니다. 애플리케이션을 종료합니다.'
-        );
+        throw new Error('[ERROR]');
     }
 };
 
