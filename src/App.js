@@ -10,12 +10,19 @@ class App {
     }
     //구분자를 사용해 숫자를 분리한다
     let DELIMITER = /,|:/;
-
-    const NUMBERS = INPUT.split(DELIMITER).map(Number)
+    let NUMBERSINPUT = INPUT
+    // 커스텀 구분자를 사용한다.
+    if (INPUT.startsWith('//')) {
+      const CUSTOM = INPUT.substring(2,INPUT.indexOf('\\n'));
+      DELIMITER = new RegExp(`[${CUSTOM},:]`)
+      NUMBERSINPUT = INPUT.substring(INPUT.indexOf('\\n') + 2 );
+    }
+    const NUMBERS = NUMBERSINPUT.split(DELIMITER).map(Number);
     // 분리한 숫자의 합을 반환한다
-    const RESULT = NUMBERS.reduce((sum, num) => sum + num, 0)
-    
+    const RESULT = NUMBERS.reduce((sum, num) => sum + num, 0);
+  
     Console.print(`결과 : ${RESULT}`);
+    
   }
 }
 
