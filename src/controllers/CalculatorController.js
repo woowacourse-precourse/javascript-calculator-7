@@ -1,6 +1,7 @@
 import Calculator from "../models/Calculator.js";
 import Delimiter from "../models/Delimiter.js";
 import { InputView } from "../views/InputView.js";
+import { OutputView } from "../views/OutputView.js";
 
 /**
  * 문자열 덧셈 계산기 Controller js
@@ -14,6 +15,7 @@ class CalculatorController {
     async calculatorProcess() {
         await this.getDelimiter();
         await this.getSumNumbers();
+        this.printOutput();
     }
 
     async getDelimiter() {
@@ -23,6 +25,10 @@ class CalculatorController {
 
     async getSumNumbers() {
         this.#sum = Calculator.getSumCalculator(this.#delimiter);
+    }
+
+    printOutput() {
+        OutputView.outputResult(this.#sum);
     }
 }
 
