@@ -13,6 +13,10 @@ class Calculator {
     const seperators = new RegExp(`[, : ${customSeperator}]`, "g");
     return removedString.split(seperators);
   }
+
+  getSumOf(numbers) {
+    return numbers.reduce((sum, number) => sum + number, 0);
+  }
 }
 
 export default Calculator;
