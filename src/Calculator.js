@@ -1,7 +1,7 @@
 export class Calculator {
   static DEFAULT_DELIMITERS = [',', ':'];
   static DEFAULT_DELIMITER_REGEX = /[,:]/;
-  
+
   constructor() {
     this.delimiterRegex = Calculator.DEFAULT_DELIMITER_REGEX;
     this.customDelimiter = null;
@@ -38,8 +38,11 @@ export class Calculator {
   parseNumbers(input) {
     return input.split(this.delimiterRegex).map((numString) => {
       const number = Number(numString.trim());
-      if (number <= 0 || isNaN(number)) throw new Error('[ERROR]');
-      else return number;
+      if (number <= 0) throw new Error('[ERROR] Only positive number allowed');
+
+      if (isNaN(number)) throw new Error('[ERROR] Invalid number encountered ');
+
+      return number;
     });
   }
 
