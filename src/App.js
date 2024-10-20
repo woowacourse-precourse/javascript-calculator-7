@@ -1,6 +1,10 @@
 import {Console} from '@woowacourse/mission-utils';
 
 class App {
+	// 상수로 처리할 부분
+	static DEFAULT_DELIMITER = /,|:/;
+	static CUSTOM_DELIMITER_PATTERN = /^\/\/(.+)\\n/;
+
 	async run() {
 		const input = await Console.readLineAsync('덧셈할 문자열을 입력해 주세요.');
 		const result = this.handleString(input);
@@ -25,12 +29,11 @@ class App {
 	// 구분자 파악 함수
 	checkDelimiter(input) {
 		// 기본 구분자 할당
-		let delimiter = /,|:/;
+		let delimiter = App.DEFAULT_DELIMITER;
 		let values = input;
 
 		// 커스텀 구분자 처리
-		const customDelimiterPattern = /^\/\/(.+)\\n/;
-		const match = input.match(customDelimiterPattern);
+		const match = input.match(App.CUSTOM_DELIMITER_PATTERN);
 		if (match) {
 			if (!isNaN(match[1])) this.throwError('구분자는 숫자가 될 수 없습니다.');
 			delimiter = new RegExp(match[1]);
