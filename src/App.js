@@ -3,14 +3,14 @@ import { VALIDATION_DEFAULT, VALIDATION_CUSTOM, VALIDATION_ERROR } from './const
 
 class App {
   validateInput(input) {
-    const sep = /[^0-9,:]/;
+    const sep = /[^0-9,:.]/;
     const customSep = /^\/\/\D\\n/;
 
     if (!sep.test(input)) {
       if (input.length !== 0 && !this.startsAndEndsWithNumber(input)) {
         return VALIDATION_ERROR;
       }
-      if (this.hasConsecutiveSeparator(input, /,:/)) {
+      if (this.hasConsecutiveSeparators(input, /,:/)) {
         return VALIDATION_ERROR;
       }
       return VALIDATION_DEFAULT;
@@ -18,17 +18,17 @@ class App {
       if (input.length > 5 && !this.startsAndEndsWithNumber(input.slice(5))) {
         return VALIDATION_ERROR;
       }
-      if (this.hasConsecutiveSeparator(input.slice(5), /,:/)) {
+      if (this.hasConsecutiveSeparators(input.slice(5), /,:/)) {
         return VALIDATION_ERROR;
       }
       if (input[2] !== '\\') {
         const pattern = new RegExp(`[^0-9,:${input[2]}]`);
-        if (pattern.test(input.slice(5)) || this.hasConsecutiveSeparator(input.slice(5), input[2])) {
+        if (pattern.test(input.slice(5)) || this.hasConsecutiveSeparators(input.slice(5), input[2])) {
           return VALIDATION_ERROR;
         }
       } else {
         const pattern = new RegExp(/[^0-9,:\\]/);
-        if (pattern.test(input.slice(5)) || this.hasConsecutiveSeparator(input.slice(5), '\\\\')) {
+        if (pattern.test(input.slice(5)) || this.hasConsecutiveSeparators(input.slice(5), '\\\\')) {
           return VALIDATION_ERROR;
         }
       }
@@ -44,7 +44,7 @@ class App {
     return true;
   }
 
-  hasConsecutiveSeparator(input, sep) {
+  hasConsecutiveSeparators(input, sep) {
     const pattern = new RegExp(`[${sep}]{2,}`);
     return pattern.test(input);
   }
