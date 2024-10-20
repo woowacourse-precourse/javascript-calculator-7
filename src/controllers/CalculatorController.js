@@ -15,7 +15,7 @@ class CalculatorController {
             this.outputView.printResult(result);
         }
         catch(error){
-            this.outputView.printError(error.message);
+            throw error;
         }
     }
 }

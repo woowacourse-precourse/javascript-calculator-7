@@ -5,11 +5,17 @@ import CalculatorController from "./controllers/CalculatorController.js";
 class App {
   constructor(){
     const inputView = new InputView();
-    const outputView = new OutputView();
-    this.controller = new CalculatorController(inputView,outputView);
+    this.outputView = new OutputView();
+    this.controller = new CalculatorController(inputView,this.outputView);
   }
   async run() {
-    await this.controller.run();
+    try{
+      await this.controller.run();
+    } catch(error){
+      this.outputView.printError(error.message);
+      throw error;
+    }
+  
 
   }
 }
