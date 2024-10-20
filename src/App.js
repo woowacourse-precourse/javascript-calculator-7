@@ -31,7 +31,9 @@ class App {
     //parse user input
     if (userInput) {
       const parsedInput = this.parseInput(userInput);
-      Console.print(parsedInput);
+      //sum numbers
+      const output = parsedInput.reduce((acc, cur) => acc + Number(cur), 0);
+      Console.print(`결과 : ${output}`);
     } else {
       Console.print(0);
     }
