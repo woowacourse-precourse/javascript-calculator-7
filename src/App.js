@@ -20,17 +20,12 @@ class App {
     if (input === "") {
       return [0];
     }
-    let result;
-    if (input.startsWith("//")) {
-      const [customDelimiter, numbersPart] = this.extractDelimiter(input);
-      result = numbersPart.split(customDelimiter);
-    } else {
-      result = input.split(/[,;]/);
-    }
+    const result = input.startsWith("//")
+      ? this.extractDelimiter(input)[1].split(this.extractDelimiter(input)[0])
+      : input.split(/[,;]/);
     if (result.some((value) => value === "")) {
       throw new Error("구분자가 잘못 사용되었습니다.");
     }
-
     return result;
   }
 
