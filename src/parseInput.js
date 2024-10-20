@@ -14,7 +14,9 @@ export function parseInput(input) {
     }
     const [, customDelimiter, rest] = customDelimiterMatch;
     //구분자 업데이트
-    delimiter = new RegExp(`[${customDelimiter.replace(/[.*+?^${}()|[\]\\]/g, '\\$&')},:]`);
+    delimiter = new RegExp(
+      `[${customDelimiter.replace(/[.*+?^${}()|[\]\\]/g, "\\$&")},:]`
+    );
     numbers = rest;
   }
 
