@@ -56,7 +56,13 @@ class App {
     if (this.isContainNum(customSeperator)) {
       return this.printError('커스텀 구분자 사이에 숫자가 있으면 안됩니다');
     }
-    return
+
+    const cleanedArray = customStr
+      .replaceAll('//', '')
+      .replaceAll('\\n', '')
+      .replaceAll(customSeperator, '');
+    
+    return this.strToArrayHandler(cleanedArray);
   }
 
   strToArrayHandler(arrToChange) {
