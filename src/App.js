@@ -25,9 +25,15 @@ class App {
     let sum = 0;
     const inputArray = inputString.split("");
     inputArray.forEach((element) => {
+      //정수인 경우
       if (!!parseInt(element)) {
         currentValue += element;
       } else {
+        //currentValue가 비어있지 않은 경우
+        if (!parseInt(currentValue)) {
+          Console.print("[ERROR]");
+          throw new Error("[ERROR]");
+        }
         sum += parseInt(currentValue);
         currentValue = "";
       }
@@ -35,7 +41,7 @@ class App {
     if (!!parseInt(currentValue)) {
       sum += parseInt(currentValue);
     }
-    Console.print(sum);
+    Console.print(`결과 : ${sum}`);
   }
 }
 
