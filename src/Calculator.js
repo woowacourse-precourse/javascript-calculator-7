@@ -1,18 +1,34 @@
-import { MissionUtils } from "@woowacourse/mission-utils";
+import { MissionUtils } from '@woowacourse/mission-utils';
 
 class Calculator {
   calculate(string) {
     try {
-      let NUMS = string.split(/,|:/);
-      let ANSWER = 0;
+      let answer = 0;
+      let nums;
 
-      for (let i = 0; i < NUMS.length; i++) {
-        ANSWER = ANSWER + parseInt(NUMS[i], 10);
+      let custom = string.match(/\/\/(.*?)\\n/);
+
+      if (custom) {
+        const customDelimiter = custom[1];
+        const splitString = string.split(custom[0]);
+
+        if (splitString.length > 1) {
+          nums = splitString[1].split(customDelimiter);
+        }
+      } else {
+        nums = string.split(/,|:/);
       }
-      if(isNaN(ANSWER)){
-        ANSWER = 0;
+
+      for (let i = 0; i < nums.length; i++) {
+        let num = parseInt(nums[i], 10);
+        if (!isNaN(num)) {
+          answer += num;
+        }
       }
-      return ANSWER;
+      if (isNaN(answer)) {
+        answer = 0;
+      }
+      return answer;
     } catch (error) {}
   }
 }
