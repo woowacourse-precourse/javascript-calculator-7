@@ -26,10 +26,10 @@ class App {
           return acc.flatMap(str => str.split(delimiter));
       }, [input]); // 구분자를 기준으로 문자열 분리
 
-      // 모든 숫자가 양수인지 검증
-      const negativeNumbers = numbers.filter(num => parseInt(num) < 0);
-      if (negativeNumbers.length > 0) {
-          throw new Error(`[ERROR] 음수는 허용되지 않습니다: ${negativeNumbers.join(', ')}`);
+      // 모든 숫자가 양수인지 검증 및 숫자가 아닌 값 검증
+      const invalidNumbers = numbers.filter(num => isNaN(parseInt(num)) || parseInt(num) < 0);
+      if (invalidNumbers.length > 0) {
+          throw new Error(`[ERROR] 유효하지 않은 값이 포함되어 있습니다: ${invalidNumbers.join(', ')}`);
       }
 
       // 숫자 합산
