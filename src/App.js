@@ -1,6 +1,9 @@
+import { MissionUtils } from "@woowacourse/mission-utils";
 import { inputUserString } from "./Input.js";
 import { getCustomDelimiter } from "./utils/getCustomDelimiter.js";
 import { getNumber } from "./utils/getNumber.js";
+import throwError from "./utils/throwError.js";
+import isNumber from "./validator.js";
 
 class App {
   async run() {
@@ -14,7 +17,7 @@ class App {
     else nums = getNumber(userInput, /,|:/);
 
     for (const n of nums) {
-      if (!isNumber(n)) throw new Error("[ERROR]");
+      if (!isNumber(n)) throwError("");
     }
 
     const sum = nums.reduce((acc, val) => acc + parseInt(val), 0);
