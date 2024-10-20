@@ -1,4 +1,5 @@
 import handleError from '../utils/handleError.js';
+import isVaildateNumber from '../utils/isVaildateNumber.js';
 
 const createEscapedDelimiter = function createEscapedDelimiterFunc(delimiters) {
   const escapedDelimiters = delimiters
@@ -30,16 +31,10 @@ const convertNumbers = function convertNumbers(splitString) {
   return numbers;
 };
 
-const getVaildateNumbers = function getVaildateNumbersFunc(numbers) {
-  const maxSafeInteger = Number.MAX_SAFE_INTEGER;
-
+const isVaildateNumbers = function isVaildateNumbersFunc(numbers) {
   numbers.forEach(num => {
-    if (num > maxSafeInteger) {
-      handleError('숫자가 Number.MAX_SAFE_INTEGER를 초과했습니다.');
-    }
+    isVaildateNumber(num);
   });
-
-  return numbers;
 };
 
 const getNumbers = function saveNumbersFromStringFunc(input, delimiters) {
@@ -48,9 +43,9 @@ const getNumbers = function saveNumbersFromStringFunc(input, delimiters) {
 
   const splitString = splitInput(input, escapedDelimiters);
   const numbers = convertNumbers(splitString);
-  const validNumbers = getVaildateNumbers(numbers);
+  isVaildateNumbers(numbers);
 
-  return validNumbers;
+  return numbers;
 };
 
 export default getNumbers;
