@@ -15,6 +15,11 @@ class CalculatorApp {
       .map((delimiter) => delimiter.replace(/[.*+?^${}()|[\]\\]/g, "\\$&"))
       .join("|");
   }
+
+  // 숫자 배열인지 확인
+  #isNumberArray(array) {
+    return array.every((item) => NUMBER_CHECK_REGEX.test(item));
+  }
   async run() {}
 }
 
