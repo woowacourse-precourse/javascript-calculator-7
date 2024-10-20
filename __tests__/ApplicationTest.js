@@ -38,7 +38,7 @@ describe("문자열 계산기", () => {
       mockQuestions(inputs);
 
       const logSpy = getLogSpy();
-      const outputs = ["결과 : 1,2,3"];
+      const outputs = ["결과 : 6"];
 
       const app = new App();
       await app.run();
@@ -53,7 +53,22 @@ describe("문자열 계산기", () => {
       mockQuestions(inputs);
 
       const logSpy = getLogSpy();
-      const outputs = ["결과 : 1,2"];
+      const outputs = ["결과 : 3"];
+
+      const app = new App();
+      await app.run();
+
+      outputs.forEach((output) => {
+        expect(logSpy).toHaveBeenCalledWith(expect.stringContaining(output));
+      });
+    });
+
+    test("정상적인 숫자 입력에 대해 여러 구분자 사용", async () => {
+      const inputs = ["//;\\n1;2,3"];
+      mockQuestions(inputs);
+
+      const logSpy = getLogSpy();
+      const outputs = ["결과 : 6"];
 
       const app = new App();
       await app.run();
@@ -106,6 +121,28 @@ describe("문자열 계산기", () => {
 
       await expect(app.run()).rejects.toThrow(
         "[ERROR] 음수는 입력할 수 없습니다."
+      );
+    });
+
+    test("숫자가 아닌 값 입력 시 예외 처리", async () => {
+      const inputs = ["1,a,3"];
+      mockQuestions(inputs);
+
+      const app = new App();
+
+      await expect(app.run()).rejects.toThrow(
+        "[ERROR] 기본 구분자 외의 문자가 사용되었습니다."
+      );
+    });
+
+    test("커스텀 구분자와 함께 숫자가 아닌 값 입력 시 예외 처리", async () => {
+      const inputs = ["//;\\n1;a;3"];
+      mockQuestions(inputs);
+
+      const app = new App();
+
+      await expect(app.run()).rejects.toThrow(
+        "[ERROR] 입력된 값 중 숫자가 아닌 항목이 있습니다."
       );
     });
   });

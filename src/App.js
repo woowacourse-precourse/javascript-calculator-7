@@ -25,7 +25,8 @@ class App {
     const inputList = numbersAsString.split(","); // 쉼표로 나누기
     this.validateNumbers(inputList, customSeparator); // 숫자 검증
 
-    Console.print(`결과 : ${inputList}`);
+    const result = this.sumNumbers(inputList); // 숫자 합산
+    Console.print(`결과 : ${result}`);
   }
 
   isEmptyInput(input) {
@@ -92,6 +93,10 @@ class App {
     if (trimmedNumbers.some((num) => +num < 0)) {
       throw new Error("[ERROR] 음수는 입력할 수 없습니다.");
     }
+  }
+
+  sumNumbers(list) {
+    return list.reduce((acc, cur) => acc + Number(cur), 0); // 합산
   }
 }
 
