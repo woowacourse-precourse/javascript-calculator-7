@@ -52,6 +52,12 @@ class App {
   //숫자 더하기
   addNum(str, delimiter = /\,|\:/) {
     const numArr = str.split(delimiter).map((x) => Number(x)); //숫자 추출
+
+    //0포함 혹은 공백 포함 여부 확인
+    if (numArr.includes(0)) {
+      throw new Error('[ERROR] 양수와 구분자만 입력해주세요');
+    }
+
     return numArr.reduce((a, b) => a + b); //더한 결과 값 반환
   }
 }
