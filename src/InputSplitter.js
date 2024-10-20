@@ -6,7 +6,7 @@ const validateCustomSeparator = (input, customSeparator) => {
     }
     throw new Error('[ERROR] 커스텀 구분자가 입력되지 않았습니다.');
   }
-  if (!isNaN(customSeparator[1])) {
+  if (customSeparator[1].match(/\d/)) {
     throw new Error('[ERROR] 커스텀 구분자는 문자나 특수문자만 가능합니다.');
   }
 };
