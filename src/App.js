@@ -18,6 +18,9 @@ class App {
   
     const sum = numbers.reduce((acc, number) => {
       const parsedNumber = Number(number);
+      if (isNaN(parsedNumber)) {
+        throw new Error('잘못된 입력입니다. 숫자가 아닙니다.');
+      }
       if (parsedNumber < 0) {
         throw new Error('잘못된 입력입니다. 음수는 허용되지 않습니다.');
       }
@@ -26,6 +29,7 @@ class App {
   
     return sum;
   }
+  
   
   
   parseInput(input) {
