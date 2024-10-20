@@ -20,10 +20,10 @@ export default class Calculator {
 
   parseCustomDelimiter() {
     if (this.input.startsWith(CUSTOM_DELIMITER_PREFIX)) {
-      const [customDelimiter, numberPart] = this.input.split(CUSTOM_DELIMITER_SEPARATOR);
+      const [customDelimiterPart, numberPart] = this.input.split(CUSTOM_DELIMITER_SEPARATOR);
       
-      this.validateCustomEmptyDelimiter(customDelimiter);
-      this.delimiter.push(customDelimiter.slice(2));
+      this.validateCustomDelimiter(customDelimiterPart);
+      this.delimiter.push(customDelimiterPart.slice(2));
       this.input = numberPart;
     }
   }
@@ -39,6 +39,18 @@ export default class Calculator {
     this.validateNoConsecutiveDelimiter();
   }
 
+  validateCustomDelimiter(customDelimiterPart) {
+    this.validateCustomEmptyDelimiter(customDelimiterPart);
+    this.validateMultipleCustomDelimiters(customDelimiterPart);
+  }
+
+  validateMultipleCustomDelimiters(customDelimiterPart) {
+    const customDelimiter = customDelimiterPart.slice(2);
+    if (customDelimiter.length > 1) {
+      throw new Error(ERROR_MESSAGE.MULTIPLE_CUSTOM_DELIMITERS);
+    }
+  }
+  
   validateNumberAndDelimiter() {
     const isInputValid = new RegExp(`^[0-9${this.delimiter.join('')}\n]*$`);
     if (!isInputValid.test(this.input)) {

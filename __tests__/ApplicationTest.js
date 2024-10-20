@@ -148,4 +148,25 @@ describe('문자열 계산기', () => {
     await expect(app.run()).rejects.toThrow('[ERROR]');
   });
 
+  test('소수점 있는 숫자 입력 예외 처리', async () => {
+    const inputs = ['1.5,2,3'];
+    mockQuestions(inputs);
+    const app = new App();
+    await expect(app.run()).rejects.toThrow('[ERROR]');
+  });
+
+  test('여러 문자로 된 커스텀 구분자 예외 처리', async () => {
+    const inputs = ['//;;\\n1;;2;;3'];
+    mockQuestions(inputs);
+    const app = new App();
+    await expect(app.run()).rejects.toThrow('[ERROR]');
+  });
+
+  test('여러 개의 커스텀 구분자 예외 처리', async () => {
+    const inputs = ['//;,:\\n1;2,3:4'];
+    mockQuestions(inputs);
+    const app = new App();
+    await expect(app.run()).rejects.toThrow('[ERROR]');
+  });
+
 });
