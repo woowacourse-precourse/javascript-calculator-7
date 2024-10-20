@@ -48,6 +48,14 @@ class App {
         return regex.test(input);
     }
 
+    splitCustomDelimiter(input) {
+        if (!this.checkCustomDelimiter(input)) {
+            return [undefined, input];
+        } else {
+            return [input[2], input.slice(5)];
+        }
+    }
+
     splitInputByDelimiter(input) {
         if (!input) return [0];
         const numbers = input.split(/[,:]/);
