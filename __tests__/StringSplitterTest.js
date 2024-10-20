@@ -13,7 +13,7 @@ describe('String Splitter 테스트', () => {
       '입력 "$input"에 대해 쉼표와 콜론을 기준으로 문자열을 분리',
       ({ input, expectedOutput }) => {
         const stringSplitter = new StringSplitter(input);
-        expect(stringSplitter.split()).toEqual(expectedOutput);
+        expect(stringSplitter.split().string).toEqual(expectedOutput);
       },
     );
 
@@ -26,7 +26,7 @@ describe('String Splitter 테스트', () => {
       '커스텀 구분자를 사용한 경우, 입력 "$input"에 대해 문자열을 분리',
       ({ input, expectedOutput }) => {
         const stringSplitter = new StringSplitter(input);
-        expect(stringSplitter.split()).toEqual(expectedOutput);
+        expect(stringSplitter.split().string).toEqual(expectedOutput);
       },
     );
   });
