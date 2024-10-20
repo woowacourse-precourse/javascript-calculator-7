@@ -41,6 +41,9 @@ class App {
       
       sum += num;
     }
+
+    // 결과 출력
+    Console.print(`결과 : ${sum}`);
   }
 }
 
