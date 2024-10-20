@@ -1,11 +1,11 @@
 class Calculator {
   /**
    *
-   * @param {string} value
+   * @param {Array<string>} values
    * @returns {number}
    */
-  calculate(value) {
-    return value.reduce((sum, current) => sum + Number(current), 0);
+  calculate(values) {
+    return values.reduce((sum, current) => sum + Number(current), 0);
   }
 }
 
