@@ -95,6 +95,8 @@ class App {
       (accumulator, currentNumber) => accumulator + currentNumber,
       0
     );
+
+    this.ioHandler.printResult(sumOfNumbers);
   }
 }
 
