@@ -24,6 +24,16 @@ class App {
     this.#delimiter = [',', ':'];
     const CUSTOM_DELIMITER = this.#inputString.match(/^\/\/(.)?\\n/)?.[1];
     CUSTOM_DELIMITER ? this.#delimiter.push(CUSTOM_DELIMITER) : '';
+    const delimiterRegex = new RegExp(`[${this.#delimiter.join('')}]`);
+    const HAS_CUSTOM_DELIMITER = CUSTOM_DELIMITER ? true : false;
+    const START_INDEX = HAS_CUSTOM_DELIMITER
+      ? this.#inputString.indexOf('\\n') + 2
+      : 0;
+
+    this.#inputString = this.#inputString.substring(START_INDEX);
+    this.#separatedNumber = this.#inputString
+      .split(delimiterRegex)
+      .map((num) => Number(num));
   }
 }
 
