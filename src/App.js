@@ -3,6 +3,10 @@ class App {
   async run() {
     Console.print('덧셈할 문자열을 입력해 주세요.')
     const input = await Console.readLineAsync('');
+
+    if (input === ""){
+      Console.print('0')
+    }
   }
 }
 
