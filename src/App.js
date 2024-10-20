@@ -27,13 +27,17 @@ class App {
   splitNumbersByDelimiter(input) {
     let delimiter;
     
-    if (input.startsWith('//') && input.slice(3, 5) === '\\n') {
+    if (input.startsWith('//')) {
+      if (!input.includes('\\n')) {
+        throw new Error('[ERROR] "\\n"이 누락되었습니다.');
+      }
+
       delimiter = input[2];
 
       if (!isNaN(delimiter)) {
         throw new Error('[ERROR] 커스텀 구분자로 숫자는 지정할 수 없습니다.')
       }
-      
+
       input = input.slice(5)
     } else {
       delimiter = /[,:]/;
