@@ -7,10 +7,13 @@ class App {
     );
 
     const customSeparator = getCustomSeparator(userInput);
+    const formattedUserInput = customSeparator
+      ? userInput.replace(/^\/\/\D\\n/, '')
+      : userInput;
 
     try {
-      validateUserInput(userInput, customSeparator);
-      const result = computeResult(userInput, customSeparator);
+      validateUserInput(customSeparator, formattedUserInput);
+      const result = computeResult(customSeparator, formattedUserInput);
       Console.print(`결과 : ${result}`);
     } catch (error) {
       Console.print(`[ERROR] ${error.message}`); // 스택 트레이스가 안 뜸
@@ -29,11 +32,7 @@ function getCustomSeparator(userInput) {
     : null;
 }
 
-function validateUserInput(userInput, customSeparator) {
-  const formattedUserInput = customSeparator
-    ? userInput.replace(/^\/\/\D\\n/, '')
-    : userInput;
-
+function validateUserInput(customSeparator, formattedUserInput) {
   const regex = customSeparator
     ? new RegExp(`\\s|^\\d+([,:${customSeparator}]\\d+)*$`)
     : /^\s|\d+([,:]\d+)*$/;
@@ -43,14 +42,10 @@ function validateUserInput(userInput, customSeparator) {
   }
 }
 
-function computeResult(userInput, customSeparator) {
+function computeResult(customSeparator, formattedUserInput) {
   const regex = customSeparator
     ? new RegExp(`[:,${customSeparator}]`)
     : new RegExp(`[:,]`);
-
-  const formattedUserInput = customSeparator
-    ? userInput.replace(/^\/\/\D\\n/, '')
-    : userInput;
 
   return formattedUserInput
     .split(regex)
