@@ -8,18 +8,12 @@ import {
 } from './Constraints/Constraints.js';
 
 import sumAllNumbers from './Util/sumAllNumbers.js';
-import { escapeRegExp } from './Util/regex.js';
+import {
+  escapeRegExp,
+  buildCustomInputValidationRegex,
+  buildNormalInputValidationRegex,
+} from './Util/regex.js';
 
-const numberPattern = '\\d+(\\.\\d+)?';
-
-function buildNormalInputValidationRegex() {
-  return new RegExp(`^${numberPattern}$`);
-}
-
-function buildCustomInputValidationRegex(escapedDelimiter) {
-  // escapedDelimiter를 포함하여 동적으로 정규식을 생성
-  return new RegExp(`^${numberPattern}(${escapedDelimiter}${numberPattern})*$`);
-}
 function validateCustomInputFormat(input) {
   const isInvalidFormat = !input.startsWith('//') || !input.includes('\\n');
   if (isInvalidFormat) {
