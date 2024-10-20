@@ -13,12 +13,19 @@ class App {
 
   async getInput() {
     // MissionUtils.Console.readLineAsync를 사용하여 입력 받기
-    return await MissionUtils.Console.readLineAsync('입력: ');
+    return await MissionUtils.Console.readLineAsync('덧셈할 문자열을 입력해 주세요.\n');
   }
 
   calculate(input) {
     if (!input) return 0;
     let delimiter = /,|:/; // 기본 구분자
+
+    if (input.startsWith("//")) {
+      const customDelimiter = input.substr(2, 1);
+      delimiter = new RegExp(customDelimiter);
+      input = input.substr(5);
+    }
+
     const numbers = input.split(delimiter).map(Number);
     // 예외 처리 (음수 값 등)
     const nan = numbers.filter(n => isNaN(n));
