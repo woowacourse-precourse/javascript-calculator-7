@@ -1,8 +1,8 @@
-import CalculatorController from './Controller.js';
+import Controller from './Controller.js';
 
 class App {
   constructor() {
-    this.controller = new CalculatorController();
+    this.controller = new Controller();
   }
 
   async run() {

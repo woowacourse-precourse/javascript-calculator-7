@@ -8,10 +8,6 @@ class View {
   printResult(result) {
     Console.print('결과 : ' + result);
   }
-
-  printError(error) {
-    Console.print(error.message);
-  }
 }
 
 export default View;
