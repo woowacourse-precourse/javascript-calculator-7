@@ -2,7 +2,7 @@ import { Console } from '@woowacourse/mission-utils';
 import { inputValidation } from './validation.js';
 class App {
   #inputString;
-  #delimiter;
+  #delimiters;
   #separatedNumber;
   #resultNumber;
   async run() {
@@ -10,6 +10,7 @@ class App {
       '덧셈할 문자열을 입력해 주세요.\n'
     );
     this.#inputString = INPUT_STRING;
+    this.setDelimiter();
     this.separateNumbers();
     inputValidation(this.getInputString(), this.getDelimiter());
     this.sumNumbers();
@@ -24,11 +25,12 @@ class App {
     return await Console.print(content);
   }
   separateNumbers() {
-    this.#delimiter = [',', ':'];
-    const CUSTOM_DELIMITER = this.#inputString.match(/^\/\/(.)?\\n/)?.[1];
-    CUSTOM_DELIMITER ? this.#delimiter.push(CUSTOM_DELIMITER) : '';
-    const delimiterRegex = new RegExp(`[${this.#delimiter.join('')}]`);
-    const HAS_CUSTOM_DELIMITER = CUSTOM_DELIMITER ? true : false;
+    const delimiterRegex = new RegExp(`[${this.#delimiters.join('')}]`);
+    const basicDelimiter = [',', ':'];
+    const HAS_CUSTOM_DELIMITER = this.#delimiters.some(
+      (delimiter) => !basicDelimiter.includes(delimiter)
+    );
+
     const START_INDEX = HAS_CUSTOM_DELIMITER
       ? this.#inputString.indexOf('\\n') + 2
       : 0;
@@ -38,12 +40,20 @@ class App {
       .split(delimiterRegex)
       .map((num) => Number(num));
   }
+
   getInputString() {
     return this.#inputString;
   }
+
   getDelimiter() {
-    return this.#delimiter;
+    return this.#delimiters;
   }
+  setDelimiter() {
+    this.#delimiters = [',', ':'];
+    const CUSTOM_DELIMITER = this.#inputString.match(/^\/\/(.)?\\n/)?.[1];
+    CUSTOM_DELIMITER ? this.#delimiters.push(CUSTOM_DELIMITER) : '';
+  }
+
   sumNumbers() {
     this.#resultNumber = this.#separatedNumber.reduce((acc, cur) => {
       return acc + cur;
