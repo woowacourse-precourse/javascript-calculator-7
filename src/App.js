@@ -6,16 +6,18 @@ class App {
 
     try{
       let delimiters = [',',':'];
+      let numbers = [];
 
       // 입력
       const input = await this.getInput();
-      // Console.print(input);
+
 
       // 커스텀 구분자 파싱 후 숫자 입력만 반환
       const inputNumbers = await this.customDelimiter(input, delimiters);
-      // Console.print(inputNumbers);
+
 
       // 숫자 파싱
+      numbers = await this.getNumbers(inputNumbers, numbers, delimiters);
 
       // 합계 연산
 
@@ -34,7 +36,7 @@ class App {
   }
 
 
-  // 커스텀 구분자 처리
+  // 커스텀 구분자 파싱
   async customDelimiter(input, delimiters){
     
     let s = 0;
@@ -58,6 +60,22 @@ class App {
 
     const inputNumbers = input.substring(s);
     return inputNumbers;
+  }
+
+  // 숫자 파싱
+  async getNumbers(input, numbers, delimiters){
+    // split을 위해 구분자 한 문자열로 병합
+    let splitD = delimiters.join('');
+
+    const regex = new RegExp(`[${splitD}]`, 'g');
+
+    // 숫자 split
+    const stringNumbers = input.split(regex);
+
+    // 숫자 형태로 배열에 저장
+    numbers = stringNumbers.map(Number);
+
+    return numbers;
   }
 
 }
