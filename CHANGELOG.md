@@ -1,0 +1,2 @@
+- docs($rootScope): modify README.md
+- feat: setup project
