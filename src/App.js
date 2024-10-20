@@ -13,7 +13,7 @@ class App {
       let sum = 0;
       let customDelimiter;
       let numbers;
-      console.log(customDelimiter);
+
       if (input.startsWith("//") && input.includes("\\n")) {
         const newlineIndex = input.indexOf("\\n");
         customDelimiter = input.slice(2, newlineIndex);
@@ -30,10 +30,12 @@ class App {
       }
       const numberArray = numbers.map((num) => {
         const parsedNum = Number(num);
-        if (!isNaN(Number(parsedNum))) {
+        if (isNaN(Number(parsedNum))) {
           throw new Error("숫자가 아닌 문자열은 사용할 수 없습니다.");
         }
+        return parsedNum;
       });
+      console.log(sum);
       sum = numberArray.reduce((acc, cur) => acc + cur, 0);
       MissionUtils.Console.print(`값: ${sum}`);
     } catch (error) {
