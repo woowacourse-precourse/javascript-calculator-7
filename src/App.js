@@ -37,6 +37,11 @@ class App {
       .then(input => {
         const result = this.extractAndSum(input); // 입력 문자열에서 숫자를 추출하고 합산
         Console.print(`결과: ${result}`); // 결과 출력
+      })
+      //5. 에러메시지출력
+      .catch(error => {
+        Console.print('[ERROR]'); // 에러 메시지 출력
+        process.exit(1); //종료
       });
   }
 }
