@@ -33,12 +33,19 @@ class StringValidator {
 
     checkIncludesNonNumber(parsedArray) {
         parsedArray.forEach((item) => {
-            if (!/^[-]?\d+$/.test(item)) { // 정규식으로 숫자 또는 음수만 허용
+            if (!/^[-]?\d+$/.test(item.trim())) {
                 throw new Error(ErrorMessages.ERROR_NON_NUMBER_CHARACTER);
             }
         });
     }
 
+    checkEmptyOrSpace(parsedArray) {
+        parsedArray.forEach((item) => {
+            if (item.trim() === "") {
+                throw new Error(ErrorMessages.ERROR_NON_NUMBER_CHARACTER);
+            }
+        });
+    }
 
     checkMultipleCustomDelimiter(parsedArray, customDelimiter) { // 커스텀 구분자 중복 사용 체크 함수
         if (customDelimiter === "\\") {

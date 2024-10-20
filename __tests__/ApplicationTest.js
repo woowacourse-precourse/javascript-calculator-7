@@ -169,6 +169,54 @@ describe("문자열 계산기", () => {
     });
   });
 
+  test("맨 앞에 ,가 먼저 오는 경우", async () => {
+    const inputs = [",1,2,3"];
+    mockQuestions(inputs);
+
+    const logSpy = getLogSpy();
+    const outputs = [ErrorMessages.ERROR_NON_NUMBER_CHARACTER];
+
+    const app = new App();
+    await app.run();
+
+    outputs.forEach((output) => {
+      expect(logSpy).toHaveBeenCalledWith(expect.stringContaining(output));
+    });
+  });
+
+
+  test("중간이 공백인 경우", async () => {
+    const inputs = ["1, ,3"];
+    mockQuestions(inputs);
+
+    const logSpy = getLogSpy();
+    const outputs = [ErrorMessages.ERROR_NON_NUMBER_CHARACTER];
+
+    const app = new App();
+    await app.run();
+
+    outputs.forEach((output) => {
+      expect(logSpy).toHaveBeenCalledWith(expect.stringContaining(output));
+    });
+  });
+
+
+  test("맨 뒤에 ,가 오는 경우", async () => {
+    const inputs = ["1,2,3,"];
+    mockQuestions(inputs);
+
+    const logSpy = getLogSpy();
+    const outputs = [ErrorMessages.ERROR_NON_NUMBER_CHARACTER];
+
+    const app = new App();
+    await app.run();
+
+    outputs.forEach((output) => {
+      expect(logSpy).toHaveBeenCalledWith(expect.stringContaining(output));
+    });
+  });
+
+
   test("구분자 외 다른 특수문자 사용", async () => {
     const inputs = ["1@2,3"];
     mockQuestions(inputs);

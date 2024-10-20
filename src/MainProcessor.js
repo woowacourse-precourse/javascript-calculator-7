@@ -31,6 +31,7 @@ export function checkingProcessBeforeParsing(input) {
 }
 
 export function checkingProcessAfterParsing(parsedArray) {
+    validator.checkEmptyOrSpace(parsedArray)
     validator.checkIncludesNonNumber(parsedArray);
     validator.checkNegativeNumbers(parsedArray);
 }
