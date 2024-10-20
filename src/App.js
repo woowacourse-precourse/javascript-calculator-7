@@ -3,10 +3,11 @@ import { Console } from "@woowacourse/mission-utils";
 class App {
 
   getCustomKey = (string) => {
-    let customKey;
+    let customKey = '';
     if (typeof string === 'string') {
 
-      if (string.toString().slice(0, 2) === '//' && string.toString().slice(3, 5) === '\n') {
+      if (string.toString().slice(0, 2) === '//' && string.toString().slice(3, 4) === '\n') {
+
         customKey = string[2]
       }
       return customKey
