@@ -12,7 +12,7 @@ import {
   validateCustomInputFormat,
   validateCustomInput,
   validateNormalInput,
-} from './validator/validator.js';
+} from './validation/validator.js';
 import { escapeRegExp } from './Util/regex.js';
 // import { validateCustomInput } from './Validator/validator.js';
 
