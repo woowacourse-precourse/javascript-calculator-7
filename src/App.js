@@ -23,14 +23,18 @@ class App {
 
       const sum = numbersWithMark
         .split("!")
-        .map(Number)
-        .reduce((acc, cur) => {
-          return acc + (isNaN(cur) ? 0 : cur);
-        }, 0);
+        .map((value) => {
+          const num = Number(value);
+          if (isNaN(num)) {
+            throw new Error("[ERROR]");
+          }
+          return num;
+        })
+        .reduce((acc, cur) => acc + cur, 0);
 
       Console.print("결과 : " + sum);
     } catch (error) {
-      new Error("[ERROR]");
+      Console.print(error.message);
     }
   }
 }
