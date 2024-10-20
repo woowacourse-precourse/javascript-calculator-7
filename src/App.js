@@ -5,6 +5,10 @@ class App {
 		// 문자열 입력 기능 구현
 		Console.print("덧셈할 문자열을 입력해 주세요.");
 		const input = await Console.readLineAsync("");
+
+		// 결과 반환
+		const result = this.add(input);
+		Console.print(`결과 : ${result}`);
 	}
 
 	// add: 입력 문자열에서 숫자를 분리하고 합산하는 메서드
