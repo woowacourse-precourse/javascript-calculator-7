@@ -2,7 +2,7 @@ import ProcessorValidator from '../validators/ProcessorValidator.js';
 
 class StringInputProcessor {
   constructor() {
-    this.customDelimiterRegEx = /\/\/(.*?)\r?\n/g;
+    this.customDelimiterRegExp = /\/\/(.*?)\r?\n/g;
     this.defaultDelimiters = new Set([',', ':']);
     this.customDelimiters = new Set();
   }
@@ -16,10 +16,10 @@ class StringInputProcessor {
 
     input = input.replace(/\\n/g, '\n');
 
-    // 커스텀 구분자 추출
+    // 커스텀 구분자 추출.
     this.customDelimiters.clear();
     let match;
-    while ((match = this.customDelimiterRegEx.exec(input)) !== null) {
+    while ((match = this.customDelimiterRegExp.exec(input)) !== null) {
       this.customDelimiters.add(match[1]);
     }
 
@@ -41,7 +41,7 @@ class StringInputProcessor {
 
     ProcessorValidator.validateFirstChar(numbersString[0]);
 
-    for (let char of numbersString) {
+    for (const char of numbersString) {
       if (/[0-9]/.test(char)) {
         if (currentDelimiter) {
           ProcessorValidator.validateDelimiter(currentDelimiter, allDelimiters);
