@@ -1,5 +1,5 @@
 import { Console } from '@woowacourse/mission-utils';
-import { validateEmptyInput, validateNegativeNumbers } from './validators.js';
+import { validateEmptyInput, validateNegativeNumbers, validateInvalidNumbers } from './validators.js';
 
 function getInput() {
   Console.readLine('덧셈할 문자열을 입력해 주세요.', (answer) => {
@@ -36,6 +36,7 @@ function splitByDelimiter (input, customdelimiter) {
 
 function sumArray(arr) {
   validateNegativeNumbers(arr);
+  validateInvalidNumbers(arr);
   const sum = arr
   .map(Number)
   .reduce((acc, curr) => acc + curr, 0);
