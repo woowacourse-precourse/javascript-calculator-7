@@ -39,7 +39,7 @@ function validateArray(array) {
       throw new Error(Constants.ERROR_MESSAGE.INVALID_INPUT_TYPE);
     }
 
-    array[index] = parseInt(element);
+    array[index] = BigInt(element);
   });
 
   return array;
