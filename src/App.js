@@ -23,13 +23,29 @@ class Validation {
   }
 }
 
+class StringProcessor {
+  extractSeperator(input) {
+    const customSeparatorPattern = new RegExp(
+      `^${CALCULATOR.customFormPrefix}(.+?)${CALCULATOR.customFormSuffix}`
+    );
+    const match = input.match(customSeparatorPattern);
+    return match ? match[1].trim() : null;
+  }
+}
+
 class App {
   constructor() {
     this.ioHandler = new Io();
     this.validation = new Validation();
+    this.processor = new StringProcessor();
   }
   async run() {
     let input = await this.ioHandler.getString();
+
+    if (input.startsWith('//')) {
+      // 사용자가 커스텀 구분자를 등록하려 시도하는 경우
+      const customSeperator = this.processor.extractSeperator(input);
+    }
 
     this.validation.isValidSeperator(input);
   }

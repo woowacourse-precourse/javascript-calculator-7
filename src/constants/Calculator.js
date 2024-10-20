@@ -1,6 +1,6 @@
 const CALCULATOR = {
   seperator: [',', ':'],
   customFormPrefix: '//',
-  customFormSuffix: '\n',
+  customFormSuffix: '\\\\n',
 };
 export default CALCULATOR;
