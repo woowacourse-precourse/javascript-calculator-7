@@ -11,10 +11,6 @@ class Calculator {
   }
 
   splitByDelimiter(input) {
-    if (Regex.notInputCustomDelimiter.test(input)) {
-      throw new Error(`[ERROR]: ${errorMessages.notInputCustomDelimiter}`);
-    }
-
     const customDelimiter = this.extractCustomDelimiter(input);
 
     if (customDelimiter) {
