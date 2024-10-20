@@ -22,7 +22,7 @@ class App {
         const dynamicRegExp = new RegExp(`[,:]|${newSeparator}`);
         const array = input.slice(parts + 2).split(dynamicRegExp);
 
-        // array에 음수나 양수가 있는지 검사하여 있으면 Error 출력
+        // array에 음수나 양수가 있는지 검사하여 있으면 Error 출력 + 설정된 구분자를 제외한 구분자를 사용한 경우 에러 발생
         checkIsPositive(array);
       } else {
         // "\n"이 없는 경우
@@ -31,7 +31,7 @@ class App {
     } else {
       const array = input.split(BASIC_REGEXP);
 
-      // array에 음수나 양수가 있는지 검사하여 있으면 Error 출력
+      // array에 음수나 양수가 있는지 검사하여 있으면 Error 출력 + 설정된 구분자를 제외한 구분자를 사용한 경우 에러 발생
       checkIsPositive(array);
     }
   }
