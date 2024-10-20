@@ -6,7 +6,11 @@ class App {
   }
 
   async readCustomDelimiters(str) {
-    if (str[0] === '/' && str[1] === '/') {
+    if (str[0] === '/') {
+      if (str[1] !== '/') {
+        throw new Error('[ERROR] 커스텀 구분자를 지정하려면 //커스텀 구분자\\n 형식으로 입력하세요.');
+      }
+
       let endOfCustomDelimeters = 0;
 
       for (let i = 2; i < str.length; i += 1) {
