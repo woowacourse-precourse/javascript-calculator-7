@@ -22,6 +22,14 @@ class App {
     return input;
   }
 
+  getCalculation(input) {
+    const result = input
+      .split("")
+      .map(Number)
+      .reduce((acc, curr) => acc + curr, 0);
+    return result;
+  }
+
   async run() {}
 }
 
