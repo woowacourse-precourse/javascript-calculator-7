@@ -19,6 +19,9 @@ class App {
         if (input.startsWith('//')) {
           const [delimiterPart, ...rest] = input.split('\\n');
           const customDelimiter = delimiterPart.slice(2);
+          if (!isNaN(customDelimiter)) {
+            throw new Error('[ERROR] 구분자는 숫자가 될 수 없습니다.');
+          }
           if (delimiters.indexOf(customDelimiter) === -1) {
             delimiters.push(customDelimiter);
           }
@@ -30,11 +33,13 @@ class App {
           numbers = numbers.split(delimiter).join(',');
         }
 
-        nums = numbers.split(',');
+        nums = numbers.split(',').map((number) => parseInt(number, 0));
       }
 
       console.log(nums);
-    } catch (error) {}
+    } catch (error) {
+      Console.print(error.message);
+    }
   }
 }
 
