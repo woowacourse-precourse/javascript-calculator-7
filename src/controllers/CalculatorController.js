@@ -1,5 +1,4 @@
 import calculateSum from "../models/CalculatorModel.js";
-import handleError from "../utils/errorHandler.js";
 import renderResult from "../views/CalculatorView.js";
 
 /**

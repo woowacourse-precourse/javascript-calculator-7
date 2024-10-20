@@ -1,6 +1,5 @@
 import { Console } from "@woowacourse/mission-utils";
 import handleCalculation from "./controllers/CalculatorController.js";
-import handleError from "./utils/errorHandler.js";
 
 class App {
   async run() {

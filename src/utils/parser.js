@@ -7,6 +7,7 @@ function handleNaNCheck(numbers) {
   }
   return numbers;
 }
+
 /**
  *
  * @param {string} input 입력문자열
