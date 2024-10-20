@@ -53,12 +53,22 @@ class App {
     verifyNumber(arrValue);
   }
 
+  caculateValue() {
+    const re = new RegExp(this.separator);
+    const arrValue = this.initValue.split(re);
+    const resultValue = arrValue.reduce((acc, cur) => {
+      return acc + Number(cur);
+    }, 0);
+    return resultValue;
+  }
+
   async run() {
     const userinput = await this.getUserinput();
     const customSeparator = this.getCustomSeparator(userinput);
     this.updateSeparator(customSeparator);
     this.updateInputValue(userinput, customSeparator);
     this.verifyUserinput(customSeparator);
+    const resultVlaue = this.caculateValue();
   }
 }
 
