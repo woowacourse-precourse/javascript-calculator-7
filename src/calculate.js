@@ -31,20 +31,22 @@ function add(input) {
 }
 
 async function askForInput() {
-  try {
-    const userInput = await Console.readLineAsync(
-      "덧셈할 문자열을 입력해 주세요."
-    );
-    if (userInput.toLowerCase() === "종료") {
-      Console.print("ERROR");
-      process.exit(0);
-    } else {
+  while (true) {
+    try {
+      const userInput = await Console.readLineAsync(
+        "덧셈할 문자열을 입력해 주세요."
+      );
+
+      if (userInput.toLowerCase() === "종료") {
+        Console.print("프로그램을 종료합니다.");
+        return;
+      }
+
       Console.print(`결과 : ${add(userInput)}`);
-      await askForInput();
+    } catch (error) {
+      Console.print("[ERROR]");
+      return;
     }
-  } catch (error) {
-    Console.print("[ERROR]");
-    process.exit(1);
   }
 }
 
