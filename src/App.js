@@ -38,6 +38,5 @@ class CalculatorApp {
       this.#delimiters.push(customDelimiter[1]);  // 커스텀 구분자 추가
       userInput = userInput.replace(CUSTOM_DELIMITER_REGEX, "");  // 구분자 제거
     }
-
     const regexForSplitting = new RegExp(this.#escapeDelimiterRegExp());  // 구분자 기반으로 분리
     const inputArray = userInput.split(regexForSplitting);
