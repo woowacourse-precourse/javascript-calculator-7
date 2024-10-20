@@ -1,7 +1,8 @@
-import { DEFAULT_SEPARATORS } from './constants.js';
+import { DEFAULT_SEPARATORS, CUSTOM_DESIGNATORS, CUSTOM_SEPARATOR_REGEX } from './constants.js';
 
 class Calculator {
   #inputText;
+  #customSeparator;
   #numbers;
   #result;
 
@@ -10,9 +11,24 @@ class Calculator {
     this.#numbers = 0;
   }
 
+  #findCustomSeparator() {
+    if (!this.#inputText.startsWith(CUSTOM_DESIGNATORS.start)) return (this.#customSeparator = '');
+
+    return this.#inputText.match(CUSTOM_SEPARATOR_REGEX)[0];
+  }
+
   #splitTextToNumber() {
-    const separatorsRegex = new RegExp(`${DEFAULT_SEPARATORS.join('|')}`, 'g');
-    this.#numbers = this.#inputText.split(separatorsRegex).map(Number);
+    this.#customSeparator = this.#findCustomSeparator();
+    const separatorsRegex = new RegExp(
+      `${DEFAULT_SEPARATORS.join('|')}${this.#customSeparator && '|' + this.#customSeparator}`,
+      'g'
+    );
+
+    const splitTarget = this.#customSeparator
+      ? this.#inputText.slice(this.#inputText.indexOf(CUSTOM_DESIGNATORS.end) + 2)
+      : this.#inputText;
+
+    this.#numbers = splitTarget.split(separatorsRegex).map(Number);
   }
 
   #calculateSum() {
