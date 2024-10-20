@@ -12,7 +12,11 @@ class App {
   getInput() {
     // 사용자의 값의 입력은 Console.readLineAsync()로 제한함
     Console.readLineAsync("덧셈할 문자열을 입력해 주세요.\n").then((input) => {
-      this.resultPrinter.print(input);
+      // 입력된 문자열을 DelimiterManager로 파싱
+      const parsedInput = this.delimiterManager.parseInput(input);
+
+      // 파싱된 결과를 ResultPrinter로 출력
+      this.resultPrinter.print(parsedInput);
     });
   }
 
