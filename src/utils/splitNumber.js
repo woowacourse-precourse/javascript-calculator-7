@@ -1,6 +1,9 @@
 import { ERROR_MESSAGES } from "../constants/errorMessages.js";
 
 const validateCustomDelimiter = (delimiter) => {
+  if (delimiter === "") {
+    throw new Error(ERROR_MESSAGES.EMPTY_DELIMITER);
+  }
   if (/\d/.test(delimiter)) {
     throw new Error(ERROR_MESSAGES.INVALID_SPLITTER);
   }
@@ -30,13 +33,9 @@ const splitNumber = (input) => {
   if (match) {
     const [, customDelimiter, numbersString] = match;
     validateCustomDelimiter(customDelimiter);
-    if (customDelimiter === "") {
-      numbers = [numbersString];
-    } else {
-      const escapedDelimiter = escapeRegExp(customDelimiter);
-      const splitRegex = new RegExp(`[,:]|${escapedDelimiter}`);
-      numbers = numbersString.split(splitRegex);
-    }
+    const escapedDelimiter = escapeRegExp(customDelimiter);
+    const splitRegex = new RegExp(`[,:]|${escapedDelimiter}`);
+    numbers = numbersString.split(splitRegex);
   }
 
   return numbers;
