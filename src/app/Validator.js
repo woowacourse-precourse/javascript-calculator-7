@@ -43,7 +43,7 @@ class Validator {
    * @param {string} value
    * @returns {boolean}
    */
-  #hasValidCustomDelimiter(value) {
+  #isNumericCustomDelimiter(value) {
     if (this.#delimiter.hasCustomDelimiter(value)) {
       return !isNumericString(this.#delimiter.getCustomDelimiter(value));
     }
@@ -57,7 +57,7 @@ class Validator {
    * @throws {string}
    */
   #validateDelimiter(value) {
-    this.#validator.validate(value).with(this.#hasValidCustomDelimiter.bind(this), {
+    this.#validator.validate(value).with(this.#isNumericCustomDelimiter.bind(this), {
       message: Error.MESSAGE.CUSTOM_DELIMITER_IS_NOT_NUMBER,
     });
   }
