@@ -42,10 +42,7 @@ class App {
         throw new Error("[ERROR] 유효하지 않은 입력값입니다.");
       }
 
-      const specialChars = customArr
-        .concat([",", ":"])
-        .map((c) => "\\" + c)
-        .join("");
+      const specialChars = customArr.concat([",", ":"]).join("");
       const delimiters = new RegExp(`[${specialChars}]`, "g");
       const splitted = customDeleted.split(delimiters);
       splitted.forEach((item) => (num += Number(item)));
