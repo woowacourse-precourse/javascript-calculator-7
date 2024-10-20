@@ -14,7 +14,6 @@ class User {
 
   async readNumber() {
     const answer = await Console.readLineAsync(MESSAGES.inputNumber);
-    validator.validateString(answer);
     this.handleCustomDelimiter(answer);
     const numbers = this.splitString(this.#numbersString);
     const sum = this.calculateNumbers(numbers);
