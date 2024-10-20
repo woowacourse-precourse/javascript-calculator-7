@@ -20,4 +20,16 @@ describe("문자열 계산기 함수 테스트", () => {
       expect(calculator.seperateBy(inputs[index])).toEqual(output);
     });
   });
+
+  test("숫자로 이루어진 배열의 합을 구할 수 있다.", () => {
+    const inputs = [
+      [1, 2, 3],
+      [2, 4, 6],
+    ];
+    const outputs = [6, 12];
+
+    outputs.forEach((output, index) => {
+      expect(calculator.getSumOf(inputs[index])).toBe(output);
+    });
+  });
 });
