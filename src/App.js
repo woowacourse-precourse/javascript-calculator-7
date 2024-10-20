@@ -39,8 +39,8 @@ class App {
         verifiedNumbers.push(Number(num));
       }
     }
-    // 숫자로 변환된 요소들을 더해준다.
-    return this.calculateSum(verifiedNumbers);
+    // 숫자로 변환된 요소들을 리턴한다.
+    return verifiedNumbers;
   }
 
   // 파싱한 숫자를 더한다.
