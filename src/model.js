@@ -2,11 +2,13 @@ export default class Model{
     constructor() {
         this.stringValue = [
             {
-                inputValue: ''
+                inputValue: '',
+                numberList: []
             }
         ];
     }
-    updateData(args){
-        this.stringValue = args;
+    updateData(input){
+        this.stringValue = input;
+        this.numberList = [];
     }
 }
