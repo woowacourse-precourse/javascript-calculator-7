@@ -1,11 +1,25 @@
+import { Console } from "@woowacourse/mission-utils";
 import InputView from "./View/InputView.js";
 import OutPutView from "./View/OutputView.js";
+import Validation from "./Validation.js";
 
 class Calculate {
   async startCalculate() {
     const splitedNums = await this.getUserInput();
-    const result = this.calculateTotal(splitedNums);
-    await OutPutView.printResult(result);
+    try {
+      this.validateUserInput(splitedNums);
+      const result = this.calculateTotal(splitedNums);
+      await OutPutView.printResult(result);
+    } catch (e) {
+      Console.print(e);
+      throw e;
+    }
+  }
+
+  validateUserInput(splitedNums) {
+    Validation.checkPositiveNum(splitedNums);
+
+    return splitedNums;
   }
 
   async getUserInput() {
@@ -49,8 +63,6 @@ class Calculate {
   calculateTotal(splitedNums) {
     return splitedNums.reduce((acc, cur) => (acc += cur));
   }
-
-  validateUserInput(userInput) {}
 }
 
 export default Calculate;
