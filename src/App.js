@@ -28,7 +28,9 @@ class App {
 
     this.validateAdditionNumbers(separatedInput);
 
-    this.printResult(separatedInput);
+    const result = this.calculateSum(separatedInput);
+
+    this.printResult(result);
   }
 
   async getInputForAddition() {
@@ -67,9 +69,11 @@ class App {
     return input.split(separationRegex).map((char) => Number(char));
   }
 
-  printResult(input) {
-    const result = input.reduce((acc, cur) => acc + cur * 10, 0) / 10;
+  calculateSum(additionArray) {
+    return additionArray.reduce((acc, cur) => acc + cur * 10, 0) / 10;
+  }
 
+  printResult(result) {
     Console.print(`${PRINT_MESSAGES.FINAL_RESULT}${result}`);
   }
 
