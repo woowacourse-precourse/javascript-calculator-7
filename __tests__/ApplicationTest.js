@@ -47,6 +47,22 @@ describe("문자열 계산기", () => {
     });
   });
 
+  
+  test("커스텀 구분자 여러 개 입력", async () => {
+    const inputs = ["//;!\n1!2;3,4"];
+    mockQuestions(inputs);
+
+    const logSpy = getLogSpy();
+    const expectedOutputs = ["결과 : 10"];
+
+    const app = new App();
+    await app.run();
+
+    expectedOutputs.forEach((output) => {
+      expect(logSpy).toHaveBeenCalledWith(expect.stringContaining(output));
+    });
+  });
+
   test("공백 제거가 되는지 테스트", async () => {
     const inputs = ["1, 2, 3"];
     mockQuestions(inputs);
@@ -70,17 +86,6 @@ describe("문자열 계산기", () => {
 
     await expect(app.run()).rejects.toThrow(
       "[ERROR] 음수는 입력할 수 없습니다."
-    );
-  });
-
-  test("예외: 구분자가 문자 1개가 아닌 경우", async () => {
-    const inputs = ["\\;!/n1,2;3"];
-    mockQuestions(inputs);
-
-    const app = new App();
-
-    await expect(app.run()).rejects.toThrow(
-      "[ERROR] 계산할 수 있는 형식이 아닙니다."
     );
   });
 

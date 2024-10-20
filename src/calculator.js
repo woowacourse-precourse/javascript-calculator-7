@@ -10,8 +10,9 @@ class Calculator {
     let delimiters = [...this.defaultDelimiters]; // 구분자 배열을 기본 구분자로 초기화
 
     if (customDelimiterMatch) {
-      const customDelimiters = customDelimiterMatch[1].trim().split(/[,|]/); // 구분자 추출
-      delimiters.push(...customDelimiters.map((delimiter) => delimiter.trim())); // 커스텀 구분자를 구분자 배열에 추가
+      // \\와 /n 사이 문자열을 문자로 분리하여 커스텀 구분자 추출
+      const customDelimiters = customDelimiterMatch[1].trim().split('').map((char) => char.trim());
+      delimiters.push(...customDelimiters); // 커스텀 구분자를 구분자 배열에 추가
       return { delimiters, numbers: input.split("\n").slice(1).join("\n") };
     }
 
