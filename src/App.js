@@ -32,24 +32,11 @@ class App { //하나의 메소드는 하나의 역할
         return param.slice(lastIdx + 2)
     }
 
-    isSeparator(value) {//구분자 판단
-        if (!isNaN(value)) { //부정 조건 지양하자
-            return value
-        }
-        /*if (value === this.customSeparator) {
-            return 0
-        }
-        if (value === "," || value === ":") {
-            return 0
-        }*/
-        throw new Error("[Error]: 에러발생")
-    }
-
     preprocessing(param) {
         const argument = this.customSeparator || /[:,]/g
         const splitArray = param.split(argument)
         return splitArray.map((elem) =>
-            isNaN(elem) ? new Error("[Error]: 에러발생") : Number(elem))
+            Number.isNaN(elem) ? new Error("[Error]: 에러발생") : Number(elem))
     }
 
     resultOutput() {
@@ -58,9 +45,7 @@ class App { //하나의 메소드는 하나의 역할
 
     calculator(param) { //계산 담당
         const numberArray = this.preprocessing(param)
-        for (const element of numberArray) {
-            this.sum += Number(this.isSeparator(element))
-        }
+        this.sum = numberArray.reduce((a, b) => a + b)
     }
 }
 
