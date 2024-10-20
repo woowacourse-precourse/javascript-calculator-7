@@ -4,36 +4,45 @@ class App {
     Console.print("덧셈할 문자열을 입력해 주세요.");
 
     const input = await Console.readLineAsync("");
-    Console.print(input);
-    this.calculate(input);
+    let result = this.calculate(input.trim());
+    Console.print(`결과 : ${result}`);
   }
 
   calculate(input) {
     if (input === "") return 0;
 
-    input = "//;\n1;2;3";
-
     let strNumbers = input;
 
-    //기본 구분자
-    let delimiter = [",", ":"];
+    let delimiter = /[,|:]/;
 
-    //1.커스텀이 있는지 확인
-    const regex = /^\/\/(.*?)\n([\s\S]*)$/;
+    const regex = /^\/\/(.)\\n(.*)$/;
     const match = input.match(regex);
-    if (match) {
-      delimiter = [match[1]];
+
+    console.log(match);
+    if (input.startsWith("//") && match) {
+      delimiter = match[1];
       strNumbers = match[2];
+    } else if (input.startsWith("//") && !match) {
+      throw new Error("[ERROR] 입력이 올바르지 않습니다.");
     }
 
     //2. 구분자로 나누기
-    const splitRegex = new RegExp(delimiter.join(""), "g");
+
+    const splitRegex = new RegExp(delimiter, "g");
 
     let numArr = strNumbers.split(splitRegex);
 
-    console.log(numArr);
+    //3-1. 문자열이 있을 경우
+    //3-2. 음수가 있을 경우
+    let sum = 0;
+    numArr.forEach((elm) => {
+      if (isNaN(elm))
+        throw new Error("[ERROR] 숫자가 아닌 값이 포함되었습니다.");
+      if (elm < 0) throw new Error("[ERROR] 음수는 임력할 수 없습니다.");
 
-    //3.예외가 있는지 확인
+      sum += Number(elm);
+    });
+    return sum;
   }
 }
 
