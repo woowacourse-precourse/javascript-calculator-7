@@ -10,6 +10,7 @@ class App {
     );
     this.#inputString = INPUT_STRING;
     this.separateNumbers();
+    inputValidation(this.getInputString());
     this.sumNumbers();
     await this.printOutput(`결과 : ${this.#resultNumber}`);
   }
@@ -35,6 +36,10 @@ class App {
     this.#separatedNumber = this.#inputString
       .split(delimiterRegex)
       .map((num) => Number(num));
+  }
+
+  getInputString() {
+    return this.#inputString;
   }
   sumNumbers() {
     this.#resultNumber = this.#separatedNumber.reduce((acc, cur) => {
