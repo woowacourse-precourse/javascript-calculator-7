@@ -2,7 +2,12 @@ import {Console, MissionUtils} from "@woowacourse/mission-utils"
 
 class App {
   constructor(){
-    this.DELIMITERS_SET = new Set(['.',';'])
+    this.DELIMITERS_SET = new Set(['\.',';'])
+  }
+
+  //정규표현식 대체 함수
+  escapeRegExp(string) {
+    return string.replace(/[.*+?^${}()|[\]\\]/g, '\\$&');
   }
 
   //문자열 입력 함수
@@ -29,9 +34,26 @@ class App {
     return false
   }
 
-  sumInteger(str){
-    return;
+  //입력받은 문자에서 구분자 걸러내고 숫자 배열 리턴하는 함수
+  filterInteger(str){
+    const CURRENT_DELIMITER = [...this.DELIMITERS_SET].map(delimiter => this.escapeRegExp(delimiter)).join('|')
+    const SPLIT_REG = RegExp(CURRENT_DELIMITER)
+    const INT_ARRAY = str.split(SPLIT_REG)
+    return INT_ARRAY;
 
+  }
+  
+  //숫자 더하는 함수
+  sumInteger(arr){
+    var RESULT = 0;
+    arr.forEach(element => {
+      const CURRENT_INT = parseInt(element)
+      if(CURRENT_INT === NaN){
+        return NaN;
+      }
+      RESULT += CURRENT_INT
+    })
+    return RESULT;
   }
 
   async run() {
@@ -45,12 +67,20 @@ class App {
         }
         const DETECT_DELIMITER = this.detectDelimeter(INPUT_STR)
         if (DETECT_DELIMITER == true){
-          Console.print('- 현재 구분자')
-          Console.print([...this.DELIMITERS_SET])
+          // Console.print('- 현재 구분자')
+          // Console.print([...this.DELIMITERS_SET])
         }
         else{
-          Console.print(INPUT_STR)
-          this.sumInteger(INPUT_STR)
+          // Console.print(INPUT_STR)
+          const FILTERED_ARRAY = this.filterInteger(INPUT_STR);
+          const SUM_RESULT = this.sumInteger(FILTERED_ARRAY)
+          if(SUM_RESULT !== NaN){
+            Console.print(SUM_RESULT)
+          }
+          else{
+            Console.print("error")
+          }
+          
         }
 
 
