@@ -58,6 +58,12 @@ class App {
       throw new Error('양수를 입력해주세요');
     }
 
+    if (num > Number.MAX_SAFE_INTEGER) {
+      throw new Error(
+        `입력된 숫자가 너무 큽니다. ${Number.MAX_SAFE_INTEGER.toLocaleString()} 이하의 숫자를 입력해주세요.`
+      );
+    }
+
     return true;
   }
 
@@ -77,7 +83,14 @@ class App {
   }
 
   calculateSum() {
-    return this.EXTRACTED_NUMBERS.reduce((sum, num) => sum + num, 0);
+    return this.EXTRACTED_NUMBERS.reduce((sum, num) => {
+      if (sum > Number.MAX_SAFE_INTEGER - num) {
+        throw new Error(
+          `계산 결과가 너무 큽니다. 합계는 ${Number.MAX_SAFE_INTEGER.toLocaleString()} 이하여야 합니다.`
+        );
+      }
+      return sum + num;
+    }, 0);
   }
 
   printResult(result) {
