@@ -22,6 +22,12 @@ class App {
         string = separator[2];
       }
 
+      if (isNaN(Number(string[0]))) {
+        throw new Error(
+          "[ERROR]구분자와 양수로 구성된 입력 형식을 확인해주세요."
+        );
+      }
+
       // 기본 구분자, 커스텀 구분자 기준으로 숫자 배열 생성
       let regexp = new RegExp(`[,:${customSeperator}]`);
       if (customSeperator == "" && separator) regexp = /(?=.)/;
@@ -40,7 +46,6 @@ class App {
       });
 
       Console.print(`결과 : ${answer}`);
-      Console.print(numArr);
     } catch (error) {
       throw error;
     }
