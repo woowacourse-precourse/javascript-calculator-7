@@ -3,6 +3,10 @@ import { Console } from "@woowacourse/mission-utils";
 class App {
   async run() {
     try {
+      const input = await Console.readLineAsync(
+        "덧셈할 문자열을 입력해 주세요.\n"
+      );
+
       const checkHasCustom = (string) => {
         if (string.startsWith("//") && string.includes("\\n")) {
           const DELIMITER = string.slice(2, string.indexOf("\\n"));
@@ -11,12 +15,8 @@ class App {
         return null;
       };
 
-      const input = await Console.readLineAsync(
-        "덧셈할 문자열을 입력해 주세요.\n"
-      );
-
       const regexString = checkHasCustom(input)
-        ? `${checkHasCustom(input)}|//|\\\\n`
+        ? `${checkHasCustom(input)}|//|\\\\n|,|:`
         : ",|:";
       const regex = new RegExp(regexString, "g");
       const numbersWithMark = input.replace(regex, "!");
@@ -30,7 +30,7 @@ class App {
 
       Console.print("결과 : " + sum);
     } catch (error) {
-      console.error(error);
+      new Error("[ERROR]");
     }
   }
 }
