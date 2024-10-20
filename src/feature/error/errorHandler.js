@@ -4,9 +4,8 @@ function errorHandler(occurredError) {
   const DEFAULT_ERROR_MESSAGE = '[ERROR]';
   
   let errorMessage = occurredError.message;
-  let finalMessage = `${errorMessage}`;
   
-  Console.print(finalMessage);
+  Console.print(errorMessage);
   throw new Error(DEFAULT_ERROR_MESSAGE);
 }
 
