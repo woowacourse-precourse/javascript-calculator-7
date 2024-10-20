@@ -14,14 +14,15 @@ function add(input) {
       throw new Error("[ERROR]");
     }
     const customDelimiter = parts[0].substring(2);
-    delimiter = new RegExp(`[${customDelimiter}]`);
+    delimiter = new RegExp(`[${customDelimiter}]`); // 수정: 템플릿 리터럴 사용
     numbersString = parts[1];
   }
 
   const numbers = numbersString.split(delimiter);
   const sum = numbers.reduce((total, current) => {
     const num = parseInt(current, 10);
-    if (isNaN(num)) {
+    if (isNaN(num) || num < 0) {
+      // 수정: 음수 처리 추가
       throw new Error("[ERROR]");
     }
     return total + num;
@@ -42,7 +43,7 @@ async function askForInput() {
         return;
       }
 
-      Console.print(`결과 : ${add(userInput)}`);
+      Console.print(`결과 : ${add(userInput)}`); // 수정: 템플릿 리터럴로 출력
     } catch (error) {
       Console.print("[ERROR]");
       return;
