@@ -9,7 +9,9 @@ class CalculateSumModel {
       const total = this.calculateSum(numberArray);
       return total;
     } else {
-      throw new Error("[ERROR] 계산식은 '숫자'로만 구성돼야 합니다.");
+      throw new Error(
+        "[ERROR] 계산식은 양수 숫자 및 구분자로만 구성돼야 합니다."
+      );
     }
   }
 
@@ -20,7 +22,8 @@ class CalculateSumModel {
 
   isValidateNumber(numberArray) {
     const condition = numberArray.filter((i) => !i).length == 0;
-    return condition;
+    const isPositive = numberArray.filter((i) => i < 0).length == 0;
+    return condition && isPositive;
   }
 
   calculateSum(numberArray) {
