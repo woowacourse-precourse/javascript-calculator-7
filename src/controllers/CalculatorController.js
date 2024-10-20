@@ -1,6 +1,7 @@
 import calculateSum from "../models/CalculatorModel.js";
+import handleError from "../utils/errorHandler.js";
 import renderResult from "../views/CalculatorView.js";
-import renderError from "../views/ErrorView.js";
+
 /**
  *
  * @todo 입력값 유효성 검사 필요
@@ -11,7 +12,7 @@ function handleCalculation(input) {
     const numbers = calculateSum(input);
     renderResult(numbers);
   } catch (error) {
-    renderError(error.message);
+    handleError(error.message);
   }
 }
 
