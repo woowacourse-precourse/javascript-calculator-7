@@ -1,4 +1,5 @@
 import { Console } from '@woowacourse/mission-utils';
+import { inputValidation } from './validation.js';
 class App {
   #inputString;
   #delimiter;
