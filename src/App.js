@@ -1,6 +1,11 @@
 import { Console } from "@woowacourse/mission-utils";
 
 class App {
+  // 커스텀 구분자 -> idx가 2 : 구분자
+  customSeparator(input) {
+    const separator = input[2];
+    return this.splitInput(input.slice(5), separator);
+  }
   // 입력값을 구분자에 따라 분리하는 함수
   splitInput(input, separators) {
     const num = [];
@@ -32,11 +37,12 @@ class App {
       input[4] === "n"
     ) {
       // 커스텀 구분자 일 경우
+      numArray = this.customSeparator(input);
     } else {
       // 기본 구분자일 경우
     }
 
-    this.splitInput("1,2,3:4", [",", ":"]);
+    //this.splitInput("1,2,3:4", [",", ":"]);
   }
 }
 
