@@ -1,5 +1,7 @@
 import { Console } from '@woowacourse/mission-utils';
 
+const ERROR_MESSAGE = '[ERROR]'; // 상수로 에러 메시지 관리
+
 class App {
   constructor() {
     // 기본 구분자를 배열로 정의
@@ -14,14 +16,14 @@ class App {
       const result = this.calculate(input); // 계산 결과 얻기
       this.printResult(result); // 결과 출력
     } catch (error) {
-      this.handleError(); // 예외 처리
+      this.handleError(ERROR_MESSAGE); // 예외 처리
     }
   }
 
   // 1. 예외 처리 함수
-  handleError() {
-    Console.print('[ERROR]');
-    throw new Error('[ERROR]');
+  handleError(errorMessage) {
+    Console.print(errorMessage);
+    throw new Error(errorMessage);
   }
 
   // 2. 입력된 문자열 검증
