@@ -14,31 +14,27 @@ const escapeRegExp = (string) => {
 };
 
 const splitNumber = (input) => {
+  console.log("Input:", input);
   // 공백일 경우 0을 반환
   if (!input || input.trim() === "") {
     return [0];
   }
 
-  const customDelimiterRegex = /^\/\/(.*)\\n(.*)$/;
+  const customDelimiterRegex = /^\/\/([^\n]*)\n(.*)$/;
   const match = input.match(customDelimiterRegex);
-
-  let numbers;
 
   // 커스텀이 아닐 경우
   if (!match) {
-    numbers = input.split(/[,:]/);
+    return input.split(/[,:]/);
   }
-
-  // 커스텀일 경우
   if (match) {
     const [, customDelimiter, numbersString] = match;
     validateCustomDelimiter(customDelimiter);
     const escapedDelimiter = escapeRegExp(customDelimiter);
-    const splitRegex = new RegExp(`[,:]|${escapedDelimiter}`);
-    numbers = numbersString.split(splitRegex);
+    return numbersString.split(new RegExp(escapedDelimiter));
   }
-
-  return numbers;
 };
+
+splitNumber();
 
 export default splitNumber;
