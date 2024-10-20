@@ -20,15 +20,25 @@ class App {
     if (input === "") {
       return [0];
     }
+    let result;
     if (input.startsWith("//")) {
       const [customDelimiter, numbersPart] = this.extractDelimiter(input);
-      return numbersPart.split(customDelimiter);
+      result = numbersPart.split(customDelimiter);
+    } else {
+      result = input.split(/[,;]/);
     }
-    return input.split(/[,;]/);
+    if (result.some((value) => value === "")) {
+      throw new Error("구분자가 잘못 사용되었습니다.");
+    }
+
+    return result;
   }
 
   extractDelimiter(input) {
     const indexCustom = input.indexOf("\\n");
+    if (indexCustom === -1) {
+      throw new Error("구분자가 잘못 사용되었습니다.");
+    }
     const customDelimiter = input.substring(2, indexCustom);
     const numbersPart = input.substring(indexCustom + 2);
     return [customDelimiter, numbersPart];
