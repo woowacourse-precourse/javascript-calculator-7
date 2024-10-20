@@ -32,6 +32,13 @@ class App {
   verifyNumber(numbers) {
     // 배열의 요소가 NaN이거나 음수이면 에러를 리턴한다.
     const verifiedNumbers = [];
+    for (let num of numbers) {
+      if (isNaN(Number(num)) || Number(num) < 0) {
+        throw Error(`유효한 숫자가 아닙니다.`);
+      } else {
+        verifiedNumbers.push(Number(num));
+      }
+    }
     // 숫자로 변환된 요소들을 더해준다.
     return this.calculateSum(verifiedNumbers);
   }
