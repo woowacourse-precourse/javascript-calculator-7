@@ -12,10 +12,21 @@ class App {
   }
 
   calculate(input) {
-    if (input === '') return 0;
+    if (input.trim() === '') return 0;
 
-    const numbers = input.split(/[,|:]/).map(Number);
-    return numbers.reduce((sum, num) => sum + num, 0);
+    const { delimiter, numbers } = this.parseInput(input);
+    const parsedNumbers = numbers.split(delimiter).map(Number);
+
+    return parsedNumbers.reduce((sum, num) => sum + num, 0);
+  }
+
+  parseInput(input) {
+    const customDelimiterMatch = input.match(/^\/\/(.)\n(.*)/);
+    if (customDelimiterMatch) {
+      const [, delimiter, numbers] = customDelimiterMatch;
+      return { delimiter, numbers };
+    }
+    return { delimiter: /[,|:]/, numbers: input };
   }
 }
 
