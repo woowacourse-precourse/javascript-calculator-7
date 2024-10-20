@@ -1,5 +1,6 @@
 import inputHandler from "./inputHandler.js";
 import stringParser from "./stringParser.js";
+import sumCalculator from "./sumCalculator.js";
 
 class App {
   constructor() {
@@ -14,8 +15,17 @@ class App {
   async parseUserInput() {
     try {
       this.parsedData = stringParser(this.userInput);
+      this.displayResult();
     } catch (error) {
       throw error;
+    }
+  }
+
+  displayResult() {
+    if (this.parsedData instanceof Error) {
+      throw this.parsedData;
+    } else {
+      sumCalculator(this.parsedData); // 결과 계산
     }
   }
 
