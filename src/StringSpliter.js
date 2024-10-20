@@ -2,7 +2,7 @@ class StringSpliter {
   #commaSeperator = ",";
   #colonSeperator = ":";
 
-  constructor(userInputString) {
+  constructor(userInputString = "") {
     this.customSeperator = this.getSeperatorFrom(userInputString);
   }
 
@@ -14,6 +14,14 @@ class StringSpliter {
     }
 
     return customSeperator[1];
+  }
+
+  removeCustomSeperator(string) {
+    if (!this.customSeperator) {
+      return string;
+    }
+
+    return string.match(/\\n(.*)/)[1];
   }
 
   getNumberFrom(string) {
