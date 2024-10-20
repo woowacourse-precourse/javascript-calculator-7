@@ -1,5 +1,4 @@
 import { Console } from "@woowacourse/mission-utils";
-
 class App {
   async run() {
     try {
@@ -20,12 +19,12 @@ class App {
   ESTRACT_SEPERATORS(input) {
     // 배열로 다 흩어버린 후에
     const CHAR_ARRAY = [...input];
-    let SEPERATORS = [",", ":"]; // 얘는 기본 구분자
+    let SEPERATORS = [",", ":"]; // 기본 구분자
     let NUM_STRING = "";
     let IS_CUSTOM = false;
 
     // 커스텀 찾기 (모든 //와 \n사이에 있는 기호들은 커스텀으로 간주)
-    // 커스텀 지정은 여러번 가능하도록 인식 (//와 \n사이에만 있다면 어디든)
+    // 커스텀 지정은 여러 번 가능하도록 인식 (//와 \n사이에만 있다면 어디든)
     for (let i = 0; i < CHAR_ARRAY.length; i++) {
       // '/' 찾기
       if (CHAR_ARRAY[i] === "/" && CHAR_ARRAY[i + 1] === "/") {
@@ -49,7 +48,8 @@ class App {
         }
         // 커스텀 구간 내의 구분자 추가!
         if (!SEPERATORS.includes(CHAR_ARRAY[i])) {
-          SEPERATORS.push(CHAR_ARRAY[i]); // 기존 구분자 배열에 추가
+          // 정규표현식에서 특수 문자 처리
+          SEPERATORS.push(this.escapeRegExp(CHAR_ARRAY[i]));
         }
       } else {
         // 커스텀 뒤에 숫자쪽
@@ -58,6 +58,11 @@ class App {
     }
 
     return { SEPERATORS, NUM_STRING };
+  }
+
+  // 특수 문자를 이스케이프 처리하는 함수 추가
+  escapeRegExp(char) {
+    return char.replace(/[.*+?^${}()|[\]\\]/g, "\\$&"); // 정규표현식 특수 문자 이스케이프 처리
   }
 
   calculateSum(NUM_STRING, SEPERATORS) {
