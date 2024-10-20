@@ -1,3 +1,5 @@
+// 문자열 덧셈 계산기
+
 import { MissionUtils } from '@woowacourse/mission-utils';
 
 class App {
