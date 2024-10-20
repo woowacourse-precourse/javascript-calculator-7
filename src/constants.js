@@ -1,0 +1,1 @@
+export const INVALID_SYMBOLS = /[^a-zA-Z0-9]/;
