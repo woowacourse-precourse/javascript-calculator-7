@@ -33,8 +33,7 @@ class App {
     separators.forEach((separator) => {
       numArr = numArr.flatMap((str) => str.split(separator));
     });
-    Console.print(separators);
-    Console.print(numArr);
+
     return this.calSum(numArr);
   }
 
