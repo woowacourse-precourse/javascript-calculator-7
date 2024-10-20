@@ -10,10 +10,9 @@ class App {
   validateAndCovertNumbers(strings) {
     return strings.map((string) => {
       const number = Number(string);
-      if (isNaN(number))
-        this.handleError("문자열의 숫자와 구분자가 유효한지 확인해주세요.");
+      if (isNaN(number)) this.handleError(MESSAGE.INVALID_NUMBER_OR_DELIMITER);
 
-      if (number < 0) this.handleError("음수는 입력할 수 없습니다.");
+      if (number < 0) this.handleError(MESSAGE.NEGATIVE_NUMBER_NOT_ALLOWED);
 
       return number;
     });
@@ -21,13 +20,11 @@ class App {
 
   validateCustomDelimiters(index, customDelimiter) {
     if (index === -1) {
-      this.handleError("커스텀 구분자 형식이 잘못되었습니다.");
+      this.handleError(MESSAGE.INVALID_CUSTOM_DELIMITER_FORMAT);
     }
 
     if (customDelimiter.length > 1) {
-      this.handleError(
-        "다중 구분자는 지원되지 않습니다. 하나의 구분자만 입력해 주세요."
-      );
+      this.handleError(MESSAGE.SINGLE_DELIMITER_REQUIRED);
     }
   }
 
@@ -36,8 +33,7 @@ class App {
       string.includes(delimiter)
     );
 
-    if (!hasDelimiter)
-      this.handleError("구분자와 양수로 구성된 문자열을 입력해주세요.");
+    if (!hasDelimiter) this.handleError(MESSAGE.INVALID_INPUT_FORMAT);
   }
 
   parseStringToNumbers(string) {
@@ -87,7 +83,7 @@ class App {
   }
 
   printResult(result) {
-    return Console.print(`결과 : ${result}`);
+    return Console.print(MESSAGE.PRINT + result);
   }
 
   async run() {
