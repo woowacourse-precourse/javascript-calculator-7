@@ -1,23 +1,11 @@
-import StringCalculator from "../models/StringCalculator.js";
-
+import StringCalculator from '../models/StringCalculator.js';
+import InputView from '../views/InputView.js';
 
 class CalculatorController {
-    constructor(InputView, OutputView){
-        this.inputView = InputView;
-        this.outputView = OutputView;
-        this.calculator = new StringCalculator();
-    }
-
-    async run(){
-        try {
-            const input = await this.inputView.getInput();
-            const result = this.calculator.calculate(input);
-            this.outputView.printResult(result);
-        }
-        catch(error){
-            throw error;
-        }
-    }
+  static async run() {
+    const input = await InputView.getInput();
+    return StringCalculator.calculate(input);
+  }
 }
 
 export default CalculatorController;
