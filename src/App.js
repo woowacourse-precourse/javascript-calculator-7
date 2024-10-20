@@ -26,7 +26,7 @@ class App {
         numbers = input.split(separation)
       }
 
-    if(numbers.length > 0){
+    if(numbers.length > 0 && numbers.find((num)=>isNaN(num) || num <=0)){
       throw new Error("[ERROR]잘못된 입력입니다.");
     } 
 
