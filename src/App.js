@@ -12,6 +12,10 @@ class App {
   async run() {
     try {
       const line = await Console.readLineAsync('덧셈할 문자열을 입력해주세요.\n');
+      let sum = 0, nums;
+      if (line[0] == "/" && line[1] == "/" && line[3] == "\\" && line[4] == "n") {
+        
+      } else {}
     } catch (error) {
     }
   }
