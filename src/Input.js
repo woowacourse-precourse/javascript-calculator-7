@@ -1,6 +1,6 @@
 import { MissionUtils } from "@woowacourse/mission-utils";
 import { IncludeZeroError, InvalidSeparatorError, InvalidCustomSeparatorError } from "./Error/index.js";
-import { INPUT_MESSAGE, DEFAULT_SEPARATOR } from "./constants/index.js";
+import { INPUT_MESSAGE, DEFAULT_SEPARATOR, REGEXP } from "./constants/index.js";
 
 class Input {
   static async getCustomSeparatorAndNumbers() {
@@ -45,7 +45,7 @@ class Input {
     const isSeparator = (num) => num === "" || DEFAULT_SEPARATOR.includes(num) || customSeparator.includes(num);
 
     if (numbers.includes("0")) throw new IncludeZeroError();
-    if (!numbers.split(/[1-9]/).every(isSeparator)) throw new InvalidSeparatorError();
+    if (!numbers.split(REGEXP.IS_NUMBER).every(isSeparator)) throw new InvalidSeparatorError();
 
     return numbers;
   }
@@ -56,7 +56,7 @@ class Input {
    * @returns {string[]}
    */
   static validateSeparators(customSeparator) {
-    const isChar = (sep) => !(/^[0-9]$/.test(sep));
+    const isChar = (sep) => !(REGEXP.IS_ALL_NUMBER.test(sep));
     if (!customSeparator.every(isChar)) throw new InvalidCustomSeparatorError();
 
     return customSeparator;

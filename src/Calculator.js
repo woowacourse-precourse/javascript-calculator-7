@@ -1,4 +1,4 @@
-import DEFAULT_SEPARATOR from "./constants/defaultSeparator.js";
+import { DEFAULT_SEPARATOR, REGEXP } from "./constants/index.js";
 
 class Calculator {
   constructor() {
@@ -17,11 +17,11 @@ class Calculator {
     * @returns {number[]}
     */
   splitNumbers(text) {
-    if (/^\d+$/.test(text)) {
+    if (REGEXP.IS_ALL_NUMBER.test(text)) {
       return [Number(text)];
     }
 
-    const separators = [...DEFAULT_SEPARATOR, ...this.customSeparator].map((sep) => sep.replace(/[.*+?^${}()|[\]\\]/g, "\\$&"));
+    const separators = [...DEFAULT_SEPARATOR, ...this.customSeparator].map((sep) => sep.replace(REGEXP.ESCAPE, "\\$&"));
     const regex = new RegExp(separators.join("|"));
     return text.split(regex).map(Number);
   }
