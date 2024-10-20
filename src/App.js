@@ -38,12 +38,15 @@ class App {
     const hasCustomSeparator =
       hasCustomDelimiterPrefix && hasCustomDelimiterSuffix;
 
-    if (hasCustomSeparator)
-      return this.splitUsingCustomDelimiterAndConvertToNumbers(
-        input,
-        CUSTOM_DELIMITER_PREFIX,
-        CUSTOM_DELIMITER_SUFFIX
-      );
+    if (hasCustomSeparator) {
+      const isCustomDelimiterAtStart = input.indexOf(CUSTOM_DELIMITER_PREFIX);
+      return isCustomDelimiterAtStart
+        ? [NaN]
+        : this.splitUsingCustomDelimiterAndConvertToNumbers(
+            input,
+            CUSTOM_DELIMITER_SUFFIX
+          );
+    }
     if (hasCommaAndSemicolon)
       return this.splitAndConvertToNumbers(input, [COMMA, SEMICOLON]);
     if (hasComma) return this.splitAndConvertToNumbers(input, COMMA);
@@ -51,17 +54,9 @@ class App {
     return [NaN];
   }
 
-  splitUsingCustomDelimiterAndConvertToNumbers(
-    input,
-    customDelimiterPrefix,
-    customDelimiterSuffix
-  ) {
-    const customDelimiterPrefixIndex = input.indexOf(customDelimiterPrefix);
-    const customDelimiterSuffixIndex = input.indexOf(customDelimiterSuffix);
-    const customDelimiter = input.slice(
-      customDelimiterPrefixIndex + 2,
-      customDelimiterSuffixIndex
-    );
+  splitUsingCustomDelimiterAndConvertToNumbers(input, CUSTOM_DELIMITER_SUFFIX) {
+    const customDelimiterSuffixIndex = input.indexOf(CUSTOM_DELIMITER_SUFFIX);
+    const customDelimiter = input.slice(2, customDelimiterSuffixIndex);
     const stringToSeparate = input.slice(customDelimiterSuffixIndex + 2);
     return this.splitAndConvertToNumbers(stringToSeparate, customDelimiter);
   }
@@ -77,7 +72,6 @@ class App {
       const [comma, semicolon] = separator;
       return input.replaceAll(semicolon, comma).split(comma).map(Number);
     }
-    console.log(input.split(separator));
     if (!isTwoSeparators) return input.split(separator).map(Number);
   }
 
