@@ -34,7 +34,9 @@ class App {
 
   // 숫자인지 그리고 양수인지판별
   isNumber(numArray) {
-    return numArray.every((value) => !isNaN(Number(value)));
+    return numArray.every(
+      (value) => !isNaN(Number(value)) && Number(value) > 0
+    );
   }
 
   // 배열의 숫자 합 계산
