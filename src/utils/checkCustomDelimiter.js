@@ -5,6 +5,10 @@ const checkCustomDelimiter = (input, delimiters) => {
     delimiters.push(...customDelimiter.split(""));
 
     return input.slice(index + 2);
+  } else if (input.includes("//") || input.includes("\\n")) {
+    throw new Error(
+      "[ERROR] 커스텀 구분자 지정은 문자열 앞부분의 “//”와 “\\n” 사이에 작성해주세요."
+    );
   }
 
   return input;
