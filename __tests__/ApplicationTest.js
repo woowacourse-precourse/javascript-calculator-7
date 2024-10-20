@@ -146,4 +146,15 @@ describe("문자열 계산기", () => {
       `[ERROR] ${Errors.WRONG_DELIMETER}`
     );
   });
+
+  test("예외: 숫자크기가 MAX_SAFE_INTEGER를 초과하는 경우", async () => {
+    const inputs = ["1,2,3,1.8E308+1"];
+    mockQuestions(inputs);
+
+    const app = new App();
+    
+    await expect(app.run()).rejects.toThrow(
+      `[ERROR] ${Errors.INVALID_FORMAT}`
+    );
+  });
 });

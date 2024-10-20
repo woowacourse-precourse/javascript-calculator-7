@@ -5,6 +5,13 @@ class Calculator {
     this.defaultDelimiters = [",", ":"];
   }
 
+  // 문자열이 비어있거나 null, undefined인 경우 에러 처리
+  isEmpty(input) {
+    if (input.trim() == "" || input == null || input == undefined) {
+      throw new Error(Errors.EMPTY_INPUT);
+    }
+  }
+
   // 구분자 확인하고 구분자 배열에 삽입
   checkDelimiter(input) {
     const customDelimiterMatch = input.match(/^\/\/(.*?)\n/); // 구분자 확인
@@ -24,7 +31,7 @@ class Calculator {
         }
       });
 
-       // 커스텀 구분자를 구분자 배열에 추가
+      // 커스텀 구분자를 구분자 배열에 추가
       delimiters.push(...customDelimiters);
       return { delimiters, numbers: input.split("\n").slice(1).join("\n") };
     }
@@ -53,7 +60,7 @@ class Calculator {
     // 예외 처리: 숫자 형식이 잘못된 경우
     return splitNumbers.map((num) => {
       const number = Number(num);
-      if (isNaN(number)) {
+      if (isNaN(number) || number > 1.8E308) {
         throw new Error(Errors.INVALID_FORMAT);
       }
       return number;
@@ -70,13 +77,7 @@ class Calculator {
 
   calculate(input) {
     // 예외 처리: 문자열이 비어있거나 null, undefined인 경우
-    if (
-      input.replaceAll(" ", "") == "" ||
-      input == null ||
-      input == undefined
-    ) {
-      throw new Error(Errors.EMPTY_INPUT);
-    }
+    this.isEmpty(input);
 
     // 구분자 배열과 숫자 부분 추출
     const { delimiters, numbers } = this.checkDelimiter(input);
