@@ -12,6 +12,12 @@ getInput() {
   });
 }
 
+ // 기본 구분자 기준 분리: 쉼표(,) 또는 콜론(:)을 구분자
+splitNumbers(numbers, delimiter) {
+  return numbers.split(new RegExp(`[${delimiter},:]`));
+}
+
+
 
 
 export default App;
