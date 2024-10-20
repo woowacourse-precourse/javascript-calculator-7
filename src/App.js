@@ -6,7 +6,7 @@ class App {
     try {
       inputService();
     } catch (e) {
-      return new Error(`[ERROR]: errorMessages.unexpectedError`);
+      throw new Error(`[ERROR]: ${errorMessages.unexpectedError}`);
     }
   }
 }
