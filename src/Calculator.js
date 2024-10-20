@@ -2,13 +2,12 @@ import { Console } from '@woowacourse/mission-utils';
 import { validateEmptyInput, validateNegativeNumbers, validateInvalidNumbers } from './validators.js';
 import { printMessage } from './utils.js';
 
-function getInput() {
-  Console.readLineAsync('덧셈할 문자열을 입력해 주세요.', (answer) => {
-    validateEmptyInput(answer);
-    const customDelimiter = getCustomDelimiter(answer);
-    const result = splitByDelimiter(answer, customDelimiter);
-    sumArray(result);
-  });
+async function getInput() {
+  const answer = await Console.readLineAsync('덧셈할 문자열을 입력해 주세요.');
+  validateEmptyInput(answer);
+  const customDelimiter = getCustomDelimiter(answer);
+  const result = splitByDelimiter(answer, customDelimiter);
+  sumArray(result);
 }
 
 function getCustomDelimiter(input) {
