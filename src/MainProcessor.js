@@ -1,12 +1,12 @@
-import StringValidator from './utils/StringValidatorUtils.js'
-import StringParsing from './utils/StringParsingUtils.js';
-import StringCalculator from './utils/StringCalculatorUtils.js';
+import StringValidator from './Utils/StringValidatorUtils.js'
+import StringParsing from './Utils/StringParsingUtils.js';
+import StringCalculatorUtils from './Utils/StringCalculatorUtils.js';
 
 const validator = new StringValidator();
 const parsing = new StringParsing();
-const calculator = new StringCalculator();
+const calculator = new StringCalculatorUtils();
 
-export function mainProcess(input) {
+export function stringCalculator(input) {
 
     if (validator.checkEmptyString(input) === 0) {
         return 0;

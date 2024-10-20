@@ -39,7 +39,7 @@ class StringValidator {
         });
     }
 
-    checkEmptyOrSpace(parsedArray) { // 공백이 있는지 ㅎ체크 함수
+    checkEmptyOrSpace(parsedArray) { // 공백이 있는지 체크
         parsedArray.forEach((item) => {
             if (item.trim() === "") {
                 throw new Error(ErrorMessages.ERROR_NON_NUMBER_CHARACTER);
