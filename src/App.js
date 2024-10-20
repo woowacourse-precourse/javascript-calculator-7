@@ -33,8 +33,9 @@ class App {
       }
 
       // 커스텀 구분자가 /, \, \n인 경우 구분자로 설정되도록 대응
+      // 사용자가 커스텀 구분자와 기본 구분자를 혼용해도 연산이 이뤄지도록 수정
       const customDelimiter = parts[0].slice(2).replace(/[.*+?^${}()|[\]\\]/g, '\\$&');
-      delimiter = new RegExp(`${customDelimiter}`);
+      delimiter = RegExp(`[${customDelimiter},:]`);
       input = parts[1];
     }
 
