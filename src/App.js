@@ -5,11 +5,7 @@ class App { //하나의 메소드는 하나의 역할
     customSeparator = ""//인스턴스 변수는 최대 2개
     async run() { //풀이 결과 반환 담당, 메소드명만 봐도 무슨역할인지 알 수 있게
         const input = await this.input()
-        if (input.startsWith("//")) {
-            this.isCustom(input)
-        } else { //else 추후 삭제
-            this.calculator(this.toArray([...input]))
-        }
+        input.startsWith("//") ? this.isCustom(input) : this.calculator(this.toArray([...input]))
         this.resultOutput()
     }
 
@@ -18,8 +14,7 @@ class App { //하나의 메소드는 하나의 역할
     }
 
     isCustom(value) {
-        const lastIdx = value.indexOf("\\n") //3
-        // "\n" 가 없는 경우
+        const lastIdx = value.indexOf("\\n") // "\n" 가 없는 경우
         if (lastIdx !== -1) {
             this.customSeparator = value.slice(2, lastIdx)
             return this.calculator(this.toArray([...value.slice(lastIdx + 2)]))
