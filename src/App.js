@@ -1,6 +1,6 @@
 import { Console } from '@woowacourse/mission-utils';
 import CalculatorController from './controller/CalculatorController.js';
-import StringCalculator from './model/StringCalculator.js';
+import { EMPTY_INPUT_SUM } from './constants/constants.js';
 
 class App {
   async run() {
@@ -10,7 +10,7 @@ class App {
       );
       const result =
         input.trim() === ''
-          ? 0
+          ? EMPTY_INPUT_SUM
           : await CalculatorController.processInput(input);
       Console.print(`결과 : ${result}`);
     } catch (error) {
