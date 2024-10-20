@@ -25,5 +25,6 @@ module.exports = {
     'prettier/prettier': 'error',
     'function-paren-newline': ['error', 'never'],
     'max-len': ['error', { code: 100 }], 
+    "camelcase": "off"
   },
 };

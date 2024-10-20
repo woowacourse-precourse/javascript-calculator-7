@@ -19,7 +19,6 @@ class Calculator {
     // 입력값 형식 검사
     const validated_input = validator(this.input);
 
-
     const separated_arr = separator(validated_input, delimiter);
 
     return summator(separated_arr);

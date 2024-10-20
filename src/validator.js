@@ -1,7 +1,7 @@
 export default function validator(input) {
   const is_Custom = /^\/\/(.*)\\n/;
   const negative_num = /-\d+/;
-  if(negative_num.test(input)){
+  if (negative_num.test(input)) {
     throw new Error('[ERROR]');
   }
   if (!is_Custom.test(input)) {
