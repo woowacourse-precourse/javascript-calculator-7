@@ -10,7 +10,17 @@ class App {
       return str.includes("//") && str.includes("\\n");
     };
 
-    Console.print(isCustomSeparator(input));
+    const getCustomSeparator = (str) => {
+      return str.split("//")[1].split("\\n")[0];
+    };
+
+    if (isCustomSeparator(input)) {
+      const customSeparator = getCustomSeparator(input);
+      console.log(customSeparator);
+    }
+
+    // Console.print(isCustomSeparator(input));
+    // Console.print(getCustomSeparator(input));
   }
 }
 
