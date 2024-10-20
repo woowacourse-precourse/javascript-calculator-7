@@ -10,7 +10,7 @@ class App {
   async getUserInput() {
     try {
       const userInput = await MissionUtils.Console.readLineAsync('덧셈할 문자열을 입력해 주세요.\n');
-      if (userInput === '') throw new Error('[ERROR] 구분자와 양수로 구성된 문자열을 입력해 주세요');
+      if (userInput === '') throw new Error('[ERROR] 구분자와 양수로 구성된 문자열을 입력해야 합니다.');
 
       this.input = userInput;
     } catch (error) {

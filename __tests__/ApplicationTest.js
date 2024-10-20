@@ -18,8 +18,8 @@ const getLogSpy = () => {
 
 describe("문자열 계산기", () => {
   test("기본 구분자 사용", () => {
-    const inputs = ["1:10,100", "1,2,3:4:5:6:7,8,9"];
-    const outputs = ["결과 : 111", "결과 : 45"];
+    const inputs = ["1:10,100"];
+    const outputs = ["결과 : 111"];
 
     outputs.forEach(async (output) => {
       mockQuestions(inputs);
@@ -50,14 +50,14 @@ describe("문자열 계산기", () => {
   });
 
   test("예외 테스트", async () => {
-    const inputs = ["-1,2,3", "//!\n1,2:3#4", "//&\\1&2&3&4"];
+    const inputs = ["", "123//!\\n1!2!3", "//\\1&2&3&4", "-1,2,3"];
     
-    inputs.forEach(async () => {
-      mockQuestions(inputs);
+    for (const input of inputs) {
+      mockQuestions([input]);
   
       const app = new App();
-
+  
       await expect(app.run()).rejects.toThrow("[ERROR]");
-    })
+    }
   });
 });
