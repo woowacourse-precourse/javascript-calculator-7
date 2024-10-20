@@ -68,3 +68,12 @@ export function filterEmpty(values) {
 export function trimWhitespace(value) {
   return value.trim();
 }
+
+/**
+ *
+ * @param {Array<number>} values
+ * @returns {number}
+ */
+export function calculateTotal(values) {
+  return values.reduce((sum, current) => sum + current, 0);
+}

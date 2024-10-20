@@ -1,4 +1,5 @@
 import {
+  calculateTotal,
   filterEmpty,
   isMatch,
   isNumericString,
@@ -140,6 +141,16 @@ describe('utils', () => {
       const result = trimWhitespace(value);
 
       expect(result).toBe('//n;\\n1;2;3');
+    });
+  });
+
+  describe('calculateTotal', () => {
+    it('주어진 숫자 배열의 총합을 반환한다', () => {
+      const values = [1, 2, 3];
+
+      const result = calculateTotal(values);
+
+      expect(result).toBe(6);
     });
   });
 });

@@ -1,3 +1,5 @@
+import { calculateTotal } from '../lib/utils';
+
 class Calculator {
   /**
    *
@@ -5,7 +7,7 @@ class Calculator {
    * @returns {number}
    */
   calculate(values) {
-    return values.reduce((sum, current) => sum + Number(current), 0);
+    return calculateTotal(values.map(Number));
   }
 }
 
