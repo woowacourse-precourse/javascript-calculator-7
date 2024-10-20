@@ -1,25 +1,26 @@
 import { Console } from '@woowacourse/mission-utils';
 // import parseString from './Parser/parser.js';
-import { SYSTEM_MESSAGES } from './Constraints/Constraints.js';
+
+import {
+  ERROR_MESSAGES,
+  ERROR_PREFIX,
+  SYSTEM_MESSAGES,
+} from './Constraints/Constraints.js';
 
 const numberPattern = '\\d+(\\.\\d+)?';
 const specialCharsPattern = /[.*+?^${}()|[\]\\]/g;
-const ERROR_PREFIX = '[ERROR] ';
-// const SYSTEM_MESSAGES = {
-//   ASK_USER_INPUT: '덧셈할 문자열을 입력해 주세요.\n',
-//   PARSE_RESULT: `결과 : `,
+// const ERROR_PREFIX = '[ERROR] ';
+// const ERROR_MESSAGES = {
+//   INVALID_INPUT_FORMAT:
+//     '커스텀 구분자 입력시 입력은 반드시 "//"로 시작하고, "\\n"이 포함되어야 합니다.',
+//   INVALID_CUSTOM_INPUT:
+//     'delimiter와 숫자 이외의 문자가 포함되었거나, 입력 순서가 잘못되었습니다.',
+//   INVALID_NUMBER_INPUT: '문자열에 포멧이 올바르지 않거나, 음수를 입력했습니다.',
+//   DUPLICATE_DELIMITERS: '숫자 사이에 중복된 delimiter가 있습니다.',
+//   MISSING_DELIMITER: 'Delimiter를 입력받지 못했습니다.',
+//   EMPTY_STRING: '빈 문자열입니다.',
+//   EMPTY_DELIMITER: 'delimiter가 비어있습니다.', // 추가된 에러 메시지
 // };
-const ERROR_MESSAGES = {
-  INVALID_INPUT_FORMAT:
-    '커스텀 구분자 입력시 입력은 반드시 "//"로 시작하고, "\\n"이 포함되어야 합니다.',
-  INVALID_CUSTOM_INPUT:
-    'delimiter와 숫자 이외의 문자가 포함되었거나, 입력 순서가 잘못되었습니다.',
-  INVALID_NUMBER_INPUT: '문자열에 포멧이 올바르지 않거나, 음수를 입력했습니다.',
-  DUPLICATE_DELIMITERS: '숫자 사이에 중복된 delimiter가 있습니다.',
-  MISSING_DELIMITER: 'Delimiter를 입력받지 못했습니다.',
-  EMPTY_STRING: '빈 문자열입니다.',
-  EMPTY_DELIMITER: 'delimiter가 비어있습니다.', // 추가된 에러 메시지
-};
 function escapeRegExp(string) {
   // 정규식에 사용되는 모든 예약어들을 escape 처리한다. .*[]\ 등...
   // 원본 문자를 남기고 ($&), 그 문자에 \를 더 붙인다.
