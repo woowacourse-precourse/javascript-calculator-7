@@ -4,6 +4,7 @@ import { getCustomDelimiter } from "./utils/getCustomDelimiter.js";
 import { getNumber } from "./utils/getNumber.js";
 import { validateNumbers } from "./validators/numberValidator.js";
 import { validateInput } from "./validators/inputValidator.js";
+import { calculateSum } from "./utils/calculateSum.js";
 
 class App {
   async run() {
@@ -18,7 +19,7 @@ class App {
 
     validateNumbers(nums);
 
-    const sum = nums.reduce((acc, val) => acc + parseInt(val), 0);
+    const sum = calculateSum(nums);
     MissionUtils.Console.print(`결과 : ${sum}`);
   }
 }
