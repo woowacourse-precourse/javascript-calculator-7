@@ -14,3 +14,8 @@ function getCustomDelimiter(input) {
   //추후 예외처리 필요
   // 구분자가 숫자인 경우
 }
+
+//커스텀 구분자 부분을 문자열에서 제거하는 함수
+function cleanStringAfterDelimiter(input) {
+  return input.replace(CUSTOM_DELIMITER_REGEX, "");
+}
