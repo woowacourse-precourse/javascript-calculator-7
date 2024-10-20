@@ -7,7 +7,7 @@ class App {
     );
 
     if (input.trim() === "") {
-      Console.print(0);
+      Console.print("결과 : 0");
       return;
     }
 
