@@ -1,4 +1,4 @@
-import Errors from "./error";
+import Errors from "./error.js";
 
 class Calculator {
   constructor() {
