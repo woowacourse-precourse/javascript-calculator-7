@@ -6,13 +6,16 @@ class App {
   let CleanInput;
 
   //3.(커스텀 구분자 구분)
-  let customDelimiter;
   if (input.startsWith('//')) {
     const delimiterEnd = input.indexOf('\n');
-    customDelimiter = input.slice(2, delimiterEnd);  
+    const customDelimiter = input.slice(2, delimiterEnd);  
     CleanInput = input.slice(delimiterEnd + 1);
+
+    //커스텀 구분자 공백으로 치환. 단순히 변수명만 사용하면 첫번째만 구분된다고해서 RegExp 사용.
+    CleanInput = CleanInput.replace(new RegExp(customDelimiter, 'g'), '');
+
 }
-  // 1.(숫자추출) 문자만 공백으로 치환.
+  //1.(숫자추출) 문자만 공백으로 치환.
   CleanInput = input.replace(/[^\d]/g, '');
 
   //2.(기본구분자 분리)
