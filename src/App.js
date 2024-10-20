@@ -21,6 +21,12 @@ class App {
         return splitNum;
       }
 
+      splitGivenNum(givenNum).forEach((e) => {
+        if (Number(e) <= 0) {
+          throw new Error('[ERROR');
+        }
+      });
+
       const getSum = (arr) => {
         return arr.reduce((a, c) => {
           return a + Number(c);
