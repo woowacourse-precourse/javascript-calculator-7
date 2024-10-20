@@ -1,3 +1,5 @@
+import handleError from "./errorHandler.js";
+
 function handleNaNCheck(numbers) {
   if (numbers.some(isNaN)) {
     handleError("숫자가 아닌 값이 포함되어 있습니다. 구분자를 확인해주세요.");
@@ -5,7 +7,11 @@ function handleNaNCheck(numbers) {
   }
   return numbers;
 }
-
+/**
+ *
+ * @param {string} input 입력문자열
+ * @returns {number[]} 숫자 배열
+ */
 function parseInput(input) {
   let delimiter = /[,:]/;
   let numbers = input;

@@ -4,16 +4,11 @@ import renderResult from "../views/CalculatorView.js";
 
 /**
  *
- * @todo 입력값 유효성 검사 필요
- * @todo 에러 종류에 따른 핸들링 필요
+ * @param {string} input 입력 문자열
  */
 function handleCalculation(input) {
-  try {
-    const numbers = calculateSum(input);
-    renderResult(numbers);
-  } catch (error) {
-    handleError(error.message);
-  }
+  const numbers = calculateSum(input);
+  renderResult(numbers);
 }
 
 export default handleCalculation;

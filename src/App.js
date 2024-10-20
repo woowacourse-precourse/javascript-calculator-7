@@ -10,9 +10,7 @@ class App {
       );
       handleCalculation(input);
     } catch (error) {
-      handleError(
-        "입력 오류 \n 유효하지 않은 입력입니다. 다시 시도해 주세요.\n"
-      );
+      throw new Error(error.message);
     }
   }
 }
