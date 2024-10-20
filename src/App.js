@@ -8,6 +8,8 @@ class App {
       MissionUtils.Console.print("결과 : 0");
       return;
     }
+    const numbers = this.validateInput(inputString, delimiters);
+    console.log(numbers);
   }
 
   async getInput() {
@@ -34,6 +36,14 @@ class App {
     }
 
     return { inputString, delimiters };
+  }
+
+  validateInput(input, delimiters) {
+    for (const delimiter of delimiters) {
+      input = input.split(delimiter).join(",");
+    }
+    const numbers = input.split(",").map(Number);
+    return numbers;
   }
 }
 
