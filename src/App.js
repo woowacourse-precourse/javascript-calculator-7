@@ -15,18 +15,27 @@ class App {
   }
 
   processInput(input) {
-    // 기본 구분자 쉼표를 사용
-    const delimiter = ',';
-    const numbers = input.split(delimiter).map(num => num.trim());
+    let DELIMITER = ',|:'; // 기본 구분자 쉼표와 콜론
+    if (input.startsWith('//')) {
+      const parts = input.split('\n');
+      DELIMITER = parts[0].slice(2); // 커스텀 구분자
+      input = parts[1]; // 실제 숫자 문자열
+    }
 
-    // 양수 확인
+    // 구분자를 기준으로 문자열을 분리
+    const numbers = input.split(new RegExp(DELIMITER)).map(num => num.trim());
+
+    // 양수 확인 및 합계 계산
+    let sum = 0;
     numbers.forEach(num => {
       const number = parseInt(num, 10);
       if (isNaN(number) || number < 0) {
         throw new Error(`양수만 입력 가능합니다: ${num}`);
       }
+      sum += number;
     });
 
+    return sum;
   }
 }
 
