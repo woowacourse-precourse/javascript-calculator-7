@@ -13,6 +13,10 @@ class App {
       throw error;
     }
   }
+
+  calculate(input) {
+    if (!input) return 0;
+  }
 }
 
 export default App;
