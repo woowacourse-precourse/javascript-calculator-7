@@ -10,7 +10,18 @@ class App {
       if (input.trim() === '') {
           return 0; // 빈 문자열인 경우 0 반환
       }
-      const delimiters = [',', ':']; // 기본 구분자 배열
+
+      let delimiters = [',', ':']; // 기본 구분자 배열
+
+      // 커스텀 구분자 처리
+      const customDelimiterRegex = /\/\/(.*?)\\n(.*)/;
+      const customDelimiterMatch = input.match(customDelimiterRegex);
+      if (customDelimiterMatch) {
+          const customDelimiter = customDelimiterMatch[1];
+          delimiters.push(customDelimiter);
+          input = customDelimiterMatch[2];
+      }
+
       const numbers = delimiters.reduce((acc, delimiter) => {
           return acc.flatMap(str => str.split(delimiter));
       }, [input]); // 구분자를 기준으로 문자열 분리
