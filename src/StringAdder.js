@@ -32,7 +32,7 @@ export class StringAdder {
             if ((idx == 0 || idx==1) && input[idx]!='/'){
                 break;
             }
-            while (input[idx]!='\n'){
+            while (idx>=2 && input[idx]!='\n'){
                 this.seperator += input[idx]; 
                 idx++;
             }
@@ -45,6 +45,7 @@ export class StringAdder {
         if (isFindSeperator){
             this.type = CalculatorType.custom;
             this.input = input.substr(idx+1, input.length - idx);    
+            console.log(this.seperator);
         }else{
             this.type = CalculatorType.error;
         }
@@ -77,6 +78,7 @@ export class StringAdder {
         if(this.type == CalculatorType.error){
                 throw new Error("[Error]");
         }else{
+            //console.log(this.result);
             MissionUtils.Console.print("결과 : " + this.result);
         }
     }
