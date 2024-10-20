@@ -3,7 +3,7 @@ import { Console } from "@woowacourse/mission-utils";
 
 class App {
   constructor() {
-    this.separator = [',', ':'];
+    this.separators = [',', ':'];
   }
 
   async run() {
@@ -25,11 +25,11 @@ class App {
 
   hasCustomSeparator(str) {
     if (str.startsWith('//') && str.includes('\\n')) {
-      if(isNaN(str[2])) {
-        this.separator.push(str[2]);
-        return str.slice(5);
-      }
-      else {
+      const separator = str.substring(2, str.indexOf('\\n'));
+      if (isNaN(separator)) {
+        this.separators.push(separator);
+        return this.hasCustomSeparator(str.slice(str.indexOf('\\n') + 2));
+      } else {
         throw new Error("[ERROR] 커스텀 구분자가 숫자입니다.");
       }
     }
@@ -47,7 +47,7 @@ class App {
   }
 
   extractNumbers(str) {
-    const regex = new RegExp(`[${this.separator.join('')}]`);
+    const regex = new RegExp(`[${this.separators.join('')}]`);
     return str.split(regex).map(Number);
   }
 
