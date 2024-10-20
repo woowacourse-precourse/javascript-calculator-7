@@ -47,6 +47,21 @@ describe('문자열 계산기', () => {
     });
   });
 
+  test('커스텀 구분자로 여러 문자 사용', async () => {
+    const inputs = ['//*;*\\n0.5*;*1.5*;*2.5'];
+    mockQuestions(inputs);
+
+    const logSpy = getLogSpy();
+    const outputs = ['결과 : 4.5'];
+
+    const app = new App();
+    await app.run();
+
+    outputs.forEach((output) => {
+      expect(logSpy).toHaveBeenCalledWith(expect.stringContaining(output));
+    });
+  });
+
   test('소수', async () => {
     const inputs = ['0.5,1.5,2.5'];
     mockQuestions(inputs);
