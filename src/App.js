@@ -54,7 +54,7 @@ class App {
 
   caculateValue() {
     const re = new RegExp(this.separator);
-    const arrValue = this.initValue.split(re);
+    const arrValue = this.valueToCalculate.split(re);
     const resultValue = arrValue.reduce((acc, cur) => {
       return acc + Number(cur);
     }, 0);
