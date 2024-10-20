@@ -27,6 +27,9 @@ class App {
       let customDelimiter = input.slice(2, 3);
       let string = input.slice(5);
 
+      if (!isNaN(customDelimiter)) {
+        throw new Error('[ERROR] 숫자를 구분자로 사용할 수 없습니다.');
+      }
       let numbers = string.split(customDelimiter);
       return numbers;
     } else {
@@ -36,6 +39,9 @@ class App {
 
   // 숫자의 합 계산
   sumNumbers(numbers) {
+    if (numbers.some((n) => n <= 0)) {
+      throw new Error('[ERROR] 양수로 구성된 문자열을 입력해주세요.');
+    }
     return numbers.reduce((acc, num) => acc + parseInt(num), 0);
   }
 }
