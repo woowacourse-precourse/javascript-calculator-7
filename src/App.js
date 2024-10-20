@@ -39,6 +39,9 @@ function checkInputFormat(input) {
 }
 
 function calculate(input) {
+  // 공백인 경우
+  if (input.length === 0) return 0;
+
   // 커스텀 구분자가 존재하는 경우
   if (input.slice(0, 2) === "//" && input.slice(3, 5) === "\\n") {
     const custom_delimeter = [...DEFAULT_DELIMETER, input[2]];
