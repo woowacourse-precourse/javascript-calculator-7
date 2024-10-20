@@ -3,9 +3,11 @@ import { Console } from '@woowacourse/mission-utils';
 class App {
   //
   extractAndSum(input) {
-  // 1.(숫자추출) 구분자를 제외한 일반문자 공백처리
-  const CleanInput = input.replace(/[^\d\s,:\-]/g, '');
+  // 1.(숫자추출) 문자만 공백으로 치환.
+  const CleanInput = input.replace(/[^\d]/g, '');
+
   
+
   //2.(기본구분자 분리)
   const numbers = CleanInput.split(/\s+|[,:\-]/)
                             .filter(item => item.trim() !== '' && !isNaN(item))
