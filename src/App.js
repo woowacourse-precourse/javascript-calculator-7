@@ -31,6 +31,10 @@ class App {
     if (input.includes(":")) {
       input = input.replaceAll(":", "");
     }
+    if (input.includes(customSeparator)) {
+      input = input.replaceAll(customSeparator, "");
+    }
+
     return input;
   }
 
