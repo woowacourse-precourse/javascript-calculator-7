@@ -19,8 +19,12 @@ class App {
       input = this.removeCustomSeparatorDefinition(input); // 커스텀 구분자 제거
     }
 
+    this.validateInput(input, customSeparator); // 입력 검증
+
     const numbersAsString = this.replaceSeparators(input, customSeparator);
     const inputList = numbersAsString.split(","); // 쉼표로 나누기
+    this.validateNumbers(inputList, customSeparator); // 숫자 검증
+
     Console.print(`결과 : ${inputList}`);
   }
 
@@ -43,6 +47,18 @@ class App {
     return input.split("\\n").slice(1).join("\n"); // 첫 줄 제거
   }
 
+  validateInput(input, customSeparator) {
+    if (customSeparator && !Number.isNaN(Number(customSeparator))) {
+      throw new Error("[ERROR] 숫자는 구분자로 사용할 수 없습니다.");
+    }
+    if (this.isEmptyInput(input)) {
+      throw new Error("[ERROR] 구분자의 앞 또는 뒤에 숫자가 없습니다.");
+    }
+    if (/\s/.test(input.replace("\n", ""))) {
+      throw new Error("[ERROR] 공백을 포함한 숫자는 허용되지 않습니다.");
+    }
+  }
+
   replaceSeparators(input, customSeparator) {
     let result = input;
     const allSeparators = [...this.separators]; // 모든 구분자
@@ -56,6 +72,26 @@ class App {
     });
 
     return result; // 변환된 문자열 반환
+  }
+
+  validateNumbers(inputList, customSeparator) {
+    if (inputList.some((num) => num === "")) {
+      throw new Error("[ERROR] 구분자의 앞 또는 뒤에 숫자가 없습니다.");
+    }
+
+    const trimmedNumbers = inputList.map((num) => num.trim()); // 공백 제거
+
+    if (trimmedNumbers.some((num) => Number.isNaN(Number(num)) && num !== "")) {
+      if (!customSeparator) {
+        throw new Error("[ERROR] 기본 구분자 외의 문자가 사용되었습니다.");
+      } else {
+        throw new Error("[ERROR] 입력된 값 중 숫자가 아닌 항목이 있습니다.");
+      }
+    }
+
+    if (trimmedNumbers.some((num) => +num < 0)) {
+      throw new Error("[ERROR] 음수는 입력할 수 없습니다.");
+    }
   }
 }
 

@@ -62,7 +62,9 @@ describe("문자열 계산기", () => {
         expect(logSpy).toHaveBeenCalledWith(expect.stringContaining(output));
       });
     });
+  });
 
+  describe("예외 처리", () => {
     test("커스텀 구분자가 여러 글자일 경우 예외 처리", async () => {
       const inputs = ["//;;\\n1;2"];
       mockQuestions(inputs);
@@ -71,6 +73,39 @@ describe("문자열 계산기", () => {
 
       await expect(app.run()).rejects.toThrow(
         "[ERROR] 커스텀 구분자는 한 글자여야 합니다."
+      );
+    });
+
+    test("구분자의 앞 또는 뒤에 숫자가 없는 경우 예외 처리", async () => {
+      const inputs = ["//;\\n;"];
+      mockQuestions(inputs);
+
+      const app = new App();
+
+      await expect(app.run()).rejects.toThrow(
+        "[ERROR] 구분자의 앞 또는 뒤에 숫자가 없습니다."
+      );
+    });
+
+    test("공백 포함한 숫자 예외 처리", async () => {
+      const inputs = ["1, 2,3"];
+      mockQuestions(inputs);
+
+      const app = new App();
+
+      await expect(app.run()).rejects.toThrow(
+        "[ERROR] 공백을 포함한 숫자는 허용되지 않습니다."
+      );
+    });
+
+    test("음수 입력 시 예외 처리", async () => {
+      const inputs = ["-1,2,3"];
+      mockQuestions(inputs);
+
+      const app = new App();
+
+      await expect(app.run()).rejects.toThrow(
+        "[ERROR] 음수는 입력할 수 없습니다."
       );
     });
   });
