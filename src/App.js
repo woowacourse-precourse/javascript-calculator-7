@@ -33,12 +33,17 @@ class App {
       // 기능 6. 그 외 모든 오류 사항 (제시된 기능에서 벗어나는 경우)
       throw new Error("[ERROR]");
     }
-
+    // 숫자 계산 및 예외 처리 (숫자가 양수인가?)
     if (list.length > 0) {
       for (let i = 0; i < list.length; i++) {
-        result += list[i];
+        if (list[i] < 0) {
+          throw new Error("[ERROR]");
+        } else {
+          result += list[i];
+        }
       }
     }
+
     // 문자열 출력
     Console.print(`결과 : ${result}`);
   }
