@@ -5,7 +5,7 @@ const isValidDelimiterFormat = function isValidDelimiterFormatFunc(input) {
 };
 
 const extractDelimiter = function extractDelimiterFunc(input) {
-  return input.slice(2, input.indexOf('\\n') - 1);
+  return input.slice(2, input.indexOf('\\'));
 };
 
 const validateDelimiter = function validateDelimiterFunc(delimiter) {
