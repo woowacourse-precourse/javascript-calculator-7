@@ -6,6 +6,13 @@ class App {
     const separator = input[2];
     return this.splitInput(input.slice(5), separator);
   }
+
+  // 기본 구분자 -> :랑 ,
+  basicSeparator(input) {
+    const separators = [":", ","];
+    return this.splitInput(input, separators);
+  }
+
   // 입력값을 구분자에 따라 분리하는 함수
   splitInput(input, separators) {
     const num = [];
@@ -30,6 +37,8 @@ class App {
       "덧셈할 문자열을 입력해 주세요.\n"
     );
 
+    let numArray;
+
     if (
       input.length >= 5 &&
       input.startsWith("//") &&
@@ -40,6 +49,7 @@ class App {
       numArray = this.customSeparator(input);
     } else {
       // 기본 구분자일 경우
+      numArray = this.basicSeparator(input);
     }
 
     //this.splitInput("1,2,3:4", [",", ":"]);
