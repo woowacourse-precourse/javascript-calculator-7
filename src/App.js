@@ -10,12 +10,12 @@ class App {
     const stringSplitter = new StringSplitter(input);
     const splittedNumbers = stringSplitter.split().toNumbers();
 
-    const sum = this.calculateSum(splittedNumbers);
+    const sum = this.#calculateSum(splittedNumbers);
 
     this.#view.printOutputString(sum);
   }
 
-  calculateSum(numbers) {
+  #calculateSum(numbers) {
     return numbers.reduce((acc, cur) => (acc += cur), 0);
   }
 }

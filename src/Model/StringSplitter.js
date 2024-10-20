@@ -3,9 +3,9 @@ export default class StringSplitter {
 
   #CUSTOM_DELIMITER_PATTERN = /^\/\/(.)\\n/;
 
-  #delimiters;
-
   string;
+
+  #delimiters;
 
   constructor(input) {
     if (input.length === 0) {
@@ -19,12 +19,16 @@ export default class StringSplitter {
       return;
     }
 
+    // 커스텀 구분자 검사
     const found = input.match(this.#CUSTOM_DELIMITER_PATTERN);
     if (found) {
       const [fullMatch, delimiter] = found;
       this.string = input.slice(fullMatch.length);
       this.#delimiters = delimiter;
+      return;
     }
+
+    throw new Error('[ERROR] 유효하지 않은 문자열입니다.');
   }
 
   split() {
