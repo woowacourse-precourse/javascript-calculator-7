@@ -14,12 +14,19 @@ class App {
   calculateSum(input) {
     if (input === '') return 0;
   
-    // 쉼표(,)와 콜론(:) 구분자 지원
-    const numbers = input.split(/,|:/);
-    const sum = numbers.reduce((acc, number) => acc + Number(number), 0);
+    const numbers = this.parseInput(input);
+  
+    const sum = numbers.reduce((acc, number) => {
+      const parsedNumber = Number(number);
+      if (parsedNumber < 0) {
+        throw new Error('잘못된 입력입니다. 음수는 허용되지 않습니다.');
+      }
+      return acc + parsedNumber;
+    }, 0);
   
     return sum;
   }
+  
   
   parseInput(input) {
     let delimiter = /,|:/; // 기본 구분자: 쉼표와 콜론
