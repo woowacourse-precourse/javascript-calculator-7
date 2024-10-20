@@ -9,6 +9,8 @@ class App {
     const calculator = new Calculator(input);
     const [result, message] = calculator.checkInputValidity();
     if (!result) throw new Error(message);
+
+    const [result2, message2] = calculator.splitNumberSection();
   }
 }
 

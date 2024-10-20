@@ -29,6 +29,15 @@ class Calculator {
 
     return [true, "유효한 문자열"];
   }
+
+  splitNumberSection() {
+
+    this.numbers = this.#defaultDelimiters.reduce((acc, delimiter) => {
+      return acc.flatMap(element => element.split(delimiter));
+    }, [this.numberSection]);
+
+    return [true, 0];
+  }
 }
 
 
