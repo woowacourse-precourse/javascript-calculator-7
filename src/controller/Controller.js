@@ -10,8 +10,7 @@ class Controller {
   }
 
   async process() {
-    const isValid = await this.inputString();
-    if (!isValid) return;
+    await this.inputString();
     OutputView.printResult(this.caculator.getSumNumbers());
   }
 
@@ -19,10 +18,9 @@ class Controller {
     const input = await InputView.readString();
     try {
       this.caculator.validateString(input);
-      return true;
     } catch (error) {
       OutputView.printError(error.message);
-      return false;
+      throw new Error(error.message);
     }
   }
 }
