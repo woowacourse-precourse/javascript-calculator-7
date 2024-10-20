@@ -1,5 +1,10 @@
 class Calculator {
-  constructor(customSeparator, numbers) {
+  constructor() {
+    this.customSeparator = [];
+    this.numbers = "";
+  }
+
+  init(customSeparator, numbers) {
     this.customSeparator = customSeparator;
     this.numbers = this.splitNumbers(numbers);
   }

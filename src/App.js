@@ -6,7 +6,8 @@ class App {
   async run() {
     const { customSeparator, numbers } = await Input.getCustomSeparatorAndNumbers();
 
-    const calculator = new Calculator(customSeparator, numbers);
+    const calculator = new Calculator();
+    calculator.init(customSeparator, numbers);
     const output = new Output(calculator.sum());
     output.printResult();
   }
