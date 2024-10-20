@@ -183,4 +183,19 @@ describe('문자열 계산기', () => {
 
     await expect(app.run()).rejects.toThrow('[ERROR]');
   });
+
+  test('BigInt 입력', async () => {
+    const inputs = ['99999999999999999'];
+    mockQuestions(inputs);
+
+    const logSpy = getLogSpy();
+    const outputs = ['결과 : 99999999999999999'];
+
+    const app = new App();
+    await app.run();
+
+    outputs.forEach((output) => {
+      expect(logSpy).toHaveBeenCalledWith(expect.stringContaining(output));
+    });
+  });
 });
