@@ -9,8 +9,15 @@ class App {
     const input = await this.#view.readInputString();
 
     const splittedInput = this.#stringSplitter.split(input);
+    const numbers = splittedInput.map(Number);
 
-    splittedInput.forEach((split) => this.#view.printOutputString(split));
+    const sum = this.calculateSum(numbers);
+
+    this.#view.printOutputString(sum);
+  }
+
+  calculateSum(numbers) {
+    return numbers.reduce((acc, cur) => (acc += cur), 0);
   }
 }
 
