@@ -1,5 +1,6 @@
 import CheckDelimiter from './CheckDelimiter.js';
 import CheckStrLen from './CheckStrLen.js';
+import FindDigitCount from './FindDigitCount.js';
 import ValidateInputData from './ValidateInputData.js';
 
 const ParseStr = (str) => {
@@ -7,6 +8,11 @@ const ParseStr = (str) => {
 
   if (!STR_LEN) {
     return 0;
+  }
+  const DIGIT_COUNT = FindDigitCount(str);
+
+  if (DIGIT_COUNT < 2) {
+    return parseInt(str, 10);
   }
 
   const [DELIMITER_SET, FIND_CUSTOM] = CheckDelimiter(str);
