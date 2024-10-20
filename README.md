@@ -14,12 +14,12 @@
 
 - `,`와 `:`을 구분자로 가지는 문자열을 구분자 기준으로 분리해 숫자의 합을 반환
 
-```
+```bash
 
 결과 : 0
 ```
 
-```
+```bash
 1,2:3
 결과 : 6
 ```
@@ -28,7 +28,7 @@
 
 - 문자열 앞부분의 `//`와 `\n` 사이에 위치하는 문자는 커스텀 구분자로 지정함
 
-```
+```bash
 //;\n1;2;3
 결과 : 6
 ```
@@ -39,13 +39,13 @@
 
 - 사용자가 잘못된 값을 입력할 경우 [ERROR] 메시지와 함께 Error 발생 후 **애플리케이션 종료**
 
-```
+```bash
 덧셈할 문자열을 입력해 주세요.
 한:1:2
 [ERROR]
 ```
 
-```
+```bash
 덧셈할 문자열을 입력해 주세요.
 1::2:,,3
 [ERROR]
@@ -70,13 +70,13 @@
 
 ##### 실행 결과 예시
 
-```
+```bash
 덧셈할 문자열을 입력해 주세요.
 1,2:3
 결과 : 6
 ```
 
-```
+```bash
 덧셈할 문자열을 입력해 주세요.
 //;\n1;2;3
 결과 : 6
@@ -93,7 +93,7 @@
 
 ##### 코드 예시
 
-```
+```javascript
 function computeResult(customSeparator, formattedUserInput) {
   const regex = customSeparator
     ? new RegExp(`[:,${customSeparator}]`)
@@ -126,7 +126,7 @@ function computeResult(customSeparator, formattedUserInput) {
 
 ##### 코드 예시
 
-```
+```javascript
 function getCustomSeparator(userInput) {
   const customSeparator = userInput.match(/^\/\/(\D)\\n/);
 
@@ -155,13 +155,13 @@ function getCustomSeparator(userInput) {
 
 ##### 코드 예시
 
-```
+```javascript
 if (!formattedUserInput.match(regex)) {
   throw new Error('사용자 입력을 다시 하세요.');
 }
 ```
 
-```
+```javascript
 if (isNaN(result)) {
   throw new Error('사용자 입력을 다시 하세요.');
 }
