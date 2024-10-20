@@ -18,7 +18,7 @@ class App {
 
     const modifiedInput = this.findCustomDelimiters(input, delimiters);
 
-    const splitedInput = this.splitNumbers(modifiedInput, delimiters);
+    const splitedInput = this.splitInput(modifiedInput, delimiters);
 
     this.addNumbers(splitedInput, numbers);
 
@@ -65,7 +65,7 @@ class App {
   }
 
 
-  splitNumbers(modifiedInput, delimiters) {
+  splitInput(modifiedInput, delimiters) {
     let splitedInput = [modifiedInput];
 
     delimiters.forEach((delimiter) => {
