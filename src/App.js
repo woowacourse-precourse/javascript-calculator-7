@@ -52,6 +52,11 @@ function calculate(input) {
     );
     return cleanedRemain.reduce((sum, num) => sum + Number(num), 0);
   }
+  // 그 외
+  if (checkDefaultFormat(input)) {
+    const cleanedInput = input.split(new RegExp(DEFAULT_DELIMETER.join("|")));
+    return cleanedInput.reduce((sum, num) => sum + Number(num), 0);
+  }
 }
 
 class App {
