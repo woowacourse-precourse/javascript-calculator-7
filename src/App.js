@@ -12,6 +12,7 @@ class App {
       if (input.length > 0 && input.startsWith('//')) { //커스텀 구분자가 지정된 경우
         delimiter = this.getDelimiter(input);
         input = input.split('\\n')[1];
+
       }
       else {  //기본 구분자를 사용하는 경우
         delimiter = /[,:]/;
@@ -50,7 +51,7 @@ class App {
     if(!isNaN(+match[1])){
       throw new Error("[ERROR] 잘못된 입력입니다. 커스텀 구분자는 숫자가 될 수 없습니다.");
     }
-    return new RegExp(`[${match[1]}]`); // 커스텀 구분자를 정규식으로 변환
+    return new RegExp(`[${match[1]},:]`); // 커스텀 구분자 + 기본 구분자를 정규식으로 변환
   }
 
 }
