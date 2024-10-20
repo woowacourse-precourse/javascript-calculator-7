@@ -2,9 +2,9 @@ import { MissionUtils } from "@woowacourse/mission-utils";
 import { IncludeZeroError, InvalidSeparatorError, InvalidCustomSeparatorError } from "./Error/index.js";
 
 class Input {
-  async getCustomSeparatorAndNumbers() {
+  static async getCustomSeparatorAndNumbers() {
     const plusString = await Input.getPlusString();
-    const { customSeparator, numbers } = this.findCustomSeparatorAndNumbers(plusString);
+    const { customSeparator, numbers } = Input.findCustomSeparatorAndNumbers(plusString);
 
     Input.validateSeparators(customSeparator);
     Input.validateNumbers(numbers, customSeparator);
@@ -24,7 +24,7 @@ class Input {
    * @param {string} text - 입력으로 주어진 문자열
    * @returns {{customSeparator: string[], numbers: string}}
    */
-  findCustomSeparatorAndNumbers(text) {
+  static findCustomSeparatorAndNumbers(text) {
     const parts = text.split("\\n");
 
     const numbers = parts[parts.length - 1];

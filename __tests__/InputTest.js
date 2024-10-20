@@ -41,39 +41,36 @@ describe("getPlusString()", () => {
 });
 
 describe("findCustomSeparatorAndNumbers()", () => {
-  const input = new Input();
-  const { findCustomSeparatorAndNumbers } = input;
-
   test("빈 문자열일 때 빈 배열과 빈 문자열 반환", async () => {
-    expect(findCustomSeparatorAndNumbers("")).toEqual({
+    expect(Input.findCustomSeparatorAndNumbers("")).toEqual({
       customSeparator: [],
       numbers: "",
     });
   });
 
   test("커스텀 구분자가 없을 때 빈 배열과 연산 문자열 반환", async () => {
-    expect(findCustomSeparatorAndNumbers("1,2,3")).toEqual({
+    expect(Input.findCustomSeparatorAndNumbers("1,2,3")).toEqual({
       customSeparator: [],
       numbers: "1,2,3",
     });
   });
 
   test("커스텀 구분자가 1개일 때 구분자 문자열 배열과 연산 문자열 반환", async () => {
-    expect(findCustomSeparatorAndNumbers("//;\\n1;2;3")).toEqual({
+    expect(Input.findCustomSeparatorAndNumbers("//;\\n1;2;3")).toEqual({
       customSeparator: [";"],
       numbers: "1;2;3",
     });
   });
 
   test("커스텀 구분자가 여러개일 때 구분자 문자열 배열과 연산 문자열 반환", async () => {
-    expect(findCustomSeparatorAndNumbers("//;\\n//$\\n1;2;3")).toEqual({
+    expect(Input.findCustomSeparatorAndNumbers("//;\\n//$\\n1;2;3")).toEqual({
       customSeparator: [";", "$"],
       numbers: "1;2;3",
     });
   });
 
   test("커스텀 구분자 중복 시 중복 제거된 배열 반환", async () => {
-    expect(findCustomSeparatorAndNumbers("//;\\n//;\\n1;2;3")).toEqual({
+    expect(Input.findCustomSeparatorAndNumbers("//;\\n//;\\n1;2;3")).toEqual({
       customSeparator: [";"],
       numbers: "1;2;3",
     });
@@ -135,12 +132,6 @@ describe("에러메시지 출력", () => {
 });
 
 describe("getCustomSeparatorAndNumbers()", () => {
-  let input;
-
-  beforeEach(() => {
-    input = new Input();
-  });
-
   afterEach(jest.restoreAllMocks);
 
   test("정상 입력이 들어왔을 때 커스텀 문자 배열과 연산자 문자열 반환", async () => {
@@ -148,7 +139,7 @@ describe("getCustomSeparatorAndNumbers()", () => {
     const spy = getConsoleSpy();
     mockQuestions(mockInput, spy);
 
-    const result = await input.getCustomSeparatorAndNumbers("//;\\n1;2;3");
+    const result = await Input.getCustomSeparatorAndNumbers("//;\\n1;2;3");
     expect(result).toEqual({ customSeparator: [";"], numbers: "1;2;3" });
   });
 
@@ -157,6 +148,6 @@ describe("getCustomSeparatorAndNumbers()", () => {
     const spy = getConsoleSpy();
     mockQuestions(mockInput, spy);
 
-    await expect(() => input.getCustomSeparatorAndNumbers("1;2;3")).rejects.toThrow(InvalidSeparatorError);
+    await expect(() => Input.getCustomSeparatorAndNumbers("1;2;3")).rejects.toThrow(InvalidSeparatorError);
   });
 });

@@ -3,14 +3,8 @@ import Calculator from "./Calculator.js";
 import Output from "./Output.js";
 
 class App {
-  input;
-
-  constructor() {
-    this.input = new Input();
-  }
-
   async run() {
-    const { customSeparator, numbers } = await this.input.getCustomSeparatorAndNumbers();
+    const { customSeparator, numbers } = await Input.getCustomSeparatorAndNumbers();
 
     const calculator = new Calculator(customSeparator, numbers);
     const result = calculator.sum();
