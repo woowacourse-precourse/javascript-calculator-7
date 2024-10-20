@@ -25,10 +25,6 @@ class StringCalculator {
     this.printSum(addRes);
   }
 
-  add(nums) {
-    return nums.reduce((acc, curr) => acc + curr, 0);
-  }
-
   isCustomDelimiterPresent(input) {
     return this._customRegexp.test(input);
   }
@@ -44,10 +40,6 @@ class StringCalculator {
     return str.replace(regexp, '');
   }
 
-  getDelimiterRegExp() {
-    return new RegExp(`[${this.delimiters.join('')}]`, 'g');
-  }
-
   removeCustomDelimiter(input) {
     return input.replace(this._customRegexp, '');
   }
@@ -61,6 +53,14 @@ class StringCalculator {
         throw new Error('[ERROR] 숫자가 아닌 값이 입력됐습니다.');
       return num;
     });
+  }
+
+  add(nums) {
+    return nums.reduce((acc, curr) => acc + curr, 0);
+  }
+
+  getDelimiterRegExp() {
+    return new RegExp(`[${this.delimiters.join('')}]`, 'g');
   }
 
   printSum(res) {
