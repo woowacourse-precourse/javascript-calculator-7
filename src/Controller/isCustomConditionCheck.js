@@ -7,30 +7,30 @@ const isConditionTextInputCheck = userInput => {
 };
 
 // 2. 구분자 사용 입력 횟수, 반복문 횟수
-const separatorTextInputAndLoofCount = userInput => {
-  let allSpeparatorTrueCheck = 0;
-  let loofCountForallSpeparatorTrueCheck = 0;
+const separatorTextInputAndLoopCount = userInput => {
+  let allSeparatorTrueCheck = 0;
+  let loopCountForAllSeparatorTrueCheck = 0;
   for (let i = 6; i < userInput.length; i += 1) {
     if (i % 2 === 0) {
-      loofCountForallSpeparatorTrueCheck += 1;
+      loopCountForAllSeparatorTrueCheck += 1;
     }
     if (userInput[2] === userInput[i]) {
-      allSpeparatorTrueCheck += 1;
+      allSeparatorTrueCheck += 1;
     }
   }
-  return [allSpeparatorTrueCheck, loofCountForallSpeparatorTrueCheck];
+  return [allSeparatorTrueCheck, loopCountForAllSeparatorTrueCheck];
 };
 
 // 2. 구분자 사용 입력횟수, 반복문 횟수 같은지 확인
-const isSeparatorTextInputAndLoofCountEqualCheck = countForSeparatorTextAndLoof => {
-  if (countForSeparatorTextAndLoof[0] === countForSeparatorTextAndLoof[1]) {
+const isSeparatorTextInputAndLoopCountEqualCheck = countForSeparatorTextAndLoop => {
+  if (countForSeparatorTextAndLoop[0] === countForSeparatorTextAndLoop[1]) {
     return true;
   }
   return false;
 };
 
 const isSeparatorTextInputCountCheck = userInput => {
-  if (isSeparatorTextInputAndLoofCountEqualCheck(separatorTextInputAndLoofCount(userInput)) === true) {
+  if (isSeparatorTextInputAndLoopCountEqualCheck(separatorTextInputAndLoopCount(userInput)) === true) {
     return true;
   }
   return false;
