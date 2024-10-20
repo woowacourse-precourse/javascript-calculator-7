@@ -1,4 +1,4 @@
-import { isNumericString, isPositiveNumber } from '../lib/utils.js';
+import { isNumericString, isPositiveNumber, trimWhitespace } from '../lib/utils.js';
 import SchemaValidator from '../lib/SchemaValidator.js';
 import Error from './Error.js';
 import Delimiter from './Delimiter.js';
@@ -38,12 +38,20 @@ class Validator {
     return values.every((value) => isPositiveNumber(value));
   }
 
+  #isNotEmptyCustomDelimiter(value) {
+    if (this.#delimiter.hasCustomDelimiter(value)) {
+      return !(trimWhitespace(this.#delimiter.getCustomDelimiter(value)) === '');
+    }
+
+    return true;
+  }
+
   /**
    *
    * @param {string} value
    * @returns {boolean}
    */
-  #isNumericCustomDelimiter(value) {
+  #isNotNumericCustomDelimiter(value) {
     if (this.#delimiter.hasCustomDelimiter(value)) {
       return !isNumericString(this.#delimiter.getCustomDelimiter(value));
     }
@@ -57,9 +65,14 @@ class Validator {
    * @throws {string}
    */
   #validateDelimiter(value) {
-    this.#validator.validate(value).with(this.#isNumericCustomDelimiter.bind(this), {
-      message: Error.MESSAGE.CUSTOM_DELIMITER_IS_NOT_NUMBER,
-    });
+    this.#validator
+      .validate(value)
+      .with(this.#isNotEmptyCustomDelimiter.bind(this), {
+        message: Error.MESSAGE.CUSTOM_DELIMITER_IS_NOT_EMPTY,
+      })
+      .with(this.#isNotNumericCustomDelimiter.bind(this), {
+        message: Error.MESSAGE.CUSTOM_DELIMITER_IS_NOT_NUMBER,
+      });
   }
 
   /**
