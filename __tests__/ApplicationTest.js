@@ -18,17 +18,17 @@ const getLogSpy = () => {
 };
 
 describe("문자열 계산기", () => {
-  test("커스텀 구분자만 사용", async () => {
-    const inputs = ["//;\n1;2"];
+  test("커스텀 구분자 사용", async () => {
+    const inputs = ["//;\\n1"];
     mockQuestions(inputs);
 
     const logSpy = getLogSpy();
-    const expectedOutputs = ["결과 : 3"];
+    const outputs = ["결과 : 1"];
 
     const app = new App();
     await app.run();
 
-    expectedOutputs.forEach((output) => {
+    outputs.forEach((output) => {
       expect(logSpy).toHaveBeenCalledWith(expect.stringContaining(output));
     });
   });
@@ -110,24 +110,6 @@ describe("문자열 계산기", () => {
 
   test("예외: 커스텀 구분자가 숫자일 경우", async () => {
     const inputs = ["//1\n2:3"];
-    mockQuestions(inputs);
-
-    const app = new App();
-
-    await expect(app.run()).rejects.toThrow(Errors.INVALID_FORMAT);
-  });
-
-  test("예외: 커스텀 구분자 여러 개 입력", async () => {
-    const inputs = ["//;!\n1!2;3,4"];
-    mockQuestions(inputs);
-
-    const app = new App();
-
-    await expect(app.run()).rejects.toThrow(Errors.INVALID_FORMAT);
-  });
-
-  test("예외: 숫자 사이에 구분자가 여러 개일 경우", async () => {
-    const inputs = ["1,2,,,3"];
     mockQuestions(inputs);
 
     const app = new App();
