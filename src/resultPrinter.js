@@ -4,6 +4,7 @@ import { Console } from "@woowacourse/mission-utils"; // woowacourse에서 제�
 export default class ResultPrinter {
   print(result) {
     // 결과의 출력은 Console.print()로 제한함
-    Console.print(`결과: ${result}`);
+    Console.print(`커스텀 구분자: ${result}`);
+    Console.print(`계산 문자열: ${result}`);
   }
 }

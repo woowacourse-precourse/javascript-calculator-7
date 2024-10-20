@@ -22,26 +22,19 @@
 
 #### DelimiterManager
 
-역할: 구분자 리스트를 관리하고 새로운 구분자를 추가하는 기능을 담당
+역할: 구분자 관리, 문자열 파싱, 숫자 추출 기능을 모두 처리하는 클래스
 
 필드:
 
-- [O] delimiters: 현재 사용 중인 구분자들의 배열
+- [] delimiters: 현재 사용 중인 구분자들의 배열
 
 메서드:
 
-- [] constructor(): 객체 생성 시 기본 구분자 리스트로 초기화
-- [] addCustomDelimiter(delimiter): 새로운 구분자를 delimiters 배열에 추가
+- [] constructor(): 객체 생성 시 기본 구분자 리스트(,, :)로 초기화
 - [] getDelimiters(): 현재 저장된 구분자 배열을 반환
-
-#### StringParser
-
-역할: 입력된 문자열을 파싱하여 구분자와 계산할 숫자를 분리
-
-메서드:
-
-- [] parseInput(input): 입력 문자열에서 커스텀 구분자와 계산 문자열을 추출
-- [] extractNumbers(calculationString, delimiters): 구분자를 사용하여 숫자들을 추출
+- [] addCustomDelimiter(delimiter): 새로운 커스텀 구분자를 구분자 리스트에 추가
+- [] parseInput(input): 입력 문자열을 분석하여 커스텀 구분자와 계산할 문자열을 추출
+- [] extractNumbers(calculationString): 구분자를 사용하여 숫자를 추출하고 배열로 반환
 
 #### Calculator
 
@@ -57,7 +50,7 @@
 
 메서드:
 
-- [△] print(result): 계산 결과를 출력
+- [] print(result): 계산 결과를 출력
 
 #### ErrorHandler
 
@@ -87,34 +80,22 @@
 - 결과를 ResultPrinter를 통해 출력
 - 에러 발생 시 ErrorHandler를 호출
 
-### 데이터 구조
-
-#### ParsedInput
-
-역할: 파싱된 입력 데이터를 저장
-필드:
-
-- [] customDelimiter: 커스텀 구분자 (없을 수도 있음)
-- [] calculationString: 실제 계산에 사용할 숫자 문자열
-
 ## 구현 순서
 
 1. 입력을 받아 그대로의 문자열을 출력
-   a. DelimiterManager - constructor() - 객체 생성
-   a. ResultPrinter - print(result) - 문자열을 그대로 출력
+   a. DelimiterManager - constructor() - 객체 생성 시 기본 구분자 리스트(,, :)로 초기화
+   b. ResultPrinter - print(result) - 입력받은 문자열을 그대로 출력
 
 2. 입력받은 문자열을 커스텀 구분자 문자열과 숫자 문자열로 나누어 입력받고 이를 각각 출력
-   a. StringParser - parseInput(input) - 각각 문자열 추출해서 ParseInput에 넣기
-   b. ParsedInput - customDelimiter - 구분자 보관함
-   c. ParsedInput - calculationString - 계산할 문자열 보관함
-   d. ResultPrinter - print(result) - 각각 출력하게 임시 변경
+   a. DelimiterManager - parseInput(input): 입력 문자열을 분석하여 커스텀 구분자와 계산할 숫자 문자열을 추출
+   b. DelimiterManager - getDelimiters(): 현재 사용 중인 구분자 배열 반환
+   c. ResultPrinter - print(result): 구분자 배열과 계산할 문자열을 각각 출력
 
 3. 커스텀 구분자 가져와서 구분자 배열에 넣고 출력해보기
-   a. DelimiterManager - delimiters - 현재 사용중인 구분자 배열 생성
-   b. DelimiterManager - addCustomDelimiter(delimiter) - 새로운 구분자를 배열에 쪼개서 넣기
-   c. DelimiterManager - getDelimiters() - 구분자 배열 반환
-   d. ResultPrinter - print(result) - 구분자 배열과 숫자 문자열을 각각 출력하게 변경
+   a. DelimiterManager - addCustomDelimiter(delimiter): 새로운 구분자를 배열에 추가
+   b. ResultPrinter - print(result): 구분자 배열과 계산할 숫자 문자열을 출력
 
 4. 구분자를 기준으로 계산
-   a. StringParser - extractNumbers(calculationString, delimiters) - 구분자 기준으로 숫자 추출
-   b. ResultPrinter - print(result) - 숫자를 받아서 계산해주고 결과를 출력
+   a. DelimiterManager - extractNumbers(calculationString): 구분자를 기준으로 계산할 숫자를 추출
+   b. Calculator - calculate(numbers): 추출된 숫자 배열의 합계를 계산하여 반환
+   c. ResultPrinter - print(result): 추출된 숫자를 출력

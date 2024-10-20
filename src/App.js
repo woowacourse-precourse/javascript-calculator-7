@@ -1,6 +1,6 @@
 import { Console } from "@woowacourse/mission-utils"; // woowacourse에서 제공
-import DelimiterManager from "./DelimiterManager.js";
-import ResultPrinter from "./ResultPrinter.js";
+import DelimiterManager from "./delimiterManager.js";
+import ResultPrinter from "./resultPrinter.js";
 
 // App 클래스는 프로그램 제어를 담당함
 class App {
