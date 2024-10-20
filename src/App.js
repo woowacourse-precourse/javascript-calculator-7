@@ -36,7 +36,15 @@ class App {
       const arr = newStr.split(",");
       return arr;
     };
+
+    const separatedArr = separateStr(str, separators);
+
+    const sum = (arr) => {
+      return arr.reduce((acc, cur) => acc + +cur, 0);
+    };
+
     Console.print(separateStr(str, separators));
+    Console.print(sum(separatedArr));
   }
 }
 
