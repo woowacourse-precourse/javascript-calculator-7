@@ -1,5 +1,6 @@
 //예외 처리 로직
 class ExceptionCheck {
+  //문자열 형식 체크
   static validate(input) {
     if (typeof input !== "string") {
       throw new Error("[ERROR] : 잘못된 값을 입력하였습니다.");
