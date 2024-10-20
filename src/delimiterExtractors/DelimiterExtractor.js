@@ -1,4 +1,8 @@
-import { CUSTOM_DELIMITER_PATTERN, DEFAULT_DELIMITERS } from '../constants.js';
+import {
+  CUSTOM_DELIMITER_PATTERN,
+  DEFAULT_DELIMITERS,
+  ERROR_MESSAGES,
+} from '../constants.js';
 import IDelimiterExtractor from '../interfaces/IDelimiterExtractor.js';
 
 class DelimiterExtractor extends IDelimiterExtractor {
@@ -11,6 +15,10 @@ class DelimiterExtractor extends IDelimiterExtractor {
 
   extractDelimiter(inputValue) {
     const customDelimiterMatch = inputValue.match(CUSTOM_DELIMITER_PATTERN);
+
+    if (customDelimiterMatch && customDelimiterMatch.index !== 0) {
+      throw new Error(ERROR_MESSAGES.CUSTOM_DELIMITER_NOT_AT_START);
+    }
 
     if (customDelimiterMatch) {
       this.#customDelimiter = customDelimiterMatch[1];
