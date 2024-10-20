@@ -1,14 +1,15 @@
 import { Console } from "@woowacourse/mission-utils";
+
 class App {
   async run() {
     try {
-      let input = await Console.readLineAsync(
-        "덧셈함 문자열을 입력해 주세요.\n"
+      const input = await Console.readLineAsync(
+        "덧셈할 문자열을 입력해 주세요.\n"
       );
-      let result = App.calculate(input);
+      const result = App.calculate(input);
       Console.print(`결과 : ${result}`);
     } catch (error) {
-      Console.print("[ERROR] " + error.message);
+      throw new Error("[ERROR]" + error.message);
     }
   }
 
@@ -17,6 +18,8 @@ class App {
 
     let delimiters = [",", ":"];
     let numbersString = input;
+
+    // 커스텀 구분자 파싱
     if (input.startsWith("//")) {
       const delimiterEndIndex = input.indexOf("\\n");
       if (delimiterEndIndex === -1) {
@@ -34,9 +37,10 @@ class App {
     }
 
     const sum = numbers.reduce((acc, curr) => {
-      const num = Number(curr);
-      if (isNaN(num) || num < 0)
-        throw new Error("숫자가 아니거나 음수가 포함되었습니다.");
+      const num = Number(curr.trim());
+      if (isNaN(num) || num < 0) {
+        throw new Error("음수 또는 잘못된 숫자가 포함되었습니다.");
+      }
       return acc + num;
     }, 0);
 

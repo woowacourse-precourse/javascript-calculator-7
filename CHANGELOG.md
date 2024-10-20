@@ -1,3 +1,4 @@
+- feat($App): add all numbers
 - feat($App): make function calculate
 - feat($App): implement input and output
 - docs($rootScope): modify README.md
