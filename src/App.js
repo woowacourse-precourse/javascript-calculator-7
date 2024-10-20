@@ -49,4 +49,12 @@ class CalculatorApp {
 
     // 총합 계산
     this.#totalSum = this.#sumValues(inputArray);
-    
+
+    // 결과 출력
+    MissionUtils.Console.print(`결과 : ${this.#totalSum}`);
+  }
+}
+
+export default CalculatorApp;
+
+
