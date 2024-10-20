@@ -1,4 +1,4 @@
-import { DEFAULT_SEPARATORS, CUSTOM_DESIGNATORS, CUSTOM_SEPARATOR_REGEX } from './constants.js';
+import { DEFAULT_SEPARATORS, CUSTOM_DESIGNATORS, CUSTOM_SEPARATOR_REGEX, ERROR_MESSAGE } from './constants.js';
 
 class Calculator {
   #inputText;
@@ -32,6 +32,9 @@ class Calculator {
   }
 
   #calculateSum() {
+    const nonPositiveNumbers = this.#numbers.filter((number) => Math.sign(number) < 1);
+    if (nonPositiveNumbers.length) throw new Error(ERROR_MESSAGE.positiveNum);
+
     return this.#numbers.reduce((acc, cur) => acc + cur, 0);
   }
 
