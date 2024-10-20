@@ -112,4 +112,31 @@ describe("문자열 계산기", () => {
 
     await expect(app.run()).rejects.toThrow("[ERROR]");
   });
+
+  test("예외 테스트 - 공백이 추가된 경우 : //", async () => {
+    const inputs = ["//#\n1#2#2# #3"];
+    mockQuestions(inputs);
+
+    const app = new App();
+
+    await expect(app.run()).rejects.toThrow("[ERROR]");
+  });
+
+  test("예외 테스트 - 탭이 추가된 경우 : //", async () => {
+    const inputs = ["//#\n1#2#2#  #3"];
+    mockQuestions(inputs);
+
+    const app = new App();
+
+    await expect(app.run()).rejects.toThrow("[ERROR]");
+  });
+
+  test("예외 테스트 - 구분자가 .인 경우 : //", async () => {
+    const inputs = ["//.\n1.2.0.4.0.5.8"];
+    mockQuestions(inputs);
+
+    const app = new App();
+
+    await expect(app.run()).rejects.toThrow("[ERROR]");
+  });
 });
