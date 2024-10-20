@@ -29,33 +29,15 @@ class App {
       return;
     }
 
-    /**
-     * 1.,가 있다면 ,기준으로 배열로 분리한다.
-     * 2.:가 있다면 그 안에 분리 되지 않은 :를 기준으로 분리한다.
-     * 3. 나머지 연산자도 마찬가지로 반복한다.
-     */
+    let splitedList = numberString.split(
+      this.getSeperatorRegex(seperatorCharList)
+    );
 
-    let splitedList = [];
-    let splitedFlag = false;
-
-    for (let i = 0; i < seperatorChar.length; i++) {
-      if (numberList.includes(seperatorChar[i])) {
-        if (!splitedFlag) {
-          splitedFlag = true;
-          splitedList = numberList.split(seperatorChar[i]);
-        } else {
-          splitedList.forEach((elem, idx) => {
-            if (elem.includes(seperatorChar[i])) {
-              // 이전 인자 제거
-              splitedList.splice(idx, 1);
-              splitedList.push(...elem.split(seperatorChar[i]));
-            }
-          });
-        }
       }
     }
 
-    let result = this.sum(splitedList);
+    let result = this.sum(numberList);
+
     Console.print(`결과 : ${result}`);
   }
 
