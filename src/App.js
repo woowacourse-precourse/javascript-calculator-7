@@ -43,8 +43,9 @@ class App {
       return arr.reduce((acc, cur) => acc + +cur, 0);
     };
 
-    Console.print(separateStr(str, separators));
-    Console.print(sum(separatedArr));
+    // Console.print(separateStr(str, separators));
+    const result = sum(separatedArr);
+    Console.print(`결과 : ${result}`);
   }
 }
 
