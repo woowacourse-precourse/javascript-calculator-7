@@ -27,6 +27,30 @@
 
 # 📺 실행 결과
 
+### 커스텀 구분자 X 출력
+
+![image](https://github.com/user-attachments/assets/3a0bcc86-05a9-4290-b0e1-14562e098f2b)
+
+### 커스텀 구분자 O 출력
+
+![image](https://github.com/user-attachments/assets/162f0a65-4c3f-46dd-83c1-24976b79a7ba)
+
+### 구분자 입력이 잘못된 경우 예외 처리
+
+![image](https://github.com/user-attachments/assets/7ff72c9e-c35d-47d2-9549-333ee2404f02)
+
+### 유효한 커스텀 구분자가 아닌 경우 예외 처리
+
+![image](https://github.com/user-attachments/assets/4a889181-cb9d-46be-8694-233c61980d14)
+
+### 커스텀 구분자가 입력되지 않은 경우 예외 처리
+
+![image](https://github.com/user-attachments/assets/30b9bcc1-c661-4f1f-b08e-e1b2e8ee693e)
+
+### 이미 등록된 구분자인 경우
+
+![image](https://github.com/user-attachments/assets/5e7e1311-b52a-4cd4-b495-2914073d9a2b)
+
 # 📕 TMI
 
 - https://github.com/woowacourse-projects/javascript-mission-utils
