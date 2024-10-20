@@ -1,19 +1,12 @@
-import { Console } from "@woowacourse/mission-utils";
-import { errorMessages } from "./constant.js";
+import { errorMessages } from './constant.js';
+import { inputService } from './lib/IOService.js';
 
 class App {
   async run() {
     try {
-      const read = await Console.readLineAsync(
-        "덧셈할 문자열을 입력해 주세요.\n"
-      );
-
-      if (!read) {
-        Console.print("결과 : 0");
-        return;
-      }
+      inputService();
     } catch (e) {
-      return new Error(errorMessages.unexpectedError);
+      return new Error(`[ERROR]: errorMessages.unexpectedError`);
     }
   }
 }
