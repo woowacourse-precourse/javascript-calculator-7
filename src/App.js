@@ -16,7 +16,7 @@ class App {
       const result = computeResult(customSeparator, formattedUserInput);
       Console.print(`결과 : ${result}`);
     } catch (error) {
-      Console.print('[ERROR]'); // 스택 트레이스가 안 뜸
+      Console.print('[ERROR]');
       throw error;
     }
   }
