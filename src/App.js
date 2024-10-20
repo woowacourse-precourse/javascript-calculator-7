@@ -21,6 +21,12 @@ class Validation {
       throw new Error(ERROR.prefix + ERROR.invalidChar);
     }
   }
+  // 커스텀 구분자 등록형식이 맞는지 확인한다.
+  static isValidCustomSeperatorForm(matchResult) {
+    if (matchResult === null) {
+      throw new Error(ERROR.prefix + ERROR.invalidCustomForm);
+    }
+  }
 }
 
 class StringProcessor {
@@ -29,7 +35,10 @@ class StringProcessor {
       `^${CALCULATOR.customFormPrefix}(.+?)${CALCULATOR.customFormSuffix}`
     );
     const match = input.match(customSeparatorPattern);
-    return match ? match[1].trim() : null;
+
+    Validation.isValidCustomSeperatorForm(match);
+
+    return match[1].trim();
   }
 }
 
