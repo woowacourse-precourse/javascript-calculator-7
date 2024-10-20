@@ -20,7 +20,8 @@ class App {
     const targetString = Validator.extractCustomDelimiter(input);
     const parsedString = Validator.parseString(targetString);
 
-    Console.print(`결과 : ${input}`);
+    const result = parsedString.reduce((sum, cur) => sum + cur, 0);
+    Console.print(`결과 : ${result}`);
   }
 }
 
