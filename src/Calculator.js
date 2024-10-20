@@ -8,11 +8,11 @@ class Calculator {
     async calculate() {
         try {
             const inputString = await Console.readLineAsync('덧셈할 문자열을 입력해주세요.\n');
-            const [stringNumbers, seperator] = InputParser.getSeperator({ inputText: inputString });
+            const [stringNumbers, seperator] = await InputParser.getSeperator({ inputText: inputString });
 
-            const arrayNumbers = Splitter.splitString({ stringNumbers, seperator });
+            const arrayNumbers = await Splitter.splitString({ stringNumbers, seperator });
 
-            const result = Add.sumNumbers({ arrayNumbers });   
+            const result = await Add.sumNumbers({ arrayNumbers });   
             Console.print(`결과 : ${result}`);
 
         } catch (error) {

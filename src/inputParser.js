@@ -2,10 +2,10 @@ import { isValidSeperator } from "./validate.js";
 
 const inputParser = {
 
-    getSeperator({ inputText }) {
+    async getSeperator({ inputText }) {
         if(inputText.startsWith("//")) {
             //커스텀 구분자 입력으로 시작할 경우 커스텀 구분자를 구하는 함수를 사용한다.
-            return this.setSeperator({ inputText })
+            return await this.setSeperator({ inputText })
         } else {
             return [inputText, null];
         }
@@ -13,7 +13,7 @@ const inputParser = {
     },
 
     //커스텀 구분자를 구하는 함수
-    setSeperator({ inputText }) {
+    async setSeperator({ inputText }) {
         try {
             // "//" 이후의 문자열 가져오기
             const beforeSeperatorIndex = inputText.indexOf("//") + 2;
@@ -26,7 +26,7 @@ const inputParser = {
             }
 
             const seperator = inputText.slice(beforeSeperatorIndex, afterSeperatorIndex);
-            if (!isValidSeperator({ seperator })) {
+            if (!await isValidSeperator({ seperator })) {
                 throw new Error("[ERROR] 유효하지 않은 구분자입니다.");
             }
 
@@ -38,7 +38,7 @@ const inputParser = {
         }
     },
 
-    deleteSeperatorInput({ inputText, endSeperatorInput }) {
+    async deleteSeperatorInput({ inputText, endSeperatorInput }) {
         return inputText.substring(endSeperatorInput + 2)
     }
 

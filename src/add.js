@@ -1,11 +1,9 @@
 import { isValidNumbers } from "./validate.js";
 
-const sum = {
-    sumNumbers ({ arrayNumbers }) {
-        if(isValidNumbers({ arrayNumbers })){
-
+const add = {
+    async sumNumbers ({ arrayNumbers }) {
+        if(await isValidNumbers({ arrayNumbers })){
             let result = 0;
-
             for(let i = 0; i < arrayNumbers.length; i++){
                 result += Number(arrayNumbers[i])
             }
@@ -15,4 +13,4 @@ const sum = {
     }
 }
 
-export default sum;
+export default add;
