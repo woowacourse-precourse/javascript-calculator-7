@@ -85,6 +85,15 @@ class App {
       input = slicedInput;
       separators.push(customSeparator);
     }
+
+    const splitedInputArray = splitInputBySeparators(input, separators);
+
+    if (validateInput(splitedInputArray)) {
+      const numberArray = convertStringArrayToNumberArray(splitedInputArray);
+      const sum = numberArray.reduce((accumulator, currentValue) => accumulator + currentValue);
+
+      return Console.print(`결과 : ${sum}`);
+    }
   }
 }
 
