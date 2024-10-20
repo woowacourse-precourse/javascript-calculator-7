@@ -7,13 +7,13 @@ function getCustomSeparatorCharacter(customText) {
 }
 
 function verifyCustomSeparator(text) {
-  const CUSTOM_REGEX = /\/\/(.*)\\n/g
+  const CUSTOM_REGEX = /\/\/(.*)\\n/g;
   const IS_NOT_CUSTOM = -1;
   
   const RESULT = new Map([
     ['customSeparatorString', null],
     ['text', null]
-  ])
+  ]);
   
 
   if(text.search(CUSTOM_REGEX) === IS_NOT_CUSTOM) {
@@ -52,7 +52,7 @@ function userInputSeparator(userInput) {
         const ERROR = new Error(errorMessage);
         throw ERROR;
       }
-    })
+    });
     
     return userStringArray; 
   } else {

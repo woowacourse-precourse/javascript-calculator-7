@@ -7,7 +7,7 @@ function errorHandler(occurredError) {
   let finalMessage = `${errorMessage}`;
   
   Console.print(finalMessage);
-  throw new Error(DEFAULT_ERROR_MESSAGE)
+  throw new Error(DEFAULT_ERROR_MESSAGE);
 }
 
 export default errorHandler;
