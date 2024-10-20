@@ -37,6 +37,10 @@ class App {
     const stringNumbers = input.split(delimiter);
     
     return stringNumbers.map(num => {
+      if (num.trim() === '') {
+        throw new Error('[ERROR] 구분자와 구분자 사이에 반드시 숫자가 있어야 합니다.');
+      }
+      
       if (!/^\d+$/.test(num)) {
         throw new Error('[ERROR] 구분자와 양수 이외의 문자는 입력할 수 없습니다.');
       }
