@@ -28,6 +28,19 @@ class App {
     // 3. 커스텀 구분자 / 기본 구분자 문자열 분리하기
     const delimiterRegex = new RegExp(`[${delimiter.join('')}]`);
     const numbersArray = numbers.split(delimiterRegex);
+
+    // 4. 숫자 추출 및 합 계산하기
+    let sum = 0;
+
+    for(let i = 0; i < numbersArray.length; i++) {
+      const num = Number(numbersArray[i]);
+
+      if(isNaN(num)) {
+        throw new Error("[ERROR] 입력한 값이 올바른지 확인해주세요.");
+      }
+      
+      sum += num;
+    }
   }
 }
 
