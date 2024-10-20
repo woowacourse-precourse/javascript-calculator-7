@@ -14,7 +14,8 @@ class App {
             return MissionUtils.Console.print(`결과 : 0`);
         }
 
-        this.validate(inputString);
+        this.validateExpressionRule(inputString);
+
         const {value, separators} = this.parseInput(inputString);
         const result = this.calculate(value, separators);
 
@@ -26,13 +27,10 @@ class App {
             const searchLastWordIndex = input.indexOf('\\n');
             const customSeparator = input.slice(2, searchLastWordIndex).trim();
 
-            if (customSeparator.length !== 1) {
-                throw Error(ERROR_MESSAGES.INVALID_CUSTOM_SEPARATOR);
-            }
-            if (this.isDigit(customSeparator)) {
-                throw Error(ERROR_MESSAGES.INVALID_CUSTOM_SEPARATOR);
-            }
-            if (searchLastWordIndex > 0) {
+            this.validateCustomSeparatorIsNotEmpty(customSeparator);
+            this.validateCustomSeparatorIsNotNumber(customSeparator);
+
+            if (searchLastWordIndex !== -1) {
                 const newSeparator = [...this.separators, customSeparator];
                 return {
                     value: input.substring(searchLastWordIndex + 2),
@@ -63,14 +61,12 @@ class App {
                 }
             }
             if (separators.includes(char)) {
-                if (isPrevSeparator) {
-                    throw Error(ERROR_MESSAGES.INVALID_SEPARATOR_USAGE);
-                }
+                this.validateSeparatorIsNotRepeat(isPrevSeparator);
                 numArray.push(currentNum);
                 currentNum = '';
                 isPrevSeparator = true;
-            } else if (!separators.includes(char) && isNaN(char)) {
-                throw Error(ERROR_MESSAGES.INVALID_SEPARATOR_USAGE);
+            } else {
+                this.validateAllowedSeparator(separators, char);
             }
         });
 
@@ -79,20 +75,56 @@ class App {
             .reduce((acc, curr) => acc + curr, 0);
     }
 
-    validate(value) {
+    isDigit(value) {
+        return value >= '0' && value <= '9'
+    }
+
+    validateMinimumLength(value) {
         if (value.length < 3) {
-            throw Error(ERROR_MESSAGES.INVALID_EXPRESSION_RULE);
-        }
-        if (!isNaN(value)) { // 입력값이 양수만으로 구성된 경우
-            throw Error(ERROR_MESSAGES.INVALID_EXPRESSION_RULE);
-        }
-        if (!this.isDigit(value.at(-1))) { // 마지막 문자가 양수가 아닌 경우
             throw Error(ERROR_MESSAGES.INVALID_EXPRESSION_RULE);
         }
     }
 
-    isDigit(value) {
-        return value >= '0' && value <= '9'
+    validateNotAllNumbers(value) {
+        if (!isNaN(value)) {
+            throw Error(ERROR_MESSAGES.INVALID_EXPRESSION_RULE);
+        }
+    }
+
+    validateLastCharIsNumber(value) {
+        if (!this.isDigit(value.at(-1))) {
+            throw Error(ERROR_MESSAGES.INVALID_EXPRESSION_RULE);
+        }
+    }
+
+    validateCustomSeparatorIsNotEmpty(num) {
+        if (num.length === 0) {
+            throw Error(ERROR_MESSAGES.INVALID_CUSTOM_SEPARATOR);
+        }
+    }
+
+    validateCustomSeparatorIsNotNumber(value) {
+        if (this.isDigit(value)) {
+            throw Error(ERROR_MESSAGES.INVALID_CUSTOM_SEPARATOR);
+        }
+    }
+
+    validateSeparatorIsNotRepeat(value) {
+        if (value) {
+            throw Error(ERROR_MESSAGES.INVALID_SEPARATOR_USAGE);
+        }
+    }
+
+    validateAllowedSeparator(separators, char) {
+        if (!separators.includes(char) && isNaN(char)) {
+            throw Error(ERROR_MESSAGES.INVALID_SEPARATOR_USAGE);
+        }
+    }
+
+    validateExpressionRule(value) {
+        this.validateMinimumLength(value);
+        this.validateNotAllNumbers(value);
+        this.validateLastCharIsNumber(value)
     }
 }
 
