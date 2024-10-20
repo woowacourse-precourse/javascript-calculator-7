@@ -1,5 +1,6 @@
 import { Console } from "@woowacourse/mission-utils";
 import checkCustomDelimiter from "./utils/checkCustomDelimiter.js";
+import isOnlyPositive from "./utils/isOnlyPositive.js";
 
 class App {
   async run() {
@@ -19,7 +20,12 @@ class App {
       .split(new RegExp(delimiters.join("|"), "g"))
       .map(Number);
 
-    Console.print(`입력 문자열 확인: ${input}`);
+    if (isOnlyPositive(splitString)) {
+      splitString.forEach((num) => (result += num));
+      Console.print(`결과 : ${result}`);
+    } else {
+      throw new Error("[ERROR] 입력한 문자열에 양수가 아닌 값이 존재합니다.");
+    }
   }
 }
 
