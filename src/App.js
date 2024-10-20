@@ -16,7 +16,14 @@ class App {
     } else if (addNumber.match(basic)) {
       // 기능 3. 기본 구분자로 구분된 숫자 계산
       list = addNumber.split(basic).map((num) => Number(num));
+    } else if (addNumber.startsWith("//")) {
+      // 기능 4. 커스텀 구분자로 구분된 숫자 계산
+      list = addNumber
+        .substring(5)
+        .split(addNumber[2])
+        .map((num) => Number(num));
     }
+
     if (list.length > 0) {
       for (let i = 0; i < list.length; i++) {
         result += list[i];
