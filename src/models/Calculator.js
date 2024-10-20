@@ -1,15 +1,14 @@
 // @ts-check
-import throwError from '../util/errorThrower.js';
-import { ERROR_MESSAGE } from '../constants/errorMessages.js';
+import { _reduce } from '../util/util.js';
 
 //덧셈기 게임 관리
 class Calculator {
   /**
    * @param {number[]} numbers
-   * @returns {void}
+   * @returns {number}
    */
-  calculate(numbers) {
-    throwError(`${ERROR_MESSAGE.NO_CALCULATE} ${numbers}`);
+  add(numbers) {
+    return _reduce((acc, cur) => acc + cur, 0, numbers);
   }
 }
 
