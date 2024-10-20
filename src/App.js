@@ -9,7 +9,15 @@ class StringCalculator {
       return 0;
     }
 
-    return 0;
+     // 기본 구분자 (쉼표, 콜론)
+     let delimiters = /,|:/;
+     let numberString = numbers;
+ 
+     // 숫자 배열로 변환 후 합산
+     const numberArray = numberString.split(delimiters).map(num => Number(num));
+ 
+     // 숫자들의 합산
+     return numberArray.reduce((sum, num) => sum + num, 0);
   }
 }
 
