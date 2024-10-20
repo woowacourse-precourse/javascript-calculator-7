@@ -22,6 +22,7 @@ describe('문자열 계산기', () => {
     { inputs: ['//;\\n1;2000;30'], expected: '결과 : 2031' },
     { inputs: ['1,2:3'], expected: '결과 : 6' },
     { inputs: ['1.5:2:3'], expected: '결과 : 6.5' },
+    { inputs: ['//;;\\n1;;2000;;30'], expected: '결과 : 2031' },
   ])('정상 동작 테스트', async ({ inputs, expected }) => {
     mockQuestions(inputs);
 
@@ -86,15 +87,6 @@ describe('예외 테스트', () => {
     const app = new App();
 
     await expect(app.run()).rejects.toThrow(ERROR_MESSAGES.customForamt);
-  });
-
-  test('커스텀 구분자 - 길이', async () => {
-    const inputs = ['//-=\\n1-=2'];
-    mockQuestions(inputs);
-
-    const app = new App();
-
-    await expect(app.run()).rejects.toThrow(ERROR_MESSAGES.length);
   });
 
   test('커스텀 구분자 - 온점', async () => {

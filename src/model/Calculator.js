@@ -22,7 +22,7 @@ class Calculater {
     if (input.startsWith(DELIMITERS.customPrefix)) {
       const customDelimiter = this.extractCustomDelimiter(input);
       const stringPart = input.split(DELIMITERS.customSuffix)[1];
-      this.validateNumbers(stringPart, new RegExp(`[${customDelimiter}]`));
+      this.validateNumbers(stringPart, customDelimiter);
     }
 
     // 기본 구분자를 사용하는 경우
@@ -43,10 +43,6 @@ class Calculater {
     }
 
     const customDelimiter = inputMatch[1];
-
-    if (customDelimiter.length > 1) {
-      throw new Error(ERROR_MESSAGES.length);
-    }
 
     if (customDelimiter === DELIMITERS.period) {
       throw new Error(ERROR_MESSAGES.period);
