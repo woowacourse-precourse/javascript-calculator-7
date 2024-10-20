@@ -19,6 +19,9 @@ class App {
         customDelimiter = input.slice(2, newlineIndex);
 
         if (customDelimiter.length > 1) {
+          throw new Error("커스텀 구분자는 한 글자 이상이면 안됩니다.");
+        }
+        if (customDelimiter.length === 0) {
           throw new Error("커스텀 구분자는 한 글자여야합니다.");
         }
         if (!isNaN(Number(customDelimiter))) {
