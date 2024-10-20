@@ -11,10 +11,20 @@ export function throwError(errorCode) {
   throw new Error(ERROR_MESSAGES[errorCode]);
 }
 
+// 문자 포함 검증
+function isNonNumeric(value) {
+  return !/^\d+$/.test(value);
+}
+
+// 0 포함 검증
+function isZero(value) {
+  return /^0+$/.test(value);
+}
+
 // --- 입력 값 검증 함수 ---
 export function validateInput(input) {
-  const hasNonNumeric = input.map(Number).some((char) => !/^\d+$/.test(char));
-  const hasZero = input.some((char) => /^0+$/.test(char));
+  const hasNonNumeric = input.map(Number).some((char) => isNonNumeric(char));
+  const hasZero = input.some((char) => isZero(char));
 
   if (hasNonNumeric) throwError('INVALID_CHARACTTER');
   if (hasZero) throwError('ZERO_NOT_ALLOWED');
@@ -22,14 +32,21 @@ export function validateInput(input) {
 
 // --- 구분자 추출 ---
 export function getCustomDelimiter(input) {
-  return input.startsWith('//')
-    ? input.substring(2, input.indexOf('\\n'))
-    : null;
+  const hasCustomDelimiter = input.startsWith('//');
+  if (!hasCustomDelimiter) return null;
+
+  const delimiterEndIndex = input.indexOf('\\n');
+  return input.substring(2, delimiterEndIndex);
 }
 
 // --- 커스텀구분자 입력 부분 제외 ---
 export function removeDelimiterSection(customDelimiter, input) {
-  return customDelimiter ? input.substring(input.indexOf('\\n') + 2) : input;
+  if (!customDelimiter) {
+    return input; // 커스텀 구분자가 없을 경우 원래 입력 반환.
+  }
+
+  const delimiterEndIndex = input.indexOf('\\n');
+  return input.substring(delimiterEndIndex + 2);
 }
 
 // --- 문자열을 구분자 기준으로 나누기 ---
@@ -66,6 +83,5 @@ export function parseNumbers(input) {
 // --- 계산 ---
 export function calculate(input) {
   const numArr = parseNumbers(input);
-  const sum = numArr.reduce((acc, current) => acc + current, 0);
-  return sum;
+  return numArr.reduce((sum, num) => sum + num, 0);
 }
