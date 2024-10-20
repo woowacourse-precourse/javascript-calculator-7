@@ -1,4 +1,4 @@
-import { isValidNumbers } from "./validate";
+import { isValidNumbers } from "./validate.js";
 
 const sum = {
     sumNumbers ({ arrayNumbers }) {

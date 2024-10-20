@@ -8,11 +8,7 @@ export function isValidSeperator({ seperator }) {
 }
 
 export function isValidNumbers({ arrayNumbers }) {
-    arrayNumbers.forEach((num, index) => {
-        if (num < 0) {
-            negativeNumbers.push(num);
-        }
-    });
+    const negativeNumbers = arrayNumbers.filter((num) => num < 0);
 
     if(negativeNumbers.length > 0) {
         throw new Error('[ERROR] 음수는 연산하지 않습니다.');

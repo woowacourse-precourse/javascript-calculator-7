@@ -10,13 +10,11 @@ class Calculator {
             const inputString = await Console.readLineAsync('덧셈할 문자열을 입력해주세요.\n');
             const [stringNumbers, seperator] = InputParser.getSeperator({ inputText: inputString });
 
-            console.log(stringNumbers, seperator)
             const arrayNumbers = Splitter.splitString({ stringNumbers, seperator });
-            Console.print(arrayNumbers)
 
             const result = Add.sumNumbers({ arrayNumbers });
             
-            Console.print(result);
+            Console.print(`결과 : ${result}`);
 
         } catch (error) {
             console.error("에러 발생:", error.message);  // 에러 메시지 출력
