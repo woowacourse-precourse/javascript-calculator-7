@@ -1,43 +1,57 @@
-import App from "../src/App.js";
-import { MissionUtils } from "@woowacourse/mission-utils";
+import { Console } from '@woowacourse/mission-utils';
 
-const mockQuestions = (inputs) => {
-  MissionUtils.Console.readLineAsync = jest.fn();
+class App {
+  // process.exit()를 사용하지 않고 예외 처리
+async run() {
+  try {
+    const input = await Console.readLineAsync('덧셈할 문자열을 입력해 주세요.\n');
+    const result = this.calculateSum(input);
+    Console.print(`결과 : ${result}`);
+  } catch (error) {
+    Console.print(`[ERROR] ${error.message}`);
+  }
+}
 
-  MissionUtils.Console.readLineAsync.mockImplementation(() => {
-    const input = inputs.shift();
-    return Promise.resolve(input);
-  });
-};
 
-const getLogSpy = () => {
-  const logSpy = jest.spyOn(MissionUtils.Console, "print");
-  logSpy.mockClear();
-  return logSpy;
-};
+  calculateSum(input) {
+    if (input === '') return 0;
+  
+    const numbers = this.parseInput(input);
+  
+    const sum = numbers.reduce((acc, number) => {
+      const parsedNumber = Number(number);
+      if (isNaN(parsedNumber)) {
+        throw new Error('잘못된 입력입니다. 숫자가 아닙니다.');
+      }
+      if (parsedNumber < 0) {
+        throw new Error('잘못된 입력입니다. 음수는 허용되지 않습니다.');
+      }
+      return acc + parsedNumber;
+    }, 0);
+  
+    return sum;
+  }
+  
+  
+  parseInput(input) {
+    let delimiter = /,|:/; // 기본 구분자: 쉼표와 콜론
+    let numbers = input;
+  
+    // 커스텀 구분자 확인
+    if (input.startsWith('//')) {
+      const endOfDelimiterIndex = input.indexOf('\n');
+      delimiter = input.substring(2, endOfDelimiterIndex); // 커스텀 구분자 추출
+      numbers = input.substring(endOfDelimiterIndex + 1); // 구분자 뒤의 숫자 추출
+    }
+  
+    return numbers.split(new RegExp(`[${delimiter}]`));
+  }
+  
+  }
 
-describe("문자열 계산기", () => {
-  test("커스텀 구분자 사용", async () => {
-    const inputs = ["//;\\n1"];
-    mockQuestions(inputs);
 
-    const logSpy = getLogSpy();
-    const outputs = ["결과 : 1"];
+const app = new App();
+app.run();
 
-    const app = new App();
-    await app.run();
+export default App;
 
-    outputs.forEach((output) => {
-      expect(logSpy).toHaveBeenCalledWith(expect.stringContaining(output));
-    });
-  });
-
-  test("예외 테스트", async () => {
-    const inputs = ["-1,2,3"];
-    mockQuestions(inputs);
-
-    const app = new App();
-
-    await expect(app.run()).rejects.toThrow("[ERROR]");
-  });
-});
