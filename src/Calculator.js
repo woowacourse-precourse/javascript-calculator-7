@@ -9,7 +9,7 @@ class Calculator {
     this.#numbers = 0;
   }
 
-  splitText() {
+  splitTextToNumber() {
     const separatorsRegex = new RegExp(`${DEFAULT_SEPARATORS.join('|')}`, 'g');
     this.#numbers = this.#inputText.split(separatorsRegex).map(Number);
   }
