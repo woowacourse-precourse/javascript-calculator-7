@@ -2,8 +2,8 @@ import {
   DEFAULT_SEPARATORS,
   CUSTOM_SEPARATOR_START,
   CUSTOM_SEPARATOR_END,
-} from '../constant/separator.js'
-import { ERROR_MESSAGE } from '../constant/error.js'
+} from '../constant/separator.js';
+import { ERROR_MESSAGE } from '../constant/error.js';
 
 class Calculator {
   /**
