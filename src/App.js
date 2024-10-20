@@ -5,7 +5,7 @@ class App {
     const input = await Console.readLineAsync(
       "덧셈할 문자열을 입력해 주세요.\n"
     );
-    const nums = [];
+    let nums = [];
     let formattedInput = input.replace(/\\n/g, "\n");
     let delimiter = /,|:/;
 
