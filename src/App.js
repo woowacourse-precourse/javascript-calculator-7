@@ -1,4 +1,4 @@
-import CalculatorController from "./controller/CalculatorController.js";
+import CalculatorController from './controller/CalculatorController.js';
 
 class App {
   async run() {

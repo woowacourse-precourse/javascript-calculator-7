@@ -1,6 +1,6 @@
-import Input from "../view/Input.js";
-import Output from "../view/Output.js";
-import Calculator from "../model/Calculator.js";
+import Input from '../view/Input.js';
+import Output from '../view/Output.js';
+import Calculator from '../model/Calculator.js';
 
 export default class CalculatorController {
   /**

@@ -10,7 +10,7 @@ export default class Calculator {
    * @type {Array<string>}
    */
   separators = [];
-  value = "";
+  value = '';
 
   /**
    * @param {string} input 
