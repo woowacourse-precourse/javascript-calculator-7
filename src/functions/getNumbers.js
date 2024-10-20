@@ -18,9 +18,17 @@ const isValidateInput = function validateInputFunc(input, escapedDelimiters) {
   }
 };
 
+const splitInput = function splitInputByDelimiters(input, escapedDelimiters) {
+  const delimiterRegex = new RegExp(`[${escapedDelimiters}]`);
+
+  return input.split(delimiterRegex);
+};
+
 const getNumbers = function saveNumbersFromStringFunc(input, delimiters) {
   const escapedDelimiters = createEscapedDelimiter(delimiters);
   isValidateInput(input, escapedDelimiters);
+
+  const splitString = splitInput(input, escapedDelimiters);
 };
 
 export default getNumbers;
