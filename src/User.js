@@ -1,7 +1,7 @@
 import { Console } from '@woowacourse/mission-utils';
 import { MESSAGES } from './constants/Messages.js';
 import { DELIMITERS } from './constants/Delimeters.js';
-import { seperateCustomDelimiter } from './handleCustomDelimiter.js';
+import seperateCustomDelimiter from './handleCustomDelimiter.js';
 import validator from './utils/validator.js';
 
 class User {
