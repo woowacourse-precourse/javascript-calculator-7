@@ -4,38 +4,51 @@
 
 ---
 
-### 입력
-
----
+### 입력 및 출력
 
 #### 사용자가 입력한 문자열을 반환
 
 [getAddInput](https://github.com/thumbthing/javascript-calculator-7/blob/thumbthing/src/UI/getAddInput.js)
 
-- 동작 과정
+구현 기능 목록
 
-1. 비동기로 유저의 입력값을 받아서 변수에 저장
-2. 변수를 반환
+> 1. 비동기로 유저의 입력값을 받아서 변수에 저장
+> 2. 변수를 반환
+>
+> * 에러처리
+>
+>> * 유저의 입력값을 받는 과정에서 오류가 발생했을 경우  
+>>   1. 에러메시지 변수를 선언
+>>   2. 에러메시지를 활용해서 새로운 에러 객체를 생성
+>>   3. 에러 객체를 반환
 
-* 에러처리
+#### 입력값의 결과를 출력
 
-1. 유저의 입력값을 받는 과정에서 오류가 발생했을 경우
-    1. 에러메시지 변수를 선언
-    2. 에러메시지를 활용해서 새로운 에러 객체를 생성
-    3. 에러 객체를 반환
+[resultUI](https://github.com/thumbthing/javascript-calculator-7/blob/thumbthing/src/UI/resultUI.js)
 
-### 입력값 검수
+구현 기능 목록
+
+> **resultUI**
+> - 매개변수: totalSum  
+> - 상수로 선언된 출력 형식을 선언 (상수명: RESULT_START)  
+> - 계산된 값과 출력 형식을 백틱을 활용하여 메시지를 상수로 선언(상수명: RESULT_MESSAGE)  
+> - RESULT_MESSAGE를 유저에게 출력
 
 ---
+
+### 입력값 검수 및 변환
 
 - 입력된 문자열을 검수  
   1. 커스텀 구분자의 존재 유무
       - 커스텀 구분자의 유효성 검사
   2. 구분자(기본, 커스텀)를 기준으로 입력값을 문자열 -> 배열로 변환
-  3. 배열로 변환된 입력값의 유효성 검사
+    3. 문자열을 배열로 변환  
+      1. 기본 구분자 (, / :)를 사용해서 변환
+      2. 커스텀 구분자를 사용해서 변환
+  4. 배열로 변환된 입력값의 유효성 검사
       - 문자열 -> 숫자로 변환이 가능한 입력값인지
       - 구분자(기본, 커스텀) 이외의 구분자의 존재 유무
-  4. 유효성을 통과한 변환값을 반환
+  5. 유효성을 통과한 변환값을 반환
 
 #### 입력받은 문자열을 변환하여 반환
 
@@ -95,28 +108,65 @@
 >> - split 메소드를 활용하여 SEPARATOR_REGEX를 기준으로 유저의 입력값을 문자열형식의 배열로 변환하여 변수에 저장 (변수명: userStringArray)  
 >> - userStringArray 를 반환
 
-### 입력값 변환
+#### 배열의 변환 및 유효성 검사
+
+[getNumberArray](https://github.com/thumbthing/javascript-calculator-7/blob/thumbthing/src/feature/converter/arrayConverter.js)  
 
 ---
-1. 문자열을 배열로 변환  
-    1. 기본 구분자 (, / :)를 사용해서 변환
-    2. 커스텀 구분자를 사용해서 변환
-2. 배열 내의 요소를 문자열 -> 숫자로 변환
+1. 배열 내의 요소를 문자열 -> 숫자로 변환  
+2. 요소의 NaN, 음의 정수, decimal을 검사
+3. 해당될 경우 해당사항에 대한 에러 메시지를 생성, 에러 객체를 에러 메시지를 활용해서 생성, 에러 메시지를 throw
 
+구현 기능 목록
+
+> **getNumberArray**  
+> - 매개변수: stringArray  
+> - map 메소드를 활용하여 문자열 배열을 변환 및 유효성 검사
+> - 요소를 Number로 변환
+>> - 유효성 검사 목록
+>>> 1. NaN  
+>>>> - isNaN을 활용하여 검사
+>>> 2. 음의 정수  
+>>>> - 비교 연산자를 활용하여 검사
+>>> 3. decimal
+>>>> - Math.floor로 변환된 값과 기존 값의 동일여부를 검사
+>> 해당하는 항목의 에러 메시지를 생성
+>> 생성자를 활용하여 Error를 생성
+>> ERROR를 throw
+
+---
 
 ### 입력값 계산
 
+[inputAdder](https://github.com/thumbthing/javascript-calculator-7/blob/thumbthing/src/feature/caculate/inputAdder.js)
+
+
+- 변환된 입력값을 덧셈으로 계산하여 결과값을 반환  
+
+구현 기능 목록
+
+> **inputAdder**
+> - 매개변수: numberList
+> - reduce 메소드를 활용하여 TOTAL_SUM을 반환  
+> TOTAL_SUM을 반환
+
 ---
-
-변환된 입력값을 덧셈으로 계산하여 결과값을 반환
-
 
 ### 에러 처리
 
----
+[errorhandler](https://github.com/thumbthing/javascript-calculator-7/blob/thumbthing/src/feature/error/errorHandler.js)
 
-1. 커스텀 구분자의 유효성
-2. 입력값의 유효성  
+- 요구사항에 해당하는 에러 처리 방식의 handler
+
+구현 기능 목록
+
+> errorHandler  
+> 매개변수: occurredError  
+> 상수로 DEFAULT_ERROR_MESSAGE 를 선언  
+> 변수로 occurredError의 message를 저장(변수명: errorMessage)  
+> @woowacourse/mission-utils 의 Console.print()를 활용하여 에러 메시지를 출력
+> DEFAULT_ERROR_MESSAGE 를 throw
+
 
 ## Commit Message
 
