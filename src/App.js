@@ -47,8 +47,10 @@ class App {
 
     // 숫자배열의 숫자 총 합 계산
     result = arr.map(Number).reduce((a,b) => a+b);
+
+     // 결과 출력
+     MissionUtils.Console.print(`결과 : ${result}`);
   }
-  
 }
 
 export default App;
