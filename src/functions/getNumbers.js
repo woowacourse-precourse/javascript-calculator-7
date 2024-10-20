@@ -22,10 +22,12 @@ const isValidateInput = function validateInputFunc(input, escapedDelimiters) {
 const splitInput = function splitInputByDelimiters(input, escapedDelimiters) {
   const delimiterRegex = new RegExp(`[${escapedDelimiters}]`);
 
-  return input.split(delimiterRegex);
+  const splitResult = input.split(delimiterRegex).filter(item => item !== '');
+
+  return splitResult;
 };
 
-const convertNumbers = function convertNumbers(splitString) {
+const convertNumbers = function convertNumbersFunc(splitString) {
   const numbers = splitString.map(string => parseInt(string, 10));
 
   return numbers;
