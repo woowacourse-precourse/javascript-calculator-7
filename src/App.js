@@ -1,5 +1,15 @@
+// @ts-check
+
+import Game from './controller/Game.js';
+
 class App {
-  async run() {}
+  constructor() {
+    this.game = new Game();
+  }
+
+  async run() {
+    await this.game.process();
+  }
 }
 
 export default App;
