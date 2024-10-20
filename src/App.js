@@ -8,8 +8,7 @@ class App {
       const input = await Console.readLineAsync("덧셈할 문자열을 입력해 주세요\n");
 
       if (input.length <= 1 && !isNaN(input)) {
-        const inputNumbers = Number(input);
-        Console.print("결과 : " + inputNumbers);
+        this.printResult(Number(input));
         return;
       }
 
@@ -37,10 +36,13 @@ class App {
         return accumulator + currentValue;
       });
 
-      Console.print("결과 : " + sum);
+      this.printResult(sum);
     } catch (error) {
       Console.print("[ERROR] " + error.message);
     }
+  }
+  printResult(result) {
+    Console.print("결과 : " + result);
   }
 }
 
