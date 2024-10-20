@@ -42,6 +42,11 @@ class App {
       }
 
       if (IS_CUSTOM) {
+        if (!isNaN(CHAR_ARRAY[i])) {
+          throw new Error(
+            `구분자로 숫자는 사용할 수 없습니다: "${CHAR_ARRAY[i]}"`
+          );
+        }
         // 커스텀 구간 내의 구분자 추가!
         if (!SEPERATORS.includes(CHAR_ARRAY[i])) {
           SEPERATORS.push(CHAR_ARRAY[i]); // 기존 구분자 배열에 추가
