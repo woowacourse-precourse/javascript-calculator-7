@@ -1,9 +1,12 @@
-import {
+const {
   buildNormalInputValidationRegex,
   buildCustomInputValidationRegex,
-} from '../Util/regex.js';
-import { ERROR_PREFIX, ERROR_MESSAGES } from '../Constraints/Constraints.js';
-// import throwError from '../Error/handleError.js';
+} = require('../Util/regex.js');
+const {
+  ERROR_PREFIX,
+  ERROR_MESSAGES,
+} = require('../Constraints/Constraints.js');
+// const throwError = require('../Error/handleError.js');
 
 function validateCustomInputFormat(input) {
   const isInvalidFormat = !input.startsWith('//') || !input.includes('\\n');
@@ -27,4 +30,8 @@ function validateNormalInput(splitValues) {
   }
 }
 
-export { validateCustomInput, validateNormalInput, validateCustomInputFormat };
+module.exports = {
+  validateCustomInput,
+  validateNormalInput,
+  validateCustomInputFormat,
+};
