@@ -7,25 +7,35 @@ class App {
       (INPUT) => {
         var NUM_LIST = [];
         var NUM = "";
-        for (var i = 0; i <= INPUT.length; i++) {
+        var SEPARATOR = "";
+        var START_IDX = 1;
+
+        if ((INPUT.slice(0, 2) == "//") & (INPUT.slice(3, 5) == "\\n")) {
+          SEPARATOR = [INPUT.slice(2, 3)];
+          START_IDX = 5;
+        } else {
+          NUM = INPUT[0];
+        }
+
+        for (var IDX = START_IDX; IDX < INPUT.length; IDX++) {
           if (
-            ((i != 0) & ((INPUT[i] == ",") | (INPUT[i] == ":"))) |
-            (i == INPUT.length)
+            (!!SEPARATOR & (INPUT[IDX] == SEPARATOR)) |
+            (!SEPARATOR & ((INPUT[IDX] == ",") | (INPUT[IDX] == ":")))
           ) {
             NUM_LIST.push(parseInt(NUM));
             NUM = "";
           } else {
-            NUM += INPUT[i];
+            NUM += INPUT[IDX];
           }
-          // console.log(`i:${i}, NUM:${NUM}, NUM_LIST: ${NUM_LIST}`);
+          console.log(`NUM: ${NUM}, NUM_LIST: ${NUM_LIST}`);
         }
+        NUM_LIST.push(parseInt(NUM));
 
         const SUM = NUM_LIST.reduce((ACCU, CURR, IDX) => {
           return (ACCU += CURR);
         }, 0);
 
         console.log(`결과: ${SUM}`);
-        // console.log(`결과: ${NUM_LIST}`);
       }
     );
   }
