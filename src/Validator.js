@@ -1,4 +1,4 @@
-import { REGEX_CONSTANTS } from "../constants.js";
+import { REGEX_CONSTANTS } from "./constants.js";
 
 class Validator {
   static is_custom_string(user_string) {
