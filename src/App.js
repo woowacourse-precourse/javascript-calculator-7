@@ -1,16 +1,21 @@
 import { MissionUtils } from "@woowacourse/mission-utils"; 
+
+const { Console } = MissionUtils;
+
+const DEFAULT_DELIMITER = /,|:/;
+
 class App {
   async receiveInput() {
-    MissionUtils.Console.print("덧셈할 문자열을 입력해 주세요."); 
-    return await MissionUtils.Console.readLineAsync();
+    Console.print("덧셈할 문자열을 입력해 주세요."); 
+    return Console.readLineAsync();
   }
 
   getDelimiter(str) {
     if (!str.startsWith("//")) {
-      return /,|:/;
+      return DEFAULT_DELIMITER;
     }
     const [_, customDelimiter] = str.match(/\/\/(.*?)\\n/);
-    return new RegExp(/,|:/.source + '|' + customDelimiter);
+    return new RegExp(`${DEFAULT_DELIMITER.source}|${customDelimiter}`);
   }
 
   getNumbers(str, delimiter) {
@@ -22,7 +27,7 @@ class App {
   }
 
   getSum(numbers) {
-    return numbers.reduce((total, num) => total + Number(num), 0);
+    return numbers.map(Number).reduce((total, num) => total + num, 0);
   }
 
   checkNumbers(numbers) {
@@ -41,10 +46,10 @@ class App {
       
       this.checkNumbers(numbers);
 
-      const sum = this.getSum(numbers);
-      MissionUtils.Console.print("결과 : " + sum);
+      const result = this.getSum(numbers);
+      Console.print(`결과 : ${result}`);
     } catch (error) {
-      MissionUtils.Console.print(error.message);
+      Console.print(error.message);
       throw error;
     }
   }
