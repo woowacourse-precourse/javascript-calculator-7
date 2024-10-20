@@ -21,7 +21,7 @@
 - [x] 분리한 숫자들의 합 반환
 - [x] 에러 처리
 
-## 흐름도 설계
+## 🖊️ 흐름도 설계
 
 ![흐름도](flowchart.png)
 
@@ -120,4 +120,45 @@ export const calculateSum = (nums) => {
 
 ## 💥 트러블 슈팅
 
+### 1. npm 버전이 안 맞아서 발생한 문제
+
+- 에러 메시지
+
+```
+npm error code EBADENGINE
+npm error engine Unsupported engine
+npm error engine Not compatible with your version of node/npm: javascript-calculator@0.0.0
+npm error notsup Not compatible with your version of node/npm: javascript-calculator@0.0.0
+npm error notsup Required: {"npm":">=10.8.2","node":">=20.17.0"}
+npm error notsup Actual:   {"npm":"10.8.1","node":"v22.3.0"}
+```
+
+**| 문제 상황**
+
+`npm install`을 수행했는데 발생
+
+**| 해결 방법**
+
+최신 버전으로 npm 업데이트
+
+### 2. import 시, .js 확장자가 없어서 발생한 문제
+
+- 에러 메시지
+
+```
+Error [ERR_MODULE_NOT_FOUND]: Cannot find module '/Users/soeun/Study/Woowacourse/precourse/javascript-calculator-7/src/utils/throwError' imported from /Users/soeun/Study/Woowacourse/precourse/javascript-calculator-7/src/validators/inputValidator.js
+```
+
+**| 문제 상황**
+
+throwError 모듈을 import 했는데 발생
+
+**| 해결 방법**
+
+`import { throwError } from '../utils/throwError'` 로 되어 있던 것을 .js를 추가하여 `import { throwError } from '../utils/throwError.js'` 로 선언하여 해결
+
 ## 📖 참고 사항
+
+- [정규표현식](https://velog.io/@ino5/%EC%9E%90%EB%B0%94%EC%8A%A4%ED%81%AC%EB%A6%BD%ED%8A%B8-%EC%A0%95%EA%B7%9C%ED%91%9C%ED%98%84%EC%8B%9D%EC%9C%BC%EB%A1%9C-%EB%AC%B8%EC%9E%90%EC%97%B4%EC%9D%B4-%ED%8A%B9%EC%A0%95-%ED%8C%A8%ED%84%B4-%EB%A7%8C%EC%A1%B1%ED%95%98%EB%8A%94%EC%A7%80-%ED%99%95%EC%9D%B8%ED%95%98%EA%B8%B0)
+- [match 메서드](https://developer.mozilla.org/ko/docs/Web/JavaScript/Reference/Global_Objects/String/match)
+- [trim 메서드](https://developer.mozilla.org/ko/docs/Web/JavaScript/Reference/Global_Objects/String/trim)
