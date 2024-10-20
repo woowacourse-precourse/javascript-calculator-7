@@ -27,8 +27,16 @@ class App {
       str = parseStrWithCustomSeparator(input);
     }
 
-    console.log("separators", separators);
-    console.log("str", str);
+    const separateStr = (str, separators) => {
+      let newStr = str;
+      separators.forEach((separator) => {
+        const regex = new RegExp(`[${separator}]`, "g");
+        newStr = newStr.replace(regex, ",");
+      });
+      const arr = newStr.split(",");
+      return arr;
+    };
+    Console.print(separateStr(str, separators));
   }
 }
 
