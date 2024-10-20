@@ -1,14 +1,14 @@
 import { Console } from '@woowacourse/mission-utils';
 import {
   verifyCustomSeparator,
-  verifyUselessInput,
-  verifyNumber,
+  verifyInvalidSeparator,
+  verifyInvalidNumber,
 } from './VerifyInputUtils.js';
 
 class App {
   constructor() {
     this.separator = ',|:';
-    this.initValue = '';
+    this.valueToCalculate = '';
   }
 
   async getUserinput() {
@@ -19,9 +19,9 @@ class App {
   }
 
   getCustomSeparator(userinput) {
-    const isCustomSeparator =
+    const hasCustomSeparator =
       userinput.slice(0, 2) === '//' && userinput.slice(3, 5) === '\\n';
-    if (isCustomSeparator) {
+    if (hasCustomSeparator) {
       return userinput[2];
     }
     return '';
@@ -35,22 +35,21 @@ class App {
 
   updateInputValue(userinput, customSeparator) {
     if (customSeparator) {
-      this.initValue = userinput.slice(5);
-      console.log(this.initValue);
+      this.valueToCalculate = userinput.slice(5);
     }
     if (!customSeparator) {
-      this.initValue = userinput;
+      this.valueToCalculate = userinput;
     }
   }
 
   verifyUserinput(customSeparator) {
     const re = new RegExp(this.separator);
-    const arrValue = this.initValue.split(re);
+    const arrValue = this.valueToCalculate.split(re);
     if (customSeparator) {
       verifyCustomSeparator(customSeparator);
     }
-    verifyUselessInput(arrValue, customSeparator);
-    verifyNumber(arrValue);
+    verifyInvalidSeparator(arrValue, customSeparator);
+    verifyInvalidNumber(arrValue);
   }
 
   caculateValue() {

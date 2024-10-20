@@ -1,4 +1,4 @@
-function hasUselesString(element, customSeparator) {
+function hasInvalidSeparator(element, customSeparator) {
   return (
     element !== ',' &&
     element !== ':' &&
@@ -13,9 +13,9 @@ export function verifyCustomSeparator(customSeparator) {
   }
 }
 
-export function verifyUselessInput(arrValue, customSeparator) {
+export function verifyInvalidSeparator(arrValue, customSeparator) {
   arrValue.forEach((element) => {
-    if (hasUselesString(element, customSeparator)) {
+    if (hasInvalidSeparator(element, customSeparator)) {
       throw new Error(
         '[ERROR] 커스텀 구분자와 쉼표(,), 콜론(:) 이외의 문자를 입력할 수 없습니다.'
       );
@@ -23,9 +23,9 @@ export function verifyUselessInput(arrValue, customSeparator) {
   });
 }
 
-export function verifyNumber(arrValue) {
-  const isNegativeNumber = arrValue.some((element) => element < 0);
-  if (isNegativeNumber) {
+export function verifyInvalidNumber(arrValue) {
+  const hasNegativeNumber = arrValue.some((element) => element < 0);
+  if (hasNegativeNumber) {
     throw new Error('[ERROR] 덧셈할 숫자로 양수를 입력해 주세요.');
   }
 }
