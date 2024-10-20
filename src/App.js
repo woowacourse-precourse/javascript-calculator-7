@@ -1,14 +1,13 @@
 import { Console } from '@woowacourse/mission-utils';
-import path from 'path'; // 추가
 
 class App {
   run() {
     Console.readLineAsync('덧셈할 문자열을 입력해 주세요.\n', (input) => {
       try {
         const result = this.calculateSum(input);
-        Console.print(`결과 : ${result}`);
+        Console.print(결과 : ${result});
       } catch (error) {
-        Console.print(`[ERROR] ${error.message}`);
+        Console.print([ERROR] ${error.message});
       }
     });
   }
@@ -44,18 +43,13 @@ class App {
     }
 
     // 구분자를 기준으로 문자열을 분리
-    numbers = numbers.split(new RegExp(`[${delimiter}]`));
+    numbers = numbers.split(new RegExp([${delimiter}]));
 
     return { numbers, delimiter };
   }
 }
 
 const app = new App();
-
-// 동적으로 현재 파일의 경로에 맞춰 App.js를 실행
-const currentDirectory = path.resolve(__dirname, 'src');
-process.chdir(currentDirectory); // 실행 디렉토리를 src로 변경
-
 app.run();
 
 export default App;
