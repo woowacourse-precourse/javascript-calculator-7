@@ -7,7 +7,7 @@ class App {
     const input = await Console.readLineAsync(SYSTEM_MESSAGES.ASK_USER_INPUT);
 
     const result = parseString(input);
-    return Console.print(`${SYSTEM_MESSAGES.PARSE_RESULT}${result}`);
+    Console.print(`${SYSTEM_MESSAGES.PARSE_RESULT}${result}`);
   }
 }
 
