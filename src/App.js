@@ -10,6 +10,7 @@ class App {
       if (this.isValidInput(input)) {
         this.plus();
       } else {
+        MissionUtils.Console.print("[ERROR] 유효한 입력값이 아닙니다.");
       }
     } catch (error) {
       MissionUtils.Console.print(`[ERROR] ${error}`);
@@ -18,6 +19,9 @@ class App {
 
   // 유효한 입력값인지 확인하는 함수
   isValidInput(input) {
+    if (input.length == 0) {
+      return false;
+    }
     return true;
   }
 
