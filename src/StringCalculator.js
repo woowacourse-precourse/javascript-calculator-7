@@ -12,6 +12,22 @@ class StringCalculator {
       Console.print(error.message);
     }
   }
+
+  sum(input) {
+    if (!input.trim()) return 0; // 빈 입력 처리
+
+    // 커스텀 구분자 추출
+    const { delimiters, trimmedInput } = this.extractDelimiters(input);
+    console.log("delimiters:", delimiters);
+    console.log("trimmedInput:", trimmedInput);
+
+    const numbers = this.splitNumbers(trimmedInput, delimiters);
+    console.log("numbers:", numbers);
+
+    this.validateNumbers(numbers);
+
+    return numbers.reduce((acc, curr) => acc + Number(curr), 0);
+  }
 }
 
 export default StringCalculator;
