@@ -44,6 +44,9 @@ class App {
     
     // 구분자들을 기준으로 나눈 숫자 배열 추출
     const arr = str.split(sepRegExp);
+
+    // 숫자배열의 숫자 총 합 계산
+    result = arr.map(Number).reduce((a,b) => a+b);
   }
   
 }
