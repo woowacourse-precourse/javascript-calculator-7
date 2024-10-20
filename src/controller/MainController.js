@@ -8,13 +8,21 @@ const calculator = new StringCalculator();
 export class MainController {
   constructor() {
     this.inputString;
+
     this.delimiter = [',', ':'];
     this.valueString;
+
     this.values;
     this.sumValue;
   }
+
   async getUserInput() {
     this.inputString = await user.getInputString();
+    try {
+      ValidateError.validateNoWhitespace(this.inputString);
+    } catch (err) {
+      throw new Error('[ERROR] ' + err.message);
+    }
   }
   separateInput() {
     if (this.inputString.startsWith('//')) {
