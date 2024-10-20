@@ -1,29 +1,26 @@
+import ERROR_MESSAGES from './constants/errorMessages.js';
 import throwError from './error/errorHandler.js';
 
 /**
  * 숫자가 음수일 경우 예외를 던진다.
  *
- * @function isNegativeNumber
+ * @function checkNegativeNumber
  * @param {number} number - 검사할 숫자
- * @throws {Error} 음수일 경우 'NEGATIVE_NUMBER' 예외를 던진다.
+ * @throws {Error} 음수일 경우 예외를 던진다.
  */
-export function isNegativeNumber(number) {
-  if (number < 0) throwError('NEGATIVE_NUMBER');
+export function checkNegativeNumber(number) {
+  if (number < 0) throwError(ERROR_MESSAGES.NEGATIVE_NUMBER);
 }
 
 /**
- * 문자열이 숫자로 변환 가능한지 검사한다.
+ * 주어진 값이 유효한 숫자인지 확인한다.
  *
- * @function isNumber
+ * @function checkNumber
  * @param {string} value - 검사할 문자열
- * @returns {number} 문자열을 변환한 숫자
  * @throws {Error} 유효하지 않은 문자가 포함된 경우 예외를 던진다.
  */
-export function isNumber(value) {
-  const number = Number(value);
-
-  if (Number.isNaN(number)) throwError('INVALID_CHARACTER');
-  return number;
+export function checkNumber(value) {
+  if (Number.isNaN(value)) throwError(ERROR_MESSAGES.INVALID_CHARACTER);
 }
 
 /**
@@ -45,8 +42,9 @@ export function isEmptyString(userInput) {
  * @param {string} userInput - 검사할 입력 문자열
  * @throws {Error} 혼용된 구분자가 있을 경우 예외를 던진다.
  */
-export function checkForMixedDelimiters(userInput) {
-  if (/^\/\/(.*?)\\n.*[,:]/.test(userInput)) throwError('MIXED_DELIMITERS');
+function checkForMixedDelimiters(userInput) {
+  if (/^\/\/(.*?)\\n.*[,:]/.test(userInput))
+    throwError(ERROR_MESSAGES.MIXED_DELIMITERS);
 }
 
 /**
@@ -56,10 +54,10 @@ export function checkForMixedDelimiters(userInput) {
  * @param {string[]} splitValues - 분리된 문자열 배열
  * @throws {Error} 구분자만 있을 경우 예외를 던진다.
  */
-export function checkForDelimiterOnly(splitValues) {
+function checkForDelimiterOnly(splitValues) {
   const isOnlyDelimeter = splitValues.every((value) => value === '');
 
-  if (isOnlyDelimeter) throwError('ONLY_DELIMITER');
+  if (isOnlyDelimeter) throwError(ERROR_MESSAGES.ONLY_DELIMITER);
 }
 
 /**
@@ -77,9 +75,7 @@ export function validateSplitValues(
 ) {
   checkForDelimiterOnly(splitValues);
 
-  if (hasCustomDelimiter) {
-    checkForMixedDelimiters(userInput);
-  }
+  if (hasCustomDelimiter) checkForMixedDelimiters(userInput);
 }
 
 /**
@@ -90,5 +86,5 @@ export function validateSplitValues(
  * @throws {Error} 구분자가 올바르지 않은 위치에 있을 경우 예외를 던진다.
  */
 export function checkCustomDelimiterPosition(match) {
-  if (!match) throwError('CUSTOM_DELIMITER_POSITION');
+  if (!match) throwError(ERROR_MESSAGES.CUSTOM_DELIMITER_POSITION);
 }
