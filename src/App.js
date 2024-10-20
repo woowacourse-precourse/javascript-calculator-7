@@ -12,23 +12,29 @@ class App {
 
   add(input) {
     if (!input) {
-      return 0; //빈 문자열 처리
+      return 0; // 빈 문자열 처리
     }
-    let seperator = [',', ':'];
+
+    let separators = [',', ':'];
     let numString = input;
 
-    //커스텀 구분자 구현
+    // 커스텀 구분자 구현
     if (input.startsWith('//')) {
-      const customSeperatorEnd = input.indexOf('\\n');
-      if (customSeperatorEnd === -1) {
+      const customSeparatorEnd = input.indexOf('\\n');
+      if (customSeparatorEnd === -1) {
         throw new Error('[ERROR] Invalid input: Incorrect separator format');
       }
-      const customSeperator = input.slice(2, customSeperatorEnd);
-      seperator.push(customSeperator);
-      numString = input.slice(customSeperatorEnd + 2);
+      const customSeparator = input.slice(2, customSeparatorEnd);
+      separators = [customSeparator];
+      numString = input.slice(customSeparatorEnd + 2);
     }
-    const numArr = numString.split(new RegExp(`[${seperator.join('')}]`));
 
+    let numArr = [numString];
+    separators.forEach((separator) => {
+      numArr = numArr.flatMap((str) => str.split(separator));
+    });
+    Console.print(separators);
+    Console.print(numArr);
     return this.calSum(numArr);
   }
 
