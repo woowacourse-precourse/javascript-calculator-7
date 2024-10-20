@@ -50,14 +50,14 @@
 
 구현 전
 
-- [ ] 문자열 덧셈 계산기 저장소를 포크하고 클론
-- [ ] 과제 진행 요구 사항, 기능 요구 사항, 프로그래밍 요구 사항과 관련하여 README.md에 작성
+- [x] 문자열 덧셈 계산기 저장소를 포크하고 클론
+- [x] 과제 진행 요구 사항, 기능 요구 사항, 프로그래밍 요구 사항과 관련하여 README.md에 작성
 - [ ] 기능 단위로 커밋 진행
 - [ ] 기능 요구 사항에 기재되지 않은 내용은 스스로 판단 후 구현
 
 구현 중
 
-- [ ] 사용자에게 문자열 입력 받기
+- [x] 사용자에게 문자열 입력 받기
 - [ ] 구분자 구분하기 쉼표(,) / 콜론(:) 기준으로 각 숫자 합으로 반환
 - [ ] 커스텀 구분자 지정 : "//"와 "\n"구분 사이에 문자 커스텀 구분자 지정하기
 - [ ] 구분자 기준으로 문자열 나누기
@@ -98,11 +98,13 @@
 
 ## 배운점 - 추가적인 학습 내용
 
-- Git 기초학습
-- 기능 명세서 작성법
-- Git Commit Message Conventions(AngularJS Git Commit Message Conventions)이란 + JavaScript Style Guide
+- [Git 기초학습](https://velog.io/@jitae/GitGitHub%EB%B3%B5%EC%8A%B5)
+- [기능 명세서 작성법](https://velog.io/@jitae/%EA%B8%B0%EB%8A%A5%EB%AA%85%EC%84%B8%EC%84%9C)
+- [Git Commit Message Conventions: feat.AngularJS](https://velog.io/@jitae/GitCommitMessageConventions)
 - `process.exit() / Console.readLineAsync() / Console.print()`
 
 ## 느낀점
+
+## 한줄평
 
 ## 많은 시간 투자 부분
