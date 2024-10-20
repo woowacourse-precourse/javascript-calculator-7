@@ -43,7 +43,7 @@ async function askForInput() {
         return;
       }
 
-      Console.print(`결과 : ${add(userInput)}`); // 수정: 템플릿 리터럴로 출력
+      Console.print(`결과 : ${add(userInput)}`); 
     } catch (error) {
       Console.print("[ERROR]");
       return;
