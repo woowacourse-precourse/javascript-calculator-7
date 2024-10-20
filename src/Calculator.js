@@ -1,4 +1,4 @@
-import { INPUT_ERROR } from "./constant";
+import { INPUT_ERROR } from "./constant.js";
 
 class Calculator {
     seperator;

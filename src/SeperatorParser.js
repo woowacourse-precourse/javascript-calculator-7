@@ -1,4 +1,4 @@
-import { INPUT_FILTER_REGEXP, SEPERATOR_REGEXP } from "./constant";
+import { INPUT_FILTER_REGEXP, SEPERATOR_REGEXP } from "./constant.js";
 
 const seperatorParser = {
     parseSeperator(input) {
