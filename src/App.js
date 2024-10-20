@@ -16,7 +16,7 @@ class App {
       return;
     }
 
-    const modifiedInput = this.findAndRemoveCustomDelimiters(input, delimiters);
+    const modifiedInput = this.findCustomDelimiters(input, delimiters);
 
     const splitedInput = this.splitNumbers(modifiedInput, delimiters);
 
@@ -35,7 +35,7 @@ class App {
     return numbers.reduce((acc, cur) => acc + cur, 0);
   }
 
-  findAndRemoveCustomDelimiters(input, delimiters) {
+  findCustomDelimiters(input, delimiters) {
     let modifiedInput = input;
 
     while (true) {
@@ -47,15 +47,23 @@ class App {
 
       const customDelimiter = match[1];
       delimiters.push(customDelimiter);
-
       const matchIndex = match.index;
-      const beforePattern = modifiedInput.slice(0, matchIndex);
-      const afterPattern = modifiedInput.slice(matchIndex + 5);
-      modifiedInput = beforePattern + afterPattern;
+      
+      modifiedInput = this.RemoveCustomDelimiters(modifiedInput,matchIndex);
     }
 
     return modifiedInput;
   }
+  
+  RemoveCustomDelimiters(modifiedInput, matchIndex)
+  {
+    const beforePattern = modifiedInput.slice(0, matchIndex);
+    const afterPattern = modifiedInput.slice(matchIndex + 5);
+    const removedInput = beforePattern + afterPattern;
+
+    return removedInput;
+  }
+
 
   splitNumbers(modifiedInput, delimiters) {
     let splitedInput = [modifiedInput];
