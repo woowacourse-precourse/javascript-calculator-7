@@ -3,7 +3,7 @@ import { inputUserString } from "./Input.js";
 import { getCustomDelimiter } from "./utils/getCustomDelimiter.js";
 import { getNumber } from "./utils/getNumber.js";
 import throwError from "./utils/throwError.js";
-import isNumber from "./validator.js";
+import { isNumber } from "./validators/numberValidator.js";
 
 class App {
   async run() {
