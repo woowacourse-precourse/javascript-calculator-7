@@ -9,11 +9,6 @@ class App {
         "덧셈할 문자열을 입력해 주세요.\n"
       );
 
-      if (input.trim() === "") {
-        Console.print("결과 : " + 0);
-        return;
-      }
-
       const checkHasCustom = (string) => {
         if (string.startsWith("//") && string.includes("\\n")) {
           const DELIMITER = string.slice(2, string.indexOf("\\n"));
@@ -27,6 +22,13 @@ class App {
       };
 
       const customDelimiter = checkHasCustom(input);
+      if (
+        input.includes(`${customDelimiter}${customDelimiter}`) ||
+        input.includes(",,") ||
+        input.includes(";;")
+      ) {
+        throw new Error(ERROR_MESSAGE);
+      }
       const regexString = customDelimiter
         ? `${escapeRegExp(customDelimiter)}|//|\\\\n|,|:`
         : ",|:";
@@ -37,7 +39,7 @@ class App {
         .split("!")
         .map((value) => {
           const num = Number(value);
-          if (isNaN(num) || !num) {
+          if (isNaN(num)) {
             throw new Error(ERROR_MESSAGE);
           }
           return num;
