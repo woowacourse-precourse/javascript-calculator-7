@@ -31,3 +31,13 @@ class CalculatorApp {
     let userInput = await MissionUtils.Console.readLineAsync(
       "덧셈할 문자열을 입력해 주세요.\n"
     );
+
+    // 커스텀 구분자가 있는지 확인
+    if (CUSTOM_DELIMITER_REGEX.test(userInput)) {
+      const customDelimiter = CUSTOM_DELIMITER_REGEX.exec(userInput);
+      this.#delimiters.push(customDelimiter[1]);  // 커스텀 구분자 추가
+      userInput = userInput.replace(CUSTOM_DELIMITER_REGEX, "");  // 구분자 제거
+    }
+
+    const regexForSplitting = new RegExp(this.#escapeDelimiterRegExp());  // 구분자 기반으로 분리
+    const inputArray = userInput.split(regexForSplitting);
