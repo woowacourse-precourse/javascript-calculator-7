@@ -1,5 +1,6 @@
 import App from '../src/App.js';
 import { MissionUtils } from '@woowacourse/mission-utils';
+import { errorMessages } from '../src/constant.js';
 
 const mockQuestions = (inputs) => {
   MissionUtils.Console.readLineAsync = jest.fn();
@@ -38,6 +39,6 @@ describe('문자열 계산기', () => {
 
     const app = new App();
 
-    await expect(app.run()).rejects.toThrow('[ERROR]');
+    await expect(app.run()).toThrow(errorMessages.unexpectedError);
   });
 });

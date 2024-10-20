@@ -1,6 +1,7 @@
 import { Console } from '@woowacourse/mission-utils';
 import Calculator from '../Calculator.js';
 import Validator from '../Validator.js';
+import { errorMessages } from '../constant.js';
 
 export async function inputService() {
   while (true) {
@@ -17,6 +18,8 @@ export async function inputService() {
     if (validator.valid(input)) {
       Console.print(`결과 : ${calculator.add(input)}`);
       return;
+    } else {
+      throw Error(errorMessages.unexpectedError);
     }
   }
 }

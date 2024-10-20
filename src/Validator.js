@@ -3,11 +3,11 @@ import { errorMessages, Regex } from './constant.js';
 class Validator {
   valid(input) {
     if (this.notInputCustomDelimiter(input)) {
-      throw new Error(`[ERROR]: ${errorMessages.notInputCustomDelimiter}`);
+      throw Error(errorMessages.notInputCustomDelimiter);
     }
 
     if (this.invalidCustomDelimiter(input)) {
-      throw new Error(`[ERROR]: ${errorMessages.invalidCustomDelimiter}`);
+      throw Error(errorMessages.invalidCustomDelimiter);
     }
 
     return Regex.valid.test(input);
@@ -20,10 +20,6 @@ class Validator {
   invalidCustomDelimiter(input) {
     return Regex.invalidCustomDelimiter.test(input);
   }
-
-  // invalidDelimiter(input) {
-  //   return Regex.invalidDelimiter.test(input);
-  // }
 }
 
 export default Validator;

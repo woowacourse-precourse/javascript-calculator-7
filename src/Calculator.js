@@ -13,7 +13,7 @@ class Calculator {
 
     if (customDelimiter) {
       if (this.delimiters.includes(customDelimiter)) {
-        throw new Error(`[ERROR]: ${errorMessages.duplicatedDelimiter}`);
+        throw Error(errorMessages.duplicatedDelimiter);
       }
 
       this.delimiters.push(customDelimiter);
@@ -29,7 +29,7 @@ class Calculator {
     const result = this.numbers.reduce((acc, delimiter) => acc + Number(delimiter), 0);
 
     if (!result) {
-      throw new Error(`[ERROR]: ${errorMessages.invalidDelimiter}`);
+      throw Error(errorMessages.invalidDelimiter);
     }
 
     return result;
