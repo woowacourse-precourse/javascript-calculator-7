@@ -17,16 +17,16 @@ class App {
   }
 
   static async #getUserInput() {
-    const USER_INPUT = await Console.readLineAsync('덧셈할 문자열을 입력해 주세요.\n');
-    return USER_INPUT.trim();
+    const input = await Console.readLineAsync('덧셈할 문자열을 입력해 주세요.\n');
+    return input.trim();
   }
 
   #checkIsEmptyAndCalculate() {
     if (isEmptyOrNull(this.#input)) {
       this.#sum = 0;
     } else {
-      const CALCULATOR = new Calculator(this.#input);
-      this.#sum = CALCULATOR.calculate();
+      const calculator = new Calculator(this.#input);
+      this.#sum = calculator.calculate();
     }
   }
 
