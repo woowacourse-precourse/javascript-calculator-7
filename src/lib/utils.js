@@ -77,3 +77,13 @@ export function trimWhitespace(value) {
 export function calculateTotal(values) {
   return values.reduce((sum, current) => sum + current, 0);
 }
+
+/**
+ *
+ * @param {object} regEx
+ * @param {string} value
+ * @returns {string | null}
+ */
+export function findCapturedValue(regEx, value) {
+  return value.match(regEx)[1];
+}

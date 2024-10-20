@@ -1,11 +1,20 @@
-import { filterEmpty, isMatch, isStartsWith, shallowCopy } from '../lib/utils.js';
+import {
+  filterEmpty,
+  findCapturedValue,
+  isMatch,
+  isStartsWith,
+  shallowCopy,
+} from '../lib/utils.js';
 
 class Delimiter {
   /** @type {Array<string>} */
   #defaultDelimiters = [',', ':'];
 
   /** @type {object} */
-  #customDelimiterRegEx = /\/\/.*\\n/;
+  #customDelimiterFormatRegEx = /\/\/.*\\n/;
+
+  /** @type {object} */
+  #customDelimiterRegEx = /\/\/(.*?)\\n/;
 
   /** @type {Array<string>} */
   #customDelimiterMatchers = ['//', '\\n'];
@@ -18,7 +27,7 @@ class Delimiter {
   hasCustomDelimiter(value) {
     return (
       isStartsWith(this.#customDelimiterMatchers[0], value) &&
-      isMatch(this.#customDelimiterRegEx, value)
+      isMatch(this.#customDelimiterFormatRegEx, value)
     );
   }
 
@@ -28,9 +37,19 @@ class Delimiter {
    * @returns {string}
    */
   getCustomDelimiter(value) {
-    const [start, end] = this.#customDelimiterMatchers;
+    return findCapturedValue(this.#customDelimiterRegEx, value);
+  }
 
-    return value.split(start)[1].split(end)[0];
+  /**
+   *
+   * @param {string} value
+   * @returns {Array<number>}
+   */
+  #getCustomDelimiterMatcherLocation(value) {
+    return [
+      value.indexOf(this.#customDelimiterMatchers[0]),
+      value.indexOf(this.#customDelimiterMatchers[1]),
+    ];
   }
 
   /**
@@ -38,35 +57,35 @@ class Delimiter {
    * @param {string} value
    * @returns {string}
    */
-  #removeCustomDelimiterMatchers(value) {
-    const [start, end] = this.#customDelimiterMatchers;
+  #removeCustomDelimiterFormat(value) {
+    const [_, end] = this.#getCustomDelimiterMatcherLocation(value);
 
-    return value.split(start)[1].split(end)[1];
+    return value.slice(end + 2);
   }
 
   /**
    *
    * @param {string} value
-   * @returns {Array<string>}
+   * @returns {object}
    */
-  #getDelimiter(value) {
-    const delimiter = shallowCopy(this.#defaultDelimiters);
+  #getDelimiterRegEx(value) {
+    const delimiters = shallowCopy(this.#defaultDelimiters);
 
     if (this.hasCustomDelimiter(value)) {
-      delimiter.push(this.getCustomDelimiter(value));
+      delimiters.push(this.getCustomDelimiter(value));
     }
 
-    return delimiter;
+    return new RegExp(`[${delimiters.join('')}]`);
   }
 
   /**
    *
-   * @param {string} delimiter
-   * @param {Array<string>} values
+   * @param {object} delimiterRegEx
+   * @param {string} value
    * @returns {Array<string>}
    */
-  #delimite(delimiter, values) {
-    return values.flatMap((value) => value.split(delimiter));
+  #delimite(delimiterRegEx, value) {
+    return value.split(delimiterRegEx);
   }
 
   /**
@@ -75,17 +94,12 @@ class Delimiter {
    * @returns {Array<string>}
    */
   splitByDelimiters(value) {
-    let delimitedValues = [value];
+    const delimiterRegEx = this.#getDelimiterRegEx(value);
+    const delimiteValue = this.hasCustomDelimiter(value)
+      ? this.#removeCustomDelimiterFormat(value)
+      : value;
 
-    if (this.hasCustomDelimiter(value)) {
-      delimitedValues = [this.#removeCustomDelimiterMatchers(value)];
-    }
-
-    this.#getDelimiter(value).forEach((delimiter) => {
-      delimitedValues = this.#delimite(delimiter, delimitedValues);
-    });
-
-    return filterEmpty(delimitedValues);
+    return filterEmpty(this.#delimite(delimiterRegEx, delimiteValue));
   }
 }
 

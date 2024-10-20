@@ -1,6 +1,7 @@
 import {
   calculateTotal,
   filterEmpty,
+  findCapturedValue,
   isMatch,
   isNumericString,
   isPositiveNumber,
@@ -151,6 +152,17 @@ describe('utils', () => {
       const result = calculateTotal(values);
 
       expect(result).toBe(6);
+    });
+  });
+
+  describe('findCapturedValue', () => {
+    it('주어진 정규표현식에 일치하는 캡처된 값이 있는경우 그 값을 반환한다', () => {
+      const value = '//woowacourse\\n123';
+      const regEx = /\/\/(.*?)\\n/;
+
+      const result = findCapturedValue(regEx, value);
+
+      expect(result).toBe('woowacourse');
     });
   });
 });
