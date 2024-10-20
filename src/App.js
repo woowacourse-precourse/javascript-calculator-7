@@ -4,7 +4,7 @@ class App {
   async run() {
     try {
       const INPUT = await MissionUtils.Console.readLineAsync(
-        "덧셈할 문자열 입력: "
+        "덧셈할 문자열을 입력해 주세요.\n "
       );
       if (!INPUT) {
         throw new Error("문자열을 입력하세요");
@@ -16,7 +16,7 @@ class App {
 
       if (INPUT.startsWith("//") && INPUT.includes("\\n")) {
         const NEW_LINE_INDEX = INPUT.indexOf("\\n");
-        customDelimiter = INPUT.slice(2, NEW_LINE_INDEX);
+        customDelimiter = INPUT.slice(1, NEW_LINE_INDEX);
 
         if (customDelimiter.length > 1) {
           throw new Error("커스텀 구분자는 한 글자 이상이면 안됩니다.");
@@ -44,7 +44,7 @@ class App {
       });
 
       sum = NUMBER_ARRAY.reduce((acc, cur) => acc + cur, 0);
-      MissionUtils.Console.print(`값: ${sum}`);
+      MissionUtils.Console.print(`결과 : ${sum}`);
     } catch (error) {
       MissionUtils.Console.print(`[ERROR] ${error.message}`);
       throw error;
