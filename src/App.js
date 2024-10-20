@@ -35,3 +35,11 @@ const EXTRACT_GEN_DELI = (INPUT_VALUE) => {
   const GEN_DELI_NUM_ARR = GEN_DELI_COMP.map(Number);
   return GEN_DELI_NUM_ARR;
 };
+
+//  [6] 실직적인 계산을 하는 함수를 만듭니다.
+const SUM = (numbersArray) => {
+  return numbersArray.reduce(
+    (accumulator, currentValue) => accumulator + currentValue,
+    0
+  );
+};
