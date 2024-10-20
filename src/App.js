@@ -4,10 +4,11 @@ class App {
   async run() {
     Console.print('덧셈할 문자열을 입력해 주세요.');
     const input = await Console.readLineAsync('');
-
+    
     if (input === "") { //빈문자열 처리
       return Console.print("결과 : 0");
     }
+
     try {
       this.sum(input);
     }
@@ -15,7 +16,6 @@ class App {
       Console.print("[ERROR] " + error.message);
     }
   }
-
 
   sum(input) { //덧셈 함수
     let delimiters = /[,|:]/;
@@ -47,8 +47,6 @@ class App {
       throw new Error("계산식에 구분자, 양수 이외의 값이 존재합니다.");
     }
   }
-
-
 }
 
 export default App;
