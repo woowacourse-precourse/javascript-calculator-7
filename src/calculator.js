@@ -40,10 +40,27 @@ class Calculator {
     // 숫자 합산
     let sum = 0;
     allNumbers.forEach((num) => {
+      if (!this.isValidNumber(num)) {
+        if (this.isNegative(num)) {
+          throw new Error('[ERROR] 음수는 입력할 수 없습니다.');
+        } else {
+          throw new Error('[ERROR] 양수와 구분자만 입력 가능합니다.');
+        }
+      }
       sum += parseInt(num, 10);
     });
 
     return sum;
+  }
+
+  // 숫자가 유효한지 확인 (양수만 허용)
+  isValidNumber(value) {
+    return /^\d+$/.test(value);
+  }
+
+  // 음수인지 확인
+  isNegative(value) {
+    return /^-\d+$/.test(value);
   }
 }
 
