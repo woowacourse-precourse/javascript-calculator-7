@@ -10,8 +10,7 @@ class App {
 	// 문자열을 처리함수
 	handleString(input) {
 		// 빈 값일 경우 에러 발생
-		if (!input.trim())
-			throw new Error('[ERROR] 빈 문자열은 입력할 수 없습니다.');
+		if (!input.trim()) this.throwError('빈 문자열은 입력할 수 없습니다.');
 
 		// 커스텀 구분자 처리
 		const {values, delimiter} = this.checkDelimiter(input);
@@ -33,8 +32,7 @@ class App {
 		const customDelimiterPattern = /^\/\/(.+)\\n/;
 		const match = input.match(customDelimiterPattern);
 		if (match) {
-			if (!isNaN(match[1]))
-				throw new Error('[ERROR] 구분자는 숫자가 될 수 없습니다.');
+			if (!isNaN(match[1])) this.throwError('구분자는 숫자가 될 수 없습니다.');
 			delimiter = new RegExp(match[1]);
 			values = input.split('\\n')[1];
 		}
@@ -50,11 +48,16 @@ class App {
 		// 에러 처리: 음수가 있을 경우 에러 발생
 		valueArray.forEach(num => {
 			if (num < 0) {
-				throw new Error('[ERROR] 음수는 입력할 수 없습니다.');
+				this.throwError('음수는 입력할 수 없습니다.');
 			}
 		});
 
 		return valueArray;
+	}
+
+	// 공통 에러 처리 함수
+	throwError(message) {
+		throw new Error(`[ERROR] ${message}`);
 	}
 }
 
