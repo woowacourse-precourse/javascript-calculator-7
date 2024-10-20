@@ -1,5 +1,3 @@
-import { extractCustomSeparator } from './utils/extractCustomSeparator';
-
 export class Parser {
 	constructor(input, separators) {
 		this.input = input;
@@ -20,8 +18,7 @@ export class Parser {
 		return this.input.slice(separatorIndex + 1);
 	}
 
-	parse() {
-		const customSeparator = extractCustomSeparator();
+	parse(customSeparator) {
 		const separators = this.combineSeparators(customSeparator);
 		const numbersPart = this.extractNumbersPart();
 
