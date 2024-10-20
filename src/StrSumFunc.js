@@ -6,7 +6,7 @@ export function StrSumFunc(input) {
 
   // 커스텀 구분자 추출
   if (inputValueStr.startsWith("//")) {
-    const CUSTOMDIVISIONVALUE = inputValueStr.split("\n");
+    const CUSTOMDIVISIONVALUE = inputValueStr.split("\\n");
     if (CUSTOMDIVISIONVALUE.length < 2) {
       throw new Error("[ERROR] 커스텀할 문자와 숫자를 입력해야 합니다.");
     }
