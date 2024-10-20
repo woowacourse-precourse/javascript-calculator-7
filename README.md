@@ -49,11 +49,13 @@ git checkout -b bin778
 ```
 
 ### 프로그래밍 요구 사항
+
 - Node.js 20.17.0 버전에서 실행 가능하다.
 - package.json 파일은 변경할 수 없으며, 제공된 라이브러리와 스타일 라이브러리 이외의 외부 라이브러리는 사용하지 않는다.
 - 프로그램 종료 시 process.exit()를 호출하지 않는다.
 - 프로그래밍 요구 사항에서 달리 명시하지 않는 한 파일, 패키지 등의 이름을 바꾸거나 이동하지 않는다.
 - 자바스크립트 코드 컨벤션([JavaScript Style Guide](https://github.com/woowacourse/woowacourse-docs/tree/main/styleguide/javascript))을 지키면서 프로그래밍한다.
+- Console.readLineAsync()와 Console.print()를 활용하여 입력 및 출력해야 한다.
 
 ## 문제 풀이
 
@@ -103,5 +105,6 @@ Input: "abcd" => Output: [ERROR]
 ```
 
 ## 실행 결과
+
 ![image](https://github.com/user-attachments/assets/129f3cbe-aebd-41ae-a1c4-fa63776a1d2c)
 ![image](https://github.com/user-attachments/assets/fe090711-0c43-4b76-84ed-ad2219412d6d)
