@@ -4,16 +4,15 @@ import { get_sum_of_number } from "./util/number-utils.js";
 import {
   divide_custom_string,
   get_numbers_from_string,
-  is_custom_string,
-  is_regular_string,
 } from "./util/string-utils.js";
+import Validator from "./Validator.js";
 
 class App {
   #get_number_list(user_string) {
-    if (is_custom_string(user_string)) {
+    if (Validator.is_custom_string(user_string)) {
       const { divider, number_area } = divide_custom_string(user_string);
       return get_numbers_from_string(number_area, divider);
-    } else if (is_regular_string(user_string)) {
+    } else if (Validator.is_regular_string(user_string)) {
       return get_numbers_from_string(
         user_string,
         REGEX_CONSTANTS.REGULAR_DIVIDER_REGEX

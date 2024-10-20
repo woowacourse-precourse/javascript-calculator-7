@@ -1,13 +1,5 @@
 import { REGEX_CONSTANTS, ERROR_PREFIX } from "../constants.js";
 
-export function is_custom_string(user_string) {
-  return REGEX_CONSTANTS.CUSTOM_REGEX.test(user_string);
-}
-
-export function is_regular_string(user_string) {
-  return REGEX_CONSTANTS.REGULAR_REGEX.test(user_string);
-}
-
 export function divide_custom_string(user_string) {
   const divider = user_string.match(REGEX_CONSTANTS.CUSTOM_DIVIDER_REGEX)[1];
   const number_area = user_string.replace(
