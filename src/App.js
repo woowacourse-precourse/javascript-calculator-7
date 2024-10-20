@@ -10,21 +10,22 @@ class App {
 
       let numArr = [];
       if (input.length === 0) {
-        this.throwError('빈 문자열');
-      } else if (input.startsWith('//')) {
-        numArr = this.splitByCustom(input);
+        Console.print(`결과 : 0`);
       } else {
-        numArr = this.splitByDelimiter(input);
-      }
+        if (input.startsWith('//')) {
+          numArr = this.splitByCustom(input);
+        } else {
+          numArr = this.splitByDelimiter(input);
+        }
 
-      let regex = /[^1-9]/;
-      const flag = numArr.some((element) => regex.test(element));
-      if (flag) {
-        this.throwError('타입 에러');
+        let regex = /[^1-9]/;
+        const flag = numArr.some((element) => regex.test(element));
+        if (flag) {
+          this.throwError('타입 에러');
+        }
+        const result = this.getSum(numArr);
+        Console.print(`결과 : ${result}`);
       }
-
-      const result = this.getSum(numArr);
-      Console.print(`결과 : ${result}`);
     } catch (error) {
       throw error;
     }
