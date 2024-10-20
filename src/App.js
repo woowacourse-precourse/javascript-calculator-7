@@ -29,12 +29,41 @@ class App {
       numString = input.slice(customSeparatorEnd + 2);
     }
 
+    // 에러 케이스
+    this.isValidInput(numString, separators);
+
     let numArr = [numString];
     separators.forEach((separator) => {
       numArr = numArr.flatMap((str) => str.split(separator));
     });
 
     return this.calSum(numArr);
+  }
+
+  isValidInput(input, separators) {
+    // 에러 케이스 1. 첫 문자가 구분자인 경우
+    if (separators.includes(input[0])) {
+      throw new Error('[ERROR] The first character cannot be a separator.');
+    }
+
+    // 에러 케이스 2. 마지막 구분자 이후에 숫자가 없는 경우
+    if (separators.includes(input[input.length - 1])) {
+      throw new Error('[ERROR] A number must follow the last separator.');
+    }
+
+    // 에러 케이스 3. 공백 문자열이 포함된 경우
+    separators.forEach((separator) => {
+      if (input.includes(`${separator} `) || input.includes(` ${separator}`)) {
+        throw new Error('[ERROR] Whitespace around a separator is not allowed.');
+      }
+    });
+
+    // 에러 케이스 4. 연속된 구분자가 포함된 경우
+    separators.forEach((separator) => {
+      if (input.includes(`${separator}${separator}`)) {
+        throw new Error('[ERROR] Consecutive separators are not allowed.');
+      }
+    });
   }
 
   calSum(numbers) {
