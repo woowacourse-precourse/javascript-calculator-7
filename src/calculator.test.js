@@ -23,9 +23,14 @@ describe('문자열 계산기 model', () => {
     expect(result).toEqual([4, 5, 6, 7, 8, 9]);
   });
   test('커스텀 구분자로 구분된 숫자 파싱', () => {
-    const inputNum = '//!\n4!5!6!7!8,9';
+    const inputNum = '//!\\n4!5!6!7!8';
     const result1 = parseNumbers(inputNum);
-    expect(result1).toEqual([4, 5, 6, 7, 8, 9]);
+    expect(result1).toEqual([4, 5, 6, 7, 8]);
+  });
+
+  test('커스텀 구분자와 기본 구분자 혼용된 숫자 파싱', () => {
+    const result = parseNumbers('//!\\n4,5,6,7!8:9');
+    expect(result).toEqual([4, 5, 6, 7, 8, 9]);
   });
 
   test('에러 발생 시 프로그램 종료 테스트', () => {
