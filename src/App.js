@@ -14,7 +14,6 @@ class App {
         // 공백 제거후 값이 비어있거나 string이 '//' 혹은 숫자로 시작되지 않는경우 에러 반환
         throw '입력 형식이 올바르지 않습니다.';
       }
-
       if (userInput.slice(0, 2) === '//') {
         // "//"와 "\n"의 위치를 찾아서 그 사이 문자열을 추출
         const endIndex = userInput.indexOf('\\n');
@@ -38,8 +37,10 @@ class App {
         formula = userInput;
       }
 
+      // 구분자를 기준으로 값을 구하는 기능
       const answer = separators
         .reduce(
+          // 구분자를 기준으로 계산을 진행할 숫자값들을 배열에 추가
           (number, separator) => {
             return number.flatMap((part) => part.split(separator));
           },
@@ -47,14 +48,17 @@ class App {
         )
         .reduce((acc, current) => {
           if (acc === '' || current === '') {
+            // 구분자를 연속해서 입력한 경우 에러 반환
             throw '구분자를 연속해서 입력하셨습니다.';
           }
+          if (isNaN(acc) || isNaN(current))
+            throw '옳지 않은 구분자를 사용하였습니다.';
+          // 숫자 덧셈 기능
           return Number(acc) + Number(current);
         }, 0);
 
       Console.print(answer);
     } catch (error) {
-      // Console.print(userInput);
       Console.print(ERROR_MESSAGE + error);
     }
   }
