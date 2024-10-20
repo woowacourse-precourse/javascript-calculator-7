@@ -13,8 +13,20 @@ class App { //하나의 메소드는 하나의 역할
         return await Console.readLineAsync("덧셈할 문자열을 입력해 주세요.\n")
     }
 
-    isCustom(param) {
-        return param.startsWith("//") && param.includes("\\n")
+    isCustom(param) { //커스텀 구분자 여부 판단
+        const lastIdx = param.includes("\\n")
+        if (lastIdx === -1) {
+            return false
+        }
+        if (param.startsWith("//")) {
+            console.log("zxc")
+            this.sliceCustomSeparator(param, lastIdx)
+            return true
+        }
+    }
+
+    sliceCustomSeparator(param, lastIdx) {//커스텀 구분자 슬라이싱
+        this.customSeparator = param.slice(2, lastIdx + 2)
     }
 
 
