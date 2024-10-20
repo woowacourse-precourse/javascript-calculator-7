@@ -1,4 +1,4 @@
-function getCustomSeparator(customText) {
+function getCustomSeparatorCharacter(customText) {
   const CUSTOM_TEXT_LENGTH = customText.length;
   const CUSTOM_TEXT_ACTUAL_RANGE = CUSTOM_TEXT_LENGTH - 2;
   
@@ -6,7 +6,7 @@ function getCustomSeparator(customText) {
   return resultSeparator;
 }
 
-function customSeparator(text) {
+function verifyCustomSeparator(text) {
   const CUSTOM_REGEX = /\/\/(.*)\\n/g
   const IS_NOT_CUSTOM = -1;
   
@@ -21,7 +21,7 @@ function customSeparator(text) {
     return RESULT;
   } else {
     let customText = text.match(CUSTOM_REGEX);
-    let resultCustomSeparator = getCustomSeparator(customText[0]);
+    let resultCustomSeparator = getCustomSeparatorCharacter(customText[0]);
     
     let calculateString = text.replace(CUSTOM_REGEX, '');
     
@@ -32,10 +32,10 @@ function customSeparator(text) {
   }
 }
 
-function separator(userInput) {
+function userInputSeparator(userInput) {
   const SEPARATORS = [',', ':'];
 
-  let customSeparatorResult = customSeparator(userInput);
+  let customSeparatorResult = verifyCustomSeparator(userInput);
 
   let userCustomSeparator = customSeparatorResult.get('customSeparatorString');
   let userCalculateString = customSeparatorResult.get('text');
@@ -66,4 +66,4 @@ function separator(userInput) {
   };
 };
 
-export default separator;
+export default userInputSeparator;
