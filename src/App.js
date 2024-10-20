@@ -1,6 +1,6 @@
-import { getInput } from './getInput.js';
-import { add } from './add.js';
-import { printResult } from './printResult.js';
+import { getInput } from './functions/getInput.js';
+import { add } from './functions/add.js';
+import { printResult } from './functions/printResult.js';
 import { Console } from '@woowacourse/mission-utils';
 
 class App {
