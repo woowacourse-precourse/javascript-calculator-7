@@ -4,9 +4,7 @@ import parseString from './Parser/parser.js';
 
 class App {
   async run() {
-    const input = await Console.readLineAsync(
-      '덧셈할 문자열을 입력해 주세요.\n',
-    );
+    const input = await Console.readLineAsync(SYSTEM_MESSAGES.ASK_USER_INPUT);
 
     const result = parseString(input);
     return Console.print(`${SYSTEM_MESSAGES.PARSE_RESULT}${result}`);

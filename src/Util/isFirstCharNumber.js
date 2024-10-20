@@ -1,5 +1,3 @@
-import { ERROR_PREFIX, ERROR_MESSAGES } from '../Constraints/Constraints.js';
-
 export default function isFirstCharNumber(str) {
   // 백업용 가드절. 로직에 악영향을 끼치면 폐기예정
 
