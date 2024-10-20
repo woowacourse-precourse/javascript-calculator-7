@@ -7,6 +7,7 @@ class App {
     });
   }
 
+
   #workingCalculator(userInput) { // 계산기 작동
     if (userInput.startsWith(/[0-9]/)) {
       this.#NumberPicker(userInput);
@@ -50,8 +51,15 @@ class App {
     }
   }
 
+  #resultCalculator() { // 결과값 띄우는 함수
+    this.#workingCalculator();
+    Console.print(RESULT);
+  }
+
+
   async run() {
     await this.#startCalculator();
+    await this.#resultCalculator();
   }
 };
 
