@@ -52,9 +52,6 @@ class App {
             if (isNaN(parsedNum)) {
                 throw new Error("유효하지 않은 입력입니다: " + num);
             }
-            if (parsedNum < 0) {
-                throw new Error("음수는 허용되지 않습니다: " + parsedNum);
-            }
             sum += parsedNum;
         }
 
