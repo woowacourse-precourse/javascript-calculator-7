@@ -24,7 +24,7 @@ export const validateCustomDelimiter = (delimiter) => {
 };
 
 const escapeRegExp = (string) => {
-  return string.replace(ESCAPE_REGEX_PATTERN, ESCAPE_REGEX_REPLACEMENT);
+  return string.replace(ESCAPE_REGEX_PATTERN, { ESCAPE_REGEX_REPLACEMENT });
 };
 
 export const handleCustomDelimiter = (match) => {
