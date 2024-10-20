@@ -18,8 +18,7 @@ class App {
       // 모든 숫자가 양수인지 검증
       const negativeNumbers = numbers.filter(num => parseInt(num) < 0);
       if (negativeNumbers.length > 0) {
-          Console.print(`[ERROR] 음수는 허용되지 않습니다: ${negativeNumbers.join(', ')}`);
-          process.exit(1); // 애플리케이션 종료
+          throw new Error(`[ERROR] 음수는 허용되지 않습니다: ${negativeNumbers.join(', ')}`);
       }
 
       // 숫자 합산
