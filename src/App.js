@@ -17,7 +17,7 @@ class App {
         numArr = this.splitByDelimiter(input);
       }
 
-      let regex = /[^0-9]/;
+      let regex = /[^1-9]/;
       const flag = numArr.some((element) => regex.test(element));
       if (flag) {
         this.throwError('타입 에러');
@@ -33,12 +33,15 @@ class App {
   throwError(message) {
     switch (message) {
       case '음수':
-      case '타입 에러':
-        Console.print(`[ERROR] : 구분자와 양수로 구성된 문자열이어야 합니다.`);
+        Console.print(`[ERROR] : 음수가 포함되었습니다.`);
         break;
       case '빈 문자열':
         Console.print(`[ERROR] : 빈 문자열입니다.`);
         break;
+      case '타입 에러':
+        Console.print(
+          `[ERROR] : 양수가 아닌 문자가 포함되어 있거나 구분자가 잘못 사용되었습니다.`
+        );
     }
     throw new Error('[ERROR]');
   }
@@ -54,7 +57,7 @@ class App {
   }
 
   splitByCustom(input) {
-    const custom = input.match(/\/\/(.+)\\n/);
+    const custom = input.match(/\/\/(.*)\\n/);
     const regex = new RegExp(custom[1]);
     const newInput = input.match(/(?<=\\n).+/g);
     const numArr = newInput[0].split(regex).map(Number);
