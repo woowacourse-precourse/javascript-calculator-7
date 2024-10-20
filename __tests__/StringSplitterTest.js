@@ -30,4 +30,20 @@ describe('String Splitter 테스트', () => {
       },
     );
   });
+
+  describe('toNumbers() 메서드 테스트', () => {
+    test.each([
+      { input: ['0', '1', '2'], expectedOutput: [0, 1, 2] },
+      { input: ['4.1', '5', '6.3'], expectedOutput: [4.1, 5, 6.3] },
+      { input: ['0'], expectedOutput: [0] },
+      { input: [''], expectedOutput: [0] },
+    ])(
+      '입력 "$input"에 대해 문자열을 숫자로 변환',
+      ({ input, expectedOutput }) => {
+        const stringSplitter = new StringSplitter('');
+        stringSplitter.string = input;
+        expect(stringSplitter.toNumbers()).toEqual(expectedOutput);
+      },
+    );
+  });
 });
