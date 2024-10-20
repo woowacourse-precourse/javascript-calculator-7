@@ -1,4 +1,4 @@
-import StringValidator from './StringValidatorUtils.js'
+import StringValidator from './StringValidatorUtils'
 
 const validator = new StringValidator();
 

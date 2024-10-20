@@ -6,7 +6,7 @@ const validator = new StringValidator();
 const parsing = new StringParsing();
 const calculator = new StringCalculatorUtils();
 
-export function mainProcess(input) {
+export function stringCalculator(input) {
 
     if (validator.checkEmptyString(input) === 0) {
         return 0;

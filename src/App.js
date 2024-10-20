@@ -1,5 +1,5 @@
 import { Console } from "@woowacourse/mission-utils";
-import { mainProcess } from './MainProcess.js';
+import { mainProcess } from './MainProcessor.js';
 
 class App {
   async run() {
