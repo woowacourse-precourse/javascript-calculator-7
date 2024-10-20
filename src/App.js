@@ -1,25 +1,26 @@
 import { Console } from "@woowacourse/mission-utils";
-
-const ORIGIN_REGEX = /^([0-9]+(,|:)?)+$/g;
-const ORIGIN_DIVIDER_REGEX = /,|:/;
-const CUSTOM_REGEX = /^\/\/(.*?)\\n.*$/;
-const CUSTOM_DIVIDER_REGEX = /\/\/(.*?)\\n/;
+import { REGEX_CONSTANTS, ERROR_PROFIX } from "./constants";
 
 class App {
   #get_number_list(user_string) {
     let num_list;
 
-    if (CUSTOM_REGEX.test(user_string)) {
-      const divider = user_string.match(CUSTOM_DIVIDER_REGEX)[1];
-      const number_area = user_string.replace(CUSTOM_DIVIDER_REGEX, "");
+    if (REGEX_CONSTANTS.CUSTOM_REGEX.test(user_string)) {
+      const divider = user_string.match(
+        REGEX_CONSTANTS.CUSTOM_DIVIDER_REGEX
+      )[1];
+      const number_area = user_string.replace(
+        REGEX_CONSTANTS.CUSTOM_DIVIDER_REGEX,
+        ""
+      );
       num_list = this.#get_numbers_from_string(number_area, divider);
-    } else if (ORIGIN_REGEX.test(user_string)) {
+    } else if (REGEX_CONSTANTS.REGULAR_REGEX.test(user_string)) {
       num_list = this.#get_numbers_from_string(
         user_string,
-        ORIGIN_DIVIDER_REGEX
+        REGEX_CONSTANTS.REGULAR_DIVIDER_REGEX
       );
     } else {
-      throw new Error("[ERROR] 잘못된 값을 입력하셨습니다.");
+      throw new Error(`${ERROR_PROFIX} 잘못된 값을 입력하셨습니다.`);
     }
 
     return num_list;
