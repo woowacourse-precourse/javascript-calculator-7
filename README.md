@@ -1,7 +1,5 @@
 # javascript-calculator-precourse
 
-# javascript-calculator-precourse
-
 **사용자 입력 및 입력한 문자에서 숫자 추출**
 
 - 덧셈할 문자열을 입력해 주세요. 출력
