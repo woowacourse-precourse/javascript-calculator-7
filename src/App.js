@@ -13,17 +13,14 @@ import {
   buildCustomInputValidationRegex,
   buildNormalInputValidationRegex,
 } from './Util/regex.js';
-// import {} from // validateCustomInput,
-// validateCustomInputFormat,
-// validateNormalInput,
-// './Validator/validator.js';
+import { validateCustomInputFormat } from './Validator/validator.js';
 
-function validateCustomInputFormat(input) {
-  const isInvalidFormat = !input.startsWith('//') || !input.includes('\\n');
-  if (isInvalidFormat) {
-    throw new Error(`${ERROR_PREFIX}${ERROR_MESSAGES.INVALID_INPUT_FORMAT}`);
-  }
-}
+// function validateCustomInputFormat(input) {
+//   const isInvalidFormat = !input.startsWith('//') || !input.includes('\\n');
+//   if (isInvalidFormat) {
+//     throw new Error(`${ERROR_PREFIX}${ERROR_MESSAGES.INVALID_INPUT_FORMAT}`);
+//   }
+// }
 
 function validateCustomInput(inputString, escapedDelimiter) {
   if (inputString === '') return;
