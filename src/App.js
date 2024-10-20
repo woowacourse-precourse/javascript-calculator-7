@@ -34,9 +34,7 @@ class App {
 
       const numArr = string.split(regexp).map((num) => {
         if (num < 0) {
-          throw new Error(
-            "[ERROR]구분자와 양수로 구성된 문자열을 입력해주세요."
-          );
+          throw new Error("[ERROR]양수로 구성된 문자열을 입력해주세요.");
         } else if (isNaN(num)) {
           throw new Error("[ERROR]구분자의 범위를 벗어났습니다.");
         }
