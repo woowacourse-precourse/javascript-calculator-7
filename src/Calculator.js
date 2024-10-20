@@ -9,12 +9,6 @@ class Calculator {
     return customSeperator[1];
   }
 
-  seperateBy(removedString, customSeperator = "") {
-    const seperators = new RegExp(`[, : ${customSeperator}]`, "g");
-
-    return removedString.split(seperators).map((element) => Number(element));
-  }
-
   getSumOf(numbers) {
     return numbers.reduce((sum, number) => sum + number, 0);
   }
