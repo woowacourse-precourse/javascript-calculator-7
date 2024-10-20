@@ -3,14 +3,17 @@ import { Console } from "@woowacourse/mission-utils";
 // 요구 사항에 기재되지 않은 내용 판단
 // 1. 구분자로 시작하거나 끝나는 경우 -> False
 // 2. 앞에 무의미한 0이 붙는 경우 -> 일단.. True
+// 3. 커스텀 구분자가 숫자인 경우 -> False
+// 4. 커스텀 구분자가 문자 하나가 아닌 경우 -> False
 
 class App {
     async run() {
         try {
             const input = await this.getUserInput();
             this.validateInput(input);
-            const numbers = this.splitInput(input);
+            const numbers = this.splitInputByDelimiter(input);
             const sum = this.sumNumbers(numbers);
+
             Console.print(`결과: ${sum}`);
         } catch (error) {
             Console.print(error.message);
@@ -27,11 +30,22 @@ class App {
     }
 
     validateInput(input) {
+        if (!input) return;
+
         // 구분자와 양수로 구성된 문자열인지 검증하는 정규표현식
         const regex = /^[0-9]+([,:][0-9]+)*$/;
-        if (input !== "" && !regex.test(input)) {
+        const isCustomDelimiter = this.checkCustomDelimiter(input);
+
+        if (isCustomDelimiter && !regex.test(input.slice(5))) {
+            this.throwError("입력값이 유효하지 않습니다.");
+        } else if (!isCustomDelimiter && !regex.test(input)) {
             this.throwError("입력값이 유효하지 않습니다.");
         }
+    }
+
+    checkCustomDelimiter(input) {
+        const regex = /^\/\/([^0-9])\\n/;
+        return regex.test(input);
     }
 
     splitInputByDelimiter(input) {
