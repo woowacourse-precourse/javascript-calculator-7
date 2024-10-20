@@ -3,10 +3,17 @@ import { Console } from '@woowacourse/mission-utils';
 class App {
   //
   extractAndSum(input) {
-  // 1.(숫자추출) 문자만 공백으로 치환.
-  const CleanInput = input.replace(/[^\d]/g, '');
+  let CleanInput;
 
-  
+  //3.(커스텀 구분자 구분)
+  let customDelimiter;
+  if (input.startsWith('//')) {
+    const delimiterEnd = input.indexOf('\n');
+    customDelimiter = input.slice(2, delimiterEnd);  
+    CleanInput = input.slice(delimiterEnd + 1);
+}
+  // 1.(숫자추출) 문자만 공백으로 치환.
+  CleanInput = input.replace(/[^\d]/g, '');
 
   //2.(기본구분자 분리)
   const numbers = CleanInput.split(/\s+|[,:\-]/)
