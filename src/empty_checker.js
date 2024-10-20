@@ -1,3 +1,3 @@
-export default function checkEmptyInput(input) {
+export default function empty_checker(input) {
   return input === '';
 }
