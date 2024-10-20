@@ -6,37 +6,14 @@ import {
   ERROR_PREFIX,
   SYSTEM_MESSAGES,
 } from './Constraints/Constraints.js';
+
 import {
-  escapeRegExp,
-  buildCustomInputValidationRegex,
-  buildNormalInputValidationRegex,
-} from './Util/regex.js';
-
-function validateCustomInputFormat(input) {
-  const isInvalidFormat = !input.startsWith('//') || !input.includes('\\n');
-  if (isInvalidFormat) {
-    throw new Error(`${ERROR_PREFIX}${ERROR_MESSAGES.INVALID_INPUT_FORMAT}`);
-  }
-}
-
-function validateCustomInput(inputString, escapedDelimiter) {
-  if (inputString === '') return;
-  const validationRegex = buildCustomInputValidationRegex(escapedDelimiter);
-  if (!validationRegex.test(inputString)) {
-    throw new Error(`${ERROR_PREFIX}${ERROR_MESSAGES.INVALID_CUSTOM_INPUT}`);
-  }
-}
-
-function validateNormalInput(splitValues) {
-  const validationRegex = buildNormalInputValidationRegex();
-  if (splitValues.some(value => !validationRegex.test(value))) {
-    throw new Error(`${ERROR_PREFIX}${ERROR_MESSAGES.INVALID_NUMBER_INPUT}`);
-  }
-}
-function sumAllNumbers(parts) {
-  // 각 부분을 숫자로 변환하고 총합을 계산한다.
-  return parts.map(parseFloat).reduce((acc, curr) => acc + curr, 0);
-}
+  validateCustomInput,
+  validateCustomInputFormat,
+  validateNormalInput,
+} from './Validator/validator.js';
+import sumAllNumbers from './Util/sumAllNumbers.js';
+import { escapeRegExp } from './Util/regex.js';
 function parseCustomInput(input) {
   // 입력이 //로 시작하고 \n을 포함하는지 확인한다.
   validateCustomInputFormat(input);
