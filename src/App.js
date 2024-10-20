@@ -1,17 +1,19 @@
 import { Console } from '@woowacourse/mission-utils';
 
 class App {
-  run() {
-    Console.readLine('문자열을 입력하세요: ', (input) => {
-      try {
-        const result = this.calculation(input);
-        Console.print(`=> ${result}`);
-      } catch (error) {
-        Console.print(error.message);
-      } finally {
-        Console.close();
-      }
-    });
+  async run() {
+    try {
+      // Console API를 이용해 비동기로 사용자 입력을 받음
+      const input = await Console.readLineAsync('문자열을 입력하세요: ');
+
+      // 입력값을 계산하는 함수 호출
+      const result = this.calculation(input);
+
+      // 결과 출력
+      Console.print(`=> ${result}`);
+    } catch (error) {
+      Console.print(error.message);
+    }
   }
 
   calculation(input) {
@@ -22,7 +24,7 @@ class App {
 
     // 커스텀 구분자 처리
     if (input.startsWith('//')) {
-      const delimiterEndIndex = input.indexOf('\n');
+      const delimiterEndIndex = input.indexOf('\\n');
       if (delimiterEndIndex === -1) {
         throw new Error('[ERROR] 잘못된 입력 형식입니다.');
       }
@@ -31,7 +33,7 @@ class App {
         throw new Error('[ERROR] 커스텀 구분자가 지정되지 않았습니다.');
       }
       separator = new RegExp(this.escapeRegExp(customDelimiter)); // 정규식 이스케이프 기능 사용
-      numbersString = input.substring(delimiterEndIndex + 1);
+      numbersString = input.substring(delimiterEndIndex + 2);
     }
 
     const numberStrings = numbersString.split(separator);
