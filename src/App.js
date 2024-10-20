@@ -1,6 +1,7 @@
 import { Console } from "@woowacourse/mission-utils";
 import checkCustomDelimiter from "./utils/checkCustomDelimiter.js";
 import isOnlyPositive from "./utils/isOnlyPositive.js";
+import validateInput from "./utils/validateInput .js";
 
 class App {
   async run() {
@@ -14,6 +15,8 @@ class App {
       Console.print(`결과 : ${result}`);
       return;
     }
+
+    validateInput(input);
 
     const remainingString = checkCustomDelimiter(input, delimiters);
     const splitString = remainingString
