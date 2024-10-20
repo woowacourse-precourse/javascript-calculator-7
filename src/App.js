@@ -32,6 +32,14 @@ class App {
     return SUM;
   }
 
+  #errorCalculator(userInput) { // 오류창 띄우는 함수
+    if (/\d/.test(userInput) === false) { // 숫자 포함 되지 않을 때 에러
+      throw new Error('ERROR');
+    } else if (userInput.indexOf('//') != -1 === true) { // '//'으로 시작하지 않을 때 에러
+      throw new Error('ERROR');
+    }
+  }
+
   async run() {
     await this.#startCalculator();
   }
