@@ -34,6 +34,11 @@ class App {
 
       const customDelimiter = input.substring(2, delimiterEnd);
 
+      // '-'를 커스텀 구분자로 사용할 수 없도록 제한
+      if (customDelimiter.includes('-')) {
+        throw new Error("[ERROR] '-' cannot be used as a custom delimiter.");
+      }
+
       //RegExp : 정규표현식 객체 생성 
       //escapeRegExp : 이스케이프 문자열 -> 정규표현식 객체 변환
       delimiter = new RegExp(`[${this.escapeRegExp(customDelimiter)}]`);
