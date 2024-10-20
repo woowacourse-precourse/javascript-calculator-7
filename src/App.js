@@ -5,9 +5,9 @@ class App {
     Console.readLineAsync('덧셈할 문자열을 입력해 주세요.\n', (input) => {
       try {
         const result = this.calculateSum(input);
-        Console.print(결과 : ${result});
+        Console.print(`결과 : ${result}`);
       } catch (error) {
-        Console.print([ERROR] ${error.message});
+        Console.print(`[ERROR] ${error.message}`);
       }
     });
   }
@@ -43,7 +43,7 @@ class App {
     }
 
     // 구분자를 기준으로 문자열을 분리
-    numbers = numbers.split(new RegExp([${delimiter}]));
+    numbers = numbers.split(new RegExp(`[${delimiter}]`));
 
     return { numbers, delimiter };
   }
@@ -53,3 +53,4 @@ const app = new App();
 app.run();
 
 export default App;
+
