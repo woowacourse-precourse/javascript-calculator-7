@@ -1,11 +1,13 @@
+import { CUSTOM_PATTERN } from './regex.js';
+
 export default function getDelimiter(input) {
-  const basic_delimiter = /[,:]/;
-  const pattern = input.match(/^\/\/(.*)\\n/);
+  const basicDelimiter = /[,:]/;
+  const pattern = input.match(CUSTOM_PATTERN);
 
   if (pattern) {
-    const custom_delimiter = pattern[1];
-    const new_delimiter = new RegExp(`[${custom_delimiter},:]`);
-    return new_delimiter;
+    const customDelimiter = pattern[1];
+    return new RegExp(`[${customDelimiter},:]`);
   }
-  return basic_delimiter;
+  
+  return basicDelimiter;
 }

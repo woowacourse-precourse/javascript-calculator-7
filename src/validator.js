@@ -1,30 +1,26 @@
+import { NEGATIVE_PATTERN, DEFAULT_PATTERN, CUSTOM_PATTERN } from './regex.js';
+
 export default function validator(input) {
-  const is_Custom = /^\/\/(.*)\\n/;
-  const negative_num = /-\d+/;
-  if (negative_num.test(input)) {
+  if (NEGATIVE_PATTERN.test(input)) {
     throw new Error('[ERROR]');
   }
-  if (!is_Custom.test(input)) {
-    const default_pattern = /^[0-9,:\n]+$/;
-    if (!default_pattern.test(input)) {
+
+  if (!CUSTOM_PATTERN.test(input)) {
+    if (!DEFAULT_PATTERN.test(input)) {
       throw new Error('[ERROR]');
-    } else {
-      return input;
     }
-  } else {
-    const custom_pattern = input.match(is_Custom);
-    if (custom_pattern) {
-      const custom_delimiter = custom_pattern[1];
+    return input;
+  }
 
-      const Exp = input.slice(input.indexOf('\\n') + 2);
+  const customPattern = input.match(CUSTOM_PATTERN);
+  if (customPattern) {
+    const customDelimiter = customPattern[1];
+    const exp = input.slice(input.indexOf('\\n') + 2);
+    const newPattern = new RegExp(`^[0-9${customDelimiter},:\n]+$`);
 
-      const new_pattern = new RegExp(`^[0-9${custom_delimiter},:\n]+$`);
-
-      if (!new_pattern.test(Exp)) {
-        throw new Error('[ERROR]');
-      } else {
-        return Exp;
-      }
+    if (!newPattern.test(exp)) {
+      throw new Error('[ERROR]');
     }
+    return exp;
   }
 }
