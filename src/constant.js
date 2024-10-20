@@ -10,4 +10,5 @@ export const Regex = {
   customDelimiter: /^\/\/(.)+\\n/,
   valid: /^\/\/(.)+\\n(?:\d+[^0-9])*\d+$|^(?:\d+[^0-9])*\d+$/,
   invalidCustomDelimiter: /^[(\/\/)(\.)(\\n)(\d)]/,
+  notInputCustomDelimiter: /^\/\/\\n/,
 };
