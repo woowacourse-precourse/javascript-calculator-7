@@ -33,8 +33,19 @@ class App {
       this.getSeperatorRegex(seperatorCharList)
     );
 
+    const numberList = splitedList.map((elem) => {
+      const numElem = Number(elem);
+      if (isNaN(numElem)) {
+        throw Error("[ERROR]: 숫자가 아닙니다.");
       }
-    }
+      return numElem;
+    });
+
+    numberList.forEach((elem) => {
+      if (elem < 0) {
+        throw Error("[ERROR]: 양수가 아닙니다.");
+      }
+    });
 
     let result = this.sum(numberList);
 
