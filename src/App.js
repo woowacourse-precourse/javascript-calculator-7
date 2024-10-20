@@ -4,7 +4,8 @@ class App {
   async run() {
     try {
       const input = await Console.readLineAsync('덧셈할 문자열을 입력해 주세요.\n');
-      const result = this.calculateSum(input);
+      const processedInput = input.replace(/\\n/g, '\n'); // \\n을 실제 \n으로 변환
+      const result = this.calculateSum(processedInput);
       Console.print(`결과 : ${result}`);
     } catch (error) {
       Console.print(`[ERROR] ${error.message}`);
@@ -37,7 +38,7 @@ class App {
 
     // 커스텀 구분자 확인
     if (input.startsWith('//')) {
-      const endOfDelimiterIndex = input.indexOf('\\n');
+      const endOfDelimiterIndex = input.indexOf('\n');
       if (endOfDelimiterIndex === -1) {
         throw new Error('커스텀 구분자 형식이 잘못되었습니다.');
       }
@@ -50,7 +51,7 @@ class App {
       return [];
     }
 
-    // 숫자를 추출하는 부분에서 공백을 제거하고 구분자를 처리
+    // 구분자를 기준으로 문자열을 분리하고 각 숫자를 반환
     return numbers.split(new RegExp(`[${delimiter}]`)).map((num) => num.trim());
   }
 }
