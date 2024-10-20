@@ -8,7 +8,7 @@ import { isNumber } from "./validators/numberValidator.js";
 class App {
   async run() {
     let nums = [];
-    const customRegex = /\/\/(.*?)\\n/;
+    const customRegex = /^\/\/(.*?)\\n/;
     const userInput = await inputUserString();
     const customDelimiter = getCustomDelimiter(userInput, customRegex);
 
@@ -17,7 +17,7 @@ class App {
     else nums = getNumber(userInput, /,|:/);
 
     for (const n of nums) {
-      if (!isNumber(n)) throwError("");
+      if (!isNumber(n)) throwError("invalid number");
     }
 
     const sum = nums.reduce((acc, val) => acc + parseInt(val), 0);
