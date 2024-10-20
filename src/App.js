@@ -38,7 +38,7 @@ class App {
     
   }
 
-  // 기능 출력
+  // 출력 기능
   printResult(result) {
     print('결과 : ' + result);
   }
