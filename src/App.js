@@ -30,7 +30,7 @@ class App {
 		let values = input;
 
 		// 커스텀 구분자 처리
-		const customDelimiterPattern = /^\/\/(.)\\n/;
+		const customDelimiterPattern = /^\/\/(.+)\\n/;
 		const match = input.match(customDelimiterPattern);
 		if (match) {
 			if (!isNaN(match[1]))
