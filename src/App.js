@@ -19,9 +19,9 @@ class App {
   CleanInput = CleanInput.replace(/[,a-zA-Z:]/g, ' ');
 
   //2.(기본구분자 분리)
-  const numbers = CleanInput.split(/\s+|[,:\-]/)
-                            .filter(item => item.trim() !== '' && !isNaN(item))
-                            .map(Number);
+  const numbers = CleanInput.split(/\s+/) //공백기준으로 분리
+                            .filter(item => item.trim() !== '' && !isNaN(item)) // 빈문자열 및 NaN 제외
+                            .map(Number); //숫자변환
 
 
   // 4. 숫자의 합을 반환 : reduce(누적값, 현재요소 => 초기값) 각 요소를 순회하면서 누적값 계산
