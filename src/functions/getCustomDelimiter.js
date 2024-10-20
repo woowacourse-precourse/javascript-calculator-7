@@ -1,5 +1,3 @@
-import handleError from '../utils/handleError.js';
-
 const isValidDelimiterFormat = function isValidDelimiterFormatFunc(input) {
   return input.startsWith('//') && input.indexOf('\\n') !== -1;
 };
@@ -12,8 +10,8 @@ const validateDelimiter = function validateDelimiterFunc(delimiter) {
   const alphaSpecialCharRegex = /^[a-zA-Z/?.,;:|*~!^\-_+<>@#%&\\='"]+$/;
 
   if (!alphaSpecialCharRegex.test(delimiter))
-    handleError(
-      '유효하지 않은 커스텀 구문자: 알파벳 대소문자 또는 허용된 특수 문자만 가능합니다.',
+    throw new Error(
+      '[ERROR] 유효하지 않은 커스텀 구문자: 알파벳 대소문자 또는 허용된 특수 문자만 가능합니다.',
     );
 };
 

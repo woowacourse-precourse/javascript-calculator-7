@@ -11,7 +11,4 @@ const printResult = function printResultFunc(total) {
   MissionUtils.Console.print(`결과 : ${total}`);
 };
 
-const printError = function printErrorFunc(message) {
-  MissionUtils.Console.print(`[ERROR] ${message}`);
-};
-export { getUserInput, printResult, printError };
+export { getUserInput, printResult };

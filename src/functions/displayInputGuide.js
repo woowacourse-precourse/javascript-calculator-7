@@ -1,5 +1,3 @@
-import { MissionUtils } from '@woowacourse/mission-utils';
-
 const displayInputGuide = function displayInputGuideFunc() {
   console.log(` ---------------------------[ 문자열 덧셈 계산기 ]---------------------------
 | 1. 입력한 문자열에서 숫자를 추출하여 더하는 프로그램입니다.                |
@@ -15,11 +13,4 @@ const displayInputGuide = function displayInputGuideFunc() {
   );
 };
 
-const getUserInput = async function getUserInputFunc() {
-  const inputString = await MissionUtils.Console.readLineAsync(
-    '\n덧셈할 문자열을 입력해 주세요.\n',
-  );
-  return inputString;
-};
-
-export { displayInputGuide, getUserInput };
+export default displayInputGuide;
