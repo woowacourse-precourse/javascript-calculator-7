@@ -5,7 +5,9 @@ const CUSTOM_DELIMITER_REGEX = /^\/\/(.*?)\\n/;
 // 숫자 체크 정규식
 const NUMBER_CHECK_REGEX = /^[0-9]+$/; 
 
-class App {
+class CalculatorApp {
+  #delimiters = [",", ":"];  // 기본 구분자
+  #totalSum = 0;
   async run() {}
 }
 
