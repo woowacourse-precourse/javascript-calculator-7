@@ -1,5 +1,26 @@
+import { Console } from "@woowacourse/mission-utils";
+
 class App {
-  async run() {}
+
+  getCustomKey = (string) => {
+    let customKey;
+    if (typeof string === 'string') {
+
+      if (string.toString().slice(0, 2) === '//' && string.toString().slice(3, 5) === '\n') {
+        customKey = string[2]
+      }
+      return customKey
+    }
+  }
+
+
+
+  async run() {
+
+    console.log(this.getCustomKey("//;\n"))
+
+  }
 }
+
 
 export default App;
