@@ -18,7 +18,7 @@ class App {
       return DEFAULT_DELIMITER;
     }
 
-    const match = str.match(/\/\/(.)\\n/);
+    const match = str.substring(0, 5).match(/\/\/(.)\\n/);
     if (!match) {
       throw new Error(ERROR_MESSAGES.INVALID_DELIMITER);
     }
@@ -32,8 +32,7 @@ class App {
       return str.split(delimiter);
     }
 
-    const numbersPart = str.substring(str.indexOf("\\n") + 2);
-    return numbersPart.split(delimiter);
+    return str.substring(5).split(delimiter);
   }
 
   getSum(numbers) {
@@ -58,13 +57,10 @@ class App {
       const str = await this.receiveInput();
       const delimiter = this.getDelimiter(str);
       const numbers = this.getNumbers(str, delimiter);
-
       this.checkNumbers(numbers);
-
       const result = this.getSum(numbers);
       Console.print(`결과 : ${result}`);
     } catch (error) {
-      Console.print(error.message);
       throw error;
     }
   }
