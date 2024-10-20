@@ -7,7 +7,7 @@ import {
     sumArray,
 } from './utils/index.js';
 
-export async function calculator(expression){
+export function calculator(expression){
     const seperatorArray = getSeperatorArray(expression);
     const expressionString = getExpressionString(expression);
     const numArray = splitBySeperator(expressionString, seperatorArray);

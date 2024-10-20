@@ -5,7 +5,7 @@ class App {
   async run() {
     try{
       const expression = await input('덧셈할 문자열을 입력해 주세요.\n');
-      const answer = await calculator(expression);
+      const answer = calculator(expression);
       print("결과 : " + answer);
       return;
     }catch(error){
