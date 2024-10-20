@@ -18,7 +18,7 @@ class App {
       // 분리된 숫자들의 합
       const SUM = SPLIT_DATA.reduce((acc, number) => acc + number, 0);
 
-      Console.print(`결과: ${SUM}`);
+      Console.print(`결과 : ${SUM}`);
   };
 
   extractSeparator(inputString, separators) {
