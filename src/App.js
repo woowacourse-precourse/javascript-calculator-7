@@ -28,7 +28,7 @@ class App {
     }
     if (tmp !== "") num.push(tmp); // 마지막 값 추가
 
-    console.log(num);
+    //console.log(num);
     return num;
   }
 
@@ -63,13 +63,12 @@ class App {
       // 기본 구분자일 경우
       numArray = this.basicSeparator(input);
     }
-    //this.splitInput("1,2,3:4", [",", ":"]);
 
     if (this.isNumber(numArray)) {
       const result = this.sum(numArray);
       Console.print(`결과 : ${result}`);
     } else {
-      //Console.print("ERRPR");
+      //Console.print("ERROR");
       throw new Error("[ERROR]");
     }
   }
