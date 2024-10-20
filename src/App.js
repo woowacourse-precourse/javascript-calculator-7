@@ -13,7 +13,7 @@ class App {
     const input = await Console.readLineAsync(
       "덧셈할 문자열을 입력해 주세요.\n"
     );
-    const SPACE = /\s/g;
+    const SPACE = / \/t/g;
     let nums = [];
     let formattedInput = input.replace(/\\n/g, "\n");
     let delimiter = DEFAULT_DELIMITER;
@@ -24,7 +24,7 @@ class App {
     }
 
     if (formattedInput.match(SPACE)) {
-      throw new Error(spaceError);
+      throw new Error(ERROR_MESSAGES.spaceError);
     }
 
     if (formattedInput.startsWith("//")) {
@@ -41,7 +41,7 @@ class App {
     }
 
     formattedInput.split(delimiter).map((item) => {
-      let num = Number(item);
+      let num = parseFloat(item);
 
       if (item.trim() === "") {
         throw new Error(ERROR_MESSAGES.invalidNumber);
