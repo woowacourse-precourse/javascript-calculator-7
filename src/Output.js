@@ -1,14 +1,12 @@
 import { MissionUtils } from "@woowacourse/mission-utils";
 
 class Output {
-  result;
-
-  constructor(result) {
-    this.result = result;
-  }
-
-  printResult() {
-    MissionUtils.Console.print(`결과 : ${this.result}`);
+  /**
+   * 덧셈 결과를 출력합니다.
+   * @param {number} result - 덧셈 결과
+   */
+  static printResult(result) {
+    MissionUtils.Console.print(`결과 : ${result}`);
   }
 }
 

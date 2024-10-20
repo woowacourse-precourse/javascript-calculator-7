@@ -8,8 +8,7 @@ class App {
 
     const calculator = new Calculator();
     calculator.init(customSeparator, numbers);
-    const output = new Output(calculator.sum());
-    output.printResult();
+    Output.printResult(calculator.sum());
   }
 }
 
