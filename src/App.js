@@ -20,8 +20,8 @@ class App {
       return 0;
     }
 
-    // 쉼표 구분자로 이루어진 문자열 입력 시 연산 기능
-    const numbers = input.split(',').map(Number);
+    // 쉼표(,) 또는 콜론(:)으로 숫자를 구분하여 연산하는 기능
+    const numbers = input.split(/[,|:]/).map(Number);
     return numbers.reduce((sum, num) => sum + num, 0);
   }
 
