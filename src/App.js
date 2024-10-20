@@ -10,7 +10,7 @@ class App {
     }
 
     let pushedCustomStr = []
-    let customSeparator = '';
+    let customSeparator = [];
     let startCustomIndex = 0;
 
     for (let i = 0; i < USERINFO.length - 1; i++) {
@@ -23,12 +23,12 @@ class App {
       } else if (CURRENT_SLICED_STRING === '\\' && NEXT_SLICED_STRING === 'n') {
         if (pushedCustomStr[pushedCustomStr.length - 1] === 1) {
           pushedCustomStr.pop();
-          customSeparator = USERINFO.substring(startCustomIndex, i);
+          customSeparator.push(USERINFO.substring(startCustomIndex, i));
+  
+          if (pushedCustomStr.length > 1) {
+            throw new Error('[ERROR] 잘못된 문자열입니다.');
+          }
         }
-      }
-
-      if (pushedCustomStr.length > 1) {
-        throw new Error('[ERROR] 잘못된 문자열입니다.');
       }
     }
 
