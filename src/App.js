@@ -16,7 +16,8 @@ class App {
       const result = computeResult(customSeparator, formattedUserInput);
       Console.print(`결과 : ${result}`);
     } catch (error) {
-      Console.print(`[ERROR]`); // 스택 트레이스가 안 뜸
+      Console.print('[ERROR]'); // 스택 트레이스가 안 뜸
+      throw error;
     }
   }
 }
@@ -37,7 +38,7 @@ function validateUserInput(customSeparator, formattedUserInput) {
     : /\s|^\d+([,:]\d+)*$/;
 
   if (!formattedUserInput.match(regex)) {
-    throw new Error('사용자 입력을 다시 하세요.');
+    throw new Error('[ERROR]');
   }
 }
 
@@ -52,7 +53,7 @@ function computeResult(customSeparator, formattedUserInput) {
     .reduce((acc, cur) => acc + cur, 0);
 
   if (isNaN(result)) {
-    throw new Error('사용자 입력을 다시 하세요.');
+    throw new Error('[ERROR]');
   }
 
   return result;
