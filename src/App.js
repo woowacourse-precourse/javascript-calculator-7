@@ -22,6 +22,9 @@ class App {
   parseInput(input) {
     const separators = [...this.defaultSeparators]; // 기본 구분자 추가
     let mainString = input;
+    if (mainString.trim() === '') {
+      throw new Error('[ERROR] 빈 문자열을 입력할 수 없습니다.');
+    }
     // 커스텀 구분자 처리
     if (input.startsWith('//')) {
       const customIndex = input.indexOf('\\n');
