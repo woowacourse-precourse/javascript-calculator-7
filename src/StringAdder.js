@@ -72,4 +72,21 @@ class StringAdder {
             this.result += number;
         }
     }
+    // 출력
+    printResult() {
+        try{
+            if(this.type == CalculatorType.error){
+                throw new Error("[Error]");
+            }else{
+                Console.print("결과 : " + this.result);
+            }
+        }
+    }
+
+    doCalculator(){
+        this.getSeperator(this.input);
+        this.splitString();
+        this.addNumber();
+        this.printResult();
+    }
 }
