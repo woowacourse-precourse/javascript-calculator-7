@@ -1,9 +1,9 @@
 import { errorMessage } from './constant.js';
-import { getCustomSeparator, getSplitedBySeparator } from './inputUitl.js';
+import { getCustomSeparator, getSplitedBySeparator } from './util/inputUitl.js';
 import {
   getSeparatorConflictPattern,
   getSeparatorPattern,
-} from './regExpUtil.js';
+} from './util/regExpUtil.js';
 
 export default class Validator {
   static validateCustomSeparator(input) {
