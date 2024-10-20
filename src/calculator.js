@@ -5,9 +5,10 @@ class Calculator {
     this.defaultDelimiters = [",", ":"];
   }
 
-  // 문자열이 비어있거나 null, undefined인 경우 에러 처리
+  // 문자열이 비어있는 경우 예외처리
   isEmpty(input) {
-    if (input.trim() == "" || input == null || input == undefined) {
+    const trimmedInput = input.trim();
+    if (trimmedInput.length < 1) {
       throw new Error(Errors.EMPTY_INPUT);
     }
   }
@@ -17,23 +18,25 @@ class Calculator {
     const customDelimiterMatch = input.match(/^\/\/(.*?)\n/); // 구분자 확인
     let delimiters = [...this.defaultDelimiters]; // 구분자 배열을 기본 구분자로 초기화
 
+    // 커스텀 구분자가 있는 경우
     if (customDelimiterMatch) {
-      // \\와 /n 사이 문자열을 문자로 분리하여 커스텀 구분자 추출
-      const customDelimiters = customDelimiterMatch[1]
-        .trim()
-        .split("")
-        .map((char) => char.trim());
+      const customDelimiters = customDelimiterMatch[1].trim().split(/[,]/); // 쉼표로 구분하여 배열로 변환
 
-      // 예외처리: 커스텀 구분자가 숫자일 경우
       customDelimiters.forEach((delimiter) => {
-        if (!isNaN(delimiter)) {
+        // 구분자가 없거나 이미 정의된 구분자이거나 숫자인 경우 예외처리
+        if (
+          delimiter.length !== 1 ||
+          !isNaN(delimiter) ||
+          delimiters.includes(delimiter)
+        ) {
           throw new Error(Errors.WRONG_DELIMETER);
         }
+        delimiters.push(delimiter);
       });
 
-      // 커스텀 구분자를 구분자 배열에 추가
-      delimiters.push(...customDelimiters);
-      return { delimiters, numbers: input.split("\n").slice(1).join("\n") };
+      // 나머지 숫자 추출
+      const numbers = input.split("\n").slice(1).join("\n");
+      return { delimiters, numbers };
     }
 
     return { delimiters, numbers: input };
@@ -60,7 +63,7 @@ class Calculator {
     // 예외 처리: 숫자 형식이 잘못된 경우
     return splitNumbers.map((num) => {
       const number = Number(num);
-      if (isNaN(number) || number > 1.8E308) {
+      if (isNaN(number) || number > Number.MAX_VALUE) {
         throw new Error(Errors.INVALID_FORMAT);
       }
       return number;
