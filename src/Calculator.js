@@ -8,6 +8,7 @@ class Calculator {
       return 0;
     }
     this.isValidateInput(input);
+    const numbers = this.parseNumber(input); //추출한 숫자 담기
     return input;
   }
 
@@ -18,6 +19,16 @@ class Calculator {
     if (!regex.test(text)) {
       throw new Error('구분자와 양수가 아닌 다른 문자가 존재합니다');
     }
+  }
+
+  //숫자 추출하기
+  parseNumber(text) {
+    const pattern = `[${[...this.delimiter].join('')}]`;
+    const splitTexts = text.split(new RegExp(pattern));
+    const extractedNums = splitTexts
+      .filter((v) => v !== '')
+      .map((v) => Number(v));
+    return extractedNums;
   }
 }
 
