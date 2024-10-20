@@ -11,7 +11,9 @@ class App {
     async readInput() {
         try {
             const VALUE = await Console.readLineAsync('');
-            const RESULT = this.calculate(VALUE);
+            const FORMATVALUE = VALUE.replace(/\\n/g, '\n');
+            const NUMBERS = this.numbersExtraction(FORMATVALUE);
+            const RESULT = this.add(NUMBERS);
 
             Console.print(`결과 : ${RESULT}`);
         } catch (error) {
@@ -19,18 +21,33 @@ class App {
         }
     }
 
-    calculate(input) {
+    numbersExtraction(input) {
         if (input.trim() === '') throw new Error('입력된 값이 없습니다.');
 
-        const REGEXP = /[,:]/;
+        let defaultRegExp = /[,:]/;
+        let userInputValue = input;
 
-        const numbers = input.split(REGEXP).map(Number);
+        // custom
+        if (input.startsWith('//')) {
+            const customDelimiterRegExp = /\/\/(.*?)\n/;
+            const customDelimiter = input.match(customDelimiterRegExp);
+
+            if (!customDelimiter) {
+                throw new Error('잘못된 형식입니다.');
+            }
+
+            const newRegExp = customDelimiter[1];
+            defaultRegExp = new RegExp(`[${newRegExp}]`);
+            userInputValue = input.split('\n')[1];
+        }
+
+        const numbers = userInputValue.split(defaultRegExp).map(Number);
 
         if (numbers.some(isNaN)) {
             throw new Error('숫자가 아닌 값이 포함되었습니다.');
         }
 
-        return this.add(numbers);
+        return numbers;
     }
 
     add(numberList) {
