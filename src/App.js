@@ -18,7 +18,7 @@ class App {
       return DEFAULT_DELIMITER;
     }
 
-    const match = str.match(/\/\/.\\n/);
+    const match = str.match(/\/\/(.)\\n/);
     if (!match) {
       throw new Error(ERROR_MESSAGES.INVALID_DELIMITER);
     }
@@ -44,11 +44,10 @@ class App {
 
   checkNumbers(numbers) {
     numbers.forEach((num) => {
-      const parsedNumber = Number(num);
-      if (isNaN(parsedNumber)) {
+      if (isNaN(num)) {
         throw new Error(ERROR_MESSAGES.INVALID_NUMBER);
       }
-      if (parsedNumber < 0) {
+      if (Number(num) < 0) {
         throw new Error(ERROR_MESSAGES.NEGATIVE_NUMBER);
       }
     });
