@@ -2,7 +2,7 @@ import Input from '../view/Input.js';
 import Output from '../view/Output.js';
 import Calculator from '../model/Calculator.js';
 
-export default class CalculatorController {
+class CalculatorController {
   /**
    * @param {string} input 
    * @returns {number}
@@ -18,3 +18,5 @@ export default class CalculatorController {
     Output.printResult(result);
   }
 }
+
+export default CalculatorController;

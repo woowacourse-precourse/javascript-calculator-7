@@ -2,7 +2,7 @@ import { Console } from '@woowacourse/mission-utils';
 import { INPUT_GUIDE_MESSAGE } from '../constant/input.js';
 import { ERROR_MESSAGE } from '../constant/error.js';
 
-export default class Input {
+class Input {
   /**
    * @returns {Promise<string>}
    */
@@ -14,3 +14,5 @@ export default class Input {
     }
   }
 }
+
+export default Input;

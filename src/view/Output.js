@@ -1,6 +1,6 @@
 import { Console } from '@woowacourse/mission-utils';
 
-export default class Output {
+class Output {
   /**
    * @param {number} result 
    */
@@ -8,3 +8,5 @@ export default class Output {
     Console.print(`결과 : ${result}`);
   }
 }
+
+export default Output;

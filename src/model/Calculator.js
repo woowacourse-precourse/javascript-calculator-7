@@ -5,7 +5,7 @@ import {
 } from '../constant/separator.js'
 import { ERROR_MESSAGE } from '../constant/error.js'
 
-export default class Calculator {
+class Calculator {
   /**
    * @type {Array<string>}
    */
@@ -74,3 +74,5 @@ export default class Calculator {
     return values.reduce(this.add);
   }
 }
+
+export default Calculator;
