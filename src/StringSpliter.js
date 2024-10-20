@@ -2,8 +2,18 @@ class StringSpliter {
   #commaSeperator = ",";
   #colonSeperator = ":";
 
-  constructor(userInputSeperator = "") {
-    this.customSeperator = userInputSeperator;
+  constructor(userInputString) {
+    this.customSeperator = this.getSeperatorFrom(userInputString);
+  }
+
+  getSeperatorFrom(userInputString) {
+    const customSeperator = userInputString.match(/\/\/(.*?)\\n/);
+
+    if (!customSeperator) {
+      return "";
+    }
+
+    return customSeperator[1];
   }
 
   getNumberFrom(string) {
