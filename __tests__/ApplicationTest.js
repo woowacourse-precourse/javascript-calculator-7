@@ -245,6 +245,21 @@ describe("기본 및 커스텀 구분자 사용", () => {
     });
   });
 
+  test("커스텀 구분자(점 .)", async () => {
+    const inputs = ["//.\\n10.20.30,40:50"];
+    mockQuestions(inputs);
+
+    const logSpy = getLogSpy();
+    const outputs = ["결과 : 150"];
+
+    const app = new App();
+    await app.run();
+
+    outputs.forEach((output) => {
+      expect(logSpy).toHaveBeenCalledWith(expect.stringContaining(output));
+    });
+  });
+
   test("커스텀 구분자(별표 *)", async () => {
     const inputs = ["//*\\n1*2*3,4:5"];
     mockQuestions(inputs);
