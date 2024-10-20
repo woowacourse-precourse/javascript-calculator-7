@@ -5,7 +5,7 @@ import { throwError } from './utils/throwError.js';
 class Validator {
 	static checkNegativeInput(input) {
 		if (hasNegative(input)) {
-			throwError('[ERROR] : 양수만 입력할 수 있어요.');
+			throwError('[ERROR] : 양수만 입력할 수 있어요. (-)는 커스텀 구분자로 사용할 수 없어요.');
 		}
 	}
 
@@ -19,8 +19,8 @@ class Validator {
 	}
 
 	static checkResultNull(result) {
-		if (result === null) {
-			throwError('[ERROR] : 커스텀 구분자를 확인할 수 없어요.');
+		if (typeof result === 'string') {
+			throwError(`[ERROR] : ${result}`);
 		}
 	}
 }
