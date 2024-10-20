@@ -25,6 +25,7 @@ class Input {
    * @returns {{customSeparator: string[], numbers: string}}
    */
   static findCustomSeparatorAndNumbers(text) {
+    if (!text) return { customSeparator: [], numbers: "" };
     const parts = text.split("\\n");
 
     const numbers = parts[parts.length - 1];
