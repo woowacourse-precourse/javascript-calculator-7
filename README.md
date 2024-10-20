@@ -252,11 +252,11 @@ const replace = string.replace(regex, "orange"); // Hello banana and orange
 `//` 로 시작하고 `\n`로 끝나는 문자열의 사이에 있는 문자(최소 1글자 이상, 숫자 형식 X) 가져오기
 
 ```js
-const regex = new RegExp(/^\/\/([^0-9\n]+)\n/gm);
+const regex = new RegExp(/^\/\/([^0-9]+)\n/gm);
 
 // 작성한 정규 표현식 까보기
 ^\/\/: 줄의 시작(^)에 "//"가 있어야 한다.("/"를 문자 그대로 사용하고 싶을 때 이스케이프(\)해야 한다)
-([^0-9\n]+): 숫자와 줄바꿈 문자를 제외한 모든 문자가 하나 이상 있어야 한다.
+([^0-9]+): 숫자 형식을 제외한 모든 문자가 하나 이상 있어야 한다.
 \n: "\n" 문자로 끝나야 한다.
 /gm: 모든 문자를 검색하고, "\n" 줄바꿈 문자가 들어가기 때문에 다중 행 모드를 활성화한다.
 ```
@@ -473,26 +473,6 @@ const userInput = await Console.readLineAsync(MESSAGES.USER_INPUT);
 const userInputString = userInput.replaceAll("\\n", "\n");
 ```
 
-또는
-
-기존에 작성했던 정규 표현식을 수정해주면 된다.
-
-```js
-// 기존 정규 표현식
-const CUSTOM_SEPARATOR = /^\/\/([^0-9\n]+)\n/gm;
-
-// 수정된 정규 표현식, \n -> \\n
-const CUSTOM_SEPARATOR = /^\/\/([^0-9\n]+)\\n/gm;
-```
-
-첫 번째 방식은 이스케이프 시퀀스 문자열(`\n`)을 일관적으로 처리한다는 것을 명시적으로 드러내고 있다.
-
-두 번째 방식은 정규 표현식을 수정하여 이스케이프 시퀀스 문자열(`\n`)을 일관적으로 처리하고 있다.
-
-🤷‍♂️ **해당 로직이 코드를 읽는 사람에게 중요한 내용일까?**
-
-→ **로직을 드러내지 않고 추상화 되어 있어도 코드 흐름을 파악하는데 어려움이 없을 것 같아 두 번째 방식으로 해결해도 괜찮을 것 같다.**
-
 </details>
 
 ## 😮 배운 것들
@@ -504,10 +484,10 @@ const CUSTOM_SEPARATOR = /^\/\/([^0-9\n]+)\\n/gm;
 
 ```js
 // RegExp 생성자
-const regex = new RegExp(/^\/\/([^0-9\n]+)\n/gm);
+const regex = new RegExp(/^\/\/([^0-9]+)\n/gm);
 
 // 리터럴 방식
-const regex = /^\/\/([^0-9\n]+)\n/gm;
+const regex = /^\/\/([^0-9]+)\n/gm;
 ```
 
 RegExp 생성자
