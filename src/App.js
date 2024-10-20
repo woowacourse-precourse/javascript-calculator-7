@@ -1,6 +1,6 @@
 // @ts-check
 
-import Game from './Game.js';
+import Game from './controller/Game.js';
 
 class App {
   constructor() {

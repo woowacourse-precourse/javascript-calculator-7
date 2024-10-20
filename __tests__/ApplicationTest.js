@@ -1,4 +1,3 @@
-import App from '../src/controller/App.js';
 import { MissionUtils } from '@woowacourse/mission-utils';
 import Game from '../src/controller/Game.js';
 
