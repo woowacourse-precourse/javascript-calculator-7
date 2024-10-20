@@ -1,7 +1,7 @@
-import { MissionUtils } from "@woowacourse/mission-utils";
+import { Console } from "@woowacourse/mission-utils";
 
 import { parseInput } from "./inputParser.js";
-import { calculateSum } from "./Calculator.js";
+import { calculateSum } from "./calculator.js";
 
 class App {
   async run() {
@@ -16,10 +16,10 @@ class App {
   }
 
   async getInput() {
-    return await MissionUtils.Console.readLineAsync("덧셈할 문자열을 입력해 주세요.\n");
+    return await Console.readLineAsync("덧셈할 문자열을 입력해 주세요.\n");
   }
   printResult(result) {
-    return MissionUtils.Console.print("결과 : " + result);
+    return Console.print("결과 : " + result);
   }
 }
 
