@@ -23,6 +23,8 @@ export const inputNumberValidation = (input) => {
   if (validInputChar.test(input) === true) {
     return null;
   } else {
-    throw new Error('[ERROR]');
+    throw new Error(
+      '[ERROR] 커스텀 구분자, 숫자, 콤마, 콜론 외에는 입력 할 수 없습니다',
+    );
   }
 };
