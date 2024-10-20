@@ -3,14 +3,22 @@ import { Console } from '@woowacourse/mission-utils';
 class App {
   async run() {
     try {
-      // 사용자 입력 받기
-      const userInput= await Console.readLineAsync('덧셈할 문자열을 입력해 주세요.\n');
-      const normalizedInput = this.normalizeInput(userInput); // 입력 정규화
+      await this.startCalculator();
+    } catch (error) {
+      Console.print(`[ERROR] ${error.message}`);
+    } 
+  }
+
+  async startCalculator() {
+    try {
+      const userInput = await Console.readLineAsync('덧셈할 문자열을 입력해 주세요.\n');
+      const normalizedInput = this.normalizeInput(userInput);
       const result = this.add(normalizedInput);
       Console.print(`결과: ${result}`);
+      await this.askForRestart(); // 계산 후 재시작 여부 묻기
     } catch (error) {
-      Console.print(error.message);
-    } 
+      Console.print(`[ERROR] ${error.message}`);
+    }
   }
 
   /**
@@ -72,9 +80,22 @@ class App {
    * @param {string} input - 사용자 입력 문자열
    * @returns {string} - 정규화된 문자열
    */
-    normalizeInput(input) {
-      return input.replace(/\\n/g, '\n'); // \\n을 실제 \n로 변환
+  normalizeInput(input) {
+    return input.replace(/\\n/g, '\n'); // \\n을 실제 \n로 변환
+  }
+
+  async askForRestart() {
+    const answer = await Console.readLineAsync("다시 시작하시겠습니까? (Y/N)\n");
+    const normalizedAnswer = answer.trim().toUpperCase(); // 대소문자 구분 없이 처리
+
+    if (normalizedAnswer === 'Y') {
+      await this.startCalculator(); // 재시작
+    } else if (normalizedAnswer === 'N') {
+    } else {
+      Console.print("[ERROR] Y 또는 N만 입력할 수 있습니다.");
+      await this.askForRestart(); // 올바른 입력이 아닐 경우 다시 묻기
     }
+  }
 }
 
 export default App;
