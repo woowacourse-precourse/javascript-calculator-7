@@ -1,0 +1,1 @@
+export { default as StrCalcuLator } from './StrCalcuLator.js'
