@@ -19,6 +19,7 @@ export const SPECIAL_CHARACTERS = [
 
 export const CONSOLE_MESSAGE = {
   INPUT: '덧셈할 문자열을 입력해 주세요.\n',
+  INPUT_STRING_FROM_ERROR: '문자열 형식이 잘못되었습니다.',
   NUMBER_ERROR: '숫자가 아닌 문자열이 포함되어 있습니다.',
   NUMBER_POSITIVE_ERROR: '음수가 포함되어 있습니다.',
   SEPARATOR_FORM_ERROR:

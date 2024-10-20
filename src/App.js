@@ -83,22 +83,26 @@ class App {
       : separator;
   }
 
-  checkNumber(num) {
-    if (!isNumber(num)) {
+  sumAllString(strArr) {
+    const numArr = strArr.map((str) => this.validateNumber(str));
+
+    return numArr.reduce((acc, cur) => acc + cur, 0);
+  }
+
+  validateNumber(str) {
+    if (str === '') {
+      throw Error(errorString(CONSOLE_MESSAGE.INPUT_STRING_FROM_ERROR));
+    }
+
+    if (!isNumber(Number(str))) {
       throw Error(errorString(CONSOLE_MESSAGE.NUMBER_ERROR));
     }
 
-    if (!isPositiveNumber(num)) {
+    if (!isPositiveNumber(Number(str))) {
       throw Error(errorString(CONSOLE_MESSAGE.NUMBER_POSITIVE_ERROR));
     }
 
-    return num;
-  }
-
-  sumAllString(strArr) {
-    const numArr = strArr.map((str) => this.checkNumber(Number(str)));
-
-    return numArr.reduce((acc, cur) => acc + cur, 0);
+    return Number(str);
   }
 }
 
