@@ -24,7 +24,7 @@ class App {
             delimiters.push(customDelimiter);
           }
 
-          numbers = rest;
+          numbers = rest.join('');
         }
 
         for (const delimiter of delimiters) {
