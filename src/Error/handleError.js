@@ -1,3 +1,3 @@
-export default function throwError(message) {
-  throw new Error(`[ERROR]: ${message}`);
-}
+// export default function throwError(message) {
+//   throw new Error();
+// }
