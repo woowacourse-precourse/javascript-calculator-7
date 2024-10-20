@@ -17,16 +17,20 @@ class App {
       this.parsedData = stringParser(this.userInput);
       this.displayResult();
     } catch (error) {
-      throw error;
+      this.handleError(error); // 에러 메시지 처리 방식 개선
     }
   }
 
   displayResult() {
     if (this.parsedData instanceof Error) {
-      throw this.parsedData;
+      this.handleError(this.parsedData);
     } else {
       sumCalculator(this.parsedData); // 결과 계산
     }
+  }
+
+  handleError(error) {
+    console.error(`[ERROR]: ${error.message}`);
   }
 
   async run() {
@@ -35,7 +39,7 @@ class App {
       this.setUserInput(inputValue);
       await this.parseUserInput();
     } catch (error) {
-      throw new Error(`[ERROR] ${error.message}`);
+      this.handleError(error); // 에러 메시지 처리 방식 개선
     }
   }
 }
