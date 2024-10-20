@@ -14,7 +14,7 @@ class Io {
 
 class Validation {
   //주어진 문자열을 구분자를 기준으로 나눌 수 있는지 확인한다.
-  isValidSeperator(string) {
+  hasInvalidSeperator(string) {
     const regex = new RegExp(`[${CALCULATOR.seperator.join('')}]`);
     const parts = string.split(regex);
     if (!parts.every(part => part.trim() === '' || /^\d+$/.test(part))) {
@@ -25,6 +25,13 @@ class Validation {
   static isValidCustomSeperatorForm(matchResult) {
     if (matchResult === null) {
       throw new Error(ERROR.prefix + ERROR.invalidCustomForm);
+    }
+  }
+  // 커스텀 구분자가 유효한지 확인한다.
+  isValidSeperator(seperator) {
+    if (!isNaN(seperator)) {
+      // 숫자는 커스텀 구분자가 될 수 없다.
+      throw new Error(ERROR.prefix + ERROR.invalidCustomSeperator);
     }
   }
 }
@@ -54,9 +61,12 @@ class App {
     if (input.startsWith('//')) {
       // 사용자가 커스텀 구분자를 등록하려 시도하는 경우
       const customSeperator = this.processor.extractSeperator(input);
+
+      // 사용자가 등록한 커스텀 구분자의 유효성을 검증한다.
+      this.validation.isValidSeperator(customSeperator);
     }
 
-    this.validation.isValidSeperator(input);
+    this.validation.hasInvalidSeperator(input);
   }
 }
 
