@@ -18,13 +18,14 @@ class App {
         delimiter = /[,:]/;
       }
 
-      let numbers = input.split(delimiter).map((v) => +v);
+      let numbers = input.split(delimiter);
 
-      numbers.forEach((v) => {
-        if (v < 0)
-          throw new Error("[ERROR] 잘못된 입력입니다. 음수가 입력에 포함됩니다.")
-        if(isNaN(v))
-          throw new Error("[ERROR] 잘못된 입력입니다. 숫자가 아닌 값이 포함됩니다." )
+      numbers = numbers.map((v) => {
+        if(v.length === 0 || isNaN(+v))
+          throw new Error("[ERROR} 잘못된 입력입니다.");
+        if (+v < 0)
+          throw new Error("[ERROR] 잘못된 입력입니다. 음수가 입력에 포함됩니다.");
+        return +v;
       })
 
       let sum = numbers.reduce((acc, cur) => acc + cur, 0);
@@ -48,6 +49,9 @@ class App {
     if(match[1].length >= 2){
       throw new Error("[ERROR] 잘못된 입력입니다. 커스텀 구분자 형식이 틀렸습니다.");
     }
+    if(match[1].length === 1 && !isNaN(+match[1]))
+      throw new Error("[ERROR] 잘못된 입력입니다. 숫자는 커스텀 구분자가 될 수 없습니다.");
+    
     return new RegExp(`[${match[1]},:]`); // 커스텀 구분자 + 기본 구분자를 정규식으로 변환
   }
 
