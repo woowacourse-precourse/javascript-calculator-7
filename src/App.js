@@ -6,18 +6,18 @@ class App {
       "덧셈할 문자열을 입력해 주세요.\n"
     );
 
-    for (const element of inputString) {
-      if (element === "0") {
-        throw new Error("[ERROR]: 0은 양수가 아닙니다.");
-      }
-    }
-
     let splitArr;
+
     if (inputString.startsWith("//")) {
       let customDelimiter = extractCustomDelimiter(inputString);
+
       splitArr = splitCustomDelimiter(inputString, customDelimiter);
     } else {
       splitArr = splitDelimiter(inputString);
+    }
+
+    if (splitArr.includes("0")) {
+      throw new Error("[ERROR]: 0은 양수가 아닙니다.");
     }
 
     let qualifyNumArr = splitArr.map(Number);
@@ -25,6 +25,7 @@ class App {
 
     if (result === true) {
       let answer = qualifyNumArr.reduce((acc, cur) => acc + cur);
+
       Console.print(`결과 : ${answer}`);
     } else if (result === false) {
       throw new Error("[ERROR]: 구분자와 양수만 입력해주세요.");
@@ -46,11 +47,13 @@ function splitCustomDelimiter(inputString, customDelimiter) {
     inputString.length
   );
   const regex = new RegExp(`${customDelimiter}|,|:`);
+
   return remainString.split(regex);
 }
 
 function splitDelimiter(inputString) {
   const regex = /,|:/;
+
   return inputString.split(regex);
 }
 
