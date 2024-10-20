@@ -1,4 +1,5 @@
 import extractNumbers from './numberExtractor.js';
+import isValidateNumbers from './validation.js';
 
 class DelimiterParser {
   constructor(input) {
@@ -7,7 +8,9 @@ class DelimiterParser {
   }
 
   extractNumbers() {
-    return extractNumbers(this.input);
+    const numbers = extractNumbers(this.input);
+    isValidateNumbers(numbers);
+    return numbers;
   }
 
   getNumbers() {

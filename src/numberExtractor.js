@@ -1,5 +1,4 @@
 import { CUSTOM_DELIMITER, DEFAULT_DELIMITER } from './constants.js';
-import isValidateNumbers from './validation.js';
 
 // 숫자를 추출하는 함수
 function extractNumbers(input) {
@@ -15,7 +14,6 @@ function extractNumbers(input) {
     numbers = input.split(DEFAULT_DELIMITER);
   }
 
-  isValidateNumbers(numbers); // 유효성 검사
   return numbers.map(Number);
 }
 
