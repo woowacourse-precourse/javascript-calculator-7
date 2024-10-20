@@ -18,6 +18,7 @@ class App {
     Console.print(`결과 : ${calculateSum(nums)}`);
   }
 }
+
 function isCustom(inputStr){
  return inputStr.slice(0,2) === "//" ? true : false;
 }
@@ -30,11 +31,25 @@ function addCustomOperator(inputStr,basicOperators){
     throw Error("[ERROR] : 커스텀 구분자 탐지에 실패했습니다.");
   }
   console.log(`커스텀 문자는 ${customOperator}입니다.`);
+  inspectCustomSeperator(customOperator);
   basicOperators.push(customOperator);
 }
 
 function extractCustomString(inputStr){
   return inputStr.split("\\n")[1];
+}
+
+function inspectCustomSeperator(customOperator){
+  if (customOperator === "" || customOperator === " " ){
+    throw Error("[ERROR] : 공백은 커스텀구분자가 될 수 없습니다.");
+  }
+  if (customOperator.length > 1){
+    throw Error("[ERROR] : 2자이상의 문자열은 커스텀구분자가 될 수 없습니다.");
+  }
+  if (!isNaN(customOperator)){
+    throw Error("[ERROR] : 숫자는 커스텀구분자가 될 수 없습니다.");
+  }
+  return;
 }
 
 function extractNums(inputStr,basicOperators){
