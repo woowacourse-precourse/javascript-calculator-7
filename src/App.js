@@ -35,12 +35,15 @@ class App {
     }
 
     formattedInput.split(delimiter).map((item) => {
-      let num = Number(item);
+      let num = Number(item.trim());
 
+      if (item.trim() === "") {
+        throw new Error(ERROR_MESSAGES.invalidNumber);
+      }
       if (isNaN(num)) {
         throw new Error(ERROR_MESSAGES.invalidNumber);
       }
-      if (num < 0) {
+      if (num <= 0) {
         throw new Error(ERROR_MESSAGES.negativeNumber);
       }
 
