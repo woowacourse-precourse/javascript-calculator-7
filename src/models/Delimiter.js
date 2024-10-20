@@ -14,7 +14,7 @@ class Delimiter {
 
     static getDelimiter(inputText) {
         if(inputText === '') {
-            validateEmptyString(inputText);
+            return this.validateEmptyString(inputText);
         }
 
         if(inputText.includes('//')) {
@@ -50,8 +50,8 @@ class Delimiter {
         this.validateBetweenEmptyNumbers(numbers);
     }
 
-    validateEmptyString() {
-        throw new DelimiterError(ERROR_MESSAGE.input_blank_error);
+    static validateEmptyString() {
+        return 0;
     }
 
     validateInconsistentDelimiters() {   
