@@ -37,15 +37,20 @@ class Validation {
 }
 
 class StringProcessor {
-  extractSeperator(input) {
-    const customSeparatorPattern = new RegExp(
+  constructor() {
+    this.customSeparatorPattern = new RegExp(
       `^${CALCULATOR.customFormPrefix}(.+?)${CALCULATOR.customFormSuffix}`
     );
-    const match = input.match(customSeparatorPattern);
+  }
+  extractSeperator(input) {
+    const match = input.match(this.customSeparatorPattern);
 
     Validation.isValidCustomSeperatorForm(match);
 
     return match[1].trim();
+  }
+  getStringToCalculate(input) {
+    return input.replace(this.customSeparatorPattern, '');
   }
 }
 
@@ -57,7 +62,7 @@ class App {
   }
   async run() {
     let input = await this.ioHandler.getString();
-
+    let stringToCalculate = '';
     if (input.startsWith('//')) {
       // 사용자가 커스텀 구분자를 등록하려 시도하는 경우
       const customSeperator = this.processor.extractSeperator(input);
@@ -67,10 +72,14 @@ class App {
 
       // 커스텀 구분자를 구분자 리스트에 추가한다.
       CALCULATOR.seperator.push(customSeperator);
-      console.log(CALCULATOR.seperator);
+
+      // 계산할 문자열만 자른다.
+      stringToCalculate = this.processor.getStringToCalculate(input);
+    } else {
+      stringToCalculate = input;
     }
 
-    this.validation.hasInvalidSeperator(input);
+    this.validation.hasInvalidSeperator(stringToCalculate);
   }
 }
 
