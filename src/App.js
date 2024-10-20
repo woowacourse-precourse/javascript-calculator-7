@@ -1,5 +1,5 @@
-import { Calculator } from "./Calculator";
-import { Console } from "./Console";
+import { Calculator } from "./Calculator.js";
+import { Console } from "./Console.js";
 
 class App {
   constructor() {
