@@ -9,6 +9,7 @@ const MESSAGES = {
     START_TO_SEPARATOR: '[ERROR] 구분자로 시작하는 문자열은 입력할 수 없습니다.',
     END_TO_SEPARATOR: '[ERROR] 구분자로 끝나는 문자열은 입력할 수 없습니다.',
     OVER_MAX_NUMBER: '[ERROR] 계산기의 계산 범위를 넘어서는 수를 더할 수 없습니다.',
+    CONTINUOUS_SEPARATOR: '[ERROR] 구분자는 숫자와 숫자 사이에 존재해야 합니다.',
   },
   OUTPUT_RESULT: '결과 : ',
 };

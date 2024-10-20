@@ -35,6 +35,9 @@ class Validator {
       if (isNaN(userInput[5])) {
         throw new Error(MESSAGES.ERROR.START_TO_SEPARATOR);
       }
+      if (isNaN(userInput[idx + 1])) {
+        throw new Error(MESSAGES.ERROR.CONTINUOUS_SEPARATOR);
+      }
     }
     // 커스텀 구분자를 사용하지 않는 경우
     else if (!useCustomSep) {
@@ -43,6 +46,9 @@ class Validator {
       }
       if (isNaN(userInput[0])) {
         throw new Error(MESSAGES.ERROR.START_TO_SEPARATOR);
+      }
+      if (isNaN(userInput[idx + 1])) {
+        throw new Error(MESSAGES.ERROR.CONTINUOUS_SEPARATOR);
       }
     }
   }
