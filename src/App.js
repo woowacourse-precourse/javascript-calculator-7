@@ -46,11 +46,10 @@ class App {
 		const valueArray = values.split(delimiter).map(Number);
 
 		// 에러 처리: 음수가 있을 경우 에러 발생
-		valueArray.forEach(num => {
-			if (num < 0) {
-				this.throwError('음수는 입력할 수 없습니다.');
-			}
-		});
+		const hasNegative = valueArray.some(num => num < 0);
+		if (hasNegative) {
+			this.throwError('음수는 입력할 수 없습니다.');
+		}
 
 		// 숫자들의 합을 반환
 		return valueArray.reduce((sum, num) => sum + num, 0);
