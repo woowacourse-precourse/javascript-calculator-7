@@ -1,4 +1,4 @@
-import Console from "./Console.js";
+import { Console } from "@woowacourse/mission-utils";
 
 function add(input) {
   try {
