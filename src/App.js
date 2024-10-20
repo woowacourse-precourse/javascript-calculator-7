@@ -9,7 +9,6 @@ class App {
       const result = parseString(str);
       Console.print(`${SYSTEM_MESSAGES.PARSE_RESULT}${result}`);
     } catch (error) {
-      Console.print(error.message);
       throw error;
     }
   }
