@@ -37,6 +37,10 @@ class App {
       if(isNaN(num)) {
         throw new Error("[ERROR] 입력한 값이 올바른지 확인해주세요.");
       }
+
+      if(num < 0) {
+        throw new Error("[ERROR] 음수가 아닌 양수를 입력해주세요.")
+      }
       
       sum += num;
     }
