@@ -10,8 +10,9 @@ class App {
     async run() {
         try {
             const input = await this.getUserInput();
-            this.validateInput(input);
-            const numbers = this.splitInputByDelimiter(input);
+            const [customDelimiter, inputWithoutDelimiter] = this.splitCustomDelimiter(input);
+            this.validateInput(customDelimiter, inputWithoutDelimiter);
+            const numbers = this.splitInputByDelimiter(customDelimiter, inputWithoutDelimiter);
             const sum = this.sumNumbers(numbers);
 
             Console.print(`결과: ${sum}`);
@@ -29,16 +30,11 @@ class App {
         }
     }
 
-    validateInput(input) {
-        if (!input) return;
+    validateInput(customDelimiter, inputWithoutDelimiter) {
+        const delimiters = customDelimiter ? `,:${customDelimiter}` : ",:";
+        const regex = new RegExp(`^[0-9]+([${delimiters}][0-9]+)*$`);
 
-        // 구분자와 양수로 구성된 문자열인지 검증하는 정규표현식
-        const regex = /^[0-9]+([,:][0-9]+)*$/;
-        const isCustomDelimiter = this.checkCustomDelimiter(input);
-
-        if (isCustomDelimiter && !regex.test(input.slice(5))) {
-            this.throwError("입력값이 유효하지 않습니다.");
-        } else if (!isCustomDelimiter && !regex.test(input)) {
+        if (inputWithoutDelimiter && !regex.test(inputWithoutDelimiter)) {
             this.throwError("입력값이 유효하지 않습니다.");
         }
     }
@@ -56,9 +52,10 @@ class App {
         }
     }
 
-    splitInputByDelimiter(input) {
-        if (!input) return [0];
-        const numbers = input.split(/[,:]/);
+    splitInputByDelimiter(customDelimiter, inputWithoutDelimiter) {
+        if (!inputWithoutDelimiter) return [0];
+        const delimiters = customDelimiter ? `,:${customDelimiter}` : ",:";
+        const numbers = inputWithoutDelimiter.split(new RegExp(`[${delimiters}]`));
         return numbers.map((number) => Number(number));
     }
 
