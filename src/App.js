@@ -71,8 +71,9 @@ class App { //하나의 메소드는 하나의 역할
         Console.print(`결과 : ${this.sum}`)
     }
 
-    calculator(arr) { //계산 담당
-        for (const element of arr) {
+    calculator(param) { //계산 담당
+        const numberArray = this.preprocessing([...param])
+        for (const element of numberArray) {
             this.sum += Number(this.isSeparator(element))
         }
     }
