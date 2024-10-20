@@ -9,6 +9,7 @@ class App {
       this.printUserOutput(numbers);
     } catch (error) {
       Console.print("[ERROR] " + error.message);
+      throw new Error("[ERROR]");
     }
   }
 
@@ -55,7 +56,7 @@ class App {
 
   printUserOutput(numbers) {
     const sum = numbers.reduce((acc, curr) => acc + curr, 0);
-    Console.print(`${sum}`);
+    Console.print(`결과 : ${sum}`);
   }
 }
 
