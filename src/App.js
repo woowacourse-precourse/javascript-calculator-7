@@ -2,15 +2,19 @@ import { Console } from "@woowacourse/mission-utils";
 
 class App {
   async run() {
-    const USER_INPUT = await Console.readLineAsync("입력값을 입력해주세요.");
-    // 구분자랑 숫자 분리 로직 -- (1)
-    const { SEPERATORS, NUM_STRING } = this.ESTRACT_SEPERATORS(USER_INPUT);
+    try {
+      const USER_INPUT = await Console.readLineAsync("입력값을 입력해주세요.");
+      // 구분자랑 숫자 분리 로직 -- (1)
+      const { SEPERATORS, NUM_STRING } = this.ESTRACT_SEPERATORS(USER_INPUT);
 
-    Console.print(`구분자: ${SEPERATORS.join(", ")}`);
-    Console.print(`숫자 문자열: "${NUM_STRING}"`);
-    // 합 출력 로직 -- (2)
-    const TOTAL_SUM = this.calculateSum(NUM_STRING, SEPERATORS);
-    Console.print(`결과: ${TOTAL_SUM}`);
+      Console.print(`구분자: ${SEPERATORS.join(", ")}`);
+      Console.print(`숫자 문자열: "${NUM_STRING}"`);
+      // 합 출력 로직 -- (2)
+      const TOTAL_SUM = this.calculateSum(NUM_STRING, SEPERATORS);
+      Console.print(`결과: ${TOTAL_SUM}`);
+    } catch (error) {
+      Console.print(`[ERROR] ${error.message}`);
+    }
   }
 
   // (1) 구분자랑 숫자 분리
@@ -22,6 +26,7 @@ class App {
     let IS_CUSTOM = false;
 
     // 커스텀 찾기 (모든 //와 \n사이에 있는 기호들은 커스텀으로 간주)
+    // 커스텀 지정은 여러번 가능하도록 인식 (//와 \n사이에만 있다면 어디든)
     for (let i = 0; i < CHAR_ARRAY.length; i++) {
       // '/' 찾기
       if (CHAR_ARRAY[i] === "/" && CHAR_ARRAY[i + 1] === "/") {
@@ -52,14 +57,25 @@ class App {
   }
 
   calculateSum(NUM_STRING, SEPERATORS) {
+    const INVALID_CHAR_REGEX = new RegExp(`[^0-9${SEPERATORS.join("")}]`);
+
+    // 에러 처리 (1): 구분자나 숫자가 아닌 이외 문자 있을 때
+    if (INVALID_CHAR_REGEX.test(NUM_STRING)) {
+      throw new Error(`구분자나 숫자가 아닌 문자가 포함되어 있습니다.`);
+    }
     // 정규 표현식
     const SEPERATE_MARK = new RegExp(`[${SEPERATORS.join("")}]`); // 구분자만 골라내서
     const NUMBERS = NUM_STRING.split(SEPERATE_MARK).filter(Boolean); // 구분자 기준 숫자분리
 
     // 합계
     return NUMBERS.reduce((sum, num) => {
-      const PARSED_NUM = parseInt(num, 10); // 문자열을 숫자로 변환
-      return isNaN(PARSED_NUM) ? sum : sum + PARSED_NUM; // 합 계산
+      const PARSED_NUM = parseInt(num, 10); //숫자로 변환
+      // 에러 처리 (2): 양수가 아닐 때
+      if (PARSED_NUM < 0) {
+        throw new Error(`${PARSED_NUM}과 같은 음수는 허용되지 않습니다`);
+      }
+      // 합 계산
+      return sum + PARSED_NUM;
     }, 0);
   }
 }
