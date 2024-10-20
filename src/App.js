@@ -25,6 +25,11 @@ class App {
     }
     return costomSeparator;
   }
+
+  splitInputBySeparators(input, separator) {
+    const pattern = `[${separator}${this.defaultSeparators}]`;
+    return input.split(new RegExp(pattern));
+  }
 }
 
 export default App;
