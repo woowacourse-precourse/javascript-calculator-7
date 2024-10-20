@@ -67,7 +67,10 @@ class App {
         result = calculateSum(userInput);
         Console.print(`결과 : ${result}`);
       } else {
-        userInput = userInput.replaceAll(checkCustomIdentifier(userInput), ",");
+        userInput = userInput.replaceAll(
+          checkCustomIdentifier(userInput).customIdentifier,
+          ","
+        );
         result = calculateSum(userInput);
         Console.print(`결과 : ${result}`);
       }
