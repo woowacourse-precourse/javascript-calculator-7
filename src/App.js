@@ -52,6 +52,10 @@ function validateCustomDelimiter(input) {
 // 구분자를 이용해 숫자들을 분리해주는 함수
 function splitNumbersUsingDelimiter(delimiter, numbers) {
 
+  if (typeof delimiter === 'number') {
+    throw new Error('[ERROR] 입력된 구분자가 숫자면 안됩니다');
+  }
+
   if (Array.isArray(delimiter)) {
     const DELIMITER_PATTERN = new RegExp(`[${delimiter.join('')}]`);
     return numbers.split(DELIMITER_PATTERN);
