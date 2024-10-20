@@ -3,7 +3,7 @@ import {
   validateCustomInput,
   // validateNoDuplicateDelimiters,
   validateCustomInputFormat,
-} from '../../validator/validator.js';
+} from '../../validation/validator.js';
 import { ERROR_MESSAGES, ERROR_PREFIX } from '../../Constraints/Constraints.js';
 
 import { escapeRegExp } from '../../Util/regex.js';
