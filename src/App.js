@@ -3,14 +3,32 @@ import { Console } from "@woowacourse/mission-utils";
 class App {
   async run() {
     let input = await Console.readLineAsync('덧셈할 문자열을 입력해 주세요.\n');
-    let answer=999999;
+    let answer = 999999;
 
-    if(input==="") answer=0;
+    if (input === "") {
+      answer = 0;
+    } else {
+      function extractCustomDelimiter(input) {
+        const delimiterMatch = input.match(/\/\/(.+?)\\n/);
+        if (delimiterMatch) {
+          return delimiterMatch[1];
+        }
+        return null;
+      }
 
-    const REGEX = new RegExp('[,:]');
-    answer=input.split(REGEX).map(Number).reduce((acc,cur)=>{return acc+cur},0);
+      let customDelimiter = extractCustomDelimiter(input);
+      let delimiters = [',', ':'];
+      
+      if (customDelimiter) {
+        input = input.split("\\n")[1];
+        delimiters.push(customDelimiter);
+      }
 
-    Console.print(`결과 : ${answer}`)
+      const REGEX = new RegExp(`[${delimiters.join('')}]`);
+      answer = input.split(REGEX).map(Number).reduce((acc, cur) => acc + cur, 0);
+    }
+
+    Console.print(`결과 : ${answer}`);
   }
 }
 
