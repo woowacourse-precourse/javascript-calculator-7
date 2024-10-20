@@ -1,50 +1,46 @@
-import { MissionUtils } from "@woowacourse/mission-utils";
+import { MissionUtils } from '@woowacourse/mission-utils';
 
 class App {
   async run() {
-    let input = await MissionUtils.Console.readLineAsync("덧셈할 문자열을 입력해 주세요.");
+    const input = await MissionUtils.Console.readLineAsync('덧셈할 문자열을 입력해 주세요.');
 
     try {
-      let result = this.caculate(input);
+      const result = this.calculate(input);
       MissionUtils.Console.print(`결과 : ${result}`);
-    } catch(e) {
-      MissionUtils.Console.print("[ERROR] 잘못된 형식의 입력입니다.");
+    } catch (e) {
+      MissionUtils.Console.print('[ERROR] 잘못된 형식의 입력입니다.');
       throw e;
     }
   }
 
-  caculate(input) {
-    if (input === "") {
+  calculate(input) {
+    if (input === '') {
       return 0;
     }
 
-    // 커스텀 구분자도 추가할 것이기 때문에 변수로 선언
-    let delimiter = [',', ':'];
+    const delimiter = [',', ':'];
 
-    if (input.startsWith("//")) {
+    if (input.startsWith('//')) {
       const match = input.match(/^\/\/(.)\\n(.*)$/);
       if (match) {
-        const customDelimiter = match[1];  // 커스텀 구분자 추출
+        const customDelimiter = match[1]; // // 뒤의 문자열을 구분자로 사용
         delimiter.push(customDelimiter);
         input = match[2]; // \n 이후의 문자열을 처리
       } else {
-        throw new Error("[ERROR] 잘못된 형식의 입력입니다.");
+        throw new Error('[ERROR] 잘못된 형식의 입력입니다.');
       }
     }
 
-    let pattern = new RegExp(`[${delimiter.join('')}]`);
-    let numbers = input.split(pattern);
+    const pattern = new RegExp(`[${delimiter.join('')}]`);
+    const numbers = input.split(pattern);
 
-    let sum  = 0
-
-    for (let number of numbers) {
-      MissionUtils.Console.print(number)
-      if (parseInt(number) < 0) {
-        throw new Error("[ERROR] 음수는 입력할 수 없습니다.")
+    return numbers.reduce((sum, number) => {
+      const parsedNumber = parseInt(number, 10);
+      if (parsedNumber < 0) {
+        throw new Error('[ERROR] 음수는 입력할 수 없습니다.');
       }
-      sum += parseInt(number);
-    }
-    return sum;
+      return sum + parsedNumber;
+    }, 0);
   }
 }
 
