@@ -5,11 +5,11 @@ class App {
     const userInput = await Console.readLineAsync(
       '덧셈할 문자열을 입력해 주세요.\n'
     );
+
     const customSeparator = getCustomSeparator(userInput);
 
     try {
-      validateUserInput(userInput, customSeparator);
-
+      //validateUserInput(userInput, customSeparator);
       const result = computeResult(userInput, customSeparator);
       Console.print(`결과 : ${result}`);
     } catch (error) {
@@ -24,19 +24,16 @@ export default App;
 function getCustomSeparator(userInput) {
   const customSeparator = userInput.match(/^\/\/(\D)\\n/);
 
-  // TODO: 길이 1짜리 배열이 나올 가능성이 있는지 체크
   return Array.isArray(customSeparator) && customSeparator.length
     ? customSeparator[1]
     : null;
 }
 
 function validateUserInput(userInput, customSeparator) {
-  // TODO: 정규 표현식 리터럴로 바꾸기 버그 찾기
+  console.log(customSeparator);
   const regex = customSeparator
-    ? new RegExp(
-        `(\/\/${customSeparator}\\n)?(\s|\d+|((\d+[:,${customSeparator}]?)+(\d+)))+$`
-      )
-    : new RegExp(`\s|(\d+(([:,]\d+)+)?)$`);
+    ? new RegExp(`^(\/\/${customSeparator}\\n)`)
+    : new RegExp(`\s|\d+|((\d+[:,])+\d+)+$`);
 
   if (!userInput.match(regex)) {
     throw new Error('사용자 입력을 다시 하세요.');
@@ -46,10 +43,10 @@ function validateUserInput(userInput, customSeparator) {
 function computeResult(userInput, customSeparator) {
   const regex = customSeparator
     ? new RegExp(`[:,${customSeparator}]`)
-    : new RegExp(`/[:,]/`);
+    : new RegExp(`[:,]`);
 
   const formattedUserInput = customSeparator
-    ? userInput.replace(/^(?:\/\/)(\D)(?:\\n)/, '')
+    ? userInput.replace(/^\/\/\D\\n/, '')
     : userInput;
 
   return formattedUserInput
