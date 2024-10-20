@@ -12,6 +12,10 @@ class App {
     if (customSeparator)
       nums = getNumber(userInput.replace(customRegex, ""), customDelimiter);
     else nums = getNumber(userInput, /,|:/);
+
+    for (const n of nums) {
+      if (!isNumber(n)) throw new Error("[ERROR]");
+    }
   }
 }
 
