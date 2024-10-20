@@ -6,7 +6,7 @@ export function splitByDefaultDelimiters(input){
 }
 
 // 커스텀 구분자가 있을 때 이를 추출하는 함수
-export function extractCustomDelimeter(input){
+export function extractCustomDelimiter(input){
     const match = input.match(RegexPattern.CUSTOM_DELIMITERS);
     if(match){
         return{
@@ -15,4 +15,10 @@ export function extractCustomDelimeter(input){
         };
     }
     return null;
+}
+
+// 커스텀 구분자로 문자열을 분리하는 함수
+export function splitByCustomDelimiter(numbers, delimiter){
+    const customDelimiterRegex = new RegExp(delimiter);
+    return numbers.split(customDelimiterRegex);
 }
