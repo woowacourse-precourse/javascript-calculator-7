@@ -34,7 +34,7 @@ class App {
       numbers.forEach((numStr) => {
         const number = Number(numStr);
         
-        if (isNaN(number)) {
+        if (isNaN(number) || number < 0) {
           throw new Error("[ERROR] 숫자가 아니거나 음수인 값이 포함되어 있습니다.");
         }
 
@@ -54,6 +54,7 @@ class App {
 
     } catch (error) {
       Console.print("[ERROR] 프로그램이 종료됩니다.");
+      throw error;
     }
 
   }
