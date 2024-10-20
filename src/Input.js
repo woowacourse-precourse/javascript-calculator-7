@@ -3,7 +3,7 @@ import { IncludeZeroError, InvalidSeparatorError, InvalidCustomSeparatorError } 
 
 class Input {
   async getCustomSeparatorAndNumbers() {
-    const plusString = await this.getPlusString();
+    const plusString = await Input.getPlusString();
     const { customSeparator, numbers } = this.findCustomSeparatorAndNumbers(plusString);
 
     Input.validateSeparators(customSeparator);
@@ -12,7 +12,7 @@ class Input {
     return { customSeparator, numbers };
   }
 
-  async getPlusString() {
+  static async getPlusString() {
     const plusString = await MissionUtils.Console.readLineAsync(
       "덧셈할 문자열을 입력해 주세요.\n",
     );

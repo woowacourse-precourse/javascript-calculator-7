@@ -20,12 +20,6 @@ const mockQuestions = (mockInputs) => {
 };
 
 describe("getPlusString()", () => {
-  let input;
-
-  beforeEach(() => {
-    input = new Input();
-  });
-
   afterEach(jest.restoreAllMocks);
 
   test("입력 안내 메시지 출력", async () => {
@@ -33,7 +27,7 @@ describe("getPlusString()", () => {
     const spy = getConsoleSpy();
     mockQuestions(mockInput, spy);
 
-    await input.getPlusString();
+    await Input.getPlusString();
     expect(spy).toHaveBeenCalledWith("덧셈할 문자열을 입력해 주세요.\n");
   });
 
@@ -41,7 +35,7 @@ describe("getPlusString()", () => {
     const mockInput = ["1,2,3"];
     mockQuestions(mockInput);
 
-    const result = await input.getPlusString();
+    const result = await Input.getPlusString();
     expect(result).toEqual("1,2,3");
   });
 });
