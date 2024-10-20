@@ -12,10 +12,15 @@ class App {
   }
 
   calculateSum(input) {
-    if (input === '') return 0; // 빈 문자열 처리
-
-    return 0; // 기본 값 (나중에 업데이트 예정)
+    if (input === '') return 0;
+  
+    // 쉼표(,)와 콜론(:) 구분자 지원
+    const numbers = input.split(/,|:/);
+    const sum = numbers.reduce((acc, number) => acc + Number(number), 0);
+  
+    return sum;
   }
+  
 }
 
 const app = new App();
