@@ -8,6 +8,7 @@ class App {
 		EMPTY_STRING: '빈 문자열은 입력할 수 없습니다.',
 		INVALID_DELIMITER: '구분자는 숫자가 될 수 없습니다.',
 		NEGATIVE_NUMBER: '음수는 입력할 수 없습니다.',
+		INVALID_FORMAT: '문자열 사이에 공백이 있을 수 없습니다.',
 	};
 
 	async run() {
@@ -20,6 +21,9 @@ class App {
 	handleString(input) {
 		// 빈 값일 경우 에러 발생
 		if (!input.trim()) this.throwError(App.ERROR_MESSAGES.EMPTY_STRING);
+		// 공백 있는지 먼저 확인
+		if (/\d\s+\d/.test(input))
+			this.throwError(App.ERROR_MESSAGES.INVALID_FORMAT);
 
 		// 커스텀 구분자 처리
 		const {values, delimiter} = this.checkDelimiter(input);
