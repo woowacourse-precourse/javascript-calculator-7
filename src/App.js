@@ -12,7 +12,7 @@ class App {
     } else if (!inputData.isEmpty() && allValidationAndCalc(inputData) !== 0) {
       Console.print("결과 : " + inputData.result);
     } else {
-      throw new Error("[ERROR] 잘못된 입력입니다.");
+      throw new Error("[ERROR]");
     }
   }
 }
