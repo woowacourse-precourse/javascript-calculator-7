@@ -23,6 +23,9 @@
 
 ## 설계
 
+![image](https://github.com/user-attachments/assets/2b8da393-05a1-4cfc-9a39-83462977fb86)
+
+
 # 📺 실행 결과
 
 # 📕 TMI
