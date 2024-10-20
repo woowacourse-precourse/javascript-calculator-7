@@ -16,7 +16,7 @@ class App {
   }
 
   async getInput() {
-    return await MissionUtils.Console.readLineAsync("덧셈할 문자열을 입력해 주세요.");
+    return await MissionUtils.Console.readLineAsync("덧셈할 문자열을 입력해 주세요.\n");
   }
   printResult(result) {
     return MissionUtils.Console.print("결과 : " + result);
