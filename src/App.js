@@ -32,6 +32,10 @@ class App {
         throw new Error('[ERROR] "\\n"이 누락되었습니다.');
       }
 
+      if (!(input.slice(3, 5) === '\\n')) {
+        throw new Error('[ERROR] 커스텀 구분자는 한 글자를 초과할 수 없습니다.');
+      }
+      
       delimiter = input[2];
 
       if (!isNaN(delimiter)) {
