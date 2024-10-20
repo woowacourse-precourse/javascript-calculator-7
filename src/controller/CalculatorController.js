@@ -20,5 +20,7 @@ export default class CalculatorController {
       const delimiter = /[,:]/;
       numbers = StringCalculator.extractNumbers(input, delimiter);
     }
+
+    return StringCalculator.sum(numbers);
   }
 }
