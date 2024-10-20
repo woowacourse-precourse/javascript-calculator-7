@@ -38,6 +38,9 @@ class App {
       let userInput = await Console.readLineAsync('덧셈할 문자열을 입력해주세요.\n');
       if (userInput.includes(' ')) {
         throw new Error('spaceInInput');
+      } else if (userInput === '') {
+        Console.print('결과 : 0');
+        return;
       } else {
         userInput = separateInput(userInput);
       }
@@ -48,7 +51,7 @@ class App {
         Console.print(`결과 : ${inputSum}`);
       } else {
         throw new Error('notAllNum');
-     }  
+      }  
     } catch(error) {
       if (error.message === 'spaceInInput') {
         throw new Error('[ERROR] 공백 없이 입력해 주세요!');
