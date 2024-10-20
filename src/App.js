@@ -9,6 +9,7 @@ class App {
     if (/\s/.test(input)) {
       throw new Error("[ERROR] 공백이 포함될 수 없습니다.");
     }
+    return input.length === 0 ? 0 : input;
   }
 }
 
