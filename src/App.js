@@ -40,10 +40,7 @@ function extractCustomSeparator(input) {
 function splitInputBySeparators(input, separators) {
   const separateRegExp = new RegExp(`[${separators.join('')}]`);
 
-  return input
-    .split(separateRegExp)
-    .map((item) => item.trim())
-    .filter((item) => item !== '');
+  return input.split(separateRegExp);
 }
 
 class App {
