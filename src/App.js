@@ -1,4 +1,4 @@
-import addCal from "./calculator.js";
+import addCal from "./models/Calculator.js";
 import { Console } from "@woowacourse/mission-utils";
 
 class App {
