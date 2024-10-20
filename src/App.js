@@ -1,11 +1,5 @@
 import { Console } from "@woowacourse/mission-utils";
-import StringValidator from './Utils/StringValidatorUtils.js';
-import StringParsing from './Utils/StringParsingUtils.js';
-import StringCalculatorUtils from './Utils/StringCalculatorUtils.js'
-
-const validator = new StringValidator();
-const parsing = new StringParsing();
-const calculator = new StringCalculatorUtils;
+import { stringCalculator } from './MainProcessor.js';
 
 class App {
   async run() {
@@ -18,34 +12,6 @@ class App {
       Console.print(`${error.message}`)
     }
   }
-}
-
-function stringCalculator(input) {
-
-  checkingProcessBeforeParsing(input);
-
-  const { parsedArray, customDelimiter } = parsing.parsing(input);
-
-  checkingProcessAfterParsing(parsedArray, customDelimiter);
-
-  var resultNumArray = calculator.convertNumArray(parsedArray);
-
-  const resultSum = calculator.calculateSum(resultNumArray);
-
-  return resultSum;
-
-}
-
-function checkingProcessBeforeParsing(input) {
-  validator.checkEmptyString(input)
-  validator.checkCustomDelimiterPosition(input);
-  validator.checkMultipleDeclareCustomDelimiter(input);
-}
-
-function checkingProcessAfterParsing(parsedArray, customDelimiter) {
-  validator.checkMultipleDelimiter(parsedArray, customDelimiter);
-  validator.checkIncludesNonNumber(parsedArray);
-  validator.checkNegativeNumbers(parsedArray);
 }
 
 export default App;

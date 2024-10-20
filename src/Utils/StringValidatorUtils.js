@@ -1,4 +1,4 @@
-import ErrorMessages from '../ErrorMessage.js'
+import ErrorMessages from '../constant/ErrorMessage.js'
 
 class StringValidator {
 
