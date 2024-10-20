@@ -9,7 +9,7 @@ class App {
     const { delimiter, numbers } = splitValues(inputtedString);
     const allNumbers = splitNumbers(delimiter, numbers);
     const sum = calculate(allNumbers);
-    Console.print(`결과: ${sum}`);
+    Console.print(`결과 : ${sum}`);
   }
 }
 
@@ -64,6 +64,12 @@ function splitNumbers(delimiter, numbers) {
 }
 
 function calculate(values) {
+  const negativeNumbers = values.filter(num => Number(num) < 0);
+
+  if (negativeNumbers.length > 0) {
+    throw new Error('[ERROR] 음수는 허용되지 않습니다');
+  }
+
   return values.reduce((acc, num) => acc + Number(num), 0);
 }
 
