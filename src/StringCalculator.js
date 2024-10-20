@@ -57,6 +57,19 @@ class StringCalculator {
       .map((part) => part.trim())
       .filter((part) => part !== "" && !part.startsWith("//")); // "//"로 시작하는 부분 필터링
   }
+
+  validateNumbers(numbers) {
+    const negativeNumbers = numbers.filter((num) => Number(num) < 0);
+    if (negativeNumbers.length > 0) {
+      throw new Error("[ERROR] : 양수만 입력하세요");
+    }
+
+    numbers.forEach((num) => {
+      if (isNaN(Number(num))) {
+        throw new Error("[ERROR] : 잘못된 값을 입력하였습니다.");
+      }
+    });
+  }
 }
 
 export default StringCalculator;
