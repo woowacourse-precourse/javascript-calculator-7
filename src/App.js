@@ -7,6 +7,12 @@ class App {
     if (input === ""){
       Console.print('0')
     }
+
+    let separation =  /[,|:]/;
+    let numbers = [];
+    const CUSTOM_START_INDEX = input.startsWith('//')
+    const CUSTOM_END_INDEX = input.indexOf('\\n')
+
   }
 }
 
