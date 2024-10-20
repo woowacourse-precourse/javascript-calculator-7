@@ -1,10 +1,13 @@
 import { Console } from '@woowacourse/mission-utils';
+import Calculator from './Calculator.js';
 
 class App {
   #input;
+  #calculator;
 
   async run() {
     this.#input = await this.#readUserInput();
+    this.#calculator = new Calculator(this.#input);
   }
 
   async #readUserInput() {
