@@ -22,6 +22,8 @@ class App {
       numbers.forEach((v) => {
         if (v < 0)
           throw new Error("[ERROR] 잘못된 입력입니다. 음수가 입력에 포함됩니다.")
+        if(isNaN(v))
+          throw new Error("[ERROR] 잘못된 입력입니다. 숫자가 아닌 값이 포함됩니다." )
       })
 
       let sum = numbers.reduce((acc, cur) => acc + cur, 0);
