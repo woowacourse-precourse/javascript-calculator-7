@@ -6,8 +6,8 @@ const COMMON_DELIMITER = [",", ":"];
 class App {
   async run() {
     const INPUTTED_NUMBER = await Console.readLineAsync('덧셈할 문자열을 입력하세요.\n');
-    const VALIDATE_RESULT = validateDelimiter(INPUTTED_NUMBER);
-    const VALUES = splitNumbersUsingDelimiter(VALIDATE_RESULT.DELIMITER, VALIDATE_RESULT.INPUTTED_NUMBERS);
+    const validate = validateDelimiter(INPUTTED_NUMBER);
+    const VALUES = splitNumbersUsingDelimiter(validate.DELIMITER, validate.INPUTTED_NUMBERS);
     const SUM = calculate(VALUES);
     Console.print(`결과: ${SUM}`);
   }
@@ -25,6 +25,8 @@ function validateDelimiter(input) {
 
   return { DELIMITER: COMMON_DELIMITER, INPUTTED_NUMBERS: input };
 }
+
+function
 
 // 커스텀 구분자를 분리해서 저장하는 함수
 function validateCustomDelimiter(input) {
