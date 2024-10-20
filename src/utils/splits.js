@@ -6,7 +6,7 @@ import Errors from '../error/errors.js';
  */
 
 function Splits(input) {
-    let seperator = [',', ':'];
+    let seperator = [',', ';'];
 
     let newLineIdx = input.lastIndexOf('\\n');
     let customs = newLineIdx !== -1 ? input.slice(2, newLineIdx) : null;
