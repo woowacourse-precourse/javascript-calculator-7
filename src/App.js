@@ -28,26 +28,32 @@ async function getText() {
   try {
     const input = await MissionUtils.Console.readLineAsync('덧셈할 문자열을 입력해 주세요.');
 
-    if(!isNaN(input)){
+    let noNumber = input.match(/-\d+/);
+    if(noNumber && noNumber.length > 0){
       throw new Error('[ERROR]');
     }
     return input;
   } catch (error) {
     MissionUtils.Console.print(error);
-    return null;
+    return Promise.reject(error);
   }
 };
 
 class App {
   async run() {
-    const input = await getText();
+    try{
+      const input = await getText();
 
-    if(!input) return;
+      if(!input) return;
 
-    let splitunit = getSplitunit(input);
-    let numberArr = extractNumber(input, splitunit);
-    let sum = sumNumber(numberArr);
-    MissionUtils.Console.print(`결과 : ${sum}`);
+      let splitunit = getSplitunit(input);
+      let numberArr = extractNumber(input, splitunit);
+      let sum = sumNumber(numberArr);
+      MissionUtils.Console.print(`결과 : ${sum}`);
+    } catch(error){
+      MissionUtils.Console.print("[Error] 프로그램이 종료되었습니다.");
+      throw error;
+    }
   }
 }
 
