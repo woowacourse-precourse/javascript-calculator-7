@@ -20,6 +20,9 @@ class App {
       throw new Error("[ERROR] 잘못된 커스텀 구분자 형식입니다.");
     }
     const costomSeparator = input.slice(2, suffixCustomSeparatorIndex);
+    if (costomSeparator === "") {
+      throw new Error("[ERROR] 빈 구분자는 허용되지 않습니다.");
+    }
     return costomSeparator;
   }
 }
