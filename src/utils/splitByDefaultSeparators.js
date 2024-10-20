@@ -1,3 +1,3 @@
-export function splitByDefaultSeparators(str) {
-	return str.split(/,|:/);
+export default function splitByDefaultSeparators(str) {
+  return str.split(/,|:/);
 }

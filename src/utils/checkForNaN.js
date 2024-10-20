@@ -1,3 +1,3 @@
-export function checkForNaN(value) {
-	return value.some((v) => isNaN(v));
+export default function checkForNaN(value) {
+  return value.some((v) => Number.isNaN(v));
 }

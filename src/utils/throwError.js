@@ -1,3 +1,3 @@
-export function throwError(err) {
-	throw new Error(err);
+export default function throwError(err) {
+  throw new Error(err);
 }
