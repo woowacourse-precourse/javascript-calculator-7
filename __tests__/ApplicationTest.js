@@ -16,20 +16,52 @@ const getLogSpy = () => {
   return logSpy;
 };
 
+const simulateWithInput = async (inputs,expectedOutputs) => {
+  mockQuestions(inputs);
+  const logSpy = getLogSpy();
+
+  const app = new App();
+  await app.run();
+
+  expectedOutputs.forEach((output) => {
+    expect(logSpy).toHaveBeenCalledWith(expect.stringContaining(output));
+  });
+}
+
 describe("문자열 계산기", () => {
   test("커스텀 구분자 사용", async () => {
     const inputs = ["//;\\n1"];
-    mockQuestions(inputs);
-
-    const logSpy = getLogSpy();
     const outputs = ["결과 : 1"];
 
-    const app = new App();
-    await app.run();
+    await simulateWithInput(inputs,outputs);
+  });
 
-    outputs.forEach((output) => {
-      expect(logSpy).toHaveBeenCalledWith(expect.stringContaining(output));
-    });
+  test("기본 구분자와 커스텀 구분자 동시 사용", async () => {
+    const inputs = ["//;\\n1;2,3"];
+    const outputs = ["결과 : 6"];
+
+    await simulateWithInput(inputs,outputs);
+  });
+
+  test("여러 문자의 커스텀 구분자 사용", async () => {
+    const inputs = ["//aaa\\n1aaa2aaa3"];
+    const outputs = ["결과 : 6"];
+
+    await simulateWithInput(inputs,outputs);
+  });
+
+  test("이스케이프 문자를 커스텀 구분자로 사용", async () => {
+    const inputs = ["//\\b\\n1\\b2\\b3"];
+    const outputs = ["결과 : 6"];
+
+    await simulateWithInput(inputs,outputs);
+  });
+
+  test("커스텀 구분자로 \\n 사용", async () => {
+    const inputs = ["//\\n\\n1\\n2\\n3"];
+    const outputs = ["결과 : 6"];
+
+    await simulateWithInput(inputs,outputs);
   });
 
   test("예외 테스트", async () => {
