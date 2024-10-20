@@ -22,9 +22,10 @@ export default class StringSplitter {
     // 커스텀 구분자 검사
     const found = input.match(this.#CUSTOM_DELIMITER_PATTERN);
     if (found) {
-      const [fullMatch, delimiter] = found;
-      this.string = input.slice(fullMatch.length);
-      this.#delimiters = delimiter;
+      const [delimiterString, customDelimiter] = found;
+      this.string = input.slice(delimiterString.length);
+      // 커스텀 구분자와 기본 구분자를 합친 정규표현식 생성
+      this.#delimiters = new RegExp(`[${customDelimiter},:]`);
       return;
     }
 
