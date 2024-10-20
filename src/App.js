@@ -1,4 +1,4 @@
-import { Console } from "@woowacourse/mission-utils";
+import { Console } from '@woowacourse/mission-utils';
 
 class App {
   #userInput;
@@ -6,7 +6,7 @@ class App {
   #numbers;
 
   constructor() {
-    this.#userInput = "";
+    this.#userInput = '';
     this.#result = 0;
     this.#numbers = [];
     this.separators = new RegExp(`[,:]`);
@@ -15,19 +15,19 @@ class App {
   // 문자열 입력 기능
   async getUserInput() {
     this.#userInput = await Console.readLineAsync(
-      "덧셈할 문자열을 입력해 주세요.\n"
+      '덧셈할 문자열을 입력해 주세요.\n'
     );
   }
 
   // 구분자 찾기 기능
   extractSeparator() {
-    if (this.#userInput.startsWith("//")) {
+    if (this.#userInput.startsWith('//')) {
       // 구분자 획득
       const separator = this.#userInput[2];
       this.separators = new RegExp(`[,:${separator}]`);
 
       // 입력값에서 커스텀 구분자 관련 문자('//...\n') 제거
-      const indexOfn = this.#userInput.indexOf("n");
+      const indexOfn = this.#userInput.indexOf('n');
       this.#userInput = this.#userInput.slice(indexOfn + 1);
     }
   }
@@ -49,8 +49,8 @@ class App {
       // 유효하지 않으면 에러 발생
       if (!isValid) {
         const errorMsg = isNaN(Number(char))
-          ? "[ERROR] 구분자가 아닌 문자는 입력할 수 없습니다."
-          : "[ERROR] 음수는 입력할 수 없습니다.";
+          ? '[ERROR] 구분자가 아닌 문자는 입력할 수 없습니다.'
+          : '[ERROR] 음수는 입력할 수 없습니다.';
         throw new Error(errorMsg);
       }
 
