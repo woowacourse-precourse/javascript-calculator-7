@@ -26,6 +26,12 @@ class App {
     return RESULT;
   }
 
+  #addNumber(x) { // 더하는 함수
+    const TURN_NUMBER = x.map(Number);
+    const SUM = TURN_NUMBER.reduce((a, b) => (a + b));
+    return SUM;
+  }
+
   async run() {
     await this.#startCalculator();
   }
