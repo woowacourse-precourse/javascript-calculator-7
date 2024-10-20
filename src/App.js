@@ -11,6 +11,19 @@ class App {
       Console.print(`[ERROR] ${error.message}`);
     }
   }
+
+  sumNumExceptString(input) {
+    let numArray = [];
+    if (input.startsWith("//") && input.includes("\n")) {
+      const separator = input.slice(2, input.indexOf("\n"));
+      const numAndString = input.slice(input.indexOf("\n") + 1);
+      numArray = numAndString.split(separator);
+    } else {
+      const regex = /[^0-9]/g;
+      numArray = input.replace(regex, "");
+    }
+    return this.sumNum(numArray);
+  }
 }
 
 export default App;
