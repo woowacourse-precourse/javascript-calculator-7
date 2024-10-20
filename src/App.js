@@ -4,13 +4,13 @@ class App {
   async run() {
     try {
       // Console API를 이용해 비동기로 사용자 입력을 받음
-      const input = await Console.readLineAsync('문자열을 입력하세요: ');
+      const input = await Console.readLineAsync('덧셈할 문자열을 입력해 주세요.\n');
 
       // 입력값을 계산하는 함수 호출
       const result = this.calculation(input);
 
       // 결과 출력
-      Console.print(result);
+      Console.print(`결과 : ${result}`);
     } catch (error) {
       Console.print(error.message);
     }
