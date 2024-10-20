@@ -6,21 +6,26 @@ class App {
       "덧셈할 문자열을 입력해 주세요.\n"
     );
 
-    if (input.trim() === "") {
-      Console.print("결과 : 0");
-      return;
+    const result = this.calculate(input);
+
+    Console.print(`결과 : ${result}`);
+  }
+
+  calculate(str) {
+    if (this.isEmptyStr(str)) {
+      return 0;
     }
 
     const separators = [",", ":"];
-    let str = input;
+    let newStr = str;
 
-    if (this.isCustomSeparator(input)) {
-      const customSeparator = this.getCustomSeparator(input);
+    if (this.isCustomSeparator(str)) {
+      const customSeparator = this.getCustomSeparator(str);
       separators.push(customSeparator);
-      str = this.parseStrWithCustomSeparator(input);
+      newStr = this.parseStrWithCustomSeparator(str);
     }
 
-    const separatedArr = this.separateStr(str, separators);
+    const separatedArr = this.separateStr(newStr, separators);
 
     if (this.isNegativeValue(separatedArr)) {
       throw new Error("[ERROR] 음수는 입력할 수 없습니다.");
@@ -32,7 +37,11 @@ class App {
       throw new Error("[ERROR] 잘못된 입력입니다.");
     }
 
-    Console.print(`결과 : ${result}`);
+    return result;
+  }
+
+  isEmptyStr(str) {
+    return str.trim() === "";
   }
 
   isCustomSeparator(str) {
