@@ -62,8 +62,12 @@ function validateInput(inputArray) {
     }
 
     const num = Number(item);
-    if (Number.isNaN(num) || num < 0) {
-      throw new Error('[ERROR] 음수나 숫자가 아닌 값을 입력하면 안됩니다.');
+    if (Number.isNaN(num)) {
+      throw new Error('[ERROR] 숫자가 아닌 값을 입력하면 안됩니다.');
+    }
+
+    if (num < 0) {
+      throw new Error('[ERROR] 음수는 입력할 수 없습니다.');
     }
   });
 
@@ -95,8 +99,9 @@ class App {
     if (validateInput(splitedInputArray)) {
       const numberArray = convertStringArrayToNumberArray(splitedInputArray);
       const sum = numberArray.reduce((accumulator, currentValue) => accumulator + currentValue);
+      const result = Number.isInteger(sum) ? sum : sum.toFixed(5);
 
-      return Console.print(`결과 : ${sum}`);
+      return Console.print(`결과 : ${result}`);
     }
   }
 }
