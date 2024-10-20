@@ -19,6 +19,7 @@ class App {
     if (input.includes(":")) {
       input = input.replaceAll(":", "");
     }
+
     return input;
   }
 
@@ -28,6 +29,10 @@ class App {
       .map(Number)
       .reduce((acc, curr) => acc + curr, 0);
     return result;
+  }
+
+  printResult(result) {
+    Console.print(`결과 : ${result}`);
   }
 
   async run() {}
