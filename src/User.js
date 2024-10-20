@@ -14,19 +14,21 @@ class User {
 
   async readNumber() {
     const answer = await Console.readLineAsync(MESSAGES.inputNumber);
+    validator.validateString(answer);
     this.handleCustomDelimiter(answer);
-    const numbers = this.splitString(this.#numbersString);
-    const sum = this.calculateNumbers(numbers);
-    this.printResult(sum);
+    this.printResult();
   }
 
   handleCustomDelimiter(string) {
     const { customDelimiter, numbersString } = seperateCustomDelimiter(string);
+    if (customDelimiter.length) validator.validateCustomDelimiter(customDelimiter);
     this.#delimiters = [...this.#delimiters, customDelimiter];
     this.#numbersString = numbersString;
   }
 
-  printResult(sum) {
+  printResult() {
+    const numbers = this.splitString(this.#numbersString);
+    const sum = numbers.reduce((acc, number) => acc + number, 0);
     Console.print(MESSAGES.result + sum);
   }
 
@@ -41,10 +43,6 @@ class User {
       .map(Number);
     validator.validateValueToSum(numbers);
     return numbers;
-  }
-
-  calculateNumbers(numbers) {
-    return numbers.reduce((acc, number) => acc + number, 0);
   }
 }
 
