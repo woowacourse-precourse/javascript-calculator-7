@@ -10,8 +10,8 @@ class Controller {
   }
 
   async process() {
-    // 사용자 입력
     await this.inputString();
+    this.caculator.getSumNumbers();
   }
 
   async inputString() {

@@ -2,6 +2,16 @@ import { ERROR_MESSAGES } from '../constant/message.js';
 
 // 계산기 데이터 및 비즈니스 로직 처리
 class Calculater {
+  #numbers;
+
+  constructor() {
+    this.#numbers = [];
+  }
+
+  getSumNumbers() {
+    return this.#numbers.reduce((acc, curr) => acc + curr, 0);
+  }
+
   validateString(input) {
     if (!input) {
       throw new Error(ERROR_MESSAGES.empty);
@@ -48,7 +58,7 @@ class Calculater {
   validateNumbers(string, delimiter) {
     const stringNumbers = string.split(delimiter);
 
-    stringNumbers.forEach((stringNumber) => {
+    this.#numbers = stringNumbers.map((stringNumber) => {
       if (!stringNumber) {
         throw new Error(ERROR_MESSAGES.missingNumber);
       }
@@ -62,6 +72,8 @@ class Calculater {
       if (number <= 0) {
         throw new Error(ERROR_MESSAGES.negativeNumber);
       }
+
+      return number;
     });
   }
 }
