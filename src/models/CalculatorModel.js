@@ -1,6 +1,6 @@
 // --- 에러 메시지 상수 ---
 const ERROR_MESSAGES = {
-  INVALID_CHARACTTER: '[ERROR] : 구분자가 아닌 문자는 입력할 수 없습니다.',
+  INVALID_CHARACTER: '[ERROR] : 구분자가 아닌 문자는 입력할 수 없습니다.',
   ZERO_NOT_ALLOWED: '[ERROR] : 0은 입력할 수 없습니다.',
 };
 
