@@ -11,6 +11,11 @@ class App {
     try {
       const inputValue = await this.getInputValue();
 
+      if (!inputValue) {
+        Console.print(`결과 : 0`);
+        return;
+      }
+
       let operands = [];
 
       if (CUSTOM_DELIMITER_REGEX.test(inputValue)) {
@@ -45,17 +50,13 @@ class App {
       const result = this.getSum(operands);
       Console.print(`결과 : ${result}`);
     } catch (err) {
-      Console.print(err);
+      // Console.print(err);
       throw err;
     }
   }
 
   async getInputValue() {
     const inputValue = (await Console.readLineAsync('덧셈할 문자열을 입력해 주세요.\n')).trim();
-
-    if (!inputValue) {
-      throw new Error('[ERROR] 입력값이 없습니다.');
-    }
 
     if (inputValue.includes(' ')) {
       throw new Error('[ERROR] 띄어쓰기는 허용되지 않습니다.');
