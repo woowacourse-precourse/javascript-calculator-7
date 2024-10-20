@@ -94,7 +94,7 @@ export default class Calculator {
 
     this.#numbers.forEach((num) => {
       if (num <= 0) {
-        throw new Error('[ERROR]: Negative number is not allowed');
+        throw new Error('[ERROR]: Only positive number is allowed');
       }
     })
   }
