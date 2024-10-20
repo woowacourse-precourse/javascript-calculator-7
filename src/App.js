@@ -4,11 +4,17 @@ class App {
   constructor() {
     this.normalSeperators = [',', ':'];
     this.customSeperators = ['//', '\\n'];
+    this.userInputValue = ''
   }
 
   async run() {
     const userInput = await Console.readLineAsync('문자열 덧셈을 해보아요:');
-    this.isValidSeperator(userInput);
+    const result = this.isValidSeperator(userInput);
+    this.userInputValue = userInput;
+
+    !result ?
+      this.printError('입력값 : ' + this.userInputValue) :
+      this.print(result);
   };
 
   isValidSeperator(str) {
@@ -81,7 +87,7 @@ class App {
   }
 
   print(str) {
-    Console.print('결과:' + str);
+    Console.print('결과 : ' + str);
   }
 }
 
