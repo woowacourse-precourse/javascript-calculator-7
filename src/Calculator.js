@@ -12,8 +12,7 @@ class Calculator {
 
             const arrayNumbers = Splitter.splitString({ stringNumbers, seperator });
 
-            const result = Add.sumNumbers({ arrayNumbers });
-            
+            const result = Add.sumNumbers({ arrayNumbers });   
             Console.print(`결과 : ${result}`);
 
         } catch (error) {
