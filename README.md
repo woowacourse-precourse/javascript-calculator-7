@@ -52,3 +52,16 @@
 >[수정]<br />
 >커밋 시 이슈 자동 닫힘은 main 브랜치에 PR 또는 병합 시에만 가능하다<br />
 >프리코스 규칙에 따라 main 브랜치가 아닌 bewheneverwhatiwant 브랜치를 사용한다<br />
+
+### 디렉토리 구조
+
+>src
+>ㄴApp.js
+>ㄴfuntions // App에서 쓰이는 3개의 함수 분리
+>    ㄴgetInput.js
+>    ㄴprintResult.js
+>    ㄴaddFunctions
+>        ㄴparseInput.js // 입력값 파싱 함수 분리
+>        ㄴvaludateNumber.js // 숫자 검증 함수 분리
+
+![디렉토리 구조](image.png)
