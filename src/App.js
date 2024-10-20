@@ -1,34 +1,46 @@
 import { MissionUtils } from "@woowacourse/mission-utils";
 class App {
-
+  //일단 파싱하는 함수
   parsingInput(input, delimiter) {
     const parsingNumbers = input.split(delimiter).map((value) => {
       var num = Number(value);
-      if (isNaN(num)) {
-        throw new Error("[ERROR]: 숫자가 아닌 값이 포함되어 있습니다.");
-      }
       return num;
     });
-
     var num = parsingNumbers.reduce((a, b) => a + b);
     return num;
   }
-
 
   async run() {
     var result;
     const input = await MissionUtils.Console.readLineAsync(
       "덧셈할 문자열을 입력해 주세요.\n "
     );
+    if(input.length==0){//공백일 경우
+      result = 0;
+    }
 
-    if (input.startsWith("//")) {
+    else if (input.startsWith("//")) {
       //커스텀 구분자일 가능성이 있는 경우
       const endOfDelimeter = input.indexOf("\\n");
-
+      if (endOfDelimeter === -1) {
+        throw new Error("[ERROR]: 잘못된 형식입니다");
+      }
+      //console.log("endOfDelimeter", endOfDelimeter);
       const customDelimeter = input.slice(2, endOfDelimeter);
+      //console.log("customDelimeter", customDelimeter);
 
+      if (typeof customDelimeter === "string") {
+        const delimiters = customDelimeter.split(""); // 문자열을 배열로 변환
+        delimiters.forEach((each) => {
+          if (/\d/.test(each)) {
+            throw new Error("[ERROR]: 구분자에 숫자가 포함되어 있습니다.");
+          }
+        });
+      }
+      
+      //console.log("customDelimeter", Number(customDelimeter));
       const inputSlice = input.slice(endOfDelimeter + 2); //숫자 부분 추출
-
+      //console.log("inputSlice:", inputSlice);
       result = this.parsingInput(
         inputSlice,
         new RegExp(`[${customDelimeter},:]`)
@@ -37,7 +49,10 @@ class App {
       //만약에 Number(!)하면 isNaN나옴
       result = this.parsingInput(input, /[,:]/);
     
-    } 
+    } else {
+      //그게 아니면 ===다른 특수문자로 시작하는 경우
+      throw new Error("[ERROR]: ", "이상한 특수문자가 포함되어 있습니다.");
+    }
 
     MissionUtils.Console.print(`"결과 : ${result}"`);
 
