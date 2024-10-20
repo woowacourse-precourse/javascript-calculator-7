@@ -18,19 +18,18 @@ const getLogSpy = () => {
 };
 
 describe('문자열 계산기', () => {
-  test('커스텀 구분자 사용', async () => {
-    const inputs = ['//;\\n1'];
+  test.each([
+    { inputs: ['//;\\n1;2000;30'], expected: '결과 : 2031' },
+    { inputs: ['1,2:3'], expected: '결과 : 6' },
+    { inputs: ['1.5:2:3'], expected: '결과 : 6.5' },
+  ])('정상 동작 테스트', async ({ inputs, expected }) => {
     mockQuestions(inputs);
 
     const logSpy = getLogSpy();
-    const outputs = ['결과 : 1'];
-
     const app = new App();
     await app.run();
 
-    outputs.forEach((output) => {
-      expect(logSpy).toHaveBeenCalledWith(expect.stringContaining(output));
-    });
+    expect(logSpy).toHaveBeenCalledWith(expect.stringContaining(expected));
   });
 });
 
