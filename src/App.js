@@ -25,6 +25,7 @@ class App {
         throw new Error(JSON.stringify("ERROR: //는 있는데 \n는 없습니다."));
       }
     } else {
+      const array = input.split(BASIC_REGEXP);
     }
   }
 }
