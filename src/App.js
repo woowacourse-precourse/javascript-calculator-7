@@ -16,12 +16,12 @@ class App {
 // 입력: 사용자에게 덧셈할 문자열을 입력받는 메소드
 async getInput() {
   Console.print('덧셈할 문자열을 입력해 주세요.');
-    return await Console.readLineAsync();
+  return await Console.readLineAsync();
 }
 
 // 기본 구분자 기준 분리: 쉼표(,) 또는 콜론(:)을 구분자
 splitNumbers(numbers, delimiter) {
-  return numbers.split(new RegExp(`[${delimiter},:]`));
+  return numbers.split(new RegExp(`[${delimiter}]`));
 }
 
 // 커스텀 구분자 기준 분리: "//"와 "\n" 사이에 위치하는 문자인 커스텀 구분자를 기준
@@ -59,8 +59,7 @@ printResult(result) {
 
 // 에러 처리: 사용자가 잘못된 값을 입력할 경우, "[ERROR]"로 시작하는 메시지와 함께 Error를 발생시키는 메소드
 handleError(error) {
-  Console.print(`[ERROR] ${error.message}`); // 오류 메시지 출력
-  process.exit(1); // 애플리케이션 종료
+  Console.print(`[ERROR] ${error.message}`); 
 }
 }
 
