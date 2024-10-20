@@ -16,7 +16,7 @@ class App {
       const result = computeResult(customSeparator, formattedUserInput);
       Console.print(`결과 : ${result}`);
     } catch (error) {
-      Console.print(`[ERROR] ${error.message}`); // 스택 트레이스가 안 뜸
+      Console.print(`[ERROR]`); // 스택 트레이스가 안 뜸
     }
   }
 }
@@ -34,7 +34,7 @@ function getCustomSeparator(userInput) {
 function validateUserInput(customSeparator, formattedUserInput) {
   const regex = customSeparator
     ? new RegExp(`\\s|^\\d+([,:${customSeparator}]\\d+)*$`)
-    : /\s|\d+([,:]\d+)*$/;
+    : /\s|^\d+([,:]\d+)*$/;
 
   if (!formattedUserInput.match(regex)) {
     throw new Error('사용자 입력을 다시 하세요.');
