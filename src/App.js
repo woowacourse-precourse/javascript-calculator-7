@@ -29,6 +29,11 @@ class App {
     
     if (input.startsWith('//') && input.slice(3, 5) === '\\n') {
       delimiter = input[2];
+
+      if (!isNaN(delimiter)) {
+        throw new Error('[ERROR] 커스텀 구분자로 숫자는 지정할 수 없습니다.')
+      }
+      
       input = input.slice(5)
     } else {
       delimiter = /[,:]/;
