@@ -8,15 +8,8 @@ class App {
 	#input;
 	async run() {
 		try {
-			const USER_INPUT = await this.#getUserInput();
-			this.#input = USER_INPUT.trim();
-			if (isEmptyOrNull(this.#input)) {
-				this.#sum = 0;
-			} else {
-				const CALCULATOR = new Calculator(this.#input);
-				this.#sum = CALCULATOR.calculate();
-			}
-
+			this.#input = await this.#getUserInput();
+			this.#checkIsEmptyAndCalculate();
 			this.#printResult();
 		} catch (err) {
 			throwError(err);
@@ -24,7 +17,17 @@ class App {
 	}
 
 	async #getUserInput() {
-		return Console.readLineAsync(`덧셈할 문자열을 입력해 주세요.\n`);
+		const USER_INPUT = await Console.readLineAsync(`덧셈할 문자열을 입력해 주세요.\n`);
+		return USER_INPUT.trim();
+	}
+
+	#checkIsEmptyAndCalculate() {
+		if (isEmptyOrNull(this.#input)) {
+			this.#sum = 0;
+		} else {
+			const CALCULATOR = new Calculator(this.#input);
+			this.#sum = CALCULATOR.calculate();
+		}
 	}
 
 	#printResult() {
