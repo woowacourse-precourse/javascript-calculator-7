@@ -14,7 +14,7 @@ export class Calculator {
     if (inputString === '') return 0;
 
     if (this.hasCustomDelimiter(inputString)) {
-      this.configureCustomDelimiter(inputString);
+      this.extractCustomDelimiter(inputString);
       inputString = inputString.split('\\n')[1];
     }
 
@@ -28,7 +28,7 @@ export class Calculator {
     return Calculator.CUSTOM_DELIMITER_REGEX.test(input);
   }
 
-  configureCustomDelimiter(input) {
+  extractCustomDelimiter(input) {
     const match = input.match(Calculator.CUSTOM_DELIMITER_REGEX);
     if (match) {
       this.setCustomDelimiter(match[1]);
