@@ -36,7 +36,7 @@ class App {
 
     const delimitedInputs = this.#delimiter.splitByDelimiters(input);
 
-    this.#validator.validate(delimitedInputs);
+    this.#validator.validate(input);
 
     const result = this.#calculator.calculate(delimitedInputs);
 
@@ -46,7 +46,7 @@ class App {
 
 export default new App(
   new View(),
-  new Validator(new SchemaValidator()),
+  new Validator(new SchemaValidator(), new Delimiter()),
   new Delimiter(),
   new Calculator(),
 );

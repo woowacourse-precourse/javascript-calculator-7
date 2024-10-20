@@ -15,7 +15,7 @@ class Delimiter {
    * @param {string} value
    * @returns {boolean}
    */
-  #hasCustomDelimiter(value) {
+  hasCustomDelimiter(value) {
     return (
       isStartsWith(this.#customDelimiterMatchers[0], value) &&
       isMatch(this.#customDelimiterRegEx, value)
@@ -27,7 +27,7 @@ class Delimiter {
    * @param {string} value
    * @returns {string}
    */
-  #getCustomDelimiter(value) {
+  getCustomDelimiter(value) {
     const [start, end] = this.#customDelimiterMatchers;
 
     return value.split(start)[1].split(end)[0];
@@ -52,8 +52,8 @@ class Delimiter {
   #getDelimiter(value) {
     const delimiter = shallowCopy(this.#defaultDelimiters);
 
-    if (this.#hasCustomDelimiter(value)) {
-      delimiter.push(this.#getCustomDelimiter(value));
+    if (this.hasCustomDelimiter(value)) {
+      delimiter.push(this.getCustomDelimiter(value));
     }
 
     return delimiter;
@@ -77,7 +77,7 @@ class Delimiter {
   splitByDelimiters(value) {
     let delimitedValues = [value];
 
-    if (this.#hasCustomDelimiter(value)) {
+    if (this.hasCustomDelimiter(value)) {
       delimitedValues = [this.#removeCustomDelimiterMatchers(value)];
     }
 
