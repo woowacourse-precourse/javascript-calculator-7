@@ -32,15 +32,21 @@ function validateCustomDelimiter(input) {
 
   if (NEW_LINE_INDEX > 2) {
     const DELIMITER = input.substring(2, NEW_LINE_INDEX);
+    console.log('DELIMITER:', DELIMITER);
 
     if (!DELIMITER) {
       throw new Error('[ERROR] 잘못된 구분자가 입력되었습니다');
     }
 
     const INPUTTED_NUMBERS = input.substring(NEW_LINE_INDEX + 2);
+    console.log('INPUTTED NUMBERS:', INPUTTED_NUMBERS);
 
     if (!INPUTTED_NUMBERS) {
       throw new Error('[ERROR] 입력된 숫자가 없습니다');
+    }
+
+    if (!INPUTTED_NUMBERS.includes(DELIMITER)) {
+      return { COMMON_DELIMITER, INPUTTED_NUMBERS };
     }
 
     return { DELIMITER, INPUTTED_NUMBERS };
@@ -51,22 +57,18 @@ function validateCustomDelimiter(input) {
 
 // 구분자를 이용해 숫자들을 분리해주는 함수
 function splitNumbersUsingDelimiter(delimiter, numbers) {
-
-  if (typeof delimiter === 'number') {
-    throw new Error('[ERROR] 입력된 구분자가 숫자면 안됩니다');
+  if (delimiter === undefined) {
+    delimiter = COMMON_DELIMITER;
   }
 
+  let DELIMITER_PATTERN;
+
   if (Array.isArray(delimiter)) {
-    const DELIMITER_PATTERN = new RegExp(`[${delimiter.join('')}]`);
+    DELIMITER_PATTERN = new RegExp(`[${delimiter.join('')}]`);
     return numbers.split(DELIMITER_PATTERN);
   }
 
-  // 사용자가 입력한 구분자가 \n 뒤에 존재하지 않으면
-  if (!numbers.includes(delimiter)) {
-    throw new Error(`[ERROR] 입력된 숫자에 구분자 ${delimiter}가 없습니다`);
-  }
-
-  return numbers.split(delimiter);
+  return [numbers];
 }
 
 // 분리된 숫자들을 더해주는 함수
