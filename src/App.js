@@ -4,6 +4,7 @@ import Delimiter from './Delimiter.js';
 import getNumbers from './functions/getNumbers.js';
 import sumNumbers from './functions/sumNumbers.js';
 import { getUserInput, printResult } from './utils/missionUtils.js';
+import checkEmptyInput from './functions/checkEmptyInput.js';
 
 class App {
   constructor() {
@@ -13,6 +14,7 @@ class App {
   async run() {
     displayInputGuide();
     const input = await getUserInput();
+    if (checkEmptyInput(input)) return;
 
     const customDelimiter = getCustomDelimiter(input);
     const processedInput = customDelimiter ? input.split('\\n')[1] : input;
