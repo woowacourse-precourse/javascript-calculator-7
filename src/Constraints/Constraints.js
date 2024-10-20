@@ -1,4 +1,4 @@
-const ERROR_PREFIX = '[ERROR]: ';
+const ERROR_PREFIX = '[ERROR] ';
 
 const ERROR_MESSAGES = {
   INVALID_INPUT_FORMAT:
