@@ -44,7 +44,8 @@ class App {
         throw new Error('[ERROR] 0는 허용되지 않습니다.');
       }
 
-      console.log(nums);
+      const sum = nums.reduce((acc, cur) => (acc += cur), 0);
+      Console.print(`결과 : ${sum}`);
     } catch (error) {
       Console.print(error.message);
     }
