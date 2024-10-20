@@ -13,6 +13,26 @@ class App {
 
       // 기본 구분자
       if (!input.startsWith('//')) {
+        // 예외 처리
+        if (
+          input.startsWith(',') |
+          input.startsWith(';') |
+          input.endsWith(',') |
+          input.endsWith(';')
+        ) {
+          throw new Error('쉼표 또는 콜론으로 시작하거나 끝날 수 없습니다.');
+        }
+
+        const delimiterReg = /(,|;){2,}/;
+        if (delimiterReg.test(input)) {
+          throw new Error('구분자는 2번 이상 사용할 수 없습니다.');
+        }
+
+        const inputReg = /^[1-9]\d*([,;][1-9]\d*)*$/;
+        if (!inputReg.test(input)) {
+          throw new Error('입력값이 유효하지 않습니다.');
+        }
+
         const result = input.split(/,|;/g);
         let sum = 0;
         result.forEach((item) => {
