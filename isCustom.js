@@ -12,6 +12,9 @@ function solution(message) {
 
     // // \n 기준으로 가운데값 추출 ;
     let custom = message.slice(FirstIndex + 2, SecondIndex);
+    if (!custom || custom.length === 0) {
+      throw new Error("[Error] 커스텀 구분자가 잘못되었습니다.");
+    }
     console.log(custom);
 
     //
@@ -23,4 +26,4 @@ function solution(message) {
   }
 }
 
-console.log(solution("//;\n1;2;3"));
+console.log(solution("//;\\n1;2;3"));

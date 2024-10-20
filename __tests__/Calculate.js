@@ -51,6 +51,18 @@ describe("문자열 계산기", () => {
     });
   });
 
+  test("커스텀 문자가 잘못됐을 경우", async () => {
+    const inputs = ["//;\\n1;2;3"]; // 음수 입력
+    mockQuestions(inputs); // 입력 모킹
+
+    const app = new App();
+
+    // 음수 입력 시 예외 발생하는지 확인
+    await expect(app.run()).rejects.toThrow(
+      "[Error] 제대로된 커스텀 문자를 입력하세요"
+    );
+  });
+
   test("음수 입력 예외 테스트", async () => {
     const inputs = ["-1,2,3"]; // 음수 입력
     mockQuestions(inputs); // 입력 모킹
@@ -75,15 +87,11 @@ describe("문자열 계산기", () => {
     const inputs = [""]; // 빈 입력
     mockQuestions(inputs); // 입력 모킹
 
-    const logSpy = getLogSpy(); // 출력 모킹
-    const outputs = ["결과 : 0"]; // 빈 입력 처리 시 예상 결과
-
     const app = new App();
-    await app.run(); // App 실행
 
-    // 빈 입력이 0으로 처리되는지 확인
-    outputs.forEach((output) => {
-      expect(logSpy).toHaveBeenCalledWith(expect.stringContaining(output));
-    });
+    // 정수가 아닌 값 입력 시 예외 발생하는지 확인
+    await expect(app.run()).rejects.toThrow(
+      "[Error] 제대로된 커스텀 문자를 입력하세요"
+    );
   });
 });

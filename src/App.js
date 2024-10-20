@@ -8,45 +8,40 @@ class App {
   isStart() {
     // MissionUtils를 사용해 사용자가 문자열을 입력할 때까지 대기
     MissionUtils.Console.readLine("덧셈할 문자열을 입력해 주세요.", (input) => {
-      // 입력받은 문자열에 커스텀 구분자가 포함된 경우 처리 (//와 \n이 있는지 확인)
-      if (input.includes("//") && input.includes("\n")) {
-        MissionUtils.Console.print(`결과 : ${this.CustomMessage(input)}`);
-      } else {
-        // 커스텀 구분자가 없으면 기본 구분자인 , 또는 :를 기준으로 문자열을 분리
-        let FirstSplit = input.split(/,|:/);
-
-        // 배열에 포함된 요소들이 유효한 숫자인지 확인
-        if (this.ExceptionArray(FirstSplit)) {
-          // 모든 숫자를 합산
-          let sum = FirstSplit.reduce((a, b) => Number(a) + Number(b), 0);
-          MissionUtils.Console.print(`결과 : ${sum}`);
-        }
+      let custom = this.getCustom(input);
+      let numbers = this.getNumbers(input, custom);
+      if (this.ExceptionArray(numbers)) {
+        let sum = this.getSum(numbers);
+        MissionUtils.Console.print(`결과 : ${sum}`);
       }
     });
   }
 
   // 커스텀 구분자를 추출하는 함수
-  CustomMessage(message) {
-    let FirstIndex = message.indexOf("//");
-    //
-    let SecondIndex = message.indexOf("\n");
-
-    if (FirstIndex !== -1 && SecondIndex !== -1 && FirstIndex < SecondIndex) {
-      // \n 이후의 내용만 잘라서 반환
-      let sliceMessage = message.slice(SecondIndex + 1);
-      console.log(sliceMessage);
-
+  getCustom(message) {
+    if (message.includes("//") && message.includes("\n")) {
+      let FirstIndex = message.indexOf("//");
+      //
+      let SecondIndex = message.indexOf("\n");
       // // \n 기준으로 가운데값 추출 ;
       let custom = message.slice(FirstIndex + 2, SecondIndex);
+      if (custom.length === 0) {
+        throw new Error("[Error] 커스텀 문자가 한개만");
+      }
       console.log(custom);
-
-      //
-      let newArray = sliceMessage.split(custom);
-      console.log(newArray);
-
-      let sum = newArray.reduce((a, b) => Number(a) + Number(b), 0);
-      return sum;
+      return custom;
     }
+    return /,|:/;
+  }
+
+  getNumbers(input, custom) {
+    let sliceMessage = input.includes("\n") ? input.split("\n") : input;
+    return sliceMessage.split(custom);
+  }
+
+  getSum(array) {
+    let sum = array.reduce((a, b) => Number(a) + Number(b), 0);
+    return sum;
   }
 
   // 배열 내 요소가 유효한 숫자인지 검사하는 함수
