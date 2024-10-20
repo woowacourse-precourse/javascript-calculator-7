@@ -1,6 +1,7 @@
 import { Console } from "@woowacourse/mission-utils";
 import BASIC_REGEXP from "./regExp.js";
 import { checkIsPositive } from "./utils/validation.js";
+import { add } from "./utils/sum.js";
 
 class App {
   async run() {
@@ -24,6 +25,7 @@ class App {
 
         // array에 음수나 양수가 있는지 검사하여 있으면 Error 출력 + 설정된 구분자를 제외한 구분자를 사용한 경우 에러 발생
         checkIsPositive(array);
+        Console.print(add(array));
       } else {
         // "\n"이 없는 경우
         throw new Error(JSON.stringify("ERROR: //는 있는데 \n는 없습니다."));
@@ -33,6 +35,7 @@ class App {
 
       // array에 음수나 양수가 있는지 검사하여 있으면 Error 출력 + 설정된 구분자를 제외한 구분자를 사용한 경우 에러 발생
       checkIsPositive(array);
+      Console.print(add(array));
     }
   }
 }
