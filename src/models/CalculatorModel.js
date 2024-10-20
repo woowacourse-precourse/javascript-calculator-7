@@ -1,23 +1,22 @@
-// --- 에러 던지기 ---
-export function validateCustomError(code) {
-  const errorMessage = {
-    1: '[ERROR] : 구분자가 아닌 문자는 입력할 수 없습니다.',
-    2: '[ERROR] : 0은 입력할 수 없습니다.',
-  };
+// --- 에러 메시지 상수 ---
+const ERROR_MESSAGES = {
+  INVALID_CHARACTTER: '[ERROR] : 구분자가 아닌 문자는 입력할 수 없습니다.',
+  ZERO_NOT_ALLOWED: '[ERROR] : 0은 입력할 수 없습니다.',
+};
 
-  throw new Error(errorMessage[code]);
+// --- 에러 처리 함수 ---
+export function throwError(code) {
+  throw new Error(ERROR_MESSAGES[code]);
 }
 
 // --- 예외처리 함수 ---
 // 양수가 아닌 수가 입력되거나, 구분자가 아닌 문자가 입력 된 경우
 export function checkForErrors(input) {
-  const containsNonNumeric = input
-    .map(Number)
-    .some((char) => !/^\d+$/.test(char));
-  const containsZero = input.some((char) => /^0+$/.test(char));
+  const hasNonNumeric = input.map(Number).some((char) => !/^\d+$/.test(char));
+  const hasZero = input.some((char) => /^0+$/.test(char));
 
-  if (containsNonNumeric) validateCustomError(1);
-  if (containsZero) validateCustomError(2);
+  if (hasNonNumeric) throwError('INVALID_CHARACTTER');
+  if (hasZero) throwError('ZERO_NOT_ALLOWED');
 }
 
 // --- 구분자 추출 함수 ---
