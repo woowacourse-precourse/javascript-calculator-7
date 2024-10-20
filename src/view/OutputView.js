@@ -5,6 +5,10 @@ const OutputView = {
   printError(message) {
     print(message);
   },
+
+  printResult(value) {
+    print(`결과 : ${value}`);
+  },
 };
 
 export default OutputView;

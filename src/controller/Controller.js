@@ -11,7 +11,7 @@ class Controller {
 
   async process() {
     await this.inputString();
-    this.caculator.getSumNumbers();
+    OutputView.printResult(this.caculator.getSumNumbers());
   }
 
   async inputString() {
