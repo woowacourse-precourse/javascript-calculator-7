@@ -1,5 +1,5 @@
-import { CUSTOM_DELIMITER_INPUT } from "../constants/Delimeters.js";
-import { ERROR_MESSAGES } from "../constants/Messages.js";
+import { CUSTOM_DELIMITER_INPUT } from '../constants/Delimeters.js';
+import { ERROR_MESSAGES } from '../constants/Messages.js';
 
 const validator = {
   validateString(string) {
@@ -7,7 +7,6 @@ const validator = {
       throw new Error(ERROR_MESSAGES.shouldStartWithDelimiter);
     if (!this.duplicatedCustomDelimiterInput(string))
       throw new Error(ERROR_MESSAGES.duplicatedDelimiterInput);
-    return;
   },
 
   validateCustomDelimiter(delimiter) {
@@ -15,13 +14,11 @@ const validator = {
       throw new Error(ERROR_MESSAGES.numberNotAllowed);
     if (!this.invalidDelimiterLength(delimiter))
       throw new Error(ERROR_MESSAGES.invalidDelimiterLength);
-    return;
   },
 
   validateValueToSum(valueArray) {
     if (!this.valueIsIntegerBiggerThenZero(valueArray))
       throw new Error(ERROR_MESSAGES.shouldBePositiveInteger);
-    return;
   },
 
   startWithCustomDelimiter(string) {

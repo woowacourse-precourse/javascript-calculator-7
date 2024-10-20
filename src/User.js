@@ -1,11 +1,12 @@
-import { Console } from "@woowacourse/mission-utils";
-import { MESSAGES } from "./constants/Messages.js";
-import { DELIMITERS } from "./constants/Delimeters.js";
-import { seperateCustomDelimiter } from "./handleCustomDelimiter.js";
-import validator from "./utils/validator.js";
+import { Console } from '@woowacourse/mission-utils';
+import { MESSAGES } from './constants/Messages.js';
+import { DELIMITERS } from './constants/Delimeters.js';
+import { seperateCustomDelimiter } from './handleCustomDelimiter.js';
+import validator from './utils/validator.js';
 
 class User {
   #numbersString;
+
   #delimiters;
 
   constructor() {
@@ -34,12 +35,7 @@ class User {
 
   splitString(answer) {
     const numbers = this.#delimiters
-      .reduce(
-        (acc, delimiter) => {
-          return acc.flatMap((string) => string.split(delimiter));
-        },
-        [answer]
-      )
+      .reduce((acc, delimiter) => acc.flatMap((string) => string.split(delimiter)), [answer])
       .map(Number);
     validator.validateValueToSum(numbers);
     return numbers;

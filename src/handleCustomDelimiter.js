@@ -1,8 +1,8 @@
-import { CUSTOM_DELIMITER_INPUT } from "./constants/Delimeters.js";
+import { CUSTOM_DELIMITER_INPUT } from './constants/Delimeters.js';
 
 export const seperateCustomDelimiter = (string) => {
   const startIndex = string.lastIndexOf(CUSTOM_DELIMITER_INPUT.start);
-  if (startIndex !== 0) return { customDelimiter: "", numbersString: string };
+  if (startIndex !== 0) return { customDelimiter: '', numbersString: string };
   const { numbersString, customDelimiterInput } = getNumbersString(string);
   const customDelimiter = exportDelimiter(customDelimiterInput);
   return { customDelimiter, numbersString };
@@ -14,7 +14,7 @@ const getNumbersString = (string) => {
   const numbersString = string.slice(endIndex + CUSTOM_DELIMITER_INPUT.end.length);
   const customDelimiterInput = string.slice(
     startIndex,
-    endIndex + CUSTOM_DELIMITER_INPUT.end.length
+    endIndex + CUSTOM_DELIMITER_INPUT.end.length,
   );
   return { numbersString, customDelimiterInput };
 };
@@ -24,6 +24,6 @@ const exportDelimiter = (customDelimiterInput) => {
     .split(CUSTOM_DELIMITER_INPUT.start)
     .flatMap((el) => el.split(CUSTOM_DELIMITER_INPUT.end))
     .filter((el) => el)
-    .join("");
+    .join('');
   return customDelimiter;
 };

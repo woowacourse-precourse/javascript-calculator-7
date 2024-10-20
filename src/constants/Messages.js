@@ -1,9 +1,9 @@
 export const MESSAGES = {
-  inputNumber: "덧셈할 문자열을 입력해 주세요.\n",
-  result: "결과 : ",
+  inputNumber: '덧셈할 문자열을 입력해 주세요.\n',
+  result: '결과 : ',
 };
 
-const ERROR_PREFIX = "[ERROR]";
+const ERROR_PREFIX = '[ERROR]';
 
 export const ERROR_MESSAGES = {
   negativeNotAllowed: `${ERROR_PREFIX}음수는 입력할 수 없습니다.`,

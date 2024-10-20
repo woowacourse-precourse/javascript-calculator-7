@@ -1,4 +1,4 @@
-import { MissionUtils } from "@woowacourse/mission-utils";
+import { MissionUtils } from '@woowacourse/mission-utils';
 
 export const mockMultipleQuestions = (inputs) => {
   MissionUtils.Console.readLineAsync = jest.fn();
@@ -9,7 +9,7 @@ export const mockMultipleQuestions = (inputs) => {
 };
 
 export const getLogSpy = () => {
-  const logSpy = jest.spyOn(MissionUtils.Console, "print");
+  const logSpy = jest.spyOn(MissionUtils.Console, 'print');
   logSpy.mockClear();
   return logSpy;
 };
