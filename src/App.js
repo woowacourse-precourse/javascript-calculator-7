@@ -21,6 +21,11 @@ class App {
     const seperatorRegex = new RegExp(`[${customSeperator}:,]`);
     const numbers = inputString.split(seperatorRegex).map(Number);
 
+    //숫자와 구분자 외의 문자(- 포함)가 있을 경우 [Error] 출력
+    if (numbers.some((num) => num < 0 || isNaN(num))) {
+      Console.print(`[Error]`);
+    }
+
     //숫자의 합 계산
     numbers.forEach((num) => {
       sum += num;
