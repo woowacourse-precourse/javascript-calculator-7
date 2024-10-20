@@ -40,4 +40,56 @@ describe("문자열 계산기", () => {
 
     await expect(app.run()).rejects.toThrow("[ERROR]");
   });
+
+  // Add Test
+  test("예외 테스트 > 입력에 커스텀 구분자, 쉼표, 콜론 이외의 구분자가 포함된 경우", async () => {
+    const inputs = ["//;\\n1;2,3~6"];
+    mockQuestions(inputs);
+
+    const app = new App();
+
+    await expect(app.run()).rejects.toThrow("[ERROR]");
+  });
+
+  test("예외 테스트 > 입력에 커스텀 구분자, 쉼표, 콜론 이외의 구분자가 포함된 경우", async () => {
+    const inputs = ["1,2:3%9"];
+    mockQuestions(inputs);
+
+    const app = new App();
+
+    await expect(app.run()).rejects.toThrow("[ERROR]");
+  });
+
+  test("예외 테스트 > 잘못된 입력인 경우", async () => {
+    const inputs = ["//;1;2,3"];
+    mockQuestions(inputs);
+
+    const app = new App();
+
+    await expect(app.run()).rejects.toThrow("[ERROR]");
+  });
+
+  test("예외 테스트 > 잘못된 입력인 경우", async () => {
+    const inputs = [";\\n1;2,3"];
+    mockQuestions(inputs);
+
+    const app = new App();
+
+    await expect(app.run()).rejects.toThrow("[ERROR]");
+  });
+
+  test("예외 테스트 > 빈 문자열을 입력한 경우", async () => {
+    const inputs = [""];
+    mockQuestions(inputs);
+
+    const logSpy = getLogSpy();
+    const outputs = ["결과 : 0"];
+
+    const app = new App();
+    await app.run();
+
+    outputs.forEach((output) => {
+      expect(logSpy).toHaveBeenCalledWith(expect.stringContaining(output));
+    });
+  });
 });
