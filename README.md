@@ -7,7 +7,7 @@
   - [x] 커스텀 구분자로 분리
   - [x] , :로 분리
 - [x] 입력받은 숫자의 합 출력
-- [ ] 예외 처리
+- [x] 예외 처리
   - [x] 빈 문자열인 경우
   - [x] 숫자가 아닌 문자가 입력된 경우
   - [x] 양수가 아닌 숫자가 입력된 경우
@@ -35,9 +35,9 @@
 
 ## 과제 요구 사항
 
-- [ ] 외부 라이브러리는 사용하지 않는다.
-- [ ] 프로그램 종료시 process.exti()를 호출하지 않는다.
-- [ ] 파일, 패키지 이름을 바꾸거나 이동하지 않는다.
-- [ ] JS 코드 컨벤션을 지킨다.
-- [ ] @ woowacourse/mission-utils에서 제공하는 Console API를 사용하여 구현
-- [ ] 사용자의 값을 입력, 출력하려면 Console.readLinAsync()와 Console.print()를 활용
+- [x] 외부 라이브러리는 사용하지 않는다.
+- [x] 프로그램 종료시 process.exti()를 호출하지 않는다.
+- [x] 파일, 패키지 이름을 바꾸거나 이동하지 않는다.
+- [x] JS 코드 컨벤션을 지킨다.
+- [x] @ woowacourse/mission-utils에서 제공하는 Console API를 사용하여 구현
+- [x] 사용자의 값을 입력, 출력하려면 Console.readLinAsync()와 Console.print()를 활용
