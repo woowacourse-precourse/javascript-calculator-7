@@ -21,6 +21,20 @@ class App {
     return sum;
   }
   
+  parseInput(input) {
+    let delimiter = /,|:/; // 기본 구분자: 쉼표와 콜론
+    let numbers = input;
+  
+    // 커스텀 구분자 확인
+    if (input.startsWith('//')) {
+      const endOfDelimiterIndex = input.indexOf('\n');
+      delimiter = input.substring(2, endOfDelimiterIndex); // 커스텀 구분자 추출
+      numbers = input.substring(endOfDelimiterIndex + 1); // 구분자 뒤의 숫자 추출
+    }
+  
+    return numbers.split(new RegExp(`[${delimiter}]`));
+  }
+  
 }
 
 const app = new App();
