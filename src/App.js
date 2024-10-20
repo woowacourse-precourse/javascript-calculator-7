@@ -54,7 +54,16 @@ class App {
     }
   }
 
-  async run() {}
+  async run() {
+    const userInput = await this.getUserInput();
+    const { customSeparator, input } = this.findCustomSeperator(userInput);
+    const seperatorRemovedString = this.getRidOfSeparator(
+      input,
+      customSeparator
+    );
+    const result = this.getCalculation(seperatorRemovedString);
+    this.printResult(result);
+  }
 }
 
 export default App;
