@@ -1,5 +1,6 @@
 import { Console } from '@woowacourse/mission-utils';
 import { validateEmptyInput, validateNegativeNumbers, validateInvalidNumbers } from './validators.js';
+import { printMessage } from './utils.js';
 
 function getInput() {
   Console.readLine('덧셈할 문자열을 입력해 주세요.', (answer) => {
@@ -41,7 +42,7 @@ function sumArray(arr) {
   .map(Number)
   .reduce((acc, curr) => acc + curr, 0);
 
-  console.log(`결과 : ${sum}`);
+  printMessage(`결과 : ${sum}`);
   return sum;
 }
 
