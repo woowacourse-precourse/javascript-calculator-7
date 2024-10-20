@@ -1,4 +1,5 @@
 import { Console } from '@woowacourse/mission-utils';
+import { VALIDATION_DEFAULT, VALIDATION_CUSTOM, VALIDATION_ERROR } from './constants.js';
 
 class App {
   validateInput(input) {
@@ -6,15 +7,15 @@ class App {
     const customSep = /^\/\/\D\\n/;
 
     if (!sep.test(input)) {
-      return 0;
+      return VALIDATION_DEFAULT;
     } else if (customSep.test(input)) {
-      const pattern = new RegExp(`[^0-9${input[2]}]`);
+      const pattern = new RegExp(`[^0-9,:${input[2]}]`);
       if (!pattern.test(input.slice(5))) {
-        return 1;
+        return VALIDATION_CUSTOM;
       }
     }
 
-    return -1;
+    return VALIDATION_ERROR;
   }
 
   convertToNumberArray(input, sep) {
@@ -26,13 +27,12 @@ class App {
     const validationResult = this.validateInput(input);
 
     let sum = 0;
-
-    if (validationResult === 0) {
+    if (validationResult === VALIDATION_DEFAULT) {
       const numArr = this.convertToNumberArray(input, /[,:]/);
       numArr.forEach((num) => {
         sum += num;
       });
-    } else if (validationResult === 1) {
+    } else if (validationResult === VALIDATION_CUSTOM) {
       const numArr = this.convertToNumberArray(input.slice(5), input[2]);
       numArr.forEach((num) => {
         sum += num;
