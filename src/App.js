@@ -3,16 +3,18 @@ import { Console } from '@woowacourse/mission-utils';
 class App {
   //
   extractAndSum(input) {
-  let CleanInput;
+  let CleanInput = input;
 
   //3.(커스텀 구분자 구분)
   if (input.startsWith('//')) {
-    const delimiterEnd = input.indexOf('\n');
-    const customDelimiter = input.slice(2, delimiterEnd);  
-    CleanInput = input.slice(delimiterEnd + 1);
-
+    const delimiterEnd = input.indexOf('\\n');
+    const customDelimiter = input.slice(2, delimiterEnd); 
+    CleanInput = input.slice(delimiterEnd + 2);
+    
     //커스텀 구분자 공백으로 치환. 단순히 변수명만 사용하면 첫번째만 구분된다고해서 RegExp 사용.
-    CleanInput = CleanInput.replace(new RegExp(customDelimiter, 'g'), '');
+    const regex = new RegExp(`\\${customDelimiter}`, 'g');
+    CleanInput = CleanInput.replace(regex, ' ');
+    //console.log(CleanInput);
 
 }
   //1.(숫자추출) + 문자 및 기본 구분자 공백으로 치환
