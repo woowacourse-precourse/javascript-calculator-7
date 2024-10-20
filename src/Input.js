@@ -1,6 +1,6 @@
 import { MissionUtils } from "@woowacourse/mission-utils";
 import { IncludeZeroError, InvalidSeparatorError, InvalidCustomSeparatorError } from "./Error/index.js";
-import { INPUT_MESSAGE } from "./constants/printMessage.js";
+import { INPUT_MESSAGE, DEFAULT_SEPARATOR } from "./constants/index.js";
 
 class Input {
   static async getCustomSeparatorAndNumbers() {
@@ -42,7 +42,7 @@ class Input {
    * @returns {string}
    */
   static validateNumbers(numbers, customSeparator) {
-    const isSeparator = (num) => num === "" || [",", ":"].includes(num) || customSeparator.includes(num);
+    const isSeparator = (num) => num === "" || DEFAULT_SEPARATOR.includes(num) || customSeparator.includes(num);
 
     if (numbers.includes("0")) throw new IncludeZeroError();
     if (!numbers.split(/[1-9]/).every(isSeparator)) throw new InvalidSeparatorError();
