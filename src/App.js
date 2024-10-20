@@ -25,7 +25,7 @@ async function getInputStr() {
 // 입력문에서의 에러 상황 체크
 
 const isCustom = (inputStr) => {
-  const regExp = /(\/\/.{1}\\n).{1,}/;
+  const regExp = /(\/\/.{1}\\n).{0,}/;
   return regExp.test(inputStr);
 }
 
