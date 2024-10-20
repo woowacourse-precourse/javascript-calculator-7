@@ -1,11 +1,11 @@
-import { isValidSeperator } from "./validate.js";
+import { isValidSeparator } from "./validate.js";
 
 const inputParser = {
 
-    async getSeperator({ inputText }) {
+    getSeparator({ inputText }) {
         if(inputText.startsWith("//")) {
             //커스텀 구분자 입력으로 시작할 경우 커스텀 구분자를 구하는 함수를 사용한다.
-            return await this.setSeperator({ inputText })
+            return this.setSeparator({ inputText })
         } else {
             return [inputText, null];
         }
@@ -13,33 +13,33 @@ const inputParser = {
     },
 
     //커스텀 구분자를 구하는 함수
-    async setSeperator({ inputText }) {
+    setSeparator({ inputText }) {
         try {
             // "//" 이후의 문자열 가져오기
-            const beforeSeperatorIndex = inputText.indexOf("//") + 2;
+            const beforeSeparatorIndex = inputText.indexOf("//") + 2;
             
             // "\n"이 있는 경우와 없는 경우를 처리
-            const afterSeperatorIndex = inputText.indexOf("\\n", beforeSeperatorIndex);
+            const afterSeparatorIndex = inputText.indexOf("\\n", beforeSeparatorIndex);
 
-            if (afterSeperatorIndex === -1) {
+            if (afterSeparatorIndex === -1) {
                 throw new Error("[ERROR] 커스텀 구분자 입력이 완료되지 않았습니다.");
             }
 
-            const seperator = inputText.slice(beforeSeperatorIndex, afterSeperatorIndex);
-            if (!await isValidSeperator({ seperator })) {
+            const separator = inputText.slice(beforeSeparatorIndex, afterSeparatorIndex);
+            if (!isValidSeparator({ separator })) {
                 throw new Error("[ERROR] 유효하지 않은 구분자입니다.");
             }
 
-            const remainingString = this.deleteSeperatorInput({ inputText, endSeperatorInput: afterSeperatorIndex });
-            return [remainingString, seperator];
+            const remainingString = this.deleteSeparatorInput({ inputText, endSeparatorInput: afterSeparatorIndex });
+            return [remainingString, separator];
 
         } catch (error){
             throw error;
         }
     },
 
-    async deleteSeperatorInput({ inputText, endSeperatorInput }) {
-        return inputText.substring(endSeperatorInput + 2)
+    deleteSeparatorInput({ inputText, endSeparatorInput }) {
+        return inputText.substring(endSeparatorInput + 2)
     }
 
 }
