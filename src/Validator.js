@@ -10,7 +10,8 @@ class Validator {
 	}
 
 	static checkSplitResult(input, result) {
-		if (result[0] === input) {
+		const isNotSplit = result[0] === input;
+		if (isNotSplit) {
 			throwError('[ERROR] : 구분자와 양수로 이루어진 값을 입력해주세요.');
 		}
 		if (checkForNaN(result)) {
