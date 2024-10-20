@@ -1,6 +1,10 @@
 import Constants from './Constants.js';
 
 export function extractCustomDelimiter(input) {
+  if (input.slice(0, 4) === '//\\n') {
+    return input.slice(4);
+  }
+
   if (input.slice(0, 2) !== '//') {
     return input;
   }
