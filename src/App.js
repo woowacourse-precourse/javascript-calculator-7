@@ -19,6 +19,8 @@ class App {
     if (suffixCustomSeparatorIndex === -1) {
       throw new Error("[ERROR] 잘못된 커스텀 구분자 형식입니다.");
     }
+    const costomSeparator = input.slice(2, suffixCustomSeparatorIndex);
+    return costomSeparator;
   }
 }
 
