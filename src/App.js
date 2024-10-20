@@ -39,6 +39,9 @@ class App {
       if (separator.length !== 1) {
         throw new Error("[ERROR] 커스텀 구분자는 한 글자여야 합니다."); // 오류 처리
       }
+      if (!isNaN(separator)) {
+        throw new Error("[ERROR] 숫자는 구분자로 사용할 수 없습니다.");
+      }
       return separator.charAt(0); // 첫 글자 반환
     }
     return null; // 없으면 null 반환
@@ -49,9 +52,6 @@ class App {
   }
 
   validateInput(input, customSeparator) {
-    if (customSeparator && !Number.isNaN(Number(customSeparator))) {
-      throw new Error("[ERROR] 숫자는 구분자로 사용할 수 없습니다.");
-    }
     if (this.isEmptyInput(input)) {
       throw new Error("[ERROR] 구분자의 앞 또는 뒤에 숫자가 없습니다.");
     }
