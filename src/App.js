@@ -53,6 +53,9 @@ function extractNums(inputStr,basicOperators){
     if (isNaN(item) || item === ""){
       throw Error('[ERROR] : 잘못된 입력입니다.');
     }
+    if (Number(item) <= 0){
+      throw Error('[ERROR] : 양수가 아닌 수가 입력되었습니다.');
+    }
     nums.push(Number(item));
   }
   return nums;
