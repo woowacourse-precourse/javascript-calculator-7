@@ -13,10 +13,12 @@ class App {
     }
   }
 
+  // 구분자를 기준으로 문자열 내부의 숫자를 더하는 함수
   add(inputStr) {
     if(inputStr === '') return 0;
 
     const { separator, numStr } = this.customSeparator(inputStr);
+    // 정규 표현식에서 특수 문자가 올바르게 처리되도록 이스케이프 처리
     const escapedSeparator = separator.split('|').map(sep => this.escapeSpecialChars(sep)).join('|');
     const numArr = numStr.split(new RegExp(`[${escapedSeparator}]`)).map( num => {
       const parsedNum = Number(num);
@@ -46,9 +48,11 @@ class App {
         .replace(/[.*+?^${}()|[\]\\]/g, '\\$&');  // 정규 표현식 특수문자 처리
   }
 
+  // 기본 구분자 또는 기본 구분자와 커스텀 구분자를 반환하는 함수
   customSeparator(inputStr) {
-    let defaultSeparator = ',|:';
+    const DEFAULT_SEPARATOR = ',|:';
     if(inputStr.startsWith('//')) {
+      // \n를 커스텀 구분자로 지정할 시
       if (inputStr.startsWith('//\\n\\n')) {
         const numStr = inputStr.slice(5);
         return { separator: '\\n', numStr };
@@ -62,12 +66,11 @@ class App {
       }
 
       const customSeparator = inputStr.substring(2, endIndex);
-      console.log(customSeparator);
       const numStr = inputStr.slice(endIndex + 2);
-      const separator = `${defaultSeparator}|${customSeparator}`;
+      const separator = `${DEFAULT_SEPARATOR}|${customSeparator}`;
       return { separator, numStr }
     }
-    return { separator: defaultSeparator, numStr: inputStr };
+    return { separator: DEFAULT_SEPARATOR, numStr: inputStr };
   }
 
 }
