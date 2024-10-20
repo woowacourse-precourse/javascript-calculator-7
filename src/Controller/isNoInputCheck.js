@@ -2,7 +2,7 @@ const isNoInputCheck = userInput => {
   if (userInput === '') {
     return true;
   }
-  false;
+  return false;
 };
 
 export default isNoInputCheck;
