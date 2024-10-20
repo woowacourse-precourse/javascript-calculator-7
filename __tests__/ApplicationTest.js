@@ -114,7 +114,7 @@ describe("문자열 계산기", () => {
 
     const app = new App();
 
-    await expect(app.run()).rejects.toThrow(Errors.WRONG_DELIMETER);
+    await expect(app.run()).rejects.toThrow(Errors.INVALID_FORMAT);
   });
 
   test("예외: 커스텀 구분자 여러 개 입력", async () => {
@@ -123,7 +123,7 @@ describe("문자열 계산기", () => {
 
     const app = new App();
 
-    await expect(app.run()).rejects.toThrow(Errors.WRONG_DELIMETER);
+    await expect(app.run()).rejects.toThrow(Errors.INVALID_FORMAT);
   });
 
   test("예외: 숫자 사이에 구분자가 여러 개일 경우", async () => {
@@ -132,7 +132,7 @@ describe("문자열 계산기", () => {
 
     const app = new App();
 
-    await expect(app.run()).rejects.toThrow(Errors.WRONG_DELIMETER);
+    await expect(app.run()).rejects.toThrow(Errors.INVALID_FORMAT);
   });
 
   test("예외: 숫자크기가 MAX_SAFE_INTEGER를 초과하는 경우", async () => {
