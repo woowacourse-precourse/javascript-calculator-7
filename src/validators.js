@@ -2,7 +2,7 @@ import { throwError } from './utils.js';
 
 export function validateEmptyInput(input) {
   if (input.trim() === '') {
-    throwError("입력된 값이 없어요. 다시 한 번 덧셈할 숫자를 입력해 주세요!");
+    throwError("[ERROR] 입력된 값이 없어요. 다시 한 번 덧셈할 숫자를 입력해 주세요!");
   }
 }
 
@@ -10,7 +10,7 @@ export function validateNegativeNumbers(numbersArray) {
   const hasNegative = numbersArray.some((number) => Number(number) < 0);
   
   if (hasNegative) {
-    throwError("양수만 입력해 주세요.");
+    throwError("[ERROR] 양수만 입력해 주세요.");
   }
 }
 
@@ -19,7 +19,7 @@ export function validateInvalidNumbers(numbersArray) {
   
   if (hasInvalid) {
     throwError(
-      `입력된 값에 지원하지 않는 문자가 있어요.
+      `[ERROR] 입력된 값에 지원하지 않는 문자가 있어요.
       기본 구분자: ':' 또는 ','
       커스텀 구분자 설정: //(구분자)\\n
       위 정보를 참고하여 다시 입력해 주세요!`
