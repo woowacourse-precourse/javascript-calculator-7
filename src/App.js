@@ -8,11 +8,9 @@ class App {
     const input = await this.#view.readInputString();
 
     const stringSplitter = new StringSplitter(input);
-    const splittedInput = stringSplitter.split();
+    const splittedNumbers = stringSplitter.split().toNumbers();
 
-    const numbers = splittedInput.map(Number);
-
-    const sum = this.calculateSum(numbers);
+    const sum = this.calculateSum(splittedNumbers);
 
     this.#view.printOutputString(sum);
   }

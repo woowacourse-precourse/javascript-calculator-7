@@ -5,16 +5,16 @@ export default class StringSplitter {
 
   #delimiters;
 
-  #string;
+  string;
 
   constructor(input) {
     if (input.length === 0) {
-      this.#string = '';
+      this.string = '';
       return;
     }
 
     if (this.#DEFAULT_VALID_PATTERN.test(input)) {
-      this.#string = input;
+      this.string = input;
       this.#delimiters = /[,:]/;
       return;
     }
@@ -22,12 +22,17 @@ export default class StringSplitter {
     const found = input.match(this.#CUSTOM_DELIMITER_PATTERN);
     if (found) {
       const [fullMatch, delimiter] = found;
-      this.#string = input.slice(fullMatch.length);
+      this.string = input.slice(fullMatch.length);
       this.#delimiters = delimiter;
     }
   }
 
   split() {
-    return this.#string.split(this.#delimiters);
+    this.string = this.string.split(this.#delimiters);
+    return this;
+  }
+
+  toNumbers() {
+    return this.string.map(Number);
   }
 }
