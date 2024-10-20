@@ -1,79 +1,68 @@
 import { Console } from "@woowacourse/mission-utils";
 
 // 커스텀 구분자는 ","와 ":" 이기 때문에 미리 state를 해준다
-const COMMON_DELIMITER = [",", ":"];
+const commonDelimiter = [",", ":"];
 
 class App {
   async run() {
-    const INPUTTED_NUMBER = await Console.readLineAsync('덧셈할 문자열을 입력하세요.\n');
-    const validate = validateDelimiter(INPUTTED_NUMBER);
-    const VALUES = splitNumbersUsingDelimiter(validate.DELIMITER, validate.INPUTTED_NUMBERS);
-    const SUM = calculate(VALUES);
-    Console.print(`결과: ${SUM}`);
+    const inputtedString = await Console.readLineAsync('덧셈할 문자열을 입력하세요.\n');
+    const { delimiter, numbers } = splitValues(inputtedString);
+    const allNumbers = splitNumbers(delimiter, numbers);
+    const sum = calculate(allNumbers);
+    Console.print(`결과: ${sum}`);
   }
 }
 
-// 커스텀 혹은 일반 구분자를 구분하는 함수
-function validateDelimiter(input) {
+function splitValues(input) {
   if (typeof input !== 'string') {
-    throw new Error('[ERROR] 입력한 값이 올바르지 않습니다');
+    throw new Error('[ERROR] 입력한 값이 문자열이 아닙니다');
   }
 
+  // 커스텀 구분자랑 같이 입력을 했으면
   if (input.startsWith('//')) {
-    return validateCustomDelimiter(input);
+    const { delimiter, numbers } = splitCustomDelimiter(input);
+    return { delimiter, numbers };
   }
 
-  return { DELIMITER: COMMON_DELIMITER, INPUTTED_NUMBERS: input };
+  return { delimiter: commonDelimiter, numbers: input };
 }
 
-function
+function splitCustomDelimiter(input) {
+  const lineIndex = input.indexOf('\\n');
 
-// 커스텀 구분자를 분리해서 저장하는 함수
-function validateCustomDelimiter(input) {
-  const NEW_LINE_INDEX = input.indexOf('\\n');
-
-  if (NEW_LINE_INDEX > 2) {
-    const DELIMITER = input.substring(2, NEW_LINE_INDEX);
-    console.log('DELIMITER:', DELIMITER);
-
-    if (!DELIMITER) {
-      throw new Error('[ERROR] 잘못된 구분자가 입력되었습니다');
+  if (lineIndex > 2) {
+    const inputtedDelimiter = input.substring(2, lineIndex);
+    if (!inputtedDelimiter) {
+      throw new Error('[ERROR] 구분자를 작성하지 않았습니다.');
     }
 
-    const INPUTTED_NUMBERS = input.substring(NEW_LINE_INDEX + 2);
-    console.log('INPUTTED NUMBERS:', INPUTTED_NUMBERS);
-
-    if (!INPUTTED_NUMBERS) {
-      throw new Error('[ERROR] 입력된 숫자가 없습니다');
+    const inputtedNumber = input.substring(lineIndex + 2);
+    if (!inputtedNumber) {
+      throw new Error('[ERROR] 값을 입력하지 않았습니다');
     }
 
-    if (!INPUTTED_NUMBERS.includes(DELIMITER)) {
-      return { COMMON_DELIMITER, INPUTTED_NUMBERS };
+    if (!inputtedNumber.includes(inputtedDelimiter)) {
+      return { delimiter: commonDelimiter, numbers: inputtedNumber };
     }
 
-    return { DELIMITER, INPUTTED_NUMBERS };
+    return { delimiter: inputtedDelimiter, numbers: inputtedNumber };
   } else {
-    throw new Error('[ERROR] 잘못 입력된 문자열입니다.');
+    throw new Error('[ERROR] 커스텀 구분자를 작성하고 뒤에 \n를 제대로 입력하셔야 합니다');
   }
 }
 
-// 구분자를 이용해 숫자들을 분리해주는 함수
-function splitNumbersUsingDelimiter(delimiter, numbers) {
-  if (delimiter === undefined) {
-    delimiter = COMMON_DELIMITER;
-  }
-
-  let DELIMITER_PATTERN;
-
+function splitNumbers(delimiter, numbers) {
+  console.log("delimiter:", delimiter);
+  console.log("numbers:", numbers);
   if (Array.isArray(delimiter)) {
-    DELIMITER_PATTERN = new RegExp(`[${delimiter.join('')}]`);
-    return numbers.split(DELIMITER_PATTERN);
+    const delimiterPattern = new RegExp(`[${delimiter.join('')}]`);
+    console.log('delimiterPattern:', delimiterPattern);
+    return numbers.split(delimiterPattern);
   }
 
-  return [numbers];
+  return numbers.split(delimiter);
 }
 
-// 분리된 숫자들을 더해주는 함수
 function calculate(values) {
   return values.reduce((acc, num) => acc + Number(num), 0);
 }
