@@ -10,7 +10,7 @@ const customSeparatorChecker = (input, customSeplength) => {
   return false;
 };
 
-export const inputNumberValidation = (input) => {
+export const inputStringsValidation = (input) => {
   const MIN_CUSTOM_SEP_LENGTH = 5;
   let defaultSeparator = ',:';
 
