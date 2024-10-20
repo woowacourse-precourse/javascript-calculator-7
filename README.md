@@ -1,4 +1,4 @@
-# javascript-calculator-precourse
+# [Week 1] 문자열 덧셈 계산기
 
 ## 📍 요구사항
 
