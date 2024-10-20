@@ -32,6 +32,16 @@ class App {
     return num;
   }
 
+  // 숫자인지 그리고 양수인지판별
+  isNumber(numArray) {
+    return numArray.every((value) => !isNaN(Number(value)));
+  }
+
+  // 배열의 숫자 합 계산
+  sum(numArray) {
+    return numArray.reduce((acc, value) => acc + Number(value), 0);
+  }
+
   async run() {
     const input = await Console.readLineAsync(
       "덧셈할 문자열을 입력해 주세요.\n"
@@ -51,8 +61,15 @@ class App {
       // 기본 구분자일 경우
       numArray = this.basicSeparator(input);
     }
-
     //this.splitInput("1,2,3:4", [",", ":"]);
+
+    if (this.isNumber(numArray)) {
+      const result = this.sum(numArray);
+      Console.print(`결과 : ${result}`);
+    } else {
+      //Console.print("ERRPR");
+      throw new Error("[ERROR]");
+    }
   }
 }
 
