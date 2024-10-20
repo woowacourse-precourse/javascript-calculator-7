@@ -20,12 +20,12 @@ export class Operand {
         CUSTOM_END_INDEX
       );
       this.#string = this.extractString(CUSTOM_END_INDEX, userInput);
+
+      return;
     }
 
-    if (!Operand.isSetCustomDelimiter(userInput, CUSTOM_END_INDEX)) {
-      this.#customDelimiter = undefined;
-      this.#string = userInput;
-    }
+    this.#customDelimiter = undefined;
+    this.#string = userInput;
   }
 
   extractCustomDelimiter(userInput, customEndIndex) {
@@ -42,19 +42,13 @@ export class Operand {
   }
 
   static isSetCustomDelimiter(userInput, customEndIndex) {
-    if (
-      userInput.startsWith(CUSTOM_DELIMITER_STATEMENT.START) &&
-      customEndIndex !== -1
-    ) {
-      return true;
-    }
+    const customStart = userInput.startsWith(CUSTOM_DELIMITER_STATEMENT.START);
+    const containsCustomEnd = customEndIndex !== -1;
 
-    if (
-      !userInput.startsWith(CUSTOM_DELIMITER_STATEMENT.START) ||
-      customEndIndex === -1
-    ) {
-      return false;
-    }
+    if (!customStart) return false;
+    if (!containsCustomEnd) return false;
+
+    return true;
   }
 
   #validate() {
