@@ -6,16 +6,16 @@ import {
 export default class Calculator {
   constructor(input) {
     this.input = input;
-    this.separator = this.determine();
+    this.separator = this.getSeparator();
   }
 
-  determine() {
+  getSeparator() {
     const customSeparator = findCustomSeparator(this.input);
 
     return customSeparator ? ['//', '\\n', customSeparator] : [',', ':'];
   }
 
-  sum() {
+  sumAll() {
     const splitedArr = splitBySeparator(this.separator, this.input);
 
     return splitedArr.reduce((num, acc) => num + acc);

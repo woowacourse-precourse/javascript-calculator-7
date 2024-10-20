@@ -1,10 +1,6 @@
-import {
-  sumByDefaultSeparator,
-  sumByCustomSeparator,
-} from './utils/calculator.js';
 import { validation } from './utils/validate.js';
 import { getInput, printAnswer } from './utils/inputOutputHelpers.js';
-import { findCustomSeparator } from './utils/separatorHelpers.js';
+import Calculator from './Calculator.js';
 
 class App {
   async run() {
@@ -12,12 +8,8 @@ class App {
 
     validation(receivedInput);
 
-    let result = 0;
-    if (findCustomSeparator(receivedInput)) {
-      result = sumByCustomSeparator(receivedInput);
-    } else {
-      result = sumByDefaultSeparator(receivedInput);
-    }
+    const calculator = new Calculator(receivedInput);
+    const result = calculator.sumAll();
 
     printAnswer(result);
   }
