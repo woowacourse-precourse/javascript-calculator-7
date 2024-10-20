@@ -15,7 +15,7 @@ class App {
   }
 
   // 구분자 찾기 기능
-  async getSeparator() {
+  extractSeparator() {
     if (this.#userInput.startsWith("//")) {
       // 구분자 획득
       this.separator = this.#userInput[2];
@@ -67,7 +67,7 @@ class App {
   async run() {
     try {
       await this.getUserInput();
-      await this.getSeparator();
+      this.extractSeparator();
       this.validateInput();
       this.calculateSum();
       this.printResult();
