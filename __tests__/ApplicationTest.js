@@ -17,8 +17,13 @@ const getLogSpy = () => {
 
 describe('문자열 계산기', () => {
   test('커스텀 구분자 사용', async () => {
-    const inputs = ['//;\\n1', '//<\\n1<2'];
-    const outputs = ['결과 : 1', '결과 : 3'];
+    const inputs = [
+      '//;\\n1',
+      '//<\\n1<2',
+      '//>\\n//<\\n1>2<3',
+      '//>\\n0.1>0.2',
+    ];
+    const outputs = ['결과 : 1', '결과 : 3', '결과 : 6', '결과 : 0.3'];
     const logSpy = getLogSpy();
 
     inputs.forEach(async (input) => {
@@ -33,7 +38,15 @@ describe('문자열 계산기', () => {
   });
 
   test('예외 테스트', async () => {
-    const inputs = ['-1,2,3'];
+    const inputs = [
+      '-1,2,3',
+      '1,2,3//;\\n',
+      '//;\\n1,2,3//;\\n',
+      '//;\\n1,2//>\\n3>4',
+      '1,2//;\\n3,4',
+      '',
+      '3ㅁ3',
+    ];
 
     inputs.forEach(async (input) => {
       mockQuestions(input);
