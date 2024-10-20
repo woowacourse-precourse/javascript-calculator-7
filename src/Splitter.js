@@ -26,9 +26,11 @@ class Splitter {
   }
 
   static convertToNumber(splittedResult) {
-    return splittedResult.map((element) =>
-      element === "" ? 0 : parseInt(element, 10)
-    );
+    return splittedResult.map((element) => {
+      if (element === "") return 0;
+      const converted = parseInt(element, 10);
+      return element !== converted.toString() ? NaN : converted; // "1" -> 1, "1.1" -> NaN, "14e1" -> NaN
+    });
   }
 }
 
