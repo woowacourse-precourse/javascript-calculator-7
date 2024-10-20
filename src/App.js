@@ -25,8 +25,7 @@ class App {
       const inputStr = await Console.readLineAsync('덧셈할 문자열을 입력해 주세요\n');
       return inputStr;
     } catch(error){
-      Console.print('Error: ' + error.message);
-      return null;
+      throw new Error("[ERROR]");
     }
   }
 
@@ -50,7 +49,7 @@ class App {
       const num = Number(strArr[i]);
       if(isNaN(num) || num < 0)
         throw new Error("[ERROR]");
-    }
+    } 
   }
 
   getSum(strArr){
