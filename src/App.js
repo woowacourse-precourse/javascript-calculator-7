@@ -1,3 +1,7 @@
+// 현재 프로젝트는 ES모듈로 설정되어 있는데, require는 CommonJS에서 사용된다.
+// 프리코스 규칙에 따라 package.json 파일을 수정할 수 없으므로, require를 import로 변경한다.
+import { Console } from '@woowacourse/mission-utils';
+
 class App {
   async run() {
     const input = await this.getInput();
@@ -6,22 +10,22 @@ class App {
   }
 
   async getInput() {
-    const { Console } = require('@woowacourse/mission-utils');
-    return new Promise((resolve) => {
-      Console.readLine('덧셈할 문자열을 입력해 주세요.\n', resolve);
-    });
+    // 수정사항 적용된 부분
+    return Console.readLineAsync('덧셈할 문자열을 입력해 주세요.\n');
   }
 
   add(input) {
-    // 빈 문자열이면 0을 반환
+    // 빈 문자열 입력 시 0 반환하는 기능
     if (input === "") {
       return 0;
     }
-    // 커스텀구분자, 잘못된입력 시 대응을 구현할 자리
+
+    // 쉼표 구분자로 이루어진 문자열 입력 시 연산 기능
+    const numbers = input.split(',').map(Number);
+    return numbers.reduce((sum, num) => sum + num, 0);
   }
 
   printResult(result) {
-    const { Console } = require('@woowacourse/mission-utils');
     Console.print(`결과 : ${result}`);
   }
 }
