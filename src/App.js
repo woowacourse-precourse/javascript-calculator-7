@@ -20,10 +20,7 @@ class App {
 		const {values, delimiter} = this.checkDelimiter(input);
 
 		// 숫자들의 합을 반환
-		return this.stringToNumber(values, delimiter).reduce(
-			(sum, num) => sum + num,
-			0,
-		);
+		return this.calculateSumFromString(values, delimiter);
 	}
 
 	// 구분자 파악 함수
@@ -43,8 +40,8 @@ class App {
 		return {values, delimiter};
 	}
 
-	// 문자열을 분리 후, 숫자로 변환하는 함수
-	stringToNumber(values, delimiter) {
+	// 문자열을 분리 후, 숫자로 변환하고 합을 계산하는 함수
+	calculateSumFromString(values, delimiter) {
 		// 숫자와 구분자로 구성된 문자열을 구분자로 분리하고 숫자로 변환
 		const valueArray = values.split(delimiter).map(Number);
 
@@ -55,7 +52,8 @@ class App {
 			}
 		});
 
-		return valueArray;
+		// 숫자들의 합을 반환
+		return valueArray.reduce((sum, num) => sum + num, 0);
 	}
 
 	// 공통 에러 처리 함수
