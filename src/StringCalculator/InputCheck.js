@@ -22,6 +22,7 @@ class InputCheck {
       inputHandler.printResult(result); // 결과 출력
     } catch (error) {
       inputHandler.printError(error.message); // 오류 메시지 출력
+      throw error;
     }
   }
 }
