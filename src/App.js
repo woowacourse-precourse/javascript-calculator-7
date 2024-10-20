@@ -2,7 +2,7 @@ import {Console, MissionUtils} from "@woowacourse/mission-utils"
 
 class App {
   constructor(){
-    this.DELIMITERS_SET = new Set(['\.',';'])
+    this.DELIMITERS_SET = new Set([',',':'])
   }
 
   //정규표현식 대체 함수
