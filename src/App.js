@@ -11,7 +11,6 @@ class App {
     const inputString = await inputReader.getInput();
     const processedInput = processor.processInput(inputString);
 
-    StringCalculator.validateNumbersArray(processedInput);
     const result = StringCalculator.sum(processedInput);
 
     StringOutputWriter.printResult(result);

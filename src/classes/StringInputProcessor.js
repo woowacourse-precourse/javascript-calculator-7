@@ -9,7 +9,7 @@ class StringInputProcessor {
 
   processInput(input) {
     if (!input) {
-      return [];
+      return 0;
     }
 
     ProcessorValidator.validateInputFormat(input);
@@ -62,7 +62,7 @@ class StringInputProcessor {
       allDelimiters
     );
 
-    return numbersArray;
+    return numbersArray.map(Number);
   }
 
   addAccumulatedNumber(numbersArray, accumulatingNumber) {
