@@ -30,8 +30,7 @@
 5. for 반복문이 끝나면 저장한 numbers배열의 합을 반환함
 
 ## 구현 기능
-1. 문자열에 커스텀 구분자가 있는지 판단하고 구분자를 지정해주는 문자를 제외한 문자열을 반환해주는 SeperatorParser class 구현해야 함
-- 해당 class는 input값을 받는 words라는 field 존재
+1. 문자열에 커스텀 구분자가 있는지 판단하고 구분자를 지정해주는 문자를 제외한 문자열을 반환해주는 SeperatorParser 객체 구현해야 함
 
 2. parseSeperator 메소드
 - 정규식을 통해 input에 커스텀 구분자가 있는지 판단 후 없으면 input만 반환하고, 구분자가 있으면 구분자와 input을 반환함 
