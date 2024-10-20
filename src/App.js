@@ -6,6 +6,17 @@ function isNumeric(str) {
   return /^\d+$/.test(str);
 }
 
+function checkDefaultFormat(input) {
+  let cleanedInput = input;
+  DEFAULT_DELIMETER.forEach((delimeter) => {
+    cleanedInput = cleanedInput.replaceAll(delimeter, "");
+  });
+  if (!isNumeric(cleanedInput)) {
+    throw new Error("[ERROR] 입력 형식이 올바르지 않습니다");
+  }
+  return true;
+}
+
 // 입력 형식 검사
 function checkInputFormat(input) {
   if (input.slice(0, 2) === "//" && input.slice(3, 5) === "\\n") {
@@ -19,6 +30,8 @@ function checkInputFormat(input) {
     }
     return true;
   }
+
+  if (checkDefaultFormat) return true;
 }
 
 class App {
