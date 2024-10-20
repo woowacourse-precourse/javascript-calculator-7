@@ -5,37 +5,33 @@ export default class StrCalcuLator {
   #inputStrs;
 
   constructor(inputStr) {
-    this.#inputStrs = inputStr;
-    console.log(this.#inputStrs);
+    this.#inputStrs = this.#createStr(inputStr);
   }
 
-  async #getStr() {
-    let inputStrs = await inputStr();
-  }
-  #createStr() {
+  // 오류 검증 및 필요한 문자열로 변환하는 메서드
+  #createStr(inputStr) {
     const separator = [":", ","];
     let customBoolean = false;
     // 커스텀 구분자를 가지는지 확인.
-    customBoolean = this.#isCustom(inputStrs);
+    customBoolean = this.#isCustom(inputStr);
     
     if (customBoolean) { // 커스텀 구분자를 가졌을 때,
-      const tmpSep = inputStrs.slice(2, 3); // 커스텀 구분자
-      inputStrs = inputStrs.slice(5,); // 커스텀 구분자를 제외한 문자열
+      const tmpSep = inputStr.slice(2, 3); // 커스텀 구분자
+      inputStr = inputStr.slice(5,); // 커스텀 구분자를 제외한 문자열
       separator.push(tmpSep);
     }
     // 구분자를 이용한 분리
     separator.forEach((sep) => {
-      inputStrs = inputStrs.split(sep).join('');
+      inputStr = inputStr.split(sep).join('');
     })
-    inputStrs = inputStrs.split('').map((el) => +el);
+    inputStr = inputStr.split('').map((el) => +el);
     
     // 분리된 문자열에서 조건에 맞는지 검증
-    this.#isNumber(inputStrs);
+    this.#isNumber(inputStr);
     
-    return inputStrs;
+    return inputStr;
   }
 
-  
   calculate() {
     const sum = this.#inputStrs.reduce((acc, cur) => {
       return acc + cur;

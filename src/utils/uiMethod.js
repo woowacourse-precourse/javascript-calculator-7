@@ -7,5 +7,5 @@ export async function inputStr() {
 }
 
 export function strPrint(str) {
-  Console.print(str);
+  Console.print(`${uiConstants.RESULT} : ${str}`);
 }

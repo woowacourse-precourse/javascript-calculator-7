@@ -6,11 +6,9 @@ import { createStr } from './utils/index.js';
 
 class App {
   async run() {
-    const calculator = createStr();
-    // const tmp = str.calculate();
-    // const input = await getInputStr();
-    // const answer = `${uiConstants.RESULT} : ${input}`;
-    // strPrint(answer);
+    const calculator = await createStr();
+    const sum = calculator.calculate();
+    strPrint(sum);
   }
 }
 
