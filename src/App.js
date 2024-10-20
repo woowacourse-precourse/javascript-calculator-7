@@ -3,6 +3,7 @@ import { GAME_MESSAGES } from "./constants/gameMessages.js";
 import splitNumber from "./utils/splitNumber.js";
 import validateNumber from "./utils/validateNumber.js";
 import getUserInput from "./utils/inputHandler.js";
+import printMessage from "./utils/outputHandler.js";
 
 class App {
   async run() {
@@ -11,7 +12,7 @@ class App {
     const numbers = splitNumber(userInput).map(validateNumber);
     const result = numbers.reduce((acc, cur) => acc + cur, 0);
 
-    Console.print(GAME_MESSAGES.END + result);
+    printMessage(GAME_MESSAGES.END + result);
   }
 }
 
