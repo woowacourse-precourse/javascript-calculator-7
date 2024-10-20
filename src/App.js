@@ -1,5 +1,6 @@
 import { Console } from "@woowacourse/mission-utils";
 import BASIC_REGEXP from "./regExp.js";
+import { checkIsPositive } from "./utils/validation.js";
 
 class App {
   async run() {
@@ -20,12 +21,18 @@ class App {
         const newSeparator = input.slice(2, parts);
         const dynamicRegExp = new RegExp(`[,:]|${newSeparator}`);
         const array = input.slice(parts + 2).split(dynamicRegExp);
+
+        // array에 음수나 양수가 있는지 검사하여 있으면 Error 출력
+        checkIsPositive(array);
       } else {
         // "\n"이 없는 경우
         throw new Error(JSON.stringify("ERROR: //는 있는데 \n는 없습니다."));
       }
     } else {
       const array = input.split(BASIC_REGEXP);
+
+      // array에 음수나 양수가 있는지 검사하여 있으면 Error 출력
+      checkIsPositive(array);
     }
   }
 }
