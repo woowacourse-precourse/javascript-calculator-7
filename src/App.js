@@ -1,7 +1,7 @@
 import getInput from './functions/get-input.js';
-import Calculator from './Calculator.js';
 import isInputValid from './functions/is-input-valid.js';
 import printOutput from './functions/print-output.js';
+import Calculator from './Calculator.js';
 
 class App {
   async run() {

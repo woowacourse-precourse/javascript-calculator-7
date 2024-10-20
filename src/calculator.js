@@ -1,33 +1,46 @@
 class Calculator {
     calculate(input) {
-        if(input === "") {
+        if(this.isEmpty(input)) {
             return 0;
         }
-        const { delimiter, numberString } = this.extractDelimiterAndNumbers(input);
-        const numbers = this.splitNumbers(numberString, delimiter);
-        
-        return this.calculateSum(numbers);
+        const { delimiter, string } = this.extractDelimiterAndString(input);
+        const numStrArr = this.splitNumbers(string, delimiter);
+        return this.calculateSum(numStrArr);
     }
 
-    extractDelimiterAndNumbers(input) {
-        if(input.startsWith('//') && input.indexOf('\\n' === 3)) {
-            const customDelimiterStartIndex = input.indexOf('\\n');
-            const customDelimiter = input.slice(2,customDelimiterStartIndex);
-            const numberString = input.slice(customDelimiterStartIndex + 2); 
-            const escapedDelimiter = customDelimiter.replace(/[.*+?^${}()|[\]\\]/g, '\\$&'); 
-            return { delimiter : new RegExp(`[${escapedDelimiter},:]`), numberString };
+    isEmpty(input) {
+        return input === "";
+    }
+
+    extractDelimiterAndString(input) {
+        if(this.hasCustomDelimiter(input)) {
+            const { customDelimiter, string } = this.getCustomDelimiterAndString(input);
+            return { delimiter: this.createDelimiterRegex(customDelimiter), string };
         }
-        return { delimiter: /[,:]/, numberString: input };
+        return { delimiter: /[,:]/, string: input };
     }
 
-    splitNumbers(numberString, delimiter) {
-        return numberString.split(delimiter);
+    hasCustomDelimiter(input) {
+        return input.startsWith('//') && input.indexOf('\\n') === 3;
     }
 
-    calculateSum(numbers) {
-        return numbers.reduce((sum, number) => {
-            return number !== '' ? sum + parseInt(number) : sum;
-        }, 0);
+    getCustomDelimiterAndString(input) {
+        const customDelimiter = input.slice(2, 3);
+        const string = input.slice(5);
+        return { customDelimiter, string };
+    }
+
+    createDelimiterRegex(customDelimiter) {
+        const escapedDelimiter = customDelimiter.replace(/[.*+?^${}()|[\]\\]/g, '\\$&'); 
+        return new RegExp(`[${escapedDelimiter},:]`);
+    }
+
+    splitNumbers(string, delimiter) {
+        return string.split(delimiter);
+    }
+
+    calculateSum(numStrArr) {
+        return numStrArr.reduce((sum, number) => sum + parseInt(number, 10), 0);
     }
 }
 
