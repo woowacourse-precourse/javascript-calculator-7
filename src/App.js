@@ -10,7 +10,20 @@ class App {
       let nums = [];
       if (input.length === 0) {
         nums.push(0);
+      } else {
+        const [delimiterPart, numberPart] = input.split('\\n');
+        let numbers = numberPart;
+        const customDelimiter = delimiterPart.slice(2);
+        const delimiters = [',', ':', customDelimiter];
+
+        for (const delimiter of delimiters) {
+          numbers = numbers.split(delimiter).join('');
+        }
+
+        nums = numbers.split('');
       }
+
+      console.log(nums);
     } catch (error) {}
   }
 }
