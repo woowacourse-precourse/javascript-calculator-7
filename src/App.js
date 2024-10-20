@@ -16,6 +16,9 @@ class App {
     for (const n of nums) {
       if (!isNumber(n)) throw new Error("[ERROR]");
     }
+
+    const sum = nums.reduce((acc, val) => acc + parseInt(val), 0);
+    MissionUtils.Console.print(`결과 : ${sum}`);
   }
 }
 
