@@ -3,7 +3,11 @@ import MESSAGES from "./messages.js";
 
 const InterfaceUtil = {
   async inputString() {
-    return await Console.readLineAsync(MESSAGES.INPUT);
+    try {
+      return await Console.readLineAsync(MESSAGES.INPUT);
+    } catch (error) {
+      throw new Error(MESSAGES.ERROR);
+    }
   },
 
   printResult(sum) {
