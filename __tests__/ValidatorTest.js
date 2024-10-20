@@ -1,6 +1,6 @@
 import App from '../src/App.js';
 import { MissionUtils } from '@woowacourse/mission-utils';
-import { errorMessages } from '../src/constant.js';
+import Validator from '../src/Validator.js';
 
 const mockQuestions = (inputs) => {
   MissionUtils.Console.readLineAsync = jest.fn();
@@ -33,12 +33,10 @@ describe('문자열 계산기', () => {
     });
   });
 
-  test('예외 테스트', async () => {
-    const inputs = ['-1,2,3'];
-    mockQuestions(inputs);
+  test('음수 예외처리', async () => {
+    const input = '//;\n-1;2,-3:4.44,-5.12';
+    const validator = new Validator();
 
-    const app = new App();
-
-    await expect(app.run()).toThrow(errorMessages.unexpectedError);
+    await expect(validator.valid(input)).toEqual(false);
   });
 });
