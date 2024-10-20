@@ -21,13 +21,16 @@ class App {
       } else if (input.match(/[,|:]/)) {
         inputNumbers = input.split(/[,|:]/);
       } else {
-        throw new Error("잘못된 구분자 형식입니다.");
+        throw new Error("[ERROR]");
       }
 
       inputNumbers = inputNumbers.map((num) => {
         const number = Number(num);
         if (isNaN(number)) {
-          throw new Error("숫자가 아닌 값이 포함되어 있습니다.");
+          throw new Error("[ERROR]");
+        }
+        if (number < 0) {
+          throw new Error("[ERROR]");
         }
         return number;
       });
@@ -38,7 +41,8 @@ class App {
 
       this.printResult(sum);
     } catch (error) {
-      Console.print("[ERROR] " + error.message);
+      Console.print(error.message);
+      throw error; // 여기도 에러를 다시 던져야 Promise가 reject 상태가 됨
     }
   }
   printResult(result) {
