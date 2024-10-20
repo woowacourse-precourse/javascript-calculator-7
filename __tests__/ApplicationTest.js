@@ -92,4 +92,62 @@ describe("문자열 계산기", () => {
       expect(logSpy).toHaveBeenCalledWith(expect.stringContaining(output));
     });
   });
+
+  test("커스텀 구분자를 갖는 문자열인지 여부를 확인한다.", async () => {
+    const input = "//;\\n1;2;3";
+
+    const app = new App();
+
+    expect(app.isCustomSeparator(input)).toBe(true);
+  });
+
+  test("커스텀 구분자를 갖는 문자열인지 여부를 확인한다.", async () => {
+    const input = "1,2:3";
+
+    const app = new App();
+
+    expect(app.isCustomSeparator(input)).toBe(false);
+  });
+
+  test("커스텀 구분자를 갖는 문자열인 경우, 커스텀 구분자를 파싱한다.", async () => {
+    const input = "//;\\n1;2;3";
+    const result = ";";
+
+    const app = new App();
+
+    expect(app.getCustomSeparator(input)).toBe(result);
+  });
+
+  test("커스텀 구분자를 갖는 문자열인 경우, 커스텀 구분자를 파싱한다.", async () => {
+    const input = "//;\\n1;2;3";
+
+    const app = new App();
+
+    expect(app.getCustomSeparator(input)).toBe(";");
+  });
+
+  test("커스텀 구분자를 갖는 문자열인 경우, 커스텀 구분자를 제외한 문자열을 파싱한다.", async () => {
+    const input = "//;\\n1;2;3";
+
+    const app = new App();
+
+    expect(app.parseStrWithCustomSeparator(input)).toBe("1;2;3");
+  });
+
+  test("구분자와 문자열을 인자로 전달받아 구분자를 기준으로 각 숫자를 분리한다.", async () => {
+    const str = "1;2,3:5";
+    const separators = [",", ":", ";"];
+
+    const app = new App();
+
+    expect(app.separateStr(str, separators)).toEqual(["1", "2", "3", "5"]);
+  });
+
+  test("분리한 각 숫자를 합한다.", async () => {
+    const arr = ["1", "2", "3", "5"];
+
+    const app = new App();
+
+    expect(app.sum(arr)).toBe(11);
+  });
 });
