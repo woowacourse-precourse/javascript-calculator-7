@@ -23,6 +23,16 @@ class App {
       let delimiter = new RegExp(parts[0].slice(2)); // 커스텀 구분자 추출
       input = parts[1]; // 문자열 부분 추출
     }
+
+    let numbers = input.split(delimiter).map(num => {
+      const parsedNum = Number(num);
+      
+      if (isNaN(parsedNum)) {
+        throw new Error(`유효하지 않은 입력: ${num}`); // 숫자가 아닌 경우
+      }
+      
+      return parsedNum;
+    });
   }
 }
 export default App;
