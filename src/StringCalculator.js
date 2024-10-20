@@ -1,6 +1,7 @@
 import { Console } from "@woowacourse/mission-utils";
 import { sumNumericStringList } from "./utils/arrayUtils.js";
 import { splitBySeparatorList } from "./utils/stringUtils.js";
+import { STRING_CALCULATOR_ERROR_MESSAGES } from "./constants/errorMessages.js";
 
 class StringCalculator {
   static DEFAULT_SEPARATOR_LIST = [",", ":"];
@@ -52,10 +53,51 @@ class StringCalculator {
     Console.print(`결과 : ${sumNumericStringList(splitResultList)}`);
   }
 
+  validateInputString(value) {
+    if (value === "") {
+      throw new Error(STRING_CALCULATOR_ERROR_MESSAGES.emptyInput);
+    }
+
+    const { DEFAULT_SEPARATOR_LIST } = StringCalculator;
+    const hasCustomSeparator = this.includeCustomSeparator(value);
+    const cleanedValue = hasCustomSeparator
+      ? this.omitCustomSeparator(value)
+      : value;
+    const separatorList = hasCustomSeparator
+      ? [...DEFAULT_SEPARATOR_LIST, this.extractCustomSeparator(value)]
+      : DEFAULT_SEPARATOR_LIST;
+
+    if (hasCustomSeparator) {
+      const customSeparator = this.extractCustomSeparator(value);
+
+      if (customSeparator === "") {
+        throw new Error(
+          STRING_CALCULATOR_ERROR_MESSAGES.invalidCustomSeparator
+        );
+      }
+    }
+
+    const splitResultList = splitBySeparatorList(cleanedValue, separatorList);
+
+    if (splitResultList.length === 0) {
+      throw new Error(STRING_CALCULATOR_ERROR_MESSAGES.noNumbers);
+    }
+
+    if (splitResultList.some((splitResult) => isNaN(splitResult))) {
+      throw new Error(STRING_CALCULATOR_ERROR_MESSAGES.invalidNumber);
+    }
+
+    if (splitResultList.some((splitResult) => Number(splitResult) < 0)) {
+      throw new Error(STRING_CALCULATOR_ERROR_MESSAGES.negativeNumber);
+    }
+  }
+
   async input() {
     const value = await Console.readLineAsync(
       "덧셈할 문자열을 입력해 주세요.\n"
     );
+
+    this.validateInputString(value);
 
     return value;
   }
