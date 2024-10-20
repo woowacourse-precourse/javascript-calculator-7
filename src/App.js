@@ -2,6 +2,7 @@ import { Console } from '@woowacourse/mission-utils';
 class App {
   #inputString;
   #delimiter;
+  #separatedNumber;
   #resultNumber;
   async run() {
     const INPUT_STRING = await this.userInput(
@@ -21,6 +22,8 @@ class App {
   }
   separateNumbers() {
     this.#delimiter = [',', ':'];
+    const CUSTOM_DELIMITER = this.#inputString.match(/^\/\/(.)?\\n/)?.[1];
+    CUSTOM_DELIMITER ? this.#delimiter.push(CUSTOM_DELIMITER) : '';
   }
 }
 
