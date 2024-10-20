@@ -1,10 +1,10 @@
 import StringValidator from './Utils/StringValidatorUtils.js'
 import StringParsing from './Utils/StringParsingUtils.js';
-import StringCalculatorUtils from './Utils/StringCalculatorUtils.js';
+import StringCalculator from './Utils/StringCalculatorUtils.js';
 
 const validator = new StringValidator();
 const parsing = new StringParsing();
-const calculator = new StringCalculatorUtils();
+const calculator = new StringCalculator();
 
 export function stringCalculator(input) {
 
