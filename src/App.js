@@ -20,7 +20,7 @@ class App {
 
     const splitedInput = this.splitInput(modifiedInput, delimiters);
 
-    this.addNumbers(splitedInput, numbers);
+    this.pushNumbers(splitedInput, numbers);
 
     const sum = this.calculator(numbers);
 
@@ -75,7 +75,7 @@ class App {
     return splitedInput;
   }
 
-  addNumbers(splitedInput, numbers) {
+  pushNumbers(splitedInput, numbers) {
     splitedInput.forEach((numStr) => {
       if (numStr === "") {
         throw new Error("[ERROR]: 구분자는 연속으로 올 수 없습니다.");
