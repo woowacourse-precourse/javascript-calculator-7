@@ -8,16 +8,9 @@ import {
 } from './Constraints/Constraints.js';
 
 import sumAllNumbers from './Util/sumAllNumbers.js';
-const numberPattern = '\\d+(\\.\\d+)?';
-const specialCharsPattern = /[.*+?^${}()|[\]\\]/g;
+import { escapeRegExp } from './Util/regex.js';
 
-function escapeRegExp(string) {
-  // 정규식에 사용되는 모든 예약어들을 escape 처리한다. .*[]\ 등...
-  // 원본 문자를 남기고 ($&), 그 문자에 \를 더 붙인다.
-  // "Hello. How+are|you?" =>
-  // "Hello\. How\+are\|you\?"
-  return string.replace(specialCharsPattern, '\\$&');
-}
+const numberPattern = '\\d+(\\.\\d+)?';
 
 function buildNormalInputValidationRegex() {
   return new RegExp(`^${numberPattern}$`);
