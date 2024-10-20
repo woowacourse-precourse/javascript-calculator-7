@@ -1,3 +1,4 @@
+import { Console } from '@woowacourse/mission-utils';
 import { displayInputGuide, getUserInput } from './functions/inputHandler.js';
 import getCustomDelimiter from './functions/getCustomDelimiter.js';
 import Delimiter from './Delimiter.js';
@@ -19,7 +20,8 @@ class App {
     const processedInput = customDelimiter ? input.split('\\n')[1] : input;
     const numbers = getNumbers(processedInput, this.delimiter.getDelimiters());
     const total = sumNumbers(numbers);
-    console.log('결과 : %d', total);
+
+    Console.print(`결과 : ${total}`);
   }
 }
 
