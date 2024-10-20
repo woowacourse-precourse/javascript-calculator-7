@@ -44,6 +44,12 @@ class App {
     if (match === null) {
       throw new Error("[ERROR] 잘못된 입력입니다. 커스텀 구분자를 읽을 수 없습니다.");
     }
+    if(match[1].legnth !== 1){
+      throw new Error("[ERROR] 잘못된 입력입니다. 커스텀 구분자 형식이 틀렸습니다.");
+    }
+    if(!isNaN(+match[1])){
+      throw new Error("[ERROR] 잘못된 입력입니다. 커스텀 구분자는 숫자가 될 수 없습니다.");
+    }
     return new RegExp(`[${match[1]}]`); // 커스텀 구분자를 정규식으로 변환
   }
 
