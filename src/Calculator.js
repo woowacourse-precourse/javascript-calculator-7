@@ -1,7 +1,9 @@
 import { Console } from '@woowacourse/mission-utils';
+import { validateEmptyInput } from './validators.js';
 
 function getInput() {
   Console.readLine('덧셈할 문자열을 입력해 주세요.', (answer) => {
+    validateEmptyInput(answer);
     console.log(answer);
     const customDelimiter = getCustomDelimiter(answer);
     const result = splitByDelimiter(answer, customDelimiter);
