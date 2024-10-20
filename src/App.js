@@ -58,12 +58,29 @@ class App {
       return sum;
     }
 
+    function removeCustomPattern(userInput) {
+      const CUSTOM_REGEX = /\/\/(.*)\\n/;
+      userInput = userInput.replace(CUSTOM_REGEX, "");
+      return userInput;
+    }
+
+    function checkString(userInput) {
+      const STRING_REGEX = /[^0-9:,]/g;
+      const CHECK_STRING = userInput.match(STRING_REGEX);
+      if (CHECK_STRING !== null) {
+        throw new Error(
+          "[ERROR] 숫자, 콜론, 콤마 이외의 문자는 입력할 수 없습니다."
+        );
+      }
+    }
+
     if (userInput === "") {
       Console.print(0);
       return;
     } else {
       checkMinus(userInput);
       if (userInput === checkCustomIdentifier(userInput)) {
+        checkString(userInput);
         result = calculateSum(userInput);
         Console.print(`결과 : ${result}`);
       } else {
@@ -71,7 +88,10 @@ class App {
           checkCustomIdentifier(userInput).customIdentifier,
           ","
         );
+        userInput = removeCustomPattern(userInput);
+        checkString(userInput);
         result = calculateSum(userInput);
+
         Console.print(`결과 : ${result}`);
       }
     }
