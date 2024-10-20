@@ -1,4 +1,4 @@
-import { checkForNaN, hasNegative, throwError } from './utils';
+import { checkForNaN, hasNegative, throwError } from './utils/index.js';
 
 class Validator {
   static checkNegativeInput(input) {

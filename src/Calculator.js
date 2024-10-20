@@ -1,8 +1,9 @@
-import { splitByCustomSeparator, splitByDefaultSeparators } from './utils';
-import Validator from './Validator';
+import { splitByCustomSeparator, splitByDefaultSeparators } from './utils/index.js';
+import Validator from './Validator.js';
 
 class Calculator {
   #input = '';
+
   #result = 0;
 
   constructor(value) {

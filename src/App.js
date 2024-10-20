@@ -1,9 +1,10 @@
 import { Console } from '@woowacourse/mission-utils';
-import Calculator from './Calculator';
-import { isEmptyOrNull, throwError } from './utils';
+import Calculator from './Calculator.js';
+import { isEmptyOrNull, throwError } from './utils/index.js';
 
 class App {
   #sum;
+
   #input;
 
   async run() {
