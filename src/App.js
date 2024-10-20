@@ -12,6 +12,18 @@ class App {
     }
   }
 
+  findCustomSeperator(input) {
+    const customSeparatorMatch = input.match(/\/\/(.*?)\\n/);
+
+    if (customSeparatorMatch) {
+      const customSeparator = customSeparatorMatch[1];
+      input = input.replaceAll("//", "");
+      input = input.replaceAll("\\n", "");
+      return { customSeparator, input };
+    }
+    return { input };
+  }
+
   getRidOfSeparator(input, customSeparator) {
     if (input.includes(",")) {
       input = input.replaceAll(",", "");
@@ -19,7 +31,6 @@ class App {
     if (input.includes(":")) {
       input = input.replaceAll(":", "");
     }
-
     return input;
   }
 
