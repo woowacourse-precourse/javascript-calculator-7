@@ -4,3 +4,13 @@ import { CUSTOM_DELIMITER_REGEX } from '../constant/constant.js';
 function hasCustomDelimiter(input) {
   return CUSTOM_DELIMITER_REGEX.test(input);
 }
+
+//커스텀 구분자를 추출하는 함수
+function getCustomDelimiter(input) {
+  const match = input.match(CUSTOM_DELIMITER_REGEX);
+  if (match) {
+    return match[1];
+  }
+  //추후 예외처리 필요
+  // 구분자가 숫자인 경우
+}
