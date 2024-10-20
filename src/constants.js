@@ -10,3 +10,5 @@ export const ERROR_MESSAGE = {
   INVALID_NUMBER: '[ERROR] 숫자를 입력해주세요.',
   INVALID_RANGE: '[ERROR] 양수를 입력해주세요.',
 };
+
+export const EMPTY_STRING = '';

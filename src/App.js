@@ -1,11 +1,15 @@
 import { Console } from '@woowacourse/mission-utils';
-import { CALCULATOR_MESSAGE, ERROR_MESSAGE } from './constants.js';
 import {
-  failCharSeparator,
-  failCustomEndIndex,
-  failIsNumbers,
-  failVaildSeparator,
-  failNumberRange,
+  CALCULATOR_MESSAGE,
+  EMPTY_STRING,
+  ERROR_MESSAGE,
+} from './constants.js';
+import {
+  isValidCharSeparator,
+  isValidCustomEndIndex,
+  isValidIsNumbers,
+  isValidVaildSeparator,
+  isValidNumberRange,
 } from './validation.js';
 
 class App {
@@ -33,12 +37,12 @@ class App {
   calculateResult() {
     const numbers = this.splitInput();
 
-    if (numbers.length === 1 && numbers[0] === '') {
+    if (numbers.length === 1 && numbers[0] === EMPTY_STRING) {
       this.sum = 0;
       return;
     }
 
-    this.checkNumbers(numbers);
+    this.validateNumbers(numbers);
     this.sum = numbers.reduce((acc, cur) => acc + Number(cur), 0);
   }
 
@@ -48,30 +52,30 @@ class App {
       const separator = this.input.slice(2, customEndIndex);
       const separatedInput = this.input.slice(customEndIndex + 2);
 
-      this.checkSeperator(customEndIndex, separator);
+      this.validateSeperator(customEndIndex, separator);
       return separatedInput.split(separator);
     }
 
     return this.input.split(/,|:/);
   }
 
-  checkSeperator(customEndIndex, seperator) {
-    if (failCustomEndIndex(customEndIndex)) {
+  validateSeperator(customEndIndex, seperator) {
+    if (!isValidCustomEndIndex(customEndIndex)) {
       throw new Error(ERROR_MESSAGE.INVALID_CUSTOM_END);
     }
-    if (failCharSeparator(seperator)) {
+    if (!isValidCharSeparator(seperator)) {
       throw new Error(ERROR_MESSAGE.INVALID_CHARACTER);
     }
   }
 
-  checkNumbers(Input) {
-    if (failIsNumbers(Input)) {
+  validateNumbers(Input) {
+    if (!isValidIsNumbers(Input)) {
       throw new Error(ERROR_MESSAGE.INVALID_NUMBER);
     }
-    if (failVaildSeparator(Input)) {
+    if (!isValidVaildSeparator(Input)) {
       throw new Error(ERROR_MESSAGE.INVALID_SEPARATOR);
     }
-    if (failNumberRange(Input)) {
+    if (!isValidNumberRange(Input)) {
       throw new Error(ERROR_MESSAGE.INVALID_RANGE);
     }
   }

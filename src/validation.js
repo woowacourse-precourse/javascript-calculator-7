@@ -1,19 +1,19 @@
-export function failCharSeparator(seperator) {
-  return seperator.length !== 1 || !isNaN(seperator);
+export function isValidCharSeparator(seperator) {
+  return seperator.length === 1 && isNaN(seperator);
 }
 
-export function failCustomEndIndex(endIndex) {
-  return endIndex === -1;
+export function isValidCustomEndIndex(endIndex) {
+  return endIndex !== -1;
 }
 
-export function failIsNumbers(input) {
-  return input.some((number) => isNaN(parseInt(number)));
+export function isValidIsNumbers(input) {
+  return input.every((number) => !isNaN(parseInt(number)));
 }
 
-export function failVaildSeparator(input) {
-  return input.some((number) => Number.isNaN(Number(number)));
+export function isValidVaildSeparator(input) {
+  return input.every((number) => !Number.isNaN(Number(number)));
 }
 
-export function failNumberRange(input) {
-  return input.some((number) => Number(number) <= 0);
+export function isValidNumberRange(input) {
+  return input.every((number) => 0 < Number(number));
 }
