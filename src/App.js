@@ -1,28 +1,31 @@
 import { Console } from "@woowacourse/mission-utils";
 
-const seperatorChar = [",", ":"];
-
 class App {
   async run() {
+    let seperatorCharList = [",", ":"];
+
     let USER_INPUT = await Console.readLineAsync(
       "덧셈할 문자열을 입력해 주세요."
     );
     let inputString = String.raw`${USER_INPUT}`;
 
-    let obj = this.findCustomCharNList(inputString);
-    let { customCharString, numberList } = obj;
+    let obj = this.splitByNewLineChar(inputString);
+    let { customSeperatorString, numberString } = obj;
 
-    if (customCharString) {
-      customCharString.split("").forEach((elem) => {
-        seperatorChar.push(elem);
+    if (customSeperatorString) {
+      customSeperatorString.split("").forEach((elem) => {
+        seperatorCharList.push(elem);
       });
     } else {
       // 커스텀 구분자가 없는 경우
       // 일반인 경우
-      numberList = inputString;
+      numberString = inputString;
     }
 
-    let statusOfNumberList = this.checkNumberList(numberList);
+    let statusOfNumberList = this.checkNumberList(
+      Boolean(customSeperatorString),
+      numberString
+    );
 
     if (!statusOfNumberList.valid) {
       Console.print(`결과 : ${statusOfNumberList.value}`);
@@ -110,7 +113,6 @@ class App {
       valid: true,
       value: null,
     };
-
     if (numberList.length === 0) {
       checkObj.valid = false;
       checkObj.value = 0;
@@ -125,7 +127,6 @@ class App {
   }
 
   getSeperatorRegex(seperatorCharList) {
-
     // let finalRe = new RegExp(lower.source + "|" + upper.source);
     // todo: 특수기호도 잘 인식되는지 마지막에 확인할것
     let regexArr = seperatorCharList.map((elem) => {
