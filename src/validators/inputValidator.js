@@ -1,4 +1,4 @@
-import throwError from "../utils/throwError";
+import { throwError } from "../utils/throwError.js";
 
 // 입력값이 없는 경우
 const emptyInput = (input) => {
