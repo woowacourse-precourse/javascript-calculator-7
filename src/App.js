@@ -6,6 +6,7 @@ class App {
   }
   
   async run() {
+    try {
       Console.print('덧셈할 문자열을 입력해주세요.');
       const INPUT_DATA = await Console.readLineAsync("");
 
@@ -19,6 +20,10 @@ class App {
       const SUM = SPLIT_DATA.reduce((acc, number) => acc + number, 0);
 
       Console.print(`결과 : ${SUM}`);
+    } catch (error) {
+      Console.print(`[ERROR] ${error.message}`);
+      throw new Error(error.message);  // 예외 발생 시 Promise가 reject되도록 수정
+    }
   };
 
   extractSeparator(inputString, separators) {
