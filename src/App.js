@@ -1,11 +1,15 @@
 import { Console } from "@woowacourse/mission-utils";
 
 class App {
-  #userInput = "";
+  #userInput;
+  #result;
+  #numbers;
 
   constructor() {
+    this.#userInput = "";
+    this.#result = 0;
+    this.#numbers = [];
     this.separators = new RegExp(`[,:]`);
-    this.numbers = [];
   }
 
   async getUserInput() {
@@ -18,8 +22,8 @@ class App {
   extractSeparator() {
     if (this.#userInput.startsWith("//")) {
       // 구분자 획득
-      this.separator = this.#userInput[2];
-      this.separators = new RegExp(`[,:${this.separator}]`);
+      const separator = this.#userInput[2];
+      this.separators = new RegExp(`[,:${separator}]`);
 
       // 입력값에서 커스텀 구분자 관련 문자 제거
       const indexOfn = this.#userInput.indexOf("n");
@@ -50,18 +54,18 @@ class App {
       }
 
       // 유효한 경우 숫자로 변환
-      this.numbers.push(Number(char));
+      this.#numbers.push(Number(char));
     }
   }
 
   // 합 계산
   calculateSum() {
-    this.result = this.numbers.reduce((acc, num) => acc + Number(num), 0);
+    this.#result = this.#numbers.reduce((acc, num) => acc + Number(num), 0);
   }
 
   // 결과 출력
   printResult() {
-    Console.print(`결과 : ${this.result}`);
+    Console.print(`결과 : ${this.#result}`);
   }
 
   async run() {
