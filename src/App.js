@@ -46,3 +46,6 @@ class CalculatorApp {
     if (!this.#isNumberArray(inputArray)) {
       throw new Error("[ERROR] 올바르지 않은 입력값입니다.");
     }
+
+    // 총합 계산
+    this.#totalSum = this.#sumValues(inputArray);
