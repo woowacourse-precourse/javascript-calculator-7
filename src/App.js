@@ -1,15 +1,16 @@
 import { MissionUtils, Console } from "@woowacourse/mission-utils";
+import { errorConstans, uiConstants } from './constants/index.js'
 
 class App {
   async run() {
     const input = await getInputStr();
-    const answer = `결과 : ${input}`;
+    const answer = `${uiConstants.RESULT} : ${input}`;
     Console.print(answer);
   }
 }
 
 async function getInputStr() {
-  let inputStr = await Console.readLineAsync('덧셈할 문자열을 입력해 주세요.\n');
+  let inputStr = await Console.readLineAsync(`${uiConstants.INPUT_MESSAGE}`);
   const separator = [":", ","];
   let customBoolean = false;
   // 커스텀 구분자를 가지는지 확인.
@@ -46,7 +47,7 @@ const isCustom = (inputStr) => {
   const regExp2 = /(\/\/\D{1}\\n){1}.{0,}/;
   if (regExp.test(inputStr)) { // 커스텀 구분자의 형식을 가진 문자열 이라면,
     if (!regExp2.test(inputStr)) {
-      throw new Error("[ERROR] 커스텀 구분자의 형식이 잘못됐습니다.");
+      throw new Error(`${errorConstans.WRONG_CUSTOM_SEPERATOR}`);
     }
     return true;
   }
@@ -57,7 +58,7 @@ const isCustom = (inputStr) => {
 // 2. 문자열이 숫자인지, 양수인지
 const isNumber = (inputStr) => {
   for (let i = 0; i < inputStr.length; i += 1){
-    if (isNaN(inputStr[i])) throw new Error("[ERROR] 문자열 중 숫자가 아니거나 양수가 아닌 문자가 있습니다.");
+    if (isNaN(inputStr[i])) throw new Error(`${errorConstans.WROND_STR}`);
   }
 }
 
