@@ -1,0 +1,13 @@
+{
+  "env": {
+    "es6": true,
+    "node": true,
+    "jest": true
+  },
+  "extends": ["eslint:recommended", "airbnb-base", "plugin:prettier/recommended"],
+  "rules": {
+    "class-methods-use-this": "off",
+    "import/extensions": ["error", "always"]
+  },
+  "plugins": ["prettier"]
+}
