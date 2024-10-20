@@ -1,4 +1,4 @@
-export const extractCustomSeparators = (input) => {
+export const extractCustomSeparator = (input) => {
 	if (hasCustomSeparator(input)) {
 		const customSeparator = getCustomSeparator(input)[1];
 		return customSeparator;
