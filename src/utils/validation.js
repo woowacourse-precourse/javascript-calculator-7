@@ -3,7 +3,7 @@ export const checkIsPositive = (array) => {
     if (!isNaN(Number(element))) {
       return element > 0;
     } else {
-      throw new Error("ERROR: 배열의 요소에 문자가 있습니다.");
+      throw new Error("ERROR: 지정한 구분자가 아닌 문자가 있습니다.");
     }
   });
 
