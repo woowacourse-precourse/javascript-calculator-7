@@ -38,8 +38,10 @@ class App {
     
     let sum = 0;
 
-    if (customSeparator !== '') {
-      const CUSTOM_DELIMITER = USERINFO.split(customSeparator);
+    if (customSeparator.length !== 0) {
+      const escapedSeparators = customSeparator.map(separator => {
+        return separator.replace(/[-\/\\^$.*+?()[\]{}|]/g, '\\$&'); 
+      });
 
       for (let i = 0; i < CUSTOM_DELIMITER.length; i++) {
         let num = CUSTOM_DELIMITER[i];
