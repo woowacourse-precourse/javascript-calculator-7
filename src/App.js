@@ -30,7 +30,7 @@ class App {
     formattedInput.split(delimiter).map((item) => {
       let num = Number(item);
 
-      if (isNaN(num) || item.trim() == "") {
+      if (isNaN(num)) {
         throw new Error("[ERROR] 유효한 숫자가 아닙니다.");
       } else if (num < 0) {
         throw new Error("[ERROR] 양수가 아닙니다.");
