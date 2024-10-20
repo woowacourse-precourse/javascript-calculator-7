@@ -12,6 +12,10 @@ class App {
     let DELIMITER = /,|:/;
 
     const NUMBERS = INPUT.split(DELIMITER).map(Number)
+    // 분리한 숫자의 합을 반환한다
+    const RESULT = NUMBERS.reduce((sum, num) => sum + num, 0)
+    
+    Console.print(`결과 : ${RESULT}`);
   }
 }
 
