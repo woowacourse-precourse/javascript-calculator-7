@@ -6,9 +6,8 @@ class App {
     const input = await Console.readLineAsync('');
 
     if (input === "") { //빈문자열 처리
-      Console.print("결과 : 0");
+      return Console.print("결과 : 0");
     }
-
     try {
       this.sum(input);
     }
@@ -24,7 +23,6 @@ class App {
 
     if (input.startsWith("//")) { // 커스텀 구분자 처리
       this.isValidCustom(input);
-
       const parts = input.split("\\n");  // 사용자가 입력한 "\n" 문자열을 기준으로 분리
       const customDelimiter = parts[0].substring(2);  // "//" 이후의 커스텀 구분자 추출
       delimiters = new RegExp(`[${customDelimiter},|:]`);  // 커스텀 구분자와 기본 구분자 포함
