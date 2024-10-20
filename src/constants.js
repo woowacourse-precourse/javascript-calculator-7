@@ -5,4 +5,4 @@ export const REGEX_CONSTANTS = Object.freeze({
   CUSTOM_DIVIDER_REGEX: /\/\/(.*?)\\n/,
 });
 
-export const ERROR_PROFIX = "[ERROR]";
+export const ERROR_PREFIX = "[ERROR]";
