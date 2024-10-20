@@ -1,6 +1,7 @@
 import { errorMessages } from './constant.js';
-import Calculator from '../Calculator.js';
-import Validator from '../Validator.js';
+import Calculator from './Calculator.js';
+import Validator from './Validator.js';
+import { Console } from '@woowacourse/mission-utils';
 
 class App {
   async run() {
