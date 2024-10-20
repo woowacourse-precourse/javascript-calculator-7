@@ -1,4 +1,3 @@
-// views/OutputView.js
 import { Console } from "@woowacourse/mission-utils";
 
 export function printResult(result) {
