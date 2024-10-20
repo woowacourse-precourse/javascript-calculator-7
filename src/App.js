@@ -40,7 +40,12 @@ class StringCalculator {
     }
 
      // 숫자 배열로 변환 후 합산
-     const numberArray = numberString.split(delimiters).map(num => Number(num));
+     const numberArray = numberString.split(delimiters).map(num => {
+      if (isNaN(num) || num.trim() === "") {
+        throw new Error("[ERROR] 입력 값이 잘못되었습니다.");
+      }
+      return Number(num);
+    });
 
        // 음수 검출 및 예외 처리
     const negativeNumbers = numberArray.filter(num => num < 0);
