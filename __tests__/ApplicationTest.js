@@ -47,8 +47,17 @@ describe('문자열 계산기', () => {
     });
   });
 
-  test('예외 테스트', async () => {
+  test('음수 입력 시 예외를 발생시킨다', async () => {
     const inputs = ['-1,2,3'];
+    mockQuestions(inputs);
+
+    const app = new App();
+
+    await expect(app.run()).rejects.toThrow('[ERROR]');
+  });
+
+  test('커스텀 구분자 설정 부분이 문자열의 맨 앞에 위치하지 않으면 예외를 발생시킨다', async () => {
+    const inputs = ['1;2;3//;\\n'];
     mockQuestions(inputs);
 
     const app = new App();

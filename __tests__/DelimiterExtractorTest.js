@@ -38,4 +38,14 @@ describe('DelimiterExtractor', () => {
 
     expect(delimiterExtractor.getDelimiters()).toEqual(output);
   });
+
+  test('커스텀 구분자 설정 부분이 문자열의 맨 앞에 위치하지 않으면 예외를 발생시킨다', async () => {
+    const input = '1;2;3//;\\n';
+
+    const delimiterExtractor = new DelimiterExtractor();
+
+    expect(() => delimiterExtractor.extractDelimiter(input)).toThrow(
+      '[ERROR] 커스텀 구분자는 문자열의 맨 앞에 위치해야 합니다.'
+    );
+  });
 });
