@@ -6,24 +6,20 @@ import sumNumbers from './functions/sumNumbers.js';
 
 class App {
   constructor() {
-    this.inputHandler = { displayInputGuide, getUserInput };
     this.delimiter = new Delimiter();
   }
 
   async run() {
-    this.inputHandler.displayInputGuide();
-    this.inputHandler.getUserInput(input => {
-      const customDelimiter = getCustomDelimiter(input);
-      if (customDelimiter) this.delimiter.setCustomDelimiter(customDelimiter);
+    displayInputGuide();
+    const input = await getUserInput();
 
-      const processedInput = customDelimiter ? input.split('\\n')[1] : input;
-      const numbers = getNumbers(
-        processedInput,
-        this.delimiter.getDelimiters(),
-      );
-      const total = sumNumbers(numbers);
-      console.log('결과 : %d', total);
-    });
+    const customDelimiter = getCustomDelimiter(input);
+    if (customDelimiter) this.delimiter.setCustomDelimiter(customDelimiter);
+
+    const processedInput = customDelimiter ? input.split('\\n')[1] : input;
+    const numbers = getNumbers(processedInput, this.delimiter.getDelimiters());
+    const total = sumNumbers(numbers);
+    console.log('결과 : %d', total);
   }
 }
 

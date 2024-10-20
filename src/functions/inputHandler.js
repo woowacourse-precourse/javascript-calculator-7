@@ -1,4 +1,4 @@
-import readline from 'readline';
+import { MissionUtils } from '@woowacourse/mission-utils';
 
 const displayInputGuide = function displayInputGuideFunc() {
   console.log(` ---------------------------[ 문자열 덧셈 계산기 ]---------------------------
@@ -15,16 +15,11 @@ const displayInputGuide = function displayInputGuideFunc() {
   );
 };
 
-const getUserInput = function getUserInputFunc(callback) {
-  const rl = readline.createInterface({
-    input: process.stdin,
-    output: process.stdout,
-  });
-
-  rl.question('\n덧셈할 문자열을 입력해 주세요. \n', input => {
-    callback(input);
-    rl.close();
-  });
+const getUserInput = async function getUserInputFunc() {
+  const inputString = await MissionUtils.Console.readLineAsync(
+    '\n덧셈할 문자열을 입력해 주세요.\n',
+  );
+  return inputString;
 };
 
 export { displayInputGuide, getUserInput };
