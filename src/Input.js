@@ -1,5 +1,6 @@
 import { MissionUtils } from "@woowacourse/mission-utils";
 import { IncludeZeroError, InvalidSeparatorError, InvalidCustomSeparatorError } from "./Error/index.js";
+import { INPUT_MESSAGE } from "./constants/printMessage.js";
 
 class Input {
   static async getCustomSeparatorAndNumbers() {
@@ -13,9 +14,7 @@ class Input {
   }
 
   static async getPlusString() {
-    const plusString = await MissionUtils.Console.readLineAsync(
-      "덧셈할 문자열을 입력해 주세요.\n",
-    );
+    const plusString = await MissionUtils.Console.readLineAsync(INPUT_MESSAGE);
     return plusString;
   }
 

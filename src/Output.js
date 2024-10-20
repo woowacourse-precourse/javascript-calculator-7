@@ -1,4 +1,5 @@
 import { MissionUtils } from "@woowacourse/mission-utils";
+import { RESULT_MESSAGE } from "./constants/printMessage.js";
 
 class Output {
   /**
@@ -6,7 +7,7 @@ class Output {
    * @param {number} result - 덧셈 결과
    */
   static printResult(result) {
-    MissionUtils.Console.print(`결과 : ${result}`);
+    MissionUtils.Console.print(`${RESULT_MESSAGE}${result}`);
   }
 }
 

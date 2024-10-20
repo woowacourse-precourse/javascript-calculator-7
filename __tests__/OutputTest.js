@@ -1,5 +1,6 @@
 import { MissionUtils } from "@woowacourse/mission-utils";
 import Output from "../src/Output";
+import { RESULT_MESSAGE } from "../src/constants/printMessage";
 
 describe("printResult()", () => {
   const { Console } = MissionUtils;
@@ -8,6 +9,6 @@ describe("printResult()", () => {
     const spy = jest.spyOn(Console, "print");
     Output.printResult(6);
 
-    expect(spy).toHaveBeenCalledWith("결과 : 6");
+    expect(spy).toHaveBeenCalledWith(`${RESULT_MESSAGE}6`);
   });
 });

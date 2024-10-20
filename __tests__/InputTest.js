@@ -1,7 +1,7 @@
 import { MissionUtils } from "@woowacourse/mission-utils";
 import Input from "../src/Input";
 import { IncludeZeroError, InvalidSeparatorError, InvalidCustomSeparatorError } from "../src/Error";
-import { ERROR_HEADER, ERROR_BODY } from "../src/constants/errorMessage.js";
+import { ERROR_HEADER, ERROR_BODY, INPUT_MESSAGE } from "../src/constants";
 
 const { Console } = MissionUtils;
 
@@ -29,7 +29,7 @@ describe("getPlusString()", () => {
     mockQuestions(mockInput, spy);
 
     await Input.getPlusString();
-    expect(spy).toHaveBeenCalledWith("덧셈할 문자열을 입력해 주세요.\n");
+    expect(spy).toHaveBeenCalledWith(INPUT_MESSAGE);
   });
 
   test("사용자가 한 번 입력 시 입력을 올바르게 반환해야 함", async () => {

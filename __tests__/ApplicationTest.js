@@ -1,6 +1,6 @@
 import { MissionUtils } from "@woowacourse/mission-utils";
 import App from "../src/App.js";
-import { ERROR_HEADER } from "../src/constants/errorMessage.js";
+import { ERROR_HEADER, INPUT_MESSAGE, RESULT_MESSAGE } from "../src/constants";
 
 const mockQuestions = (inputs) => {
   MissionUtils.Console.readLineAsync = jest.fn();
@@ -28,7 +28,7 @@ describe("Input 클래스", () => {
     await app.run();
 
     const spy = getConsoleSpy();
-    expect(spy).toHaveBeenCalledWith("덧셈할 문자열을 입력해 주세요.\n");
+    expect(spy).toHaveBeenCalledWith(INPUT_MESSAGE);
   });
 });
 
@@ -38,7 +38,7 @@ describe("문자열 계산기", () => {
     mockQuestions(inputs);
 
     const logSpy = getLogSpy();
-    const outputs = ["결과 : 1"];
+    const outputs = [`${RESULT_MESSAGE}1`];
 
     const app = new App();
     await app.run();
