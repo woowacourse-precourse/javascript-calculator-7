@@ -4,9 +4,9 @@ class App {
   async run() {
     try {
       const input = await Console.readLineAsync("덧셈할 문자열을 입력해 주세요.\n");
-      const result = this.calculate( input );
+      const result = this.calculate(input);
       Console.print(`결과 : ${result}`);
-    } catch ( error ) {
+    } catch (error) {
       if (!error.message.startsWith("[ERROR]")) {
         error.message = `[ERROR] ${error.message}`;
       }
@@ -19,6 +19,20 @@ class App {
     
     let numberString = input;
     let delimiter = ',|:';
+    
+    if (input.startsWith('//')) {
+      const customDelimiterMatch = input.match(/\/\/(.*?)\\n(.*)/);
+      if (!customDelimiterMatch) {
+        throw new Error("[ERROR] 잘못된 커스텀 구분자 형식입니다. 구분자는 //와 \n 사이에 위치해야합니다. ex. //;\\n1;2;3");
+      }
+      
+      delimiter = this.escapeRegExp(customDelimiterMatch[1]);
+      numberString = customDelimiterMatch[2];
+    }
+    
+    if (!numberString.trim()) {
+      return 0;
+    }
     
     const numbers = numberString.split(new RegExp(delimiter))
       .map(num => {
@@ -38,6 +52,9 @@ class App {
     return numbers.reduce((sum, num) => sum + num, 0);
   }
 
+  escapeRegExp(string) {
+    return string.replace(/[.*+?^${}()|[\]\\]/g, '\\$&');
+  }
 }
 
 export default App;
