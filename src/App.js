@@ -7,6 +7,16 @@ class App {
     });
   }
 
+  #workingCalculator(userInput) { // 계산기 작동
+    if (userInput.startsWith(/[0-9]/)) {
+      this.#NumberPicker(userInput);
+    } else if (userInput.indexOf('//') != -1 === false) {
+      this.#customPicker(userInput);
+    } else {
+      this.#errorCalculator(userInput);
+    }
+  }
+
   #NumberPicker(userInput) { // 입력받은 값에서 숫자만 추출하는 함수
     const CHANGE_COLON = userInput.replace(":", ",");
     const COMMA = CHANGE_COLON.split(',');
