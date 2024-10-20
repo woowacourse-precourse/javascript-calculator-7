@@ -9,6 +9,11 @@ class App {
         "덧셈할 문자열을 입력해 주세요.\n"
       );
 
+      if (input.trim() === "") {
+        Console.print("결과 : " + 0);
+        return;
+      }
+
       const checkHasCustom = (string) => {
         if (string.startsWith("//") && string.includes("\\n")) {
           const DELIMITER = string.slice(2, string.indexOf("\\n"));
