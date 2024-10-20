@@ -1,5 +1,6 @@
 const FindDigitCount = (str) => {
   const DIGITS = str.match(/\d+/g);
+  const NOT_DIGITS = str.match(/[^\d+]/g);
 
   if (DIGITS == null) {
     throw new Error(`[ERROR] 숫자가 최소 한 개 이상 필요합니다.`);
@@ -9,7 +10,9 @@ const FindDigitCount = (str) => {
     throw new Error(`[ERROR] 음수는 문자열에 포함될 수 없습니다.`);
   }
 
-  return DIGITS.length;
+  return NOT_DIGITS !== null
+    ? DIGITS.length + NOT_DIGITS.length
+    : DIGITS.length;
 };
 
 export default FindDigitCount;
