@@ -8,17 +8,13 @@ import { Console } from "@woowacourse/mission-utils";
 
 class App {
     async run() {
-        try {
-            const input = await this.getUserInput();
-            const [customDelimiter, inputWithoutDelimiter] = this.splitCustomDelimiter(input);
-            this.validateInput(customDelimiter, inputWithoutDelimiter);
-            const numbers = this.splitInputByDelimiter(customDelimiter, inputWithoutDelimiter);
-            const sum = this.sumNumbers(numbers);
+        const input = await this.getUserInput();
+        const [customDelimiter, inputWithoutDelimiter] = this.splitCustomDelimiter(input);
+        this.validateInput(customDelimiter, inputWithoutDelimiter);
+        const numbers = this.splitInputByDelimiter(customDelimiter, inputWithoutDelimiter);
+        const sum = this.sumNumbers(numbers);
 
-            Console.print(`결과 : ${sum}`);
-        } catch (error) {
-            Console.print(error.message);
-        }
+        Console.print(`결과 : ${sum}`);
     }
 
     async getUserInput() {
