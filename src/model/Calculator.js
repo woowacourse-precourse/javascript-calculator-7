@@ -1,3 +1,4 @@
+import { DELIMITERS } from '../constant/config.js';
 import { ERROR_MESSAGES } from '../constant/message.js';
 
 // 계산기 데이터 및 비즈니스 로직 처리
@@ -18,10 +19,9 @@ class Calculater {
     }
 
     // 커스텀 구분자를 사용하는 경우
-    if (input.startsWith('//')) {
+    if (input.startsWith(DELIMITERS.customPrefix)) {
       const customDelimiter = this.extractCustomDelimiter(input);
-
-      const stringPart = input.split('\\n')[1];
+      const stringPart = input.split(DELIMITERS.customSuffix)[1];
       this.validateNumbers(stringPart, new RegExp(`[${customDelimiter}]`));
     }
 
@@ -31,12 +31,12 @@ class Calculater {
         throw new Error(ERROR_MESSAGES.defaultStart);
       }
 
-      this.validateNumbers(input, /[,|:]/);
+      this.validateNumbers(input, DELIMITERS.default);
     }
   }
 
   extractCustomDelimiter(data) {
-    const inputMatch = data.match(/^\/\/(.+)\\n/);
+    const inputMatch = data.match(DELIMITERS.regularExpression);
 
     if (!inputMatch) {
       throw new Error(ERROR_MESSAGES.customForamt);
@@ -48,7 +48,7 @@ class Calculater {
       throw new Error(ERROR_MESSAGES.length);
     }
 
-    if (customDelimiter === '.') {
+    if (customDelimiter === DELIMITERS.period) {
       throw new Error(ERROR_MESSAGES.period);
     }
 
