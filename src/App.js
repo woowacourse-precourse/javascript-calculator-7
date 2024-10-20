@@ -21,7 +21,7 @@ class App {
             }
 
             // 입력값이 한 개일 경우 해당 숫자를 그대로 반환
-            if (Number(input).length) {
+            if (!isNaN(input)) {
                 return Console.print(input.trim());
             }
 
