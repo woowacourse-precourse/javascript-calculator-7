@@ -49,3 +49,4 @@ class CalculatorApp {
 
     // 총합 계산
     this.#totalSum = this.#sumValues(inputArray);
+    
