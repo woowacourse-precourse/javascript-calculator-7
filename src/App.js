@@ -25,7 +25,9 @@ class CalculatorApp {
   #sumValues(values) {
     return values.reduce((accumulator, value) => accumulator + Number(value), 0);
   }
-  async run() {}
-}
 
-export default App;
+  // 실행 메서드
+  async run() {
+    let userInput = await MissionUtils.Console.readLineAsync(
+      "덧셈할 문자열을 입력해 주세요.\n"
+    );
