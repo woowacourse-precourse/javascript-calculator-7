@@ -4,6 +4,7 @@ const ERROR_MESSAGES = {
   invalidNumber: "[ERROR] 유효한 숫자가 아닙니다.",
   negativeNumber: "[ERROR] 양수가 아닙니다.",
   invalidDelimiter: "[ERROR] 구분자 형식을 확인해주세요.",
+  spaceError: "[ERROR] 공백이 포함되어 있습니다.",
 };
 
 const DEFAULT_DELIMITER = /,|:/;
@@ -12,6 +13,7 @@ class App {
     const input = await Console.readLineAsync(
       "덧셈할 문자열을 입력해 주세요.\n"
     );
+    const SPACE = /\s/g;
     let nums = [];
     let formattedInput = input.replace(/\\n/g, "\n");
     let delimiter = DEFAULT_DELIMITER;
@@ -19,6 +21,10 @@ class App {
     if (!formattedInput) {
       Console.print("결과 : 0");
       return;
+    }
+
+    if (formattedInput.match(SPACE)) {
+      throw new Error(spaceError);
     }
 
     if (formattedInput.startsWith("//")) {
@@ -35,7 +41,7 @@ class App {
     }
 
     formattedInput.split(delimiter).map((item) => {
-      let num = Number(item.trim());
+      let num = Number(item);
 
       if (item.trim() === "") {
         throw new Error(ERROR_MESSAGES.invalidNumber);
