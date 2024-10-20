@@ -28,7 +28,7 @@ class App {
 		let custom_regex;
 		let input_array = [];
 
-		let input = await Console.readLineAsync(",(쉼표)와 ;(세미 콜론)와 숫자를 조합한 문자열을 입력해주세요. ex)1,2:3 ");
+		let input = await Console.readLineAsync(",(쉼표)와 ;(세미 콜론)과 숫자를 조합한 문자열을 입력해주세요. ex)1,2:3 ");
 
 		try {
 			if (input.match(regexes.check_special_chracter) || input.match(regexes.check_empty_string)) {
@@ -44,6 +44,8 @@ class App {
 				}
 				const answer = this.sumInputNumbers(input_array);
 				Console.print(`결과 : ${answer}`);
+			} else {
+				throw new Error("[ERROR] 구분자가 필요합니다");
 			}
 		} catch (error) {
 			throw new Error(`[ERROR] ${error.message}`);
