@@ -2,12 +2,16 @@ import {Console} from "@woowacourse/mission-utils";
 
 class App { //하나의 메소드는 하나의 역할
     sum = 0
-    inputString = ""
     customSeparator = ""//인스턴스 변수는 최대 2개
 
     async run() { //풀이 결과 반환 담당, 메소드명만 봐도 무슨역할인지 알 수 있게
-        this.inputString = await this.input()
-        this.isCustom(this.inputString) ? this.isCustom(this.inputString) : this.calculator(this.toArray(this.inputString))
+        const input = await this.input()
+        if (this.isCustom(input)) {
+            const afterString = this.sliceString(input)
+            return this.calculator([...afterString])
+        } else {
+            this.calculator(this.toArray(this.input))
+        }
         this.resultOutput()
     }
 
@@ -21,16 +25,15 @@ class App { //하나의 메소드는 하나의 역할
             return false
         }
         if (param.startsWith("//")) {
-            this.sliceString(param, lastIdx)
             return true
         }
     }
 
-    sliceString(param, lastIdx) {//커스텀 구분자 슬라이싱
+    sliceString(param) {//커스텀 구분자 슬라이싱
+        const lastIdx = param.indexOf("\\n")
         this.customSeparator = param.slice(2, lastIdx)
-        this.inputString = param.slice(lastIdx + 2)
+        return param.slice(lastIdx + 2)
     }
-
 
     isSeparator(value) {//구분자 판단
         if (!isNaN(value)) { //부정 조건 지양하자
