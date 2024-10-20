@@ -1,7 +1,8 @@
 import { Console } from "@woowacourse/mission-utils";
 
-const ORIGIN_REGEX = /,|:/;
-const CUSTOM_REGEX = /\/\/(.*?)\\n.*/;
+const ORIGIN_REGEX = /^([0-9]+(,|:)?)+$/g;
+const ORIGIN_DIVIDER_REGEX = /,|:/;
+const CUSTOM_REGEX = /^\/\/(.*?)\\n.*$/;
 const CUSTOM_DIVIDER_REGEX = /\/\/(.*?)\\n/;
 
 class App {
@@ -13,9 +14,12 @@ class App {
       const number_area = user_string.replace(CUSTOM_DIVIDER_REGEX, "");
       num_list = this.#get_numbers_from_string(number_area, divider);
     } else if (ORIGIN_REGEX.test(user_string)) {
-      num_list = this.#get_numbers_from_string(user_string, ORIGIN_REGEX);
+      num_list = this.#get_numbers_from_string(
+        user_string,
+        ORIGIN_DIVIDER_REGEX
+      );
     } else {
-      throw new Error(`[ERROR] 잘못된 값이 입력되었습니다.`);
+      throw new Error("[ERROR] 잘못된 값을 입력하셨습니다.");
     }
 
     return num_list;
