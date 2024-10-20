@@ -41,7 +41,7 @@ class App {
 
     // 앞부분에서 // 와 \n 사이에 있으면 모두 구분자
     while (INPUT.substring(START, END) == '//' && END < INPUT.length) {
-      while (END < INPUT.length && INPUT.substring(END, END + 2) !== "\\n") {
+      while (END < INPUT.length && INPUT.substring(END, END + 2) !== '\\n') {
         END++;
       }
 
@@ -103,7 +103,7 @@ class App {
 
   // 결과 출력
   async getOutput(SUM){
-    Console.print("결과 : " + SUM);
+    Console.print('결과 : ' + SUM);
   }
 }
 
