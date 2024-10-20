@@ -20,4 +20,14 @@ describe("문자열 숫자 분리 테스트", () => {
       expect(stringSpliter.getSeperatorFrom(inputs[index])).toBe(output);
     });
   });
+
+  test("커스텀 구분자 부분을 제외한 문자열을 구분할 수 있다.", () => {
+    const inputs = ["//;\\n12345", "//.\\n1,2,345", "//-\\n12345", "12345k", ";\\n1234"];
+    const outputs = ["12345", "1,2,345", "12345", "12345k", ";\\n1234"];
+
+    outputs.forEach((output, index) => {
+      const stringSpliter = new StringSpliter(inputs[index]);
+      expect(stringSpliter.removeCustomSeperator(inputs[index])).toEqual(output);
+    });
+  });
 });
