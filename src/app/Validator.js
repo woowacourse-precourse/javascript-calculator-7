@@ -47,6 +47,8 @@ class Validator {
     if (this.#delimiter.hasCustomDelimiter(value)) {
       return !isNumericString(this.#delimiter.getCustomDelimiter(value));
     }
+
+    return true;
   }
 
   /**
