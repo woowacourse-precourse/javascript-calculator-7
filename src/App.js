@@ -2,6 +2,10 @@ import { Console } from "@woowacourse/mission-utils";
 
 const DEFAULT_DELIMETER = [",", ":"];
 
+function escapeRegExp(string) {
+  return string.replace(/[.*+?^${}()|[\]\\]/g, "\\$&");
+}
+
 function isNumeric(str) {
   return /^\d+$/.test(str);
 }
@@ -32,6 +36,19 @@ function checkInputFormat(input) {
   }
 
   if (checkDefaultFormat) return true;
+}
+
+function calculate(input) {
+  // 커스텀 구분자가 존재하는 경우
+  if (input.slice(0, 2) === "//" && input.slice(3, 5) === "\\n") {
+    const custom_delimeter = [...DEFAULT_DELIMETER, input[2]];
+    let remain = input.slice(5);
+    const changedEscapeDelimiters = custom_delimeter.map(escapeRegExp);
+    const cleanedRemain = remain.split(
+      new RegExp(changedEscapeDelimiters.join("|"))
+    );
+    return cleanedRemain.reduce((sum, num) => sum + Number(num), 0);
+  }
 }
 
 class App {
