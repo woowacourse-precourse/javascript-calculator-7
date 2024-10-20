@@ -4,7 +4,7 @@
 
 - [x] 출력 메시지 구현
 - [x] 사용자가 입력할 부분 구현
-- [ ] 결과 출력 메시지 구현
+- [x] 결과 출력 메시지 구현
 - [ ] 쉼표가 구분되도록 구현
 - [ ] 콜론이 구분되도록 구현
 - [ ] 잘못된 값 입력 시 Error 구현
@@ -27,4 +27,10 @@
 1. `Console.readLineAsync`의 입력된 값은 `then`으로 출력해야합니다.
 2. `Console.print` 대신 `Console.readLineAsync`의 요구 사항 메시지를 넣습니다.
 3. `.then`을 통해 `readLineAsync`에서 입력받은 결과를 확인합니다.
+   <br><br>
+
+### 사용자가 입력할 부분 구현
+
+1. `Console.readLineAsync`의 줄바꿈 문자를 추가하여 입력 받는 위치 변경합니다.
+2. `Console.print` 에 `+`를 넣어서 결과 창을 구현합니다.
    <br><br>
