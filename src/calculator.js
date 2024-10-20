@@ -14,8 +14,8 @@ class Calculator {
             const customDelimiterStartIndex = input.indexOf('\\n');
             const customDelimiter = input.slice(2,customDelimiterStartIndex);
             const numberString = input.slice(customDelimiterStartIndex + 2); 
-            
-            return { delimiter : new RegExp(`[${customDelimiter},:]`), numberString };
+            const escapedDelimiter = customDelimiter.replace(/[.*+?^${}()|[\]\\]/g, '\\$&'); // 특수문자 처리
+            return { delimiter : new RegExp(`[${escapedDelimiter},:]`), numberString };
         }
         return { delimiter: /[,:]/, numberString: input };
     }
