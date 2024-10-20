@@ -31,7 +31,7 @@ class App {
     } 
 
     const result = numbers.map(Number).reduce((sum, num) => sum + num, 0);
-
+    Console.print(`결과 : ${result}`)
   }
 }
 
