@@ -18,7 +18,9 @@ class App {
       }
 
       // 기본 구분자, 커스텀 구분자 기준으로 숫자 배열 생성
-      const regexp = new RegExp(`[,:${customSeperator}]`);
+      let regexp = new RegExp(`[,:${customSeperator}]`);
+      if (customSeperator == "" && separator) regexp = /(?=.)/;
+
       const numArr = string.split(regexp).map(Number);
     } catch (error) {}
   }
