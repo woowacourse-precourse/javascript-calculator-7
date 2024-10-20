@@ -14,6 +14,11 @@ class StringCalculator {
             if (matches) {
                 let custom_separator = matches[1];
 
+                // 커스텀 구분자가 알파벳(A-Z)이나 숫자로 설정된 경우 에러 발생
+                if (/[a-zA-Z0-9]/.test(custom_separator)) {
+                    throw new Error("[ERROR] 이 문자는 커스텀 구분자로 설정할 수 없습니다.");
+                }
+
                 // 각 특수문자 의미를 없애고 정규식에서 사용할 수 있도록 이스케이프 처리
                 custom_separator = custom_separator.replace(/[.*+?^${}()|[\]\\]/g, "\\$&");
 
