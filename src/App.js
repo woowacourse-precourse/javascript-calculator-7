@@ -34,7 +34,7 @@ extractDelimiter(input) {
     const numbers = numberLines.join('\n'); 
     return [delimiter, numbers]; 
   }
-  return [',', input]; 
+  return [',:', input]; 
 }
 
 // 숫자 변환: 분리한 문자를 숫자로 변환하는 메소드
