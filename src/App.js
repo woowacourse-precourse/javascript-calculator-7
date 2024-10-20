@@ -1,5 +1,98 @@
+import { Console } from "@woowacourse/mission-utils";
+
 class App {
-  async run() {}
+  async run() {
+    try{
+      let userInput = await Console.readLineAsync(`덧셈할 문자열을 입력해 주세요.\n`);
+      userInput = userInput.replace("\\n", "\n");
+
+      const result = this.calculate(userInput);
+      Console.print(`결과 : ${result}`);
+    } catch (error) {
+      Console.print(error.message);
+      throw error;
+    }
+  }
+
+  /**
+  *   @author CWDll
+  *   @describe 입력받은 문자열을 계산하는 함수
+  *   @parameter {string}
+  *   @returnValue {number}
+  */
+  calculate(userInput) {
+    if(userInput === "") {
+      return 0;
+    }
+
+    // 커스텀 구분자 추출 or 기본 구분자 사용
+    const { delimiter, numbers } = this.extractCustomDelimiter(userInput);
+    const splitNumbers = numbers.split(delimiter);
+
+    // 분리된 문자열을 숫자로 변환하여 더하기
+    const result = this.addNumbers(splitNumbers);
+    return result;
+
+  }
+
+  /**
+   * @author CWDll
+   * @describe 숫자 변환 및 더하기
+   * @parameter {Array<string>}
+   * @returnValue {number}
+   */
+  addNumbers(splitNumbers) {
+    return splitNumbers.reduce((sum, current) => {
+      const number = this.validateAndConvert(current);  // 숫자 변환 및 검증
+      return sum + number;
+    }, 0);
+  }
+
+  /**
+   * @author CWDll
+   * @describe 입력값 검증 및 변환
+   * @parameter {string}
+   * @returnValue {number}
+   * @throws {Error} 유효하지 않은 입력일 경우 예외 발생
+   */
+  validateAndConvert(value) {
+    const number = parseInt(value, 10);
+
+    // 유효하지 않은 숫자 또는 음수일 경우 예외 발생
+    if (isNaN(number)) {
+      throw new Error("[ERROR] 숫자가 아닌 값이 포함되어 있습니다.");
+    }
+    if (number < 0) {
+      throw new Error("[ERROR] 음수는 입력할 수 없습니다.");
+    }
+    if (number !== Math.floor(number)) {
+        throw new Error("[ERROR] 실수는 입력할 수 없습니다.");
+    }
+    return number;
+  }
+
+  /**
+   * @author CWDll
+   * @describe 커스텀 구분자 추출 함수
+   * @parameter {string}
+   * @returnValue {Object} : 구분자와 숫자 부분을 포함한 객체
+   */
+  extractCustomDelimiter(userInput) {
+    let delimiter = /,|:/;  // 기본 구분자 쉼표(,)와 콜론(:)
+    let numbers = userInput;
+
+    // 커스텀 구분자가 있는지 확인 (//로 시작하는 경우)
+    if (userInput.startsWith("//")) {
+      const delimiterEndIndex = userInput.indexOf(`\n`);
+      delimiter = userInput.substring(2, delimiterEndIndex);  // "//"와 "\n" 사이의 구분자 추출
+      numbers = userInput.substring(delimiterEndIndex + 1);  // "\n" 이후의 숫자 부분 추출
+
+      // 구분자가 특수문자일 경우 이스케이프 처리
+      delimiter = delimiter.replace(/[.*+?^${}()|[\]\\]/g, '\\$&');
+    }
+
+    return { delimiter, numbers };
+  }
 }
 
 export default App;
