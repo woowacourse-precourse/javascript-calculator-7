@@ -43,6 +43,33 @@ function splitInputBySeparators(input, separators) {
   return input.split(separateRegExp);
 }
 
+function validateInput(inputArray) {
+  if (inputArray[0] === ' ' && inputArray[inputArray.length - 1] === ' ') {
+    throw new Error('[ERROR] 앞과 뒤에 공백을 입력할 수 없습니다.');
+  }
+
+  if (inputArray[0] === '' && inputArray[inputArray.length - 1] === '') {
+    throw new Error('[ERROR] 구분자는 숫자 사이에만 입력되어야 합니다.');
+  }
+
+  inputArray.forEach((item) => {
+    if (item !== item.trim()) {
+      throw new Error('[ERROR] 숫자 앞뒤에 공백을 포함하여 입력하면 안됩니다.');
+    }
+
+    if (item === '') {
+      throw new Error('[ERROR] 구분자는 숫자 사이에 한 번만 입력되어야 합니다.');
+    }
+
+    const num = Number(item);
+    if (Number.isNaN(num) || num < 0) {
+      throw new Error('[ERROR] 음수나 숫자가 아닌 값을 입력하면 안됩니다.');
+    }
+  });
+
+  return true;
+}
+
 class App {
   async run() {
     let input = await Console.readLineAsync('덧셈할 문자열을 입력해 주세요.\n');
