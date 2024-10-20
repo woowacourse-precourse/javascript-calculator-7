@@ -40,4 +40,14 @@ describe("문자열 계산기", () => {
 
     await expect(app.run()).rejects.toThrow("[ERROR]");
   });
+  
+  test("구분자가 잘못되거나 없는 경우", async () => {
+    const inputs = ["1;2;3"]
+    mockQuestions(inputs);
+
+    const app = new App();
+
+    await expect(app.run()).rejects.toThrow("[ERROR]");
+
+  });
 });
