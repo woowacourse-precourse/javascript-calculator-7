@@ -6,3 +6,17 @@ export function isValidSeperator({ seperator }) {
     }
     return true;
 }
+
+export function isValidNumbers({ arrayNumbers }) {
+    arrayNumbers.forEach((num, index) => {
+        if (num < 0) {
+            negativeNumbers.push(num);
+        }
+    });
+
+    if(negativeNumbers.length > 0) {
+        throw new Error('[ERROR] 음수는 연산하지 않습니다.');
+    }
+
+    return true;
+}
