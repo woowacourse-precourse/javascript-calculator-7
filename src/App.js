@@ -36,6 +36,14 @@ class App {
         nums = numbers.split(',').map((number) => parseInt(number, 0));
       }
 
+      if (nums.some((num) => isNaN(num))) {
+        throw new Error('[ERROR] 잘못된 입력입니다.');
+      } else if (nums.some((num) => num < 0)) {
+        throw new Error('[ERROR] 음수는 허용되지 않습니다.');
+      } else if (nums.some((num) => num === 0)) {
+        throw new Error('[ERROR] 0는 허용되지 않습니다.');
+      }
+
       console.log(nums);
     } catch (error) {
       Console.print(error.message);
