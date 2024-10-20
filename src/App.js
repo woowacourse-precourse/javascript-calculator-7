@@ -3,7 +3,7 @@ import isInputEmpty from './Controller/isInputEmpty.js';
 import printErrorMessageForInputEmpty from './View/printErrorMessageForInputEmpty.js';
 import isCommaSemicolonConditionCheck from './Controller/isCommaSemicolonConditionCheck.js';
 import isCustomConditionCheck from './Controller/isCustomConditionCheck.js';
-import addNumbers from './Model/addedNumbers.js';
+import addNumbers from './Model/addNumbers.js';
 import printUserOutput from './View/printUserOutput.js';
 import printErrorMessageForTypo from './View/printErrorMessageForTypo.js';
 

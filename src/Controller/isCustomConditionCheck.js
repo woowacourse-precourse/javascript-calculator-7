@@ -1,4 +1,3 @@
-// 1. //+구분자+\n 입력 체크
 const isSeparatorTextCheck = userInput => {
   if (userInput[0] === '/' && userInput[1] === '/' && userInput[3] === '\\' && userInput[4] === 'n') {
     return true;
@@ -6,7 +5,6 @@ const isSeparatorTextCheck = userInput => {
   return false;
 };
 
-// 2. 구분자 사용 입력 횟수, 반복문 횟수
 const countMatchingAndEvenIndexChecks = userInput => {
   let allSeparatorTrueCheck = 0;
   let loopCountForAllSeparatorTrueCheck = 0;
@@ -21,7 +19,6 @@ const countMatchingAndEvenIndexChecks = userInput => {
   return [allSeparatorTrueCheck, loopCountForAllSeparatorTrueCheck];
 };
 
-// 2. 구분자 사용 입력횟수, 반복문 횟수 같은지 확인
 const isSeparatorTextInputAndLoopCountEqual = countForSeparatorTextAndLoop => {
   if (countForSeparatorTextAndLoop[0] === countForSeparatorTextAndLoop[1]) {
     return true;
@@ -36,7 +33,6 @@ const isSeparatorTextInputCountCheck = userInput => {
   return false;
 };
 
-// 3. 숫자가 양수로 이루어진지 체크하기
 const isPositiveNumberCheck = userInput => {
   let positiveNumberCheckCount = 0;
   const NUMBER_COUNT = (userInput.length - 5) / 2 + 1;
