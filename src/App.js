@@ -21,7 +21,7 @@ getInput() {
   });
 }
 
- // 기본 구분자 기준 분리: 쉼표(,) 또는 콜론(:)을 구분자
+// 기본 구분자 기준 분리: 쉼표(,) 또는 콜론(:)을 구분자
 splitNumbers(numbers, delimiter) {
   return numbers.split(new RegExp(`[${delimiter},:]`));
 }
@@ -40,6 +40,13 @@ extractDelimiter(input) {
 // 숫자 변환: 분리한 문자를 숫자로 변환하는 메소드
 convertToNumbers(numbers) {
   return numbers.map(num => Number(num)); 
+}
+
+// 숫자 추출: 구분자 분리 + 숫자 변환
+ extractNumbers(input) {
+  const [delimiter, numbers] = this.extractDelimiter(input); 
+  const numberArray = this.splitNumbers(numbers, delimiter); 
+  return this.convertToNumbers(numberArray);
 }
 
 // 합 계산: 분리한 각 숫자의 합을 반환하는 메소드
