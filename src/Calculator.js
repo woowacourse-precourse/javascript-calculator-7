@@ -12,6 +12,7 @@ class Calculator {
     await this.process.getString();
     this.process.doParsing();
     this.process.operatingNums();
+    this.process.printResult();
   }
 }
 

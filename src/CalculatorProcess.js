@@ -25,6 +25,10 @@ class CalculatorProcess {
     }, 0);
   }
 
+  printResult() {
+    const PREFIX_MESSAGE = '결과 : ';
+    Console.print(PREFIX_MESSAGE + String(this.outputNum));
+  }
 }
 
 export default CalculatorProcess;
