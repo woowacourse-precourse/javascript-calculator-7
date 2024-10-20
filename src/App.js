@@ -12,6 +12,7 @@ class App {
     this.separators = new RegExp(`[,:]`);
   }
 
+  // 문자열 입력 기능
   async getUserInput() {
     this.#userInput = await Console.readLineAsync(
       "덧셈할 문자열을 입력해 주세요.\n"
@@ -25,7 +26,7 @@ class App {
       const separator = this.#userInput[2];
       this.separators = new RegExp(`[,:${separator}]`);
 
-      // 입력값에서 커스텀 구분자 관련 문자 제거
+      // 입력값에서 커스텀 구분자 관련 문자('//...\n') 제거
       const indexOfn = this.#userInput.indexOf("n");
       this.#userInput = this.#userInput.slice(indexOfn + 1);
     }
