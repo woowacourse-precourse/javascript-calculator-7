@@ -34,7 +34,7 @@ class App {
         }
     }
 
-    splitInput(input) {
+    splitInputByDelimiter(input) {
         if (!input) return [0];
         const numbers = input.split(/[,:]/);
         return numbers.map((number) => Number(number));
