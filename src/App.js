@@ -1,4 +1,5 @@
 import getString from './utils/getString';
+import getSum from './utils/getSum';
 import parseIntArray from './utils/parseIntArray';
 import splitBySymbol from './utils/splitBySymbol';
 
@@ -7,7 +8,7 @@ class App {
     const inputValue = await getString();
     const seperatedValue = splitBySymbol(inputValue);
     const intArray = parseIntArray(seperatedValue);
-
+    const result = getSum(intArray);
   }
 }
 
