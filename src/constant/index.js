@@ -17,6 +17,11 @@ const ERROR_MESSAGE = {
     NULL_SEPERATOR: '[ERROR] 구분자가 입력되지 않았습니다.',
 }
 
+const IO_MESSAGE = {
+    INPUT : '덧셈할 문자열을 입력해 주세요.\n',
+    OUTPUT : "결과 : ",
+}
+
 const EMPTY_INPUT_ARRAY = [0];
 
 export {
@@ -27,4 +32,5 @@ export {
     NULL_STRING,
     ERROR_MESSAGE,
     EMPTY_INPUT_ARRAY,
+    IO_MESSAGE,
 }

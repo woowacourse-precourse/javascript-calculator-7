@@ -1,13 +1,12 @@
-// import { Console } from "@woowacourse/mission-utils";
 import { input, print } from "./utils/ioHandler.js";
 import { calculator } from "./caclulator.js";
+import { IO_MESSAGE } from "./constant/index.js";
 class App {
   async run() {
     try{
-      const expression = await input('덧셈할 문자열을 입력해 주세요.\n');
+      const expression = await input(IO_MESSAGE.INPUT);
       const answer = calculator(expression);
-      print("결과 : " + answer);
-      return;
+      print(IO_MESSAGE.OUTPUT + answer);
     }catch(error){
       throw error;
     }
