@@ -1,4 +1,5 @@
-import { displayInputGuide, getUserInput } from './inputHandler.js';
+import { displayInputGuide, getUserInput } from './functions/inputHandler.js';
+import getCustomDelimiter from './functions/getCustomDelimiter.js';
 
 class App {
   constructor() {
@@ -7,9 +8,10 @@ class App {
 
   async run() {
     this.inputHandler.displayInputGuide();
-
     this.inputHandler.getUserInput(input => {
-      console.log(`결과: ${input}`);
+      const customDelimiter = getCustomDelimiter(input);
+
+      console.log(customDelimiter);
     });
   }
 }
