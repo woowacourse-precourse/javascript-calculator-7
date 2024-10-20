@@ -1,17 +1,18 @@
 import { CUSTOM_DELIMITER_REGEX } from '../constant/constant.js';
 
-//커스텀 구분자를 쓰는지 확인하는 함수
+//커스텀 구분자와 정리된 문자열을 반환해주는 함수
 export default function handleCustomDelimiter(input) {
-  if (!hasCustomDelimiter(input)) {
-    return input;
-  }
-  const customDelimiter = getCustomDelimiter(input);
-  const cleanString = cleanStringAfterDelimiter(input);
+  const result = {
+    cleanedString: input,
+    customDelimiter: null,
+  };
 
-  return {
-    customDelimiter,
-    cleanString,
+  if (hasCustomDelimiter(input)) {
+    result.cleanedString = cleanStringAfterDelimiter(input);
+    result.customDelimiter = getCustomDelimiter(input);
   }
+
+  return result;
 }
 
 //커스텀 구분자를 사용하는 문자열인지 확인
