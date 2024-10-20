@@ -54,6 +54,10 @@ class App {
       numberTmp += str[i];
     }
 
+    if(Number.isNaN(Number(numberTmp))) {
+      throw new Error(`[ERROR] ${numberTmp} 는 잘못된 표현입니다.`);
+    }
+
     sum += Number(numberTmp);
     Console.print(`결과 : ${sum}`);
   }
