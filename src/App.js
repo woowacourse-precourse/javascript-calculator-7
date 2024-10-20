@@ -19,11 +19,18 @@ class App {
       const numAndString = input.slice(input.indexOf("\n") + 1);
       numArray = numAndString.split(separator);
     } else {
-      const regex = /[^0-9]/g;
-      numArray = input.replace(regex, "");
+      numArray = input.match(/-?\d+/g) || [];
     }
     return this.sumNum(numArray);
   }
+  sumNum(numArray) {
+    return numArray.reduce((acc, current) => {
+      const num = Number(current);
+      if (isNaN(num) || num < 0) {
+        throw new Error("구분자와 양수로 구성된 문자열을 입력해주세요.");
+      }
+      return acc + num;
+    }, 0);
+  }
 }
-
 export default App;
