@@ -37,22 +37,18 @@ class App {
   }
 
   async run() {
-    try {
-      const user_string = await Console.readLineAsync(
-        "덧셈할 문자열을 입력해 주세요.\n"
-      );
+    const user_string = await Console.readLineAsync(
+      "덧셈할 문자열을 입력해 주세요.\n"
+    );
 
-      if (user_string == "") {
-        Console.print("결과 : 0");
-        return;
-      }
-      const num_list = this.#get_number_list(user_string);
-      const result = this.#get_sum_of_number(num_list);
-
-      Console.print(`결과 : ${result}`);
-    } catch (error) {
-      return error;
+    if (user_string == "") {
+      Console.print("결과 : 0");
+      return;
     }
+    const num_list = this.#get_number_list(user_string);
+    const result = this.#get_sum_of_number(num_list);
+
+    Console.print(`결과 : ${result}`);
   }
 }
 
