@@ -1,11 +1,37 @@
 import { Console } from "@woowacourse/mission-utils";
 
 class App {
+  createDelimetersRegExpPattern(delimetersArray) {
+    const sortedDelimetersArray = delimetersArray.sort(
+      (a, b) => b.length - a.length
+    );
+    console.log("🚩 sorted delimeters :", sortedDelimetersArray);
+    const delimetersPatternArray = sortedDelimetersArray.map((delimeter) => {
+      if (/[.*+?^${}()|[\]\\]/.test(delimeter)) {
+        let delimeterWithEscape = "";
+        for (let i = 0; i < delimeter.length; i++) {
+          if (/[.*+?^${}()|[\]\\]/.test(delimeter[i])) {
+            delimeterWithEscape = delimeterWithEscape + `\\${delimeter[i]}`;
+          } else {
+            delimeterWithEscape = delimeterWithEscape + `${delimeter[i]}`;
+          }
+        }
+        return delimeterWithEscape;
+      }
+      return delimeter;
+    });
+    console.log(
+      "🚩 delimeters pattern Array with escape :",
+      delimetersPatternArray
+    );
+
+    return delimetersPatternArray.join("|");
+  }
+
   //parse user input using both custom delimiters and default delimiters
   parseInput(userInput) {
-    let delimetersPattern = "[,:]";
     let input = userInput;
-    let customDelimetersArray = [];
+    let delimetersArray = [",", ":"];
 
     while (input.startsWith("//")) {
       if (input.includes("\\n")) {
@@ -15,19 +41,32 @@ class App {
             "[ERROR] : (.)은 커스텀 구분자로 사용할 수 없습니다."
           );
         }
-        customDelimetersArray.push(customDelimeter);
+        delimetersArray.push(customDelimeter);
         input = input.slice(input.indexOf("\\n") + 2);
       } else {
         throw new Error("[ERROR] : 커스텀 구분자 지정 패턴이 잘못되었습니다.");
       }
     }
-    console.log("🚩 custom delimeters :", customDelimetersArray);
-    if (customDelimetersArray.length) {
-      delimetersPattern = `[,:${customDelimetersArray.join("")}]`;
-    }
+    console.log("🚩 all delimeters :", delimetersArray);
+    const delimetersRegExpPattern =
+      this.createDelimetersRegExpPattern(delimetersArray);
 
-    const delimetersRegExp = new RegExp(delimetersPattern);
+    const delimetersRegExp = new RegExp(delimetersRegExpPattern);
     const parsedInput = input.split(delimetersRegExp);
+
+    // check user input 2 (after parsing)
+    parsedInput.forEach((el) => {
+      if (isNaN(Number(el))) {
+        throw new Error(
+          "[ERROR] : 기본 구분자, 지정한 커스텀 구분자가 아닌 구분자가 문자열에 포함되어있습니다."
+        );
+      }
+      if (Number(el) < 0) {
+        throw new Error(
+          "[ERROR] : 입력값에는 양수만 포함되어야합니다. (만약 (-)를 구분자로 사용하고 싶다면 커스텀 구분자로 (-)를 지정해주세요.)"
+        );
+      }
+    });
 
     return parsedInput;
   }
@@ -52,20 +91,6 @@ class App {
       //parse user input
       const parsedInput = this.parseInput(userInput);
       console.log("🚩 parsed input :", parsedInput);
-
-      // check user input 2 (after parsing)
-      parsedInput.forEach((el) => {
-        if (isNaN(Number(el))) {
-          throw new Error(
-            "[ERROR] : 기본 구분자, 지정한 커스텀 구분자가 아닌 구분자가 문자열에 포함되어있습니다."
-          );
-        }
-        if (Number(el) < 0) {
-          throw new Error(
-            "[ERROR] : 입력값에는 양수만 포함되어야합니다. (만약 (-)를 구분자로 사용하고 싶다면 커스텀 구분자로 (-)를 지정해주세요.)"
-          );
-        }
-      });
 
       //sum numbers
       const output = parsedInput.reduce((acc, cur) => acc + Number(cur), 0);
