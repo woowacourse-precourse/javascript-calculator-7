@@ -33,6 +33,11 @@ convertToNumbers(numbers) {
   return numbers.map(num => Number(num)); // 분리된 문자열을 숫자로 변환
 }
 
+// 합 계산: 분리한 각 숫자의 합을 반환하는 메소드
+calculateSum(numbers) {
+  return numbers.reduce((sum, num) => sum + num, 0); 
+}
+
 
 
 export default App;
