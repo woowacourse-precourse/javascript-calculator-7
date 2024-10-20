@@ -13,8 +13,8 @@ describe("문자열 계산기 함수 테스트", () => {
   });
 
   test("문자열에서 구분자들로 숫자들만 따로 추출할 수 있다.", () => {
-    const inputs = ["1", "1,2,3", "1,2:3", "1:2:3", "1"];
-    const outputs = [["1"], ["1", "2", "3"], ["1", "2", "3"], ["1", "2", "3"]];
+    const inputs = ["1", "1,2,3", "1,2:3", "1:2:3"];
+    const outputs = [[1], [1, 2, 3], [1, 2, 3], [1, 2, 3]];
 
     outputs.forEach((output, index) => {
       expect(calculator.seperateBy(inputs[index])).toEqual(output);
@@ -30,6 +30,19 @@ describe("문자열 계산기 함수 테스트", () => {
 
     outputs.forEach((output, index) => {
       expect(calculator.getSumOf(inputs[index])).toBe(output);
+    });
+  });
+
+  test("숫자를 담은 배열의 각 원소가 양수인지 확인할 수 있다.", () => {
+    const inputs = [
+      [1, 2, 3],
+      [-2, 4, 6],
+      [NaN, 2, 4],
+    ];
+    const outputs = [true, false, false];
+
+    outputs.forEach((output, index) => {
+      expect(calculator.isPositive(inputs[index])).toBe(output);
     });
   });
 });
