@@ -1,6 +1,8 @@
 import { Console } from "@woowacourse/mission-utils";
 
 class App {
+    constructor() {}
+
     async run() {
         const input = await this.getUserInput();
         const [customDelimiter, inputBody] = this.splitCustomDelimiter(input);
