@@ -55,3 +55,5 @@
 - [ ] AngularJS Git Commit Message Conventions에 맞춰 커밋 메시지 작성
 - [ ] JavaScript Style Guide 컨벤션을 지키며 코드 작성
 - [ ] 코드 구현 후, 더 깔끔하게 리팩토링
+  - [ ] `Strings.js`에 상수 문자열 분리
+  - [ ] `Calculator.js`의 기능을 명확하게 하기 위해 `Splitter.js`을 생성하여 기능 분리
