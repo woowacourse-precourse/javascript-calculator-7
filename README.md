@@ -55,13 +55,13 @@
 
 ### 디렉토리 구조
 
->src
->ㄴApp.js
->ㄴfuntions // App에서 쓰이는 3개의 함수 분리
->    ㄴgetInput.js
->    ㄴprintResult.js
->    ㄴaddFunctions
->        ㄴparseInput.js // 입력값 파싱 함수 분리
->        ㄴvaludateNumber.js // 숫자 검증 함수 분리
+>src<br />
+>ㄴApp.js<br />
+>ㄴfuntions // App에서 쓰이는 3개의 함수 분리<br />
+>    ㄴgetInput.js<br />
+>    ㄴprintResult.js<br />
+>    ㄴaddFunctions<br />
+>        ㄴparseInput.js // 입력값 파싱 함수 분리<br />
+>        ㄴvaludateNumber.js // 숫자 검증 함수 분리<br />
 
 ![디렉토리 구조](image.png)
