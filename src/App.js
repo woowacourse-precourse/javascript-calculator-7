@@ -91,6 +91,10 @@ class App {
     this.validation.hasInvalidSeperator(stringToCalculate);
 
     let numberArray = this.processor.extractNumber(stringToCalculate);
+    let sumOfNumbers = numberArray.reduce(
+      (accumulator, currentNumber) => accumulator + currentNumber,
+      0
+    );
   }
 }
 
