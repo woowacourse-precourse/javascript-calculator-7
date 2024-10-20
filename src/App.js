@@ -7,7 +7,7 @@ class App {
       const result = this.add(input);
       this.printResult(result);
     } catch (error) {
-      Console.print(`[ERROR]${error.message}`);
+      Console.print(`${error.message}`);
       throw error;  // 예외를 다시 던져서 테스트에서 잡히도록 처리
     }
   }
@@ -29,7 +29,7 @@ class App {
 
       // 커스텀 구분자만 입력하거나 숫자 미입력의 경우 대응
       if (parts.length < 2 || parts[1].trim() === "") {
-        throw new Error("[ERROR] 잘못된 입력 형식입니다.");
+        throw new Error('[ERROR] 잘못된 입력 형식입니다.');
       }
 
       // 커스텀 구분자가 /, \, \n인 경우 구분자로 설정되도록 대응
@@ -45,9 +45,9 @@ class App {
       .map(num => {
         const parsedNum = Number(num);
         if (isNaN(parsedNum)) {
-          throw new Error("[ERROR] 숫자가 아닌 값이 포함되었습니다.");
+          throw new Error('[ERROR] 숫자가 아닌 값이 포함되었습니다.');
         } else if (parsedNum < 0) {
-          throw new Error("[ERROR] 양수로만 이루어져야 합니다.");
+          throw new Error('[ERROR] 양수로만 이루어져야 합니다.');
         }
         return parsedNum;
       });
