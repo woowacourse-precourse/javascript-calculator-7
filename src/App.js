@@ -20,6 +20,10 @@ class App {
         }
 
         this.delimiters.push(str[i]);
+
+        if (i === str.length - 1) {
+          throw new Error('[ERROR] 커스텀 구분자를 지정하려면 //커스텀 구분자\\n 형식으로 입력하세요.');
+        }
       }
 
       return str.slice(endOfCustomDelimeters, str.length);
