@@ -10,6 +10,7 @@ class App {
     }
     const numbers = this.validateInput(inputString, delimiters);
     const result = this.sumNumbers(numbers);
+    this.printResult(result);
   }
 
   async getInput() {
@@ -64,6 +65,10 @@ class App {
     }
 
     return sum;
+  }
+
+  printResult(result) {
+    MissionUtils.Console.print(`결과 : ${result}`);
   }
 }
 
