@@ -30,7 +30,7 @@ class App {
     let sum = 0;
     strNumArr.map((str) => {
       const strNum = Number(str);
-      if (strNum <= 0 || !isNaN(strNum)) {
+      if (strNum <= 0 || isNaN(strNum)) {
         if (!(str === '')) {
           this.isError = true;
           return -1;
