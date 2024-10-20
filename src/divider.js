@@ -1,4 +1,17 @@
-export function extractCustomDvider(input) {
+export function extractDividerProcess(input, divider) {
+  while (input !== "") {
+    const { extractedString, newInput } = extractCustomDvider(input);
+    if (extractedString === "") {
+      break;
+    }
+    divider.push(extractedString);
+    input = newInput;
+  }
+  return { updatedInput: input, updatedDivider: divider };
+}
+
+function extractCustomDvider(input) {
+  input = input.replace("\\n", "\n");
   const startComment = input.indexOf("//");
   const endComment = input.indexOf("\n");
 
@@ -10,3 +23,4 @@ export function extractCustomDvider(input) {
   
   return { extractedString: "", newInput: input };
 }
+

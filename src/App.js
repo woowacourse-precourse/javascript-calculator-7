@@ -1,6 +1,6 @@
 import { Console } from "@woowacourse/mission-utils";
 import { INPUT_MESSAGE, RESULT_MESSAGE } from "./message.js";
-import { extractCustomDvider } from "./divider.js";
+import { extractDividerProcess } from "./divider.js";
 
 class App {
   input = "";
@@ -10,19 +10,15 @@ class App {
   async run() {
     await this.inputStart();
 
-    const {extractedString, newInput} = extractCustomDvider(this.input);
-
-    if (extractedString !== "") {
-      this.divider.push(extractedString);
-    }
-    this.input = newInput;
+    const { updatedInput, updatedDivider } = extractDividerProcess(this.input, this.divider);
+    this.input = updatedInput;
+    this.divider = updatedDivider;
 
     await this.resultPrint();
   }
   
   async inputStart() {
-    const input = await Console.readLineAsync(INPUT_MESSAGE);
-    this.input = input.replace("\\n","\n")
+    this.input = await Console.readLineAsync(INPUT_MESSAGE);
   }
 
   async resultPrint() {
