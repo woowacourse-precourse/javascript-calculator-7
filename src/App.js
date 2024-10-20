@@ -1,9 +1,12 @@
 import Controller from './controller/Controller.js';
 
 class App {
+  constructor() {
+    this.controller = new Controller();
+  }
+
   async run() {
-    const controller = new Controller();
-    await controller.process();
+    await this.controller.process();
   }
 }
 

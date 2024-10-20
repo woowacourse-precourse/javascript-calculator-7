@@ -3,5 +3,4 @@ export const DELIMITERS = Object.freeze({
   customPrefix: '//',
   customSuffix: '\\n',
   regularExpression: /^\/\/(.+)\\n/,
-  period: '.',
 });
