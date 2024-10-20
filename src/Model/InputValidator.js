@@ -1,6 +1,6 @@
-const Custom_Separator_Checker = (input, Custom_Sep_length) => {
+const customSeparatorChecker = (input, customSeplength) => {
   if (
-    Custom_Sep_length <= input.length &&
+    customSeplength <= input.length &&
     input.startsWith('//') &&
     input[3] === '\\' &&
     input[4] === 'n'
@@ -10,17 +10,17 @@ const Custom_Separator_Checker = (input, Custom_Sep_length) => {
   return false;
 };
 
-export const InputNumberValidation = (input) => {
+export const inputNumberValidation = (input) => {
   const MIN_CUSTOM_SEP_LENGTH = 5;
-  let Default_separator = ',:';
+  let defaultSeparator = ',:';
 
-  if (Custom_Separator_Checker(input, MIN_CUSTOM_SEP_LENGTH) === true) {
-    Default_separator += input[2];
+  if (customSeparatorChecker(input, MIN_CUSTOM_SEP_LENGTH) === true) {
+    defaultSeparator += input[2];
     input = input.slice(MIN_CUSTOM_SEP_LENGTH);
   }
-  const VALID_INPUT_CHAR = new RegExp(`^[0-9${Default_separator}]*$`);
+  const validInputChar = new RegExp(`^[0-9${defaultSeparator}]*$`);
 
-  if (VALID_INPUT_CHAR.test(input) === true) {
+  if (validInputChar.test(input) === true) {
     return null;
   } else {
     throw new Error('[ERROR]');
