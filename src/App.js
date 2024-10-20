@@ -62,10 +62,7 @@ class App {
       customDelimiterPrefixIndex + 2,
       customDelimiterSuffixIndex
     );
-    const stringToSeparate = input.replace(
-      input.slice(customDelimiterPrefixIndex, customDelimiterSuffixIndex + 2),
-      ""
-    );
+    const stringToSeparate = input.slice(customDelimiterSuffixIndex + 2);
     return this.splitAndConvertToNumbers(stringToSeparate, customDelimiter);
   }
 
@@ -80,6 +77,7 @@ class App {
       const [comma, semicolon] = separator;
       return input.replaceAll(semicolon, comma).split(comma).map(Number);
     }
+    console.log(input.split(separator));
     if (!isTwoSeparators) return input.split(separator).map(Number);
   }
 
