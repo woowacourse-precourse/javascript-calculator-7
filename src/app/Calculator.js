@@ -1,13 +1,20 @@
 import { calculateTotal } from '../lib/utils';
+import Delimiter from './Delimiter';
 
 class Calculator {
+  /** @type {Delimiter} */
+  #delimiter;
+
+  constructor(delimiter) {
+    this.#delimiter = delimiter;
+  }
   /**
    *
-   * @param {Array<string>} values
+   * @param {string} value
    * @returns {number}
    */
-  calculate(values) {
-    return calculateTotal(values.map(Number));
+  calculate(value) {
+    return calculateTotal(this.#delimiter.splitByDelimiters(value).map(Number));
   }
 }
 
