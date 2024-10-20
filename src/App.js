@@ -16,11 +16,9 @@ class App {
 
     if (formattedInput.startsWith("//")) {
       const parts = formattedInput.split("\n");
-      Console.print(parts);
 
       if (parts.length < 2) {
-        Console.print("[ERROR] 구분자 형식을 확인해주세요.");
-        return;
+        throw new Error("[ERROR] 구분자 형식을 확인해주세요.");
       }
 
       const customDelimiter = parts[0].slice(2);
@@ -29,23 +27,26 @@ class App {
       formattedInput = parts[1];
     }
 
+    formattedInput.split(delimiter).map((item) => {
+      let num = Number(item);
+
+      if (isNaN(num) || item.trim() == "") {
+        throw new Error("[ERROR] 유효한 숫자가 아닙니다.");
+      } else if (num < 0) {
+        throw new Error("[ERROR] 양수가 아닙니다.");
+      }
+
+      if (!isNaN(num)) {
+        nums.push(num);
+      }
+    });
+
+    const sum = nums.reduce((acc, cur) => acc + cur, 0);
+
     try {
-      formattedInput.split(delimiter).map((item) => {
-        let num = Number(item);
-
-        if (isNaN(num) || item.trim() == "" || num < 0) {
-          throw "[ERROR] 유효한 숫자가 아닙니다.";
-        }
-
-        if (!isNaN(num)) {
-          nums.push(num);
-        }
-      });
-
-      const sum = nums.reduce((acc, cur) => acc + cur, 0);
       Console.print(`결과 : ${sum}`);
-    } catch (error) {
-      Console.print(error);
+    } catch {
+      Console.print(error.message);
     }
   }
 }
