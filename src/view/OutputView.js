@@ -1,13 +1,13 @@
-import { print } from '../util/consoleUtil.js';
+import { Console } from '@woowacourse/mission-utils';
 
 // 결과를 사용자에게 출력하는 역할
 const OutputView = {
   printError(message) {
-    print(message);
+    Console.print(message);
   },
 
   printResult(value) {
-    print(`결과 : ${value}`);
+    Console.print(`결과 : ${value}`);
   },
 };
 
