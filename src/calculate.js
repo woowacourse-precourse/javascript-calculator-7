@@ -1,3 +1,5 @@
+import Console from "./Console";
+
 function add(input) {
   try {
     if (input === "") {
@@ -32,3 +34,25 @@ function add(input) {
     return;
   }
 }
+async function askForInput() {
+  try {
+    const userInput = await Console.readLineAsync(
+      '숫자를 입력하세요 (쉼표(,) 또는 콜론(:)으로 구분, "종료" 입력 시 종료): '
+    );
+    if (userInput.toLowerCase() === "종료") {
+      Console.print("프로그램을 종료합니다.");
+    } else {
+      Console.print(`결과: ${add(userInput)}`);
+      await askForInput();
+    }
+  } catch (error) {
+    Console.print(error.message);
+  }
+}
+
+async function run() {
+  Console.print("숫자 더하기 프로그램을 시작합니다.");
+  await askForInput();
+}
+
+export { run };
