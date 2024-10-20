@@ -1,5 +1,12 @@
 import { Console } from "@woowacourse/mission-utils";
 
+const ERROR_MESSAGES = {
+  invalidNumber: "[ERROR] 유효한 숫자가 아닙니다.",
+  negativeNumber: "[ERROR] 양수가 아닙니다.",
+  invalidDelimiter: "[ERROR] 구분자 형식을 확인해주세요.",
+};
+
+const DEFAULT_DELIMITER = /,|:/;
 class App {
   async run() {
     const input = await Console.readLineAsync(
@@ -7,7 +14,7 @@ class App {
     );
     let nums = [];
     let formattedInput = input.replace(/\\n/g, "\n");
-    let delimiter = /,|:/;
+    let delimiter = DEFAULT_DELIMITER;
 
     if (!formattedInput) {
       Console.print("결과 : 0");
@@ -18,7 +25,7 @@ class App {
       const parts = formattedInput.split("\n");
 
       if (parts.length < 2) {
-        throw new Error("[ERROR] 구분자 형식을 확인해주세요.");
+        throw new Error(ERROR_MESSAGES.invalidDelimiter);
       }
 
       const customDelimiter = parts[0].slice(2);
@@ -31,10 +38,10 @@ class App {
       let num = Number(item);
 
       if (isNaN(num)) {
-        throw new Error("[ERROR] 유효한 숫자가 아닙니다.");
+        throw new Error(ERROR_MESSAGES.invalidNumber);
       }
       if (num < 0) {
-        throw new Error("[ERROR] 양수가 아닙니다.");
+        throw new Error(ERROR_MESSAGES.negativeNumber);
       }
 
       nums.push(num);
