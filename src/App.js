@@ -1,13 +1,14 @@
 import { Console } from '@woowacourse/mission-utils';
 // import parseString from './Parser/parser.js';
-// import { SYSTEM_MESSAGES } from './Constraints/Constraints.js';
+import { SYSTEM_MESSAGES } from './Constraints/Constraints.js';
+
 const numberPattern = '\\d+(\\.\\d+)?';
 const specialCharsPattern = /[.*+?^${}()|[\]\\]/g;
 const ERROR_PREFIX = '[ERROR] ';
-const SYSTEM_MESSAGES = {
-  ASK_USER_INPUT: '덧셈할 문자열을 입력해 주세요.\n',
-  PARSE_RESULT: `결과 : `,
-};
+// const SYSTEM_MESSAGES = {
+//   ASK_USER_INPUT: '덧셈할 문자열을 입력해 주세요.\n',
+//   PARSE_RESULT: `결과 : `,
+// };
 const ERROR_MESSAGES = {
   INVALID_INPUT_FORMAT:
     '커스텀 구분자 입력시 입력은 반드시 "//"로 시작하고, "\\n"이 포함되어야 합니다.',
