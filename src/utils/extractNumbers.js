@@ -3,10 +3,16 @@ export function extractNumbers(input, delimiters){
     // 6. 빈 문자열이 들어올 경우 ⇒ 0 출력
     const numberArray = [0];
 
-    // 커스텀 구분자가 들어가면 그 이후부터 탐색, 없으면 처음부터 탐색 
-    const startIndex = input.lastIndexOf("\\n") === -1 ? 0 : input.lastIndexOf("\\n") + 2;
+    // 커스텀 구분자가 들어가면 그 이후부터 탐색, 없으면 처음부터 탐색
+    const startIndex = input.startsWith("//") ? input.lastIndexOf("\\n") + 2 : 0;
 
     let sliceInput = input.slice(startIndex);
+
+
+    // 빈 문자열 "" 이 들어오는 경우 or 커스텀 구분자만 들어오는 경우 => 예외적으로 0을 반환
+    if(sliceInput === ""){
+        return numberArray;
+    }
 
     // 첫번째 방법 : 정규식을 통한 구분자 사이의 숫자 추출
     // 정규식에 사용되는 특수 문자(']')가 들어가면 로직이 예상대로 작동하지 않아 반복문 방식 선택
