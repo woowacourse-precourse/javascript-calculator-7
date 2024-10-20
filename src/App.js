@@ -1,29 +1,19 @@
-import readline from "readline";
+import { Console } from "@woowacourse/mission-utils";
 
 class App {
   async run() {
     try {
       const input = await this.get_input();
       const result = this.calculator(input);
-      console.log(`결과: ${result}`);
+      Console.print(`결과: ${result}`);
     } catch (error) {
-      console.error(error.message);
+      Console.print(error.message);
       throw error;
     }
   }
 
   get_input() {
-    const rl = readline.createInterface({
-      input: process.stdin,
-      output: process.stdout,
-    });
-
-    return new Promise((resolve) => {
-      rl.question("숫자 입력: ", (answer) => {
-        rl.close();
-        resolve(answer);
-      });
-    });
+    return Console.readLineAsync("숫자 입력: ");
   }
 
   calculator(input) {
