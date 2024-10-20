@@ -121,4 +121,19 @@ describe("문자열 계산기", () => {
             expect(logSpy).toHaveBeenCalledWith(expect.stringContaining(output));
         });
     });
+
+    test("기본 및 커스텀 구분자 혼합 사용", async () => {
+        const inputs = ["//;\\n1,2:3;4"];
+        mockQuestions(inputs);
+
+        const logSpy = getLogSpy();
+        const outputs = ["결과 : 10"];
+
+        const app = new App();
+        await app.run();
+
+        outputs.forEach((output) => {
+            expect(logSpy).toHaveBeenCalledWith(expect.stringContaining(output));
+        });
+    });
 });
