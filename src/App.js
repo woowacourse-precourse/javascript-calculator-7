@@ -15,6 +15,17 @@ class App {
     return RESULT;
   }
 
+  #customPicker(userInput) { // 커스텀 구분자 추출 하고나서 숫자만 추출하기
+    const START_INDEX = userInput.indexOf('//') + 2;
+    const END_INDEX = userInput.indexOf("\n");
+    const CUSTOM = userInput.substring(START_INDEX, END_INDEX);
+    const DEL_FIRST = userInput.replace('//', '');
+    const DEL_SECOND = DEL_FIRST.replace(/\n/g, "");
+    const PICK_CUSTOM_NUMBER = DEL_SECOND.split(CUSTOM);
+    const RESULT = this.#addNumber(PICK_CUSTOM_NUMBER);
+    return RESULT;
+  }
+
   async run() {
     await this.#startCalculator();
   }
