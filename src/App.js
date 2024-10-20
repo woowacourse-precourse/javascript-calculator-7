@@ -25,6 +25,11 @@ class App {
     }else{
         numbers = input.split(separation)
       }
+
+    if(numbers.length > 0){
+      throw new Error("[ERROR]잘못된 입력입니다.");
+    } 
+
   }
 }
 
