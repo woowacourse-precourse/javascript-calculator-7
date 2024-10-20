@@ -8,7 +8,7 @@ class App {
     const customSeparator = getCustomSeparator(userInput);
 
     try {
-      vaildateUserInput(userInput, customSeparator);
+      validateUserInput(userInput, customSeparator);
 
       const result = computeResult(userInput, customSeparator);
       Console.print(`결과 : ${result}`);
@@ -22,7 +22,7 @@ class App {
 export default App;
 
 function getCustomSeparator(userInput) {
-  const customSeparator = userInput.match(/^(\/\/\D\\n)/);
+  const customSeparator = userInput.match(/^\/\/(\D)\\n/);
 
   // TODO: 길이 1짜리 배열이 나올 가능성이 있는지 체크
   return Array.isArray(customSeparator) && customSeparator.length
@@ -30,22 +30,22 @@ function getCustomSeparator(userInput) {
     : null;
 }
 
-function vaildateUserInput(userInput, customSeparator) {
+function validateUserInput(userInput, customSeparator) {
   // TODO: 정규 표현식 리터럴로 바꾸기 버그 찾기
   const regex = customSeparator
     ? new RegExp(
-        `(\/\/${customSeparator}\\n)?(\s|((\d+[:,${customSeparator}]?)+(\d+))+$)`
+        `(\/\/${customSeparator}\\n)?(\s|\d+|((\d+[:,${customSeparator}]?)+(\d+)))+$`
       )
     : new RegExp(`\s|(\d+(([:,]\d+)+)?)$`);
 
   if (!userInput.match(regex)) {
-    throw new Error('error occured');
+    throw new Error('사용자 입력을 다시 하세요.');
   }
 }
 
 function computeResult(userInput, customSeparator) {
   const regex = customSeparator
-    ? new RegExp(`[\\n:,${customSeparator}]`)
+    ? new RegExp(`[:,${customSeparator}]`)
     : new RegExp(`/[:,]/`);
 
   const formattedUserInput = customSeparator
@@ -55,5 +55,5 @@ function computeResult(userInput, customSeparator) {
   return formattedUserInput
     .split(regex)
     .map(Number)
-    .reduce((acc, cur) => acc + cur);
+    .reduce((acc, cur) => acc + cur, 0);
 }
