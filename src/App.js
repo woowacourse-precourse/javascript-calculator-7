@@ -15,6 +15,8 @@ class App {
     const inputWithoutSpace = this.removeSpace(input);
 
     if (this.isCustomDelimiterExist(inputWithoutSpace)) {
+      this.validateCustomDelimiterPosition(inputWithoutSpace);
+
       const customDelimiters = this.extractCustomDelimiters(inputWithoutSpace);
       this.delimiters.push(...customDelimiters);
     }
@@ -100,6 +102,21 @@ class App {
         throw new Error(ERROR_MESSAGES.WRONG_SYMBOL_TYPE);
       }
     });
+  }
+
+  validateCustomDelimiterPosition(input) {
+    if (!input.startsWith('//')) {
+      throw new Error(ERROR_MESSAGES.WRONG_POSITION);
+    }
+    const splitArray = input.split(/\/\/.*?\\n/).filter((str) => str !== '');
+
+    if (splitArray.length > 1) {
+      throw new Error(ERROR_MESSAGES.WRONG_POSITION);
+    }
+
+    if (input.endsWith('\\n')) {
+      throw new Error(ERROR_MESSAGES.WRONG_POSITION);
+    }
   }
 }
 
