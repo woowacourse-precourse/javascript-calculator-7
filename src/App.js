@@ -16,7 +16,7 @@ class App {
 // 입력: 사용자에게 덧셈할 문자열을 입력받는 메소드
 async getInput() {
   Console.print('덧셈할 문자열을 입력해 주세요.');
-  return await Console.readLineAsync();
+  return await Console.readLineAsync('');
 }
 
 // 기본 구분자 기준 분리: 쉼표(,) 또는 콜론(:)을 구분자
