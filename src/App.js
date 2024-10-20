@@ -39,6 +39,14 @@ class App {
 
     const separatedArr = separateStr(str, separators);
 
+    const isNegativeValue = (arr) => {
+      return arr.some((value) => +value < 0);
+    };
+
+    if (isNegativeValue(separatedArr)) {
+      throw new Error("[ERROR] 음수는 입력할 수 없습니다.");
+    }
+
     const sum = (arr) => {
       return arr.reduce((acc, cur) => acc + +cur, 0);
     };
