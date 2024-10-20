@@ -1,5 +1,5 @@
 const ErrorMessages = {
-    ERROR_EMPTY_STRING: "ERROR : 빈 문자열이 입력되었습니다.",
+    ERROR_EMPTY_STRING: "[ERROR] 빈 문자열이 입력되었습니다.",
     ERROR_CUSTOM_DELIMITER_POSITION: "[ERROR] 커스텀 구분자는 맨 앞에 선언 해야 합니다.",
     ERROR_MULTIPLE_DECLARE_CUSTOM_DELIMITER: "[ERROR] 커스텀 구분자 선언은 한 번만 가능합니다.",
     ERROR_NEGATIVE_NUMBER: "[ERROR] 음수가 포함되어 있습니다.",
