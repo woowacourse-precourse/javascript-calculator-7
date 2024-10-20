@@ -2,7 +2,8 @@ import parseNormalInput from './SubParser/parseNormalInput.js';
 import parseCustomInput from './SubParser/parseCustomInput.js';
 
 import isFirstCharNumber from '../Util/isFirstCharNumber.js';
-import { ERROR_MESSAGES, ERROR_PREFIX } from '../Constraints/Constraints.js';
+import throwError from '../Error/handleError.js';
+import { ERROR_PREFIX, ERROR_MESSAGES } from '../Constraints/Constraints.js';
 // 에러를 처리하는 함수
 
 // 에러를 출력하는 함수
@@ -11,7 +12,7 @@ export default function parseString(str) {
     return 0;
   }
   if (str === null || str === undefined) {
-    throw new Error('[ERROR] 빈 문자열입니다.');
+    throwError(`${ERROR_PREFIX}${ERROR_MESSAGES.EMPTY_STRING}`);
   }
   // 문자열의 첫 번째 문자가 숫자인지 확인
   if (isFirstCharNumber(str)) {

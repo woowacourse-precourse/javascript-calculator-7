@@ -1,6 +1,7 @@
 import sumAllNumbers from '../../Util/sumAllNumbers.js';
 import { validateNormalInput } from '../../validation/validator.js';
 import { ERROR_MESSAGES, ERROR_PREFIX } from '../../Constraints/Constraints.js';
+import throwError from '../../Error/handleError.js';
 
 export default function parseNormalInput(str) {
   if (str === '') {
@@ -8,7 +9,7 @@ export default function parseNormalInput(str) {
   }
 
   if (!str) {
-    throw new Error(`${ERROR_PREFIX}${ERROR_MESSAGES.EMPTY_STRING}`);
+    throwError(`${ERROR_PREFIX}${ERROR_MESSAGES.EMPTY_STRING}`);
   }
 
   const splitters = [':', ','];
