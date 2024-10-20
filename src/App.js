@@ -17,8 +17,13 @@ class App {
         return null;
       };
 
-      const regexString = checkHasCustom(input)
-        ? `${checkHasCustom(input)}|//|\\\\n|,|:`
+      const escapeRegExp = (string) => {
+        return string.replace(/[.*+?^${}()|[\]\\]/g, "\\$&");
+      };
+
+      const customDelimiter = checkHasCustom(input);
+      const regexString = customDelimiter
+        ? `${escapeRegExp(customDelimiter)}|//|\\\\n|,|:`
         : ",|:";
       const regex = new RegExp(regexString, "g");
       const numbersWithMark = input.replace(regex, "!");
