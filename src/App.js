@@ -77,7 +77,7 @@ class App {
       this.calculateSum();
       this.printResult();
     } catch (error) {
-      throw new Error(error);
+      throw error;
     }
   }
 }
