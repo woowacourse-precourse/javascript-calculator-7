@@ -1,12 +1,37 @@
-- fix(parser) fix normal parser behavior that allows negative number
-- test(parser): add parser and divide parser logic into multiple directory
-- feat(error) add error handling code.
-- feat(parser) add properCustomInput parser and NormalInput parser. test cases are working properly for the first time ever!
-- feat(parser) add more custom parser logic
-- (feat)parse add custom input parser
-- feat(error) write proper error handling code and more validation logic
-- feat(calculator): implement more vaildation logic for custom splitters.
-- feat(calculator): implement checkFormattingIsValid function
-- feat(parser): add custom and normal number parsing logic - 입력 문자열의 첫 번째 문자가 숫자인지 확인하는 `isFirstCharNumber` 함수를 추가했습니다. - 기본 구분자(쉼표와 콜론)를 공백으로 대체하는 `replaceCommaOrClone` 함수를 구현했습니다. - `parseCustomNumber` 함수는 "//<구분자>\n" 형식으로 된 커스텀 구분자를 확인하고, 해당 구분자에 맞춰 문자열을 파싱할 준비를 합니다. - `parseNormalNumber` 함수는 입력 문자열이 기본 구분자를 사용하는 경우를 처리합니다. - `checkAndChooseParsingStat` 함수는 문자열의 첫 번째 문자가 숫자인지 여부에 따라 적절한 파싱 방법(커스텀 또는 기본)을 선택합니다.
-- docs(readme): 프로젝트 구조 및 기능 설명 업데이트
-- feat: setup project
+## [unreleased]
+
+### Docs
+
+- _(readme)_ 프로젝트 구조 및 기능 설명 업데이트
+- _(changelog)_ Add changelog.md to track project changes
+- _(regex)_ Add comments to clarify regex pattern
+- Add comment
+- _(readme)_ Add readme detail
+
+### Feat
+
+- Setup project
+- _(calculator)_ Implement checkFormattingIsValid function
+- _(calculator)_ Implement more vaildation logic for custom splitters.
+- Add more test case
+
+### Fix
+
+- _(readme)_ Fix readme file
+- _(readme)_ Fix readme details
+- _(readme)_ Fix typo
+- Fix error messages for fit more in actual logic
+- Fix error message
+
+### Refactor
+
+- _(parser)_ Refactored parseCustomInput into small pieces
+- _(parser)_ Refactor parseNormalInput into small reuseable pieces
+- _(error)_ Add error message as constrints refactored validators
+- Refactor parser
+- Refactor vaildation logic and regex for better reusablity
+- Refactor regex for more reusability
+
+### Test
+
+- _(parser)_ Add parser and divide parser logic into multiple directory

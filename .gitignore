@@ -25,3 +25,6 @@ dist-ssr
 
 src/Leftovers
 __tests__/AdditionalApplicationTest.js
+
+#cliff files
+cliff.toml
