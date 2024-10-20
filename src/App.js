@@ -8,7 +8,9 @@ class App {
 
       const numbers = this.parseInput(input);
 
-      Console.print(`결과 : ${numbers}`);
+      const sum = this.sumNumbers(numbers);
+
+      Console.print(`결과 : ${sum}`);
 
     } catch (error) {
       // reject 되는 경우
@@ -20,6 +22,10 @@ class App {
     let delimiter = /,|:/; // 정규식을 사용하여 구분자 여러개 설정
 
     return input.split(delimiter).map((num) => parseInt(num));
+  }
+  // 숫자의 합 계신
+  sumNumbers(numbers){
+    return numbers.reduce((acc, num) => acc + num, 0);
   }
 }
 
