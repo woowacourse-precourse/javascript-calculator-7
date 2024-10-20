@@ -3,7 +3,8 @@ import { Console } from "@woowacourse/mission-utils";
 class App {
   async run() {
     let separator = [];
-    let customSeperator = [];
+    let customSeperator = "";
+    let answer = 0;
 
     try {
       let string = await Console.readLineAsync(
@@ -22,6 +23,11 @@ class App {
       if (customSeperator == "" && separator) regexp = /(?=.)/;
 
       const numArr = string.split(regexp).map(Number);
+      answer = numArr.reduce((prev, cur) => {
+        return prev + cur;
+      });
+
+      Console.print(`결과 : ${answer}`);
     } catch (error) {}
   }
 }
