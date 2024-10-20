@@ -1,4 +1,5 @@
 import App from "../src/App.js";
+import Errors from "../src/error.js";
 import { MissionUtils } from "@woowacourse/mission-utils";
 
 const mockQuestions = (inputs) => {
@@ -47,7 +48,6 @@ describe("문자열 계산기", () => {
     });
   });
 
-  
   test("커스텀 구분자 여러 개 입력", async () => {
     const inputs = ["//;!\n1!2;3,4"];
     mockQuestions(inputs);
@@ -85,7 +85,7 @@ describe("문자열 계산기", () => {
     const app = new App();
 
     await expect(app.run()).rejects.toThrow(
-      "[ERROR] 음수는 입력할 수 없습니다."
+      `[ERROR] ${Errors.NEGATIVE_NUMBERS}`
     );
   });
 
@@ -95,9 +95,7 @@ describe("문자열 계산기", () => {
 
     const app = new App();
 
-    await expect(app.run()).rejects.toThrow(
-      "[ERROR] 계산할 수 있는 형식이 아닙니다."
-    );
+    await expect(app.run()).rejects.toThrow(`[ERROR] ${Errors.INVALID_FORMAT}`);
   });
 
   test("예외: 커스텀 구분자가 기본 구분자와 동일한 경우", async () => {
@@ -106,9 +104,7 @@ describe("문자열 계산기", () => {
 
     const app = new App();
 
-    await expect(app.run()).rejects.toThrow(
-      "[ERROR] 계산할 수 있는 형식이 아닙니다."
-    );
+    await expect(app.run()).rejects.toThrow(`[ERROR] ${Errors.INVALID_FORMAT}`);
   });
 
   test("예외: 문자 입력", async () => {
@@ -117,9 +113,7 @@ describe("문자열 계산기", () => {
 
     const app = new App();
 
-    await expect(app.run()).rejects.toThrow(
-      "[ERROR] 계산할 수 있는 형식이 아닙니다."
-    );
+    await expect(app.run()).rejects.toThrow(`[ERROR] ${Errors.INVALID_FORMAT}`);
   });
 
   test("예외: 빈 문자열 입력", async () => {
@@ -128,8 +122,28 @@ describe("문자열 계산기", () => {
 
     const app = new App();
 
+    await expect(app.run()).rejects.toThrow(`[ERROR] ${Errors.EMPTY_INPUT}`);
+  });
+
+  test("예외: 커스텀 구분자가 숫자일 경우", async () => {
+    const inputs = ["//1\n2:3"];
+    mockQuestions(inputs);
+
+    const app = new App();
+
     await expect(app.run()).rejects.toThrow(
-      "[ERROR] 입력된 문자열이 없습니다."
+      `[ERROR] ${Errors.WRONG_DELIMETER}`
+    );
+  });
+
+  test("예외: 숫자 사이에 구분자가 여러 개일 경우", async () => {
+    const inputs = ["1,2,,,3"];
+    mockQuestions(inputs);
+
+    const app = new App();
+
+    await expect(app.run()).rejects.toThrow(
+      `[ERROR] ${Errors.WRONG_DELIMETER}`
     );
   });
 });
