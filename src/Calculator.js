@@ -3,7 +3,7 @@ import { validateEmptyInput, validateNegativeNumbers, validateInvalidNumbers } f
 import { printMessage } from './utils.js';
 
 function getInput() {
-  Console.readLine('덧셈할 문자열을 입력해 주세요.', (answer) => {
+  Console.readLineAsync('덧셈할 문자열을 입력해 주세요.', (answer) => {
     validateEmptyInput(answer);
     const customDelimiter = getCustomDelimiter(answer);
     const result = splitByDelimiter(answer, customDelimiter);
