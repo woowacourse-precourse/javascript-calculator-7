@@ -16,4 +16,12 @@ export default class Validator {
       throw new Error('[ERROR] 커스텀 구분자 구문을 잘 못 작성하셨습니다. 다시 확인해주세요.');
     }
   }
+
+  static validateIsNumber(numbers) {
+    numbers.forEach((number) => {
+      if (isNaN(Number(number))) {
+        throw new Error(`[ERROR] 입력된 값이 구분자로 올바르게 나눠지지 않았습니다. 다시 확인해주세요.`);
+      }
+    });
+  }
 }

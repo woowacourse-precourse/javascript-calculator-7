@@ -13,6 +13,7 @@ export default class Model {
   }
 
   total(numbers) {
+    Validator.validateIsNumber(numbers);
     return numbers.reduce((total, number) => total + parseInt(number, 10), 0);
   }
 }
