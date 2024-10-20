@@ -19,6 +19,10 @@ class App {
         nums = line.substr(5).split(token).map(Number);      // 순회할 문자열을 구분자 설정 이후부터
       } else 
         nums = line.split(/[,:]/).map(Number);
+      
+      for (let num of nums) {
+          sum += num;
+      }
     } catch (error) {
     }
   }
