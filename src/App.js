@@ -30,6 +30,14 @@ class App {
       }
     }
 
+    // 커스텀 구분자 설정을 제외한 문자열 추출
+    const str = input.substring(input.indexOf('\\n')+2);
+    
+    // 숫자와 구분자를 제외한 다른 형식의 문자가 포함되어 있는지 확인
+    const allRegExp = new RegExp(`[${seperators}\\d]`)
+    if(!str.match(allRegExp)) {
+      throw new Error("[ERROR] 숫자와 구분자가 아닌 다른 문자가 포함되어 있습니다.");
+    } 
   }
   
 }
