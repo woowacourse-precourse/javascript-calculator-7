@@ -26,6 +26,7 @@ class App {
     if (customTest) {
       const customArr = userStr.match(/(?<=\/\/).*?(?=\\n)/);
       const customDelimiter = customArr.join("");
+      const customDelimiterRegex = new RegExp(`[${customDelimiter}]`, "g");
       const reg = /\/\/.[^\\n]*\\n/gim;
       const customDeleted = userStr.replace(reg, "");
 
@@ -34,8 +35,9 @@ class App {
       }
 
       if (
-        regex.test(customDeleted) &&
-        customDeleted.indexOf(customDelimiter) === -1
+        (regex.test(customDeleted) &&
+          customDeleted.indexOf(customDelimiter) === -1) ||
+        regex.test(customDeleted.replace(customDelimiterRegex, ""))
       ) {
         throw new Error("[ERROR] 유효하지 않은 입력값입니다.");
       }
