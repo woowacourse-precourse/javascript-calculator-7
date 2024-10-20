@@ -17,3 +17,38 @@ export function extractCustomDelimiter(input) {
   return input.slice(5);
 }
 
+function validateArray(array) {
+  array.forEach((element, index) => {
+    if (element === '0') {
+      throw new Error(Constants.ERROR_MESSAGE.INVALID_INPUT_TYPE);
+    }
+
+    if (element === '') {
+      element = '0';
+    }
+
+    if (isNaN(element)) {
+      throw new Error(Constants.ERROR_MESSAGE.INVALID_INPUT_TYPE);
+    }
+
+    if (element < 0) {
+      throw new Error(Constants.ERROR_MESSAGE.INVALID_INPUT_TYPE);
+    }
+
+    array[index] = parseInt(element);
+  });
+
+  return array;
+}
+
+export function parseString(input) {
+  // 정규식 구분자를 이스케이프 처리
+  const escapedDelimiters = Constants.DELIMITER.map((delimiter) =>
+    delimiter.replace(/[.*+?^${}()|[\]\\]/g, '\\$&')
+  );
+
+  const delimiterPattern = new RegExp(escapedDelimiters.join('|'));
+  const array = input.split(delimiterPattern);
+
+  return validateArray(array);
+}

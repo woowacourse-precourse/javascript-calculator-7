@@ -18,6 +18,7 @@ class App {
     const input = await getUserInput();
 
     const targetString = Validator.extractCustomDelimiter(input);
+    const parsedString = Validator.parseString(targetString);
 
     Console.print(`결과 : ${input}`);
   }
