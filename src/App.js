@@ -58,6 +58,11 @@ class App {
 
     // Console.print(separateStr(str, separators));
     const result = sum(separatedArr);
+
+    if (Number.isNaN(result) || Number.isInteger(result) === false) {
+      throw new Error("[ERROR] 잘못된 입력입니다.");
+    }
+
     Console.print(`결과 : ${result}`);
   }
 }
