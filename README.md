@@ -33,7 +33,7 @@
 - [O] constructor(): 객체 생성 시 기본 구분자 리스트(,, :)로 초기화
 - [O] getDelimiters(): 현재 저장된 구분자 배열을 반환
 - [] addCustomDelimiter(delimiter): 새로운 커스텀 구분자를 구분자 리스트에 추가
-- [] parseInput(input): 입력 문자열을 분석하여 커스텀 구분자와 계산할 문자열을 추출
+- [O] parseInput(input): 입력 문자열을 분석하여 커스텀 구분자와 계산할 문자열을 추출
 - [] extractNumbers(calculationString): 구분자를 사용하여 숫자를 추출하고 배열로 반환
 
 #### Calculator
