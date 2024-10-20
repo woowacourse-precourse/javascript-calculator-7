@@ -41,6 +41,12 @@ class StringCalculator {
 
      // 숫자 배열로 변환 후 합산
      const numberArray = numberString.split(delimiters).map(num => Number(num));
+
+       // 음수 검출 및 예외 처리
+    const negativeNumbers = numberArray.filter(num => num < 0);
+    if (negativeNumbers.length > 0) {
+      throw new Error(`[ERROR] 음수는 허용되지 않습니다: ${negativeNumbers.join(", ")}`);
+    }
  
      // 숫자들의 합산
      return numberArray.reduce((sum, num) => sum + num, 0);
