@@ -1,5 +1,5 @@
-import { DELIMITERS } from '../constant/config.js';
-import { ERROR_MESSAGES } from '../constant/message.js';
+import { DELIMITERS } from './constant/config.js';
+import { ERROR_MESSAGES } from './constant/message.js';
 
 // 계산기 데이터 및 비즈니스 로직 처리
 class Calculater {
