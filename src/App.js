@@ -8,9 +8,9 @@ class App {
 
     //커스텀 구분자가 있는지 검사
     str = str.replace('\\n', '\n');
-    const pattern = /^\/\/.\n/;
+    const PATTERN = /^\/\/.\n/;
     let custom_splitter;
-    if(pattern.test(str)){
+    if(PATTERN.test(str)){
       custom_splitter = str[2];
       str = str.slice(4)//커스텀 구분자가 있는 부분을 제거
       splitter = new RegExp(`[,:;${custom_splitter}]+`);//커스텀 구분자를 구분자 목록에 추가
