@@ -43,6 +43,27 @@ describe("문자열 계산기", () => {
     await simulateWithInput(inputs,outputs);
   });
 
+  test("여러 문자의 커스텀 구분자 사용", async () => {
+    const inputs = ["//aaa\\n1aaa2aaa3"];
+    const outputs = ["결과 : 6"];
+
+    await simulateWithInput(inputs,outputs);
+  });
+
+  test("이스케이프 문자를 커스텀 구분자로 사용", async () => {
+    const inputs = ["//\\b\\n1\\b2\\b3"];
+    const outputs = ["결과 : 6"];
+
+    await simulateWithInput(inputs,outputs);
+  });
+
+  test("커스텀 구분자로 \\n 사용", async () => {
+    const inputs = ["//\\n\\n1\\n2\\n3"];
+    const outputs = ["결과 : 6"];
+
+    await simulateWithInput(inputs,outputs);
+  });
+
   test("예외 테스트", async () => {
     const inputs = ["-1,2,3"];
     mockQuestions(inputs);
