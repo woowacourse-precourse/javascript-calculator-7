@@ -15,7 +15,7 @@ class App {
             const numbers = this.splitInputByDelimiter(customDelimiter, inputWithoutDelimiter);
             const sum = this.sumNumbers(numbers);
 
-            Console.print(`결과: ${sum}`);
+            Console.print(`결과 : ${sum}`);
         } catch (error) {
             Console.print(error.message);
         }
