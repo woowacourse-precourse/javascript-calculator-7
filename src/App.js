@@ -1,4 +1,7 @@
 import { Console } from '@woowacourse/mission-utils';
+import Message from './constant/Message.js';
+import CustomSeparator from './constant/CustomSeparator.js';
+import Regex from './constant/Regex.js';
 
 class App {
   constructor() {
@@ -7,7 +10,7 @@ class App {
 
   async run() {
     // 1. 사용자에게 문자열을 입력 받는다.
-    const STR = await this.readLine('덧셈할 문자열을 입력해 주세요.\n');
+    const STR = await this.readLine(Message.INPUT);
     // 2. 입력받은 문자열을 처리한다.
     // 3. 숫자를 모두 더해 저장한다.
     const RESULT = this.processString(STR);
@@ -49,7 +52,7 @@ class App {
    * Error를 지정된 양식으로 throw 한다.
    */
   throwError() {
-    throw new Error('[ERROR] 입력 값이 잘못되었습니다. 구분자와 양수로 이루어진 문자열을 입력해주십시오.');
+    throw new Error(Message.ERROR);
   }
 
   /**
@@ -62,11 +65,15 @@ class App {
    * return = "1;2-3"
    */
   processCustomSeparator(str) {
-    const REGEX = /^(\/\/.\\n)+/g; // 문자열 앞부분에 //.\n 형식이 있는 경우
+    const REGEX = Regex.CUSTOM_SEPARATOR; // 문자열 앞부분에 //.\n 형식이 있는 경우
     const MATCHED = str.match(REGEX);
     let matchedString = '';
-    if (MATCHED) matchedString = MATCHED[0];
-    for (let i = 2; i < matchedString.length; i += 5) {
+    if (MATCHED) [matchedString] = MATCHED;
+    for (
+      let i = CustomSeparator.FIRST_SEPARATOR_IDX;
+      i < matchedString.length;
+      i += CustomSeparator.SEPARATOR_INTERVAL
+    ) {
       this.separator.add(matchedString[i]);
     }
     return str.substring(matchedString.length);
@@ -96,7 +103,7 @@ class App {
    * @throws {Error} 숫자가 양수가 아닐 때, 숫자가 아닌 문자가 포함된 경우
    */
   checkValidNumber(str) {
-    const REGEX = /[^0-9.\-+]/;
+    const REGEX = Regex.VALID_NUMBER;
     /*
     javascript의 parse함수는 앞에서부터 parse가 가능한 부분까지 처리 후 반환한다. ex) 3a4 -> 3
     따라서 별도의 문자열 검사가 필요함.
