@@ -1,4 +1,5 @@
+import REGEX from '../constants/regex.js';
+
 export default function hasNegative(str) {
-  const regex = /-\d+/;
-  return regex.test(str);
+  return REGEX.NEGATIVE_INTEGER.test(str);
 }
