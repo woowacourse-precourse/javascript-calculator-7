@@ -66,7 +66,7 @@ class App {
   }
 
   strToArrayHandler(arrToChange) {
-    const changedArray = arrToChange
+    return arrToChange
       .replaceAll(',', '')
       .replaceAll(':', '')
       .split('');
