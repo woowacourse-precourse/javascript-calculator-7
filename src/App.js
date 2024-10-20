@@ -1,5 +1,14 @@
 class App {
-  async run() {}
-}
+  async run() {
+    
+    const input = promt("덧셈할 문자열을 입력해 주세요.\n");
 
+    try {
+      const result = this.add(input);
+      console.log(`결과 : ${result}`);
+    } catch (error) {
+      console.error(`[ERROR] ${error.message}`);
+    }
+  }
+}
 export default App;
