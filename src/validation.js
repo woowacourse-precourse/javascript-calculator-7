@@ -1,7 +1,8 @@
 export function isInputValid(separator, expression) {
   const expressionArr = expression.split("").map((val) => val.trim());
-  if (expressionArr.every((str) => separator.includes(str) || (!isNaN(str) && Number(str) >= 0))) {
-    return true;
+  for (const num of expressionArr) {
+    if (!separator.includes(num) && isNaN(num)) return false;
+    if (num < 0) return false;
   }
-  return false;
+  return true;
 }
