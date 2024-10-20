@@ -41,3 +41,7 @@
 ## 🌠 Flow Chart
 
 <img src="./docs/flowchart.png" alt="flow chart" width="50%"/>
+
+## ✅ 테스트 결과
+
+<img src="./docs/testresult.png" alt="test result" width="80%"/>
