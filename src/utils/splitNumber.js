@@ -1,6 +1,20 @@
 import { ERROR_MESSAGES } from "../constants/errorMessages.js";
+import {
+  EMPTY_INPUT_DEFAULT,
+  DEFAULT_DELIMITERS,
+  CUSTOM_DELIMITER_REGEX,
+  ESCAPE_REGEX_PATTERN,
+  ESCAPE_REGEX_REPLACEMENT,
+} from "../constants/delimiterConstants.js";
 
-const validateCustomDelimiter = (delimiter) => {
+export const isEmptyInput = (input) => !input || input.trim() === "";
+
+export const handleEmptyInput = () => EMPTY_INPUT_DEFAULT;
+
+export const handleDefaultDelimiters = (input) =>
+  input.split(DEFAULT_DELIMITERS);
+
+export const validateCustomDelimiter = (delimiter) => {
   if (delimiter === "") {
     throw new Error(ERROR_MESSAGES.EMPTY_DELIMITER);
   }
@@ -10,31 +24,28 @@ const validateCustomDelimiter = (delimiter) => {
 };
 
 const escapeRegExp = (string) => {
-  return string.replace(/[.*+?^${}()|[\]\\]/g, "\\$&");
+  return string.replace(ESCAPE_REGEX_PATTERN, ESCAPE_REGEX_REPLACEMENT);
+};
+
+export const handleCustomDelimiter = (match) => {
+  const [, customDelimiter, numbersString] = match;
+  validateCustomDelimiter(customDelimiter);
+  const escapedDelimiter = escapeRegExp(customDelimiter);
+  return numbersString.split(new RegExp(escapedDelimiter));
 };
 
 const splitNumber = (input) => {
-  console.log("Input:", input);
-  // 공백일 경우 0을 반환
-  if (!input || input.trim() === "") {
-    return [0];
+  if (isEmptyInput(input)) {
+    return handleEmptyInput();
   }
 
-  const customDelimiterRegex = /^\/\/([^\n]*)\n(.*)$/;
-  const match = input.match(customDelimiterRegex);
+  const match = input.match(CUSTOM_DELIMITER_REGEX);
 
-  // 커스텀이 아닐 경우
-  if (!match) {
-    return input.split(/[,:]/);
-  }
   if (match) {
-    const [, customDelimiter, numbersString] = match;
-    validateCustomDelimiter(customDelimiter);
-    const escapedDelimiter = escapeRegExp(customDelimiter);
-    return numbersString.split(new RegExp(escapedDelimiter));
+    return handleCustomDelimiter(match);
   }
-};
 
-splitNumber();
+  return handleDefaultDelimiters(input);
+};
 
 export default splitNumber;
