@@ -1,5 +1,5 @@
 import { Console } from '@woowacourse/mission-utils';
-import Calculator from './calculator';
+import Calculator from './calculator.js';
 
 class App {
   async run() {
