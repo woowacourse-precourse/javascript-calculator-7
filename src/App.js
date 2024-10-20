@@ -43,6 +43,10 @@ printResult(result) {
   console.log(`결과 : ${result}`); 
 }
 
-
+// 에러 처리: 사용자가 잘못된 값을 입력할 경우, "[ERROR]"로 시작하는 메시지와 함께 Error를 발생시키는 메서드
+handleError(error) {
+  console.log(`[ERROR] ${error.message}`); // 오류 메시지 출력
+  process.exit(1); // 애플리케이션 종료
+}
 
 export default App;
