@@ -20,6 +20,9 @@ class App {
       const SUM = await this.getSum(NUMBERS);
 
       // 결과 출력
+      await this.getOutput(SUM);
+
+      // 결과 출력
     } catch (error) {
       throw error;
     }
@@ -96,6 +99,11 @@ class App {
     }
 
     return SUM;
+  }
+
+  // 결과 출력
+  async getOutput(SUM){
+    Console.print("결과 : " + SUM);
   }
 }
 
