@@ -35,7 +35,8 @@ class App {
       sum += number;
     });
 
-    return sum;
+    // 결과값 출력
+    Console.print(`결과 : ${sum}`); // 출력할 결과
   }
 }
 
