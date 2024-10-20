@@ -30,7 +30,7 @@ class App {
     // "//"와 "\\n"사이에 커스텀 구분자가 있을 경우
     if (this.customSeperators.every(e => str.includes(e))) {
       const changedArray = this.checkCustomSeperator(str);
-      return this.addAllArray(changedArray);
+      return changedArray && this.addAllArray(changedArray);
     };
 
     // ','와 ":" 만 있을 경우 
