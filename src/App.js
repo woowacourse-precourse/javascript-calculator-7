@@ -19,6 +19,9 @@ class App {
           separation = new RegExp(`[${customSepartion},|:]`);
           numbers = input.substring(CUSTOM_END_INDEX+2).split(separation)
           }
+          else{
+            throw new Error("[ERROR]잘못된 입력입니다.");
+          }
     }else{
         numbers = input.split(separation)
       }
