@@ -3,7 +3,10 @@ import { Console } from "@woowacourse/mission-utils";
 class App {
   async run() {
     const input = await Console.readLineAsync("문자열을 입력해주세요: ");
-    const regexp = /\/\/.\\n/;
+
+    // /,\,숫자를 제외한 문자를 구분자로 인식 (/,\, 숫자는 구분자에 포함시키지 않음)
+    // 대괄호 내의 문자가 두 개 이상 들어가있으면 정규식으로 추출
+    const regexp = /\/\/[^\/\\0-9]+\\n/;
     const seperators = [",", ":"];
     let inputString = input;
 
@@ -15,6 +18,10 @@ class App {
       }
       if (regexpArray.index !== 0) {
         break;
+      }
+      if (regexpArray[0].length >= 6) {
+        Console.print("[ERROR] 구분자는 하나씩 입력해주세요");
+        throw new Error("[ERROR] 구분자는 하나씩 입력해주세요.");
       }
       seperators.push(regexpArray[0][2]);
       inputString = inputString.replace(regexp, "");
