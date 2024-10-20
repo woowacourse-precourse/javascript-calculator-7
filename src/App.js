@@ -11,12 +11,8 @@ class App {
       '덧셈할 문자열을 입력해 주세요.\n'
     );
 
-    try {
-      let result = this.processUserInput(userStr);
-      Console.print(`결과 : ${result}`);
-    } catch (e) {
-      Console.print(e.message);
-    }
+    let result = this.processUserInput(userStr);
+    Console.print(`결과 : ${result}`);
   }
 
   processUserInput(userStr) {
