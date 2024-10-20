@@ -1,16 +1,22 @@
+import { Console } from "@woowacourse/mission-utils";
+
+
 class App {
   async run() {
 
-    let input = promt("덧셈할 문자열을 입력해 주세요.\n");
-
-    try {
-      const result = this.add(input);
-      console.log(`결과 : ${result}`);
-    } catch (error) {
-      console.error(`[ERROR] ${error.message}`);
-    }
+    Console.readLineAsync("덧셈할 문자열을 입력해 주세요.\n", (input) => {
+      try {
+        const result = this.add(input);
+        // 결과 출력
+        Console.print(`결과 : ${result}`);
+      } catch (error) {
+        // 에러 발생 시 출력
+        Console.print(`[ERROR] ${error.message}`);
+      }
+    });
   }
 
+  
   add(input) {
     if (input == "") {
       return 0; // 빈 문자열 처리
