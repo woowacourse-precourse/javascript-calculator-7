@@ -40,4 +40,28 @@ describe("문자열 계산기", () => {
 
     await expect(app.run()).rejects.toThrow("[ERROR]");
   });
+  test("string입력 예외 테스트", async () => {
+    const inputs = ["some string"];
+    mockQuestions(inputs);
+
+    const app = new App();
+
+    await expect(app.run()).rejects.toThrow("[ERROR]");
+  });
+  test("문자열 커스텀 구분자 입력 예외 테스트", async () => {
+    const inputs = ["//string\\n1;4;7;8"];
+    mockQuestions(inputs);
+
+    const app = new App();
+
+    await expect(app.run()).rejects.toThrow("[ERROR]");
+  });
+  test("커스텀 구분자 입력 예외 테스트", async () => {
+    const inputs = ["/;\\n1;4;7;8"];
+    mockQuestions(inputs);
+
+    const app = new App();
+
+    await expect(app.run()).rejects.toThrow("[ERROR]");
+  });
 });
