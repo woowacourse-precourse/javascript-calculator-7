@@ -9,7 +9,9 @@ class App {
     for (let n of numbers) {
       answer += Number(n);
     }
-    if (typeof answer !== NaN) {
+    if (answer === 0) {
+      Console.print(0);
+    } else if (typeof answer !== NaN) {
       Console.print("[ERROR]");
       throw new Error();
     } else {
