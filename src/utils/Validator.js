@@ -6,3 +6,9 @@ export function validateInput(input){
         throw new Error(ERROR_MESSAGES.EMPTY_INPUT);
     }
 }
+
+export function validateNumbers(numbers){
+    if(numbers.some(num => isNaN(num) || Number(num) < 0)){
+        throw new Error(ERROR_MESSAGES.INVALID_INPUT);
+    }
+}

@@ -1,5 +1,1 @@
-function addCal(input) {
-
-}
-
-export default addCal;
+import {validateInput, validateNumbers} from "../utils/Validator.js";
