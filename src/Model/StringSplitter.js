@@ -1,7 +1,22 @@
 export default class StringSplitter {
-  #DEFAULT_DELIMITERS = /[,|:]/;
+  #DEFAULT_VALID_PATTERN = /^\d+([,:]\d+)*$/;
 
-  split(string) {
-    return string.split(this.#DEFAULT_DELIMITERS);
+  #delimiters;
+
+  #string;
+
+  constructor(input) {
+    if (input.length === 0) {
+      this.#string = '';
+    }
+
+    if (this.#DEFAULT_VALID_PATTERN.test(input)) {
+      this.#delimiters = /[,:]/;
+      this.#string = input;
+    }
+  }
+
+  split() {
+    return this.#string.split(this.#delimiters);
   }
 }

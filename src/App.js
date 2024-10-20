@@ -3,12 +3,13 @@ import View from './View/View.js';
 
 class App {
   #view = new View();
-  #stringSplitter = new StringSplitter();
 
   async run() {
     const input = await this.#view.readInputString();
 
-    const splittedInput = this.#stringSplitter.split(input);
+    const stringSplitter = new StringSplitter(input);
+    const splittedInput = stringSplitter.split();
+
     const numbers = splittedInput.map(Number);
 
     const sum = this.calculateSum(numbers);
