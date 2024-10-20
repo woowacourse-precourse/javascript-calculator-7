@@ -1,20 +1,21 @@
 import { Console } from "@woowacourse/mission-utils";
+import { INPUT_MESSAGE, RESULT_MESSAGE } from "./message.js";
 
 class App {
   input = "";
   result = 0;
 
   async run() {
-    this.start();
-    this.resultPrint();
+    await this.inputStart();
+    await this.resultPrint();
   }
   
-  async start() {
-    this.input = await Console.readLineAsync("덧셈할 문자열을 입력해 주세요.\n");
+  async inputStart() {
+    this.input = await Console.readLineAsync(INPUT_MESSAGE);
   }
 
   async resultPrint() {
-    Console.print(`결과 : ${this.result}`);
+    Console.print(`${RESULT_MESSAGE}${this.result}`);
   }
 }
 
