@@ -13,11 +13,8 @@ class Calculator{
     }
 
     async run(){
-        try {
-            const input = await Console.readLineAsync("덧셈할 문자열을 입력해 주세요.\n");
-            this.#checkInput(input);
-        } catch (error) {
-        }
+        const input = await Console.readLineAsync("덧셈할 문자열을 입력해 주세요.\n");
+        this.#checkInput(input);
     };
 
     #checkInput(input){
@@ -68,7 +65,7 @@ class Calculator{
             };
         };
         return input;
-    }; // 커스텀 문자열 체크
+    };
     
     #separate(input){
         let newArr;
@@ -81,7 +78,7 @@ class Calculator{
                 .flatMap(value => value.split(this.#separator[2]));
         };
         return newArr;
-    }//문자열 나누기
+    }
 
     #checkVoid(input){
         if(input.some((value) => value === '')){
@@ -89,7 +86,7 @@ class Calculator{
             return false;
         }
         return true;
-    } // ,,,1 처럼 연속된 구분자 체크
+    } 
 
     #checkNegative(input) {
         if (input.some(value => Number(value) < 0)) {
@@ -112,7 +109,7 @@ class Calculator{
         this.#sum = input.reduce((sum,current) => sum +current, 0);
         Console.print("결과 : " + this.#sum);
         return true;
-    }//문자열 더하기
+    }
 };
 
 export default Calculator;
