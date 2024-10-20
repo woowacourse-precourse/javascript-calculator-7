@@ -31,7 +31,6 @@ class App {
   
   splitString(inputString, separators) {
     let splitData = [inputString];
-    console.log(separators)
     for (const separator of separators) {
       let temp = [];
       for (const separatorString of splitData) {
@@ -45,8 +44,13 @@ class App {
         splitData = [...temp];
       }
     }
+    // 여기에서 음수에 대한 예외 처리
+    const numbers = splitData.map(Number);
+    if (numbers.some(number => number < 0)) {
+      throw new Error("[ERROR] 음수는 입력할 수 없습니다.");
+    }
   
-    return splitData.map(Number);
+    return numbers;
   }
 }
 export default App;
