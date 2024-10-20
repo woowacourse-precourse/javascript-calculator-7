@@ -31,12 +31,32 @@ class Calculator {
   }
 
   splitNumberSection() {
-
     this.numbers = this.#defaultDelimiters.reduce((acc, delimiter) => {
       return acc.flatMap(element => element.split(delimiter));
     }, [this.numberSection]);
 
     return [true, 0];
+  }
+
+  checkIsPositiveNumber() {
+    const hasInvalid = this.numbers.some((numStr) => {
+      const parsedNum = Number(numStr);
+      return isNaN(parsedNum) || parsedNum <= 0;
+    });
+
+    if (hasInvalid) {
+      return [false, "[ERROR] 양수가 아닌 값은 계산할 수 없습니다."];
+    }
+
+    return [true, "모든 값이 양수입니다."];
+  }
+
+  addNumbers() {
+    let sum = 0;
+    this.numbers.forEach(numStr => {
+      sum += Number(numStr);
+    });
+    return sum;
   }
 }
 

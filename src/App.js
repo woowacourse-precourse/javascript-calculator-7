@@ -11,6 +11,10 @@ class App {
     if (!result) throw new Error(message);
 
     const [result2, message2] = calculator.splitNumberSection();
+    const [result3, message3] = calculator.checkIsPositiveNumber();
+    if (!result3) throw new Error(message3);
+
+    MissionUtils.Console.print("결과 : " + calculator.addNumbers());
   }
 }
 
