@@ -28,11 +28,16 @@ class App {
       const parsedNum = Number(num);
       
       if (isNaN(parsedNum)) {
-        throw new Error(`유효하지 않은 입력: ${num}`); // 숫자가 아닌 경우
+        throw new Error(`유효하지 않은 입력: ${num}`); // 숫자가 아닌 경우 에러 메시지
       }
       
       return parsedNum;
     });
+
+    const negativeNumbers = numbers.filter(num => num < 0);
+    if (negativeNumbers.length > 0) {
+      throw new Error(`음수는 허용되지 않습니다: ${negativeNumbers.join(", ")}`); // 숫자가 음수인 경우 에러 메시지
+    }
   }
 }
 export default App;
