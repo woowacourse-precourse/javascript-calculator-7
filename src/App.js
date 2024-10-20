@@ -61,7 +61,7 @@ class App {
           throw new Error('[ERROR] 잘못된 문자열입니다.');
         }
 
-        num = parseInt(num);
+        num = parseFloat(num);
         if (num <= 0) {
           throw new Error('[ERROR] 양수가 아닙니다.');
         }
@@ -80,7 +80,7 @@ class App {
         }
 
 
-        num = parseInt(num);
+        num = parseFloat(num);
         if (num <= 0) {
           throw new Error('[ERROR] 양수가 아닙니다.');
         }
