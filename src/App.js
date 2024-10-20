@@ -1,8 +1,9 @@
 import { Console } from "@woowacourse/mission-utils";
+import { SEPARATORS, ERROR_MESSAGES } from "./constants/appConstants.js";
 
 class App {
   constructor() {
-    this.separators = [",", ":"]; // 기본 구분자
+    this.separators = SEPARATORS; // 기본 구분자
   }
 
   async run() {
@@ -37,10 +38,10 @@ class App {
     if (input.startsWith("//")) {
       const separator = input.split("\\n")[0].slice(2); // 커스텀 구분자 가져오기
       if (separator.length !== 1) {
-        throw new Error("[ERROR] 커스텀 구분자는 한 글자여야 합니다."); // 오류 처리
+        throw new Error(ERROR_MESSAGES.INVALID_CUSTOM_SEPARATOR); // 오류 처리
       }
       if (!isNaN(separator)) {
-        throw new Error("[ERROR] 숫자는 구분자로 사용할 수 없습니다.");
+        throw new Error(ERROR_MESSAGES.NUMERIC_SEPARATOR);
       }
       return separator.charAt(0); // 첫 글자 반환
     }
@@ -53,10 +54,10 @@ class App {
 
   validateInput(input, customSeparator) {
     if (this.isEmptyInput(input)) {
-      throw new Error("[ERROR] 구분자의 앞 또는 뒤에 숫자가 없습니다.");
+      throw new Error(ERROR_MESSAGES.EMPTY_SEPARATOR);
     }
     if (/\s/.test(input.replace("\n", ""))) {
-      throw new Error("[ERROR] 공백을 포함한 숫자는 허용되지 않습니다.");
+      throw new Error(ERROR_MESSAGES.SPACE_IN_NUMBER);
     }
   }
 
@@ -77,21 +78,21 @@ class App {
 
   validateNumbers(inputList, customSeparator) {
     if (inputList.some((num) => num === "")) {
-      throw new Error("[ERROR] 구분자의 앞 또는 뒤에 숫자가 없습니다.");
+      throw new Error(ERROR_MESSAGES.EMPTY_SEPARATOR);
     }
 
     const trimmedNumbers = inputList.map((num) => num.trim()); // 공백 제거
 
     if (trimmedNumbers.some((num) => Number.isNaN(Number(num)) && num !== "")) {
       if (!customSeparator) {
-        throw new Error("[ERROR] 기본 구분자 외의 문자가 사용되었습니다.");
+        throw new Error(ERROR_MESSAGES.INVALID_CHARACTER);
       } else {
-        throw new Error("[ERROR] 입력된 값 중 숫자가 아닌 항목이 있습니다.");
+        throw new Error(ERROR_MESSAGES.NON_NUMBER);
       }
     }
 
     if (trimmedNumbers.some((num) => +num < 0)) {
-      throw new Error("[ERROR] 음수는 입력할 수 없습니다.");
+      throw new Error(ERROR_MESSAGES.NEGATIVE_NUMBER);
     }
   }
 
