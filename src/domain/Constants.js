@@ -2,7 +2,7 @@ export const ErrorMessage = Object.freeze({
     NEGATIVE_NUMBER: '[ERROR] 음수는 허용되지 않습니다.',
     INVALID_NUMBER: '[ERROR] 유효하지 않은 숫자입니다.',
     INVALID_CHARACTER: '[ERROR] 유효하지 않은 문자입니다.',
-    WHITESPACE : '[ERROR] 숫자 사이에 공백이 있습니다.'
+    WHITESPACE: '[ERROR] 숫자 사이에 공백이 있습니다.'
 });
 
 export const GuideMessage = Object.freeze({
