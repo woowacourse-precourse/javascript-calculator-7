@@ -28,7 +28,6 @@ class App {
     // 커스텀 구분자 추출 or 기본 구분자 사용
     const { delimiter, numbers } = this.extractCustomDelimiter(userInput);
     const splitNumbers = numbers.split(delimiter);
-    console.log("Split Numbers:", splitNumbers);  // 디버깅: split 결과 확인
 
     // 분리된 문자열을 숫자로 변환하여 더하기
     const result = this.addNumbers(splitNumbers);
@@ -85,13 +84,8 @@ class App {
     // 커스텀 구분자가 있는지 확인 (//로 시작하는 경우)
     if (userInput.startsWith("//")) {
       const delimiterEndIndex = userInput.indexOf(`\n`);
-      console.log("Delimiter End Index:", delimiterEndIndex);
-      console.log("search값: ",userInput.search(`\n`));
       delimiter = userInput.substring(2, delimiterEndIndex);  // "//"와 "\n" 사이의 구분자 추출
       numbers = userInput.substring(delimiterEndIndex + 1);  // "\n" 이후의 숫자 부분 추출
-
-      console.log("Custom Delimiter:", delimiter);
-      console.log("Numbers:", numbers);
 
       // 구분자가 특수문자일 경우 이스케이프 처리
       delimiter = delimiter.replace(/[.*+?^${}()|[\]\\]/g, '\\$&');
