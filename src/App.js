@@ -44,7 +44,7 @@ class App {
    */
   extractDelimiters(input) {
     const defaultDelimiters = [",", ":"];
-    const customDelimiterPattern = /^\/\/(.)\n(.*)$/;
+    const customDelimiterPattern = /^\/\/(.)\\n(.*)$/;
     const match = input.match(customDelimiterPattern);
 
     if (match) {
