@@ -28,6 +28,10 @@ extractDelimiter(input) {
   return [',', input]; 
 }
 
+// 숫자 변환: 분리한 문자를 숫자로 변환하는 메소드
+convertToNumbers(numbers) {
+  return numbers.map(num => Number(num)); // 분리된 문자열을 숫자로 변환
+}
 
 
 
