@@ -14,13 +14,21 @@ class App {
       return str.split("//")[1].split("\\n")[0];
     };
 
+    const parseStrWithCustomSeparator = (str) => {
+      return str.split("\\n")[1];
+    };
+
+    const separators = [",", ":"];
+    let str = input;
+
     if (isCustomSeparator(input)) {
       const customSeparator = getCustomSeparator(input);
-      console.log(customSeparator);
+      separators.push(customSeparator);
+      str = parseStrWithCustomSeparator(input);
     }
 
-    // Console.print(isCustomSeparator(input));
-    // Console.print(getCustomSeparator(input));
+    console.log("separators", separators);
+    console.log("str", str);
   }
 }
 
