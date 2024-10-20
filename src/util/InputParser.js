@@ -1,11 +1,13 @@
+//@ts-check
+
 import { DEFAULT_DELIMITER } from '../constants/delimiter.js';
 
 class InputParser {
+  /**
+   * @param {string} input
+   * @returns {number[]}
+   */
   parse(input) {
-    return this.parseValidatedInput(input);
-  }
-
-  parseValidatedInput(input) {
     const customDelimiter = this.extractCustomDelimiter(input);
     if (customDelimiter) {
       const [, numbersPart] = input.split('\\n');
@@ -14,6 +16,10 @@ class InputParser {
     return input.split(DEFAULT_DELIMITER).map(Number);
   }
 
+  /**
+   * @param {string} input
+   * @returns {null | string}
+   */
   extractCustomDelimiter(input) {
     if (input.startsWith('//')) {
       const delimiter = input.indexOf('\\n');
