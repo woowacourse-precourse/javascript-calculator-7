@@ -17,12 +17,12 @@ class App {
 
             Console.print(`결과 : ${RESULT}`);
         } catch (error) {
-            Console.print(`[ERROR] : ${error.message}`);
+            this.throwError();
         }
     }
 
     numbersExtraction(input) {
-        if (input.trim() === '') throw new Error('입력된 값이 없습니다.');
+        if (input.trim() === '') this.throwError();
 
         let defaultRegExp = /[,:]/;
         let userInputValue = input;
@@ -32,9 +32,7 @@ class App {
             const customDelimiterRegExp = /\/\/(.*?)\n/;
             const customDelimiter = input.match(customDelimiterRegExp);
 
-            if (!customDelimiter) {
-                throw new Error('잘못된 형식입니다.');
-            }
+            if (!customDelimiter) this.throwError();
 
             const newRegExp = customDelimiter[1];
             defaultRegExp = new RegExp(`[${newRegExp}]`);
@@ -43,15 +41,19 @@ class App {
 
         const numbers = userInputValue.split(defaultRegExp).map(Number);
 
-        if (numbers.some(isNaN)) {
-            throw new Error('숫자가 아닌 값이 포함되었습니다.');
-        }
+        if (numbers.some((num) => num < 0)) this.throwError();
+
+        if (numbers.some(isNaN)) this.throwError();
 
         return numbers;
     }
 
     add(numberList) {
         return numberList.reduce((sum, number) => sum + number, 0);
+    }
+
+    throwError() {
+        throw new Error('[ERROR]');
     }
 }
 
