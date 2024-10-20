@@ -1,11 +1,13 @@
 import { MissionUtils } from "@woowacourse/mission-utils";
 
 class Calculator {
+  #defaultDelimiters = [",", ":"];
+
   constructor(input) {
     this.input = input;
     this.customDelimiterSection = null;
-    this.customDelimiter = null;
     this.numberSection = null;
+    this.numbers = null;
   }
 
   checkInputValidity() {
@@ -21,8 +23,9 @@ class Calculator {
 
     if (this.customDelimiterSection !== "") {
       if (!this.customDelimiterSection.startsWith("//")) return [false, "[ERROR] 커스텀 구분자 입력부는 문자열 앞에 위치하여 \"//\"로 시작하고 \"\\n\"으로 끝나야 합니다."];
-      this.customDelimiter = this.customDelimiterSection.slice(2);
-    } else this.customDelimiter = "";
+      const customDelimiter = this.customDelimiterSection.slice(2);
+      if (customDelimiter !== "") this.#defaultDelimiters.unshift(customDelimiter);
+    }
 
     return [true, "유효한 문자열"];
   }
