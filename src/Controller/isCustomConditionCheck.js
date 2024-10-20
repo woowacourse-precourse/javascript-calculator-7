@@ -1,5 +1,5 @@
 // 1. //+구분자+\n 입력 체크
-const isConditionTextInputCheck = userInput => {
+const isSeparatorTextCheck = userInput => {
   if (userInput[0] === '/' && userInput[1] === '/' && userInput[3] === '\\' && userInput[4] === 'n') {
     return true;
   }
@@ -7,7 +7,7 @@ const isConditionTextInputCheck = userInput => {
 };
 
 // 2. 구분자 사용 입력 횟수, 반복문 횟수
-const separatorTextInputAndLoopCount = userInput => {
+const countMatchingAndEvenIndexChecks = userInput => {
   let allSeparatorTrueCheck = 0;
   let loopCountForAllSeparatorTrueCheck = 0;
   for (let i = 6; i < userInput.length; i += 1) {
@@ -22,7 +22,7 @@ const separatorTextInputAndLoopCount = userInput => {
 };
 
 // 2. 구분자 사용 입력횟수, 반복문 횟수 같은지 확인
-const isSeparatorTextInputAndLoopCountEqualCheck = countForSeparatorTextAndLoop => {
+const isSeparatorTextInputAndLoopCountEqual = countForSeparatorTextAndLoop => {
   if (countForSeparatorTextAndLoop[0] === countForSeparatorTextAndLoop[1]) {
     return true;
   }
@@ -30,7 +30,7 @@ const isSeparatorTextInputAndLoopCountEqualCheck = countForSeparatorTextAndLoop 
 };
 
 const isSeparatorTextInputCountCheck = userInput => {
-  if (isSeparatorTextInputAndLoopCountEqualCheck(separatorTextInputAndLoopCount(userInput)) === true) {
+  if (isSeparatorTextInputAndLoopCountEqual(countMatchingAndEvenIndexChecks(userInput))) {
     return true;
   }
   return false;
@@ -53,7 +53,7 @@ const isPositiveNumberCheck = userInput => {
 };
 
 const isCustomConditionCheck = userInput => {
-  if (isConditionTextInputCheck(userInput) && isSeparatorTextInputCountCheck(userInput) && isPositiveNumberCheck(userInput)) {
+  if (isSeparatorTextCheck(userInput) && isSeparatorTextInputCountCheck(userInput) && isPositiveNumberCheck(userInput)) {
     return true;
   }
   return false;

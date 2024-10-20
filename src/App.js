@@ -1,23 +1,24 @@
 import getUserInput from './View/getUserInput.js';
-import isNoInputCheck from './Controller/isNoInputCheck.js';
-import exportErrorMessageForNoInput from './View/exportErrorMessageForNoinput.js';
+import isInputEmpty from './Controller/isInputEmpty.js';
+import printErrorMessageForInputEmpty from './View/printErrorMessageForInputEmpty.js';
 import isCommaSemicolonConditionCheck from './Controller/isCommaSemicolonConditionCheck.js';
 import isCustomConditionCheck from './Controller/isCustomConditionCheck.js';
-import addedNumbers from './Model/addedNumbers.js';
-import exportUserOutput from './View/exportUserOutput.js';
-import exportErrorMessage from './View/exportErrorMessageForTypo.js';
+import addNumbers from './Model/addedNumbers.js';
+import printUserOutput from './View/printUserOutput.js';
+import printErrorMessageForTypo from './View/printErrorMessageForTypo.js';
 
 class App {
   async run() {
     const input = await getUserInput();
-    if (isNoInputCheck(input) === true) {
-      exportErrorMessageForNoInput();
+    if (isInputEmpty(input) === true) {
+      printErrorMessageForInputEmpty();
     }
     if (isCommaSemicolonConditionCheck(input) === true || isCustomConditionCheck(input) === true) {
-      const output = addedNumbers(input);
-      exportUserOutput(output);
-    } else {
-      exportErrorMessage();
+      const output = addNumbers(input);
+      printUserOutput(output);
+    }
+    if (!(isCommaSemicolonConditionCheck(input) === true || isCustomConditionCheck(input) === true)) {
+      printErrorMessageForTypo();
     }
   }
 }

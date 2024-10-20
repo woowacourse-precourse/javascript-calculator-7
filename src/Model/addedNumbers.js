@@ -1,5 +1,5 @@
 // 구분자 쉼표나 콜론 기준으로 숫자 추출
-const addedNumbers = userInput => {
+const addNumbers = userInput => {
   const REGULAR_EXPRESSION = /[^0-9]/g;
   const REMOVE_STR = userInput.replace(REGULAR_EXPRESSION, '');
 
@@ -13,4 +13,4 @@ const addedNumbers = userInput => {
   return totalNumberSum;
 };
 
-export default addedNumbers;
+export default addNumbers;
