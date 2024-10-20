@@ -35,7 +35,7 @@ describe("문자열 계산기", () => {
   });
 
   test("정상 문자열 입력 2", async () => {
-    const inputs = ["//*\n11,2*3:4"];
+    const inputs = ["//*\n11*2*3*4"];
     mockQuestions(inputs);
 
     const logSpy = getLogSpy();
@@ -124,8 +124,23 @@ describe("문자열 계산기", () => {
     });
   });
 
+  test("커스텀 구분자 외 다른 구분자 입력", async () => {
+    const inputs = ["1,2,k"];
+    mockQuestions(inputs);
+
+    const logSpy = getLogSpy();
+    const outputs = [ErrorMessages.ERROR_NON_NUMBER_CHARACTER];
+
+    const app = new App();
+    await app.run();
+
+    outputs.forEach((output) => {
+      expect(logSpy).toHaveBeenCalledWith(expect.stringContaining(output));
+    });
+  });
+
   test("음수 포함 입력", async () => {
-    const inputs = ["//*\n1,-2*3:4"];
+    const inputs = ["//*\n1*-2*3*4"];
     mockQuestions(inputs);
 
     const logSpy = getLogSpy();
@@ -174,7 +189,7 @@ describe("문자열 계산기", () => {
     mockQuestions(inputs);
 
     const logSpy = getLogSpy();
-    const outputs = [ErrorMessages.ERROR_MULTIPLE_DELIMITER];
+    const outputs = [ErrorMessages.ERROR_MULTIPLE_DEFAULT_DELIMITER];
 
     const app = new App();
     await app.run();
@@ -185,11 +200,11 @@ describe("문자열 계산기", () => {
   });
 
   test("커스텀 구분자가 2개 이상 사용된 경우", async () => {
-    const inputs = ["//*\n1**2:3"];
+    const inputs = ["//*\n1**2*3"];
     mockQuestions(inputs);
 
     const logSpy = getLogSpy();
-    const outputs = [ErrorMessages.ERROR_MULTIPLE_DELIMITER];
+    const outputs = [ErrorMessages.ERROR_MULTIPLE_CUSTOM_DELIMITER];
 
     const app = new App();
     await app.run();

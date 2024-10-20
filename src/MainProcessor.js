@@ -31,7 +31,8 @@ export function checkingProcessBeforeParsing(input) {
 }
 
 export function checkingProcessAfterParsing(parsedArray, customDelimiter) {
-    validator.checkMultipleDelimiter(parsedArray, customDelimiter);
+    validator.checkMultipleDefaultDelimiter(parsedArray, customDelimiter);
+    validator.checkMultipleCustomDelimiter(parsedArray, customDelimiter);
     validator.checkIncludesNonNumber(parsedArray);
     validator.checkNegativeNumbers(parsedArray);
 }

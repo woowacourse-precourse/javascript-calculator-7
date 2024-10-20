@@ -28,11 +28,11 @@ class StringParsing {
         return parsedArray;
     }
 
-    parseCustomDelimiter(numbers, customDelimiter) { // 커스텀, 기본 구분자로 파싱
+    parseCustomDelimiter(numbers, customDelimiter) { // 커스텀 구분자로만 파싱
         if (customDelimiter === "\\") {
             customDelimiter = "\\\\";
         }
-        const regex = new RegExp(`[${customDelimiter},:]`);
+        const regex = new RegExp(`[${customDelimiter}]`);
         var parsedArray = numbers.split(regex);
         return parsedArray;
     }

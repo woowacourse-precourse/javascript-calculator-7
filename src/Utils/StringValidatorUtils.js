@@ -40,10 +40,20 @@ class StringValidator {
         });
     }
 
-    checkMultipleDelimiter(input, customDelimiter) { // 커스텀, 기본 구분자 중복 사용 체크 함수 
-        const multipleDelimiterPattern = customDelimiter ? new RegExp(`[${customDelimiter},:]{2,}`) : /[,|:]{2,}/;
-        if (multipleDelimiterPattern.test(input)) {
-            throw new Error(ErrorMessages.ERROR_MULTIPLE_DELIMITER);
+    checkMultipleCustomDelimiter(parsedArray, customDelimiter) { // 커스텀 구분자 중복 사용 체크 함수
+        if (customDelimiter === "\\") {
+            customDelimiter = "\\\\";
+        }
+        const multipleDelimiterPattern = new RegExp(`[${customDelimiter}]{2,}`)
+        if (multipleDelimiterPattern.test(parsedArray)) {
+            throw new Error(ErrorMessages.ERROR_MULTIPLE_CUSTOM_DELIMITER);
+        }
+    }
+
+    checkMultipleDefaultDelimiter(parsedArray) { // 기본 구분자 중복 사용 체크 함수
+        const multipleDefaultDelimiterPattern = /[,|:]{2,}/;
+        if (multipleDefaultDelimiterPattern.test(parsedArray)) {
+            throw new Error(ErrorMessages.ERROR_MULTIPLE_DEFAULT_DELIMITER);
         }
     }
 }
