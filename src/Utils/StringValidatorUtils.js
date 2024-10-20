@@ -52,7 +52,6 @@ class StringValidator {
     }
 
     checkMultipleDefaultDelimiter(parsedArray) { // 기본 구분자 중복 사용 체크 함수
-        console.log(parsedArray)
         const multipleDefaultDelimiterPattern = /[,|:]{2,}/;
         if (multipleDefaultDelimiterPattern.test(parsedArray)) {
             throw new Error(ErrorMessages.ERROR_MULTIPLE_DEFAULT_DELIMITER);
