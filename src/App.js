@@ -2,31 +2,35 @@ import { Console } from "@woowacourse/mission-utils";
 
 class App {
   async run() {
-    try {
+    const getInput = async () => {
       Console.print("문자열을 입력해 주세요");
-      const input = await Console.readLineAsync("");
+      return await Console.readLineAsync("");
+    };
 
-      let numbers;
+    const getNumbers = (input) => {
+      return input.split(/,|:|\/\/.\\n/);
+    };
+
+    const getSum = (numbers) => {
       let sum = 0;
-
-      numbers = input.split(/,|:|\/\/.\\n/);
-      Console.print(numbers);
-
       numbers.map((n) => {
-        if (Number(n) < 0) {
-          throw new Error("[ERROR]");
+        const number = Number(n);
+        if (isNaN(number) || number < 0) {
+          throw new Error("[ERROR] 유효하지 않은 숫자가 입력되었습니다: " + n);
         }
-        sum += Number(n);
+        sum += number;
       });
+      return sum;
+    };
 
-      if (isNaN(sum)) {
-        throw new Error("[ERROR]");
-      } else {
-        Console.print("결과 : " + sum);
-      }
+    try {
+      const input = await getInput();
+      let numbers = getNumbers(input);
+      let sum = getSum(numbers);
+
+      Console.print("결과 : " + sum);
     } catch (e) {
-      Console.print("[ERROR]");
-      throw e;
+      throw new Error("[ERROR]" + e.message);
     }
   }
 }
