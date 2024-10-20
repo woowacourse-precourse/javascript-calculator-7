@@ -1,5 +1,7 @@
 import { Console } from "@woowacourse/mission-utils";
 
+const ERROR_MESSAGE = "[ERROR] 잘못된 입력 값 형식입니다.";
+
 class App {
   async run() {
     try {
@@ -26,7 +28,7 @@ class App {
         .map((value) => {
           const num = Number(value);
           if (isNaN(num)) {
-            throw new Error("[ERROR]");
+            throw new Error(ERROR_MESSAGE);
           }
           return num;
         })
@@ -34,7 +36,7 @@ class App {
 
       Console.print("결과 : " + sum);
     } catch (error) {
-      Console.print(error.message);
+      throw error;
     }
   }
 }
