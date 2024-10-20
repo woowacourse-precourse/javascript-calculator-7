@@ -24,7 +24,7 @@ class App {
 
 export default App;
 
-function getCustomSeparator(userInput) {
+export function getCustomSeparator(userInput) {
   const customSeparator = userInput.match(/^\/\/(\D)\\n/);
 
   return Array.isArray(customSeparator) && customSeparator.length
@@ -32,7 +32,7 @@ function getCustomSeparator(userInput) {
     : null;
 }
 
-function validateUserInput(customSeparator, formattedUserInput) {
+export function validateUserInput(customSeparator, formattedUserInput) {
   const regex = customSeparator
     ? new RegExp(`\\s|^\\d+([,:${customSeparator}]\\d+)*$`)
     : /\s|^\d+([,:]\d+)*$/;
@@ -42,7 +42,7 @@ function validateUserInput(customSeparator, formattedUserInput) {
   }
 }
 
-function computeResult(customSeparator, formattedUserInput) {
+export function computeResult(customSeparator, formattedUserInput) {
   const regex = customSeparator
     ? new RegExp(`[:,${customSeparator}]`)
     : new RegExp(`[:,]`);
