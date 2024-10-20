@@ -43,7 +43,7 @@ const checkDefaultSeparator = (text) => {
   }
 };
 
-export const validation = (text) => {
+export const validate = (text) => {
   checkOnlyNumber(text);
   checkOnlySeparator(text);
 

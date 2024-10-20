@@ -1,4 +1,4 @@
-import { validation } from './utils/validate.js';
+import { validate } from './utils/validation.js';
 import { getInput, printAnswer } from './utils/inputOutputHelpers.js';
 import Calculator from './Calculator.js';
 
@@ -6,7 +6,7 @@ class App {
   async run() {
     const receivedInput = await getInput();
 
-    validation(receivedInput);
+    validate(receivedInput);
 
     const calculator = new Calculator(receivedInput);
     const result = calculator.sumAll();
