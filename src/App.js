@@ -9,7 +9,7 @@ import exportErrorMessage from './View/exportErrorMessageForTypo.js';
 
 class App {
   async run() {
-    const input = await getUserInput(); //this 넣기 
+    const input = await getUserInput();
     if (isNoInputCheck(input) === true) {
       exportErrorMessageForNoInput();
     }
