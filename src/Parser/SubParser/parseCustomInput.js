@@ -28,11 +28,16 @@ export default function parseCustomInput(input) {
 
   // delimiter 이후의 내용을 추출한다.
   const content = input.slice(delimiterEnd + 2);
-  // console.log(content);
+
   validateCustomInput(content, escapedDelimiter);
+  // 구분자는 있지만, 내용이 빈경우
+  if (content === '') {
+    return 0;
+  }
 
   const parts = content.split(delimiter);
   // validateNoDuplicateDelimiters(parts);
   // 모든 숫자의 합을 반환한다.
+
   return sumAllNumbers(parts);
 }

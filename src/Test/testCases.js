@@ -96,14 +96,11 @@ export const customTestCases = [
     expectedOutput: 2005,
     description: '',
   },
-  {
-    input: '//;\\n',
-    expectedError: `${ERROR_PREFIX}${ERROR_MESSAGES.INVALID_CUSTOM_INPUT}`,
-    description: '구분자가 있지만 내용이 없는 경우',
-  },
+
+  // 두가지 행동 가능. 주의
   {
     input: '//:\\n',
-    expectedError: `${ERROR_PREFIX}${ERROR_MESSAGES.INVALID_CUSTOM_INPUT}`,
+    expectedOutput: 0,
     description: '구분자가 있지만 내용이 없는 경우',
   },
   {

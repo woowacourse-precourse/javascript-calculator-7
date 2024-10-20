@@ -13,6 +13,7 @@ function validateCustomInputFormat(input) {
 }
 
 function validateCustomInput(inputString, escapedDelimiter) {
+  if (inputString === '') return;
   const validationRegex = buildCustomInputValidationRegex(escapedDelimiter);
   if (!validationRegex.test(inputString)) {
     throwError(ERROR_MESSAGES.INVALID_CUSTOM_INPUT);
