@@ -22,6 +22,10 @@ class App {
     return this.sum(numbers);
   }
 
+  sum(numbers) {
+    return numbers.reduce((acc, cur) => acc + parseInt(cur), 0);
+  }
+
   parseInput(input) {
     // 커스텀 구분자인 경우
     if (input.startsWith("//")) {
