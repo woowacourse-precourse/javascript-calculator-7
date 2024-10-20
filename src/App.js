@@ -24,15 +24,29 @@ class App {
       }
 
       const customDelimiter = parts[0].slice(2);
-      delimiter = new RegExp(`[${customDelimiter},:]`);
+      delimiter = new RegExp(`[${customDelimiter},:\\n]+`);
 
       formattedInput = parts[1];
     }
 
-    nums = formattedInput.split(delimiter).map(Number);
+    try {
+      formattedInput.split(delimiter).map((item) => {
+        let num = Number(item);
 
-    const sum = nums.reduce((acc, cur) => acc + cur, 0);
-    Console.print(`결과 : ${sum}`);
+        if (isNaN(num) || item.trim() == "" || num < 0) {
+          throw "[ERROR] 유효한 숫자가 아닙니다.";
+        }
+
+        if (!isNaN(num)) {
+          nums.push(num);
+        }
+      });
+
+      const sum = nums.reduce((acc, cur) => acc + cur, 0);
+      Console.print(`결과 : ${sum}`);
+    } catch (error) {
+      Console.print(error);
+    }
   }
 }
 
