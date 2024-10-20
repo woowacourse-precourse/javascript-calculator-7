@@ -30,13 +30,19 @@
 5. for 반복문이 끝나면 저장한 numbers배열의 합을 반환함
 
 ## 구현 기능
-1. 문자열에서 구분자와 숫자를 분리할 수 있는 계산기 class 구현해야 함
+1. 문자열에 커스텀 구분자가 있는지 판단하고 구분자를 지정해주는 문자를 제외한 문자열을 반환해주는 SeperatorParser class 구현해야 함
+- 해당 class는 input값을 받는 words라는 field 존재
+
+2. parseSeperator 메소드
+- 정규식을 통해 input에 커스텀 구분자가 있는지 판단 후 없으면 input만 반환하고, 구분자가 있으면 구분자와 input을 반환함 
+
+3. 문자열에서 구분자와 숫자를 분리할 수 있는 계산기 class 구현해야 함
 - 계산기 class는 numbers라는 빈배열과 구분자와 입력값을 저장하는 field존재
 - 계산기 class는 seperator과 input을 field로 저장
 
-2. calculate 메소드
+4. calculate 메소드
 - for 반복문으로 숫자면 number에 더하고, 문자면 ","인지 ":"인지 또는 커스텀 구분자인지 판단 후 맞으면 커스텀 구분자의 경우 i를 구분자 뒤로 할당하고, number를 numbers에 push
     - ","이나 ":" 이나 커스텀 구분자가 아닌 문자라면 에러 반환
 -for 반복문이 끝나면 마지막 숫자는 포함되지 않았으므로 numbers에 push하고 numbers의 원소의 합을 반환
 
-3. App에서 input이 커스텀 구분자가 포함되는지 확인 후 있는 경우 구분자만큼의 문자를 문자열에서 제거 후 Calculator class에 구분자가 든 배열과 input을 넘겨줌
+5. App에서 input이 커스텀 구분자가 포함되는지 확인 후 있는 경우 구분자만큼의 문자를 문자열에서 제거 후 Calculator class에 구분자가 든 배열과 input을 넘겨줌
