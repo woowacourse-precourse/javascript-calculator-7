@@ -53,7 +53,11 @@ class App {
 
 
   async run() {
-
+    //입력
+    const Input = await Console.readLineAsync("덧셈할 문자열을 입력해 주세요.")
+    //출력
+    const result = "결과 : " + this.caculateSum(Input)
+    Console.print(result)
     //기본구분자사용
     console.log(this.caculateSum('1,2,3'))
     //커스텀구분자사용
