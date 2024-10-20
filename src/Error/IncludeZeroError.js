@@ -1,10 +1,11 @@
 import ValidationError from "./ValidationError.js";
+import { ERROR_HEADER, ERROR_BODY } from "../constants/errorMessage.js";
 
 class IncludeZeroError extends ValidationError {
   constructor() {
     super();
     this.name = "IncludeZeroError";
-    this.message = "[ERROR] 입력 값에 0이 포함되어 있습니다.\n 구분자와 양수로 구성된 문자열을 입력해주세요.";
+    this.message = `${ERROR_HEADER} ${ERROR_BODY.INCLUDE_ZERO}`;
   }
 }
 

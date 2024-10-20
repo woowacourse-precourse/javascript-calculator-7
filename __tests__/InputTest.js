@@ -1,6 +1,7 @@
 import { MissionUtils } from "@woowacourse/mission-utils";
 import Input from "../src/Input";
 import { IncludeZeroError, InvalidSeparatorError, InvalidCustomSeparatorError } from "../src/Error";
+import { ERROR_HEADER, ERROR_BODY } from "../src/constants/errorMessage.js";
 
 const { Console } = MissionUtils;
 
@@ -110,7 +111,7 @@ describe("에러메시지 출력", () => {
     try {
       throw new IncludeZeroError();
     } catch (error) {
-      expect(error.message).toBe("[ERROR] 입력 값에 0이 포함되어 있습니다.\n 구분자와 양수로 구성된 문자열을 입력해주세요.");
+      expect(error.message).toBe(`${ERROR_HEADER} ${ERROR_BODY.INCLUDE_ZERO}`);
     }
   });
 
@@ -118,7 +119,7 @@ describe("에러메시지 출력", () => {
     try {
       throw new InvalidSeparatorError();
     } catch (error) {
-      expect(error.message).toBe("[ERROR] 입력 값에 등록되지 않은 구분자가 포함되어 있습니다.\n 문자옆 앞부분의 '//'와 '\\n' 사이에 커스텀 구분자를 입력하거나, 덧셈할 문자열에 구분자와 양수만 포함되도록 입력해주세요.");
+      expect(error.message).toBe(`${ERROR_HEADER} ${ERROR_BODY.INVALID_SEPARATOR}`);
     }
   });
 
@@ -126,7 +127,7 @@ describe("에러메시지 출력", () => {
     try {
       throw new InvalidCustomSeparatorError();
     } catch (error) {
-      expect(error.message).toBe("[ERROR] 커스텀 구분자는 문자로 입력해주세요.");
+      expect(error.message).toBe(`${ERROR_HEADER} ${ERROR_BODY.INVALID_CUSTOM_SEPARATOR}`);
     }
   });
 });
