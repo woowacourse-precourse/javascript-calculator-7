@@ -15,9 +15,8 @@ class App {
   static calculate(input) {
     if (input === "") return 0;
 
-    let delimiters = [',', ':'];
+    let delimiters = [",", ":"];
     let numbersString = input;
-    console.log(numbersString)
     if (input.startsWith("//")) {
       const delimiterEndIndex = input.indexOf("\\n");
       if (delimiterEndIndex === -1) {
@@ -26,11 +25,22 @@ class App {
 
       const customDelimiter = input.slice(2, delimiterEndIndex);
       delimiters.push(customDelimiter);
-      numbersString = input.slice(delimiterEndIndex + 1);
-      Console.print(delimiters)
+      numbersString = input.slice(delimiterEndIndex + 2);
     }
 
-    return 0;
+    let numbers = [numbersString];
+    for (let delimiter of delimiters) {
+      numbers = numbers.flatMap((numString) => numString.split(delimiter));
+    }
+
+    const sum = numbers.reduce((acc, curr) => {
+      const num = Number(curr);
+      if (isNaN(num) || num < 0)
+        throw new Error("숫자가 아니거나 음수가 포함되었습니다.");
+      return acc + num;
+    }, 0);
+
+    return sum;
   }
 }
 

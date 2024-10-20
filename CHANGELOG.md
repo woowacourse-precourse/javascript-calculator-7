@@ -1,3 +1,4 @@
+- feat($App): make function calculate
 - feat($App): implement input and output
 - docs($rootScope): modify README.md
 - feat: setup project
