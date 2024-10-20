@@ -9,12 +9,7 @@ class App {
       return Console.print("결과 : 0");
     }
 
-    try {
-      this.sum(input);
-    }
-    catch (error) {
-      Console.print("[ERROR] " + error.message);
-    }
+    return this.sum(input);
   }
 
   sum(input) {
@@ -33,7 +28,7 @@ class App {
       delimiters = new RegExp(`[${customDelimiter},|:]`);
       numbersPart = parts[1];
     } else if (isNaN(input[0]) || input[0] === "-") {
-      throw new Error("커스텀 구분자를 사용하지 않는다면 양수로 시작해야 합니다.");
+      throw new Error("[ERROR] 커스텀 구분자를 사용하지 않는다면 양수로 시작해야 합니다.");
     }
 
     const numbers = numbersPart.split(delimiters).map(Number);
@@ -46,14 +41,14 @@ class App {
   //커스텀 구분자 유효성 검사
   isValidCustom(input) {
     if (input.indexOf("\\n") !== 3 || !isNaN(input[2])) {
-      throw new Error("커스텀 구분자 양식이 잘못됐습니다.");
+      throw new Error("[ERROR] 커스텀 구분자 양식이 잘못됐습니다.");
     }
   }
 
   //숫자 유효성 검사
   isValidNumber(input) {
     if (isNaN(input) || input < 1) {
-      throw new Error("계산식에 구분자, 양수 이외의 값이 존재합니다.");
+      throw new Error("[ERROR] 계산식에 구분자, 양수 이외의 값이 존재합니다.");
     }
   }
 }
