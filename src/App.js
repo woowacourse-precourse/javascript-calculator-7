@@ -11,6 +11,15 @@ class App {
     }
     return input.length === 0 ? 0 : input;
   }
+
+  getCustomSeparator(input) {
+    const suffixCustomSeparatorIndex = input.indexOf(
+      this.suffixCustomSeparator
+    );
+    if (suffixCustomSeparatorIndex === -1) {
+      throw new Error("[ERROR] 잘못된 커스텀 구분자 형식입니다.");
+    }
+  }
 }
 
 export default App;
