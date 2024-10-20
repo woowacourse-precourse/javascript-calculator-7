@@ -5,6 +5,8 @@ export default function validator(input) {
     const default_pattern = /^[0-9,:\n]+$/;
     if (!default_pattern.test(input)) {
       throw new Error('[ERROR] 잘못된 입력 형식.');
+    } else {
+      return input;
     }
   } else {
     const custom_pattern = input.match(is_Custom);
@@ -17,6 +19,8 @@ export default function validator(input) {
 
       if (!new_pattern.test(Exp)) {
         throw new Error('[ERROR] 잘못된 입력 형식.');
+      } else {
+        return Exp;
       }
     }
   }
