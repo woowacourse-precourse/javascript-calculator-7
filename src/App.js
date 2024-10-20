@@ -11,9 +11,16 @@ class App {
   }
 }
 
-const separate = function separateCommas(input) {
+const separate = function separateCommasAndColons(input) {
   const SEPARATED_COMMAS = input.split(",");
-  return SEPARATED_COMMAS[0];
+  let SUM = 0;
+  for (const ITEM of SEPARATED_COMMAS) {
+    const SEPARATED = ITEM.split(":");
+    for (const NUM of SEPARATED) {
+      SUM += parseInt(NUM);
+    }
+  }
+  return SUM;
 };
 
 export default App;
