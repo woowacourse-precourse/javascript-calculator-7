@@ -31,14 +31,14 @@ class StringValidator {
         });
     }
 
-    checkIncludesNonNumber(parsedArray) { // 숫자, 알파벳, 한글, 구분자 외 특수문자 체크 함수
-        const nonNumberPattern = /[^\d\s-]+/g;
+    checkIncludesNonNumber(parsedArray) {
         parsedArray.forEach((item) => {
-            if (nonNumberPattern.test(item)) {
+            if (!/^[-]?\d+$/.test(item)) { // 정규식으로 숫자 또는 음수만 허용
                 throw new Error(ErrorMessages.ERROR_NON_NUMBER_CHARACTER);
             }
         });
     }
+
 
     checkMultipleCustomDelimiter(parsedArray, customDelimiter) { // 커스텀 구분자 중복 사용 체크 함수
         if (customDelimiter === "\\") {

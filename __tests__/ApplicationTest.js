@@ -154,6 +154,21 @@ describe("문자열 계산기", () => {
     });
   });
 
+  test("하이픈 입력", async () => {
+    const inputs = ["1-2-3"];
+    mockQuestions(inputs);
+
+    const logSpy = getLogSpy();
+    const outputs = [ErrorMessages.ERROR_NON_NUMBER_CHARACTER];
+
+    const app = new App();
+    await app.run();
+
+    outputs.forEach((output) => {
+      expect(logSpy).toHaveBeenCalledWith(expect.stringContaining(output));
+    });
+  });
+
   test("구분자 외 다른 특수문자 사용", async () => {
     const inputs = ["1@2,3"];
     mockQuestions(inputs);
