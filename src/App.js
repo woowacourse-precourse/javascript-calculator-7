@@ -38,7 +38,10 @@ function extractCustomSeparator(input) {
 }
 
 function splitInputBySeparators(input, separators) {
-  const separateRegExp = new RegExp(`[${separators.join('')}]`);
+  const separateRegExp = new RegExp(
+    separators.map((separator) => separator.replace(/[.*+?^${}()|[\]\\]/g, '\\$&')).join('|'),
+    'g',
+  );
 
   return input.split(separateRegExp);
 }
