@@ -14,6 +14,11 @@ class App {
 
       // 구분자를 기준으로 분리
       const SPLIT_DATA = this.splitString(EXTRACT_DATA, SEPARATORS);    
+
+      // 분리된 숫자들의 합
+      const SUM = SPLIT_DATA.reduce((acc, number) => acc + number, 0);
+
+      Console.print(`결과: ${SUM}`);
   };
 
   extractSeparator(inputString, separators) {
