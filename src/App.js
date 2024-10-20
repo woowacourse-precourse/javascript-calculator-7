@@ -21,7 +21,9 @@ class App {
           process.exit(1); // 애플리케이션 종료
       }
 
-      return numbers;
+      // 숫자 합산
+      const sum = numbers.reduce((total, num) => total + parseInt(num), 0);
+      return sum;
   }
 }
 
