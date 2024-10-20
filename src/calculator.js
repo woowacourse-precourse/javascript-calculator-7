@@ -10,7 +10,7 @@ class Calculator {
     }
 
     extractDelimiterAndNumbers(input) {
-        if(input.startsWith('//') && input.indexOf('\\n' >= 3)) {
+        if(input.startsWith('//') && input.indexOf('\\n' === 3)) {
             const customDelimiterStartIndex = input.indexOf('\\n');
             const customDelimiter = input.slice(2,customDelimiterStartIndex);
             const numberString = input.slice(customDelimiterStartIndex + 2); 

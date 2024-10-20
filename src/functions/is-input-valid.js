@@ -10,7 +10,7 @@ function isInputValid(input) {
 
 function validateCustomDelimiterInput(input, pattern) {
     const customDelimiterStartIndex = input.indexOf('\\n');
-    if(customDelimiterStartIndex === -1){
+    if(customDelimiterStartIndex === -1 || customDelimiterStartIndex !==3){
         throw new Error('[ERROR] 잘못된 값을 입력했습니다.');
     }
 
