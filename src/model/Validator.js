@@ -1,12 +1,21 @@
+import { Console } from '@woowacourse/mission-utils';
+import { EMPTY_INPUT_SUM } from '../constants/constants.js';
+
 class Validator {
   static validateInputChars(input) {
+    if (!input || input.trim() === '') {
+      return EMPTY_INPUT_SUM;
+    }
     const invalidChars = /[^0-9,:]/;
     if (invalidChars.test(input)) {
       throw new Error('[ERROR] 잘못된 문자가 포함되어 있습니다.');
     }
   }
   static validateIsNumber(input) {
-    if (typeof input !== 'number' || isNaN(input)) {
+    if (
+      !Array.isArray(input) ||
+      input.some((num) => typeof num !== 'number' || isNaN(num))
+    ) {
       throw new Error('[ERROR] 숫자가 포함되어 있지 않습니다.');
     }
   }
@@ -21,10 +30,6 @@ class Validator {
     }
   }
   static validateNumAfterCustomDelim(cleanInput, delimiter) {
-    if (!cleanInput || cleanInput.trim() === '') {
-      return 0;
-    }
-
     const invalidChars = new RegExp(`[^0-9${delimiter.source}]`);
     if (invalidChars.test(cleanInput)) {
       throw new Error('[ERROR] 잘못된 문자가 포함되어 있습니다.');

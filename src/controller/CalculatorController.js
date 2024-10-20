@@ -1,30 +1,35 @@
+import { Console } from '@woowacourse/mission-utils';
+import { EMPTY_INPUT_SUM } from '../constants/constants.js';
 import StringCalculator from '../model/StringCalculator.js';
 import Validator from '../model/Validator.js';
 
 export default class CalculatorController {
   static async processInput(input) {
-    let numbers = '';
+    const { cleanInput, delimiter } = this.getCleanInputAndDelimiter(input);
 
+    const numbers = StringCalculator.extractNumbers(cleanInput, delimiter);
+    if (!cleanInput || cleanInput.trim() === '') {
+      return EMPTY_INPUT_SUM;
+    }
+    Validator.validateIsNumber(numbers);
+    return StringCalculator.sum(numbers);
+  }
+
+  static getCleanInputAndDelimiter(input) {
+    let cleanInput;
+    let delimiter;
     if (input.startsWith('//')) {
-      const validationResult =
-        Validator.validateInputCharsWithCustomDelim(input);
       const customDelimiter = input[2];
-      const delimiter = new RegExp(`[${customDelimiter},:]`);
-      const cleanInput = input.split('\\n')[1];
-
-      if (validationResult === 0) {
-        return EMPTY_INPUT_SUM;
-      }
-
+      delimiter = new RegExp(`[${customDelimiter},:]`);
+      cleanInput = input.split('\\n')[1];
+      Validator.validateInputCharsWithCustomDelim(input);
       Validator.validateNumAfterCustomDelim(cleanInput, delimiter);
-      numbers = StringCalculator.extractNumbers(cleanInput, delimiter);
     } else {
-      const delimiter = /[,:]/;
+      delimiter = /[,:]/;
       Validator.validateInputChars(input);
-      Validator.validateIsNumber(input);
-      numbers = StringCalculator.extractNumbers(input, delimiter);
+      cleanInput = input;
     }
 
-    return StringCalculator.sum(numbers);
+    return { cleanInput, delimiter };
   }
 }
