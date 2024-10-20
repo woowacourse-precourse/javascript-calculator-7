@@ -1,6 +1,6 @@
 # javascript-calculator-precourse
 
-## 기능 요구사항
+## 기능
 
 1. 입력
 
@@ -16,6 +16,12 @@
 3. 출력
 
 - 결과 출력 기능
+
+4. refactoring
+
+- 함수 단위로 리팩토링
+
+---
 
 ## 과제 진행 요구사항
 

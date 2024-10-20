@@ -1,43 +1,54 @@
 import { Console } from "@woowacourse/mission-utils";
 
+const DEFAULT_DELIMITER = /[,|:]/;
+
+function parseDelimitersAndNumbers(inputString) {
+  let delimiters = DEFAULT_DELIMITER;
+  let numberString = inputString;
+
+  if (numberString.startsWith("//")) {
+    const customDelimiter = numberString.split('\\n');
+    if (customDelimiter.length > 1 && customDelimiter[0].startsWith('//')) {
+      delimiters = new RegExp(`[${customDelimiter[0].slice(2)}]`);
+      numberString = customDelimiter[1];
+    }
+  }
+
+  return { delimiters, numberString };
+}
+
+function parseToNumbers(stringArray) {
+  return stringArray.map((word) => {
+    const number = Number(word);
+    if (isNaN(number)) {
+      throw new Error("[ERROR]");
+    }
+    return number;
+  });
+}
+
 function sum(numbers) {
   return numbers.reduce((acc, curr) => acc + curr, 0);
 }
 
 class App {
   async run() {
-    // Console.print("덧셈할 문자를 입력해 주세요.");
-    const STRING_INPUT = await Console.readLineAsync("");
-    const CLEANED_INPUT = STRING_INPUT.replace(/"/g, "").trim();
+    Console.print("덧셈할 문자를 입력해 주세요.");
+    const inputString = await Console.readLineAsync("");
+    const cleanedInput = inputString.replace(/"/g, "").trim();
 
-    let DELIMITERS = /[,|:]/;
-    let NUM_STRING = CLEANED_INPUT;
+    const { delimiters, numberString } = parseDelimitersAndNumbers(cleanedInput);
 
-    if (NUM_STRING.startsWith("//")) {
-      const CUSTOM_DELIM = NUM_STRING.split('\\n');
-      if (CUSTOM_DELIM.length > 1 && CUSTOM_DELIM[0].startsWith('//')) {
-        DELIMITERS = new RegExp(`[${CUSTOM_DELIM[0].slice(2)}]`);
-        NUM_STRING = CUSTOM_DELIM[1];
-      }
-    }
+    const wordsArray = numberString.split(delimiters);
+    const numbersArray = parseToNumbers(wordsArray);
 
-    const WORDS = NUM_STRING.split(DELIMITERS);
-    
-    const STRING_TO_NUM = WORDS.map((word) => {
-      const NUM = Number(word);
-      if (isNaN(NUM)) {
-        throw new Error("[ERROR]");
-      }
-      return NUM;
-    });
-
-    const NEGATIVE_NUM = STRING_TO_NUM.filter(num => num < 0);
-    if (NEGATIVE_NUM.length > 0) {
+    const negativeNumbers = numbersArray.filter(num => num < 0);
+    if (negativeNumbers.length > 0) {
       throw new Error("[ERROR]");
     }
 
-    const RESULT = sum(STRING_TO_NUM)
-    Console.print("결과 : "+RESULT);
+    const result = sum(numbersArray);
+    Console.print(`결과 : ${result}`);
   }
 }
 
