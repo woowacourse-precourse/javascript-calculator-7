@@ -1,97 +1,97 @@
-import { stringCalculator } from "../src/MainProcessor.js";
+import { mainProcessor } from "../src/MainProcessor.js";
 import ErrorMessages from "../src/constant/ErrorMessage.js";
 
-describe("StringCalculator", () => {
+describe("mainProcessor", () => {
 
     test("정상 문자열 입력 1", () => {
         const input = "1:2,3";
-        const result = stringCalculator(input);
+        const result = mainProcessor(input);
         expect(result).toBe(6);
     });
 
     test("정상 문자열 입력 2", () => {
         const input = "//*\n11*2*3*4";
-        const result = stringCalculator(input);
+        const result = mainProcessor(input);
         expect(result).toBe(20);
     });
 
     test("숫자 하나만 입력", () => {
         const input = "1";
-        const result = stringCalculator(input);
+        const result = mainProcessor(input);
         expect(result).toBe(1);
     });
 
     test("커스텀 구분자가 /인 경우", () => {
         const input = "///\n1/2/3";
-        const result = stringCalculator(input);
+        const result = mainProcessor(input);
         expect(result).toBe(6);
     });
 
     test("커스텀 구분자가 \\인 경우", () => {
         const input = "//\\\\n1\\2\\3";
-        const result = stringCalculator(input);
+        const result = mainProcessor(input);
         expect(result).toBe(6);
     });
 
     test("빈 문자열 입력", () => {
         const input = "";
-        const result = stringCalculator(input);
+        const result = mainProcessor(input);
         expect(result).toBe(0);
     });
 
     test("다른 문자 입력", () => {
         const input = "1,2,k";
-        expect(() => stringCalculator(input)).toThrow(ErrorMessages.ERROR_NON_NUMBER_CHARACTER);
+        expect(() => mainProcessor(input)).toThrow(ErrorMessages.ERROR_NON_NUMBER_CHARACTER);
     });
 
     test("음수 포함 입력", () => {
         const input = "//*\n1*-2*3*4";
-        expect(() => stringCalculator(input)).toThrow(ErrorMessages.ERROR_NEGATIVE_NUMBER);
+        expect(() => mainProcessor(input)).toThrow(ErrorMessages.ERROR_NEGATIVE_NUMBER);
     });
 
     test("하이픈 입력", () => {
         const input = "1-2-3";
-        expect(() => stringCalculator(input)).toThrow(ErrorMessages.ERROR_NON_NUMBER_CHARACTER);
+        expect(() => mainProcessor(input)).toThrow(ErrorMessages.ERROR_NON_NUMBER_CHARACTER);
     });
 
     test("맨 앞에 ,가 먼저 오는 경우", () => {
         const input = ",1,2,3";
-        expect(() => stringCalculator(input)).toThrow(ErrorMessages.ERROR_NON_NUMBER_CHARACTER);
+        expect(() => mainProcessor(input)).toThrow(ErrorMessages.ERROR_NON_NUMBER_CHARACTER);
     });
 
     test("중간이 공백인 경우", () => {
         const input = "1, ,3";
-        expect(() => stringCalculator(input)).toThrow(ErrorMessages.ERROR_NON_NUMBER_CHARACTER);
+        expect(() => mainProcessor(input)).toThrow(ErrorMessages.ERROR_NON_NUMBER_CHARACTER);
     });
 
     test("맨 뒤에 ,가 오는 경우", () => {
         const input = "1,2,3,";
-        expect(() => stringCalculator(input)).toThrow(ErrorMessages.ERROR_NON_NUMBER_CHARACTER);
+        expect(() => mainProcessor(input)).toThrow(ErrorMessages.ERROR_NON_NUMBER_CHARACTER);
     });
 
     test("구분자 외 다른 특수문자 사용", () => {
         const input = "1@2,3";
-        expect(() => stringCalculator(input)).toThrow(ErrorMessages.ERROR_NON_NUMBER_CHARACTER);
+        expect(() => mainProcessor(input)).toThrow(ErrorMessages.ERROR_NON_NUMBER_CHARACTER);
     });
 
     test("커스텀 구분자의 위치 선언이 잘못된 경우", () => {
         const input = "1,2:3//*\n";
-        expect(() => stringCalculator(input)).toThrow(ErrorMessages.ERROR_CUSTOM_DELIMITER_POSITION);
+        expect(() => mainProcessor(input)).toThrow(ErrorMessages.ERROR_CUSTOM_DELIMITER_POSITION);
     });
 
     test("구분자가 2개 이상 사용된 경우", () => {
         const input = "1,,2:3";
-        expect(() => stringCalculator(input)).toThrow(ErrorMessages.ERROR_MULTIPLE_DEFAULT_DELIMITER);
+        expect(() => mainProcessor(input)).toThrow(ErrorMessages.ERROR_MULTIPLE_DEFAULT_DELIMITER);
     });
 
     test("커스텀 구분자가 2개 이상 사용된 경우", () => {
         const input = "//*\n1**2*3";
-        expect(() => stringCalculator(input)).toThrow(ErrorMessages.ERROR_MULTIPLE_CUSTOM_DELIMITER);
+        expect(() => mainProcessor(input)).toThrow(ErrorMessages.ERROR_MULTIPLE_CUSTOM_DELIMITER);
     });
 
     test("커스텀 구분자가 선언을 두 번이상 한 경우", () => {
         const input = "//*\n//;\n1*2;3";
-        expect(() => stringCalculator(input)).toThrow(ErrorMessages.ERROR_MULTIPLE_DECLARE_CUSTOM_DELIMITER);
+        expect(() => mainProcessor(input)).toThrow(ErrorMessages.ERROR_MULTIPLE_DECLARE_CUSTOM_DELIMITER);
     });
 
 });
