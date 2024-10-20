@@ -54,7 +54,7 @@ export const validate = {
 
   // 커스텀 구분자 형식 검증
   customDelimiter(input) {
-    const match = input.match(/^\/\/(.)\n/);
+    const match = input.match(/^\/\/(.)\\n/);
     if (!match) {
       throw new Error(ERROR_MESSAGES.INVALID_CUSTOM_DELIMITER);
     }

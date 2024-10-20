@@ -17,7 +17,7 @@ function parseTokens(input, delimiters) {
 // 커스텀 구분자로 합산
 function sumWithCustomDelimiter(input) {
   const customDelimiter = validate.customDelimiter(input); // 커스텀 구분자 검증
-  const numbersString = input.slice(4); // 구분자 뒤에 오는 숫자 문자열
+  const numbersString = input.slice(5); // 구분자 뒤에 오는 숫자 문자열
   validate.missingNumber(numbersString); // 숫자 누락 검증
   validate.delimiters(numbersString, customDelimiter); // 구분자 검증
   const numberValues = parseTokens(numbersString, [

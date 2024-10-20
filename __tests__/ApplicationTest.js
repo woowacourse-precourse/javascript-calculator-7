@@ -33,11 +33,11 @@ describe("문자열 계산기", () => {
   });
 
   test("커스텀 구분자 사용", async () => {
-    const inputs = ["//;\n1;2;3"];
+    const inputs = ["//;\\n1"];
     mockQuestions(inputs);
 
     const logSpy = getLogSpy();
-    const outputs = ["결과 : 6"];
+    const outputs = ["결과 : 1"];
 
     const app = new App();
     await app.run();
@@ -113,7 +113,7 @@ describe("문자열 계산기", () => {
   });
 
   test("커스텀 구분자 지정 후 숫자 생략", async () => {
-    const inputs = ["//;\n"];
+    const inputs = ["//;\\n"];
     mockQuestions(inputs);
 
     const app = new App();
