@@ -1,5 +1,6 @@
-import App from '../src/App.js';
+import App from '../src/controller/App.js';
 import { MissionUtils } from '@woowacourse/mission-utils';
+import Game from '../src/controller/Game.js';
 
 const mockQuestions = (inputs) => {
   MissionUtils.Console.readLineAsync = jest.fn();
@@ -24,8 +25,8 @@ describe('문자열 계산기', () => {
     const logSpy = getLogSpy();
     const outputs = ['결과 : 1'];
 
-    const app = new App();
-    await app.run();
+    const game = new Game();
+    await game.process();
 
     outputs.forEach((output) => {
       expect(logSpy).toHaveBeenCalledWith(expect.stringContaining(output));
@@ -36,9 +37,9 @@ describe('문자열 계산기', () => {
     const inputs = ['-1,2,3'];
     mockQuestions(inputs);
 
-    const app = new App();
+    const game = new Game();
 
-    await expect(app.run()).rejects.toThrow('[ERROR]');
+    await expect(game.process()).rejects.toThrow('[ERROR]');
   });
 
   test('기본 구분자 사용', async () => {
@@ -48,8 +49,8 @@ describe('문자열 계산기', () => {
     const logSpy = getLogSpy();
     const outputs = ['결과 : 6'];
 
-    const app = new App();
-    await app.run();
+    const game = new Game();
+    await game.process();
 
     outputs.forEach((output) => {
       expect(logSpy).toHaveBeenCalledWith(expect.stringContaining(output));
@@ -68,8 +69,8 @@ describe('문자열 계산기', () => {
         .reduce((acc, cur) => acc + Number(cur), 0);
       const outputs = [`결과 : ${expectedSum}`];
 
-      const app = new App();
-      await app.run();
+      const game = new Game();
+      await game.process();
 
       outputs.forEach((output) => {
         expect(logSpy).toHaveBeenCalledWith(expect.stringContaining(output));
@@ -82,8 +83,8 @@ describe('문자열 계산기', () => {
     for (const input of inputs) {
       mockQuestions([input]);
 
-      const app = new App();
-      await expect(app.run()).rejects.toThrow('[ERROR]');
+      const game = new Game();
+      await expect(game.process()).rejects.toThrow('[ERROR]');
     }
   });
 });
