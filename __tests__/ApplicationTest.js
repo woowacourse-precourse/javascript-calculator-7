@@ -73,4 +73,19 @@ describe('문자열 계산기', () => {
 
     await expect(app.run()).rejects.toThrow('[ERROR]');
   });
+
+  test('사용자가 빈 문자열을 입력했을 경우 결과를 0으로 출력한다', async () => {
+    const inputs = [''];
+    mockQuestions(inputs);
+
+    const logSpy = getLogSpy();
+    const outputs = ['결과 : 0'];
+
+    const app = new App();
+    await app.run();
+
+    outputs.forEach((output) => {
+      expect(logSpy).toHaveBeenCalledWith(expect.stringContaining(output));
+    });
+  });
 });

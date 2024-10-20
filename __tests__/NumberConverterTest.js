@@ -64,4 +64,13 @@ describe('NumberConverter', () => {
       '[ERROR] 음수는 허용되지 않습니다.'
     );
   });
+
+  test('빈 문자열은 0으로 처리한다', () => {
+    const input = [''];
+    const output = 0;
+
+    const result = NumberConverter.convertToNumber(input);
+
+    expect(result).toEqual(output);
+  });
 });
