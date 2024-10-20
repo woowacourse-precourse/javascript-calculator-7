@@ -16,10 +16,10 @@ describe('Parser 클래스', () => {
 		expect(parser.parse()).toBe(0);
 	});
 
-	test('구분자가 비어있을 때 단일 숫자가 있는 배열을 반환해야 합니다', () => {
+	test('구분자가 비어있을 땐 기본 구분자를 통해 numbersPart를 분할해야 합니다', () => {
 		extractCustomSeparator.mockReturnValue(null);
-		const parser = new Parser('123', []);
-		expect(parser.parse()).toEqual(['123']);
+		const parser = new Parser('1:2,3', []);
+		expect(parser.parse()).toEqual(['1', '2', '3']);
 	});
 
 	test('기본 구분자를 사용하여 numbersPart를 분할해야 합니다', () => {
