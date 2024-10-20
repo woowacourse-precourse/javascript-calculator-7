@@ -1,5 +1,6 @@
 import { Regex } from './constant.js';
 import { Console } from '@woowacourse/mission-utils';
+import { errorMessages } from './constant.js';
 
 class Calculator {
   constructor(input) {
@@ -17,12 +18,19 @@ class Calculator {
     }
 
     const delimiterRex = this.generateRegexFromDelimiters(input);
-    Console.print(delimiterRex);
-    return input.replace(Regex.customDelimiter, '').split(delimiterRex);
+    const result = input.replace(Regex.customDelimiter, '').split(delimiterRex);
+
+    return result;
   }
 
   add() {
-    return this.numbers.reduce((acc, delimiter) => acc + Number(delimiter), 0);
+    const result = this.numbers.reduce((acc, delimiter) => acc + Number(delimiter), 0);
+
+    if (!result) {
+      throw new Error(`[ERROR]: ${errorMessages.invalidDelimiter}`);
+    }
+
+    return result;
   }
 
   extractCustomDelimiter(input) {
