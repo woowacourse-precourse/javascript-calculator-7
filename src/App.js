@@ -2,12 +2,15 @@ import { MissionUtils } from '@woowacourse/mission-utils';
 
 class App {
     /**
-     * 프로그램 실행의 시작점
      */
     async run() {
-        const input = await MissionUtils.Console.readLineAsync('덧셈할 문자열을 입력해 주세요.');
-        const result = this.calculateSum(input); // 숫자 계산
-        MissionUtils.Console.print(`결과 : ${result}`);
+        try {
+            const input = await MissionUtils.Console.readLineAsync('덧셈할 문자열을 입력해 주세요.');
+            const result = this.calculateSum(input); // 숫자 계산
+            MissionUtils.Console.print(`결과 : ${result}`);
+        } catch (error) {
+            MissionUtils.Console.print(error.message); // 에러 발생 시 메시지 출력
+        }
     }
 
     /**
@@ -29,7 +32,14 @@ class App {
             numbersString = input.substring(delimiterEndIndex + 1); // 구분자 이후의 숫자 문자열 추출
         }
 
-        const tokens = numbersString.split(delimiter).map(Number); // 숫자 변환
+        const tokens = numbersString.split(delimiter).map((token) => {
+            const number = Number(token);
+            if (isNaN(number) || number < 0) {
+                throw new Error('[ERROR] 잘못된 입력입니다.'); // 숫자가 아닌 경우 또는 음수일 경우 에러 처리
+            }
+            return number;
+        });
+
         return tokens.reduce((acc, curr) => acc + curr, 0); // 숫자 합산
     }
 }
