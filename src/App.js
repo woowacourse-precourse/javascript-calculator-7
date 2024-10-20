@@ -13,6 +13,15 @@ class App {
     const CUSTOM_START_INDEX = input.startsWith('//')
     const CUSTOM_END_INDEX = input.indexOf('\\n')
 
+    if (CUSTOM_START_INDEX) {
+      if (CUSTOM_END_INDEX !== -1){ 
+          const customSepartion = input.substring(2, CUSTOM_END_INDEX)
+          separation = new RegExp(`[${customSepartion},|:]`);
+          numbers = input.substring(CUSTOM_END_INDEX+2).split(separation)
+          }
+    }else{
+        numbers = input.split(separation)
+      }
   }
 }
 
