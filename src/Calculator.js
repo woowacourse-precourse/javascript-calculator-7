@@ -6,6 +6,7 @@ function getInput() {
     const customDelimiter = getCustomDelimiter(answer);
     const result = splitByDelimiter(answer, customDelimiter);
     console.log(result);
+    sumArray(result);
   });
 }
 
@@ -29,6 +30,15 @@ function splitByDelimiter (input, customdelimiter) {
   const regex = new RegExp(escapedDelimiters.join('|'), 'g');
 
   return remainingInput.split(regex);
+}
+
+function sumArray(arr) {
+  const sum = arr
+  .map(Number)
+  .reduce((acc, curr) => acc + curr, 0);
+
+  console.log(`결과 : ${sum}`);
+  return sum;
 }
 
 export function calculator() {
