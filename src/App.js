@@ -38,6 +38,12 @@ class App {
     if (negativeNumbers.length > 0) {
       throw new Error(`음수는 허용되지 않습니다: ${negativeNumbers.join(", ")}`); // 숫자가 음수인 경우 에러 메시지
     }
+
+    return this.sumNumbers(numbers); // 숫자의 합 계산
+  }
+
+  sumNumbers(numbers) {
+    return numbers.reduce((acc, num) => acc + num, 0); // 합계 계산
   }
 }
 export default App;
