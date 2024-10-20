@@ -27,15 +27,4 @@ function validateNormalInput(splitValues) {
   }
 }
 
-// function validateNoDuplicateDelimiters(splitValues) {
-//   if (splitValues.some(value => value === '')) {
-//     throwError(ERROR_MESSAGES.DUPLICATE_DELIMITERS);
-//   }
-// }
-
-export {
-  validateCustomInput,
-  validateNormalInput,
-  // validateNoDuplicateDelimiters,
-  validateCustomInputFormat,
-};
+export { validateCustomInput, validateNormalInput, validateCustomInputFormat };
