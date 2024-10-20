@@ -9,6 +9,7 @@ class Calculator {
   constructor(input) {
     this.#inputText = input;
     this.#numbers = 0;
+    this.#result = 0;
   }
 
   #findCustomSeparator() {
@@ -39,6 +40,8 @@ class Calculator {
   }
 
   calculateStringSum() {
+    if (!this.#inputText.length) return;
+
     this.#splitTextToNumber();
     this.#result = this.#calculateSum();
   }
