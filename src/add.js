@@ -4,9 +4,11 @@ const sum = {
         let result = 0;
 
         for(let i = 0; i < arrayNumbers.length; i++){
-            result += Number(arrayNumbers)
+            result += Number(arrayNumbers[i])
         }
-        
+
         return result
     }
 }
+
+export default sum;
