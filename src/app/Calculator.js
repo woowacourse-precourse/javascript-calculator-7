@@ -1,5 +1,5 @@
-import { calculateTotal } from '../lib/utils';
-import Delimiter from './Delimiter';
+import { calculateTotal } from '../lib/utils.js';
+import Delimiter from './Delimiter.js';
 
 class Calculator {
   /** @type {Delimiter} */
