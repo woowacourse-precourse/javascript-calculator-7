@@ -68,7 +68,7 @@
 
 <hr>
 
-## TIL 및 회고
+## TIL 및 회고 (2024.10.18)
 
 - ApplicationTest.js에서 mockQuestions 함수에 대해 자세히 들여다보았다.
 
