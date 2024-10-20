@@ -1,4 +1,6 @@
 import { Console } from '@woowacourse/mission-utils';
+import Constants from './Constants.js';
+import * as Validator from './validator.js';
 
 async function getUserInput() {
   try {
@@ -7,13 +9,16 @@ async function getUserInput() {
     );
     return input;
   } catch (e) {
-    throw new Error('[ERROR] 입력값을 받아오는데 실패했습니다.');
+    throw new Error(Constants.ERROR_MESSAGE.INVALID_INPUT);
   }
 }
 
 class App {
   async run() {
     const input = await getUserInput();
+
+    const targetString = Validator.extractCustomDelimiter(input);
+
     Console.print(`결과 : ${input}`);
   }
 }
