@@ -1,18 +1,16 @@
+import { CUSTOM_DELIMITER_PATTERN, DEFAULT_DELIMITERS } from '../constants.js';
 import IDelimiterExtractor from '../interfaces/IDelimiterExtractor.js';
 
 class DelimiterExtractor extends IDelimiterExtractor {
-  #defaultDelimiters;
   #customDelimiter;
 
   constructor() {
     super();
-    this.#defaultDelimiters = [',', ':'];
     this.#customDelimiter = null;
   }
 
   extractDelimiter(inputValue) {
-    const delimiterPattern = /\/\/(.*?)\\n/;
-    const customDelimiterMatch = inputValue.match(delimiterPattern);
+    const customDelimiterMatch = inputValue.match(CUSTOM_DELIMITER_PATTERN);
 
     if (customDelimiterMatch) {
       this.#customDelimiter = customDelimiterMatch[1];
@@ -24,9 +22,9 @@ class DelimiterExtractor extends IDelimiterExtractor {
 
   getDelimiters() {
     if (this.#customDelimiter) {
-      return [...this.#defaultDelimiters, this.#customDelimiter];
+      return [...DEFAULT_DELIMITERS, this.#customDelimiter];
     }
-    return this.#defaultDelimiters;
+    return DEFAULT_DELIMITERS;
   }
 }
 

@@ -1,8 +1,8 @@
+import { ERROR_MESSAGES } from '../constants';
+
 class IConverter {
   convertAndValidate(values) {
-    throw new Error(
-      'convertAndValidate() 메서드는 반드시 오버라이딩 되어야 합니다.'
-    );
+    throw new Error(ERROR_MESSAGES.MUST_OVERRIDE_METHOD('convertAndValidate'));
   }
 }
 
