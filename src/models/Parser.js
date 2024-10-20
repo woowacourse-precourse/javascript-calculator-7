@@ -1,7 +1,11 @@
 export class Parser {
 	constructor(input, separators) {
 		this.input = input;
-		this.separators = separators;
+		if (separators && separators.length) {
+			this.separators = separators;
+		} else {
+			this.separators = [',', ':'];
+		}
 	}
 
 	combineSeparators(customSeparator) {
