@@ -6,7 +6,7 @@
   "scripts": {
     "start": "node src/index.js",
     "test": "jest --detectOpenHandles",
-    "test:watch": "jest --watch --detectOpenHandles ./test/*"
+    "test:watch": "jest --watch --detectOpenHandles"
   },
   "devDependencies": {
     "@babel/core": "^7.25.8",
