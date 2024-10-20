@@ -1,39 +1,55 @@
-import { MissionUtils } from "@woowacourse/mission-utils"; 
+import { MissionUtils } from "@woowacourse/mission-utils";
 
 const { Console } = MissionUtils;
-
 const DEFAULT_DELIMITER = /,|:/;
+const ERROR_MESSAGES = {
+  INVALID_DELIMITER: "[ERROR] 잘못된 구분자 형식입니다.",
+  INVALID_NUMBER: "[ERROR] 잘못된 값이 입력되었습니다.",
+  NEGATIVE_NUMBER: "[ERROR] 음수가 입력되었습니다.",
+};
 
 class App {
   async receiveInput() {
-    Console.print("덧셈할 문자열을 입력해 주세요."); 
-    return Console.readLineAsync();
+    return Console.readLineAsync("덧셈할 문자열을 입력해 주세요.");
   }
 
   getDelimiter(str) {
     if (!str.startsWith("//")) {
       return DEFAULT_DELIMITER;
     }
-    const [_, customDelimiter] = str.match(/\/\/(.*?)\\n/);
+
+    const match = str.match(/\/\/.\\n/);
+    if (!match) {
+      throw new Error(ERROR_MESSAGES.INVALID_DELIMITER);
+    }
+
+    const [_, customDelimiter] = match;
     return new RegExp(`${DEFAULT_DELIMITER.source}|${customDelimiter}`);
   }
 
   getNumbers(str, delimiter) {
     if (!str.startsWith("//")) {
-      return str.split(delimiter); 
+      return str.split(delimiter);
     }
-    const [_, numbers] = str.split("\\n"); 
-    return numbers.split(delimiter); 
+
+    const numbersPart = str.substring(str.indexOf("\\n") + 2);
+    return numbersPart.split(delimiter);
   }
 
   getSum(numbers) {
-    return numbers.map(Number).reduce((total, num) => total + num, 0);
+    return numbers
+      .map(Number)
+      .reduce((total, num) => total + num, 0);
   }
 
   checkNumbers(numbers) {
     numbers.forEach((num) => {
-      if (isNaN(Number(num)) || Number(num) < 0) {
-        throw new Error("[ERROR] 잘못된 값이 입력되었습니다.");
+      const parsedNumber = Number(num);
+      if (isNaN(parsedNumber)) {
+        throw new Error(ERROR_MESSAGES.INVALID_NUMBER);
+      }
+      if (parsedNumber < 0) {
+        throw new Error(ERROR_MESSAGES.NEGATIVE_NUMBER);
       }
     });
   }
@@ -43,7 +59,7 @@ class App {
       const str = await this.receiveInput();
       const delimiter = this.getDelimiter(str);
       const numbers = this.getNumbers(str, delimiter);
-      
+
       this.checkNumbers(numbers);
 
       const result = this.getSum(numbers);

@@ -32,8 +32,26 @@ describe("문자열 계산기", () => {
     });
   });
 
-  test("예외 테스트", async () => {
+  test("예외 테스트 음수", async () => {
     const inputs = ["-1,2,3"];
+    mockQuestions(inputs);
+
+    const app = new App();
+
+    await expect(app.run()).rejects.toThrow("[ERROR]");
+  });
+
+  test("예외 테스트 많은\\\\", async () => {
+    const inputs = ["//;\\\\\\\\n1"];
+    mockQuestions(inputs);
+
+    const app = new App();
+
+    await expect(app.run()).rejects.toThrow("[ERROR]");
+  });
+
+  test("예외 테스트 \\n의 반복", async () => {
+    const inputs = ["//;\\n1\\n1\\n1\\n1"];
     mockQuestions(inputs);
 
     const app = new App();
