@@ -11,5 +11,12 @@ class CalculatorProcess {
     const INPUT = await Console.readLineAsync('덧셈할 문자열을 입력해 주세요.');
     this.inputString = INPUT;
   }
-}
+
+  doParsing() {
+    if (/^-?\d+([,:]-?\d+)*$/.test(this.inputString)) {
+      const parsedNums = this.inputString.match(/-?\d+/g);
+      this.inputNums = parsedNums.map((element) => Number(element));
+    }
+  }
+
 export default CalculatorProcess;

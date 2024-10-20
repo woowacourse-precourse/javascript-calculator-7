@@ -10,6 +10,7 @@ class Calculator {
 
   async executeProcess() {
     await this.process.getString();
+    this.process.doParsing();
   }
 }
 
