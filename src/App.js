@@ -63,59 +63,34 @@ class App {
    *
    * @param {*} input
    * @returns
-   * 있다면 list로 반환
-   * 없다면 null
-   *
-   * "//;,//|/\\n1;2;3"
-   * 인식 x 케이스
    */
-
-  // 여러개일 수 있음
-  findCustomCharNList(input) {
-    // 문자열 앞부분의 "//"와 "\n" 사이에 존재한다.
-
+  splitByNewLineChar(input) {
     let obj = {
-      customCharString: null,
-      numberList: null,
+      customSeperatorString: null,
+      numberString: null,
     };
 
-    const preCharRegex = /^\/\//; // 문자열이 //로 시작하는지 확인
-    const afterCharRegex = /\\n/; // 보기에는 \n
+    const doubleSlashRegex = /^\/\//; // 문자열이 //로 시작하는지 확인
+    const newLineCharRegex = /\\n/; // 보기에는 \n
 
-    const hasPreChar = preCharRegex.test(input);
-    const hasEndChar = afterCharRegex.test(input);
+    // const regex = /^\/\/*\\n/; // 문자열이 //로 시작하는지 확인
+    const regex = doubleSlashRegex.test(input) && newLineCharRegex.test(input);
 
-    if (hasPreChar && hasEndChar) {
-      let [customCharStr, numberList] = input.split(afterCharRegex);
-
-      obj.customCharString = String.raw`${customCharStr.substring(
-        input.search(preCharRegex) + 2,
-        input.search(afterCharRegex)
-      )}`;
-
-      // afterCharRegex부터 끝까지
-      obj.numberList = numberList;
+    if (!regex) {
+      return obj;
     }
+
+    let [customSeperatorString, numberString] = input.split(
+      newLineCharRegex,
+      2
+    );
+
+    customSeperatorString = customSeperatorString.split(doubleSlashRegex)[1];
+
+    obj.customSeperatorString = customSeperatorString;
+    obj.numberString = numberString;
 
     return obj;
-  }
-
-  splitByComma(input) {
-    return splitBySeperaterChar(":", input);
-  }
-
-  splitBySemiColumn(input) {
-    return splitBySeperaterChar(";", input);
-  }
-
-  splitBySeperaterChar(sepChar, input) {
-    let result;
-    if (!!input) {
-      const numbers = input.split(sepChar);
-      result = this.sum(numbers);
-      Console.print(result);
-      return result;
-    }
   }
 
   sum(splitedList) {
