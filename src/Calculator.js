@@ -11,7 +11,6 @@ export class Calculator {
     // 2. 파싱 실행
     const parse = new Parse();
     let parseInput = parse.changeToList(input);
-    console.log(parseInput);
 
     // 3. 파싱된 결과 바탕으로 예외처리
     if (validate.deepValidate(parseInput).error) return false;
@@ -23,8 +22,21 @@ export class Calculator {
   add(...numbers) {
     let result = 0;
     numbers.forEach((number) => {
-      result += number;
+      if ((number * 10) % 10 != 0) {
+        result = this.floatAdd(result, number);
+      } else result += number;
     });
     return result;
+  }
+  floatAdd(result, number) {
+    // number와 result의 소수점 자릿수를 문자열 변환 후 계산
+    const resultDecimals = (result.toString().split(".")[1] || "").length;
+    const numberDecimals = (number.toString().split(".")[1] || "").length;
+
+    // 더 큰 소수점 자릿수를 기준으로 계산
+    const multiplier = Math.pow(10, Math.max(resultDecimals, numberDecimals));
+
+    // 정수로 변환해 계산하고 다시 소수점 자릿수로 나눔
+    return (result * multiplier + number * multiplier) / multiplier;
   }
 }
