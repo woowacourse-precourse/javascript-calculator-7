@@ -30,10 +30,12 @@ class App {
         throw new Error(ERROR_MESSAGE);
       }
       const regexString = customDelimiter
-        ? `${escapeRegExp(customDelimiter)}|//|\\\\n|,|:`
+        ? `${escapeRegExp(customDelimiter)}`
         : ",|:";
       const regex = new RegExp(regexString, "g");
-      const numbersWithMark = input.replace(regex, "!");
+      const numbersWithMark = customDelimiter
+        ? input.split("\\n")[1].replace(regex, "!")
+        : input.replace(regex, "!");
 
       const sum = numbersWithMark
         .split("!")
@@ -48,6 +50,7 @@ class App {
 
       Console.print("결과 : " + sum);
     } catch (error) {
+      Console.print(error.message);
       throw error;
     }
   }
