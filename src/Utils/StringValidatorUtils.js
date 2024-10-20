@@ -2,6 +2,12 @@ import ErrorMessages from '../constant/ErrorMessage.js'
 
 class StringValidator {
 
+    checkEmptyString(input) { // 빈 문자열 체크 함수
+        if (input.trim() === "") {
+            return 0;
+        }
+    }
+
     checkCustomDelimiterPosition(input) { // 커스텀 구분자 선언 위치 체크 함수
         if (input.includes('//') && !input.startsWith('//')) {
             throw new Error(ErrorMessages.ERROR_CUSTOM_DELIMITER_POSITION);
@@ -13,12 +19,6 @@ class StringValidator {
         const matches = input.match(customDelimiterPattern);
         if (matches && matches.length > 1) {
             throw new Error(ErrorMessages.ERROR_MULTIPLE_DECLARE_CUSTOM_DELIMITER);
-        }
-    }
-
-    checkEmptyString(input) { // 빈 문자열 체크 함수
-        if (input.trim() === "") {
-            throw new Error(ErrorMessages.ERROR_EMPTY_STRING);
         }
     }
 

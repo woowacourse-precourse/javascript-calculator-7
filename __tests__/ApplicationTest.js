@@ -99,7 +99,7 @@ describe("문자열 계산기", () => {
     mockQuestions(inputs);
 
     const logSpy = getLogSpy();
-    const outputs = [ErrorMessages.ERROR_EMPTY_STRING];
+    const outputs = ["결과 : 0"];
 
     const app = new App();
     await app.run();

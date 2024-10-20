@@ -8,6 +8,10 @@ const calculator = new StringCalculatorUtils();
 
 export function stringCalculator(input) {
 
+    if (validator.checkEmptyString(input) === 0) {
+        return 0;
+    }
+
     checkingProcessBeforeParsing(input);
 
     const { parsedArray, customDelimiter } = parsing.parsing(input);
@@ -22,7 +26,6 @@ export function stringCalculator(input) {
 }
 
 export function checkingProcessBeforeParsing(input) {
-    validator.checkEmptyString(input);
     validator.checkCustomDelimiterPosition(input);
     validator.checkMultipleDeclareCustomDelimiter(input);
 }
