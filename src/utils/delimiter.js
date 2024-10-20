@@ -1,7 +1,7 @@
 import {
   checkCustomDelimiterPosition,
   validateSplitValues,
-} from '../validator.js';
+} from './validator.js';
 
 /**
  * 콤마(`,`)와 콜론(`:`)을 기본 구분자로 사용하여 입력 문자열을 분리한다.

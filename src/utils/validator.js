@@ -1,5 +1,5 @@
-import ERROR_MESSAGES from './constants/errorMessages.js';
-import throwError from './error/errorHandler.js';
+import ERROR_MESSAGES from '../constants/errorMessages.js';
+import throwError from '../errors/errorGenerator.js';
 
 /**
  * 숫자가 음수일 경우 예외를 던진다.

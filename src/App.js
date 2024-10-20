@@ -1,9 +1,9 @@
-import getUserInput from './IO/inputHandler.js';
-import splitStringByDelimiter from './utils/delimiterHandler.js';
-import sumCalculation from './calculator.js';
-import { isEmptyString } from './validator.js';
-import printResult from './IO/printResult.js';
-import convertStringToNumber from './utils/numberHandler.js';
+import getUserInput from './controllers/inputController.js';
+import splitStringByDelimiter from './utils/delimiter.js';
+import sumCalculation from './utils/calculator.js';
+import { isEmptyString } from './utils/validator.js';
+import printResult from './views/resultView.js';
+import convertStringToNumber from './utils/converter.js';
 
 class App {
   async run() {

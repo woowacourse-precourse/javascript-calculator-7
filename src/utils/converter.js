@@ -1,4 +1,4 @@
-import { checkNegativeNumber, checkNumber } from '../validator.js';
+import { checkNegativeNumber, checkNumber } from './validator.js';
 
 /**
  * 문자열 배열을 숫자 배열로 변환한다.
