@@ -16,7 +16,9 @@ class Calculator {
       this.delimiters.push(customDelimiter);
     }
 
-    return input.replace(Regex.customDelimiter, '').split(this.generateRegexFromDelimiters(input));
+    const delimiterRex = this.generateRegexFromDelimiters(input);
+    Console.print(delimiterRex);
+    return input.replace(Regex.customDelimiter, '').split(delimiterRex);
   }
 
   add() {
@@ -34,7 +36,7 @@ class Calculator {
   }
 
   generateRegexFromDelimiters(input) {
-    const escapedDelimiters = this.delimiters.map((delimiter) => `\\${delimiter}`).join('');
+    const escapedDelimiters = this.delimiters.map((delimiter) => `${delimiter}`).join('');
     return new RegExp(`[${escapedDelimiters}]`);
   }
 }
