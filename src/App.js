@@ -9,7 +9,8 @@ class App {
       const result = this.calculate(userInput);
       Console.print(`결과 : ${result}`);
     } catch (error) {
-      Console.print(`[ERROR] ${error.message}`);
+      Console.print(error.message);
+      throw error;
     }
   }
 
@@ -59,8 +60,14 @@ class App {
     const number = parseInt(value, 10);
 
     // 유효하지 않은 숫자 또는 음수일 경우 예외 발생
-    if (isNaN(number) || number < 0) {
-      throw new Error("잘못된 입력값입니다.");  // [ERROR] 메시지를 개선
+    if (isNaN(number)) {
+      throw new Error("[ERROR] 숫자가 아닌 값이 포함되어 있습니다.");
+    }
+    if (number < 0) {
+      throw new Error("[ERROR] 음수는 입력할 수 없습니다.");
+    }
+    if (number !== Math.floor(number)) {
+        throw new Error("[ERROR] 실수는 입력할 수 없습니다.");
     }
     return number;
   }
