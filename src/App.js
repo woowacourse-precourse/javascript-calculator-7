@@ -47,7 +47,11 @@ class App {
   }
 
   printResult(result) {
-    Console.print(`결과 : ${result}`);
+    if (Number.isNaN(result)) {
+      throw new Error("[ERROR]");
+    } else {
+      Console.print(`결과 : ${result}`);
+    }
   }
 
   async run() {}
