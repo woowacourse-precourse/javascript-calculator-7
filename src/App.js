@@ -28,20 +28,20 @@ class App {
   }
 
   delimiterHandler(input) {
-    const delimiter = [',', ':'];
+    const DEFAULT_DELIMITERS = [',', ':'];  // 상수는 SNAKE_CASE로 변경
 
     if (input.startsWith('//')) {
       const match = input.match(/^\/\/(.)\\n(.*)$/);
       if (match) {
         const customDelimiter = match[1]; // // 뒤의 문자열을 구분자로 사용
-        delimiter.push(customDelimiter);
+        DEFAULT_DELIMITERS.push(customDelimiter); // 기본 구분자 배열에 커스텀 구분자를 추가
         input = match[2]; // \n 이후의 문자열을 처리
       } else {
         throw new Error('[ERROR] 잘못된 형식의 입력입니다.');
       }
     }
 
-    return { delimiters: delimiter, updatedInput: input }; // delimiter와 수정된 input을 반환
+    return { delimiters: DEFAULT_DELIMITERS, updatedInput: input };
   }
 
   splitInput(input, delimiters) {
