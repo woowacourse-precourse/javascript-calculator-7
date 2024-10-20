@@ -23,13 +23,14 @@ class App {
 
     // "//"와 "\\n"사이에 커스텀 구분자가 있을 경우
     if (this.customSeperators.every(e => str.includes(e))) {
-      this.checkCustomSeperator(str)
-      return
+      const changedArray = this.checkCustomSeperator(str);
+      return this.addAllArray(changedArray);
     };
 
     // ','와 ":" 만 있을 경우 
     if (this.normalSeperators.some(e => str.includes(e))) {
-      return
+      const changedArray = this.strToArrayHandler(str);
+      return this.addAllArray(changedArray)
     }
 
     // 그 외의 경우 예외처리
@@ -62,9 +63,11 @@ class App {
       .replaceAll(',', '')
       .replaceAll(':', '')
       .split('');
-    
   }
 
+  addAllArray(arr) {
+    return arr.reduce((a, b) => Number(a) + Number(b));
+  }
 
   printError(msg) {
     Console.print('[ERROR]'+msg);
