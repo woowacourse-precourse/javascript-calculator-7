@@ -7,6 +7,14 @@ class App {
     });
   }
 
+  #NumberPicker(userInput) { // 입력받은 값에서 숫자만 추출하는 함수
+    const CHANGE_COLON = userInput.replace(":", ",");
+    const COMMA = CHANGE_COLON.split(',');
+    const PICKED_NUMBER = COMMA;
+    const RESULT = this.#addNumber(PICKED_NUMBER);
+    return RESULT;
+  }
+
   async run() {
     await this.#startCalculator();
   }
