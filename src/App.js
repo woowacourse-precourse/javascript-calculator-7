@@ -30,12 +30,17 @@ extractDelimiter(input) {
 
 // 숫자 변환: 분리한 문자를 숫자로 변환하는 메소드
 convertToNumbers(numbers) {
-  return numbers.map(num => Number(num)); // 분리된 문자열을 숫자로 변환
+  return numbers.map(num => Number(num)); 
 }
 
 // 합 계산: 분리한 각 숫자의 합을 반환하는 메소드
 calculateSum(numbers) {
   return numbers.reduce((sum, num) => sum + num, 0); 
+}
+
+// 출력: 덧셈 결과를 출력하는 메소드
+printResult(result) {
+  console.log(`결과 : ${result}`); 
 }
 
 
