@@ -1,4 +1,4 @@
-import App from "../App.js";
+import App from "../src/App.js";
 import { MissionUtils } from "@woowacourse/mission-utils";
 
 const mockQuestions = (inputs) => {
@@ -51,7 +51,7 @@ describe("테스트", () => {
     mockQuestions(inputs);
 
     const logSpy = getLogSpy();
-    const outputs = ["[ERROR] : 잘못된 문자열을 입력하였습니다."];
+    const outputs = ["[ERROR] : 잘못된 문자를 입력하였습니다."];
 
     const app = new App();
     await app.run();

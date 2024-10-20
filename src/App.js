@@ -1,4 +1,4 @@
-import InputCheck from "./InputCheck.js";
+import InputCheck from "./StringCalculator/InputCheck.js";
 
 class App {
   async run() {
