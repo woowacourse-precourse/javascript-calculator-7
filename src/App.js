@@ -1,12 +1,14 @@
 import { Console } from "@woowacourse/mission-utils"; // woowacourse에서 제공
 import DelimiterManager from "./delimiterManager.js";
 import ResultPrinter from "./resultPrinter.js";
+import Calculator from "./calculator.js";
 
 // App 클래스는 프로그램 제어를 담당함
 class App {
   constructor() {
     this.delimiterManager = new DelimiterManager();
     this.resultPrinter = new ResultPrinter();
+    this.calculator = new Calculator();
   }
 
   getInput() {
@@ -15,8 +17,14 @@ class App {
       // 입력된 문자열을 DelimiterManager로 파싱
       const parsedInput = this.delimiterManager.parseInput(input);
 
-      // 파싱된 결과를 ResultPrinter로 출력
-      this.resultPrinter.print(parsedInput);
+      // 계산할 문자열에서 숫자들을 추출
+      const numbers = this.delimiterManager.extractNumbers(
+        parsedInput.calculationString
+      );
+
+      const result = this.calculator.calculate(numbers);
+
+      this.resultPrinter.print(result);
     });
   }
 

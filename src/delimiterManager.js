@@ -10,23 +10,41 @@ class DelimiterManager {
     return this.delimiters;
   }
 
+  // 새로운 커스텀 구분자를 구분자 배열에 추가하는 메서드
+  addCustomDelimiter(delimiter) {
+    this.delimiters.push(delimiter);
+  }
+
   // 입력 문자열을 분석하여 커스텀 구분자와 계산할 숫자 문자열을 추출
   parseInput(input) {
     let customDelimiter = null;
     let calculationString = input;
 
-    // 커스텀 구분자가 있는지 확인 (예: //;\n1;2;3)
-    const customDelimiterMatch = input.match(/^\/\/(.+)\n/);
-    if (customDelimiterMatch) {
-      customDelimiter = customDelimiterMatch[1]; // 커스텀 구분자 추출
-      this.delimiters.push(customDelimiter); // 커스텀 구분자를 구분자 배열에 추가
-      calculationString = input.split("\n")[1]; // 계산할 숫자 문자열 추출
+    if (input.startsWith("//")) {
+      const parts = input.split("\\n");
+
+      if (parts.length > 1) {
+        customDelimiter = parts[0].substring(2); // "//" 이후의 문자열 추출 (커스텀 구분자)
+        calculationString = parts[1]; // 계산할 문자열 추출
+        this.addCustomDelimiter(customDelimiter);
+      }
     }
 
     return {
-      delimiters: this.getDelimiters(), // 구분자 배열
-      calculationString: calculationString, // 계산할 문자열
+      delimiters: this.getDelimiters(),
+      calculationString: calculationString,
     };
+  }
+
+  // 계산할 문자열에서 구분자들을 사용해 숫자들을 추출하는 메서드
+  extractNumbers(calculationString) {
+    // 구분자들을 "|"로 연결하여 정규 표현식으로 변환
+    const delimiterRegex = new RegExp(
+      this.delimiters.map((d) => `\\${d}`).join("|"),
+      "g"
+    );
+    const numbers = calculationString.split(delimiterRegex).map(Number);
+    return numbers;
   }
 }
 
