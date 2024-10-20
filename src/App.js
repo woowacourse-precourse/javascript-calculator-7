@@ -10,8 +10,10 @@ class App {
     async run() {
         const input = await this.getUserInput();
         const [customDelimiter, inputWithoutDelimiter] = this.splitCustomDelimiter(input);
-        this.validateInput(customDelimiter, inputWithoutDelimiter);
-        const numbers = this.splitInputByDelimiter(customDelimiter, inputWithoutDelimiter);
+        const delimiters = customDelimiter ? `,:${customDelimiter}` : ",:";
+
+        this.validateInput(inputWithoutDelimiter, delimiters);
+        const numbers = this.splitInputByDelimiter(inputWithoutDelimiter, delimiters);
         const sum = this.sumNumbers(numbers);
 
         Console.print(`결과 : ${sum}`);
@@ -26,10 +28,8 @@ class App {
         }
     }
 
-    validateInput(customDelimiter, inputWithoutDelimiter) {
-        const delimiters = customDelimiter ? `,:${customDelimiter}` : ",:";
+    validateInput(inputWithoutDelimiter, delimiters) {
         const regex = new RegExp(`^^(0|[1-9][0-9]*)([${delimiters}](0|[1-9][0-9]*))*$`);
-
         if (inputWithoutDelimiter && !regex.test(inputWithoutDelimiter)) {
             this.throwError("입력값이 유효하지 않습니다.");
         }
@@ -48,9 +48,8 @@ class App {
         }
     }
 
-    splitInputByDelimiter(customDelimiter, inputWithoutDelimiter) {
+    splitInputByDelimiter(inputWithoutDelimiter, delimiters) {
         if (!inputWithoutDelimiter) return [0];
-        const delimiters = customDelimiter ? `,:${customDelimiter}` : ",:";
         const numbers = inputWithoutDelimiter.split(new RegExp(`[${delimiters}]`));
         return numbers.map((number) => Number(number));
     }
