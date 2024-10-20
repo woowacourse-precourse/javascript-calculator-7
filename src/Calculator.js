@@ -1,7 +1,7 @@
 import { Console } from "@woowacourse/mission-utils";
 import Delimiters from "./Delimiters";
 import Validator from "./Validator";
-const CUSTOM_DISTINCT_REGEX = /^(\/\/.+\\n)|\s+/g;
+const CUSTOM_DISTINCT_REGEX = /^(\/\/.+\n)|\s+/g; // 커스텀 구분자의 식별자와 공백
 
 class Calculator {
   constructor() {
@@ -10,7 +10,7 @@ class Calculator {
 
   async calculate () {
     let input = await this.getInput();
-    input = input.trim();
+    input = input.trim().replace("\\n", "\n");
     if(this.isEmptyInput(input)) {
       Console.print("결과 : 0");
       return;
@@ -29,7 +29,7 @@ class Calculator {
       const input = await Console.readLineAsync('덧셈할 문자열을 입력해주세요.(기본 구분자: ",", ":" | 커스텀 구분자는 "//" "\n" 사이에 입력해주세요. 예: "//;\n")');
       return input;
     } catch (error) {
-      throw new Error("[ERROR] 입력값을 읽는 중 에러가 발생했습니다.");
+      throw new Error(`[ERROR] 입력값을 읽는 중 에러가 발생했습니다. ${error}`);
     }
   }
 
@@ -48,7 +48,7 @@ class Calculator {
       this.validator.validateNumberExist(value)
       return Number(value);
     });
-    console.log(numbers);
+
     return numbers;
   }
 

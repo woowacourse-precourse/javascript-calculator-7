@@ -12,7 +12,7 @@ const mockQuestions = (inputs) => {
 
 describe("Caculator 클래스 입력 테스트", () => {
   test("getInput 메서드가 입력값을 제대로 받아오는지 확인", async () => {
-    const inputs = ["//;\\n1;2;3"];  // 테스트 입력값
+    const inputs = ["//;\\n1;2;3"];  
     mockQuestions(inputs);
 
     const calculator = new Caculator();

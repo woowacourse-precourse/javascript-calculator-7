@@ -3,7 +3,7 @@ import Validator from "./Validator";
 class Delimiters {
   constructor() {
     this.BASE_DELIMITER = [",", ":"];
-    this.CUSTOM_DELIMITER_REGEX = /^\/\/(.+)\\n/; // 숫자 사용 불가
+    this.CUSTOM_DELIMITER_REGEX = /^\/\/(.+)\n/;
     this.validator = new Validator();
   }
   detect (input) {
@@ -13,7 +13,7 @@ class Delimiters {
     const matchedDelimiter = input.match(this.CUSTOM_DELIMITER_REGEX);    
     
     if (!matchedDelimiter) {
-      this.validator.validateDelimiter(input);
+      this.validator.validateEscapeDelimiter(input); // //\\\n 에러 처리
       return this.BASE_DELIMITER;
     }
 

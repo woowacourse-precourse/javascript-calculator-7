@@ -26,8 +26,8 @@ class Validator {
     }
   }
 
-  validateDelimiter(input) {
-    if (input.startsWith("//\\\n")) {
+  validateEscapeDelimiter(input) {
+    if (input.startsWith("//\\n")) {
       throw new Error("[ERROR] 식별자(/, \\)는 커스텀 구분자로 사용할 수 없습니다.");
     }
   }

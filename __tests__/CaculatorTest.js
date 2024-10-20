@@ -47,7 +47,7 @@ describe("문자열 계산기", () => {
       expect(logSpy).toHaveBeenCalledWith(expect.stringContaining(output));
     });
   });
-  test("커스텀 구분자 사용", async () => {
+  test("실수 계산", async () => {
     const inputs = ["//;\\n1.2,2.4;2.5"];
     mockQuestions(inputs);
 
@@ -77,7 +77,7 @@ describe("문자열 계산기", () => {
     });
   });
 
-  test("커스텀 구분자 사용", async () => {
+  test("실수, 정수 계산", async () => {
     const inputs = ["//;\\n1;2.1;3"];
     mockQuestions(inputs);
 
@@ -101,7 +101,7 @@ describe("문자열 계산기", () => {
     await expect(app.run()).rejects.toThrow("[ERROR]");
   });
 
-  test("예외 테스트: 커스텀 구분자 중복", async () => {
+  test("예외 테스트: 유효하지 않은 커스텀 구분자 ", async () => {
     const inputs = ["//;\\n//]\\n1*2; 3"];
     mockQuestions(inputs);
 
