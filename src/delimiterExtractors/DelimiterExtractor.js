@@ -24,7 +24,13 @@ class DelimiterExtractor extends IDelimiterExtractor {
       throw new Error(ERROR_MESSAGES.CUSTOM_DELIMITER_NOT_AT_START);
     }
 
-    this.#customDelimiter = customDelimiterMatch[1];
+    const customDelimiter = customDelimiterMatch[1];
+
+    if (customDelimiter.length > 1) {
+      throw new Error(ERROR_MESSAGES.CUSTOM_DELIMITER_TOO_LONG);
+    }
+
+    this.#customDelimiter = customDelimiter;
     return inputValue.slice(customDelimiterMatch[0].length);
   }
 
