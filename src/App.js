@@ -20,6 +20,11 @@ class CalculatorApp {
   #isNumberArray(array) {
     return array.every((item) => NUMBER_CHECK_REGEX.test(item));
   }
+
+  // 합계 계산
+  #sumValues(values) {
+    return values.reduce((accumulator, value) => accumulator + Number(value), 0);
+  }
   async run() {}
 }
 
