@@ -1,4 +1,3 @@
-import { Console } from '@woowacourse/mission-utils';
 import { EMPTY_INPUT_SUM } from '../constants/constants.js';
 import StringCalculator from '../model/StringCalculator.js';
 import Validator from '../model/Validator.js';

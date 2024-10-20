@@ -1,6 +1,5 @@
 import { Console } from '@woowacourse/mission-utils';
 import CalculatorController from './controller/CalculatorController.js';
-import { EMPTY_INPUT_SUM } from './constants/constants.js';
 
 class App {
   async run() {
