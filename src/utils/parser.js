@@ -1,11 +1,23 @@
+function handleNaNCheck(numbers) {
+  if (numbers.some(isNaN)) {
+    handleError("숫자가 아닌 값이 포함되어 있습니다. 구분자를 확인해주세요.");
+    return [];
+  }
+  return numbers;
+}
+
 function parseInput(input) {
+  let delimiter = /[,:]/;
+  let numbers = input;
+
   if (input.startsWith("//")) {
     const delimiterEndIndex = input.indexOf("\\n");
-    const delimiter = input.substring(2, delimiterEndIndex);
-    const numbers = input.substring(delimiterEndIndex + 2);
-    return numbers.split(delimiter).map(Number);
+    delimiter = input.substring(2, delimiterEndIndex);
+    numbers = input.substring(delimiterEndIndex + 2);
   }
-  return input.split(/[,:]/).map(Number);
+
+  const parsedNumbers = numbers.split(delimiter).map(Number);
+  return handleNaNCheck(parsedNumbers);
 }
 
 export default parseInput;
