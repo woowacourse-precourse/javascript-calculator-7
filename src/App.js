@@ -12,6 +12,9 @@ class App {
     Console.print("덧셈할 문자열을 입력해 주세요."); 
     let Input = await Console.readLineAsync("");
 
+    // 빈 문자열을 예외 처리
+    this.Exception(Input === "", "[ERROR]");
+
     // 기본 구분자를 정규식으로 포함
     let Delim = /[,:]/;
     let Num;
@@ -23,6 +26,9 @@ class App {
 
       let Custom_delim_end = Input.indexOf("\n");
 
+      // 커스텀 구분자 형태의 예외 처리
+      this.Exception(Custom_delim_end === -1, "[ERROR]");
+
       // 커스텀 구분자 추출
       let Custsom_delim = Input.substring(2, Custom_delim_end);
       Delim = new RegExp(`[${Custsom_delim}]`); // 정규식 객체 생성
@@ -33,6 +39,11 @@ class App {
 
     // 문자열을 구분자로 분리하고 숫자로 변환, trim()으로 공백 제거
     Num = Input.split(Delim).map((x) => x.trim()).map(Number);
+
+    // 숫자배열의 예외처리
+    this.Exception(Num.length === 0, "[ERROR]");
+    this.Exception(Num.some(isNaN), "[ERROR]");
+    this.Exception(Num.some((n) => n < 0), "[ERROR]");
 
     // 합산 계산
     let SUM = 0;
