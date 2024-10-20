@@ -72,7 +72,7 @@ describe("문자열 계산기", () => {
   });
 
   test("커스텀 구분자와 기본 구분자 혼용 사용", async () => {
-    const inputs = ["//^\n1^2,3:4^"];
+    const inputs = ["//^\\n1,2:3^4"];
     mockQuestions(inputs);
 
     const logSpy = getLogSpy();
@@ -93,5 +93,20 @@ describe("문자열 계산기", () => {
     const app = new App();
 
     await expect(app.run()).rejects.toThrow("[ERROR]");
+  });
+
+  test("커스텀 구분자가 /, \, \n인 경우", async () => {
+    const inputs = ["//\\\\n2\\3\\4"];
+    mockQuestions(inputs);
+
+    const logSpy = getLogSpy();
+    const outputs = ["결과 : 9"];
+
+    const app = new App();
+    await app.run();
+
+    outputs.forEach((output) => {
+      expect(logSpy).toHaveBeenCalledWith(expect.stringContaining(output));
+    });
   });
 });
