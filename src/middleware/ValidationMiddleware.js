@@ -11,7 +11,7 @@ class ValidationMiddleware {
 
   next(context, next) {
     if (!this.isValidExpression(context.expression)) {
-      throw new Error("[ERROR] test");
+      throw new FormatValidationError();
     }
     next();
   }
