@@ -37,14 +37,27 @@ class App {
 
     if (first.startsWith('//')) {
       const customSep = first.slice(2);
-      if (customSep.length !== 1) {
-        throw Error(errorString(CONSOLE_MESSAGE.SEPARATOR_LENGTH_ERROR));
-      }
+
+      this.validateSeparator(customSep);
 
       return [customSep, rest];
     }
 
-    return ['', first];
+    return [null, first];
+  }
+
+  validateSeparator(customSep) {
+    if (DEFAULT_SEPARATOR.includes(customSep)) {
+      throw Error(errorString(CONSOLE_MESSAGE.SEPARATOR_DUPLICATE_ERROR));
+    }
+
+    if (customSep.length !== 1) {
+      throw Error(errorString(CONSOLE_MESSAGE.SEPARATOR_LENGTH_ERROR));
+    }
+
+    if (customSep === ' ') {
+      throw Error(errorString(CONSOLE_MESSAGE.SEPARATOR_EMPTY_ERROR));
+    }
   }
 
   splitWithSeparator(str, separator, customSep) {
@@ -52,30 +65,16 @@ class App {
       return ['0'];
     }
 
-    const allSeparator = this.validateAndAddSeparator(separator, customSep);
-
-    const sepToRegex = new RegExp(allSeparator.join('|'));
-
-    return str.split(sepToRegex);
-  }
-
-  validateAndAddSeparator(separator, customSep) {
     const allSeparator = separator;
 
-    if (allSeparator.includes(customSep)) {
-      throw Error(errorString(CONSOLE_MESSAGE.SEPARATOR_DUPLICATE_ERROR));
-    }
-
-    if (customSep !== '') {
+    if (customSep) {
       const escapedSep = this.escapedSeparator(customSep);
       allSeparator.push(escapedSep);
     }
 
-    if (customSep === ' ') {
-      throw Error(errorString(CONSOLE_MESSAGE.SEPARATOR_EMPTY_ERROR));
-    }
+    const sepToRegex = new RegExp(allSeparator.join('|'));
 
-    return allSeparator;
+    return str.split(sepToRegex);
   }
 
   escapedSeparator(separator) {
