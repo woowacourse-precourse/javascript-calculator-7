@@ -1,11 +1,6 @@
-import { 
-	printOutput, 
-	userInput 
-} from "./utils/missionUtils.js";
-import validateSeparatorFormat from "./utils/validateSeparatorFormat.js";
-import validatePositiveNumber from "./utils/validatePositiveNumber.js";
-import extractCustomSeparator from "./utils/extractCustomSeparator.js";
-import splitNumbers from "./utils/splitNumbers.js";
+import { printOutput, userInput } from "./utils/missionUtils.js";
+import { validateSeparatorFormat, validatePositiveNumber} from './utils/validate.js'
+import { splitSeparator, extractCustomSeparator } from "./utils/separator.js";
 import { getSum } from "./utils/calculate.js";
 
 class Calculator {
@@ -30,7 +25,7 @@ class Calculator {
 
 	async #getNumbers(userInputValue) {
 		const { separators, inputWithoutSeparator } = await extractCustomSeparator(userInputValue);
-		return splitNumbers(separators, inputWithoutSeparator);
+		return splitSeparator(separators, inputWithoutSeparator);
 	}
 
 	async #printOutputNumber(outputValue) {
