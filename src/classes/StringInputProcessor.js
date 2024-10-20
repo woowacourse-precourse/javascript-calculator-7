@@ -9,7 +9,7 @@ class StringInputProcessor {
 
   processInput(input) {
     if (!input) {
-      return 0;
+      return [0];
     }
 
     ProcessorValidator.validateInputFormat(input);

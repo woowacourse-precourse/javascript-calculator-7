@@ -8,7 +8,7 @@ class ProcessorValidator {
   static validateDelimiter(char, allDelimiters) {
     if (!allDelimiters.has(char)) {
       throw new Error(
-        `[ERROR] 허용되지 않은 구분자 ${char} 가 입력되었습니다.`
+        `[ERROR] 허용되지 않은 구분자 '${char}' 가 입력되었습니다.`
       );
     }
   }
@@ -19,7 +19,7 @@ class ProcessorValidator {
     }
 
     if (!/[0-9]/.test(firstChar)) {
-      throw new Error(`[ERROR] ${firstChar} 구분자 앞에 숫자가 없습니다.`);
+      throw new Error(`[ERROR] '${firstChar}' 구분자 앞에 숫자가 없습니다.`);
     }
   }
 
@@ -31,7 +31,9 @@ class ProcessorValidator {
   ) {
     if (lastDelimiter) {
       this.validateDelimiter(lastDelimiter, allDelimiters);
-      throw new Error(`[ERROR] ${lastDelimiter} 구분자 뒤에 숫자가 없습니다.`);
+      throw new Error(
+        `[ERROR] '${lastDelimiter}' 구분자 뒤에 숫자가 없습니다.`
+      );
     }
 
     if (lastNumber) {
