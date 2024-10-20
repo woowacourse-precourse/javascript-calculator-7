@@ -21,7 +21,10 @@ class App {
         nums = line.split(/[,:]/).map(Number);
       
       for (let num of nums) {
+        if (Number(num) >= 0)
           sum += num;
+        else 
+          throw new Error("[ERROR]");
       }
     } catch (error) {
     }
