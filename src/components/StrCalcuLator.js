@@ -1,11 +1,13 @@
-import { Console } from "@woowacourse/mission-utils";
-import { uiConstants, errorConstans } from "../constants/index.js";
+import { errorConstans } from "../constants/index.js";
 
 export default class StrCalcuLator {
   #inputStrs;
+  #separator;
 
   constructor(inputStr) {
-    this.#inputStrs = this.#createStr(inputStr);
+    this.#inputStrs = this.#createStr(inputStr); // 커스텀 구분자 검증과 문자열 생성.
+    this.#inputStrs = this.#separate(this.#separator, this.#inputStrs); // 구분자로 분류후 배열로 생성.
+    this.#isNumber(this.#inputStrs); // 분리된 문자열에서 조건에 맞는지 검증
   }
 
   // 오류 검증 및 필요한 문자열로 변환하는 메서드
@@ -20,16 +22,16 @@ export default class StrCalcuLator {
       inputStr = inputStr.slice(5,); // 커스텀 구분자를 제외한 문자열
       separator.push(tmpSep);
     }
-    // 구분자를 이용한 분리
-    separator.forEach((sep) => {
-      inputStr = inputStr.split(sep).join('');
-    })
-    inputStr = inputStr.split('').map((el) => +el);
-    
-    // 분리된 문자열에서 조건에 맞는지 검증
-    this.#isNumber(inputStr);
-    
+    this.#separator = separator;   
     return inputStr;
+  }
+
+  #separate(separatorArr, strs) {
+    separatorArr.forEach((sep) => {
+      strs = strs.split(sep).join('');
+    })
+    strs = strs.split('').map((el) => +el);
+    return strs;
   }
 
   calculate() {
