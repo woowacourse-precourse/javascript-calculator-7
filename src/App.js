@@ -2,8 +2,9 @@ import { MissionUtils, Console } from "@woowacourse/mission-utils";
 
 class App {
   async run() {
-    const tmp = await getInputStr();
-    console.log(tmp, "마지막 콘솔");
+    const input = await getInputStr();
+    const answer = `결과 : ${input}`;
+    Console.print(answer);
   }
 }
 
@@ -25,16 +26,19 @@ async function getInputStr() {
     separator.forEach((sep) => {
       inputStr = inputStr.split(sep).join('');
     })
-    inputStr = inputStr.split('');
+    inputStr = inputStr.split('').map((el) => +el);
 
-    console.log(inputStr);
     // 분리된 문자열에서 조건에 맞는지 검증
     isNumber(inputStr);
-    isNotNegative(inputStr);
+
+    const sum = inputStr.reduce((acc, cur) => {
+      return acc + cur;
+    }, 0);
     // 구분자를 이용해 문자열 구분.
-    return inputStr;
+    return sum;
+
   } catch (error) {
-     return error;
+    throw new Error(error);
   }
 }
 
@@ -46,7 +50,7 @@ const isCustom = (inputStr) => {
   const regExp2 = /(\/\/\D{1}\\n){1}.{0,}/;
   if (regExp.test(inputStr)) { // 커스텀 구분자의 형식을 가진 문자열 이라면,
     if (!regExp2.test(inputStr)) {
-      throw new Error("[ERROR] 잘못된 입력 형식 입니다.(구분자 길이 오류 or 잘못된 커스텀 구분자 형식)");
+      throw new Error("[ERROR]");
     }
     return true;
   }
@@ -54,19 +58,13 @@ const isCustom = (inputStr) => {
 }
 
 
-// 2. 문자열이 숫자 인지
+// 2. 문자열이 숫자인지, 양수인지
 const isNumber = (inputStr) => {
   for (let i = 0; i < inputStr.length; i += 1){
-    if(isNaN(inputStr[i])) throw new Error("[ERROR] 숫자가 아닙니다. or 양수가 아닙니다.")
+    if (isNaN(inputStr[i])) throw new Error("[ERROR]");
   }
 }
 
-// 3. 문자열에 구분자를 제외하면 양수만 있는지.
-const isNotNegative = (inputStr) => {
-  for (let i = 0; i < inputStr.length; i += 1){
-    if(0 > inputStr[i]) throw new Error("[ERROR] 양수만 사용할 수 있습니다.")
-  }
-}
 
 
 export default App;
