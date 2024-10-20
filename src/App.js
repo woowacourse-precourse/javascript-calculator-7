@@ -1,5 +1,9 @@
 import { MissionUtils } from "@woowacourse/mission-utils";
 
+function printResult(sum){
+  return MissionUtils.Console.print(`결과 : ${sum}`);
+}
+
 function sumNumber(numberArr){
   let sum = 0;
   for(var number of numberArr) sum += number;
@@ -63,7 +67,7 @@ class App {
       let splitunit = getSplitunit(input);
       let numberArr = extractNumber(input, splitunit);
       let sum = sumNumber(numberArr);
-      MissionUtils.Console.print(`결과 : ${sum}`);
+      printResult(sum);
     } catch(error){
       MissionUtils.Console.print("[Error] 프로그램이 종료되었습니다.");
       throw error;
