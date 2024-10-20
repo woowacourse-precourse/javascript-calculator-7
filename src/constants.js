@@ -14,6 +14,7 @@ const ERROR_MESSAGES = {
     '[ERROR] 커스텀 구분자는 기본 구분자와 겹치지 않아야 합니다.',
   WRONG_SYMBOL_TYPE:
     '[ERROR] 커스텀 구분자는 기본 구분자와 (.)점을 제외한 특수문자만 입력해 주세요.',
+  WRONG_POSITION: '[ERROR] 커스텀 구분자의 위치가 올바르지 않습니다.',
 };
 
 export { PRINT_MESSAGES, ERROR_MESSAGES };
