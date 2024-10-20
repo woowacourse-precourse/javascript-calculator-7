@@ -10,11 +10,15 @@ class App {
       const result = this.processInput(input);
       Console.print(`결과: ${result}`);
     } catch (error) {
-      Console.print(`오류: ${error.message}`);
+      Console.print(`[ERROR] ${error.message}`);
     }
   }
 
   processInput(input) {
+    if (!input) {
+      throw new Error('숫자를 입력해주세요.'); // 입력이 없는 경우 처리
+    }
+
     let DELIMITER = ',|:'; // 기본 구분자 쉼표와 콜론
     if (input.startsWith('//')) {
       const parts = input.split('\n');
@@ -29,8 +33,11 @@ class App {
     let sum = 0;
     numbers.forEach(num => {
       const number = parseInt(num, 10);
-      if (isNaN(number) || number < 0) {
-        throw new Error(`양수만 입력 가능합니다: ${num}`);
+      if (isNaN(number)) {
+        throw new Error('숫자를 입력해주세요.'); // 숫자가 아닌 경우 처리
+      }
+      if (number < 0) {
+        throw new Error('숫자는 양수만 가능합니다.'); // 양수가 아닌 경우 처리
       }
       sum += number;
     });
