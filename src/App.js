@@ -6,14 +6,14 @@ class App {
     let result = 0;
 
     function checkCustomIdentifier(userInput) {
-      const customRegex = /\/\/(.*)\\n/;
-      const customString = userInput.match(customRegex);
+      const CUSTOM_REGEX = /\/\/(.*)\\n/;
+      const CUSTOM_STRING = userInput.match(CUSTOM_REGEX);
       let customIdentifier = "";
 
-      if (customString === null) {
+      if (CUSTOM_STRING === null) {
         return userInput;
       } else {
-        customIdentifier = customString[1];
+        customIdentifier = CUSTOM_STRING[1];
 
         if (customIdentifier.length > 1) {
           throw new Error("[ERROR] 커스텀 구분자는 1자리여야 합니다.");
@@ -30,9 +30,9 @@ class App {
     }
 
     function checkMinus(userInput) {
-      const minusRegex = /-\d+/g;
-      let minusString = userInput.match(minusRegex);
-      if (minusString === null) {
+      const MINUS_REGEX = /-\d+/g;
+      const MINUS_STRING = userInput.match(MINUS_REGEX);
+      if (MINUS_STRING === null) {
         return userInput;
       } else {
         throw new Error("[ERROR] 음수는 입력할 수 없습니다.");
@@ -40,13 +40,13 @@ class App {
     }
 
     function calculateSum(userInput) {
-      const targetRegex = /[^0-9:,]/g;
+      const TARGET_REGEX = /[^0-9:,]/g;
       let sum = 0;
 
-      userInput = userInput.replace(targetRegex, "");
+      userInput = userInput.replace(TARGET_REGEX, "");
 
-      const splitedInput = userInput.split(/[:,]/);
-      splitedInput.map((element) => {
+      const SPLITED_INPUT = userInput.split(/[:,]/);
+      SPLITED_INPUT.map((element) => {
         if (element !== "") {
           element = parseInt(element);
           sum += element;
