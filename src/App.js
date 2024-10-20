@@ -8,38 +8,27 @@ class App {
 
 
   #workingCalculator(userInput) { // 계산기 작동
-    if (userInput.startsWith(/[0-9]/)) {
-      this.#NumberPicker(userInput);
-    } else if (userInput.indexOf('//') != -1 === false) {
-      this.#customPicker(userInput);
+    let string = [];
+    if (userInput.indexOf('//') != -1 === false) {
+      // 커스텀 구분자 추출 하고나서 숫자만 추출하기
+      const startIndex = userInput.indexOf('//') + 2;
+      const endIndex = userInput.indexOf("\n");
+      const custom = userInput.substring(startIndex, endIndex);
+      const delFirst = userInput.replace('//', '');
+      const delSecond = delFirst.replace(/\n/g, "");
+      string = delSecond.split(custom).map(Number);
     } else {
-      this.#errorCalculator(userInput);
+      // 입력받은 값에서 숫자만 추출하는 함수
+      const changeColon = userInput.replace(":", ",");
+      const comma = changeColon.split(',').map(Number);
+      string = comma;
     }
+    return string;
   }
 
-  #NumberPicker(userInput) { // 입력받은 값에서 숫자만 추출하는 함수
-    const CHANGE_COLON = userInput.replace(":", ",");
-    const COMMA = CHANGE_COLON.split(',');
-    const PICKED_NUMBER = COMMA;
-    const RESULT = this.#addNumber(PICKED_NUMBER);
-    return RESULT;
-  }
-
-  #customPicker(userInput) { // 커스텀 구분자 추출 하고나서 숫자만 추출하기
-    const START_INDEX = userInput.indexOf('//') + 2;
-    const END_INDEX = userInput.indexOf("\n");
-    const CUSTOM = userInput.substring(START_INDEX, END_INDEX);
-    const DEL_FIRST = userInput.replace('//', '');
-    const DEL_SECOND = DEL_FIRST.replace(/\n/g, "");
-    const PICK_CUSTOM_NUMBER = DEL_SECOND.split(CUSTOM);
-    const RESULT = this.#addNumber(PICK_CUSTOM_NUMBER);
-    return RESULT;
-  }
-
-  #addNumber(x) { // 더하는 함수
-    const TURN_NUMBER = x.map(Number);
-    const SUM = TURN_NUMBER.reduce((a, b) => (a + b));
-    return SUM;
+  addNumber(num) { // 더하는 함수
+    const sum = num.reduce((a, b) => (a + b));
+    Console.print(`결과 :${result}`)
   }
 
   #errorCalculator(userInput) { // 오류창 띄우는 함수
