@@ -1,4 +1,9 @@
-import { MissionUtils } from '@woowacourse/mission-utils';
+import { Console } from '@woowacourse/mission-utils';
+import {
+  verifyCustomSeparator,
+  verifyUselessInput,
+  verifyNumber,
+} from './VerifyInputUtils.js';
 
 class App {
   constructor() {
@@ -7,7 +12,7 @@ class App {
   }
 
   async getUserinput() {
-    const userinput = MissionUtils.Console.readLineAsync(
+    const userinput = await Console.readLineAsync(
       '덧셈할 문자열을 입력해 주세요.\n'
     );
     return userinput;
@@ -31,10 +36,21 @@ class App {
   updateInputValue(userinput, customSeparator) {
     if (customSeparator) {
       this.initValue = userinput.slice(5);
+      console.log(this.initValue);
     }
     if (!customSeparator) {
       this.initValue = userinput;
     }
+  }
+
+  verifyUserinput(customSeparator) {
+    const re = new RegExp(this.separator);
+    const arrValue = this.initValue.split(re);
+    if (customSeparator) {
+      verifyCustomSeparator(customSeparator);
+    }
+    verifyUselessInput(arrValue, customSeparator);
+    verifyNumber(arrValue);
   }
 
   async run() {
@@ -42,6 +58,7 @@ class App {
     const customSeparator = this.getCustomSeparator(userinput);
     this.updateSeparator(customSeparator);
     this.updateInputValue(userinput, customSeparator);
+    this.verifyUserinput(customSeparator);
   }
 }
 
