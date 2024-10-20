@@ -1,6 +1,7 @@
 export class Calculator {
   static DEFAULT_DELIMITERS = [',', ':'];
   static DEFAULT_DELIMITER_REGEX = /[,:]/;
+  static CUSTOM_DELIMITER_REGEX = /^\/\/(.*)\\n/;
 
   constructor() {
     this.delimiterRegex = Calculator.DEFAULT_DELIMITER_REGEX;
@@ -13,6 +14,7 @@ export class Calculator {
     if (inputString === '') return 0;
 
     if (this.hasCustomDelimiter(inputString)) {
+      this.configureCustomDelimiter(inputString);
       inputString = inputString.split('\\n')[1];
     }
 
@@ -23,16 +25,17 @@ export class Calculator {
   }
 
   hasCustomDelimiter(input) {
-    const customDelimiterRegex = /^\/\/(.*)\\n/;
-    const match = input.match(customDelimiterRegex);
+    return Calculator.CUSTOM_DELIMITER_REGEX.test(input);
+  }
 
+  configureCustomDelimiter(input) {
+    const match = input.match(Calculator.CUSTOM_DELIMITER_REGEX);
     if (match) {
       this.setCustomDelimiter(match[1]);
       this.delimiterRegex = new RegExp(
         `[${this.customDelimiter}${Calculator.DEFAULT_DELIMITERS.join('')}]`
       );
-      return true;
-    } else return false;
+    }
   }
 
   parseNumbers(input) {
