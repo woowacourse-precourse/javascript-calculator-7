@@ -2,7 +2,6 @@ import { Console } from "@woowacourse/mission-utils";
 
 class Calculator {
   constructor() {
-    // 생성자에서는 특별히 할 작업이 없지만, 확장성을 위해 추가
   }
 
   add(input) {
@@ -19,7 +18,7 @@ class Calculator {
         throw new Error("[ERROR]");
       }
       const customDelimiter = parts[0].substring(2);
-      delimiter = new RegExp(`[${customDelimiter}]`); // 커스텀 구분자 처리
+      delimiter = new RegExp(`[${customDelimiter}]`); 
       numbersString = parts[1];
     }
 
@@ -48,7 +47,7 @@ class Calculator {
           return;
         }
 
-        Console.print(`결과 : ${this.add(userInput)}`); // this를 통해 클래스 메서드 호출
+        Console.print(`결과 : ${this.add(userInput)}`); 
       } catch (error) {
         Console.print("[ERROR]");
         return;
@@ -58,8 +57,8 @@ class Calculator {
 }
 
 async function run() {
-  const calculator = new Calculator(); // Calculator 클래스의 인스턴스 생성
-  await calculator.askForInput(); // 입력 요청
+  const calculator = new Calculator(); 
+  await calculator.askForInput(); 
 }
 
 export { run };
