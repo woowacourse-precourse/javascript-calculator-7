@@ -6,7 +6,7 @@ class App {
     try {
       const userInput = await getUserInput().then((result) => result.trim());
       const separator = [':', ','];
-
+      let formula = '';
       if (
         !(
           userInput.length > 0 &&
@@ -31,14 +31,16 @@ class App {
           }
 
           separator.push(customSeprator);
+          formula = userInput.substr(endIndex + 2);
         } else {
           // \n이 없는 경우 에러 반환
           throw '커스텀 구분자를 사용하려면 \\n을 입력해주세요';
         }
       }
 
-      // Console.print(userInput);
+      Console.print(userNumber);
     } catch (error) {
+      // Console.print(userInput);
       Console.print(ERROR_MESSAGE + error);
     }
   }
