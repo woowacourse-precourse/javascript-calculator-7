@@ -15,7 +15,12 @@ class App {
       inputNumbers = input.split(/[,|:]/);
     }
 
-    Console.print("결과 : " + inputNumbers);
+    inputNumbers = inputNumbers.map((num) => Number(num));
+    const sum = inputNumbers.reduce((accumulator, currentValue) => {
+      return accumulator + currentValue;
+    });
+
+    Console.print("결과 : " + sum);
   }
 }
 
