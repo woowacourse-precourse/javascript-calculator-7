@@ -42,6 +42,21 @@ class StringCalculator {
 
     return { delimiters, trimmedInput: input }; // 이스케이프 문자를 포함하지 않도록 반환
   }
+
+  splitNumbers(input, delimiters) {
+    let parts = [input]; // 처음에는 입력 문자열로 시작
+
+    // 모든 구분자로 순회하며 문자열을 분리
+    delimiters.forEach((delimiter) => {
+      parts = parts.flatMap((part) => part.split(delimiter)); // 구분자로 나누기
+      console.log(`After splitting with delimiter: ${delimiter} =>`, parts);
+    });
+
+    //  공백 제거
+    return parts
+      .map((part) => part.trim())
+      .filter((part) => part !== "" && !part.startsWith("//")); // "//"로 시작하는 부분 필터링
+  }
 }
 
 export default StringCalculator;
