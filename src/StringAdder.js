@@ -61,4 +61,15 @@ class StringAdder {
                 return new Array();
         }
     }
+    // 숫자로 변환 후 덧셈
+    addNumber(splitList) {
+        for (let i=0; i<splitList.length; i++){
+            let number = Number(splitList[i]);
+            if (number == NaN){
+                this.type = CalculatorType.error;
+                break;
+            }
+            this.result += number;
+        }
+    }
 }
