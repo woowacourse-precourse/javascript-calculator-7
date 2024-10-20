@@ -16,8 +16,10 @@
 ### 4. 예외처리
 #### 구분자와 양수로 구성된 문자열 입력
 - [] 사용자의 입력값이 공백일 경우 [ERROR]
-- [] 사용자의 입력값이 구분자 내 음수나, 숫자가 아닐 경우 [ERROR]
-- [] 사용자의 입력값이 입력된 문자열 형식이 올바르지 않은 경우 [ERROR] ex) "//;\n1;2:3"과 같은 잘못된 형식
+- [] 사용자의 입력값의 구분자 외의 값이 숫자가 아닌 문자가 포함되어 있는 경우 [ERROR]
+- [] 사용자의 입력값이 음수일 경우 [ERROR]
+- [] 사용자의 입력값의 구분자가 일관되지 않을 경우 [ERROR] ex) "//;\n1;2:3"과 같은 잘못된 형식
+- [] 사용자의 입력값의 구분자 외의 값에 공백이 포함되어 있는 경우 [ERROR]
 
 5. jest 테스트
 - 기본 구분자(쉼표, 콜론)를 통한 숫자 합산 테스트
@@ -27,10 +29,18 @@
 ## :file_folder: 패키지 구조 및 파일명
 ```
 - src
+  - contants
+  - - calculatorMessages.js
+  - - errorMessages.js
   - controllers
   - - CalculatorController.js
+  - errors
+  - - AppError.js
+  - - CalculatorError.js
+  - - DelimiterError.js
   - models
-  - public
+  - - Calculator.js
+  - - Delimiter.js
   - views
   - - InputView.js
   - - OutputView.js
