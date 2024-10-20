@@ -1,19 +1,13 @@
-import ERROR_MESSAGES from './constants/errorMessages.js';
+import throwError from './error/errorHandler.js';
 
 export function isNegativeNumber(number) {
-  if (number < 0)
-    throw new Error(
-      `${ERROR_MESSAGES.PREFIX} ${ERROR_MESSAGES.NEGATIVE_NUMBER}`,
-    );
+  if (number < 0) throwError('NEGATIVE_NUMBER');
 }
 
 export function isNumber(value) {
   const number = Number(value);
 
-  if (Number.isNaN(number))
-    throw new Error(
-      `${ERROR_MESSAGES.PREFIX} ${ERROR_MESSAGES.INVALID_CHARACTER}`,
-    );
+  if (Number.isNaN(number)) throwError('INVALID_CHARACTER');
   return number;
 }
 
@@ -23,19 +17,13 @@ export function isEmptyString(userInput) {
 }
 
 export function checkForMixedDelimiters(userInput) {
-  if (/^\/\/(.*?)\\n.*[,:]/.test(userInput))
-    throw new Error(
-      `${ERROR_MESSAGES.PREFIX} ${ERROR_MESSAGES.MIXED_DELIMITERS}`,
-    );
+  if (/^\/\/(.*?)\\n.*[,:]/.test(userInput)) throwError('MIXED_DELIMITERS');
 }
 
 export function checkForDelimiterOnly(splitValues) {
   const isOnlyDelimeter = splitValues.every((value) => value === '');
 
-  if (isOnlyDelimeter)
-    throw new Error(
-      `${ERROR_MESSAGES.PREFIX} ${ERROR_MESSAGES.ONLY_DELIMITER}`,
-    );
+  if (isOnlyDelimeter) throwError('ONLY_DELIMITER');
 }
 
 export function validateSplitValues(
@@ -51,9 +39,5 @@ export function validateSplitValues(
 }
 
 export function checkCustomDelimiterPosition(match) {
-  if (!match) {
-    throw new Error(
-      `${ERROR_MESSAGES.PREFIX} ${ERROR_MESSAGES.CUSTOM_DELIMITER_POSITION}`,
-    );
-  }
+  if (!match) throwError('CUSTOM_DELIMITER_POSITION');
 }
