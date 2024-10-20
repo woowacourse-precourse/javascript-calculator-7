@@ -17,6 +17,17 @@ splitNumbers(numbers, delimiter) {
   return numbers.split(new RegExp(`[${delimiter},:]`));
 }
 
+// 커스텀 구분자 기준 분리: "//"와 "\n" 사이에 위치하는 문자인 커스텀 구분자를 기준
+extractDelimiter(input) {
+  if (input.startsWith("//")) { 
+    const [delimiterLine, ...numberLines] = input.split('\n'); 
+    const delimiter = delimiterLine.substring(2); 
+    const numbers = numberLines.join('\n'); 
+    return [delimiter, numbers]; 
+  }
+  return [',', input]; 
+}
+
 
 
 
