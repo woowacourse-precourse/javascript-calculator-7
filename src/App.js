@@ -26,6 +26,8 @@ class App {
         else 
           throw new Error("[ERROR]");
       }
+      
+      Console.print(`결과 : ${sum}`);
     } catch (error) {
     }
   }
