@@ -16,16 +16,16 @@ class DelimiterExtractor extends IDelimiterExtractor {
   extractDelimiter(inputValue) {
     const customDelimiterMatch = inputValue.match(CUSTOM_DELIMITER_PATTERN);
 
-    if (customDelimiterMatch && customDelimiterMatch.index !== 0) {
+    if (!customDelimiterMatch) {
+      return inputValue;
+    }
+
+    if (customDelimiterMatch.index !== 0) {
       throw new Error(ERROR_MESSAGES.CUSTOM_DELIMITER_NOT_AT_START);
     }
 
-    if (customDelimiterMatch) {
-      this.#customDelimiter = customDelimiterMatch[1];
-      return inputValue.slice(customDelimiterMatch[0].length);
-    } else {
-      return inputValue;
-    }
+    this.#customDelimiter = customDelimiterMatch[1];
+    return inputValue.slice(customDelimiterMatch[0].length);
   }
 
   getDelimiters() {
