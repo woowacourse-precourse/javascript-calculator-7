@@ -33,7 +33,7 @@ function add(input) {
 async function askForInput() {
   try {
     const userInput = await Console.readLineAsync(
-      "덧셈할 문자열을 입력해 주세요. "
+      "덧셈할 문자열을 입력해 주세요."
     );
     if (userInput.toLowerCase() === "종료") {
       Console.print("ERROR");
