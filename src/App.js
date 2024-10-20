@@ -28,14 +28,13 @@ class StringCalculator{ // 계산을 위한 클래스
         if (PARSED < 0) { // 음수 체크
           throw new Error(`[ERROR] 음수는 허용되지 않습니다: ${PARSED}`);
         }
-
         return PARSED;
       });
 
       return NUMBERS.reduce((sum, num)=> sum + num, 0); //배열 numbers의 모든 요소를 더해 합산
       //reduce(누적값, 현재 요소) => {처리 로직} , 초기값)
     }catch(error){
-      throw error;
+      throw error; // 에러를 다시 던져서 에러에 맞게 메시지 출력
     }
   }
 }
@@ -51,8 +50,8 @@ class App { // 입력과 출력하는 클래스
         const RESULT = this.calculator.add(INPUT);
         MissionUtils.Console.print(`결과 : ${RESULT}`);
       }catch(error){
-        console.error(error.message); 
-        throw error; 
+        console.error(error.message); //에러 메시지 출력
+        throw error; // 에러를 다시 던져서 테스트에 잡히도록 함
       }
   }
 }
