@@ -18,7 +18,6 @@ class App {
     if(input.length==0){//공백일 경우
       result = 0;
     }
-
     else if (input.startsWith("//")) {
       //커스텀 구분자일 가능성이 있는 경우
       const endOfDelimeter = input.indexOf("\\n");
@@ -46,14 +45,13 @@ class App {
         new RegExp(`[${customDelimeter},:]`)
       );
     } else if (!isNaN(Number(input[0]))) {
-      //만약에 Number(!)하면 isNaN나옴
+
       result = this.parsingInput(input, /[,:]/);
     
     } else {
       //그게 아니면 ===다른 특수문자로 시작하는 경우
       throw new Error("[ERROR]: ", "이상한 특수문자가 포함되어 있습니다.");
     }
-
     MissionUtils.Console.print(`"결과 : ${result}"`);
 
   }
