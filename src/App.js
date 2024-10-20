@@ -1,5 +1,5 @@
 import { Console } from '@woowacourse/mission-utils';
-
+import validateAnswer from './validator.js';
 class App {
 	async run() {
 		const answer = await Console.readLineAsync(
@@ -12,8 +12,8 @@ class App {
 			if (answer.trim() === '') {
 				Console.print(`결과: 0`);
 			} else if (answer.startsWith('//')) {
-				//커스텀 구분자 
-				const delimiter = answer.substring(2, 3); // 배열의 2번째에서 3번째 자름
+				//커스텀 구분자
+				const delimiter = answer.substring(2, 3);
 				const numbers = answer.split('\\n')[1].split(delimiter);
 				const sum = numbers.map(Number).reduce((a, b) => a + b, 0);
 				Console.print(`결과 : ${sum}`);
@@ -31,18 +31,5 @@ class App {
 		}
 	}
 }
-
-const validateAnswer = (answer) => {
-	let isValid = true;
-
-	[...answer].forEach((a) => {
-		// 허용되지 않은 문자가 있으면 오류 출력
-		if (!/[,:0-9\n]/.test(a)) {
-			isValid = false; // 유효하지 않은 문자가 있을 경우 false로 설정
-		}
-	});
-
-	return isValid; // 모든 문자가 유효하다면 true, 그렇지 않으면 false 반환
-};
 
 export default App;
