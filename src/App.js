@@ -8,6 +8,16 @@ class App {
 
     Console.print("결과 : " + input);
   }
+
+  validateNumbers(numbers) {
+    numbers.forEach((number) => {
+      const parsedNumber = parseInt(number);
+
+      if (isNaN(parsedNumber)) {
+        throw new Error("[ERROR] 숫자가 아닌 값이 포함되어 있습니다.");
+      }
+    });
+  }
 }
 
 export default App;
