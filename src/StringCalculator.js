@@ -1,32 +1,34 @@
 import { Console } from '@woowacourse/mission-utils';
 
 class StringCalculator {
-  constructor() {
-    this.delimiters = [',', ':'];
+  static #DEFAULT_DELIMITERS = [',', ':'];
 
-    this._customRegexp = /^\/\/.+\\n/;
+  static #CUSTOM_DELIMITER_REGEXP = /^\/\/.+\\n/;
+
+  constructor() {
+    this.delimiters = [...StringCalculator.#DEFAULT_DELIMITERS];
   }
 
   calculation(input) {
-    let parsedNums = input;
+    let parsedInputs = input;
 
     if (this.isCustomDelimiterPresent(input)) {
       this.setDelimiters(this.parseCustomDelimiter(input));
-      parsedNums = this.removeCustomDelimiter(input);
+      parsedInputs = this.removeCustomDelimiter(input);
     }
 
     const delimeterRegExp = this.getDelimiterRegExp();
-    const splited = parsedNums.split(delimeterRegExp);
+    const splitInput = parsedInputs.split(delimeterRegExp);
 
-    const nums = this.getNums(splited);
+    const nums = this.getNums(splitInput);
 
-    const addRes = this.add(nums);
+    const sum = this.add(nums);
 
-    this.printSum(addRes);
+    this.printSum(sum);
   }
 
   isCustomDelimiterPresent(input) {
-    return this._customRegexp.test(input);
+    return StringCalculator.#CUSTOM_DELIMITER_REGEXP.test(input);
   }
 
   setDelimiters(newDelimiter) {
@@ -34,23 +36,22 @@ class StringCalculator {
   }
 
   parseCustomDelimiter(input) {
-    const str = input.match(this._customRegexp)[0];
+    const str = input.match(StringCalculator.#CUSTOM_DELIMITER_REGEXP)[0];
 
     const regexp = /[/\\n]/g;
     return str.replace(regexp, '');
   }
 
   removeCustomDelimiter(input) {
-    return input.replace(this._customRegexp, '');
+    return input.replace(StringCalculator.#CUSTOM_DELIMITER_REGEXP, '');
   }
 
   getNums(arr) {
     return arr.map(n => {
       const num = Number(n);
 
-      if (num < 0) throw new Error('[ERROR] 숫자는 양수만 입력이 가능합니다.');
-      if (Number.isNaN(num))
-        throw new Error('[ERROR] 숫자가 아닌 값이 입력됐습니다.');
+      if (num < 0) throw new Error(`[ERROR]`);
+      if (Number.isNaN(num)) throw new Error(`[ERROR]`);
       return num;
     });
   }
