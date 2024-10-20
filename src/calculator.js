@@ -24,11 +24,43 @@ class Calculator {
   extractDelimiterAndRemainingInput(input) {
     let delimiter = DEFAULT_DELIMITER;
     let remainingInput = input;
+
+    if (input.startsWith("//")) {
+      const { customDelimiter, remainingInputPart } =
+        this.extractCustomDelimiter(input);
+      delimiter = customDelimiter;
+      remainingInput = remainingInputPart;
+    }
+
     return { delimiter, remainingInput };
   }
 
   splitAndParseNumbers(input, delimiter) {
     return input.split(delimiter).map(this.validateAndParseNumber);
+  }
+
+  extractCustomDelimiter(input) {
+    const end = input.indexOf("\\n");
+    if (end === -1) {
+      throw new Error(ERROR_MESSAGE.CUSTOM_DELIMITER_ERROR);
+    }
+
+    let delimiter = input.substring(2, end);
+
+    const splitDelimiters = [...delimiter.matchAll(/\[(.*?)\]/g)].map(
+      (del) => del[1]
+    );
+
+    if (splitDelimiters.length > 0) {
+      delimiter = new RegExp(
+        splitDelimiters
+          .map((d) => d.replace(/[.*+?^${}()|[\]\\]/g, "\\$&"))
+          .join("|")
+      );
+    }
+
+    const remainingInput = input.substring(end + 2);
+    return { customDelimiter: delimiter, remainingInputPart: remainingInput };
   }
 
   validateAndParseNumber(str) {
