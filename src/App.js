@@ -6,23 +6,40 @@ class App {
     const input = await Console.readLineAsync(
       "덧셈할 문자열을 입력해 주세요.\n"
     );
+    const result = this.calculate(input);
 
-    Console.print("결과 : " + input);
+    Console.print(`결과 : ${result}`);
   }
 
   calculate(input) {
     if (input === "") {
       return 0;
     }
+
+    const { delimiter, numbersString } = this.parseInput(input);
+    const numbers = this.splitNumbers(numbersString, delimiter);
+    this.validateNumbers(numbers);
+    return this.sum(numbers);
   }
 
   parseInput(input) {
+    // 커스텀 구분자인 경우
     if (input.startsWith("//")) {
-      const [delimiterPart, numbersString] = input.split("\n");
+      const [delimiterPart, numbersString] = input.split("\\n");
       const delimiter = delimiterPart.slice(2);
       return { delimiter, numbersString };
     }
+
+    // 기본 구분자인 경우
     return { delimiter: App.DEFAULT_DELIMITERS, numbersString: input };
+  }
+
+  splitNumbers(numbersString, delimiter) {
+    if (Array.isArray(delimiter)) {
+      const regex = new RegExp(`[${delimiter.join("")}]`);
+      return numbersString.split(regex);
+    }
+    return numbersString.split(delimiter);
   }
 
   validateNumbers(numbers) {
