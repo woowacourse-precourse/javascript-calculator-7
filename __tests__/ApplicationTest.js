@@ -92,6 +92,30 @@ describe('문자열 계산기', () => {
 
         await expect(app.run()).rejects.toThrow('[ERROR]');
       });
+
+      test('커스텀 구분자가 중복되서 존재하는 경우 에러를 발생시킨다', async () => {
+        const inputs = ['//;\\n1:2://;\\n3'];
+        mockQuestions(inputs);
+
+        const app = new App();
+
+        await expect(app.run()).rejects.toThrow('[ERROR]');
+      });
+
+      test('커스텀 구분자가 //의 경우 //를 커스텀 구분자로 사용할 수 있다', async () => {
+        const inputs = ['////\\n1//2//3'];
+        mockQuestions(inputs);
+
+        const logSpy = getLogSpy();
+        const outputs = ['결과 : 6'];
+
+        const app = new App();
+        await app.run();
+
+        outputs.forEach((output) => {
+          expect(logSpy).toHaveBeenCalledWith(expect.stringContaining(output));
+        });
+      });
     });
   });
 
@@ -118,6 +142,21 @@ describe('문자열 계산기', () => {
       const app = new App();
 
       await expect(app.run()).rejects.toThrow('[ERROR]');
+    });
+
+    test('유효한 숫자 앞에 0이 있는 경우 에러가 발생하지 않아야한다', async () => {
+      const inputs = ['00123'];
+      mockQuestions(inputs);
+
+      const logSpy = getLogSpy();
+      const outputs = ['결과 : 123'];
+
+      const app = new App();
+      await app.run();
+
+      outputs.forEach((output) => {
+        expect(logSpy).toHaveBeenCalledWith(expect.stringContaining(output));
+      });
     });
   });
 });
