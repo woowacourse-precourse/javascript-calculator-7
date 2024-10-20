@@ -1,6 +1,25 @@
 import { Console } from "@woowacourse/mission-utils";
 
 class App {
+  // 입력값을 구분자에 따라 분리하는 함수
+  splitInput(input, separators) {
+    const num = [];
+    let tmp = "";
+
+    for (let i = 0; i < input.length; i++) {
+      if (separators.includes(input[i])) {
+        if (tmp !== "") num.push(tmp); // 빈 값이 아니면 배열에 추가
+        tmp = ""; // 초기화
+      } else {
+        tmp += input[i];
+      }
+    }
+    if (tmp !== "") num.push(tmp); // 마지막 값 추가
+
+    console.log(num);
+    return num;
+  }
+
   async run() {
     const input = await Console.readLineAsync(
       "덧셈할 문자열을 입력해 주세요.\n"
@@ -16,6 +35,8 @@ class App {
     } else {
       // 기본 구분자일 경우
     }
+
+    this.splitInput("1,2,3:4", [",", ":"]);
   }
 }
 
