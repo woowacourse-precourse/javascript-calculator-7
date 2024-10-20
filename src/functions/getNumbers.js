@@ -24,11 +24,33 @@ const splitInput = function splitInputByDelimiters(input, escapedDelimiters) {
   return input.split(delimiterRegex);
 };
 
+const convertNumbers = function convertNumbers(splitString) {
+  const numbers = splitString.map(string => parseInt(string, 10));
+
+  return numbers;
+};
+
+const getVaildateNumbers = function getVaildateNumbersFunc(numbers) {
+  const maxSafeInteger = Number.MAX_SAFE_INTEGER;
+
+  numbers.forEach(num => {
+    if (num > maxSafeInteger) {
+      handleError('숫자가 Number.MAX_SAFE_INTEGER를 초과했습니다.');
+    }
+  });
+
+  return numbers;
+};
+
 const getNumbers = function saveNumbersFromStringFunc(input, delimiters) {
   const escapedDelimiters = createEscapedDelimiter(delimiters);
   isValidateInput(input, escapedDelimiters);
 
   const splitString = splitInput(input, escapedDelimiters);
+  const numbers = convertNumbers(splitString);
+  const validNumbers = getVaildateNumbers(numbers);
+
+  return validNumbers;
 };
 
 export default getNumbers;
