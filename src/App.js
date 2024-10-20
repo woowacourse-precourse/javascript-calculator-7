@@ -1,4 +1,4 @@
-import Calculator from "./calculator";
+import Calculator from "./calculator.js";
 import { MissionUtils } from "@woowacourse/mission-utils";
 
 class App {
@@ -8,10 +8,10 @@ class App {
 
   async run() {
     let sum; // 계산 결과를 저장할 변수
-
     try {
-      MissionUtils.Console.print("덧셈할 문자열을 입력해 주세요.");
-      const input = await MissionUtils.Console.readLineAsync();
+      const input = await MissionUtils.Console.readLineAsync(
+        "덧셈할 문자열을 입력해 주세요.\n"
+      );
       sum = this.calculator.calculate(input);
     } catch (error) {
       throw new Error(`[ERROR] ${error.message}`);
