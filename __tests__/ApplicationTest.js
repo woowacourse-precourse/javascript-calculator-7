@@ -47,6 +47,7 @@ describe("문자열 계산기", () => {
     await runTest(["//a\\n1a2a3"],["결과 : 6"]); // 알파벳
     await runTest(["//\n\\n1\n2\n3"],["결과 : 6"]); // \n
     await runTest(["//\\\\n1\\2\\3"],["결과 : 6"]); // 백슬래시
+    await runTest(["//!\\n1!2,3"],["결과 : 6"]); // 기본 구분자와 혼합
   });
   test("빈 문자", async () => {
     await runTest([""], ["결과 : 0"]);
