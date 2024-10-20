@@ -9,7 +9,7 @@ class App {
     const customSeparator = getCustomSeparator(userInput);
 
     try {
-      //validateUserInput(userInput, customSeparator);
+      validateUserInput(userInput, customSeparator);
       const result = computeResult(userInput, customSeparator);
       Console.print(`결과 : ${result}`);
     } catch (error) {
@@ -30,12 +30,15 @@ function getCustomSeparator(userInput) {
 }
 
 function validateUserInput(userInput, customSeparator) {
-  console.log(customSeparator);
-  const regex = customSeparator
-    ? new RegExp(`^(\/\/${customSeparator}\\n)`)
-    : new RegExp(`\s|\d+|((\d+[:,])+\d+)+$`);
+  const formattedUserInput = customSeparator
+    ? userInput.replace(/^\/\/\D\\n/, '')
+    : userInput;
 
-  if (!userInput.match(regex)) {
+  const regex = customSeparator
+    ? new RegExp(`\\s|^\\d+([,:${customSeparator}]\\d+)*$`)
+    : /^\s|\d+([,:]\d+)*$/;
+
+  if (!formattedUserInput.match(regex)) {
     throw new Error('사용자 입력을 다시 하세요.');
   }
 }
