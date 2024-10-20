@@ -16,7 +16,7 @@ class App {
     });
   }
 
-  
+
   add(input) {
     if (input == "") {
       return 0; // 빈 문자열 처리
@@ -26,7 +26,7 @@ class App {
 
     if (input.startsWith("//")) {
       const parts = input.split("\n");
-      let delimiter = new RegExp(parts[0].slice(2)); // 커스텀 구분자 추출
+      delimiter = new RegExp(parts[0].slice(2)); // 커스텀 구분자 추출
       input = parts[1]; // 문자열 부분 추출
     }
 
