@@ -61,16 +61,12 @@ function calculate(input) {
 
 class App {
   async run() {
-    try {
-      const input = await Console.readLineAsync(
-        "덧셈할 문자열을 입력해 주세요.\n"
-      );
-      if (checkInputFormat(input)) {
-        const result = calculate(input);
-        Console.print(`결과 : ${result}`);
-      }
-    } catch (error) {
-      Console.readLineAsync(error.message);
+    const input = await Console.readLineAsync(
+      "덧셈할 문자열을 입력해 주세요.\n"
+    );
+    if (checkInputFormat(input)) {
+      const result = calculate(input);
+      Console.print(`결과 : ${result}`);
     }
   }
 }
