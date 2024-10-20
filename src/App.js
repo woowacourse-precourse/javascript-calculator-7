@@ -15,7 +15,8 @@ class App {
       
       let sum = 0, nums;
       if (line[0] == "/" && line[1] == "/" && line[3] == "\\" && line[4] == "n") {
-        
+        const token = line[2];
+        nums = line.substr(5).split(token).map(Number);      // 순회할 문자열을 구분자 설정 이후부터
       } else 
         nums = line.split(/[,:]/).map(Number);
     } catch (error) {
