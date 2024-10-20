@@ -10,7 +10,7 @@ const ERROR_MESSAGES = {
 
 class App {
   async receiveInput() {
-    return Console.readLineAsync("덧셈할 문자열을 입력해 주세요.");
+    return Console.readLineAsync("덧셈할 문자열을 입력해 주세요.\n");
   }
 
   getDelimiter(str) {
