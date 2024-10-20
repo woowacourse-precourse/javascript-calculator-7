@@ -24,10 +24,7 @@ class App {
       if (endOfDelimeter === -1) {
         throw new Error("[ERROR]: 잘못된 형식입니다");
       }
-      //console.log("endOfDelimeter", endOfDelimeter);
       const customDelimeter = input.slice(2, endOfDelimeter);
-      //console.log("customDelimeter", customDelimeter);
-
       if (typeof customDelimeter === "string") {
         const delimiters = customDelimeter.split(""); // 문자열을 배열로 변환
         delimiters.forEach((each) => {
@@ -36,20 +33,15 @@ class App {
           }
         });
       }
-      
-      //console.log("customDelimeter", Number(customDelimeter));
       const inputSlice = input.slice(endOfDelimeter + 2); //숫자 부분 추출
-      //console.log("inputSlice:", inputSlice);
       result = this.parsingInput(
         inputSlice,
         new RegExp(`[${customDelimeter},:]`)
       );
     } else if (!isNaN(Number(input[0]))) {
-
       result = this.parsingInput(input, /[,:]/);
     
     } else {
-      //그게 아니면 ===다른 특수문자로 시작하는 경우
       throw new Error("[ERROR]: ", "이상한 특수문자가 포함되어 있습니다.");
     }
     MissionUtils.Console.print(`"결과 : ${result}"`);
