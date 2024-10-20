@@ -53,9 +53,17 @@ class App {
   }
 
   splitUsingCustomDelimiterAndConvertToNumbers(input, CUSTOM_DELIMITER_SUFFIX) {
+    const CUSTOM_DELIMITER_PREFIX_LENGTH = 2;
+    const CUSTOM_DELIMITER_SUFFIX_LENGTH = 2;
+
     const customDelimiterSuffixIndex = input.indexOf(CUSTOM_DELIMITER_SUFFIX);
-    const customDelimiter = input.slice(2, customDelimiterSuffixIndex);
-    const stringToSeparate = input.slice(customDelimiterSuffixIndex + 2);
+    const customDelimiter = input.slice(
+      CUSTOM_DELIMITER_PREFIX_LENGTH,
+      customDelimiterSuffixIndex
+    );
+    const stringToSeparate = input.slice(
+      customDelimiterSuffixIndex + CUSTOM_DELIMITER_SUFFIX_LENGTH
+    );
     return this.splitAndConvertToNumbers(stringToSeparate, customDelimiter);
   }
 
