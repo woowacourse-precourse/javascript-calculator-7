@@ -68,7 +68,8 @@ class App {
     this.updateSeparator(customSeparator);
     this.updateInputValue(userinput, customSeparator);
     this.verifyUserinput(customSeparator);
-    const resultVlaue = this.caculateValue();
+    const resultValue = this.caculateValue();
+    Console.print(`결과 : ${resultValue}`);
   }
 }
 
