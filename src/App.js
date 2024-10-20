@@ -8,13 +8,11 @@ class App {
     const input = await Console.readLineAsync(INPUT_MESSAGE);
     const numberArray = this.extractNumbers(input);
     const hasInvalidValue = numberArray.includes(NaN);
-    const hasNegativeNumber = numberArray.filter((el) => el < 0).length;
 
-    if (hasInvalidValue || hasNegativeNumber) throw new Error(ERROR);
-    if (!hasInvalidValue && !hasNegativeNumber) {
-      const result = this.calculateSum(numberArray);
-      Console.print(`${RESULT}${result}`);
-    }
+    if (hasInvalidValue || this.hasNegativeNumber(numberArray))
+      throw new Error(ERROR);
+    const result = this.calculateSum(numberArray);
+    return Console.print(`${RESULT}${result}`);
   }
 
   extractNumbers(input) {
@@ -77,6 +75,12 @@ class App {
 
   calculateSum(numbers) {
     return numbers.reduce((acc, cur) => acc + cur, 0);
+  }
+
+  hasNegativeNumber(numberArray) {
+    for (let i = 0; i < numberArray.length; i++) {
+      if (numberArray[i] < 0) return true;
+    }
   }
 }
 
