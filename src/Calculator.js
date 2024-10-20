@@ -8,6 +8,11 @@ class Calculator {
 
     return customSeperator[1];
   }
+
+  seperateBy(removedString, customSeperator = "") {
+    const seperators = new RegExp(`[, : ${customSeperator}]`, "g");
+    return removedString.split(seperators);
+  }
 }
 
 export default Calculator;
