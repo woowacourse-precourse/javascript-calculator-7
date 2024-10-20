@@ -44,7 +44,7 @@ class App { //하나의 메소드는 하나의 역할
         throw new Error("[Error]: 에러발생")
     }
 
-    toArray(param) { //10이상 수 삽입 : 추후 인덴트 줄이기, 클래스는 하나의 역할만
+    preprocessing(param) { //10이상 수 삽입 : 추후 인덴트 줄이기, 클래스는 하나의 역할만
         let arr = [...param]
         let tmpValue = "";
         param.forEach((element, idx) => { //구분자가 숫자 값이면? 문자 값이라 했으니 문자만?
