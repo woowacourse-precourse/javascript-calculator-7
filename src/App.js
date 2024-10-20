@@ -4,17 +4,16 @@ class App {
   async run() {
     
     let userInput;
-    let result;
+    let result = "";
     let spliter = new Set([",",":"]);
     userInput = String(await Console.readLineAsync('덧셈할 문자열을 입력해 주세요.\n'));
 
     if(!this.isInputEmpty(userInput)) {
       userInput = this.checkCustomSpliter(userInput, spliter);
-
-      this.doSum(userInput, spliter);
+      result = this.doSum(userInput, spliter);
     }
-
-
+    
+    Console.print("결과 : " + Number(result));
 
   }
 
@@ -55,7 +54,7 @@ class App {
       
     }
     result += Number(tmp);
-    Console.print("결과 : " + result);
+    return result;
   }
 
 }
