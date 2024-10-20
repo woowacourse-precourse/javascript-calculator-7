@@ -30,6 +30,9 @@ class App {
     }
 
     nums = formattedInput.split(delimiter).map(Number);
+
+    const sum = nums.reduce((acc, cur) => acc + cur, 0);
+    Console.print(`결과 : ${sum}`);
   }
 }
 
