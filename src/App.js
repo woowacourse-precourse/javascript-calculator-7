@@ -27,8 +27,8 @@ class App {
     const splitNumbers = parsedInput.split(delimiter);
 
     const numbers = splitNumbers.map(num => {
-      if (num === '' || isNaN(num)) {
-        throw new Error('[ERROR] 유효하지 않은 숫자가 포함되어 있습니다.');
+      if (isNaN(num)) {
+        throw new Error('[ERROR] 문자열이 포함되어 있습니다.');
       }
       const number = Number(num);
       if (number < 0) {
