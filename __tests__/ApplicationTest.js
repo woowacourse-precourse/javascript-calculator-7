@@ -48,21 +48,6 @@ describe("문자열 계산기", () => {
     });
   });
 
-  test("커스텀 구분자 여러 개 입력", async () => {
-    const inputs = ["//;!\n1!2;3,4"];
-    mockQuestions(inputs);
-
-    const logSpy = getLogSpy();
-    const expectedOutputs = ["결과 : 10"];
-
-    const app = new App();
-    await app.run();
-
-    expectedOutputs.forEach((output) => {
-      expect(logSpy).toHaveBeenCalledWith(expect.stringContaining(output));
-    });
-  });
-
   test("공백 제거가 되는지 테스트", async () => {
     const inputs = ["1, 2, 3"];
     mockQuestions(inputs);
@@ -84,9 +69,7 @@ describe("문자열 계산기", () => {
 
     const app = new App();
 
-    await expect(app.run()).rejects.toThrow(
-      `[ERROR] ${Errors.NEGATIVE_NUMBERS}`
-    );
+    await expect(app.run()).rejects.toThrow(Errors.NEGATIVE_NUMBERS);
   });
 
   test("예외: 구분자가 없음", async () => {
@@ -95,16 +78,16 @@ describe("문자열 계산기", () => {
 
     const app = new App();
 
-    await expect(app.run()).rejects.toThrow(`[ERROR] ${Errors.INVALID_FORMAT}`);
+    await expect(app.run()).rejects.toThrow(Errors.INVALID_FORMAT);
   });
 
   test("예외: 커스텀 구분자가 기본 구분자와 동일한 경우", async () => {
-    const inputs = ["\\:/n1,2"];
+    const inputs = ["\\:/n1:2"];
     mockQuestions(inputs);
 
     const app = new App();
 
-    await expect(app.run()).rejects.toThrow(`[ERROR] ${Errors.INVALID_FORMAT}`);
+    await expect(app.run()).rejects.toThrow(Errors.INVALID_FORMAT);
   });
 
   test("예외: 문자 입력", async () => {
@@ -113,7 +96,7 @@ describe("문자열 계산기", () => {
 
     const app = new App();
 
-    await expect(app.run()).rejects.toThrow(`[ERROR] ${Errors.INVALID_FORMAT}`);
+    await expect(app.run()).rejects.toThrow(Errors.INVALID_FORMAT);
   });
 
   test("예외: 빈 문자열 입력", async () => {
@@ -122,7 +105,7 @@ describe("문자열 계산기", () => {
 
     const app = new App();
 
-    await expect(app.run()).rejects.toThrow(`[ERROR] ${Errors.EMPTY_INPUT}`);
+    await expect(app.run()).rejects.toThrow(Errors.EMPTY_INPUT);
   });
 
   test("예외: 커스텀 구분자가 숫자일 경우", async () => {
@@ -131,9 +114,16 @@ describe("문자열 계산기", () => {
 
     const app = new App();
 
-    await expect(app.run()).rejects.toThrow(
-      `[ERROR] ${Errors.WRONG_DELIMETER}`
-    );
+    await expect(app.run()).rejects.toThrow(Errors.WRONG_DELIMETER);
+  });
+
+  test("예외: 커스텀 구분자 여러 개 입력", async () => {
+    const inputs = ["//;!\n1!2;3,4"];
+    mockQuestions(inputs);
+
+    const app = new App();
+
+    await expect(app.run()).rejects.toThrow(Errors.WRONG_DELIMETER);
   });
 
   test("예외: 숫자 사이에 구분자가 여러 개일 경우", async () => {
@@ -142,9 +132,7 @@ describe("문자열 계산기", () => {
 
     const app = new App();
 
-    await expect(app.run()).rejects.toThrow(
-      `[ERROR] ${Errors.WRONG_DELIMETER}`
-    );
+    await expect(app.run()).rejects.toThrow(Errors.WRONG_DELIMETER);
   });
 
   test("예외: 숫자크기가 MAX_SAFE_INTEGER를 초과하는 경우", async () => {
@@ -152,9 +140,7 @@ describe("문자열 계산기", () => {
     mockQuestions(inputs);
 
     const app = new App();
-    
-    await expect(app.run()).rejects.toThrow(
-      `[ERROR] ${Errors.INVALID_FORMAT}`
-    );
+
+    await expect(app.run()).rejects.toThrow(Errors.INVALID_FORMAT);
   });
 });
