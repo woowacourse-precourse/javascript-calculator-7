@@ -4,7 +4,7 @@
 // 3. 구분자를 기준으로 숫자 나누기 [O]
 // 4. 나눈 숫자 더하기 [O]
 // 5. 결과값 출력하고 프로그램 종료하기 [O]
-// 6. 예외 처리 [X]
+// 6. 예외 처리 [O]
 
 import { readInput, printOutput } from './utils/inputOutputHandler.js';
 import { findDelimiters } from './utils/findDelimiters.js';
