@@ -58,8 +58,9 @@ class App {
         throw new Error("[ERROR] 유효하지 않은 입력값입니다.");
       }
 
-      const found = userStr.match(/\d+/g);
-      found.forEach((item) => (num += Number(item)));
+      const defaultDelimiters = /[,:]/;
+      const defaultSplitted = userStr.split(defaultDelimiters);
+      defaultSplitted.forEach((item) => (num += Number(item)));
       this.printresult(num);
     }
   }
