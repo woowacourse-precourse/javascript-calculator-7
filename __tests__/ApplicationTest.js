@@ -22,7 +22,7 @@ describe("문자열 계산기", () => {
     mockQuestions(inputs);
 
     const logSpy = getLogSpy();
-    const outputs = ["결과 : 1"];
+    const outputs = ["덧셈할 문자열을 입력해 주세요.", "결과 : 1"];
 
     const app = new App();
     await app.run();
@@ -38,6 +38,8 @@ describe("문자열 계산기", () => {
 
     const app = new App();
 
-    await expect(app.run()).rejects.toThrow("[ERROR]");
+    await expect(app.run()).rejects.toThrow(
+      "ERROR: 배열의 요소에 0 혹은 음수가 있습니다."
+    );
   });
 });
