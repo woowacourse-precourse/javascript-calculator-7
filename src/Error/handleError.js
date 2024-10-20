@@ -1,3 +1,3 @@
-// export default function throwError(message) {
-//   throw new Error();
-// }
+export default function throwError(message) {
+  throw new Error(message);
+}
