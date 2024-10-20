@@ -33,6 +33,10 @@ class App {
         if (isNaN(Number(parsedNum))) {
           throw new Error("숫자가 아닌 문자열은 사용할 수 없습니다.");
         }
+        if (parsedNum < 0) {
+          throw new Error("음수는 입력할 수 없습니다.");
+        }
+
         return parsedNum;
       });
       console.log(sum);
