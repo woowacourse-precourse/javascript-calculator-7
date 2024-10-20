@@ -1,8 +1,6 @@
 export const errorMessage = {
   usePositive: '[ERROR] 양수만 입력해 주세요',
 
-  invalidSeparator: '[ERROR] 구분자로 쉼표와 클론만 사용해 주세요',
-
   missingNewLine: '[ERROR] "\\n"을 포함시켜 주세요',
 
   missingCustomSeparator: '[ERROR] 커스텀 구분자를 입력해 주세요',
