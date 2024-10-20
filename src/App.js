@@ -9,10 +9,15 @@ class App {
     this.#input = await this.#readUserInput();
     this.#calculator = new Calculator(this.#input);
     this.#calculator.calculateStringSum();
+    this.#printCalculationResult();
   }
 
   async #readUserInput() {
     return await Console.readLineAsync('덧셈할 문자열을 입력해 주세요.\n');
+  }
+
+  #printCalculationResult() {
+    Console.print(`결과 : ${this.#calculator.result}`);
   }
 }
 
