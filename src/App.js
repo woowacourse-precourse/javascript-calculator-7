@@ -1,4 +1,4 @@
-import { getInput, printResult, printError } from './io_module.js';
+import { getInput, printResult, printError } from './io/io_module.js';
 import Calculator from './calculator.js';
 
 class App {

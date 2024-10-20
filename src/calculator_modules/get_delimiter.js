@@ -1,4 +1,4 @@
-import { CUSTOM_PATTERN } from './regex.js';
+import { CUSTOM_PATTERN } from '../validation/regex.js';
 
 export default function getDelimiter(input) {
   const basicDelimiter = /[,:]/;

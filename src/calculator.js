@@ -1,8 +1,8 @@
-import emptyChecker from './empty_checker.js';
-import getDelimiter from './get_delimiter.js';
-import validator from './validator.js';
-import separator from './separator.js';
-import summation from './summation.js';
+import emptyChecker from './calculator_modules/empty_checker.js';
+import getDelimiter from './calculator_modules/get_delimiter.js';
+import validator from './validation/validator.js';
+import separator from './calculator_modules/separator.js';
+import summation from './calculator_modules/summation.js';
 
 class Calculator {
   constructor(input) {
