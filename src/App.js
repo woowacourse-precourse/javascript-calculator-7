@@ -36,10 +36,31 @@ const EXTRACT_GEN_DELI = (INPUT_VALUE) => {
   return GEN_DELI_NUM_ARR;
 };
 
-//  [6] 실직적인 계산을 하는 함수를 만듭니다.
+// [6] 실직적인 계산을 하는 함수를 만듭니다.
 const SUM = (numbersArray) => {
   return numbersArray.reduce(
     (accumulator, currentValue) => accumulator + currentValue,
     0
   );
 };
+
+// [7] 조건문을 이용하여 커스텀구분자와 일반구분자에 대한 계산을 다르게 합니다.
+if (IS_THIS_CUSTOM) {
+  console.log("🟢 커스텀구분자를 사용하셨습니다");
+  const CUSTOM_NUMBER_ARRAY = EXTRACT_CUSTOM_DELI(INPUT_VALUE);
+  const CUSTOM_RESULT = SUM(CUSTOM_NUMBER_ARRAY);
+  console.log("🔥 커스텀 구분자 최종 결과 :", CUSTOM_RESULT);
+  resolve();
+} else if (!IS_THIS_CUSTOM) {
+  console.log("🟢 일반구분자를 사용하셨습니다.");
+  const GEN_NUMBER_ARRAY = EXTRACT_GEN_DELI(INPUT_VALUE);
+  const GEN_RESULT = SUM(GEN_NUMBER_ARRAY);
+  console.log("🔥 일반 구분자 최종 결과 :", GEN_RESULT);
+  resolve();
+} else {
+  reject(
+    new Error(
+      "[ERROR] 입력하신 내용에 요구사항에 맞는 구분자가 아니거나 없습니다."
+    )
+  );
+}
