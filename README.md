@@ -59,6 +59,6 @@
 
 ## 요구사항
 
-- [ ] `@woowacourse/mission-utils`에서 제공하는 `Console` API를 사용하여 구현
+- [x] `@woowacourse/mission-utils`에서 제공하는 `Console` API를 사용하여 구현
   - 사용자 입력: `Console.readLineAsync()`
   - 사용자 출력: `Console.print()`
