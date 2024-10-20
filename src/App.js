@@ -8,6 +8,8 @@ class App {
       MissionUtils.Console.print(`"결과 : ${result}"`);
     } catch (error) {
       MissionUtils.Console.print(`"${error.message}"`);
+      if (process.env.NODE_ENV === 'test')
+        throw error;
     }
   }
 
@@ -33,15 +35,14 @@ class App {
     }
 
     const numbers = input.split(delimiter).map(Number);
-    // 예외 처리 (음수 값 등)
+    // 예외 처리 (음수 값, 잘못된 문자)
     const nan = numbers.filter(n => isNaN(n));
     if (nan.length > 0) {
-      throw new Error("[ERROR]");
+      throw new Error("[ERROR] 잘못된 문자입니다.");
     }
     const negatives = numbers.filter(n => n < 0);
-    console.log(negatives);
     if (negatives.length > 0) {
-      throw new Error("[ERROR]");
+      throw new Error("[ERROR] 음수는 사용할 수 없습니다.");
     }
     return numbers.reduce((sum, num) => sum + num, 0);
   }
