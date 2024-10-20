@@ -17,7 +17,6 @@ class App {
       Console.print(`결과 : ${result}`);
     } catch (error) {
       Console.print(`[ERROR] ${error.message}`); // 스택 트레이스가 안 뜸
-      // throw new Error(`[ERROR] ${error.message}`); // 스택 트레이스가 뜸
     }
   }
 }
@@ -35,7 +34,7 @@ function getCustomSeparator(userInput) {
 function validateUserInput(customSeparator, formattedUserInput) {
   const regex = customSeparator
     ? new RegExp(`\\s|^\\d+([,:${customSeparator}]\\d+)*$`)
-    : /^\s|\d+([,:]\d+)*$/;
+    : /\s|\d+([,:]\d+)*$/;
 
   if (!formattedUserInput.match(regex)) {
     throw new Error('사용자 입력을 다시 하세요.');
@@ -47,8 +46,14 @@ function computeResult(customSeparator, formattedUserInput) {
     ? new RegExp(`[:,${customSeparator}]`)
     : new RegExp(`[:,]`);
 
-  return formattedUserInput
+  const result = formattedUserInput
     .split(regex)
     .map(Number)
     .reduce((acc, cur) => acc + cur, 0);
+
+  if (isNaN(result)) {
+    throw new Error('사용자 입력을 다시 하세요.');
+  }
+
+  return result;
 }
