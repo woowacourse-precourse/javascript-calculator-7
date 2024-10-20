@@ -1,17 +1,17 @@
+import { ERROR_MESSAGES, ERROR_PREFIX } from '../Constraints/Constraints.js';
 import {
-  buildNormalInputValidationRegex,
   buildCustomInputValidationRegex,
+  buildNormalInputValidationRegex,
 } from '../Util/regex.js';
-import { ERROR_PREFIX, ERROR_MESSAGES } from '../Constraints/Constraints.js';
 
-function validateCustomInputFormat(input) {
+export function validateCustomInputFormat(input) {
   const isInvalidFormat = !input.startsWith('//') || !input.includes('\\n');
   if (isInvalidFormat) {
     throw new Error(`${ERROR_PREFIX}${ERROR_MESSAGES.INVALID_INPUT_FORMAT}`);
   }
 }
 
-function validateCustomInput(inputString, escapedDelimiter) {
+export function validateCustomInput(inputString, escapedDelimiter) {
   if (inputString === '') return;
   const validationRegex = buildCustomInputValidationRegex(escapedDelimiter);
   if (!validationRegex.test(inputString)) {
@@ -19,11 +19,9 @@ function validateCustomInput(inputString, escapedDelimiter) {
   }
 }
 
-function validateNormalInput(splitValues) {
+export function validateNormalInput(splitValues) {
   const validationRegex = buildNormalInputValidationRegex();
   if (splitValues.some(value => !validationRegex.test(value))) {
     throw new Error(`${ERROR_PREFIX}${ERROR_MESSAGES.INVALID_NUMBER_INPUT}`);
   }
 }
-
-export { validateCustomInput, validateNormalInput, validateCustomInputFormat };

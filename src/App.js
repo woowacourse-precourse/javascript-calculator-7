@@ -9,33 +9,34 @@ import {
 
 import sumAllNumbers from './Util/sumAllNumbers.js';
 import {
-  escapeRegExp,
-  buildCustomInputValidationRegex,
-  buildNormalInputValidationRegex,
-} from './Util/regex.js';
+  validateCustomInputFormat,
+  validateCustomInput,
+  validateNormalInput,
+} from './validator/validator.js';
+import { escapeRegExp } from './Util/regex.js';
 // import { validateCustomInput } from './Validator/validator.js';
 
-function validateCustomInputFormat(input) {
-  const isInvalidFormat = !input.startsWith('//') || !input.includes('\\n');
-  if (isInvalidFormat) {
-    throw new Error(`${ERROR_PREFIX}${ERROR_MESSAGES.INVALID_INPUT_FORMAT}`);
-  }
-}
+// function validateCustomInputFormat(input) {
+//   const isInvalidFormat = !input.startsWith('//') || !input.includes('\\n');
+//   if (isInvalidFormat) {
+//     throw new Error(`${ERROR_PREFIX}${ERROR_MESSAGES.INVALID_INPUT_FORMAT}`);
+//   }
+// }
 
-function validateCustomInput(inputString, escapedDelimiter) {
-  if (inputString === '') return;
-  const validationRegex = buildCustomInputValidationRegex(escapedDelimiter);
-  if (!validationRegex.test(inputString)) {
-    throw new Error(`${ERROR_PREFIX}${ERROR_MESSAGES.INVALID_CUSTOM_INPUT}`);
-  }
-}
+// function validateCustomInput(inputString, escapedDelimiter) {
+//   if (inputString === '') return;
+//   const validationRegex = buildCustomInputValidationRegex(escapedDelimiter);
+//   if (!validationRegex.test(inputString)) {
+//     throw new Error(`${ERROR_PREFIX}${ERROR_MESSAGES.INVALID_CUSTOM_INPUT}`);
+//   }
+// }
 
-function validateNormalInput(splitValues) {
-  const validationRegex = buildNormalInputValidationRegex();
-  if (splitValues.some(value => !validationRegex.test(value))) {
-    throw new Error(`${ERROR_PREFIX}${ERROR_MESSAGES.INVALID_NUMBER_INPUT}`);
-  }
-}
+// function validateNormalInput(splitValues) {
+//   const validationRegex = buildNormalInputValidationRegex();
+//   if (splitValues.some(value => !validationRegex.test(value))) {
+//     throw new Error(`${ERROR_PREFIX}${ERROR_MESSAGES.INVALID_NUMBER_INPUT}`);
+//   }
+// }
 
 function parseCustomInput(input) {
   // 입력이 //로 시작하고 \n을 포함하는지 확인한다.
