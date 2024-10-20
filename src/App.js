@@ -12,6 +12,10 @@ class App {
       );
       separator = string.match(/\/\/(.*?)\\n(.*)/);
 
+      if (string.slice(0, 2) === "//" && !string.includes("\\n")) {
+        throw new Error("[ERROR] 커스텀 구분자가 지정되지 않았습니다.");
+      }
+
       // "//", "\n"이 있다면 커스텀 구분자 지정
       if (separator) {
         customSeperator = separator[1];
@@ -24,7 +28,9 @@ class App {
 
       const numArr = string.split(regexp).map((num) => {
         if (num < 0 || isNaN(num)) {
-          throw new Error("[ERROR] 양수로 구성된 문자열을 입력해주세요.");
+          throw new Error(
+            "[ERROR]구분자와 양수로 구성된 문자열을 입력해주세요."
+          );
         }
         return Number(num);
       });
@@ -34,6 +40,7 @@ class App {
       });
 
       Console.print(`결과 : ${answer}`);
+      Console.print(numArr);
     } catch (error) {
       throw error;
     }
