@@ -13,7 +13,7 @@ $ npm run start
 
 [fork된 Repository 링크](https://github.com/mun-kyeong/javascript-calculator-7)
 
-[미션 PR](/**/)
+[미션 PR](https://github.com/woowacourse-precourse/javascript-calculator-7/pull/159)
 
 <br/>
 <br/>
@@ -34,7 +34,7 @@ $ npm run start
   ```md
       [잘못된 입력 예시]
       - 양수가 아닌 문자열 입력
-      - (커스텀 구분자 방식이 아닌) 기본구분자 외의 문자열 입력
+      - (커스텀 구분자 방식이 아닌) 기본구분자 외의 문자열 입력 등
   ```
   - 에러 메시지 반환 후 애플리케이션 종료
 - **기본 구분자 처리**
@@ -73,7 +73,7 @@ $ npm run start
 <br/>
 <br/>
 
-# 4. Project Structure (프로젝트 구조) >> 추후 수정
+# 4. Project Structure (프로젝트 구조)
 
 ```plaintext
 javascript-calculator-7/
@@ -110,68 +110,16 @@ javascript-calculator-7/
 <br/>
 <br/>
 
-# 6. Coding Convention
-
-## 명명 규칙
-
-- 영어 사용 / 특수문자 사용 불가
-
-- 상수 : `SNAKE_CASE`
-
-```
-const NAME_ROLE;
-```
-
-- 변수 & 함수 : `camelCase`
-
-```javascript
-// state
-const [isLoading, setIsLoading] = useState(false);
-
-// 배열 - 복수형 이름 사용
-const datas = [];
-```
-
-<br/>
-
-## 함수
-
-- 함수는 함수 표현식을 사용하며, 화살표 함수를 사용한다.
-
-```javascript
-// Good
-const fnName = () => {};
-
-// Bad
-function fnName() {}
-```
-
-<br/>
-
-## 폴더 네이밍
-
-`camelCase` 를 기본으로 하며, 컴포넌트 폴더일 경우에만 파스칼 케이스로 사용한다.
-
-```
-// 카멜 케이스
-camelCase
-// 파스칼 케이스
-PascalCase
-```
-
-<br/>
-<br/>
-
-# 7. 커밋 컨벤션
+# 6. 커밋 컨벤션
 
 ## 기본 구조
 
 ```md
-<type>(<scope>): <subject> //헤더
+<type>(<scope>): <subject>
 
-<body>                      //본문
+<body>
 
-<footer>                    //푸터
+<footer>
 ```
 
 <br/>
@@ -189,6 +137,7 @@ chore (maintain) - 잡일(기타..)
 ```
 
 <br/>
+<br/>
 
 ## 커밋 형식 설명
 
@@ -198,16 +147,21 @@ chore (maintain) - 잡일(기타..)
 - `subject` : 명령형, 현재형 언어 사용. 커밋 주제
 - `body` : 변경된 부분 설명 및 이전 행동과 대조
 - `footer` : 주요 변경사항은 참고 사항이랑 footer에 언급필요
-  <br/>
+
+<br/>
+<br/>
 
 ## 커밋 예시
 
 ```md
-Feat(PlusFunction): 덧셈 기능 구현
+[FEAT] (Controller, Model) : 기본 구분자로 문자열 구분
 
-숫자(integer) 2개를 입력으로 받아 두 숫자의 합(integer)을 출력하는 함수 작성
+- Controller에서 Model로 input값 전달
+- Model에선 parseInt()을 통해 문자열 구분
+- parseInt()는 현재 기본 구분자만 구분 가능
 
-3번째 커밋 - 덧셈 기능 구현
+기본 구분자 기준으로 문자열을 파씽할 수 있도록 작성했습니다.
+추후 기능 추가가 필요한 부분은 @todo를 통해 확인할 수 있습니다.
 ```
 
 <br/>
