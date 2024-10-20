@@ -17,7 +17,13 @@ const separate = function separateCommasAndColons(input) {
   for (const ITEM of SEPARATED_COMMAS) {
     const SEPARATED = ITEM.split(":");
     for (const NUM of SEPARATED) {
-      SUM += parseInt(NUM);
+      const PARSED = parseInt(NUM);
+
+      if (isNaN(PARSED)) {
+        throw new Error("[ERROR]");
+      }
+
+      SUM += PARSED;
     }
   }
   return SUM;
