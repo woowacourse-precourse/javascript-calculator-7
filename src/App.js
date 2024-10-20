@@ -52,7 +52,7 @@ class App {
     if (!customSeperator) {
       return this.printError('커스텀 구분자는 //와 \\n사이에 있어야 합니다');
     }
-    if (this.isContainNum(customStr)) {
+    if (this.isContainNum(customSeperator)) {
       return this.printError('커스텀 구분자 사이에 숫자가 있으면 안됩니다');
     }
     return
