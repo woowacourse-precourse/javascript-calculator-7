@@ -34,7 +34,7 @@
 - [O] getDelimiters(): 현재 저장된 구분자 배열을 반환
 - [] addCustomDelimiter(delimiter): 새로운 커스텀 구분자를 구분자 리스트에 추가
 - [O] parseInput(input): 입력 문자열을 분석하여 커스텀 구분자와 계산할 문자열을 추출
-- [] extractNumbers(calculationString): 구분자를 사용하여 숫자를 추출하고 배열로 반환
+- [O] extractNumbers(calculationString): 구분자를 사용하여 숫자를 추출하고 배열로 반환
 
 #### Calculator
 
@@ -42,7 +42,7 @@
 
 메서드:
 
-- [] calculate(numbers): 숫자 배열의 합계를 계산하여 반환
+- [O] calculate(numbers): 숫자 배열의 합계를 계산하여 반환
 
 #### ResultPrinter
 
@@ -50,7 +50,7 @@
 
 메서드:
 
-- [△] print(result): 계산 결과를 출력
+- [O] print(result): 계산 결과를 출력
 
 #### ErrorHandler
 
