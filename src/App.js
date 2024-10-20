@@ -1,7 +1,8 @@
-import Caculator from "./Calculator";
+import Calculator from "./Calculator";
 class App {
   async run() {
-    new Caculator().calculate();
+    const calculator = new Calculator();
+    await calculator.calculate();
   }
 }
 

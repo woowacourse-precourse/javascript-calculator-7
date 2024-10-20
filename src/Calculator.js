@@ -1,33 +1,63 @@
 import { Console } from "@woowacourse/mission-utils";
-const CUSTOM_DISTINCT_REGEX = /^(\/\/.+\n)|\s+/g;
+import Delimiters from "./Delimiters";
+import Validator from "./Validator";
+const CUSTOM_DISTINCT_REGEX = /^(\/\/.+\\n)|\s+/g;
 
-class Caculator {
+class Calculator {
+  constructor() {
+    this.validator = new Validator();
+  };
+
   async calculate () {
-    const input = await this.getInput();
-    Console.print("결과 : 1");
+    let input = await this.getInput();
+    input = input.trim();
+    if(this.isEmptyInput(input)) {
+      Console.print("결과 : 0");
+      return;
+    }
+
+    const delimitersInstance = new Delimiters();
+    const delimiters = delimitersInstance.detect(input);
+    const numbers = this.extractNumbers(delimiters, input);
+    const result = this.addNumbers(numbers);
+  
+    Console.print(`결과 : ${result}`);
   }
 
-  getInput() {
+  async getInput() {
     try {
-      const input = Console.readLineAsync('닉네임을 입력해주세요.');
+      const input = await Console.readLineAsync('덧셈할 문자열을 입력해주세요.(기본 구분자: ",", ":" | 커스텀 구분자는 "//" "\n" 사이에 입력해주세요. 예: "//;\n")');
       return input;
     } catch (error) {
-      
+      throw new Error("[ERROR] 입력값을 읽는 중 에러가 발생했습니다.");
     }
   }
 
+  isEmptyInput(input) {
+    return input === "";
+  }
+  
   extractNumbers(delimiters, formula) {
-    let parsedFormula = formula.replace(CUSTOM_DISTINCT_REGEX, "");
-    for (let delimiter of delimiters ) {
-      parsedFormula = parsedFormula.replaceAll(delimiter, " ");
-    }
-    const numbers = parsedFormula.split(" ").map(Number);
+    let cleanedFormula = formula.replace(CUSTOM_DISTINCT_REGEX, "");
+  
+    delimiters.forEach((delimiter) => {
+      cleanedFormula = cleanedFormula.replaceAll(delimiter, ",");
+    }) 
+
+    const numbers = cleanedFormula.split(",").map((value) => {
+      this.validator.validateNumberExist(value)
+      return Number(value);
+    });
+    console.log(numbers);
     return numbers;
   }
 
   addNumbers(numbers) {
-    return numbers.reduce((acc, num) => acc + num, 0);
+    this.validator.validateNumbers(numbers); 
+    this.validator.validateNegativeNumbers(numbers);
+    let sum = numbers.reduce((acc, num) => acc + num, 0);
+    return parseFloat(sum.toFixed(2));  
   }
 }
 
-export default Caculator;
+export default Calculator;
