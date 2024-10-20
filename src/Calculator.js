@@ -14,10 +14,6 @@ class Calculator {
     const customDelimiter = this.extractCustomDelimiter(input);
 
     if (customDelimiter) {
-      if (Regex.invalidCustomDelimiter.test(customDelimiter)) {
-        throw new Error(`[ERROR]: ${errorMessages.invalidCustomDelimiter}`);
-      }
-
       if (this.delimiters.includes(customDelimiter)) {
         throw new Error(`[ERROR]: ${errorMessages.duplicatedDelimiter}`);
       }
