@@ -47,7 +47,7 @@ class App {
         continue;
       }
 
-      if (Number.isNaN(Number(str[i]))) {
+      if (str[i] !== '.' && Number.isNaN(Number(str[i]))) {
         throw new Error(`[ERROR] ${str[i]} 는 지정된 구분자 또는 숫자가 아닙니다.`);
       }
 
