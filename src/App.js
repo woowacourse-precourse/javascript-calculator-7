@@ -5,7 +5,7 @@ class App {
 
   async run() {
     this.calculator = new Calculator();
-    this.calculator.run();
+    await this.calculator.run();
   }
 }
 
