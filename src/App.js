@@ -30,9 +30,11 @@ class App {
             throw new Error('숫자가 아닌 값이 포함되었습니다.');
         }
 
-        Console.print(numbers);
+        return this.add(numbers);
+    }
 
-        return numbers;
+    add(numberList) {
+        return numberList.reduce((sum, number) => sum + number, 0);
     }
 }
 
