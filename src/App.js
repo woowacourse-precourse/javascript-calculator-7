@@ -11,6 +11,9 @@ class App {
       if (this.hasWhitespace(input)) {
         throw new Error("[ERROR] 입력에 공백이 포함되어 있습니다.");
       }
+      if(this.hasMinus(input)) {
+        throw new Error("[ERROR] 음수는 입력할 수 없습니다.");
+      }
       input = this.hasCustomSeparator(input)
       const numbers = this.extractNumbers(input);
       const sum = this.sumNumbers(numbers);
@@ -34,6 +37,11 @@ class App {
       }
     }
     return str;
+  }
+
+  hasMinus(str) {
+    const pattern = /-/;
+    return pattern.test(str);
   }
 
   hasWhitespace(str) {
