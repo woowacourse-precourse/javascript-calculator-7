@@ -3,12 +3,13 @@ export default class Model{
         this.stringValue = [
             {
                 inputValue: '',
-                numberList: []
+                numberList: [],
+                customSeparator: ''
             }
         ];
     }
     updateData(input){
-        this.stringValue = input;
-        this.numberList = [];
+        this.stringValue.inputValue = input;
+        this.stringValue.numberList = [];
     }
 }
