@@ -78,10 +78,7 @@ class App {
 
     if (isTwoSeparators) {
       const [comma, semicolon] = separator;
-      return input
-        .split(comma)
-        .flatMap((el) => el.split(semicolon))
-        .map(Number);
+      return input.replaceAll(semicolon, comma).split(comma).map(Number);
     }
     if (!isTwoSeparators) return input.split(separator).map(Number);
   }
