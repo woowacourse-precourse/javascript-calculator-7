@@ -10,7 +10,7 @@ class Calculator {
     this.isValidateInput(input);
     const numbers = this.parseNumber(input); //추출한 숫자 담기
     const result = this.addNums(numbers); //덧셈 결과 담기
-    return input;
+    return result;
   }
 
   //문자열 유효성 검사
