@@ -4,5 +4,5 @@ export const add = (array) => {
     sum += Number(element);
   });
 
-  return sum;
+  return `결과 : ${sum}`;
 };
