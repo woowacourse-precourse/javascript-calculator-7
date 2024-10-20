@@ -11,11 +11,16 @@ class Calculator {
 
   seperateBy(removedString, customSeperator = "") {
     const seperators = new RegExp(`[, : ${customSeperator}]`, "g");
-    return removedString.split(seperators);
+
+    return removedString.split(seperators).map((element) => Number(element));
   }
 
   getSumOf(numbers) {
     return numbers.reduce((sum, number) => sum + number, 0);
+  }
+
+  isPositive(numbers) {
+    return numbers.every((number) => number > 0);
   }
 }
 
