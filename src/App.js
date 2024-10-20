@@ -19,17 +19,15 @@ class App {
 
     let delimiters = [",", ":"];
 
-    // 커스텀 구분자 처리
     if (input.startsWith("//")) {
       const parts = input.split("\n");
       if (parts.length < 2) {
         throw new Error("커스텀 구분자 형식이 잘못되었습니다.");
       }
-      delimiters.push(parts[0].substring(2)); // "//" 이후 문자
-      input = parts[1]; // 첫 번째 줄 이후의 내용
+      delimiters.push(parts[0].substring(2));
+      input = parts[1];
     }
 
-    // 숫자 추출 및 합산
     const numbers = input
       .split(new RegExp(`[${delimiters.join("")}]`))
       .map((num) => {
