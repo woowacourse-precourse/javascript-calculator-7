@@ -1,5 +1,4 @@
 import { Regex } from './constant.js';
-import { Console } from '@woowacourse/mission-utils';
 import { errorMessages } from './constant.js';
 
 class Calculator {
@@ -7,7 +6,6 @@ class Calculator {
     this.delimiters = [',', ':'];
     this.input = input;
     this.numbers = this.splitByDelimiter(input);
-    Console.print(this.numbers);
   }
 
   splitByDelimiter(input) {

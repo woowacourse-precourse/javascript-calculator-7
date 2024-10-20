@@ -9,6 +9,6 @@ export const errorMessages = {
 export const Regex = {
   customDelimiter: /^\/\/(.)+\\n/,
   valid: /^\/\/(.)+\\n(?:\d+[^0-9])*\d+$|^(?:\d+[^0-9])*\d+$/,
-  invalidCustomDelimiter: /^[(\/\/)(\.)(\\n)(\d)]/,
+  invalidCustomDelimiter: /^\/\/[(\/\/)(\.)(\\n)(\d)]\\n/,
   notInputCustomDelimiter: /^\/\/\\n/,
 };
