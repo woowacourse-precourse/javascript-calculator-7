@@ -10,7 +10,7 @@ class App {
       const result = this.calculation(input);
 
       // 결과 출력
-      Console.print(`=> ${result}`);
+      Console.print(result);
     } catch (error) {
       Console.print(error.message);
     }
