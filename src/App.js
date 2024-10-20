@@ -22,13 +22,21 @@ class App {
       let regexp = new RegExp(`[,:${customSeperator}]`);
       if (customSeperator == "" && separator) regexp = /(?=.)/;
 
-      const numArr = string.split(regexp).map(Number);
+      const numArr = string.split(regexp).map((num) => {
+        if (num < 0 || isNaN(num)) {
+          throw new Error("[ERROR] 양수로 구성된 문자열을 입력해주세요.");
+        }
+        return Number(num);
+      });
+
       answer = numArr.reduce((prev, cur) => {
         return prev + cur;
       });
 
       Console.print(`결과 : ${answer}`);
-    } catch (error) {}
+    } catch (error) {
+      throw error;
+    }
   }
 }
 
