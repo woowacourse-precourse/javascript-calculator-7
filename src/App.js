@@ -52,6 +52,15 @@ class StringProcessor {
   getStringToCalculate(input) {
     return input.replace(this.customSeparatorPattern, '');
   }
+
+  extractNumber(string) {
+    const regex = new RegExp(`[${CALCULATOR.seperator.join('')}]`);
+    const numberPart = string.split(regex);
+    return numberPart
+      .map(part => part.trim())
+      .filter(part => /^\d+$/.test(part))
+      .map(Number);
+  }
 }
 
 class App {
@@ -80,6 +89,8 @@ class App {
     }
 
     this.validation.hasInvalidSeperator(stringToCalculate);
+
+    let numberArray = this.processor.extractNumber(stringToCalculate);
   }
 }
 
