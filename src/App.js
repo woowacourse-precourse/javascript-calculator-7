@@ -30,6 +30,8 @@ class App {
       throw new Error("[ERROR]잘못된 입력입니다.");
     } 
 
+    const result = numbers.map(Number).reduce((sum, num) => sum + num, 0);
+
   }
 }
 
