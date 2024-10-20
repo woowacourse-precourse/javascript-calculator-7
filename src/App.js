@@ -14,79 +14,57 @@ import {
   validateNormalInput,
 } from './validation/validator.js';
 import { escapeRegExp } from './Util/regex.js';
-// import { validateCustomInput } from './Validator/validator.js';
+import parseCustomInput from './Parser/SubParser/parseCustomInput.js';
+import parseNormalInput from './Parser/SubParser/parseNormalInput.js';
+// function parseCustomInput(input) {
+//   // 입력이 //로 시작하고 \n을 포함하는지 확인한다.
+//   validateCustomInputFormat(input);
 
-// function validateCustomInputFormat(input) {
-//   const isInvalidFormat = !input.startsWith('//') || !input.includes('\\n');
-//   if (isInvalidFormat) {
-//     throw new Error(`${ERROR_PREFIX}${ERROR_MESSAGES.INVALID_INPUT_FORMAT}`);
+//   const delimiterEnd = input.indexOf('\\n');
+//   const delimiter = input.slice(2, delimiterEnd);
+
+//   // delimiter가 비어있으면 에러를 던진다.
+//   if (delimiter === '') {
+//     throw new Error(`${ERROR_PREFIX}${ERROR_MESSAGES.EMPTY_DELIMITER}`);
 //   }
-// }
+//   // console.log(delimiter);
+//   // console.log('1||2'.split('|'));
 
-// function validateCustomInput(inputString, escapedDelimiter) {
-//   if (inputString === '') return;
-//   const validationRegex = buildCustomInputValidationRegex(escapedDelimiter);
-//   if (!validationRegex.test(inputString)) {
-//     throw new Error(`${ERROR_PREFIX}${ERROR_MESSAGES.INVALID_CUSTOM_INPUT}`);
+//   // escape 처리.
+
+//   const escapedDelimiter = escapeRegExp(delimiter);
+
+//   // delimiter 이후의 내용을 추출한다.
+//   const content = input.slice(delimiterEnd + 2);
+
+//   validateCustomInput(content, escapedDelimiter);
+//   // 구분자는 있지만, 내용이 빈경우
+//   if (content === '') {
+//     return 0;
 //   }
-// }
 
-// function validateNormalInput(splitValues) {
-//   const validationRegex = buildNormalInputValidationRegex();
-//   if (splitValues.some(value => !validationRegex.test(value))) {
-//     throw new Error(`${ERROR_PREFIX}${ERROR_MESSAGES.INVALID_NUMBER_INPUT}`);
+//   const parts = content.split(delimiter);
+//   // validateNoDuplicateDelimiters(parts);
+//   // 모든 숫자의 합을 반환한다.
+
+//   return sumAllNumbers(parts);
+// }
+// function parseNormalInput(str) {
+//   if (str === '') {
+//     return 0;
 //   }
+
+//   if (!str) {
+//     throw new Error(`${ERROR_PREFIX}${ERROR_MESSAGES.EMPTY_STRING}`);
+//   }
+
+//   const splitters = [':', ','];
+//   const parts = str.split(new RegExp(`[${splitters.join('')}]`));
+
+//   validateNormalInput(parts);
+//   // 소수점 허용을 위해 숫자와 소수점을 처리하는 정규표현식
+//   return sumAllNumbers(parts);
 // }
-
-function parseCustomInput(input) {
-  // 입력이 //로 시작하고 \n을 포함하는지 확인한다.
-  validateCustomInputFormat(input);
-
-  const delimiterEnd = input.indexOf('\\n');
-  const delimiter = input.slice(2, delimiterEnd);
-
-  // delimiter가 비어있으면 에러를 던진다.
-  if (delimiter === '') {
-    throw new Error(`${ERROR_PREFIX}${ERROR_MESSAGES.EMPTY_DELIMITER}`);
-  }
-  // console.log(delimiter);
-  // console.log('1||2'.split('|'));
-
-  // escape 처리.
-
-  const escapedDelimiter = escapeRegExp(delimiter);
-
-  // delimiter 이후의 내용을 추출한다.
-  const content = input.slice(delimiterEnd + 2);
-
-  validateCustomInput(content, escapedDelimiter);
-  // 구분자는 있지만, 내용이 빈경우
-  if (content === '') {
-    return 0;
-  }
-
-  const parts = content.split(delimiter);
-  // validateNoDuplicateDelimiters(parts);
-  // 모든 숫자의 합을 반환한다.
-
-  return sumAllNumbers(parts);
-}
-function parseNormalInput(str) {
-  if (str === '') {
-    return 0;
-  }
-
-  if (!str) {
-    throw new Error(`${ERROR_PREFIX}${ERROR_MESSAGES.EMPTY_STRING}`);
-  }
-
-  const splitters = [':', ','];
-  const parts = str.split(new RegExp(`[${splitters.join('')}]`));
-
-  validateNormalInput(parts);
-  // 소수점 허용을 위해 숫자와 소수점을 처리하는 정규표현식
-  return sumAllNumbers(parts);
-}
 
 function isFirstCharNumber(str) {
   // 백업용 가드절. 로직에 악영향을 끼치면 폐기예정
