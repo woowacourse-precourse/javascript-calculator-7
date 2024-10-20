@@ -1,5 +1,11 @@
+import StringCalculatorController from "./controller/StringCalculatorController.js";
 class App {
-  async run() {}
+  #stringCalculator = new StringCalculatorController();
+
+  constructor() { }
+  async run() {
+    await this.#stringCalculator.startCalculation();
+  }
 }
 
 export default App;
