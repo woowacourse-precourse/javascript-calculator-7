@@ -1,3 +1,4 @@
+import Delimiter from "../models/Delimiter.js";
 import { InputView } from "../views/InputView.js";
 
 /**
@@ -5,12 +6,15 @@ import { InputView } from "../views/InputView.js";
  */
 class CalculatorController {
 
+    #delimiter;
+
     async calculatorProcess() {
         await this.getDelimiter();
     }
 
     async getDelimiter() {
         const inputText = await InputView.getNumbersFromInput();
+        this.#delimiter = Delimiter.getDelimiter(inputText);
     }
 }
 
