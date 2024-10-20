@@ -32,18 +32,12 @@ describe("문자열 계산기", () => {
     });
   });
 
-  test("음수 입력", async () => {
+  test("예외 테스트", async () => {
     const inputs = ["-1,2,3"];
     mockQuestions(inputs);
 
-    const logSpy = getLogSpy();
-    const outputs = ["[ERROR] : 양수만 입력하세요"];
-
     const app = new App();
-    await app.run();
 
-    outputs.forEach((output) => {
-      expect(logSpy).toHaveBeenCalledWith(expect.stringContaining(output));
-    });
+    await expect(app.run()).rejects.toThrow("[ERROR]");
   });
 });

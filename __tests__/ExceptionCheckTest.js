@@ -31,34 +31,13 @@ describe("테스트", () => {
     });
   });
 
-  test("음수를 포함한 입력값", async () => {
-    const inputs = ["-1,2,3"];
+  test("숫자가 아닌 문자열 입력시", async () => {
+    const inputs = ["a,b,c"];
     mockQuestions(inputs);
 
-    const logSpy = getLogSpy();
-    const outputs = ["[ERROR] : 양수만 입력하세요"];
-
     const app = new App();
-    await app.run();
 
-    outputs.forEach((output) => {
-      expect(logSpy).toHaveBeenCalledWith(expect.stringContaining(output));
-    });
-  });
-
-  test("잘못된 문자열 입력 시 오류 발생", async () => {
-    const inputs = ["abc"];
-    mockQuestions(inputs);
-
-    const logSpy = getLogSpy();
-    const outputs = ["[ERROR] : 잘못된 값을 입력하였습니다."];
-
-    const app = new App();
-    await app.run();
-
-    outputs.forEach((output) => {
-      expect(logSpy).toHaveBeenCalledWith(expect.stringContaining(output));
-    });
+    await expect(app.run()).rejects.toThrow("[ERROR]");
   });
 
   test("공백이 포함된 입력값 처리", async () => {
