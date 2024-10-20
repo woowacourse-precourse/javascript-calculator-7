@@ -39,23 +39,5 @@
  ┣ 📜App.js // 프로그램 입력 및 출력
  ┣ 📜calculator.js // 계산 로직 구현
  ┗ 📜index.js // 프로그램 실행
+ ┗ 📜error.js // 에러 목록 관리
 ```
-
-## To do
-
-- **docs**
-
-  - [ ] `README.md`에 구현할 기능 목록 작성
-  - [ ] 1주차 회고 작성
-
-- **feat**
-
-  - [ ] [미션 유틸](https://github.com/woowacourse-projects/javascript-mission-utils) 사용
-  - [ ] 하나의 유틸이 한 가지 일만 하는지 확인
-  - [ ] [AngularJS commit conventions](https://gist.github.com/stephenparish/9941e89d80e2bc58a153#generating-changelogmd) 읽기
-  - [ ] 기능 목록을 단위로 삼아 커밋
-  - [ ] 테스트 코드 작성
-
-- **style**
-  - [ ] [airbnb style guide](https://github.com/woowacourse/woowacourse-docs/tree/main/styleguide/javascript) 읽기
-  - [ ] 적절한 주석 작성
