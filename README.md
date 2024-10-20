@@ -3,12 +3,12 @@
 ## ✅ 체크포인트
 
 - [x] Node.js 20.17.0 이상의 버전 설치
-- [ ] 문자열의 길이가 0인경우 바로 0 출력
-- [ ] 쉼표(,), 콜론(:)을 기본 구분자로 구분자를 관리하는 delimiters 배열에 추가
-- [ ] 구분자로 문자열을 나누는 splitByDelimiter 함수 구현
+- [x] 문자열의 길이가 0인경우 바로 0 출력
+- [x] 쉼표(,), 콜론(:)을 기본 구분자로 구분자를 관리하는 delimiters 배열에 추가
+- [x] 구분자로 문자열을 나누는 splitByDelimiter 함수 구현
   - reg 배열 내에 들어있는 문자열을 구분하는 정규식 작성
-  - 정규식을 활용하여 구분자를 기준으로 문자열을 나눠서 sum 배열에 저장
-- [ ] 커스텀 구분자를 추가하는 함수 구현
+  - 정규식을 활용하여 구분자를 기준으로 문자열을 나눠서 numbers 배열에 저장
+- [x] 커스텀 구분자를 추가하는 함수 구현
   - "//"와 "\n" 사이에 위치하는 문자를 인식하는 정규식 작성
   - 정규식을 활용하여 reg 배열에 추가
 - [ ] 잘못된 값을 입력할 경우 [ERROR]로 시작하는 에러 메시지 출력
@@ -31,3 +31,4 @@
 
 - https://github.com/woowacourse-projects/javascript-mission-utils
 - https://gist.github.com/stephenparish/9941e89d80e2bc58a153
+- https://hamait.tistory.com/342
