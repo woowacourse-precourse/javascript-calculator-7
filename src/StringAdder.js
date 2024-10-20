@@ -7,7 +7,7 @@ const CalculatorType = Object.freeze({
     error : Symbol(2)
 });
 
-class StringAdder {
+export class StringAdder {
     constructor(input) {
         this.input = input;
         this.result = 0;
@@ -17,8 +17,8 @@ class StringAdder {
 
     // 구분자 판단, 계산기 선택
     getSeperator(input) {
-        if (input.length() == 0){ // 입력이 없을 경우 오류
-            this.type = CalculatorType.error;
+        if (input.length == 0){ // 입력이 없을 경우 결과 값 0
+            this.type = CalculatorType.basic;
             return;
         }
 
@@ -74,19 +74,16 @@ class StringAdder {
     }
     // 출력
     printResult() {
-        try{
-            if(this.type == CalculatorType.error){
+        if(this.type == CalculatorType.error){
                 throw new Error("[Error]");
-            }else{
-                MissionUtils.Console.print("결과 : " + this.result);
-            }
+        }else{
+            MissionUtils.Console.print("결과 : " + this.result);
         }
     }
 
     doCalculator(){
         this.getSeperator(this.input);
-        this.splitString();
-        this.addNumber();
+        this.addNumber(this.splitString());
         this.printResult();
     }
 }
