@@ -16,7 +16,12 @@ function calculator(operand) {
     }
   }
 
-  const regex = new RegExp(SEPARATOR.join("|"), "g");
+  const regex = new RegExp(
+    SEPARATOR.map((separator) =>
+      separator.replace(/[-\/\\^$.*+?()[\]{}|]/g, "\\$&")
+    ).join("|"),
+    "g"
+  );
   checkNumber = checkNumber.split(regex);
 
   for (let i = 0; i < checkNumber.length; i++) {
