@@ -5,19 +5,19 @@ class App {
     delimiter = new Set([":", ","]);
 
     isValidateNumber = (number) => {
-        return !isNaN(number) && number >= 0;
+        return number && !isNaN(number) && number >= 0;
     };
 
     findCustomDelimiter = (input) => {
         // 커스텀 구분자가 있는지 확인한다.
         // "//"와 "\n" 사이에 위치하는 문자를 커스텀 구분자로 사용한다
         let userInput = input.slice(); // 불변성 유지
-        const regex = /\/\/(.*?)\\n/;
+        const regex = /\/\/(.)\\n/;
         while (userInput.match(regex)) {
             const customDelimiter = userInput.match(regex);
 
             if (customDelimiter) {
-                if (customDelimiter.index > 0) {
+                if (customDelimiter.index > 0 || customDelimiter[1].length !== 1 || !isNaN(customDelimiter[1])) {
                     return this.ERROR_MESSAGE;
                 }
                 this.delimiter.add(customDelimiter[1]);
