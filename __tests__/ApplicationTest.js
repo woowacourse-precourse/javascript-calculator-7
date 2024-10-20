@@ -6,6 +6,7 @@ const mockQuestions = (inputs) => {
 
   MissionUtils.Console.readLineAsync.mockImplementation(() => {
     const input = inputs.shift();
+    console.log(input);
     return Promise.resolve(input);
   });
 };
@@ -73,6 +74,7 @@ describe("문자열 계산기", () => {
   test("에러: 구분자 연속 사용", async () => {
     await runError(["1::2,,3"]);
     await runError(["//?\\n1??2??3"]);
+    await runError(["//\\\\n1\\\\2\\3"]);
   });
   test("에러: 공백 포함", async () => {
     await runError(["1, 2:3"]);
