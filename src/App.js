@@ -5,9 +5,9 @@ class App {
     const input = await Console.readLineAsync(
       "덧셈할 문자열을 입력해 주세요.\n"
     );
+    const nums = [];
     let formattedInput = input.replace(/\\n/g, "\n");
     let delimiter = /,|:/;
-    let nums = [];
 
     if (!formattedInput) {
       Console.print("결과 : 0");
@@ -32,20 +32,19 @@ class App {
 
       if (isNaN(num)) {
         throw new Error("[ERROR] 유효한 숫자가 아닙니다.");
-      } else if (num < 0) {
+      }
+      if (num < 0) {
         throw new Error("[ERROR] 양수가 아닙니다.");
       }
 
-      if (!isNaN(num)) {
-        nums.push(num);
-      }
+      nums.push(num);
     });
 
     const sum = nums.reduce((acc, cur) => acc + cur, 0);
 
     try {
       Console.print(`결과 : ${sum}`);
-    } catch {
+    } catch (error) {
       Console.print(error.message);
     }
   }
