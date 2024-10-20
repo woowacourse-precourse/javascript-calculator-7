@@ -43,6 +43,10 @@ class App {
         return separator.replace(/[-\/\\^$.*+?()[\]{}|]/g, '\\$&'); 
       });
 
+      const reg = new RegExp(escapedSeparators.sort((a, b) => b.length - a.length).join('|'));
+
+      const CUSTOM_DELIMITER = USERINFO.split(reg);
+      
       for (let i = 0; i < CUSTOM_DELIMITER.length; i++) {
         let num = CUSTOM_DELIMITER[i];
         if (num === '//') {
