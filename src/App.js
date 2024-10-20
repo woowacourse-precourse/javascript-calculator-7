@@ -21,13 +21,19 @@ function returnCustomSum(inputText) {
 function returnSum(inputText) {
   // custom 구분자가 없을 경우의 계산
   let returnAns = 0
+  let TEMP_NUM = ''
   for (let i = 0; i < inputText.length; i++) {
     if (i === 0) {
-      returnAns += parseInt(inputText[i])
+      // returnAns += parseInt(inputText[i])
+      TEMP_NUM += inputText[i]
     } else if (inputText[i] === ':' || inputText[i] === ',') {
-      returnAns += parseInt(inputText[i + 1])
+      returnAns += parseInt(TEMP_NUM)
+      TEMP_NUM = ''
+    } else {
+      TEMP_NUM += inputText[i]
     }
   }
+  returnAns += parseInt(TEMP_NUM)
   return returnAns
 }
 
