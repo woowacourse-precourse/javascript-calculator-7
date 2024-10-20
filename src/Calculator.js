@@ -1,4 +1,4 @@
-class Calculate {
+class Calculator {
   sum(arr) {
     let sum = 0;
     arr.forEach((num) => (sum += num));
@@ -6,4 +6,4 @@ class Calculate {
   }
 }
 
-export default Calculate;
+export default Calculator;

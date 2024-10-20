@@ -1,6 +1,6 @@
 import Constant from "./constants/Constant.js";
 
-class Validate {
+class Validator {
   validateValue(arr) {
     let tempArr = [];
     for (let str of arr) {
@@ -16,4 +16,4 @@ class Validate {
     return tempArr;
   }
 }
-export default Validate;
+export default Validator;

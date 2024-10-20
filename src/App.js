@@ -1,14 +1,14 @@
 import View from "./View.js";
-import Separator from "./Separate.js";
-import Validate from "./Validate.js";
-import Calculate from "./calculate.js";
+import Separator from "./Separator.js";
+import Validator from "./Validator.js";
+import Calculator from "./Calculator.js";
 
 class App {
   constructor() {
     this.view = new View();
     this.separator = new Separator();
-    this.validate = new Validate();
-    this.calculate = new Calculate();
+    this.validator = new Validator();
+    this.calculator = new Calculator();
   }
 
   async run() {
@@ -17,8 +17,8 @@ class App {
     const customSeparator = this.separator.isCustomSeparator(userInput);
     const inputArr = this.separator.userValueArr(userInput, customSeparator);
 
-    const verifiedArr = this.validate.validateValue(inputArr);
-    const result = this.calculate.sum(verifiedArr);
+    const verifiedArr = this.validator.validateValue(inputArr);
+    const result = this.calculator.sum(verifiedArr);
 
     this.view.outputView(result);
   }
