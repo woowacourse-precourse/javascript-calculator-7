@@ -74,13 +74,16 @@ class App {
   }
 
   splitAndConvertToNumbers(input, separator) {
-    if (typeof separator === "object") {
+    const isTwoSeparators = typeof separator === "object";
+
+    if (isTwoSeparators) {
       const [comma, semicolon] = separator;
       return input
         .split(comma)
         .flatMap((el) => el.split(semicolon))
         .map(Number);
-    } else return input.split(separator).map(Number);
+    }
+    if (!isTwoSeparators) return input.split(separator).map(Number);
   }
 
   calculateSum(numbers) {
