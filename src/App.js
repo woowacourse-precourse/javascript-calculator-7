@@ -6,6 +6,11 @@ class App {
       "덧셈할 문자열을 입력해 주세요.\n"
     );
 
+    if (input.trim() === "") {
+      Console.print(0);
+      return;
+    }
+
     const isCustomSeparator = (str) => {
       return str.includes("//") && str.includes("\\n");
     };
