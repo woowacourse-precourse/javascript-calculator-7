@@ -7,12 +7,13 @@ class App {
       Console.print(`결과 : ${result}`);
   }
   addNumbers(input) {
+      if (input.trim() === '') {
+          return 0; // 빈 문자열인 경우 0 반환
+      }
       const delimiters = [',', ':']; // 기본 구분자 배열
       const numbers = delimiters.reduce((acc, delimiter) => {
           return acc.flatMap(str => str.split(delimiter));
       }, [input]); // 구분자를 기준으로 문자열 분리
-
-      Console.print(numbers); // numbers 출력
 
       // 모든 숫자가 양수인지 검증
       const negativeNumbers = numbers.filter(num => parseInt(num) < 0);
