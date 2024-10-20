@@ -1,6 +1,5 @@
 import { checkForNaN } from './utils/checkForNaN.js';
 import { hasNegative } from './utils/hasNegative.js';
-import { isEmptyOrNull } from './utils/isEmptyOrNull.js';
 import { splitByCustomSeparator } from './utils/splitByCustomSeparator.js';
 import { splitByDefaultSeparators } from './utils/splitByDefaultSeparators.js';
 import { throwError } from './utils/throwError.js';
@@ -21,9 +20,6 @@ class Calculator {
 	}
 
 	#validateInput() {
-		if (isEmptyOrNull(this.#input)) {
-			return 0;
-		}
 		if (hasNegative(this.#input)) {
 			throwError('[ERROR] : 양수만 입력할 수 있어요.');
 		}
