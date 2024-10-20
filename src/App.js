@@ -12,6 +12,16 @@ class App {
     }
   }
 
+  getRidOfSeparator(input, customSeparator) {
+    if (input.includes(",")) {
+      input = input.replaceAll(",", "");
+    }
+    if (input.includes(":")) {
+      input = input.replaceAll(":", "");
+    }
+    return input;
+  }
+
   async run() {}
 }
 
