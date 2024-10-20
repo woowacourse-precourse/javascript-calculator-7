@@ -22,6 +22,8 @@ module.exports = {
     sourceType: 'module',
   },
   rules: {
-    'prettier/prettier': 'error'
+    'prettier/prettier': 'error',
+    'function-paren-newline': ['error', 'never'],
+    'max-len': ['error', { code: 100 }], 
   },
 };
