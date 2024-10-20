@@ -1,2 +1,2 @@
-export {default as uiConstants} from './ui-constants.js';
-export { default as errorConstans } from './error-constants.js';
+export {default as uiConstants} from './uiConstants.js';
+export {default as errorConstans } from './errorConstants.js';
