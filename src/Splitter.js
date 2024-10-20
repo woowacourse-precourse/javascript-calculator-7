@@ -1,12 +1,12 @@
 import CustomSepatator from "./CustomSeparator.js";
-import Validator from "./Validator.js";
+import validator from "./Validator.js";
 
 class Splitter {
   #separator = [",", ":"];
 
   split(string) {
     if (CustomSepatator.hasPattern(string)) {
-      Validator.validateCustomSeparator(string);
+      validator.validateCustomSeparator(string);
       this.#separator = [...CustomSepatator.extractSeparator(string)];
       return this.#splitAndConvertToNumbers(
         CustomSepatator.removePattern(string)

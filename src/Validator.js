@@ -1,8 +1,8 @@
 import CustomError from "./CustomError.js";
 import CustomSepatator from "./CustomSeparator.js";
 
-class Validator {
-  static VALIDATION_NUMBER_ARRAY = {
+const validator = {
+  NUMBER_RULES: {
     isNumber: {
       errorMessage:
         "구분자를 제외하면 0 또는 양수인 숫자만 입력할 수 있습니다.",
@@ -13,9 +13,9 @@ class Validator {
       isNotValid: (element) =>
         Math.sign(element) === -1 || Object.is(Math.sign(element), -0),
     },
-  };
+  },
 
-  static VALIDATION_CUSTOM_SEPARATOR = {
+  CUSTOM_SEPARATOR_RULES: {
     noSeparator: {
       errorMessage: "//와 \\n 사이에 커스텀 문자 1개를 지정해주세요.",
       isNotValid: (string) =>
@@ -26,25 +26,25 @@ class Validator {
       isNotValid: (string) =>
         CustomSepatator.extractSeparator(string).length > 1,
     },
-  };
+  },
 
-  static validateNumberArray(array) {
+  validateNumberArray: (array) => {
     array.forEach((element) => {
-      Object.values(Validator.VALIDATION_NUMBER_ARRAY).forEach(
+      Object.values(validator.NUMBER_RULES).forEach(
         ({ errorMessage, isNotValid }) => {
           if (isNotValid(element)) throw new CustomError(errorMessage);
         }
       );
     });
-  }
+  },
 
-  static validateCustomSeparator(string) {
-    Object.values(Validator.VALIDATION_CUSTOM_SEPARATOR).forEach(
+  validateCustomSeparator: (string) => {
+    Object.values(validator.CUSTOM_SEPARATOR_RULES).forEach(
       ({ errorMessage, isNotValid }) => {
         if (isNotValid(string)) throw new CustomError(errorMessage);
       }
     );
-  }
-}
+  },
+};
 
-export default Validator;
+export default validator;

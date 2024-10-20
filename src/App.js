@@ -1,6 +1,6 @@
 import Calculator from "./Calculator.js";
 import Splitter from "./Splitter.js";
-import Validator from "./Validator.js";
+import validator from "./Validator.js";
 import View from "./View.js";
 
 class App {
@@ -13,7 +13,7 @@ class App {
   async run() {
     const userInput = await View.readUserInput();
     const numbers = this.#splitter.split(userInput);
-    Validator.validateNumberArray(numbers);
+    validator.validateNumberArray(numbers);
     const sum = Calculator.sum(numbers);
     View.printResult(sum);
   }
