@@ -16,6 +16,10 @@ class App {
       if (isNaN(parsedNumber)) {
         throw new Error("[ERROR] 숫자가 아닌 값이 포함되어 있습니다.");
       }
+
+      if (parsedNumber < 0) {
+        throw new Error("[ERROR] 음수는 입력할 수 없습니다.");
+      }
     });
   }
 }
