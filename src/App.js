@@ -1,3 +1,6 @@
+
+import { Console } from '@woowacourse/mission-utils';
+
 class App {
   async run() {
     const input = await this.getInput(); // 입력 메소드 사용
@@ -9,16 +12,11 @@ class App {
       this.handleError(error); // 에러 처리 메소드 사용
     }
   }
-}
 
 // 입력: 사용자에게 덧셈할 문자열을 입력받는 메소드
-getInput() {
-  return new Promise((resolve) => {
-    console.log('덧셈할 문자열을 입력해 주세요.'); 
-    process.stdin.once('data', (data) => {
-      resolve(data.toString().trim()); 
-    });
-  });
+async getInput() {
+  Console.print('덧셈할 문자열을 입력해 주세요.');
+    return await Console.readLineAsync();
 }
 
 // 기본 구분자 기준 분리: 쉼표(,) 또는 콜론(:)을 구분자
@@ -56,13 +54,14 @@ calculateSum(numbers) {
 
 // 출력: 덧셈 결과를 출력하는 메소드
 printResult(result) {
-  console.log(`결과 : ${result}`); 
+  Console.print(`결과 : ${result}`); 
 }
 
 // 에러 처리: 사용자가 잘못된 값을 입력할 경우, "[ERROR]"로 시작하는 메시지와 함께 Error를 발생시키는 메소드
 handleError(error) {
-  console.log(`[ERROR] ${error.message}`); // 오류 메시지 출력
+  Console.print(`[ERROR] ${error.message}`); // 오류 메시지 출력
   process.exit(1); // 애플리케이션 종료
+}
 }
 
 export default App;
