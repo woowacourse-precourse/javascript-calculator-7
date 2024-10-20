@@ -17,7 +17,7 @@ class App {
         // 커스텀 구분자 검증
         this.customDelimiterVaildation(input);
 
-        // 커스텀 구분자 전처리 (커스텀 구분자 구하고, 커스텀 구분자 설정 부분 자르기)
+        // 커스텀 구분자 처리 (커스텀 구분자 구하고, 커스텀 구분자 설정 부분 자르기)
         input = this.processCustomDelimiter(input);
       }
 
@@ -37,6 +37,8 @@ class App {
     }
   }
 
+  // 입출력 함수 //
+
   // 입력 받는 함수
   async getInput() {
     try {
@@ -47,24 +49,12 @@ class App {
     }
   }
 
-  //입력 전처리 (커스텀 구분자 구하고, 커스텀 구분자 설정 부분 자르기)
-  processCustomDelimiter(input) {
-    // 커스텀 구분자 있는 경우
-    const customMatch = input.match(REGEX_CUSTOM_SEPARATOR);
-    if (customMatch) {
-      const customSeparator = customMatch[1]; // 캡처된 구분자
-      this.separators.push(customSeparator); // 기존 구분자 배열에 추가
-      input = input.replace(REGEX_CUSTOM_SEPARATOR, ""); // 커스텀 구분자 설정 부분 자르기
-    }
-    return input;
+  // 합 출력 함수
+  printSum(sum) {
+    Console.print("결과 : " + sum);
   }
 
-  // 입력값을 구분자들로 나눠 배열로 반환
-  parseInput(input) {
-    // 구분자들로 정규식 생성
-    const REGEX_SEPARATOR = new RegExp(this.separators.map((s) => `\\${s}`).join("|"), "g");
-    return input.split(REGEX_SEPARATOR);
-  }
+  // 검증 함수 //
 
   // 커스텀 구분자 입력 검증 함수
   customDelimiterVaildation(input) {
@@ -110,14 +100,30 @@ class App {
     }
   }
 
-  // 배열에 저장된 입력값 더하기
-  sumNumbers(numArr) {
-    return numArr.reduce((acc, current) => acc + Number(current), 0);
+  // 값 처리 함수 //
+
+  // 커스텀 구분자 처리 함수 (커스텀 구분자 구하고, 커스텀 구분자 설정 부분 자르기)
+  processCustomDelimiter(input) {
+    // 커스텀 구분자 있는 경우
+    const customMatch = input.match(REGEX_CUSTOM_SEPARATOR);
+    if (customMatch) {
+      const customSeparator = customMatch[1]; // 캡처된 구분자
+      this.separators.push(customSeparator); // 기존 구분자 배열에 추가
+      input = input.replace(REGEX_CUSTOM_SEPARATOR, ""); // 커스텀 구분자 설정 부분 자르기
+    }
+    return input;
   }
 
-  // 합 출력
-  printSum(sum) {
-    Console.print("결과 : " + sum);
+  // 입력값을 구분자들로 나눠 배열로 반환하는 함수
+  parseInput(input) {
+    // 구분자들로 정규식 생성
+    const REGEX_SEPARATOR = new RegExp(this.separators.map((s) => `\\${s}`).join("|"), "g");
+    return input.split(REGEX_SEPARATOR);
+  }
+
+  // 배열에 저장된 입력값 더하는 함수
+  sumNumbers(numArr) {
+    return numArr.reduce((acc, current) => acc + Number(current), 0);
   }
 }
 
