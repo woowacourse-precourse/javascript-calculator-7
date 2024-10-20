@@ -10,39 +10,43 @@ class App {
         return;
       }
 
-      //커스텀 구분자가 있는지 검사후 배열을 반환
+      // 커스텀 구분자가 있는지 검사 후 배열을 반환
       const { inputArr, delimiters } = this.parseInputToArray(input);
 
-      // 유효한 입력값일 경우, 계산하는 메서드 를 실행
+      // 유효한 입력값일 경우, 계산하는 메서드를 실행
       if (this.isValid(inputArr, delimiters)) {
         this.calculate(inputArr);
       } else {
-        MissionUtils.Console.print('[ERROR] 잘못된 값을 입력하셨습니다.');
-        return;
+        throw new Error('[ERROR] 잘못된 구분자를 사용하셨습니다.');
       }
     } catch (error) {
-      MissionUtils.Console.print(`[ERROR]: ${error}`);
+      MissionUtils.Console.print(error.message);
       return;
     }
   }
-  
-  isValid(inputArr, delimiters) {    
+
+  isValid(inputArr, delimiters) {
     const isValidInput = inputArr.every((str, idx) => {
       if (idx % 2 === 0) { 
         // 숫자인지 확인
-        return !isNaN(parseFloat(str)) && isFinite(str); 
+        if (isNaN(parseFloat(str)) || !isFinite(str)) {
+          throw new Error(`[ERROR] 유효하지 않은 숫자입니다: ${str}`);
+        }
+        return true;
       } else { 
         // 구분자가 올바른지 확인
-        return delimiters.includes(str);
+        if (!delimiters.includes(str)) {
+          throw new Error(`[ERROR] 유효하지 않은 구분자입니다: ${str}`);
+        }
+        return true;
       }
     });
   
     return isValidInput; 
   }
-  
-  
-  //입력받은 input 을 배열로 바꿔주는 메서드
-  parseInputToArray(input){
+
+  // 입력받은 input을 배열로 바꿔주는 메서드
+  parseInputToArray(input) {
     const delimiters = [',', ':'];
 
     // 커스텀 구분자가 있는지 확인
@@ -80,8 +84,7 @@ class App {
     if (temp) {
       result.push(temp);
     }
-    
-   
+
     const combinedResult = [];
     let numberString = '';
     for (let j = 0; j < result.length; j++) {
@@ -107,26 +110,23 @@ class App {
     return { inputArr: combinedResult, delimiters }; 
   }
 
-
   // 입력값을 계산하는 메서드 
   calculate(inputArr) {
     // 숫자만 필터링
     const numbers = inputArr.filter((str, idx) => idx % 2 === 0).map(Number); 
-  
+
     // 음수가 있는지 체크
     const negativeNumbers = numbers.filter(num => num < 0);
     if (negativeNumbers.length > 0) {
-      MissionUtils.Console.print(`[ERROR] 음수의 값을 입력하셨습니다: ${negativeNumbers.join(', ')}`);
-      return;
+      throw new Error(`[ERROR] 음수 값을 입력하셨습니다: ${negativeNumbers.join(', ')}`);
     }
-  
+
     // 양수 합산
     const sum = numbers.reduce((acc, curr) => acc + curr, 0);
-  
+
     // 최종 합산 결과 출력
     MissionUtils.Console.print(`결과: ${sum}`);
   }
-  
-  
 }
+
 export default App;
