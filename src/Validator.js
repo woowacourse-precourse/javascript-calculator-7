@@ -19,9 +19,9 @@ export class Validator {
   }
 
   static duplicatedSet(string) {
-    const CUSTOM_END_INDEX = string.indexOf(CUSTOM_DELIMITER_STATEMENT.END);
+    const customEndIndex = string.indexOf(CUSTOM_DELIMITER_STATEMENT.END);
 
-    if (Operand.isSetCustomDelimiter(string, CUSTOM_END_INDEX)) {
+    if (Operand.isSetCustomDelimiter(string, customEndIndex)) {
       throw new Error(ERROR_MESSAGE.TAG + ERROR_MESSAGE.DUPLICATED_SET);
     }
   }

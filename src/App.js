@@ -4,8 +4,8 @@ import { Operand } from "./Operand.js";
 
 class App {
   async run() {
-    const USER_INPUT = await InputView.string();
-    const operand = new Operand(USER_INPUT);
+    const userInput = await InputView.string();
+    const operand = new Operand(userInput);
     OutputView.sum(operand.calculate());
   }
 }

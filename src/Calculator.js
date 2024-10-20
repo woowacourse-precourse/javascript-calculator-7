@@ -1,8 +1,8 @@
 export class Calculator {
   static extractNumber(string) {
-    const EXTRACTED_ARR = string.split(/[^\d]+/).map(Number);
+    const extractdArr = string.split(/[^\d]+/).map(Number);
 
-    return EXTRACTED_ARR;
+    return extractdArr;
   }
 
   static add(arr) {

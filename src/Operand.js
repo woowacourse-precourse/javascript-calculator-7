@@ -12,14 +12,14 @@ export class Operand {
   }
 
   #setCustomDelimiter(userInput) {
-    const CUSTOM_END_INDEX = userInput.indexOf(CUSTOM_DELIMITER_STATEMENT.END);
+    const customEndIndex = userInput.indexOf(CUSTOM_DELIMITER_STATEMENT.END);
 
-    if (Operand.isSetCustomDelimiter(userInput, CUSTOM_END_INDEX)) {
+    if (Operand.isSetCustomDelimiter(userInput, customEndIndex)) {
       this.#customDelimiter = this.extractCustomDelimiter(
         userInput,
-        CUSTOM_END_INDEX
+        customEndIndex
       );
-      this.#string = this.extractString(CUSTOM_END_INDEX, userInput);
+      this.#string = this.extractString(customEndIndex, userInput);
 
       return;
     }
@@ -62,8 +62,8 @@ export class Operand {
   }
 
   calculate() {
-    const EXTRACTED_ARR = Calculator.extractNumber(this.#string);
+    const extractedArr = Calculator.extractNumber(this.#string);
 
-    return Calculator.add(EXTRACTED_ARR);
+    return Calculator.add(extractedArr);
   }
 }
