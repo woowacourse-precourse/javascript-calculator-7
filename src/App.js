@@ -1,18 +1,33 @@
-import { Console } from '@woowacourse/mission-utils';
-
 class App {
   run() {
     Console.readLine('문자열을 입력하세요: ', (input) => {
       try {
-        // 나중에 입력값을 처리할 로직이 추가될 예정
-        const result = input; // 일단 입력값 그대로 출력
+        const result = this.calculation(input);
         Console.print(`=> ${result}`);
       } catch (error) {
         Console.print(error.message);
       } finally {
-        Console.close();  // 콘솔 인터페이스 종료
+        Console.close();
       }
     });
+  }
+
+  calculation(input) {
+    if (input === '') return 0;
+
+    let separator = /[,:]/;
+    const numberStrings = input.split(separator);
+    let sum = 0;
+
+    for (const numStr of numberStrings) {
+      if (numStr.trim() === '') continue;
+      if (!/^\d+$/.test(numStr)) { // 숫자가 아닌 경우 에러
+        throw new Error('[ERROR] 숫자가 아닌 값이 포함되어 있습니다: ' + numStr);
+      }
+      sum += parseInt(numStr, 10);
+    }
+
+    return sum;
   }
 }
 
