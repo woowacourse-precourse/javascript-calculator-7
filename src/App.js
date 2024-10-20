@@ -48,10 +48,11 @@ class App {
     const end = customStr.indexOf('\\n');
     const customSeperator = customStr.slice(start + 2, end);
 
-    ////와 \\n사이에 아무 문자가 없을 경우
+    // //와 \\n사이에 아무 문자가 없을 경우
     if (!customSeperator) {
       return this.printError('커스텀 구분자는 //와 \\n사이에 있어야 합니다');
     }
+    // 커스텀 구분자 사이에 숫자가 있을 경우
     if (this.isContainNum(customSeperator)) {
       return this.printError('커스텀 구분자 사이에 숫자가 있으면 안됩니다');
     }
