@@ -3,6 +3,10 @@ import IConverter from '../interfaces/IConverter.js';
 
 class NumberConverter extends IConverter {
   static convertToNumber(value) {
+    if (value === '') {
+      return 0;
+    }
+
     if (isNaN(value)) {
       throw new Error(ERROR_MESSAGES.INVALID_NUMBER_INPUT);
     }
