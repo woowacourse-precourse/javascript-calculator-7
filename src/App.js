@@ -7,8 +7,6 @@ class App {
         '덧셈할 문자열을 입력해 주세요.\n',
       );
 
-      console.log('input', input);
-
       let nums = [];
       if (input.length === 0) {
         nums.push(0);
