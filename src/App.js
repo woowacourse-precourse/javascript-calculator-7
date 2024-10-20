@@ -1,4 +1,4 @@
-import Calculator from "./Calculator.js";
+import calculator from "./Calculator.js";
 import Splitter from "./Splitter.js";
 import validator from "./Validator.js";
 import View from "./View.js";
@@ -14,7 +14,7 @@ class App {
     const userInput = await View.readUserInput();
     const numbers = this.#splitter.split(userInput);
     validator.validateNumberArray(numbers);
-    const sum = Calculator.sum(numbers);
+    const sum = calculator.sum(numbers);
     View.printResult(sum);
   }
 }

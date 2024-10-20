@@ -1,4 +1,4 @@
-import Calculator from "../src/Calculator";
+import calculator from "../src/Calculator";
 
 describe("sum 테스트", () => {
   test.each([
@@ -15,7 +15,7 @@ describe("sum 테스트", () => {
       expected: 6,
     },
   ])("$input의 원소를 더한 결과는 $expected 이다.", ({ input, expected }) => {
-    const result = Calculator.sum(input);
+    const result = calculator.sum(input);
     expect(result).toBe(expected);
   });
 });

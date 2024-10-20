@@ -1,7 +1,5 @@
-class Calculator {
-  static sum(numbers) {
-    return numbers.reduce((cur, acc) => cur + acc, 0);
-  }
-}
+const calculator = {
+  sum: (numbers) => numbers.reduce((cur, acc) => cur + acc, 0),
+};
 
-export default Calculator;
+export default calculator;
