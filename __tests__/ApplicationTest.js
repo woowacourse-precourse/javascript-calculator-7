@@ -1,5 +1,6 @@
-import App from "../src/App.js";
-import { MissionUtils } from "@woowacourse/mission-utils";
+import App from '../src/App.js';
+import { MissionUtils } from '@woowacourse/mission-utils';
+import { ERROR_MESSAGES } from '../src/constant/message.js';
 
 const mockQuestions = (inputs) => {
   MissionUtils.Console.readLineAsync = jest.fn();
@@ -11,18 +12,18 @@ const mockQuestions = (inputs) => {
 };
 
 const getLogSpy = () => {
-  const logSpy = jest.spyOn(MissionUtils.Console, "print");
+  const logSpy = jest.spyOn(MissionUtils.Console, 'print');
   logSpy.mockClear();
   return logSpy;
 };
 
-describe("문자열 계산기", () => {
-  test("커스텀 구분자 사용", async () => {
-    const inputs = ["//;\\n1"];
+describe('문자열 계산기', () => {
+  test('커스텀 구분자 사용', async () => {
+    const inputs = ['//;\\n1'];
     mockQuestions(inputs);
 
     const logSpy = getLogSpy();
-    const outputs = ["결과 : 1"];
+    const outputs = ['결과 : 1'];
 
     const app = new App();
     await app.run();
@@ -31,13 +32,78 @@ describe("문자열 계산기", () => {
       expect(logSpy).toHaveBeenCalledWith(expect.stringContaining(output));
     });
   });
+});
 
-  test("예외 테스트", async () => {
-    const inputs = ["-1,2,3"];
+describe('예외 테스트', () => {
+  test('미입력', async () => {
+    const inputs = [''];
     mockQuestions(inputs);
 
     const app = new App();
 
-    await expect(app.run()).rejects.toThrow("[ERROR]");
+    await expect(app.run()).rejects.toThrow(ERROR_MESSAGES.empty);
+  });
+
+  test('커스텀 구분자 - 음수', async () => {
+    const inputs = ['//+\\n1+-2+3'];
+    mockQuestions(inputs);
+
+    const app = new App();
+
+    await expect(app.run()).rejects.toThrow(ERROR_MESSAGES.negativeNumber);
+  });
+
+  test('기본구분자 - 구분자 뒤 숫자 미입력', async () => {
+    const inputs = ['1,2,'];
+    mockQuestions(inputs);
+
+    const app = new App();
+
+    await expect(app.run()).rejects.toThrow(ERROR_MESSAGES.missingNumber);
+  });
+
+  test('유효하지 않은 구분자', async () => {
+    const inputs = ['1,2-3'];
+    mockQuestions(inputs);
+
+    const app = new App();
+
+    await expect(app.run()).rejects.toThrow(ERROR_MESSAGES.invalidDelimiter);
+  });
+
+  test('기본 구분자 - 음수', async () => {
+    const inputs = ['-1,2,3'];
+    mockQuestions(inputs);
+
+    const app = new App();
+
+    await expect(app.run()).rejects.toThrow(ERROR_MESSAGES.defaultStart);
+  });
+
+  test('커스텀 구분자 - 포맷', async () => {
+    const inputs = ['//\\n1'];
+    mockQuestions(inputs);
+
+    const app = new App();
+
+    await expect(app.run()).rejects.toThrow(ERROR_MESSAGES.customForamt);
+  });
+
+  test('커스텀 구분자 - 길이', async () => {
+    const inputs = ['//-=\\n1-=2'];
+    mockQuestions(inputs);
+
+    const app = new App();
+
+    await expect(app.run()).rejects.toThrow(ERROR_MESSAGES.length);
+  });
+
+  test('커스텀 구분자 - 온점', async () => {
+    const inputs = ['//.\\n23.1'];
+    mockQuestions(inputs);
+
+    const app = new App();
+
+    await expect(app.run()).rejects.toThrow(ERROR_MESSAGES.period);
   });
 });
