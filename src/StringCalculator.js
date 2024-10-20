@@ -1,13 +1,14 @@
 class StringCalculator {
   static CUSTOM_DELIMITER_PATTERN = /^\/\/(.)\\n/;
-  static ERROR_EMPTY_INPUT = "[ERROR] 입력값이 빈 문자열입니다.";
   static ERROR_INVALID_CHARACTERS =
     "[ERROR] 입력값에 허용되지 않는 문자가 포함되어 있습니다.";
   static ERROR_NEGATIVE_NUMBER = "[ERROR] 음수는 입력할 수 없습니다.";
   static ERROR_WRONG_DELIMITER = "[ERROR] 구분자가 잘못 사용되었습니다.";
 
   parseAndAdd(input) {
-    this.checkEmptyInput(input);
+    if (this.isEmptyInput(input)) {
+      return 0;
+    }
 
     const customDelimiter = this.extractCustomDelimiter(input);
     const numberSection = this.getNumberSection(input, customDelimiter);
@@ -41,10 +42,8 @@ class StringCalculator {
     }
   }
 
-  checkEmptyInput(input) {
-    if (!input || input.trim() === "") {
-      throw new Error(StringCalculator.ERROR_EMPTY_INPUT);
-    }
+  isEmptyInput(input) {
+    return !input || input.trim() === "";
   }
 
   checkDelimiterUsage(numberTokens) {

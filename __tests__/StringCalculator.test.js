@@ -1,12 +1,18 @@
 import StringCalculator from "../src/StringCalculator";
 
 describe("StringCalculator", () => {
-  describe("checkEmptyInput", () => {
-    test("빈 문자열이 입력되면 에러를 발생시킨다", () => {
+  describe("isEmptyInput", () => {
+    test("빈 문자열이면 true를 반환한다", () => {
       const calculator = new StringCalculator();
-      expect(() => calculator.checkEmptyInput("")).toThrow(
-        "[ERROR] 입력값이 빈 문자열입니다."
-      );
+      expect(calculator.isEmptyInput("")).toBe(true);
+      expect(calculator.isEmptyInput(" ")).toBe(true);
+      expect(calculator.isEmptyInput(null)).toBe(true);
+    });
+
+    test("빈 문자열이 아니면 false를 반환한다", () => {
+      const calculator = new StringCalculator();
+      expect(calculator.isEmptyInput("1,2,3")).toBe(false);
+      expect(calculator.isEmptyInput("//;\\n1;2;3")).toBe(false);
     });
   });
 
@@ -116,11 +122,9 @@ describe("StringCalculator", () => {
       expect(calculator.parseAndAdd("//;\\n1")).toBe(1);
     });
 
-    test("빈 문자열이 입력되면 에러가 발생한다", () => {
+    test("빈 문자열이 입력되면 0을 반환한다.", () => {
       const calculator = new StringCalculator();
-      expect(() => calculator.parseAndAdd("")).toThrow(
-        "[ERROR] 입력값이 빈 문자열입니다."
-      );
+      expect(calculator.parseAndAdd("")).toBe(0);
     });
 
     test("허용되지 않는 문자가 포함된 경우 에러를 발생시킨다", () => {
