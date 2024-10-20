@@ -38,6 +38,11 @@ class Validator {
     return values.every((value) => isPositiveNumber(value));
   }
 
+  /**
+   *
+   * @param {string} value
+   * @returns {boolean}
+   */
   #isNotEmptyCustomDelimiter(value) {
     if (this.#delimiter.hasCustomDelimiter(value)) {
       return !(trimWhitespace(this.#delimiter.getCustomDelimiter(value)) === '');
