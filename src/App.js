@@ -1,9 +1,9 @@
-import StringCalculator from "./StringCalculator";
+import InputCheck from "./InputCheck.js";
 
 class App {
   async run() {
-    const stringCalculator = new StringCalculator();
-    await stringCalculator.calculate();
+    const inputCheck = new InputCheck();
+    await inputCheck.calculate();
   }
 }
 
