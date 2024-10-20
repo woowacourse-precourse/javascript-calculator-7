@@ -10,6 +10,9 @@ export default function parseString(str) {
   if (!str && str === '') {
     return 0;
   }
+  if (str === null || str === undefined) {
+    throw new Error('[ERROR] 빈 문자열입니다.');
+  }
   // 문자열의 첫 번째 문자가 숫자인지 확인
   if (isFirstCharNumber(str)) {
     // 숫자로 시작하면 일반 입력을 처리
