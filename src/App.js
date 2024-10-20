@@ -4,15 +4,17 @@ import { Console } from "@woowacourse/mission-utils";
 class App {
   async run() {
 
-    Console.readLineAsync("덧셈할 문자열을 입력해 주세요.\n", (input) => {
-      try {
-        const result = this.add(input);
-        // 결과 출력
-        Console.print(`결과 : ${result}`);
-      } catch (error) {
-        // 에러 발생 시 출력
-        Console.print(`[ERROR] ${error.message}`);
-      }
+    return new Promise((resolve) => {
+      Console.readLineAsync("덧셈할 문자열을 입력해 주세요.\n", (input) => {
+        try {
+          const result = this.add(input);
+          Console.print(`결과 : ${result}`);
+          resolve();
+        } catch (error) {
+          Console.print(`[ERROR] ${error.message}`);
+          resolve(Promise.reject(error));
+        }
+      });
     });
   }
 
