@@ -11,21 +11,16 @@ class App {
   }
 
   async run() {
-    try {
-      displayInputGuide();
-      const input = await getUserInput();
-      const customDelimiter = getCustomDelimiter(input);
-      if (customDelimiter) this.delimiter.setCustomDelimiter(customDelimiter);
-      const processedInput = customDelimiter ? input.split('\\n')[1] : input;
-      const numbers = getNumbers(
-        processedInput,
-        this.delimiter.getDelimiters(),
-      );
-      const total = sumNumbers(numbers);
-      printResult(total);
-    } catch (error) {
-      throw error;
-    }
+    displayInputGuide();
+    const input = await getUserInput();
+
+    const customDelimiter = getCustomDelimiter(input);
+    const processedInput = customDelimiter ? input.split('\\n')[1] : input;
+    if (customDelimiter) this.delimiter.setCustomDelimiter(customDelimiter);
+
+    const numbers = getNumbers(processedInput, this.delimiter.getDelimiters());
+    const total = sumNumbers(numbers);
+    printResult(total);
   }
 }
 
