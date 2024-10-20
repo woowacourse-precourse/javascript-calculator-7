@@ -7,9 +7,7 @@ class App {
     const { customSeparator, numbers } = await Input.getCustomSeparatorAndNumbers();
 
     const calculator = new Calculator(customSeparator, numbers);
-    const result = calculator.sum();
-
-    const output = new Output(result);
+    const output = new Output(calculator.sum());
     output.printResult();
   }
 }
