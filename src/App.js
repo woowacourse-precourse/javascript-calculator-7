@@ -17,3 +17,7 @@ const inputValue = "//;\n2 ;4; 5; 7";
 const INPUT_VALUE = inputValue.replace(/[^\S\n]/g, "");
 console.log('입력값이 무엇이죠? : ', INPUT_VALUE);
 
+// [3] 커스텀구분자 여부를 확인합니다.
+const CUSTOM_PATTERN = /^\/\//;
+const IS_THIS_CUSTOM = CUSTOM_PATTERN.test(INPUT_VALUE); // true, flase 여부 반환
+console.log('커스텀 구분자인가요? : ', IS_THIS_CUSTOM);
