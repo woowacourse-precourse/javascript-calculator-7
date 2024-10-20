@@ -15,8 +15,8 @@ class App {
     CleanInput = CleanInput.replace(new RegExp(customDelimiter, 'g'), '');
 
 }
-  //1.(숫자추출) 문자만 공백으로 치환.
-  CleanInput = input.replace(/[^\d]/g, '');
+  //1.(숫자추출) + 문자 및 기본 구분자 공백으로 치환
+  CleanInput = CleanInput.replace(/[,a-zA-Z:]/g, ' ');
 
   //2.(기본구분자 분리)
   const numbers = CleanInput.split(/\s+|[,:\-]/)
