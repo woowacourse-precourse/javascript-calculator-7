@@ -1,23 +1,23 @@
 import { Console } from '@woowacourse/mission-utils';
 
 class App {
-  separators = [',', ':'];
-  extractedNumbers = [];
+  SEPARATORS = [',', ':'];
+  EXTRACTED_NUMBERS = [];
 
   async run() {
     try {
-      const INPUT = await Console.readLineAsync(
+      const input = await Console.readLineAsync(
         '덧셈할 문자열을 입력해주세요.\n'
       );
 
-      const PROCESSED_INPUT = this.handleCustomSeparator(INPUT);
+      const processedInput = this.handleCustomSeparator(input);
 
-      if (this.isEmpty(PROCESSED_INPUT)) {
+      if (this.isEmpty(processedInput)) {
         this.printResult(0);
       } else {
-        this.splitAndExtractNumbers(PROCESSED_INPUT);
-        const SUM = this.calculateSum();
-        this.printResult(SUM);
+        this.splitAndExtractNumbers(processedInput);
+        const sum = this.calculateSum();
+        this.printResult(sum);
       }
     } catch (error) {
       this.handleError(error);
@@ -34,15 +34,15 @@ class App {
     let match;
 
     while ((match = remainingString.match(CUSTOM_SEPARATOR_REGEX))) {
-      const CUSTOM_SEPARATOR = match[1];
+      const customSeparator = match[1];
       remainingString = match[2];
 
-      if (CUSTOM_SEPARATOR !== ' ' && !isNaN(CUSTOM_SEPARATOR)) {
+      if (customSeparator !== ' ' && !isNaN(customSeparator)) {
         throw new Error('커스텀 구분자로 숫자를 사용할 수 없습니다');
       }
 
-      if (!this.separators.includes(CUSTOM_SEPARATOR)) {
-        this.separators.push(CUSTOM_SEPARATOR);
+      if (!this.SEPARATORS.includes(customSeparator)) {
+        this.SEPARATORS.push(customSeparator);
       }
     }
 
@@ -62,22 +62,22 @@ class App {
   }
 
   splitAndExtractNumbers(input) {
-    const REGEX = new RegExp(`[${this.separators.join('')}]`, 'g');
-    const NUMBERS = input.split(REGEX);
+    const REGEX = new RegExp(`[${this.SEPARATORS.join('')}]`, 'g');
+    const numbers = input.split(REGEX);
 
-    if (NUMBERS.some((num) => num.trim() === '')) {
+    if (numbers.some((num) => num.trim() === '')) {
       throw new Error('구분자 사이에 빈 문자열이 있습니다');
     }
 
-    for (const NUM of NUMBERS) {
-      if (this.validateNumber(NUM)) {
-        this.extractedNumbers.push(Number(NUM));
+    for (const num of numbers) {
+      if (this.validateNumber(num)) {
+        this.EXTRACTED_NUMBERS.push(Number(num));
       }
     }
   }
 
   calculateSum() {
-    return this.extractedNumbers.reduce((sum, num) => sum + num, 0);
+    return this.EXTRACTED_NUMBERS.reduce((sum, num) => sum + num, 0);
   }
 
   printResult(result) {
