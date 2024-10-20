@@ -3,12 +3,6 @@ import { Console } from '@woowacourse/mission-utils';
 class App {
     async run() {
         try {
-            /**
-             6. 입력값이 한 개일 때 처리
-             - 문자열이 하나의 숫자로만 구성된 경우 해당 숫자를 그대로 반환합니다.
-             - 예: "5" -> 5
-             */
-
             // 사용자로부터 입력(문자열)을 받음
             let input = await Console.readLineAsync(
                 '덧셈할 문자열을 입력해주세요.\n'
@@ -71,9 +65,10 @@ class App {
                 .reduce((acc, curr) => acc + curr, 0);
 
             // 결과 출력
-            Console.print(`${result}`);
+            Console.print(`결과 : ${result}`);
         } catch (error) {
             Console.print(error.message);
+            throw error;
         }
     }
 }
