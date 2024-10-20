@@ -12,7 +12,7 @@ function add(input) {
     if (input.startsWith("//")) {
       const parts = input.split("\n");
       if (parts.length < 2) {
-        throw new Error("[ERROR]");
+        throw new Error("[ERROR] 잘못된 입력 형식입니다.");
       }
       const customDelimiter = parts[0].substring(2);
       delimiter = new RegExp(`[${customDelimiter}]`);
@@ -25,13 +25,15 @@ function add(input) {
       if (isNaN(num)) {
         throw new Error("[ERROR] 숫자가 아닌 값이 포함되었습니다.");
       }
+      if (num < 0) {
+        throw new Error("[ERROR] 음수는 허용되지 않습니다.");
+      }
       return total + num;
     }, 0);
 
     return sum;
   } catch (error) {
-    Console.print(error.message);
-    throw error;  // 에러 발생 시 예외를 던져서 처리
+    throw new Error(error.message); // 에러를 발생시킴
   }
 }
 
@@ -42,14 +44,13 @@ async function askForInput() {
     );
     if (userInput.toLowerCase() === "종료") {
       Console.print("프로그램을 종료합니다.");
-      process.exit(0);  // 정상 종료
     } else {
       Console.print(`결과 : ${add(userInput)}`);
       await askForInput();
     }
   } catch (error) {
-    Console.print("[ERROR] 잘못된 입력으로 프로그램을 종료합니다.");
-    process.exit(1);  // 에러 발생 시 프로그램 종료
+    Console.print(error.message); // 에러 메시지 출력
+    process.exit(1); // 프로그램을 종료
   }
 }
 
