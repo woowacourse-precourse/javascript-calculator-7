@@ -2,7 +2,7 @@ import { Console } from "@woowacourse/mission-utils";
 
 // 요구 사항에 기재되지 않은 내용 판단
 // 1. 구분자로 시작하거나 끝나는 경우 -> False
-// 2. 앞에 무의미한 0이 붙는 경우 -> 일단.. True
+// 2. 앞에 무의미한 0이 붙는 경우 -> False
 // 3. 커스텀 구분자가 숫자인 경우 -> False
 // 4. 커스텀 구분자가 문자 하나가 아닌 경우 -> False
 
@@ -28,7 +28,7 @@ class App {
 
     validateInput(customDelimiter, inputWithoutDelimiter) {
         const delimiters = customDelimiter ? `,:${customDelimiter}` : ",:";
-        const regex = new RegExp(`^[0-9]+([${delimiters}][0-9]+)*$`);
+        const regex = new RegExp(`^^(0|[1-9][0-9]*)([${delimiters}](0|[1-9][0-9]*))*$`);
 
         if (inputWithoutDelimiter && !regex.test(inputWithoutDelimiter)) {
             this.throwError("입력값이 유효하지 않습니다.");
