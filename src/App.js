@@ -13,11 +13,13 @@ class App {
     if (input.match(customDelimiter)){
       const matched = input.match(customDelimiter);
       const newDelimiter = matched[1];
-      delimiter = new RegExp(`[${newDelimiter},:]`);
-      parseTarget = input.slice(5);
+      const escapedDelimiter = newDelimiter.replace(/[.*+?^${}()|[\]\\]/g, '\\$&');
+      delimiter = new RegExp(`[${escapedDelimiter},:]`);
+      parseTarget = input.slice(matched[0].length);
     }
     //문자열에서 정규표현식으로 구분자 찾아 숫자 배열로 파싱
     const parsedList = parseTarget.trim().split(delimiter).map(Number);
+
     //숫자 배열 돌면서 값 더하기
     const result = parsedList.reduce((accumulator, currentValue) => accumulator + currentValue, 0);
 
@@ -29,8 +31,6 @@ class App {
     } catch (error) {
       throw error;
     }
-    // 결과 출력
-    
   }
 }
 
