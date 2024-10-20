@@ -25,7 +25,14 @@ class App {
       }
 
       const REGEX = new RegExp(`[${delimiters.join('')}]`);
-      answer = input.split(REGEX).map(Number).reduce((acc, cur) => acc + cur, 0);
+      const numbers = input.split(REGEX).map(Number);
+
+      const negativeNumbers = numbers.filter(num => num < 0);
+      if (negativeNumbers.length > 0) {
+        throw new Error(`[ERROR] 음수는 허용되지 않습니다: ${negativeNumbers.join(', ')}`);
+      }
+
+      answer = numbers.reduce((acc, cur) => acc + cur, 0);
     }
 
     Console.print(`결과 : ${answer}`);
