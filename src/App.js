@@ -4,10 +4,9 @@ class App {
     async run() {
         try {
             /**
-             4. 음수 또는 잘못된 입력 처리
-             - 사용자가 음수나 유효하지 않은 값을 입력하면 [ERROR] 메시지를 출력하고 애플리케이션을 종료합니다.
-             - 예 : "-1,2" -> [ERROR] 음수는 허용되지 않습니다.
-             - 예 : "1, a" -> [ERROR] 유효하지 않은 입력입니다.
+             5. 다양한 구분자를 처리하는 기능
+             - 여러 개의 커스텀 구분자를 지정하여 사용할 수 있습니다.
+             - 예: "//[;][|]\n1;2|3" -> 6
              */
 
             // 사용자로부터 입력(문자열)을 받음
@@ -25,6 +24,25 @@ class App {
             if (input.startsWith('//')) {
                 const end = input.indexOf('\\n');
                 delimiter = input.substring(2, end);
+
+                // 여러 개의 커스텀 구분자 추출
+                const splitter = [
+                    ...delimiter.matchAll(/\[(.*?)\]/g),
+                ].map((del) => del[1]);
+
+                if (splitter.length > 0) {
+                    delimiter = new RegExp(
+                        splitter
+                            .map((d) =>
+                                d.replace(
+                                    /[.*+?^${}()|[\]\\]/g,
+                                    '\\$&'
+                                )
+                            )
+                            .join('|')
+                    );
+                }
+
                 input = input.substring(end + 2);
             }
 
