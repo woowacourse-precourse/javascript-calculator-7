@@ -74,3 +74,13 @@ git config --global user.email 사용자@이메일.com
 ```
 
 사용자의 이름, 이메일 설정
+
+**amend**
+
+```
+git amend 
+```
+
+가장 마지막에 commit 한 내용 수정
+
+<!-- 특정 커밋 메시지 수정 항목 추가 필요 -->

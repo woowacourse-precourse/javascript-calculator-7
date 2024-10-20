@@ -224,3 +224,46 @@ function something() {
    * /
 }
 ```
+
+**isNaN**
+
+[참고자료](https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/isNaN)
+
+// 설명 정리 
+
+**Array.reduce**
+
+[참고자료](https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/Array/reduce)
+
+##### syntax
+
+```javascript
+reduce(콜백함수);
+reduce(콜백함수, 초기값);
+
+const something = ['배열', '형태의', '데이터'];
+
+const reducedSomthing = something.reduce((이전까지의 누적값, 현재값) => 이전까지의 누적값 + 현재값, 초기값);
+
+- parameters
+
+callbackFn
+
+  accumulator
+  콜백함수의 이전 호출의 결과값
+
+  currentValue
+  현재 요소의 값
+
+  currentIndex
+  현재 요소의 인덱스 위치 
+
+initialValue
+초기값
+```
+
+**Error**
+
+[참고자료](https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/Error)
+
+// 설명 추가
