@@ -47,7 +47,7 @@ function extractNums(inputStr,basicOperators){
       nums.push(Number(item));
     }
     else{
-       throw Error('[ERROR] : 잘못된 문자가 입력되었습니다.');;
+       throw Error('[ERROR] : 잘못된 문자가 입력되었습니다.');
     }
   }
   return nums;
@@ -55,6 +55,9 @@ function extractNums(inputStr,basicOperators){
 
 function calculateSum(nums){
   return nums.reduce((acc, cur) => {
+    if (cur == 0){
+      throw Error('[ERROR] : 0은 양수가 아닙니다.');
+    }
     return acc + cur;
   }, 0);
 }
