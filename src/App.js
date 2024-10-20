@@ -13,6 +13,10 @@ class App {
       if (this.hasConsecutiveSeparators(input, /,:/)) {
         return VALIDATION_ERROR;
       }
+      if (this.hasConsecutiveDecimalPoints(input)) {
+        return VALIDATION_ERROR;
+      }
+
       return VALIDATION_DEFAULT;
     } else if (customSep.test(input)) {
       if (input.length > 5 && !this.startsAndEndsWithNumber(input.slice(5))) {
@@ -21,17 +25,25 @@ class App {
       if (this.hasConsecutiveSeparators(input.slice(5), /,:/)) {
         return VALIDATION_ERROR;
       }
+      if (this.hasConsecutiveDecimalPoints(input.slice(5))) {
+        return VALIDATION_ERROR;
+      }
+      if (input[2] === '.') {
+        return VALIDATION_ERROR;
+      }
+
       if (input[2] !== '\\') {
-        const pattern = new RegExp(`[^0-9,:${input[2]}]`);
+        const pattern = new RegExp(`[^0-9,:.${input[2]}]`);
         if (pattern.test(input.slice(5)) || this.hasConsecutiveSeparators(input.slice(5), input[2])) {
           return VALIDATION_ERROR;
         }
       } else {
-        const pattern = new RegExp(/[^0-9,:\\]/);
+        const pattern = new RegExp(/[^0-9,:.\\]/);
         if (pattern.test(input.slice(5)) || this.hasConsecutiveSeparators(input.slice(5), '\\\\')) {
           return VALIDATION_ERROR;
         }
       }
+
       return VALIDATION_CUSTOM;
     }
     return VALIDATION_ERROR;
@@ -46,6 +58,11 @@ class App {
 
   hasConsecutiveSeparators(input, sep) {
     const pattern = new RegExp(`[${sep}]{2,}`);
+    return pattern.test(input);
+  }
+
+  hasConsecutiveDecimalPoints(input) {
+    const pattern = new RegExp(/[.]{2,}/);
     return pattern.test(input);
   }
 
