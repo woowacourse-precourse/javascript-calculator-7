@@ -21,7 +21,8 @@ class App {
       }
     } catch (error) {
       MissionUtils.Console.print(error.message);
-      return;
+      // 에러가 발생했을 때 Promise가 reject되도록 에러를 다시 throw
+      throw error;
     }
   }
 
@@ -118,14 +119,14 @@ class App {
     // 음수가 있는지 체크
     const negativeNumbers = numbers.filter(num => num < 0);
     if (negativeNumbers.length > 0) {
-      throw new Error(`[ERROR] 음수 값을 입력하셨습니다: ${negativeNumbers.join(', ')}`);
+      throw new Error("[ERROR] : 음수의값을 입력하셧습니다.");
     }
 
     // 양수 합산
     const sum = numbers.reduce((acc, curr) => acc + curr, 0);
 
     // 최종 합산 결과 출력
-    MissionUtils.Console.print(`결과: ${sum}`);
+    MissionUtils.Console.print(`결과 : ${sum}`);
   }
 }
 
