@@ -16,7 +16,7 @@ class App {
      */
     calculateSum(input) {
         if (input === '') return 0; // 빈 문자열일 경우 0 반환
-        let delimiter = /[,|:]/; // 기본 구분자
+
         // 쉼표(,)와 콜론(:)으로 구분하여 숫자 배열로 변환 후 합산
         const tokens = input.split(/[,|:]/).map(Number);
         return tokens.reduce((acc, curr) => acc + curr, 0); // 배열의 숫자 합산
