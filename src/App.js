@@ -26,7 +26,9 @@ class App {
           throw new Error("[ERROR] 기본 구분자와 중복됩니다.");
         }
       }
-      return customIdentifier;
+
+      userInput = userInput.replace(CUSTOM_REGEX, "");
+      return { userInput, customIdentifier };
     }
 
     function checkMinus(userInput) {
