@@ -1,5 +1,4 @@
 # javascript-calculator-precourse
-# javascript-calculator-precourse
 ## 과제 진행 요구 사항
 - 미션은 문자열 덧셈 계산기 저장소를 포크하고 클론하는 것으로 시작한다.
 - 기능을 구현하기 전 **```README.md```에 구현할 기능 목록을 정리**해 추가한다.
