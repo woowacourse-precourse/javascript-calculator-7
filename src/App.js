@@ -40,3 +40,9 @@ class CalculatorApp {
     }
     const regexForSplitting = new RegExp(this.#escapeDelimiterRegExp());  // 구분자 기반으로 분리
     const inputArray = userInput.split(regexForSplitting);
+
+    // 입력 값이 숫자로만 구성되었는지 확인
+    // 음수이거나 숫자가 아닌 입력 값이라면 ERROR 처리
+    if (!this.#isNumberArray(inputArray)) {
+      throw new Error("[ERROR] 올바르지 않은 입력값입니다.");
+    }
