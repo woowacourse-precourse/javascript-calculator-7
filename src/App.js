@@ -42,7 +42,7 @@ class App {
         userInput = separateInput(userInput);
       }
 
-      //숫자만으로 이루어진 배열인지 체크하고 더하기
+      //양수만으로 이루어진 배열인지 체크하고 더하기
       if (isAllNum(userInput)) {
         const inputSum = userInput.reduce((sum, num) => sum + Number(num), 0);
         Console.print(`결과 : ${inputSum}`);
@@ -53,7 +53,7 @@ class App {
       if (error.message === 'spaceInInput') {
         throw new Error('[ERROR] 공백 없이 입력해 주세요!');
       } else if (error.message === 'notAllNum') {
-        throw new Error('[ERROR] 구분자와 숫자만 입력해주세요!');
+        throw new Error('[ERROR] 구분자와 양수만 입력해주세요!');
       } else {
         throw new Error(`[ERROR] 알 수 없는 에러 발생: ${error.message}`);
       }  
