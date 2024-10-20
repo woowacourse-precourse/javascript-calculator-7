@@ -4,3 +4,15 @@ import {RegexPattern} from "../enums/RegexPattern.js";
 export function splitByDefaultDelimiters(input){
     return input.split(RegexPattern.DEFAULT_DELIMITERS);
 }
+
+// 커스텀 구분자가 있을 때 이를 추출하는 함수
+export function extractCustomDelimeter(input){
+    const match = input.match(RegexPattern.CUSTOM_DELIMITERS);
+    if(match){
+        return{
+            delimiter: match[1],
+            numbers: input.split('\n')[1],
+        };
+    }
+    return null;
+}
