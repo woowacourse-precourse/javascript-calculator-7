@@ -7,7 +7,24 @@ class App {
         "덧셈할 문자열을 입력해 주세요.\n"
       );
 
-      const splitInput = input.split(/[,:]/);
+      let customSeparator = "";
+
+      if (input.includes("//") && input.includes("\\n")) {
+        const CUSTOM_START_INDEX = input.indexOf("//") + 2;
+        const CUSTOM_END_INDEX = input.indexOf("\\n");
+
+        if (CUSTOM_START_INDEX < CUSTOM_END_INDEX) {
+          customSeparator = input.substring(
+            CUSTOM_START_INDEX,
+            CUSTOM_END_INDEX
+          );
+          input = input.replace("//", "");
+          input = input.replace("\\n", "");
+        }
+      }
+
+      const regex = new RegExp(`[,:${customSeparator}]`);
+      const splitInput = input.split(regex);
 
       splitInput.forEach((stringNumber) => {
         if (!Number(stringNumber)) {
