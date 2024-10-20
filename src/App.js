@@ -9,7 +9,7 @@ class App {
     const userInput = await inputUserString();
     const customDelimiter = getCustomDelimiter(userInput, customRegex);
 
-    if (customSeparator)
+    if (customDelimiter)
       nums = getNumber(userInput.replace(customRegex, ""), customDelimiter);
     else nums = getNumber(userInput, /,|:/);
 
