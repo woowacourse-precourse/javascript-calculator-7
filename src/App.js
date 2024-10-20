@@ -1,6 +1,6 @@
 import { Console } from '@woowacourse/mission-utils';
 import parseInput from './parseInput.js';
-import sumInput from './sumInput.js'
+import sumInput from './sumInput.js';
 
 class App {
   async run() {
