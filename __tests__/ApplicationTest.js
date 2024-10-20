@@ -41,14 +41,19 @@ describe("문자열 계산기", () => {
     await runTest(["1,2,3"], ["결과 : 6"]);
     await runTest(["1,2:3"], ["결과 : 6"]);
     await runTest(["01,2:003"], ["결과 : 6"]);
+    await runTest(["1.5,4.5"], ["결과 : 6"]);
+    await runTest(["1.2,2.3"], ["결과 : 3.5"]);
   });
   test("커스텀 구분자 사용", async () => {
     await runTest(["//?\\n1?2?3"],["결과 : 6"]); // 특수 문자
+    await runTest(["//?\\n1.5?4.5"],["결과 : 6"]); // 특수 문자
     await runTest(["// \\n1 2 3"],["결과 : 6"]); // 공백
     await runTest(["//a\\n1a2a3"],["결과 : 6"]); // 알파벳
     await runTest(["//\n\\n1\n2\n3"],["결과 : 6"]); // \n
     await runTest(["//\\\\n1\\2\\3"],["결과 : 6"]); // 백슬래시
     await runTest(["//!\\n1!2,3"],["결과 : 6"]); // 기본 구분자와 혼합
+    await runTest(["//?\\n1.5?4.5"], ["결과 : 6"]);
+    await runTest(["//?\\n1.2?2.3"], ["결과 : 3.5"]);
   });
   test("빈 문자", async () => {
     await runTest([""], ["결과 : 0"]);
@@ -60,6 +65,7 @@ describe("문자열 계산기", () => {
   test("에러: 음수 입력", async () => {
     await runError(["-1,2:3"]);
     await runError(["//?\\n1?2?-3"]);
+    await runError(["1.2,-3"]);
   });
   test("에러: 시작과 끝이 숫자가 아닐때", async () => {
     await runError(["1,2:3,"]);
@@ -71,8 +77,16 @@ describe("문자열 계산기", () => {
     await runError(["//\\n123"]); // 커스텀 구분자 없음
     await runError(["//!\\n1!2?3"]); // 커스텀 구분자 이외 사용
   });
+  test("에러: 커스텀 구분자 소수점 사용", async () => {
+    await runError(["//.\\n1.2.3"]);
+  });
+  test("에러: 소수점 연속 사용", async () => {
+    await runError(["1..2,3"]);
+    await runError(["//?\\n1.5?4..5"]);
+  });
   test("에러: 구분자 연속 사용", async () => {
     await runError(["1::2,,3"]);
+    await runError(["1::2,3"]);
     await runError(["//?\\n1??2??3"]);
     await runError(["//\\\\n1\\\\2\\3"]);
   });
