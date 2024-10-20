@@ -23,8 +23,6 @@ class App {
     if (isOnlyPositive(splitString)) {
       splitString.forEach((num) => (result += num));
       Console.print(`결과 : ${result}`);
-    } else {
-      throw new Error("[ERROR] 입력한 문자열에 양수가 아닌 값이 존재합니다.");
     }
   }
 }
