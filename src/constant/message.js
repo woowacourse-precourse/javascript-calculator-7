@@ -10,5 +10,5 @@ export const ERROR_MESSAGE = Object.freeze({
     ERROR_BASIC_SEPARATOR:
         '[ERROR] 쉼표(,) 또는 콜론(:) 이외의 구분자는 사용 불가합니다. 커스텀 구분자를 지정해 주세요.',
     ERROR_CUSTOM_SEPARATOR:
-        '[ERROR] 커스텀 구분자 형식이 올바르지 않습니다. "//"와 "\\n" 사이에 구분자를 지정해 주세요.',
+        '[ERROR] 커스텀 구분자 형식이 올바르지 않습니다. "//"와 "\\n" 사이에 1자 이상의 문자를 지정해 주세요.',
 });
