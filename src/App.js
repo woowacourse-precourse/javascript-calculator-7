@@ -29,6 +29,10 @@ class App {
       const reg = /\/\/.[^\\n]*\\n/gim;
       const customDeleted = userStr.replace(reg, "");
 
+      if (/\d/.test(customDelimiter)) {
+        throw new Error("[ERROR] 커스텀 구분자로 숫자를 사용할 수 없습니다.");
+      }
+
       if (
         regex.test(customDeleted) &&
         customDeleted.indexOf(customDelimiter) === -1
@@ -51,6 +55,7 @@ class App {
       if (regex.test(userStr)) {
         throw new Error("[ERROR] 유효하지 않은 입력값입니다.");
       }
+
       const found = userStr.match(/\d+/g);
       found.forEach((item) => (num += Number(item)));
       this.printresult(num);
