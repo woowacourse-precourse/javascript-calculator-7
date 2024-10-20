@@ -11,6 +11,16 @@ class App {
         Console.print('결과 : 0 ');
       }
 
+      // 기본 구분자
+      if (!input.startsWith('//')) {
+        const result = input.split(/,|;/g);
+        let sum = 0;
+        result.forEach((item) => {
+          sum += parseInt(item);
+        });
+        Console.print(`결과 : ${sum}`);
+      }
+
       // 커스텀 구분자
       if (input.startsWith('//') && input.substring(3, 5) == '\\n') {
         const delimiter = input.charAt(2);
@@ -22,14 +32,6 @@ class App {
 
         Console.print(`결과 : ${hap}`);
       }
-
-      // 기본 구분자
-      const result = input.split(/,|;/g);
-      let sum = 0;
-      result.forEach((item) => {
-        sum += parseInt(item);
-      });
-      Console.print(`결과 : ${sum}`);
     } catch (error) {
       Console.print(`[ERROR] ${error}`);
     }
