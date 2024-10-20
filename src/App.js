@@ -18,15 +18,20 @@ class App {
     let separators = [',', ':'];
     let numString = input;
 
-    // 커스텀 구분자 구현
+    // 여러 커스텀 구분자 처리
     if (input.startsWith('//')) {
-      const customSeparatorEnd = input.indexOf('\\n');
-      if (customSeparatorEnd === -1) {
-        throw new Error('[ERROR] Invalid input: Incorrect separator format');
+      separators = [];
+      const lines = input.split('\\n');
+      for (let i = 0; i < lines.length; i++) {
+        const line = lines[i];
+        if (line.startsWith('//')) {
+          const customSeparator = line.slice(2);
+          separators.push(customSeparator);
+        } else {
+          numString = lines.slice(i).join('\\n');
+          break;
+        }
       }
-      const customSeparator = input.slice(2, customSeparatorEnd);
-      separators = [customSeparator];
-      numString = input.slice(customSeparatorEnd + 2);
     }
 
     // 에러 케이스
@@ -36,6 +41,8 @@ class App {
     separators.forEach((separator) => {
       numArr = numArr.flatMap((str) => str.split(separator));
     });
+
+    this.checkConsecutiveSeparators(numArr, separators);
 
     return this.calSum(numArr);
   }
@@ -57,13 +64,14 @@ class App {
         throw new Error('[ERROR] Whitespace around a separator is not allowed.');
       }
     });
+  }
 
+  checkConsecutiveSeparators(numArr, separators) {
     // 에러 케이스 4. 연속된 구분자가 포함된 경우
-    separators.forEach((separator) => {
-      if (input.includes(`${separator}${separator}`)) {
-        throw new Error('[ERROR] Consecutive separators are not allowed.');
-      }
-    });
+    const invalidNumbers = numArr.filter((num) => num === '');
+    if (invalidNumbers.length > 0) {
+      throw new Error('[ERROR] Consecutive separators are not allowed.');
+    }
   }
 
   calSum(numbers) {
