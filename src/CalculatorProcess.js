@@ -19,4 +19,12 @@ class CalculatorProcess {
     }
   }
 
+  operatingNums() {
+    this.outputNum = this.inputNums.reduce((accumulator, element) => {
+      return accumulator + element;
+    }, 0);
+  }
+
+}
+
 export default CalculatorProcess;
