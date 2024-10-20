@@ -9,7 +9,7 @@ class App {
 
   constructor() {
     this.#input = null;
-    this.#separators = [];
+    this.#separators = [',', ':'];
     this.#inputNumbers = null;
   }
 
@@ -34,9 +34,8 @@ class App {
 
   findSeparator() {
     const inputString = this.#input;
-    if (!App.isCustomSeparator(inputString)) {
+    if (!this.isCustomSeparator(inputString)) {
       this.#inputNumbers = inputString;
-      this.#separators = [',', ':'];
     } else {
       const SEPARATOR_FORMAT = ['//', '\\n'];
       const [prefix, suffix] = SEPARATOR_FORMAT;
@@ -70,19 +69,23 @@ class App {
   async askNumbers() {
     const inputString =
       await Console.readLineAsync('덧셈할 문자열을 입력해 주세요.');
-    App.validate(inputString);
+    this.validate(inputString);
     this.#input = inputString;
     return this;
   }
 
-  static isCustomSeparator(input) {
-    const numberArray = input.split(',').join(':').split(':');
+  isCustomSeparator(input) {
+    const [firstSeparator, secondSeparator] = this.#separators;
+    const numberArray = input
+      .split(firstSeparator)
+      .join(secondSeparator)
+      .split(secondSeparator);
     const numbers = Number(numberArray.join(''));
     return Number.isNaN(numbers);
   }
 
-  static validate(input) {
-    if (App.isCustomSeparator(input)) {
+  validate(input) {
+    if (this.isCustomSeparator(input)) {
       const [prefixString, numbers] = input.split('\\n');
       const separator = prefixString.slice(2);
 
@@ -90,7 +93,7 @@ class App {
       App.isValidSeparator(separator);
       App.isValidNumbers([separator], numbers);
     } else {
-      App.isValidNumbers([',', ':'], input);
+      App.isValidNumbers(this.#separators, input);
     }
   }
 
