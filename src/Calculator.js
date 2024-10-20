@@ -13,7 +13,8 @@ class Calculator {
         const splitString = string.split(custom[0]);
 
         if (splitString.length > 1) {
-          nums = splitString[1].split(customDelimiter);
+          const regex = new RegExp(`${customDelimiter}|,|:`);
+          nums = splitString[1].split(regex);
         }
       } else {
         nums = string.split(/,|:/);
@@ -21,6 +22,7 @@ class Calculator {
 
       for (let i = 0; i < nums.length; i++) {
         let num = parseInt(nums[i], 10);
+        
         if (!isNaN(num)) {
           answer += num;
         }
