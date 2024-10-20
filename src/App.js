@@ -58,7 +58,7 @@ class App {
 			try {
 				return BigInt(num);
 			} catch {
-				throw new Error("[ERROR] 유효하지 않은 값을 포함되어 있습니다.");
+				throw new Error("[ERROR] 유효하지 않은 값을 포함하고 있습니다.");
 			}
 		});
 	}
