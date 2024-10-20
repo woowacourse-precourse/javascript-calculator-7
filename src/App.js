@@ -21,8 +21,14 @@ class App {
     // 분리한 숫자의 합을 반환한다
     const RESULT = NUMBERS.reduce((sum, num) => sum + num, 0);
   
-    Console.print(`결과 : ${RESULT}`);
-    
+    //예외 처리
+    //음수를 입력하는 경우
+    const NEGATIVES = NUMBERS.filter(num => num < 0);
+    if (NEGATIVES.length > 0) {
+      throw new Error ("[ERROR]")
+    } else {
+      Console.print(`결과 : ${RESULT}`);
+    }
   }
 }
 
