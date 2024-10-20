@@ -1,5 +1,7 @@
 # 프리코스 1주차 과제 - 문자열 덧셈 계산기
 
+> 우아한테크코스 7기 프리코스 1주차 과제 - 문자열 덧셈 계산기를 구현한 저장소입니다.
+
 ## 시작하기
 
 - 레지포터리를 자신의 계정으로 fork한다.
@@ -46,7 +48,14 @@ git checkout -b bin778
 결과 : 6
 ```
 
-### 문제 풀이
+### 프로그래밍 요구 사항
+- Node.js 20.17.0 버전에서 실행 가능하다.
+- package.json 파일은 변경할 수 없으며, 제공된 라이브러리와 스타일 라이브러리 이외의 외부 라이브러리는 사용하지 않는다.
+- 프로그램 종료 시 process.exit()를 호출하지 않는다.
+- 프로그래밍 요구 사항에서 달리 명시하지 않는 한 파일, 패키지 등의 이름을 바꾸거나 이동하지 않는다.
+- 자바스크립트 코드 컨벤션([JavaScript Style Guide](https://github.com/woowacourse/woowacourse-docs/tree/main/styleguide/javascript))을 지키면서 프로그래밍한다.
+
+## 문제 풀이
 
 - "덧셈할 문자열을 입력해주세요."를 콘솔에 출력하고 사용자로부터 문자열을 입력받는다.
 - 구분자 배열과 숫자 배열을 사용하여 각각 따로 분리하여 처리한다.
@@ -56,7 +65,7 @@ git checkout -b bin778
   - ERROR: 숫자 배열에 숫자 이외의 값이 있을 경우, 문자열 배열에 있는 문자 외에 다른 문자가 있을 경우
 - 검사해서 제대로 입력한 경우 숫자 배열의 전체 요소의 합을 출력한다.
 
-### 테스트 케이스 작성
+## 테스트 케이스 작성
 
 1. "//"와 "\n" 사이의 문자가 2개 이상일 경우
 
@@ -69,6 +78,7 @@ Input: "//.\n//;\n//?\n1;2.3;4?5,6?7" => Output: 결과 : 28
 
 ```
 Input: "//;?;\n1;?;2:3" => Output: 결과 : 6
+Input: "//.\n//;??\n//?\n1,2,3.4;??10?100" => Output: 결과 : 120
 ```
 
 3. "//"와 "\n"사이에 있는 문자가 숫자일 경우
@@ -91,3 +101,7 @@ Input: "//;\n" => Output: 0
 Input: "//;n" => Output: [ERROR]
 Input: "abcd" => Output: [ERROR]
 ```
+
+## 실행 결과
+![image](https://github.com/user-attachments/assets/129f3cbe-aebd-41ae-a1c4-fa63776a1d2c)
+![image](https://github.com/user-attachments/assets/fe090711-0c43-4b76-84ed-ad2219412d6d)
