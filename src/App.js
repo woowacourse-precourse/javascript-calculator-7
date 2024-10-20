@@ -32,7 +32,7 @@ class App {
         .split("!")
         .map((value) => {
           const num = Number(value);
-          if (isNaN(num)) {
+          if (isNaN(num) || !num) {
             throw new Error(ERROR_MESSAGE);
           }
           return num;
