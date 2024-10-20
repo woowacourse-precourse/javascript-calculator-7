@@ -17,7 +17,7 @@ class Calculator {
     const delimiter = getDelimiter(this.input);
     const validatedInput = validator(this.input);
     const separatedArr = separator(validatedInput, delimiter);
-    
+
     return summation(separatedArr);
   }
 }

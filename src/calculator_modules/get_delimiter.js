@@ -8,6 +8,6 @@ export default function getDelimiter(input) {
     const customDelimiter = pattern[1];
     return new RegExp(`[${customDelimiter},:]`);
   }
-  
+
   return basicDelimiter;
 }
