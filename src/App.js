@@ -28,6 +28,8 @@ class App {
 
       formattedInput = parts[1];
     }
+
+    nums = formattedInput.split(delimiter).map(Number);
   }
 }
 
