@@ -32,11 +32,20 @@ describe("허용되는 예외상황 테스트", () => {
     await expectResults(app, outputs);
   });
 
-  test.only("숫자와 구분자만 입력된 경우", async () => {
+  test("숫자와 구분자만 입력된 경우", async () => {
     const inputs = ["1,2,3,4", "1:2:3:4"];
     mockMultipleQuestions(inputs);
 
     const outputs = ["결과 : 10", "결과 : 10"];
+
+    const app = new App();
+    await expectResults(app, outputs);
+  });
+  test("커스텀 구분자가 정상적으로 입력된 경우", async () => {
+    const inputs = ["//\n\\n1\n2,3:4", "// \\n1 2 3 4", "//|\\n1,2:3|4"];
+    mockMultipleQuestions(inputs);
+
+    const outputs = ["결과 : 10", "결과 : 10", "결과 : 10"];
 
     const app = new App();
     await expectResults(app, outputs);

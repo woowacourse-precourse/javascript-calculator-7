@@ -12,7 +12,7 @@ describe("에러를 발생시키는 예외상황 테스트", () => {
     }
   });
   test("커스텀 구분자에 숫자를 입력하는 경우", async () => {
-    const inputs = ["//1\\n1,2,3,4", "//0\\n1,2,3,4"];
+    const inputs = ["//1\\n1,2,3,4", "//0\\n1,2,3,4", "//0.5\\n1,2,3,4"];
     mockMultipleQuestions(inputs);
 
     const app = new App();
