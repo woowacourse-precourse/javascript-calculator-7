@@ -1,6 +1,6 @@
 import StringInputProcessor from './classes/StringInputProcessor.js';
 import StringInputReader from './classes/StringInputReader.js';
-import StringCalculator from './classes/StringCalculator.js';
+import StringAddCalculator from './classes/StringAddCalculator.js';
 import StringOutputWriter from './classes/StringOutputWriter.js';
 
 class App {
@@ -11,7 +11,7 @@ class App {
     const inputString = await inputReader.getInput();
     const processedInput = processor.processInput(inputString);
 
-    const result = StringCalculator.sum(processedInput);
+    const result = StringAddCalculator.sum(processedInput);
 
     StringOutputWriter.printResult(result);
   }
