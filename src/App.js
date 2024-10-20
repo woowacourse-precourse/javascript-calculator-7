@@ -22,20 +22,22 @@ class App {
           input = input.replace("\\n", "");
         }
       }
-
       const regex = new RegExp(`[,:${customSeparator}]`);
-      const splitInput = input.split(regex);
+      let splitInput = input.split(regex);
 
-      splitInput.forEach((stringNumber) => {
+      if (splitInput[0] === "") splitInput.shift();
+      splitInput = splitInput.map((stringNumber) => {
         if (!Number(stringNumber)) {
           throw new Error("[ERROR] 지정되지 않은 구분자를 입력했습니다.");
         }
         if (Number(stringNumber) < 0) {
           throw new Error("[ERROR] 음수는 입력할 수 없습니다.");
         }
+        return Number(stringNumber);
       });
 
-      MissionUtils.Console.print(`결과 : ${splitInput}`);
+      const SUM = splitInput.reduce((acc, cur) => acc + cur, 0);
+      MissionUtils.Console.print(`결과 : ${SUM}`);
     } catch (error) {
       MissionUtils.Console.print(`[ERROR] ${error.message}`);
       throw error;
