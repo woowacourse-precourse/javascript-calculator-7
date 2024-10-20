@@ -3,15 +3,14 @@ import { Console } from "@woowacourse/mission-utils";
 class App {
   async run() {
     try {
-      const USER_INPUT = await Console.readLineAsync("입력값을 입력해주세요.");
+      const USER_INPUT = await Console.readLineAsync(
+        "덧셈할 문자열을 입력해 주세요."
+      );
       // 구분자랑 숫자 분리 로직 -- (1)
       const { SEPERATORS, NUM_STRING } = this.ESTRACT_SEPERATORS(USER_INPUT);
-
-      Console.print(`구분자: ${SEPERATORS.join(", ")}`);
-      Console.print(`숫자 문자열: "${NUM_STRING}"`);
       // 합 출력 로직 -- (2)
       const TOTAL_SUM = this.calculateSum(NUM_STRING, SEPERATORS);
-      Console.print(`결과: ${TOTAL_SUM}`);
+      Console.print(`결과 : ${TOTAL_SUM}`);
     } catch (error) {
       Console.print(`[ERROR] ${error.message}`);
     }
