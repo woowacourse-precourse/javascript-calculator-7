@@ -1,4 +1,4 @@
-import { Console } from "@woowacourse/mission-utils";
+import { MissionUtils } from "@woowacourse/mission-utils";
 
 
 const CalculatorType = Object.freeze({
@@ -78,7 +78,7 @@ class StringAdder {
             if(this.type == CalculatorType.error){
                 throw new Error("[Error]");
             }else{
-                Console.print("결과 : " + this.result);
+                MissionUtils.Console.print("결과 : " + this.result);
             }
         }
     }
