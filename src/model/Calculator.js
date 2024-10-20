@@ -44,10 +44,6 @@ class Calculator {
 
     const customDelimiter = inputMatch[1];
 
-    if (customDelimiter === DELIMITERS.period) {
-      throw new Error(ERROR_MESSAGES.period);
-    }
-
     return customDelimiter;
   }
 
