@@ -14,7 +14,7 @@ export function StrSumFunc(input) {
     inputValueStr = CUSTOMDIVISIONVALUE[1];
   }
 
-  // 원래는 ,: 구분자 추출하지만 커스텀 구분자일 경우 이걸 추출한다.
+  // 원래는 ,: 구분자 추출하지만 커스텀 구분자일 경우 커스텀 구분자를 추출한다.
   const DIVISIONVALUES = inputValueStr.split(divisionStr);
 
   // 사용자가 입력한 값이 ""일 때는 0을 반환
@@ -26,7 +26,7 @@ export function StrSumFunc(input) {
   let sum = 0;
   // for of 반복문은 빈 값이 들어왔을 때 오류를 반환하다. 하지만 여기서는 위에 따로 빈 값이 들어왔을 때를 대응했으므로 연산이 빠른 for of 반복문을 사용한다.
   for (const DIVISIONVALUE of DIVISIONVALUES) {
-    if (DIVISIONVALUE.trim() === "") {
+    if (DIVISIONVALUE.trim() == "") {
       throw new Error("[ERROR] 구분자만 있고 숫자는 없습니다.");
     }
 
