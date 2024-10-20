@@ -45,16 +45,15 @@ function inspectCustomSeperator(customOperator){
 
 function extractNums(inputStr,basicOperators){
   const nums = [];
-  for (const item of inputStr){
-    if (basicOperators.includes(item)){
-      continue;
+  //구분자를 통일하는 이유, 스플릿하기 위해!
+  for (const operator of basicOperators){
+    inputStr = inputStr.replaceAll(operator,",");  
+  }
+  for (const item of inputStr.split(",")){
+    if (isNaN(item) || item === ""){
+      throw Error('[ERROR] : 잘못된 입력입니다.');
     }
-    if (!isNaN(item)){
-      nums.push(Number(item));
-    }
-    else{
-       throw Error('[ERROR] : 잘못된 문자가 입력되었습니다.');
-    }
+    nums.push(Number(item));
   }
   return nums;
 }
