@@ -8,6 +8,7 @@ class App {
   async run() {
     this.#input = await this.#readUserInput();
     this.#calculator = new Calculator(this.#input);
+    this.#calculator.calculateStringSum();
   }
 
   async #readUserInput() {

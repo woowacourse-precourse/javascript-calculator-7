@@ -3,6 +3,7 @@ import { DEFAULT_SEPARATORS } from './constants.js';
 class Calculator {
   #inputText;
   #numbers;
+  #result;
 
   constructor(input) {
     this.#inputText = input;
@@ -16,6 +17,15 @@ class Calculator {
 
   #calculateSum() {
     return this.#numbers.reduce((acc, cur) => acc + cur, 0);
+  }
+
+  calculateStringSum() {
+    this.#splitTextToNumber();
+    this.#result = this.#calculateSum();
+  }
+
+  get result() {
+    return this.#result;
   }
 }
 
