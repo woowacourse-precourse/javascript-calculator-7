@@ -14,6 +14,10 @@ class ProcessorValidator {
   }
 
   static validateFirstChar(firstChar) {
+    if (firstChar == undefined) {
+      throw new Error(`[ERROR] 계산할 문자가 입력되지 않았습니다.`);
+    }
+
     if (!/[0-9]/.test(firstChar)) {
       throw new Error(`[ERROR] 첫 구분자 앞에 숫자가 없습니다.`);
     }
@@ -35,11 +39,11 @@ class ProcessorValidator {
     }
   }
 
-  static validateExistNumberArray(numberArray) {
-    if (numberArray.length === 0) {
-      throw new Error(`[ERROR] 숫자가 입력되지 않았습니다.`);
-    }
-  }
+  // static validateExistNumberArray(numberArray) {
+  //   if (numberArray.length === 0) {
+  //     throw new Error(`[ERROR] 숫자가 입력되지 않았습니다.`);
+  //   }
+  // }
 }
 
 export default ProcessorValidator;
