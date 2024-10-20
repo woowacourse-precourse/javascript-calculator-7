@@ -50,4 +50,15 @@ class StringAdder {
         }
         return;
     }
+    // 구분자로 나누기
+    splitString() {
+        switch(this.type){
+            case CalculatorType.basic:
+                return this.input.split(/,|:/);
+            case CalculatorType.custom:
+                return this.input.split(this.seperator);
+            case CalculatorType.error:
+                return new Array();
+        }
+    }
 }
