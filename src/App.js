@@ -15,6 +15,8 @@ class App {
     if (input == "") {
       return 0; // 빈 문자열 처리
     }
+
+    let delimiter = /,|:/; // 기본 구분자
   }
 }
 export default App;
