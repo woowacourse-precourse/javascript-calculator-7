@@ -62,3 +62,8 @@
 - [x] `@woowacourse/mission-utils`에서 제공하는 `Console` API를 사용하여 구현
   - 사용자 입력: `Console.readLineAsync()`
   - 사용자 출력: `Console.print()`
+
+## 테스트
+
+- [x] 정상 동작 테스트
+- [x] 예외 테스트
