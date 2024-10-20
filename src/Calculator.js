@@ -9,6 +9,7 @@ class Calculator {
     }
     this.isValidateInput(input);
     const numbers = this.parseNumber(input); //추출한 숫자 담기
+    const result = this.addNums(numbers); //덧셈 결과 담기
     return input;
   }
 
@@ -29,6 +30,11 @@ class Calculator {
       .filter((v) => v !== '')
       .map((v) => Number(v));
     return extractedNums;
+  }
+
+  //숫자 더하기
+  addNums(arr) {
+    return arr.length === 0 ? 0 : arr.reduce((n, v) => n + v, 0);
   }
 }
 
