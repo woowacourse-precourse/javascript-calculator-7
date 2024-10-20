@@ -10,6 +10,12 @@ class App {
     Console.print("결과 : " + input);
   }
 
+  calculate(input) {
+    if (input === "") {
+      return 0;
+    }
+  }
+
   parseInput(input) {
     if (input.startsWith("//")) {
       const [delimiterPart, numbersString] = input.split("\n");
