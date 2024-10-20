@@ -15,7 +15,7 @@ class App {
 
     for (let i = 0; i < USERINFO.length - 1; i++) {
       const CURRENT_SLICED_STRING = USERINFO.slice(i, i + 1);
-      let NEXT_SLICED_STRING = USERINFO.slice(i + 1, i + 2);
+      const NEXT_SLICED_STRING = USERINFO.slice(i + 1, i + 2);
 
       if (CURRENT_SLICED_STRING === '/' && NEXT_SLICED_STRING === '/') {
         pushedCustomStr.push(1);
