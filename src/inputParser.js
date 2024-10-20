@@ -20,8 +20,8 @@ const inputParser = {
         if (afterSeperatorIndex === -1) {  // \n이 없는 경우
             throw new Error("[ERROR] 커스텀 구분자 입력이 완료되지 않았습니다.");
         } else {  // \n이 있는 경우
-            const seperator = inputText.slice(beforeSeperatorIndex, afterSeperatorIndex)
-            if(true) { //isValidSeperator(seperator) 구분자 유효성 검사 부분
+            const seperator = inputText.slice(beforeSeperatorIndex, afterSeperatorIndex);
+            if(isValidSeperator(seperator)) { // 구분자 유효성 검사
                 return [seperator, this.deleteSeperatorInput(inputText, afterSeperatorIndex)];
             }
         }
