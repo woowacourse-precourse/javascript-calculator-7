@@ -1,3 +1,4 @@
+// src/App.js
 import { Console } from "@woowacourse/mission-utils";
 
 class App {
@@ -6,24 +7,20 @@ class App {
   }
 
   async run() {
-    try {
-      let input = await Console.readLineAsync("덧셈할 문자열을 입력해 주세요.");
-      if (this.hasWhitespace(input)) {
-        throw new Error("[ERROR] 입력에 공백이 포함되어 있습니다.");
-      }
-      if(this.hasMinus(input)) {
-        throw new Error("[ERROR] 음수는 입력할 수 없습니다.");
-      }
-      input = this.hasCustomSeparator(input)
-      const numbers = this.extractNumbers(input);
-      const sum = this.sumNumbers(numbers);
-      if (isNaN(sum)) {
-        throw new Error("[ERROR] 결과가 숫자가 아닙니다.");
-      }
-      Console.print(`결과 : ${sum}`);
-    } catch (error) {
-      Console.print(error.message);
+    let input = await Console.readLineAsync("덧셈할 문자열을 입력해 주세요.");
+    if (this.hasWhitespace(input)) {
+      throw new Error("[ERROR] 입력에 공백이 포함되어 있습니다.");
     }
+    if(this.hasMinus(input)) {
+      throw new Error("[ERROR] 음수는 입력할 수 없습니다.");
+    }
+    input = this.hasCustomSeparator(input)
+    const numbers = this.extractNumbers(input);
+    const sum = this.sumNumbers(numbers);
+    if (isNaN(sum)) {
+      throw new Error("[ERROR] 결과가 숫자가 아닙니다.");
+    }
+    Console.print(`결과 : ${sum}`);
   }
 
   hasCustomSeparator(str) {
