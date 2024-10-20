@@ -1,4 +1,4 @@
-class StringCalculatorUtils {
+class StringCalculator {
     convertNumArray(parsedArray) { // 문자열 배열 숫자 배열로 변환
         var convertNumArray = parsedArray.map((item) => parseInt(item, 10));
         return convertNumArray;
@@ -10,4 +10,4 @@ class StringCalculatorUtils {
     }
 }
 
-export default StringCalculatorUtils;
+export default StringCalculator;
