@@ -1,7 +1,7 @@
 import { MissionUtils } from "@woowacourse/mission-utils";
 
 class App {
-  async run() {
+  run = async () => {
     try {
       const input = await MissionUtils.Console.readLineAsync("덧셈할 문자열을 입력해 주세요.\n");
 
@@ -25,7 +25,7 @@ class App {
     }
   }
 
-  isValid(inputArr, delimiters) {
+  isValid = (inputArr, delimiters) => {
     const isValidInput = inputArr.every((str, idx) => {
       if (idx % 2 === 0) { 
         // 숫자인지 확인
@@ -46,7 +46,7 @@ class App {
   }
 
   // 입력받은 input을 배열로 바꿔주는 메서드
-  parseInputToArray(input) {
+  parseInputToArray = (input) => {
     const delimiters = [',', ':'];
 
     // 커스텀 구분자가 있는지 확인
@@ -111,7 +111,7 @@ class App {
   }
 
   // 입력값을 계산하는 메서드 
-  calculate(inputArr) {
+  calculate = (inputArr) => {
     // 숫자만 필터링
     const numbers = inputArr.filter((str, idx) => idx % 2 === 0).map(Number); 
 
