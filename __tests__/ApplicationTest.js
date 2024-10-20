@@ -64,4 +64,13 @@ describe('문자열 계산기', () => {
 
     await expect(app.run()).rejects.toThrow('[ERROR]');
   });
+
+  test('커스텀 구분자의 길이가 2 이상이면 예외를 발생시킨다', async () => {
+    const inputs = ['//;]\\n1;2;3'];
+    mockQuestions(inputs);
+
+    const app = new App();
+
+    await expect(app.run()).rejects.toThrow('[ERROR]');
+  });
 });

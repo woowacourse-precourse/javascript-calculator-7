@@ -48,4 +48,14 @@ describe('DelimiterExtractor', () => {
       '[ERROR] 커스텀 구분자는 문자열의 맨 앞에 위치해야 합니다.'
     );
   });
+
+  test('커스텀 구분자의 길이가 2 이상이면 예외를 발생시킨다', async () => {
+    const input = '//;]\\n1;2;3';
+
+    const delimiterExtractor = new DelimiterExtractor();
+
+    expect(() => delimiterExtractor.extractDelimiter(input)).toThrow(
+      '[ERROR] 커스텀 구분자는 한 글자여야 합니다.'
+    );
+  });
 });
