@@ -40,7 +40,7 @@ class StringCalculator {
 
             // 숫자를 입력해야 하는 곳에 문자열을 입력한 경우
             if (isNaN(parsed)) {
-                throw new Error('[ERROR] 잘못된 위치에 문자열이 입력되었습니다.');
+                throw new Error('[ERROR] 숫자 위치에 문자열이 입력되었습니다.');
             }
 
             // 음수인 경우
