@@ -4,7 +4,7 @@ class App {
   async run() {
     try {
       const INPUT = await MissionUtils.Console.readLineAsync(
-        "덧셈할 문자열을 입력해 주세요.\n "
+        "덧셈할 문자열을 입력해 주세요.\n"
       );
       if (!INPUT) {
         throw new Error("문자열을 입력하세요");
