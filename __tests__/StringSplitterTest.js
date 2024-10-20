@@ -46,4 +46,14 @@ describe('String Splitter 테스트', () => {
       },
     );
   });
+
+  describe('유효하지 않은 입력 테스트', () => {
+    test.each([
+      { input: '1;2,3' }, // 유효하지 않은 구분자 조합
+      { input: 'abc' }, // 숫자가 아닌 문자 포함
+      { input: '1, 2' }, // 문자 사이에 공백 포함
+    ])('유효하지 않은 입력 "$input"에 대해 Error를 발생', ({ input }) => {
+      expect(() => new StringSplitter(input)).toThrow('[ERROR]');
+    });
+  });
 });
