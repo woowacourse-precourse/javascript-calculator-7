@@ -26,7 +26,10 @@ class App {
     if (customTest) {
       const customArr = userStr.match(/(?<=\/\/).*?(?=\\n)/);
       const customDelimiter = customArr.join("");
-      const customDelimiterRegex = new RegExp(`[${customDelimiter}]`, "g");
+      const customDelimiterRegex = new RegExp(
+        `[${customDelimiter.replace(/[.*+?^${}()|[\]\\]/g, "\\$&")}]`,
+        "g"
+      );
       const reg = /\/\/.[^\\n]*\\n/gim;
       const customDeleted = userStr.replace(reg, "");
 
@@ -43,7 +46,10 @@ class App {
       }
 
       const specialChars = customArr.concat([",", ":"]).join("");
-      const delimiters = new RegExp(`[${specialChars}]`, "g");
+      const delimiters = new RegExp(
+        `[${specialChars.replace(/[.*+?^${}()|[\]\\]/g, "\\$&")}]`,
+        "g"
+      );
       const splitted = customDeleted.split(delimiters);
       splitted.forEach((item) => (num += Number(item)));
       this.printresult(num);
