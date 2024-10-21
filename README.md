@@ -40,7 +40,7 @@
     - [x] 구분자 커스텀 생성 기호가 잘못 입력된 경우 (예 : '/$\n' or '\n$//') -> ('[ERROR] CUSTOM_SEPERATE_ERROR')
     - [x] 구분자 커스텀 생성 기호에 n이 없는 경우 -> ('[ERROR] CUSTOM_SEPERATE_N_ERROR')
     - [x] 커스텀, 기본 이외의 구분자를 혼용한 경우 (예 : '//*\n9*9,8&8') -> ('[ERROR] SEPARATOR_ERROR')
-    - [ ] 커스텀 지정한 구분자가 연속으로 쓰인 경우 (예 : '//*\n9*9**9' ('**'를 잘못된 구분자로 인식)) -> ('[ERROR] SEPARATOR_ERROR')
+    - [x] 커스텀 지정한 구분자가 연속으로 쓰인 경우 (예 : '//*\n9*9**9' ('**'를 잘못된 구분자로 인식)) -> ('[ERROR] SEPARATOR_ERROR')
 
 ### TEST
 

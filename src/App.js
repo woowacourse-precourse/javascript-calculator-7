@@ -61,6 +61,7 @@ class App {
         }
 
         const inputNumber = userInputCustomFormula.split(combinedSeparator);
+        checkSeparator(inputNumber);
 
         return inputNumber;
       } else if (!userInput.includes('n')) {
