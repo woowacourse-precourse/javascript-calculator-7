@@ -21,3 +21,11 @@ const getCustomSeperatorAndTargetString = (str) => {
         targetString: str
     }
 }
+
+// 문자열이 조건에 맞는지 확인한다.
+const validate = (separator, targetString) => {
+    if (new RegExp(`^(${separator.join("|")}|\\d+)+$`).test(targetString))
+        return;
+    else 
+        throw new Error("[ERROR] 구분자와 양수만 입력할 수 있습니다.")
+}
