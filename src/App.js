@@ -30,10 +30,15 @@ class App {
 
     // 커스텀 구분자 처리
     if (str.startsWith('//')) {
-      str = str.replace('\\n', '\n');
-      const [customDelimiter, rest] = str.split('\n');
-      delimiter = customDelimiter[2];
-      return this.sumNumbers(rest.split(delimiter));
+      // 문자열에서 \\n을 실제 \n로 변환
+      const customDelimiterMatch = str.match(/^\/\/(.*?)\\n/);
+
+      // 커스텀 구분자가 존재하는지 확인
+      if (customDelimiterMatch) {
+        const customDelimiter = customDelimiterMatch[1];
+        const numbersPart = str.slice(customDelimiterMatch[0].length);
+        return this.sumNumbers(numbersPart.split(customDelimiter));
+      }
     }
 
     //유효하지 않은 구분자 처리
