@@ -13,7 +13,7 @@ class App {
       }
 
       let numbers = [];
-      const customDelimiterMatch = input.match(/^\/\/(.)\n(.*)/);
+      const customDelimiterMatch = input.match(/^\/\/(.)\\n(.*)/);
 
       if (customDelimiterMatch) {
         const customDelimiter = customDelimiterMatch[1];
@@ -24,7 +24,7 @@ class App {
       }
 
       const parsedNumbers = numbers.map((num) => {
-        const parsed = Number(num);
+        const parsed = Number(num.trim());
 
         if (isNaN(parsed)) {
           throw new Error(" 잘못된 입력입니다.");
