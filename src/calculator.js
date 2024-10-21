@@ -1,13 +1,13 @@
 import {Console} from '@woowacourse/mission-utils';
 
 export async function calculator() {
-    const input = await Console.readLineAsync('덧셈할 문자열을 입력해 주세요.')
     try {
+        const input = await Console.readLineAsync('덧셈할 문자열을 입력해 주세요.')
         const parseResult = parseInput(input);
         const result = add(parseResult);
-        Console.print(result);
+        Console.print(`결과 : ${result}`);
     } catch (error) {
-        Console.print(error.message);
+        throw error;
     }
 }
 
@@ -27,7 +27,7 @@ function parseInput(input) {
 
         return result.map(validateAndConvertNumber)
     }else {
-        throw new Error(`[ERROR] 올바른 값이 아닙니다.`)
+        throw Error("[ERROR]")
     }
 }
 
@@ -37,23 +37,23 @@ function add(parseResult) {
 
 function validateInput(input) {
     if (input.trim() === '') {
-        throw new Error('[ERROR] 입력값이 비어있습니다.');
+        throw Error("[ERROR]");
     }
 }
 
 function validateCustomSeparator(input,number ) {
     if(!input.startsWith('//') || !number) {
-        throw new Error('[ERROR] 커스텀셀럭터 입력이 올바르지 않습니다.')
+        throw Error("[ERROR]")
     }
 }
 
-function validateAndConvertNumber(item, index) {
+function validateAndConvertNumber(item) {
     const num = Number(item);
     if (isNaN(num)) {
-        throw new Error(`[ERROR] 유효하지 않은 숫자입니다.`);
+        throw Error("[ERROR]");
     }
     if (num < 0) {
-        throw new Error(`[ERROR] 음수는 허용되지 않습니다.`);
+        throw Error("[ERROR]");
     }
     return num;
 }
