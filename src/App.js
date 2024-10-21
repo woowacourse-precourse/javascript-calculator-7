@@ -13,8 +13,7 @@ class App {
       }
 
       let numbers = [];
-      const customDelimiterMatch =
-        input.match(/^\/\/(.*?)\\n(.*)/) || input.match(/^\/\/(.*?)\n(.*)/);
+      const customDelimiterMatch = input.match(/^\/\/(.)\\n(.*)/);
 
       if (customDelimiterMatch) {
         const customDelimiter = customDelimiterMatch[1];
