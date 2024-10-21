@@ -19,7 +19,7 @@ export function throwError(errorCode) {
 
 // 문자 포함 검증
 function isNonNumeric(value) {
-  return !/^-?\d+$/.test(value);
+  return value !== '' && !/^-?\d+$/.test(value);
 }
 
 // 0 포함 검증
@@ -34,7 +34,7 @@ function isNegative(value) {
 
 // --- 입력 값 검증 함수 ---
 function validateInput(input) {
-  const hasNonNumeric = input.map(Number).some((char) => isNonNumeric(char));
+  const hasNonNumeric = input.some((char) => isNonNumeric(char));
   const hasZero = input.some((char) => isZero(char));
   const hasNegative = input.some((char) => isNegative(char));
   const hasTooLarge = input.some((char) => Number(char) > MAX_LIMIT);
@@ -100,6 +100,9 @@ function replaceEmptyWithZero(inputArr) {
 
 // --- 숫자 파싱 로직 ---
 export function parseNumbers(input) {
+  if (!input) {
+    return [0];
+  }
   const customDelimiter = getCustomDelimiter(input);
   const processedInput = removeDelimiterSection(customDelimiter, input);
 

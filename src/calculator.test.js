@@ -87,7 +87,7 @@ describe('문자열 계산기 model', () => {
   });
 
   test('계산', () => {
-    const result2 = calculate('5, 6');
+    const result2 = calculate('5,6');
     expect(result2).toEqual(11);
   });
   test('0이 1개 이상 입력되면 오류', () => {
