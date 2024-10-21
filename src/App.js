@@ -55,7 +55,7 @@ class App {
   checkCustomSeperator(customStr) {
     const start = customStr.indexOf('//');
     const end = customStr.indexOf('\\n');
-    const customSeperator = customStr.slice(start + 2, end);
+    const customSeperator = customStr.slice(start + 2, end).trim();
 
     // //와 \\n사이에 아무 문자가 없을 경우
     if (!customSeperator) {
