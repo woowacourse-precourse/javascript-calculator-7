@@ -1,4 +1,4 @@
-import { CUSTOM_DELIMITER, DEFAULT_DELIMITER } from './constants.js';
+import { CUSTOM_DELIMITER, DEFAULT_DELIMITER } from '../constants/constants.js';
 
 // 커스텀 구분자를 사용하여 숫자를 추출하는 함수
 function extractWithCustomDelimiter(input, customDelimiterMatch) {

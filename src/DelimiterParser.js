@@ -1,5 +1,5 @@
-import extractNumbers from './numberExtractor.js';
-import isValidateNumbers from './validation.js';
+import extractNumbers from './utils/numberExtractor.js';
+import isValidateNumbers from './utils/validation.js';
 
 class DelimiterParser {
   constructor(input) {

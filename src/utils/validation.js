@@ -1,4 +1,4 @@
-import { ERROR_MESSAGE } from './constants.js';
+import { ERROR_MESSAGE } from '../constants/constants.js';
 
 // 잘못된 문자를 검사하는 함수
 function isNumberValid(numbers) {
