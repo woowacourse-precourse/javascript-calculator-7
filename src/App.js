@@ -34,7 +34,9 @@ class App {
   getNumberCutWithSeparator(regex, str) {
     return str.split(regex);
   }
-  calculateSum() {}
+  calculateSum(arr) {
+    return arr.reduce((acc, cur) => acc + +cur, 0);
+  }
   printAnswer() {}
   printError() {}
   validate() {}
