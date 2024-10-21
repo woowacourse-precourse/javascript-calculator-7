@@ -3,46 +3,46 @@ import { Console } from "@woowacourse/mission-utils";
 class App {
   async run() {
     try {
-      const input = await Console.readLineAsync("덧셈할 문자열을 입력해 주세요\n");
-      const inputNumbers = this.splitInput(input);
-      const sum = this.sumNumbers(inputNumbers);
-      this.printResult(sum);
+      const userInput = await Console.readLineAsync("덧셈할 문자열을 입력해 주세요\n");
+      const parsedNumbers = this.splitInput(userInput);
+      const totalSum = this.sumNumbers(parsedNumbers);
+      this.printResult(totalSum);
     } catch (error) {
       Console.print(error.message);
       throw error;
     }
   }
 
-  splitInput(input) {
-    let inputNumbers;
+  splitInput(userInput) {
+    let parsedNumbers;
 
-    if (input.length <= 1 && !isNaN(input)) {
-      return [Number(input)];
+    if (userInput.length <= 1 && !isNaN(userInput)) {
+      return [Number(userInput)];
     }
 
-    const customSeparator = input.match(/\/\/(.)\\n/);
+    const customSeparator = userInput.match(/\/\/(.)\\n/);
 
     if (customSeparator) {
-      inputNumbers = input.split(customSeparator[1]);
-      inputNumbers.splice(0, 1);
-      inputNumbers[0] = inputNumbers[0].substring(2);
-    } else if (input.match(/[,|:]/)) {
-      inputNumbers = input.split(/[,|:]/);
+      parsedNumbers = userInput.split(customSeparator[1]);
+      parsedNumbers.splice(0, 1);
+      parsedNumbers[0] = parsedNumbers[0].substring(2);
+    } else if (userInput.match(/[,|:]/)) {
+      parsedNumbers = userInput.split(/[,|:]/);
     } else {
       throw new Error("[ERROR]");
     }
 
-    return inputNumbers.map((value) => {
-      const number = Number(value);
-      if (isNaN(number) || number < 0) {
+    return parsedNumbers.map((value) => {
+      const parsedNumber = Number(value);
+      if (isNaN(parsedNumber) || parsedNumber < 0) {
         throw new Error("[ERROR]");
       }
-      return number;
+      return parsedNumber;
     });
   }
 
-  sumNumbers(inputNumbers) {
-    return inputNumbers.reduce((sum, currentNumber) => sum + currentNumber, 0);
+  sumNumbers(parsedNumbers) {
+    return parsedNumbers.reduce((totalSum, number) => totalSum + number, 0);
   }
 
   printResult(result) {
