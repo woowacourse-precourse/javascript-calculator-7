@@ -44,6 +44,13 @@ class App {
         Console.print("[ERROR] 잘못된 입력입니다.");
         return;
       }
+
+      // 예외처리 1: 음수 값이 들어왔을 때
+      if (num < 0) {
+        Console.print("[ERROR] 음수는 허용되지 않습니다.");
+        return;
+      }
+
       calc += num;
     }
 
