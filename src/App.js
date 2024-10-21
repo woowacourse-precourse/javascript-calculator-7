@@ -23,6 +23,10 @@ class App {
     const regExpOfDelimiter = new RegExp(delimiters.join('|'));
     const numbers = expression.split(regExpOfDelimiter);
   }
+
+  throwError(message) {
+    throw new Error(`[ERROR] ${message}`);
+  }
 }
 
 export default App;
