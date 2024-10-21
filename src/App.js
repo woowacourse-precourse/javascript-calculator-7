@@ -1,6 +1,23 @@
 import { Console } from "@woowacourse/mission-utils";
 
 class App {
+  addStrNumsArray(strNumsArray) {
+    const sortedStrNumsArray = strNumsArray.sort(
+      (a, b) =>
+        Number(b.length - 1 - b.indexOf(".")) -
+        Number(a.length - 1 - a.indexOf("."))
+    );
+
+    const expectedDecimalPlaces =
+      sortedStrNumsArray[0].length - 1 - sortedStrNumsArray[0].indexOf(".");
+
+    const result = sortedStrNumsArray
+      .reduce((acc, cur) => acc + Number(cur), 0)
+      .toFixed(expectedDecimalPlaces);
+
+    return Number(result);
+  }
+
   createDelimetersRegExpPattern(delimetersArray) {
     const sortedDelimetersArray = delimetersArray.sort(
       (a, b) => b.length - a.length
@@ -93,7 +110,7 @@ class App {
       console.log("🚩 parsed input :", parsedInput);
 
       //sum numbers
-      const output = parsedInput.reduce((acc, cur) => acc + Number(cur), 0);
+      const output = this.addStrNumsArray(parsedInput);
       Console.print(`결과 : ${output}`);
     } else {
       Console.print(0);
