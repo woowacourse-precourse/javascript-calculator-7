@@ -1,11 +1,14 @@
 import { getInput } from "./UserView.js";
-//import { Console } from "@woowacourse/mission-utils";
+// import extractedNumbers from "./StringProcesing.js";
+// import { Console } from "@woowacourse/mission-utils";
+// import { printOutput } from "./UserView.js";
+// import { MESSAGE } from "./content.js";
+// import { numberSum } from "./StringProcesing.js";
 
 class AdditionCalculator {
   async start() {
     getInput();
-    //let out = await import("./UserView.js");
-    //out.printOutput();
+    // await printOutput(MESSAGE.CALCULATOR_RESULT, numberSum);
   }
 }
 
