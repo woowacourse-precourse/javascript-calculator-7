@@ -1,4 +1,4 @@
-import { getInput } from './utils/IOUtils.js';
+import { getInput, printOutput } from './utils/IOUtils.js';
 import { getNumbers } from './utils/preprocessUtils.js';
 import { add } from './utils/calculator.js';
 
@@ -9,6 +9,7 @@ class App {
       const numbers = getNumbers(input);
       const result = add(numbers);
 
+      printOutput(result);      
     } catch (err) {
       throw err;
     }

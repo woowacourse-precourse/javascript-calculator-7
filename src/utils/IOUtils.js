@@ -10,4 +10,9 @@ const getInput = async () => {
     }
 }
 
-export { getInput };
+const printOutput = (output) => {
+    const outputMessage = "결과 : ";
+    MissionUtils.Console.print(outputMessage + output);
+}
+
+export { getInput, printOutput };
