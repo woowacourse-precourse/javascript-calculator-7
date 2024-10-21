@@ -5,7 +5,8 @@ class App {
     try {
       const input = await MissionUtils.Console.readLineAsync('숫자를 입력하세요: ');
       const result = this.divide(input); // this로 divide 메소드 호출
-      MissionUtils.Console.print(`결과: ${result}`);
+      const sum = this.calculate(result); // calculate 호출
+      MissionUtils.Console.print(`결과: ${sum}`);
     } catch (error) {
       MissionUtils.Console.print(`[ERROR] ${error.message}`);
     }
@@ -43,6 +44,10 @@ class App {
     });
 
     return numbers;
+  }
+
+  calculate(numbers) {
+    return numbers.reduce((acc, cur) => acc + cur, 0);
   }
 
   throwError(message) {
