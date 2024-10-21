@@ -11,6 +11,7 @@ class App {
       Console.print(`결과 : ${result}`);
     } catch (error) {
       Console.print(`[ERROR] ${error.message}`);
+      throw error; // 예외를 다시 던집니다.
     }
   }
 
@@ -21,7 +22,7 @@ class App {
 
     // 커스텀 구분자 처리
     if (input.startsWith("//")) {
-      const parts = input.split("\\n"); // 1. 여기서 split("\\n")을 사용하여 구분합니다.
+      const parts = input.split("\\n"); // "\\n"을 사용하여 구분합니다.
       if (parts.length < 2) {
         throw new Error("[ERROR] 커스텀 구분자 형식이 잘못되었습니다.");
       }
@@ -31,7 +32,7 @@ class App {
 
     // 숫자 추출 및 합산
     const numbers = input
-      .split(new RegExp(`[${delimiters.join("|")}]`)) // 2. 여기서 join("|")을 사용하여 정규식을 만듭니다.
+      .split(new RegExp(`[${delimiters.join("")}]`)) // join("")을 사용하여 정규식을 만듭니다.
       .map((num) => {
         const parsedNum = parseInt(num.trim(), 10);
         if (isNaN(parsedNum)) {
