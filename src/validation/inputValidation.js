@@ -1,16 +1,17 @@
 import { ERROR_MESSAGE } from "../constants/constants";
+import { MissionUtils } from "@woowacourse/mission-utils";
 
-function inputValdation() {
+function inputValidation() {
     const invalidInputError = () => {
-        throw new Error(ERROR_MESSAGE.invalidInputError);
+        MissionUtils.Console.print(ERROR_MESSAGE.invalidInputError);
     }
 
     const negativeInputError = () => {
-        throw new Error(ERROR_MESSAGE.negativeInputError);
+        MissionUtils.Console.print(ERROR_MESSAGE.negativeInputError);
     }
 
     const separatorError= () => {
-        throw new Error(ERROR_MESSAGE.separatorError);
+        MissionUtils.Console.print(ERROR_MESSAGE.separatorError);
     }
 
     return {
@@ -20,4 +21,4 @@ function inputValdation() {
     };
 }
 
-export default inputValdation;
+export default inputValidation;
