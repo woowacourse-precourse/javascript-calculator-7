@@ -18,7 +18,12 @@ class App {
       // [0]= //@\n이니까  문자인 @이 나오게 1번째
       numbers = input.slice(sort_Custom[0].length);
     }
+
     const result = numbers.split(sort).map(Number);
+
+    if (result.filter(n => n < 0).length > 0) {
+      throw new Error('[ERROR]');
+    }
     Console.print(result.reduce((a, b) => a + b));
   }
 }
