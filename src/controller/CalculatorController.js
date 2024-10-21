@@ -12,6 +12,9 @@ class CalculatorController {
     return calc.compute();
   }
 
+  /**
+   * @returns {Promise<void>}
+   */
   async run() {
     const inputValue = await Input.readLine();
     const result = this.process(inputValue);
