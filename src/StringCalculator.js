@@ -16,17 +16,6 @@ class StringCalculator {
         this.resultOutput();
     }
 
-    isCustomSeparatorError(param) {
-        if (!isNaN(param)) {
-            throw new Error("[ERROR]: 에러발생");
-        }
-    }
-
-    isError(param) {
-        if (Number(param) < 0 || param === "" || isNaN(param.trim())) {
-            throw new Error("[ERROR]: 에러발생");
-        }
-    }
 
     resultOutput() {
         Console.print(`결과 : ${this.sum}`);
