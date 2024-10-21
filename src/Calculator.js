@@ -34,7 +34,9 @@ class Calculator {
 
   #calculateSum() {
     const nonPositiveNumbers = this.#numbers.filter((number) => Math.sign(number) < 1);
+    const invalidFormats = this.#numbers.filter((number) => Number.isNaN(number));
     if (nonPositiveNumbers.length) throw new Error(ERROR_MESSAGE.positiveNum);
+    else if (invalidFormats.length) throw new Error(ERROR_MESSAGE.invalidFormat);
 
     return this.#numbers.reduce((acc, cur) => acc + cur, 0);
   }
