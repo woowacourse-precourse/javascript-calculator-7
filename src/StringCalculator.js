@@ -26,6 +26,17 @@ class StringCalculator {
 
       const splitNumbers = numbers.split(delimiters);
 
+      // 음수 및 유효하지 않은 입력 처리
+      splitNumbers.forEach(num => {
+        const parsedNum = parseInt(num, 10);
+        if (isNaN(parsedNum)) {
+            throw new Error("[ERROR] 유효하지 않은 숫자 입력입니다.");
+        }
+        if (parsedNum < 0) {
+            throw new Error("[ERROR] 음수는 허용되지 않습니다.")
+        }
+      });
+
       // 문자열을 숫자로 변환하고 합계 계산
       return splitNumbers.reduce((sum, num) => sum + parseInt(num, 10), 0);
     }
