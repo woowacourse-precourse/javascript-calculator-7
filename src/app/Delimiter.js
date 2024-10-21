@@ -78,16 +78,25 @@ class Delimiter {
   /**
    *
    * @param {string} value
-   * @returns {object}
+   * @returns {Array<string>}
    */
-  #getDelimiterRegEx(value) {
+  #getDelimiters(value) {
     const delimiters = shallowCopy(this.#defaultDelimiters);
 
     if (this.hasCustomDelimiter(value)) {
       delimiters.push(this.getCustomDelimiter(value));
     }
 
-    return new RegExp(`[${delimiters.join('')}]`);
+    return delimiters;
+  }
+
+  /**
+   *
+   * @param {string} value
+   * @returns {object}
+   */
+  #getDelimiterRegEx(value) {
+    return new RegExp(`[${this.#getDelimiters(value).join('')}]`);
   }
 
   /**
