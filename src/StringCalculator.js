@@ -36,10 +36,16 @@ class StringCalculator {
   }
 
   parseCustomDelimiter(input) {
-    const str = input.match(StringCalculator.#CUSTOM_DELIMITER_REGEXP)[0];
+    const DIGIT_REGEXP = /\d/;
+
+    const match = input.match(StringCalculator.#CUSTOM_DELIMITER_REGEXP)[0];
 
     const regexp = /[/\\n]/g;
-    return str.replace(regexp, '');
+    const customDelimiter = match.replace(regexp, '');
+
+    if (DIGIT_REGEXP.test(customDelimiter)) throw new Error('[ERROR]');
+
+    return match.replace(regexp, '');
   }
 
   removeCustomDelimiter(input) {
