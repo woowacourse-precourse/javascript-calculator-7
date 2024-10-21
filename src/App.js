@@ -18,6 +18,9 @@ class App {
   // 빈 문자열 입력시 0 반환
   calculateSum(input) {
     if (input === "") return 0;
+
+    // 기본 구분자 설정
+    let delimiters = [',', ':'];
   }
 }
 
