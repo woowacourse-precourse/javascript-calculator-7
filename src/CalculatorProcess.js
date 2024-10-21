@@ -24,16 +24,22 @@ class CalculatorProcess {
     return false;
   }
 
+  escapeRegExp(string) {
+    return string.replace(/[.*+?^${}()|[\]\\]/g, '\\$&');
+  }
+
   doParsing() {
     if (!this.handleDefaultDelimiter) {
       const customDelimiterMatch = this.inputString.match(/^\/\/(.)\\n(.*)$/);
+
       if (customDelimiterMatch) {
-        const customDelimiter = new RegExp(`[${customDelimiterMatch[1]},:]`);
+        const customDelimiter = this.escapeRegExp(customDelimiterMatch[1]);
+        const delimiterRegex = new RegExp(`[${customDelimiter},:]`);
         this.inputString = customDelimiterMatch[2];
-        const parsedNums = this.inputString.split(customDelimiter).map(Number);
+        const parsedNums = this.inputString.split(delimiterRegex).map(Number);
         this.inputNums = parsedNums;
       } else {
-        throw new Error('[ERROR] 잘못된 형식의 입력입니다.');
+        throw new Error('[ERROR] 커스텀 구분자 할당 형식이 잘못 되었습니다.');
       }
     }
   }
