@@ -16,7 +16,7 @@ class App {
     }
 
     if (this.hasCustomDelimiter(input)) {
-      input = input.slice(5);
+      input = input.slice(5); // 커스텀 구분자 이후부터 처리
     }
     this.isValidate(input);
 
@@ -28,10 +28,19 @@ class App {
   hasCustomDelimiter(input) {
     if (input.startsWith("//") && input.slice(3, 5) === "\\n") {
       const customDelimiter = input[2];
+
+      if (!isNaN(customDelimiter) || customDelimiter.length != 1) {
+        throw new Error("[ERROR] 유효하지 않은 커스텀 구분자입니다.");
+      }
+
       this.delimiter.push(customDelimiter);
 
       return true;
+    } else if (input.startsWith("//")) {
+      // \n이 없는 경우
+      throw new Error("[ERROR] 커스텀 구분자 지정 방식이 잘못되었습니다.");
     }
+
     return false;
   }
 
@@ -43,21 +52,13 @@ class App {
       throw new Error("[ERROR] 공백이 포함되어 있습니다.");
     } else if (input.includes("-")) {
       throw new Error("[ERROR] 음수는 입력할 수 없습니다.");
-    } else if (input.includes("//") && input.slice(3, 5) !== "\\n") {
-      throw new Error("[ERROR] 커스텀 구분자 지정 방식이 잘못되었습니다.");
-    } else if (!isNaN(Number(this.delimiter[2]))) {
-      throw new Error("[ERROR] 커스텀 구분자가 숫자입니다.");
-    } else if (this.delimiter[2].length > 1) {
-      throw new Error("[ERROR] 구분자가 여러개입니다.");
-    } else if (this.delimiter[2] === "") {
-      throw new Error("[ERROR] 구분자가 없습니다.");
     } else if (regex.test(input)) {
-      throw new Error("[ERROR] 숫자, 구분자가 아닌 문자가 포함되어 있습니다 ");
+      throw new Error("[ERROR] 숫자, 구분자가 아닌 문자가 포함되어 있습니다. ");
     }
   }
 
   extractNumbers(input) {
-    const regex = new RegExp(`[${this.delimiter.join(" ")}]`);
+    const regex = new RegExp(`[${this.delimiter.join("")}]`);
     const numbers = input.split(regex).map((str) => parseInt(str, 10));
 
     return numbers;
