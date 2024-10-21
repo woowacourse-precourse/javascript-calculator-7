@@ -12,19 +12,16 @@ class App {
 
     calculateSum(input) {
         if (input === '') {
-            return 0;
+            return 0; // 빈 문자열 처리
         }
 
         let numbers;
 
-        // 커스텀 구분자가 존재하는지 확인
         if (input.startsWith('//')) {
-            // 커스텀 구분자 형식: //[구분자]\n[숫자들]
             const [delimiterSection, numberSection] = input.split('\n');
             const customDelimiter = delimiterSection.slice(2);
             numbers = numberSection.split(customDelimiter);
         } else {
-            // 기본 구분자 쉼표와 콜론을 처리
             numbers = input.split(/[,|:]/);
         }
 
