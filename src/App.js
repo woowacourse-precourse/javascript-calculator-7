@@ -47,7 +47,7 @@ function getCustomSeperators(input) {
 
       // 숫자 혹은 문자열인지 확인
       if(customSeperator.match(/^[0-9]$/) || customSeperator.length > 1) {
-        throw new Error("[ERROR] 커스텀 구분자의 형식이 잘못되었습니다.");
+        throw new Error(getErrorMessage("커스텀 구분자의 형식이 잘못되었습니다."));
       }
     }
   }
@@ -58,7 +58,7 @@ function getCustomSeperators(input) {
 function isOnlyNumberAndSeperators(str, seperators) {
   const allRegExp = new RegExp(`[${seperators}\\d]`)
   if(!str.match(allRegExp)) {
-    throw new Error("[ERROR] 숫자와 구분자가 아닌 다른 문자가 포함되어 있습니다.");
+    throw new Error(getErrorMessage("숫자와 구분자가 아닌 다른 문자가 포함되어 있습니다."));
   } 
 }
 
@@ -73,4 +73,7 @@ function getSumAllNumber(arr) {
   return arr.map(Number).reduce((a,b) => a+b);
 }
 
+function getErrorMessage(message) {
+  return '[Error] ' + message;
+}
 export default App;
