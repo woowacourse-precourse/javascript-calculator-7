@@ -6,16 +6,17 @@ class App {
             "덧셈할 문자열을 입력해 주세요.\n"
         );
 
-        let dividerExp = /[,|:]/;
+        let dividerExp = /[,:]/;
         let strNumbers = str;
 
         if (str === "") {
             await Console.print(`결과: 0`);
+            return;
         }
 
         if (str.startsWith("//") && str.indexOf("\n") !== -1) {
             const divider = str.slice(2, str.indexOf("\n"));
-            dividerExp = new RegExp(`[${divider}]`);
+            dividerExp = new RegExp(`[${divider}]`, "g");
             strNumbers = str.slice(str.indexOf("\n") + 1);
         }
 
