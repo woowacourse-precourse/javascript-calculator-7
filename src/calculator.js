@@ -1,8 +1,8 @@
-import { ERROR_MESSAGE } from "./message";
+import { EMPTY_STRING, ERROR_MESSAGE } from "./message";
 
 export function tokenizeString(input, dividerList) {
   let tokens = [];
-  let currentToken = '';
+  let currentToken = "";
   let index = 0;
 
   while (index < input.length) {
@@ -16,7 +16,7 @@ export function tokenizeString(input, dividerList) {
         if (currentToken.length > 0) {
           let convertedToken = convertToNumber(currentToken);
           tokens.push(convertedToken);
-          currentToken = '';
+          currentToken = "";
         }
 
         index += divider.length - 1;
@@ -35,7 +35,7 @@ export function tokenizeString(input, dividerList) {
 }
 
 function convertToNumber(token) {
-  if (token === '') {
+  if (token === EMPTY_STRING) {
     throw new Error(ERROR_MESSAGE.EMPTY_TOKEN);
   }
   if (isNaN(token)) {
