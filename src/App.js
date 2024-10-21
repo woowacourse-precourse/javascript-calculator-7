@@ -2,61 +2,61 @@ import { Console } from "@woowacourse/mission-utils";
 
 class App {
   async run() {
-    // 입력받기
-    const input = await Console.readLineAsync("덧셈할 문자열을 입력해 주세요.\n");
+    // 입력 요청
+    Console.print("덧셈할 문자열을 입력해 주세요.");
+    const input = await Console.readLineAsync("");
 
     // 빈 문자열 처리
-    if (input === "") {
-      return Console.print("결과 : 0");
+    if (input.trim() === "") {
+      Console.print("결과 : 0");
+      return;
     }
 
-    // 기본 구분자 
-    const separators = [",", ":"];
+    // 입력 유효성 검사 및 숫자 배열 반환
+    const result = this.verifyInput(input);
+    if (result[0]) {
+      const answer = this.calculate(result[1]);
+      Console.print(`결과 : ${answer}`);
+    } else {
+      throw new Error(
+        "[ERROR] 양수와 구분자(, 또는 : 또는 커스텀 //x\\n)로 이루어진 문자열을 입력해주세요."
+      );
+    }
+  }
 
+  // 구분자 이외의 모든 문자가 숫자이고 양수인지 검사
+  isAllNumber(arr) {
+    return arr.every((v) => !isNaN(v)) && arr.every((v) => v > 0);
+  }
+
+  // 커스텀 방식 또는 일반 방식인지 확인하고 유효한 배열 반환
+  verifyInput(input) {
     // 커스텀 구분자 처리
-    let inputString = input;
-    let customSeparator = null;
-    if (this.isCustom(input)) {
-      [customSeparator, inputString] = this.splitCustom(input);
-      separators.push(customSeparator); // 커스텀 구분자를 기본 구분자 배열에 추가
+    const customMatch = input.match(/^\/\/(.*?)\\n(.+)$/);
+    if (customMatch) {
+      const customSeparator = customMatch[1].trim();
+      const numbersString = customMatch[2];
+      
+      // 숫자 배열로 변환
+      const arr = numbersString.split(customSeparator).map((num) => +num.trim());
+      if (this.isAllNumber(arr)) {
+        return [true, arr];
+      }
+    } 
+
+    // 일반 구분자 처리
+    const arr = input.split(/[:,]+/).map((num) => +num.trim());
+    if (this.isAllNumber(arr)) {
+      return [true, arr];
     }
 
-    // 기본 구분자 처리
-    for (const separator of separators) {
-      inputString = inputString.split(separator).join(",");
-    }
-
-    // 잘못된 입력값 처리 및 숫자 변환
-    const numbers = inputString.split(",").map(num => Number(num.trim()));
-    
-    // 구분자만 있거나 숫자가 아닌 경우 처리
-    if (inputString === "" || inputString.match(/^[,:\n]+$/)) {
-      return Console.print("[ERROR] 잘못된 형식입니다. 숫자를 입력해 주세요.");
-    }
-
-    // 음수 또는 NaN 처리
-    if (numbers.some(num => isNaN(num) || num < 0)) {
-      return Console.print("[ERROR] 음수 또는 잘못된 값을 입력했습니다.");
-    }
-
-    // 숫자 더하기 및 결과 반환
-    const sum = numbers.reduce((acc, curr) => acc + curr, 0);
-    Console.print(`결과 : ${sum}`);
+    return [false];
   }
 
-  // 커스텀 구분자 스트링인지 확인 
-  isCustom(input) {
-    return input.startsWith("//");
-  }
-
-  // 커스텀 구분자를 추출하고 새로운 입력 문자열을 반환 
-  splitCustom(input) {
-    const parts = input.split("\n");
-    const customSeparator = parts[0].slice(2); 
-    const newInputString = parts[1]; 
-    return [customSeparator, newInputString];
+  // 덧셈 결과 반환
+  calculate(arr) {
+    return arr.reduce((acc, cur) => acc + cur, 0);
   }
 }
 
 export default App;
-
