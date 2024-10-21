@@ -7,7 +7,7 @@ class App {
   }
 
 
-  #workingCalculator(userInput) { // 계산기 작동
+  workingCalculator(userInput) { // 계산기 작동
     let string = [];
     if (userInput.indexOf('//') != -1 === false) {
       // 커스텀 구분자 추출 하고나서 숫자만 추출하기
@@ -31,23 +31,19 @@ class App {
     Console.print(`결과 :${result}`)
   }
 
-  #errorCalculator(userInput) { // 오류창 띄우는 함수
+  errorCalculator() { // 오류창 띄우는 함수
     if (/\d/.test(userInput) === false) { // 숫자 포함 되지 않을 때 에러
       throw new Error('ERROR');
     } else if (userInput.indexOf('//') != -1 === true) { // '//'으로 시작하지 않을 때 에러
       throw new Error('ERROR');
+    } else if (isNaN(string) || string < 0) { // 음수 입력했을 때
+      throw new Error('ERROR');
     }
   }
 
-  #resultCalculator() { // 결과값 띄우는 함수
-    this.#workingCalculator();
-    Console.print(RESULT);
-  }
-
-
   async run() {
-    await this.#startCalculator();
-    await this.#resultCalculator();
+    await this.startCalculator();
+    await this.resultCalculator();
   }
 };
 
