@@ -1,23 +1,51 @@
 class Calculator {
   constructor() {
     this.delimiter = new Set([',', ':']);
+    this.startIndex = 0;
+    this.result = 0;
   }
 
   calculate(input) {
     if (input === '') {
-      return 0;
+      return this.result;
     }
     const useCustomDelimiter = this.hasCustomDelimiter(input); //커스텀 구분자 사용 여부 담기
-    this.isValidateInput(input);
-    const numbers = this.parseNumber(input); //추출한 숫자 담기
-    const result = this.addNums(numbers); //덧셈 결과 담기
-    return result;
+    useCustomDelimiter && this.addCustomDelimiter(input);
+    console.log([...this.delimiter]);
+    // const sliceText = input.slice(this.startIndex);
+    // this.isValidateInput(input);
+    // const numbers = this.parseNumber(input); //추출한 숫자 담기
+    // const result = this.addNums(numbers); //덧셈 결과 담기
+    return this.result;
   }
 
   //커스텀 구분자 사용 여부 판단
   hasCustomDelimiter(text) {
     const regex = /\/\/.*\\n/g;
     return regex.test(text);
+  }
+
+  //커스텀 구분자 구하기
+  addCustomDelimiter(text) {
+    const regex = /\/\/(.*?)\\n/g;
+    let findCustom;
+
+    while ((findCustom = regex.exec(text)) != null) {
+      if (findCustom.index != this.startIndex) {
+        //커스텀 구분자 조건 1 : 문자열 앞에서 연속적으로 주어질 때
+        throw new Error('커스텀 구분자의 위치가 올바르지 않습니다.');
+      }
+      if (findCustom[1].length !== 1) {
+        //커스텀 구분자 조건 2 : 문자 1개
+        throw new Error('커스텀 구분자의 문자가 1개가 아닙니다.');
+      }
+      if (/\d/.test(findCustom[1])) {
+        //커스텀 구분자 조건 3 : 숫자가 아닌 문자
+        throw new Error('커스텀 구분자는 숫자가 불가합니다.');
+      }
+      this.startIndex += findCustom[0].length;
+      this.delimiter.add(findCustom[1]);
+    }
   }
 
   //문자열 유효성 검사
