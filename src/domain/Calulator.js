@@ -14,6 +14,7 @@ export default class Calculator {
   calculate() {
     this.#addCustomDelimiter();
     const numberArr = this.#splitByDelimiters();
+    return calculateSum(numberArr);
   }
 
   #splitByDelimiters() {

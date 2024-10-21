@@ -5,6 +5,7 @@ class App {
   async run() {
     const inputString = await input.getStringToPlus();
     const calculator = new Calculator(inputString);
+    const result = calculator.calculate();
   }
 }
 
