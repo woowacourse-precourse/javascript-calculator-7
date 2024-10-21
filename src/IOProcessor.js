@@ -21,6 +21,14 @@ class IOProcessor {
   processOutput(result) {
     Console.print(OUTPUT_MESSAGE.concat(result));
   }
+
+  /**
+   * @woowacourse/mission-utils에서 제공하는 API를 활용하여 에러 메시지를 출력함
+   * @param {string} errorMessage - 출력할 에러 메시지
+   */
+  processErrorOutput(errorMessage) {
+    Console.print(errorMessage);
+  }
 }
 
 export default IOProcessor;
