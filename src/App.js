@@ -23,6 +23,8 @@ class App {
         this.handleNumber(char);
       }
     }
+
+    Console.print(`결과 : ${this.sum}`);
   }
 
   handleCustomSeparator(strArr) {
