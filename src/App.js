@@ -12,7 +12,7 @@ class App {
   }
 
   add(input) {
-    if (!input) {
+    if (!input || input.trim() === "") {
       return 0;
     }
 
