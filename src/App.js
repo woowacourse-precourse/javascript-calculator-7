@@ -50,3 +50,24 @@ class App {
               throw new Error("[ERROR] Invalid delimiter.");
           }
       }
+              // 구분자를 사용하여 숫자 배열로 변환
+              const numbers = input.split(delimiter).map(num => num.trim());
+
+              // 유효성 검사 및 합산
+              const sum = numbers.reduce((acc, num) => {
+                  if (num === "") {
+                      throw new Error("[ERROR] Invalid input format."); // 빈 값 처리
+                  }
+                  const number = parseFloat(num);
+                  if (isNaN(number)) {
+                      throw new Error("[ERROR] Invalid number format."); // 숫자 형식이 아닐 경우 에러
+                  }
+                  if (number < 0) {
+                      throw new Error("[ERROR] Negative numbers are not allowed."); // 음수 처리
+                  }
+                  return acc + number; // 합산
+              }, 0);
+      
+              return sum; // 최종 합계 반환
+          }
+      }
