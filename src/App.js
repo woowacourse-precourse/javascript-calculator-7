@@ -5,7 +5,7 @@ class App {
   defaultDelimeterValidation = /[^,\d:]/gi;
 
   isCustomDelimeterUsed(input) {
-    return input.startsWith("//") && input.includes("\n");
+    return input.startsWith("//") && input.includes("\\n");
   }
 
   replaceDelimeter(input, delimeter) {
@@ -25,42 +25,31 @@ class App {
     }
 
     let inputString = input;
-    inputString = inputString.replace("\\\\n", "\n").replace("\\n", "\n");
 
     if (this.isCustomDelimeterUsed(inputString)) {
-      const [delimeterPart, numbers] = inputString.split("\n");
+      const [delimeterPart, numbers] = inputString.split("\\n");
       const delimeter = delimeterPart.slice(2);
 
-      inputString = this.replaceDelimeter(numbers, delimeter); // 구분자를 ,로 변경
+      inputString = this.replaceDelimeter(numbers, delimeter);
     }
 
     if (inputString.match(this.defaultDelimeterValidation)) {
       throw new Error("유효하지 않은 입력입니다.");
     }
 
-    inputString = this.replaceDelimeter(inputString); // 기본 구분자 처리
+    inputString = this.replaceDelimeter(inputString);
     const answer = this.addNumbers(inputString);
     Console.print(`결과 : ${answer}`);
   }
 
   async run() {
-    let endFlag = false;
-
-    while (true) {
-      try {
-        const userInput = await Console.readLineAsync(
-          "덧셈할 문자열을 입력해 주세요.\n"
-        );
+    await Console.readLineAsync("덧셈할 문자열을 입력해 주세요.\n")
+      .then((userInput) => {
         this.getAnswer(userInput);
-      } catch (err) {
-        endFlag = true;
-        Console.print(`[ERROR] ${err.message}`);
-      }
-
-      if (endFlag) {
-        break;
-      }
-    }
+      })
+      .catch((err) => {
+        throw new Error(`[ERROR] ${err.msg}`);
+      });
   }
 }
 
