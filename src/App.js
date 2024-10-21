@@ -45,7 +45,7 @@ class App {
   }
 
   isValidate(input) {
-    const allowedCharacters = `[0-9${this.delimiter.join("")}\\n]`;
+    const allowedCharacters = `[${this.delimiter.join("")}]`;
     const regex = new RegExp(`[^${allowedCharacters}]`);
 
     if (input.includes(" ")) {
@@ -59,7 +59,13 @@ class App {
 
   extractNumbers(input) {
     const regex = new RegExp(`[${this.delimiter.join("")}]`);
-    const numbers = input.split(regex).map((str) => parseInt(str, 10));
+    const numbers = input.split(regex).map((str) => {
+      const num = parseInt(str, 10);
+      if (isNaN(num)) {
+        throw new Error("[ERROR] 숫자가 아닌 값이 포함되어 있습니다.");
+      }
+      return num;
+    });
 
     return numbers;
   }
