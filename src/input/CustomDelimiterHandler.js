@@ -5,6 +5,14 @@ export function getCustomDelimiter(input) {
   const match = input.match(CUSTOM_DELIMITER_REGEX);
   if (match) {
     const customDelimiter = match[1];
+    if (/\d/.test(match[1])) {
+      throw new Error("[ERROR] : 커스텀 구분자는 숫자가 될 수 없습니다!")
+    }
+
+    if (/^\s+$/.test(customDelimiter)) {
+      throw new Error("[ERROR] : 커스텀 구분자는 공백일 수 없습니다!");
+    }
+
     return customDelimiter;
   }
   return null;
