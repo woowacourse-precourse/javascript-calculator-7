@@ -14,9 +14,10 @@ class App {
   }
 
   divide(input) {
-    let symbol = [',', ':'];
-    let numstring = input;
+    let symbol = [',', ':']; //기본 구분자 설정
+    let numstring = input; //커스텀 구분자의 경우 숫자부분 추출을 위한 변수
 
+    //커스텀 구분자 처리
     if (input.startsWith('//')) {
       const symbolindex = input.indexOf('\\n');
       if (symbolindex === -1) {
@@ -29,6 +30,7 @@ class App {
       numstring = input.substring(symbolindex + 2);  // 숫자 부분 추출
     }
 
+    //구분자에 의한 문자열 처리
     const dividepattern = new RegExp(`[${symbol.join('')}]`);
     const result = numstring.split(dividepattern);
 
@@ -47,10 +49,12 @@ class App {
     return numbers;
   }
 
+  // 구분한 숫자열이 입력되면 덧셈
   calculate(numbers) {
     return numbers.reduce((acc, cur) => acc + cur, 0);
   }
 
+  // 에러 메세지 처리
   throwError(message) {
     throw new Error(message);
   }
