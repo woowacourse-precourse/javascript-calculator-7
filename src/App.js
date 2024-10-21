@@ -7,6 +7,8 @@ class App {
                 if (number < 0) {
                     throw new Error("[ERROR] : 양수를 입력해주세요.");
                 }
+                if (isNaN(number))
+                    throw new Error("[ERROR] : 숫자를 입력해주세요.");
                 return acc + number;
             }, 0);
         };
@@ -18,6 +20,10 @@ class App {
             const inputData = await Console.readLineAsync(
                 "덧셈할 문자열을 입력해 주세요.\n"
             );
+
+            const BLANK = /\s/;
+            if (BLANK.test(inputData))
+                throw new Error("[ERROR] : 공백 없는 문자열을 입력해주세요.");
 
             // case1: 기본 구분자(,:) 케이스
             const NORMAL_SEPARATOR = /[,:]/; // 기본 구분자와 숫자로만 구성되어 있는가?
