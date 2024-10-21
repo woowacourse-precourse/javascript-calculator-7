@@ -28,7 +28,8 @@ function extractSeperator(userInput) {
   const REGEX = /\/\/(.)\\n/;
 
   if (userInput.includes(",") || userInput.includes(":")) {
-    return cutSeperator(userInput);
+    const numbers = cutSeperator(userInput);
+    return sumNumbers(numbers);
   } else if (userInput.startsWith(`//`) && userInput.match(REGEX)) {
     const numbers = extractCharacter(userInput);
     return sumNumbers(numbers);
@@ -38,7 +39,9 @@ function extractSeperator(userInput) {
 }
 
 function cutSeperator(string) {
-  return ",";
+  const stringBySeperator1 = string.split(",");
+  const numbers = stringBySeperator1.map((x) => x.split(":")).flat();
+  return numbers;
 }
 
 function extractCharacter(string) {
