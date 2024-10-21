@@ -11,9 +11,10 @@ class App {
     );
 
     //커스텀 구분자 저장
-    if (inputString.startsWith("//") && inputString.startsWith("\\n", 3)) {
-      customSeperator = inputString[2];
-      inputString = inputString.substring(5);
+    if (inputString.startsWith("//") && inputString.includes("\\n", 3)) {
+      inputString = inputString.split("\\n");
+      customSeperator = inputString[0].substring(2);
+      inputString = inputString[1];
     }
 
     //문자열에서 숫자 추출하여 배열로 저장
