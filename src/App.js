@@ -19,11 +19,13 @@ class App {
 
   // string인 input을 구분자 기준으로 쪼개서 숫자로 변환할 배열에 담는다.
   parseString(input) {
-    // 커스텀 구분자가 존재하는지 정규식으로 검사
+    // 커스텀 구분자가 존재하는지 정규식으로 검사 후 구분자와 문자열로 분해한다.
+    const { delimiter, string } = this.disassembleDelimiterAndString(input);
+    // delimiter을 split 연산을 위해 정규표현식으로 변환
+    const delimiterToRegex = this.makeSplitRegExp(delimiter);
     // 있다면 커스텀 구분자 설정 뒤를 input으로 설정
-    const numStrs = [];
+    const numStrs = string.split(delimiterToRegex);
     // 구분자를 기준으로 나뉜 문자열을 numStrs에 추가
-
     return this.verifyNumber(numStrs);
   }
 
