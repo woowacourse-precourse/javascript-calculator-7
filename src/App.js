@@ -42,8 +42,11 @@ class App { //하나의 메소드는 하나의 역할
     }
 
     preprocessing(param) {
-        const customSeparator = this.customSeparator ? this.customSeparator : '[:,]';
-        const argument = new RegExp(customSeparator, 'g');
+        const defaultSeparator = /[:,]/g;
+        const argument = this.customSeparator
+            ? new RegExp(`[${this.customSeparator}:,]`, 'g')
+            : defaultSeparator;
+
         const splitArray = param.split(argument);
         return splitArray.map((elem) =>
             this.isError(elem) || Number(elem))
