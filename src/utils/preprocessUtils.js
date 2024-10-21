@@ -10,7 +10,7 @@ const getNumbers = (input) => {
             targetString
         );
 
-        return targetString.split(new RegExp(seperator.join("|")))
+        return targetString.split(new RegExp(seperator.join("|"))).map(Number);
 
     } catch (err) {
         throw err;
