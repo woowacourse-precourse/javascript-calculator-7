@@ -7,9 +7,7 @@ class App {
   async run() {
     const input = await Console.readLineAsync(RUN_MESSAGES.INPUT);
     const numberArray = extractNumbers(input);
-
     hasNegativeNumber(numberArray);
-
     const invalidCharacterRegexResult = calculateSum(numberArray);
     return Console.print(
       `${RUN_MESSAGES.RESULT}${invalidCharacterRegexResult}`

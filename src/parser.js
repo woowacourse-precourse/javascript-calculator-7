@@ -24,7 +24,9 @@ export function extractNumbers(input) {
   const hasCommaAndSemicolon = hasComma && hasSemicolon;
   const hasCustomSeparator =
     hasCustomDelimiterPrefix && hasCustomDelimiterSuffix;
+  const blank = input === " ";
 
+  if (blank) return [Number(input)];
   if (hasCustomSeparator) {
     const isCustomDelimiterAtStart = input.indexOf(
       EXTRA_NUMBERS_MESSAGE.CUSTOM_DELIMITER_PREFIX
