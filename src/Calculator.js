@@ -11,8 +11,8 @@ class Calculator {
   async run() {
     try {
       const input = await this.getInput();
-      const customDelimiter = this.getCustomDelimiter(input);
-      const numbers = this.splitByDelimiter(input, customDelimiter);
+      const processedInput = this.processCustomDelimiter(input);
+      const numbers = this.splitByDelimiter(processedInput);
       const sum = this.sumArray(numbers);
       printMessage(`${LOG_MESSAGE.RESULT_MESSAGE}${sum}`);
     } catch (error) {
@@ -26,23 +26,27 @@ class Calculator {
     return answer;
   }
 
-  getCustomDelimiter(input) {
-    return input.match(REGEX.CUSTOM_DELIMITER_PATTERN);
+  processCustomDelimiter(input) {
+    const customDelimiterMatch = input.match(REGEX.CUSTOM_DELIMITER_PATTERN);
+    if (customDelimiterMatch) {
+      this.addCustomDelimiter(customDelimiterMatch[1]);
+      return input.slice(customDelimiterMatch[0].length);;
+    }
+    return input;
   }
 
-  splitByDelimiter(input, customDelimiter) {
-    let remainingInput = input;
+  addCustomDelimiter(delimiter) {
+    this.defaultDelimiters.push(delimiter);
+  }
 
-    if (customDelimiter) {
-      const customDelimiterValue = customDelimiter[1];
-      remainingInput = input.slice(customDelimiter[0].length);
-      this.defaultDelimiters.push(customDelimiterValue);
-    }
+  splitByDelimiter(input) {
+    const regex = this.createDelimiterRegex();
+    return input.split(regex);
+  }
 
+  createDelimiterRegex() {
     const escapedDelimiters = escapeRegexSpecialChars(this.defaultDelimiters);
-
-    const regex = new RegExp(escapedDelimiters.join('|'), 'g');
-    return remainingInput.split(regex);
+    return new RegExp(escapedDelimiters.join('|'), 'g');
   }
 
   sumArray(arr) {
