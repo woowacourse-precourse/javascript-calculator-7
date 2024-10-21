@@ -1,4 +1,3 @@
-import { MissionUtils } from '@woowacourse/mission-utils';
 import { CONSTANTS } from '../constants/constants.js';
 
 const {
@@ -23,12 +22,10 @@ export const determineNumber = (numberString) => {
  */
 export const classificationDelimiter = (inputNumber, isNumber) => {
   if (isNumber === true) {
-    MissionUtils.Console.print(isNumber);
     return calculateCommonSeparator(inputNumber);
   }
 
   if (isNumber === false) {
-    MissionUtils.Console.print(isNumber);
     return calculateCustomSeparator(inputNumber);
   }
 };
@@ -42,7 +39,10 @@ export const calculateCommonSeparator = (inputNumber) => {
 // custom 구분자를 받아서 합을 구하는 함수
 export const calculateCustomSeparator = (inputNumber) => {
   const endIndex = inputNumber.indexOf(SEPARATOR_CUSTOM_END);
-  const customSeparator = inputNumber.slice(SEPARATOR_CUSTOM_START.length, endIndex);
+  const customSeparator = inputNumber.slice(
+    SEPARATOR_CUSTOM_START.length,
+    endIndex,
+  );
 
   if (endIndex === -1 || !customSeparator) {
     throw new Error(ERROR_MESSAGE_NOT_INCLUDE_SEPARATOR);
