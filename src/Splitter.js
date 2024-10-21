@@ -17,7 +17,7 @@ class Splitter {
 
   #splitAndConvertToNumbers(string) {
     const splittedResult = this.#splitBySeparator(string);
-    return Splitter.convertToNumber(splittedResult);
+    return Splitter.#convertToNumber(splittedResult);
   }
 
   #splitBySeparator(string) {
@@ -25,7 +25,7 @@ class Splitter {
     return string.split(splitRegex);
   }
 
-  static convertToNumber(splittedResult) {
+  static #convertToNumber(splittedResult) {
     return splittedResult.map((element) => {
       if (element === "") return 0;
       const converted = parseInt(element, 10);
