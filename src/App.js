@@ -30,9 +30,9 @@ class App {
         if (input.match(checkSpecialPattern)) {
             const delimiter = input.match(checkSpecialPattern)[1];
             input = input.split("\\n").slice(1)[0];
-            return input.split(delimiter);
+            return input.split(delimiter).map((item) => Number(item.trim()));
         } else {
-            return input.split(/[,:]/).map((item) => item.trim());
+            return input.split(/[,:]/).map((item) => Number(item.trim()));
         }
     }
 }
