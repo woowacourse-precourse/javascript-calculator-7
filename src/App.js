@@ -12,6 +12,7 @@ class App {
 
     function getArrSum(arr) {
       if (isNegative(arr)) throw Error("[ERROR] 음수 입력 불가능");
+
       return arr.reduce(
         (accumulator, currentValue) => accumulator + currentValue,
         0
@@ -37,6 +38,9 @@ class App {
       } else {
         const numArr = str.split(/[,: ]/).map(Number);
         sum = getArrSum(numArr);
+      }
+      if (Number.isNaN(sum) || Number.isInteger(sum) === false) {
+        throw Error("[ERROR] 잘못된 입력입니다.");
       }
       Console.print("결과 : " + sum);
     }
