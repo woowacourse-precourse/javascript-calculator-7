@@ -1,4 +1,4 @@
-import { ONLY_NUMBER } from './constants'
+import { ONLY_NUMBER, ONLY_SYMBOL } from './constants'
 
 //배열안에 양수가 아닐때
 export const hasNegative = (array)=> {
@@ -25,3 +25,7 @@ export const hasStringNumber = (string)=> {
     return ONLY_NUMBER.test(string);
 }
 
+//입력에 기호가 없는경우 
+export const hasSymbol = (string)=> {
+    return ONLY_SYMBOL.test(string);
+}
