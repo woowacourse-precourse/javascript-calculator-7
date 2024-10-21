@@ -6,7 +6,7 @@ class App {
       const input = await MissionUtils.Console.readLineAsync("덧셈할 문자열을 입력해주세요\n");
       this.calculate(input);
     } catch(error) {
-      MissionUtils.Console.print(`Error: ${error.message}`);
+      throw new Error(`[ERROR]: ${error.message}`);
     }
   }
 
@@ -21,8 +21,13 @@ class App {
 
     for(let num of splited){
       if(isNaN(Number(num))){
-        throw new Error(`'${num}' is not a valid number.`);
+        throw new Error(`'[ERROR] ${num}' is not a valid number.`);
       }
+
+      if(Number(num) < 0){
+        throw new Error(`'[ERROR] number should be positive.`);
+      }
+      
       answer += Number(num);
     }
 
