@@ -11,7 +11,7 @@ class Delimiter {
   #defaultDelimiters = [',', ':'];
 
   /** @type {object} */
-  #customDelimiterFormatRegEx = /\/\/.*\\n/;
+  #customDelimiterFormatRegEx = /\/\/.*?\\n/;
 
   /** @type {object} */
   #customDelimiterRegEx = /\/\/(.*?)\\n/;
