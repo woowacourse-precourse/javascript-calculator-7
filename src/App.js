@@ -6,8 +6,14 @@ class App {
     if (!input.length) return this.printAnswer(0);
 
     const [separators, numberString] = this.getSeparatorAndNumber(input);
+
+    if (separators === null) {
+      return this.printError("올바르지 않은 커스텀 구분자 형식입니다.");
+    }
+
     const regex = this.changeToRegex(separators);
     const numbers = this.getNumberCutWithSeparator(regex, numberString);
+
     const sum = this.calculateSum(numbers);
     return this.printAnswer(sum);
   }
