@@ -1,9 +1,5 @@
-import Console from woowacourse/mission-utils
 class App {
-  async run() {
-    Console.print("hello")
-  }
-
+  async run() {}
 }
 
 export default App;
