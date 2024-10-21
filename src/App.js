@@ -1,6 +1,9 @@
 import { Console } from "@woowacourse/mission-utils";
 
 class App {
+  defaultDelimeter = /[\s,:]/gi;
+  defaultDelimeterValidation = /[^,\d:]/gi;
+
   isCustomDelimeterUsed(input) {
     return input.startsWith("//") && input.includes("\\n");
   }
@@ -14,17 +17,27 @@ class App {
     return inputString.replaceAll(this.defaultDelimeter, " ");
   }
 
-  getAnswer(input) {
-    let answer, inputString;
+  addNumbers(inputString) {
+    return inputString.split(" ").reduce((acc, cur) => acc + Number(cur), 0);
+  }
 
-    if (this.isCustomDelimeterUsed(input)) {
-      const delimeter = input.split("\\n")[0].slice(2);
-      const numbers = input.split("\\n")[1];
+  getAnswer(input) {
+    let answer,
+      inputString = input;
+
+    if (this.isCustomDelimeterUsed(inputString)) {
+      if (inputString.includes("\\n")) {
+        inputString = inputString.replace(/\\\\/g, "\\");
+      }
+      const delimeter = inputString.split("\\n")[0].slice(2);
+      const numbers = inputString.split("\\n")[1];
 
       inputString = this.replaceDelimeter(numbers, delimeter);
     }
 
-    inputString = this.replaceDelimeter(input);
+    inputString = this.replaceDelimeter(inputString);
+    answer = this.addNumbers(inputString);
+    Console.print(`결과 : ${answer}`);
   }
 
   async run() {
