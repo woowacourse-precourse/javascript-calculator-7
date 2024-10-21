@@ -5,58 +5,87 @@ import {
   ParseError,
 } from "./CustomErrors.js";
 
-const customSeparatorReg = new RegExp(/\/\/.*\\n/);
+const CUSTOM_SEPARATOR_REG = new RegExp(/\/\/.*\\n/);
+const DEGREE_REG = /[^\d]/;
 
 class App {
   constructor() {
     this.sum = 0;
-    this.separatorArray = [",", ":"];
-    this.separator = "";
+    this.separator = ",:";
+    this.userInput = "";
   }
+
   async run() {
-    let userInput = await Console.readLineAsync(
+    await this.processUserInputAndStoreResult();
+    this.processCustomSeparator();
+    if (this.userInput.length > 0) {
+      const stringNumbers = this.getNumbers();
+      const numbers = this.parseNumbers(stringNumbers);
+      this.calculateSum(numbers);
+    }
+    this.printResult();
+  }
+
+  async processUserInputAndStoreResult() {
+    this.userInput = await Console.readLineAsync(
       "덧셈할 문자열을 입력해 주세요.\n"
     );
-    const customSeparator = userInput.search(customSeparatorReg);
-    if (customSeparator >= 0) {
-      this.checkCustomSeparatorError(userInput);
-      this.separatorArray.push(userInput[2]);
-      userInput = userInput.slice(5);
-    }
-    this.separator = this.separatorArray.join("");
-    if (userInput.length > 0) {
-      this.checkValidateError(userInput);
-      const separatorReg = new RegExp(`[${this.separator}]`, "g");
-      const numbers = userInput.replace(separatorReg, " ").split(" ");
-      const parsedNumbers = numbers.map((number) => {
-        const num = parseInt(number, 10);
-        this.checkParseError(num);
-        return num;
-      });
-      this.sum = parsedNumbers.reduce((acc, cur) => acc + cur, 0);
-    }
+  }
+
+  printResult() {
     Console.print(`결과 : ${this.sum}`);
   }
+
+  processCustomSeparator() {
+    const customSeparator = this.userInput.search(CUSTOM_SEPARATOR_REG);
+    if (customSeparator >= 0) {
+      this.checkCustomSeparatorError(this.userInput);
+      this.separator += this.userInput[2];
+      this.userInput = this.userInput.slice(5);
+    }
+  }
+
+  getNumbers() {
+    this.checkValidateError(this.userInput);
+    const separatorReg = new RegExp(`[${this.separator}]`, "g");
+    return this.userInput.split(separatorReg);
+  }
+
+  parseNumbers(stringNumbers) {
+    const parsedNumbers = stringNumbers.map((number) => {
+      const num = parseInt(number, 10);
+      this.checkParseError(num);
+      return num;
+    });
+    return parsedNumbers;
+  }
+
+  calculateSum(numbers) {
+    this.sum = numbers.reduce((acc, cur) => acc + cur, 0);
+  }
+
   checkCustomSeparatorError(userInput) {
     if (userInput.slice(0, 2) !== "//")
       throw new CustomSeparatorError(
         "커스텀 구분자는 맨 앞에 존재해야 합니다."
       );
-    const degreeReg = /[^\d]/;
-    if (!degreeReg.test(userInput[2]))
+    
+    if (!DEGREE_REG.test(userInput[2]))
       throw new CustomSeparatorError("숫자는 커스텀 구분자가 될 수 없습니다.");
     if (userInput[4] != "n")
       throw new CustomSeparatorError(
         "커스텀 구분자는 한 글자만 사용 가능합니다."
       );
   }
+
   checkValidateError(userInput) {
     const validateSeparator = new RegExp(`^[0-9${this.separator}]+$`, "g");
     if (!validateSeparator.test(userInput))
-      throw new ValidateError("잘못된 입력입니다.");
+      throw new ValidateError("구분자와 양수를 입력해주세요.");
   }
+
   checkParseError(num) {
-    if (!num) throw new ParseError("잘못된 입력입니다");
+    if (isNaN(num)) throw new ParseError("잘못된 입력입니다.");
     if (num < 0) throw new ParseError("양수를 입력해주세요");
   }
 }
