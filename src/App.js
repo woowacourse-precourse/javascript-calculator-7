@@ -49,7 +49,7 @@ class App {
         }
 
         const inputNumber = userInput.split(DEFAULT_SEPARATOR);
-        Console.print(inputNumber);
+        checkSeparator(inputNumber);
 
         return inputNumber;
       } else if (userInput.includes('n') && CUSTOM_EXPRESS.test(userInput)) {
@@ -62,11 +62,11 @@ class App {
         }
 
         const inputNumber = userInputCustomFormula.split(combinedSeparator);
-        Console.print(inputNumber);
+        checkSeparator(inputNumber);
 
         return inputNumber;
       } else {
-        throw new Error('[ERROR]' + error.message);
+        throw new Error('[ERROR]');
       }
     }
 
@@ -104,6 +104,14 @@ class App {
       Console.print('결과 : ' + result);
     } catch (error) {
       throw new Error(error.message);
+    }
+
+    function checkSeparator(inputArray) {
+      inputArray.forEach((symbol) => {
+        if (symbol === '') {
+          throw new Error(ERROR.SEPARATOR_ERROR);
+        }
+      });
     }
   }
 }

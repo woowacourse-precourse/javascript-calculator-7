@@ -29,10 +29,10 @@
   - 기본 입력 예외사항
 
     - [x] 사용자가 음수를 입력했을 때 -> ('[ERROR] NEGATIVE_NUMBER_ERROR')
-    - [ ] 숫자가 아닌 문자를 입력했을 때 -> ('[ERROR] FORMULA_ERROR')
+    - [x] 숫자가 아닌 문자를 입력했을 때 -> ('[ERROR] FORMULA_ERROR')
     - [x] 띄어쓰기가 포함된 경우 -> '' 0으로 인식
-    - [ ] 구분자로 끝난 경우 -> ('[ERROR] FORMULA_ERROR')
-    - [ ] 구분자가 연속으로 쓰인 경우 (예 : '1;;') -> ('[ERROR] FORMULA_ERROR')
+    - [x] 구분자로 끝난 경우 -> ('[ERROR] SEPARATOR_ERROR') : 커스텀으로 두 개 이상의 구분자가 가능하기 때문
+    - [x] 구분자가 연속으로 쓰인 경우 (예 : '1;;') -> ('[ERROR] FORMULA_ERROR')
 
   - 커스텀 구분자 입력 예외사항
 
