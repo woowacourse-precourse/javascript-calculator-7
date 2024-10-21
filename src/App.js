@@ -10,6 +10,11 @@ class App {
       `xxxxx(확인용 - 최초 입력값 = ${inputValue}) / type : ${typeof inputValue}`
     );
 
+    // [2] 커스텀구분자 여부를 확인
+    const CUSTOM_PATTERN = /^\/\//;
+    const isCustom = CUSTOM_PATTERN.test(inputValue);
+    console.log(`xxxxx(확인용 - 커스텀 구분자인가요? : ${isCustom})`);
+
   }
 }
 
