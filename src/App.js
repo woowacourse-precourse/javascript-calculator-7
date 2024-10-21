@@ -39,6 +39,7 @@ class App {
     const CURRENT_DELIMITER = [...this.DELIMITERS_SET].map(delimiter => this.escapeRegExp(delimiter)).join('|')
     const SPLIT_REG = RegExp(CURRENT_DELIMITER)
     const INT_ARRAY = str.split(SPLIT_REG)
+    // Console.print([...INT_ARRAY])
     return INT_ARRAY;
 
   }
@@ -47,19 +48,16 @@ class App {
   sumInteger(arr){
     var RESULT = 0;
     arr.forEach(element => {
-      const CURRENT_INT = parseInt(element)
-      if(CURRENT_INT === NaN){
-        return NaN;
-      }
+      const CURRENT_INT = Number(element)
       RESULT += CURRENT_INT
     })
     return RESULT;
   }
 
   async run() {
-    try {
-      while(true){
-        
+
+    while(true){
+      try {
         const INPUT_STR = await this.inputStr()
         if (INPUT_STR === 'quit' ){
           Console.print("종료")
@@ -71,22 +69,19 @@ class App {
           // Console.print([...this.DELIMITERS_SET])
         }
         else{
-          // Console.print(INPUT_STR)
           const FILTERED_ARRAY = this.filterInteger(INPUT_STR);
           const SUM_RESULT = this.sumInteger(FILTERED_ARRAY)
-          if(SUM_RESULT !== NaN){
-            Console.print(SUM_RESULT)
+          if(Number.isNaN(SUM_RESULT)){
+            Console.print("error")
+            throw new Error('[ERRROR] 구분자 이외의 문자를 입력했습니다.')
           }
           else{
-            Console.print("error")
+            Console.print(SUM_RESULT)
           }
-          
         }
-
-
+      } catch (error) {
+        Console.print(error)
       }
-    } catch (error) {
-      Console.print(error)
     }
   }
 }
