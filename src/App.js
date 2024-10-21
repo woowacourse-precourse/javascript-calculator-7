@@ -2,13 +2,10 @@ import { Console } from "@woowacourse/mission-utils";
 
 class App {
   getInputString() {
-    const inputString =
-      Console.readLineAsync("덧셈할 문자열을 입력해 주세요\n");
-    return inputString;
+    return Console.readLineAsync("덧셈할 문자열을 입력해 주세요\n");
   }
 
   stringSplitDelimiter(inputString) {
-    let str = [];
     // 커스텀 구분자 사용 시
     if (inputString[0] === "/" && inputString[1] === "/") {
       const index = inputString.indexOf("\\n");
@@ -19,13 +16,11 @@ class App {
 
       const regex = new RegExp(`[${delimiter}:,]`);
 
-      str = stringToSplit.split(regex).map(Number);
+      return stringToSplit.split(regex).map(Number);
     } else {
       // 기본 구분자(쉼표, 콜론) 사용 시
-      str = inputString.split(/,|:/).map(Number);
+      return inputString.split(/,|:/).map(Number);
     }
-
-    return str;
   }
 
   addNumbers(numbers) {
@@ -37,16 +32,16 @@ class App {
     Console.print("[ERROR]");
   }
 
-  catchException(splitedString) {
+  catchException(splitString) {
     // 음수가 포함된 경우
-    if (splitedString.some((num) => num < 0)) {
+    if (splitString.some((num) => num < 0)) {
       this.printError();
       throw new Error("[ERROR]");
     }
     // 숫자 아닌 문자 입력 한 경우, 올바르지 않은 구분자 사용한 경우
     // 커스텀 구분자 시작과 끝을 잘못 지정한 경우
 
-    if (splitedString.some((val) => isNaN(val))) {
+    if (splitString.some((val) => isNaN(val))) {
       this.printError();
       throw new Error("[ERROR]");
     }
@@ -57,13 +52,13 @@ class App {
     const inputString = await this.getInputString();
 
     // 구분자 기준으로 문자열 분리
-    const splitedString = this.stringSplitDelimiter(inputString);
+    const splitString = this.stringSplitDelimiter(inputString);
 
     // 예외 처리 함수
-    this.catchException(splitedString);
+    this.catchException(splitString);
 
     // 문자열에서 분리된 숫자들의 합 계산
-    this.addNumbers(splitedString);
+    this.addNumbers(splitString);
   }
 }
 
