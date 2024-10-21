@@ -19,6 +19,8 @@ class App {
       const NUMBERS = App.getNumbers(INPUT, this.SEPARATORS);
 
       const RESULT = App.calculate(NUMBERS);
+
+      Console.print(`결과 : ${RESULT}`);
     } catch(error) {
       console.print(error.message);
     }
