@@ -18,6 +18,7 @@ class Calculate {
 
   validateUserInput(splitedNums) {
     Validation.checkPositiveNum(splitedNums);
+    Validation.checkZeroNum(splitedNums);
 
     return splitedNums;
   }
