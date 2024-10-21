@@ -8,8 +8,6 @@ export default function splitCustom(inputs) {
     splitedInputs = inputs.substring(endIdx + 2).split(customDelimiter);
     // 분리했더니 커스텀 구분자랑 다른 구분자가 있는 경우 에러
 
-    console.log(splitedInputs); // 여기서 분리가 잘 되는지 확인
-
     const numTest = /^[0-9]+$/;
     splitedInputs.forEach((input) => {
         if (!numTest.test(input)) {
