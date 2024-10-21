@@ -31,8 +31,8 @@ extractNumbers(input) {
 
   // 커스텀 구분자
   if(input.slice(0,2) === "//"){
-    const customDelimiterEnd = input.indexOf('\\');
-    if (customDelimiterEnd === -1 || input[customDelimiterEnd + 1] !== 'n') {
+    const customDelimiterEnd = input.indexOf('\\n');
+    if (customDelimiterEnd === -1) {
        throw new Error('유효하지 않은 커스텀 구분자입니다.');
     }
     custom = input.slice(2, customDelimiterEnd);
