@@ -43,7 +43,7 @@ class App {
     return verifiedNumbers;
   }
 
-  // 파싱한 숫자를 더한다.
+  // 숫자를 더한다.
   calculateSum(numbers) {
     return numbers.reduce((res, ele) => res + ele, 0);
   }
