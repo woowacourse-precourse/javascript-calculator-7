@@ -43,13 +43,24 @@ class Delimiter {
   /**
    *
    * @param {string} value
-   * @returns {Array<number>}
+   * @returns {{ start: number; end: number }}
    */
   #getCustomDelimiterMatcherLocation(value) {
-    return [
-      value.indexOf(this.#customDelimiterMatchers[0]),
-      value.indexOf(this.#customDelimiterMatchers[1]),
-    ];
+    return {
+      start: value.indexOf(this.#customDelimiterMatchers[0]),
+      end: value.indexOf(this.#customDelimiterMatchers[1]),
+    };
+  }
+
+  /**
+   *
+   * @returns {{ start: number; end: number; }}
+   */
+  #getCustomDelimiterMatcherLength() {
+    return {
+      start: this.#customDelimiterMatchers[0].length,
+      end: this.#customDelimiterMatchers[1].length,
+    };
   }
 
   /**
@@ -58,9 +69,10 @@ class Delimiter {
    * @returns {string}
    */
   #removeCustomDelimiterFormat(value) {
-    const [_, end] = this.#getCustomDelimiterMatcherLocation(value);
-
-    return value.slice(end + 2);
+    return value.slice(
+      this.#getCustomDelimiterMatcherLocation(value).end +
+        this.#getCustomDelimiterMatcherLength().end,
+    );
   }
 
   /**
