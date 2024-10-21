@@ -1,6 +1,10 @@
 import { Console } from "@woowacourse/mission-utils";
 import BASIC_REGEXP from "./regExp.js";
-import { checkIsBlank, checkIsPositive } from "./utils/validation.js";
+import {
+  checkIsBlank,
+  checkIsNumericEdge,
+  checkIsPositive,
+} from "./utils/validation.js";
 import { add } from "./utils/sum.js";
 
 class App {
@@ -24,6 +28,7 @@ class App {
         const newSeparator = input.slice(2, parts);
         const dynamicRegExp = new RegExp(`${newSeparator}|[,:]`);
         const array = input.slice(parts + 2).split(dynamicRegExp);
+        checkIsNumericEdge(array);
 
         // array에 음수나 양수가 있는지 검사하여 있으면 Error 출력 + 설정된 구분자를 제외한 구분자를 사용한 경우 에러 발생
         checkIsPositive(array);
@@ -34,6 +39,7 @@ class App {
       }
     } else {
       const array = input.split(BASIC_REGEXP);
+      checkIsNumericEdge(array);
 
       // array에 음수나 양수가 있는지 검사하여 있으면 Error 출력 + 설정된 구분자를 제외한 구분자를 사용한 경우 에러 발생
       checkIsPositive(array);

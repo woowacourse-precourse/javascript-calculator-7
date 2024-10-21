@@ -18,3 +18,9 @@ export const checkIsBlank = (input) => {
   }
   return input;
 };
+
+export const checkIsNumericEdge = (input) => {
+  if (isNaN(Number(input[0])) || isNaN(Number(input[input.length - 1]))) {
+    throw new Error("ERROR: 배열의 입력 양 끝 값이 숫자가 아닙니다.");
+  }
+};
