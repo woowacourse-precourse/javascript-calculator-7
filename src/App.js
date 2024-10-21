@@ -6,8 +6,8 @@ class App {
     let delimiters = [",", ":"];
     let expression = input.trim();
 
-    if (input.startsWith("//") && input.includes("\n")) {
-      const { customDelimiter, newExpression } = this.checkCustomDelimiter(input);
+    if (expression.startsWith("//") && expression.includes("\n")) {
+      const { customDelimiter, newExpression } = this.checkCustomDelimiter(expression);
       delimiters.push(customDelimiter);
       expression = newExpression;
     }
