@@ -1,5 +1,5 @@
 import { Console } from "@woowacourse/mission-utils";
-import { ERROR_MESSAGES } from './constant.js';
+import { ERROR_MESSAGES } from './constant.js'; 
 
 class App {
   async run() {
@@ -23,6 +23,11 @@ class App {
       if (customDelimiter) {
         input = input.split("\\n")[1];
         delimiters.push(customDelimiter);
+      }
+
+      const SUPPORTED_DELIMITERS_REGEX = new RegExp(`^[0-9${delimiters.join('')}]+$`);
+      if (!SUPPORTED_DELIMITERS_REGEX.test(input)) {
+        throw new Error(ERROR_MESSAGES.INVALID_INPUT());
       }
 
       const REGEX = new RegExp(`[${delimiters.join('')}]`);
