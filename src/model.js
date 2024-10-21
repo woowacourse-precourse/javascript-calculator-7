@@ -15,8 +15,6 @@ class CalculatorModel {
       NUMBER_AS_SEPARATOR: "[ERROR] 숫자는 구분자로 쓸 수 없습니다.",
       SPACE_BETWEEN_NUMBERS:
         "[ERROR] 붙어있어야 할 문자들 사이에 공백이 있습니다.",
-      SPACE_IN_CUSTOM_SEPARATOR:
-        "[ERROR] 커스텀 구분자와 줄바꿈 사이에 공백이 있습니다.",
       CONSECUTIVE_DEFAULT_SEPARATORS:
         "[ERROR] 기본 구분자는 연속으로 사용할 수 없습니다.",
       MISSING_CUSTOM_SEPARATOR: "[ERROR] 커스텀 구분자를 입력해주세요.",
@@ -42,11 +40,6 @@ class CalculatorModel {
     if (extractedSeparators) {
       separators = separators.concat(extractedSeparators);
       numbersString = newNumbersString;
-    }
-
-    // 커스텀 구분자 확인 및 공백 체크
-    if (this.checkForSpacesInCustomSeparator(input)) {
-      throw new Error(this.errorMessages.SPACE_IN_CUSTOM_SEPARATOR);
     }
 
     // 공백이 구분자로 사용될 경우 처리
