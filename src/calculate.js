@@ -18,4 +18,15 @@ class Calculator {
         delimiter = new RegExp(`[${customDelimiter}]`);
         numbersString = parts[1];
       }
-    }}
+      const numbers = numbersString.split(delimiter);
+      const sum = numbers.reduce((total, current) => {
+        const num = parseInt(current, 10);
+        if (isNaN(num) || num < 0) {
+          throw new Error("[ERROR]");
+        }
+        return total + num;
+      }, 0);
+  
+      return sum;
+    }
+}
