@@ -1,6 +1,6 @@
 import { ERROR_MESSAGE } from './constants.js';
 
-class Parser {
+class Calculation {
   static parseInput(input) {
     let numbers;
 
@@ -32,4 +32,4 @@ class Parser {
   }
 }
 
-export default Parser;
+export default Calculation;
