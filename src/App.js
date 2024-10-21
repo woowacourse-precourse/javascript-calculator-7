@@ -71,3 +71,6 @@ class App {
               return sum; // 최종 합계 반환
           }
       }
+      // 프로그램 시작점
+const app = new App();
+app.run(); // run() 메서드 호출
