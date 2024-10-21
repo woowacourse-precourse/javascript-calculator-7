@@ -4,7 +4,7 @@ function adder(numList) {
   let sum = 0;
   for(let i = 0; i < numList.length; i++){
       if(isNaN(numList[i])){
-        continue;
+        continue;  // 숫자가 아닌 값은 무시
       }
       sum += numList[i];
   }
@@ -14,12 +14,8 @@ function adder(numList) {
 function divideWithDefault(INPUT) {
   let strList = INPUT.split(/[, :]/);
   
-  if (strList.some(element => isNaN(element))) {
-    Console.print("[ERROR] 구분자 사이에는 숫자만 입력 가능합니다.");
-    return;
-  }
-
-  let numList = strList.map(element => parseInt(element, 10));
+  // 숫자가 아닌 문자는 무시하고 숫자만 처리
+  let numList = strList.map(element => parseInt(element, 10)).filter(element => !isNaN(element));
   
   if (numList.some(element => element <= 0)) {
     Console.print("[ERROR] 양수 값을 입력해주세요.");
@@ -46,12 +42,8 @@ function divideWithCustom(INPUT) {
   const STR = INPUT.split('\\n')[1];
   let strList = STR.split(new RegExp(`[${DELIMETER},:]`));
 
-  if (strList.some(element => isNaN(element))) {
-    Console.print("[ERROR] 구분자 사이에는 숫자만 입력 가능합니다.");
-    return;
-  }
-
-  let numList = strList.map(element => parseInt(element, 10));
+  // 숫자가 아닌 문자는 무시하고 숫자만 처리
+  let numList = strList.map(element => parseInt(element, 10)).filter(element => !isNaN(element));
 
   if (numList.some(element => element <= 0)) {
     Console.print("[ERROR] 양수 값을 입력해주세요.");
