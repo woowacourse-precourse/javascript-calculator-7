@@ -65,7 +65,6 @@ class App {
   printError(error) {
     throw new Error(`[ERROR] ${error}`);
   }
-  validate() {}
 }
 
 export default App;
