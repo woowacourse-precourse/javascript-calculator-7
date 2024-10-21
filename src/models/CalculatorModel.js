@@ -22,7 +22,7 @@ function isZero(value) {
 }
 
 // --- 입력 값 검증 함수 ---
-export function validateInput(input) {
+function validateInput(input) {
   const hasNonNumeric = input.map(Number).some((char) => isNonNumeric(char));
   const hasZero = input.some((char) => isZero(char));
 
@@ -31,7 +31,7 @@ export function validateInput(input) {
 }
 
 // --- 구분자 추출 ---
-export function getCustomDelimiter(input) {
+function getCustomDelimiter(input) {
   const hasCustomDelimiter = input.startsWith('//');
   if (!hasCustomDelimiter) return null;
 
@@ -40,7 +40,7 @@ export function getCustomDelimiter(input) {
 }
 
 // --- 커스텀구분자 입력 부분 제외 ---
-export function removeDelimiterSection(customDelimiter, input) {
+function removeDelimiterSection(customDelimiter, input) {
   if (!customDelimiter) {
     return input; // 커스텀 구분자가 없을 경우 원래 입력 반환.
   }
@@ -50,7 +50,7 @@ export function removeDelimiterSection(customDelimiter, input) {
 }
 
 // --- 문자열을 구분자 기준으로 나누기 ---
-export function splitString(customDelimiter, processedInput) {
+function splitString(customDelimiter, processedInput) {
   const splitByCustomDelimiter = customDelimiter
     ? processedInput.split(customDelimiter)
     : [processedInput];
@@ -63,7 +63,7 @@ export function splitString(customDelimiter, processedInput) {
 }
 
 // --- 빈 문자열은 0 반환 ---
-export function replaceEmptyWithZero(inputArr) {
+function replaceEmptyWithZero(inputArr) {
   const cleanedNumbers = inputArr.map((value) => (value === '' ? '0' : value));
   return cleanedNumbers.map(Number);
 }
