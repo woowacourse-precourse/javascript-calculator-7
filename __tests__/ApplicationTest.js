@@ -32,6 +32,21 @@ describe("문자열 계산기", () => {
     });
   });
 
+  test("빈 문자열", async () => {
+    const inputs = [""];
+    mockQuestions(inputs);
+
+    const logSpy = getLogSpy();
+    const outputs = ["결과 : 0"];
+
+    const app = new App();
+    await app.run();
+
+    outputs.forEach((output) => {
+      expect(logSpy).toHaveBeenCalledWith(expect.stringContaining(output));
+    });
+  });
+
   test("예외 테스트", async () => {
     const inputs = ["-1,2,3"];
     mockQuestions(inputs);
