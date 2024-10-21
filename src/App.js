@@ -1,4 +1,3 @@
-// 제공하는 Console API를 사용하기 위해 import
 import { MissionUtils } from "@woowacourse/mission-utils";
 
 class App {
@@ -9,10 +8,10 @@ class App {
         "덧셈할 문자열을 입력해 주세요.\n"
       );
 
-      // 빈 문자열 처리
-      const result = this.calculate(input);
+      // 계산 결과
+      const result = this.calculate(input.trim());
 
-      // 빈 문자열이 아닌 경우 입력된 값을 그대로 출력
+      // 결과 출력
       MissionUtils.Console.print(`결과: ${result}`);
     } catch (error) {
       // 오류났을 때 출력
@@ -26,9 +25,17 @@ class App {
       return 0;
     }
 
-    //다른 로직 추가 예정
+    // 쉼표(,)와 콜론(:)을 구분자로 가지는 문자열을 전달하는 경우, 구분자를 기준으로 분리한 각 숫자의 합을 반환
+    const numbers = input.split(/[,\:]/).map(Number); // 숫자로 변환
 
-    return input;
+    // numbers에 있는 숫자들의 합 구하기
+    let sum = 0;
+    for (let i = 0; i < numbers.length; i++) {
+      sum += numbers[i];
+    }
+
+    // 최종 합계 반환
+    return sum;
   }
 }
 
