@@ -27,7 +27,7 @@ class App {
 
       const SUPPORTED_DELIMITERS_REGEX = new RegExp(`^[0-9${delimiters.join('')}]+$`);
       if (!SUPPORTED_DELIMITERS_REGEX.test(input)) {
-        throw new Error("[ERROR] 올바르지 않은 입력입니다. 올바른 구분자를 사용하세요.");
+        throw new Error("[ERROR] 올바르지 않은 입력입니다. (쉼표, 콜론 또는 커스텀 구분자 형식 및 양수만 입력이 가능합니다.)");
       }
 
       const REGEX = new RegExp(`[${delimiters.join('')}]`);
