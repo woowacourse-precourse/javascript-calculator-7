@@ -11,7 +11,6 @@ class Calculator {
   async run() {
     try {
       const input = await this.getInput();
-      validateEmptyInput(input);
       const customDelimiter = this.getCustomDelimiter(input);
       const numbers = this.splitByDelimiter(input, customDelimiter);
       const sum = this.sumArray(numbers);
@@ -22,7 +21,9 @@ class Calculator {
   }
 
   async getInput() {
-    return await Console.readLineAsync(LOG_MESSAGE.START_MESSAGE);
+    const answer = await Console.readLineAsync(LOG_MESSAGE.START_MESSAGE);
+    validateEmptyInput(answer);
+    return answer;
   }
 
   getCustomDelimiter(input) {
