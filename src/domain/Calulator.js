@@ -1,11 +1,13 @@
 import { DEFAULT_DELIMITERS } from "../constants/delimiters.js";
 import calculateSum from "../utils/calculateSum.js";
+import inputValidator from "../validator/inputValidator.js";
 
 export default class Calculator {
   #inputString;
   #delimiters;
 
   constructor(inputString) {
+    inputValidator.emptyInput(inputString);
     this.#inputString = inputString;
     this.#delimiters = DEFAULT_DELIMITERS;
   }
@@ -32,4 +34,6 @@ export default class Calculator {
       this.#inputString = this.#inputString.replace(customDelimiterPattern, "");
     }
   }
+
+  #validateInput() {}
 }
