@@ -6,11 +6,10 @@ class App {
     return userInput;
   }
 
-
   workingCalculator(userInput) { // 계산기 작동
     let string = [];
+    // 커스텀 구분자 추출 하고나서 숫자만 추출하기
     if (userInput.indexOf('//') != -1 === false) {
-      // 커스텀 구분자 추출 하고나서 숫자만 추출하기
       const startIndex = userInput.indexOf('//') + 2;
       const endIndex = userInput.indexOf("\n");
       const custom = userInput.substring(startIndex, endIndex);
@@ -28,15 +27,18 @@ class App {
 
   addNumber(num) { // 더하는 함수
     const sum = num.reduce((a, b) => (a + b));
-    Console.print(`결과 :${result}`)
+    Console.print(`결과 :${sum}`)
   }
 
   errorCalculator() { // 오류창 띄우는 함수
     if (/\d/.test(userInput) === false) { // 숫자 포함 되지 않을 때 에러
+      Console.print(`[ERROR]`);
       throw new Error('ERROR');
     } else if (userInput.indexOf('//') != -1 === true) { // '//'으로 시작하지 않을 때 에러
+      Console.print(`[ERROR]`);
       throw new Error('ERROR');
     } else if (isNaN(string) || string < 0) { // 음수 입력했을 때
+      Console.print(`[ERROR]`);
       throw new Error('ERROR');
     }
   }
