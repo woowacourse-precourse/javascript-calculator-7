@@ -25,6 +25,24 @@ class Model {
     return this.string.match(DELIMITER_REGEX.CUSTOM);
   }
 
+  checkInvalidCharacter() {
+    // 기본 구분자는 정규표현식 그대로 사용하고, 커스텀 구분자는 이스케이프 처리
+    let escapedDelimiter = this.#delimiter;
+
+    if (typeof this.#delimiter === 'string') {
+      // 커스텀 구분자가 문자열일 경우 이스케이프 처리
+      escapedDelimiter = this.#delimiter.replace(/[.*+?^${}()|[\]\\]/g, '\\$&');
+    }
+
+    // 숫자(0-9)와 현재 구분자 외의 문자 찾기
+    const invalidCharRegex = new RegExp(`[^0-9${escapedDelimiter}]`);
+
+    const invalidCharMatch = this.string.match(invalidCharRegex);
+    if (invalidCharMatch) {
+      throw new Error(`[ERROR] 허용되지 않은 문자가 포함되어 있습니다: ${invalidCharMatch[0]}`);
+    }
+  }
+
   extractNumber() {
     const splitedString = this.string.split(this.#delimiter);
     this.#numberList = splitedString.map((string) => this.convertToNumber(string));
@@ -32,7 +50,8 @@ class Model {
 
   convertToNumber(string) {
     const number = Number(string);
-    if (Number.isSafeInteger(number)) {
+
+    if (!Number.isSafeInteger(number)) {
       throw new Error('[ERROR] 유효하지 않은 정수가 포함되어 있습니다');
     }
     if (number < 0) {
@@ -49,6 +68,7 @@ class Model {
     if (this.string === '') {
       throw new Error('[ERROR] 한 자리 이상의 문자열을 입력해주세요');
     }
+    this.checkInvalidCharacter();
     this.extractNumber(); // 숫자 추출
     return this.sum(); // 합산 결과 반환
   }
