@@ -1,15 +1,15 @@
-export function extractDividerProcess(input, divider) {
+export function extractDividerList(input, dividerList) {
   while (input !== "") {
     const { extractedString, newInput } = extractCustomDvider(input);
     if (extractedString === "") {
       break;
     }
-    repetitionCheck(divider);
-    divider.push(extractedString);
+    repetitionCheck(dividerList);
+    dividerList.push(extractedString);
     input = newInput;
   }
 
-  return { updatedInput: input, updatedDivider: divider };
+  return { updatedInput: input, updatedDividerList: dividerList };
 }
 
 function extractCustomDvider(input) {
@@ -43,8 +43,8 @@ function validateDivider(divider) {
   return;
 }
 
-function repetitionCheck(divider, extractedString) {
-  if (divider.includes(extractedString)) {
+function repetitionCheck(dividerList, extractedString) {
+  if (dividerList.includes(extractedString)) {
     throw new Error("[ERROR] 구분자가 중복되었습니다.");
   }
   return;
