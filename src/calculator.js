@@ -4,7 +4,6 @@ export function tokenizeString(input, dividerList) {
   let index = 0;
 
   while (index < input.length) {
-    console.log('index:', index);
     let isDivider = false;
     for (let j = 0; j < dividerList.length; j++) {
       let divider = dividerList[j];
@@ -13,7 +12,8 @@ export function tokenizeString(input, dividerList) {
         isDivider = true;
 
         if (currentToken.length > 0) {
-          tokens.push(currentToken);
+          let convertedToken = convertToNumber(currentToken);
+          tokens.push(convertedToken);
           currentToken = '';
         }
 
@@ -27,6 +27,9 @@ export function tokenizeString(input, dividerList) {
 
     index++;
   }
-
   console.log(tokens);
+}
+
+function convertToNumber(token) {
+  return parseInt(token);
 }
