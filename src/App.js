@@ -9,15 +9,13 @@ class App {
     try {
       const input = await Console.readLineAsync(
         "덧셈할 문자열을 입력해주세요.\n"
-      );
+      ); // 문자열 입력 받기
 
       const afterCustomSeparator = await this.handleCustomSeparator(input); // 커스텀 구분자 제외한 문자열
-      Console.print(afterCustomSeparator);
-      Console.print(this.separators);
 
-      await this.handleSeparator(afterCustomSeparator);
+      await this.handleSeparator(afterCustomSeparator); // 구분자 배열을 바탕으로 숫자 추출하기
 
-      const result = await this.addNumbers(this.numbers);
+      const result = await this.addNumbers(this.numbers); // 덧셈 처리
       Console.print(`결과: ${result}`);
     } catch (error) {
       Console.print(`${error}`);
@@ -29,15 +27,13 @@ class App {
     const match = this.extractCustomSeparator(input); // 커스텀 구분자 추출
 
     if (match) {
-      // 커스텀 구분자가 있으면
-      const customSeparator = match[1];
+      // 커스텀 구분자 정보가 있으면
+      const customSeparator = match[1]; // match[1]은 //와 \n을 제외한 커스텀 구분자
 
       this.validateCustomSeparator(customSeparator); // 구분자 유효성 검사
       this.separators.push(customSeparator); // 구분자 배열에 커스텀 구분자 추가
       return input.slice(match[0].length); // 구분자 뒤에 있는 실제 문자열 반환
     }
-
-    Console.print("커스텀 구분자가 없다");
     return input; // 커스텀 구분자가 없으면 입력 문자열 그대로 반환
   }
 
@@ -45,11 +41,9 @@ class App {
   extractCustomSeparator(input) {
     const customSeparatorPattern = /\/\/(.*?)\\n/; // "//"로 시작하고 "\n"으로 끝나는 문자열 파악하는 정규식
     const match = input.match(customSeparatorPattern); // 매칭된 문자열 추출
-    Console.print(match);
 
     if (match && input.startsWith(match[0])) {
       // 매칭되는 문자열이 있고 그 문자열이 입력 문자열 맨 앞에서 시작한다면
-      Console.print("커스텀 구분자가 있다");
       return match;
     }
 
@@ -99,9 +93,6 @@ class App {
       // 유효한 숫자라면 배열에 추가
       this.numbers.push(num);
     }
-
-    Console.print("숫자 배열");
-    Console.print(this.numbers);
   }
 
   // 유효성 검사를 담당하는 메서드
