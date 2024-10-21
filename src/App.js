@@ -20,6 +20,22 @@ class StringCalculator {
     this.validateNumbers(numbers); // 숫자 유효성 검사
     return this.sumNumbers(numbers); // 숫자 합산
   }
+
+  parseInput(input) {
+    // 커스텀 구분자가 있는지 확인
+    if (input.startsWith('//')) {
+      const delimiterEndIndex = input.indexOf('\\n'); // \\n을 구분자로 찾음
+      if (delimiterEndIndex === -1) {
+        throw new Error('[ERROR] 잘못된 입력입니다.'); // \\n을 찾지 못한 경우
+      }
+      const delimiter = input.substring(2, delimiterEndIndex); // 구분자 추출
+      const numbersString = input.substring(delimiterEndIndex + 2); // 구분자 이후의 숫자 문자열 추출
+      return { delimiter, numbersString };
+    }
+    // 기본 구분자 (쉼표 또는 콜론)
+    return { delimiter: ',|:', numbersString: input };
+  }
+
 }
 
 export default StringCalculator;
