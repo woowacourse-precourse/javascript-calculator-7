@@ -41,5 +41,5 @@ function awareCustomSeprator(input, distinct) {
     let seperate = removeFront.split('\\n');
     distinct.push(seperate[0]);
     input = seperate[1];
-    return distinct, input;
+    return [distinct, input];
 }
