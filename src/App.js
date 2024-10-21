@@ -8,7 +8,7 @@ class App {
       const result = this.calculateSum(parseInput);
       MissionUtils.Console.print(`결과 : ${result}`);
     } catch (error) {
-      throw Error("[ERROR]");
+      throw error;
     }
   }
 
@@ -34,7 +34,7 @@ class App {
     const verifiedNumbers = [];
     for (let num of numbers) {
       if (isNaN(Number(num)) || Number(num) < 0) {
-        throw Error(`유효한 숫자가 아닙니다.`);
+        throw new Error(`[ERROR] 유효한 숫자가 아닙니다.`);
       } else {
         verifiedNumbers.push(Number(num));
       }
