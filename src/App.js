@@ -15,7 +15,7 @@ class App {
     this.input = updatedInput;
     this.dividerList = updatedDividerList;
 
-    tokenizeString(this.input, this.dividerList);
+    this.result = tokenizeString(this.input, this.dividerList);
     await this.resultPrint();
   }
   

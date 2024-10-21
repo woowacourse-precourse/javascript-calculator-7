@@ -1,4 +1,4 @@
-import { EMPTY_STRING, ERROR_MESSAGE } from "./message";
+import { EMPTY_STRING, ERROR_MESSAGE } from "./message.js";
 
 export function tokenizeString(input, dividerList) {
   let tokens = [];
@@ -32,6 +32,9 @@ export function tokenizeString(input, dividerList) {
   if (tokens.length === 0) {
     throw new Error(ERROR_MESSAGE.NO_TOKEN);
   }
+
+  const result = sumTokens(tokens);
+  return result;
 }
 
 function convertToNumber(token) {
@@ -42,4 +45,8 @@ function convertToNumber(token) {
     throw new Error(ERROR_MESSAGE.NOT_NUMBER_TOKEN);
   }
   return parseInt(token);
+}
+
+function sumTokens(tokens) {
+  return tokens.reduce((acc, cur) => acc + cur, 0);
 }
