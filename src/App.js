@@ -27,6 +27,7 @@ class App {
     return '';
   }
 
+  //커스텀 구분자를 구분자에 추가
   updateSeparator(customSeparator) {
     if (customSeparator) {
       this.separator = `${this.separator}|${customSeparator}`;
@@ -42,20 +43,22 @@ class App {
     }
   }
 
-  verifyUserinput(customSeparator) {
-    const re = new RegExp(this.separator);
-    const arrValue = this.valueToCalculate.split(re);
+  verifyUserinput(numbers, customSeparator) {
     if (customSeparator) {
       verifyCustomSeparator(customSeparator);
     }
-    verifyInvalidSeparator(arrValue, customSeparator);
-    verifyInvalidNumber(arrValue);
+    verifyInvalidSeparator(numbers, customSeparator);
+    verifyInvalidNumber(numbers);
   }
 
-  caculateValue() {
+  //구분자를 기준으로 분리
+  splitBySeparator() {
     const re = new RegExp(this.separator);
-    const arrValue = this.valueToCalculate.split(re);
-    const resultValue = arrValue.reduce((acc, cur) => {
+    return this.valueToCalculate.split(re);
+  }
+
+  caculateValue(numbers) {
+    const resultValue = numbers.reduce((acc, cur) => {
       return acc + Number(cur);
     }, 0);
     return resultValue;
@@ -66,8 +69,9 @@ class App {
     const customSeparator = this.getCustomSeparator(userinput);
     this.updateSeparator(customSeparator);
     this.updateInputValue(userinput, customSeparator);
-    this.verifyUserinput(customSeparator);
-    const resultValue = this.caculateValue();
+    const numbers = this.splitBySeparator();
+    this.verifyUserinput(numbers, customSeparator);
+    const resultValue = this.caculateValue(numbers);
     Console.print(`결과 : ${resultValue}`);
   }
 }
