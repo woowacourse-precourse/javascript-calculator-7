@@ -55,6 +55,18 @@ class StringCalculator {
       return parsed;
     });
   }
+
+  validateNumbers(numbers) {
+    // 음수 검증
+    if (numbers.some((num) => num < 0)) {
+      throw new Error('[ERROR] 음수는 허용되지 않습니다.');
+    }
+  }
+  
+  sumNumbers(numbers) {
+    // 숫자들의 합을 계산
+    return numbers.reduce((acc, curr) => acc + curr, 0);
+  }
 }
 
 export default StringCalculator;
