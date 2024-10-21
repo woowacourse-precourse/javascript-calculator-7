@@ -37,11 +37,15 @@ class App {
       .map((num) => Number(num))
       .filter((num) => !isNaN(num));
 
+    // 숫자 배열의 합계를 계산
+    const sum = numbers.reduce((acc, curr) => acc + curr, 0);
+
     // 테스트용
     Console.print(separators);
     Console.print(cleanedInput);
     Console.print(separatedInput);
     Console.print(numbers);
+    Console.print(sum);
   }
 }
 
