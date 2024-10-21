@@ -1,5 +1,7 @@
 import { Console } from "@woowacourse/mission-utils";
 import DelimiterHandler from "./DelimiterHandler";
+import Calculator from "./Calculator";
+
 class App {
   async run() {
     const input = await Console.readLineAsync(
@@ -7,6 +9,13 @@ class App {
     );
     try {
       const numbers = DelimiterHandler(input);
+      const result = new Calculator().calculateSum(numbers);
+      Console.print(`결과 : ${result}`);
+
+    } catch (error) {
+      throw new Error(error.message);
+    }
+  }
 }
 
 export default App;
