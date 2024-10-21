@@ -29,9 +29,9 @@ class App {
       }
     }
 
-    let numbers = message.split(separators);
+    const NUMBERS = message.split(separators);
 
-    numbers.forEach(v => {
+    NUMBERS.forEach(v => {
       const NUM = Number(v);
       if (NUM <= 0 || Number.isNaN(NUM)) {
         throw new Error(
@@ -40,7 +40,7 @@ class App {
       }
     });
 
-    const ANSWER = numbers.reduce((acc, cur) => acc + +cur, 0);
+    const ANSWER = NUMBERS.reduce((acc, cur) => acc + +cur, 0);
     Console.print(`결과 : ${ANSWER}`);
   }
 }
