@@ -6,12 +6,12 @@ import splitBySymbol from './utils/splitBySymbol';
 
 class App {
   async run() {
-    const inputValue = await getString();
-    const seperatedValue = splitBySymbol(inputValue);
-    const intArray = parseIntArray(seperatedValue);
-    const result = getSum(intArray);
+      const inputValue = await getString();
+      const seperatedValue = splitBySymbol(inputValue);
+      const intArray = parseIntArray(seperatedValue);
+      const result = getSum(intArray);
   
-    MissionUtils.Console.print(`결과 : ${result}`);
+      MissionUtils.Console.print(`결과 : ${result}`);  
   }
 }
 

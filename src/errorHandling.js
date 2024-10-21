@@ -11,7 +11,6 @@ export const hasNegative = (array)=> {
 }
 
 //배열안에 기호가 들어가 있을때 
-
 export const hasInvalidSymbol = (array)=> {
     for(let i=0; i<array.length; i++ ){
         if(INVALID_SYMBOLS.test(array)){
