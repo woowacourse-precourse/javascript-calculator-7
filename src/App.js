@@ -7,10 +7,14 @@ class App {
         else if (STR.startsWith("//") && STR.indexOf("\n") !== -1) {
             DIVIDER = new RegExp(`[${STR[2]}]`);
             STR_NUMBERS = STR.slice(STR.indexOf("\n") + 1);
-            console.log(STR_NUMBERS);
-            console.log(STR_NUMBERS.split(DIVIDER));
         }
-        console.log(STR_NUMBERS.split(DIVIDER));
+
+        const NUMBERS = STR_NUMBERS.split(DIVIDER).map((NUM) => {
+            const PARSENUM = Number(NUM);
+            if (isNaN(PARSENUM)) {
+                throw new Error("[ERROR]");
+            }
+        });
     }
 }
 
