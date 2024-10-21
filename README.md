@@ -1,9 +1,6 @@
 # 문자열 덧셈 계산기
 입력한 문자열에서 숫자를 추출하여 더하는 계산기 구현
 
-- [@woowacourse mission‐utils의 Console 톺아보기](https://github.com/anonymousRecords/javascript-calculator-7/wiki/@woowacourse-mission%E2%80%90utils%EC%9D%98-Console-%ED%86%BA%EC%95%84%EB%B3%B4%EA%B8%B0)
-- [class vs function](https://github.com/anonymousRecords/javascript-calculator-7/wiki/%08class-vs-function)
-
 ## 기능 요구 사항
 **1. 문자열 입력**
 
