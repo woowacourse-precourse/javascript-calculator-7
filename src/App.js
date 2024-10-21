@@ -2,8 +2,13 @@ import Controller from "./controller/controller.js";
 
 class App {
   #Controller = new Controller();
+
   async run() {
-    this.#Controller.start();
+    try {
+      await this.#Controller.start();
+    } catch (e) {
+      throw new Error("[ERROR]");
+    }
   }
 }
 
