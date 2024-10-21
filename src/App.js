@@ -38,6 +38,18 @@ class App {
     let customSplitter = /[,:\n]/;
     let nums = input;
 
+    // 커스텀 구분자
+    if (input.startsWith("//")) {
+      const splitterEndIdx = input.indexOf("n");
+
+      if (splitterEndIdx === -1) {
+        throw new Error(MSG.WARN.SPLITTER_FORM_ERROR);
+      }
+
+      customSplitter = input.slice(2, splitterEndIdx - 1);
+      nums = input.slice(splitterEndIdx + 1);
+    }
+
     const numbers = nums.split(new RegExp(customSplitter));
     let resnum = 0;
     numbers.forEach((num) => {
