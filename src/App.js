@@ -15,10 +15,14 @@ class App {
     if (customDelimiter !== null) {
       cleanedString = cleanStringAfterDelimiter(input);
     }
+
     checkInputValidity(cleanedString, customDelimiter);
+
     const parsedNumberList = splitByDelimiters(cleanedString, customDelimiter);
     const sum = calculateSum(parsedNumberList);
+
     printResult(sum);
+
   }
 }
 

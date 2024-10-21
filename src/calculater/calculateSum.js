@@ -3,5 +3,6 @@ export default function calculateSum(numberList) {
   numberList.forEach(number => {
     sum += number;
   })
+
   return sum;
 }
