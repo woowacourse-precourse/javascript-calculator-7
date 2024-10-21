@@ -4,15 +4,15 @@ import process from "./functions/process.js";
 class App {
   async run() {
     // 입력
-    const input = await Console.readLineAsync(
+    const INPUT = await Console.readLineAsync(
       "덧셈할 문자열을 입력해주세요.\n"
     );
 
     // 출력값
-    let output = process(input);
+    const OUTPUT = process(INPUT);
 
     // 출력
-    Console.print(`결과 : ${output}`);
+    Console.print(`결과 : ${OUTPUT}`);
   }
 }
 

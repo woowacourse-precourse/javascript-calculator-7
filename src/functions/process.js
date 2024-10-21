@@ -1,7 +1,9 @@
 import preprocess from "./preprocess.js";
 
 export default function process(input) {
+  // 문자열 전처리 과정
   let [string, custom] = preprocess(input);
+
   let seperator = [":", ","];
   // 커스텀이 존재할 경우 구분자로 포함시킴.
   if (custom != "") seperator.push(custom);
