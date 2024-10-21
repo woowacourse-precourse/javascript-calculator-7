@@ -1,7 +1,10 @@
-class App {
-  async run() {
-    // Placeholder for the run method implementation
-  }
-}
+// src/App.js
 
-export default App;
+import { MainController } from './controllers/MainController.js';
+
+export default class App {
+	async run() {
+		const controller = new MainController();
+		await controller.run();
+	}
+}
