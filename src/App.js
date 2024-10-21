@@ -5,7 +5,7 @@ class App {
     Console.print('덧셈할 문자열을 입력해주세요.');
     const userInput = await this.getUserInput();
     const result = this.sumNumbers(userInput);
-    Console.print(`결과 : ${result}`);
+    result && Console.print(`결과 : ${result}`);
   }
 
   async getUserInput() {
@@ -30,13 +30,15 @@ class App {
     }
 
     const numbers = input.split(regex).map(Number);
-    let result = undefined;
+
     if (numbers.includes(NaN)) {
-      result =
-        '[Error] 올바른 값을 얻으려면 새로운 커스텀 구분자를 지정하거나 올바른 값을 입력해주세요.';
-    } else {
-      result = numbers.reduce((sum, num) => sum + num, 0);
+      Console.print(
+        '[Error] 올바른 값을 얻으려면 새로운 커스텀 구분자를 지정하거나 올바른 값을 입력해주세요.',
+      );
+      return;
     }
+
+    const result = numbers.reduce((sum, num) => sum + num, 0);
     return result;
   }
 }
