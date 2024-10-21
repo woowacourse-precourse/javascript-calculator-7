@@ -1,6 +1,7 @@
 import { DEFAULT_DELIMITERS } from "../constants/delimiters.js";
 import calculateSum from "../utils/calculateSum.js";
 import inputValidator from "../validator/inputValidator.js";
+import { convertStringArrToNumberArr } from "../utils/convert.js";
 
 export default class Calculator {
   #inputString;
@@ -14,19 +15,22 @@ export default class Calculator {
 
   calculate() {
     this.#addCustomDelimiter();
-    const numberArr = this.#splitByDelimiters();
-    this.#vaildateNumberArr(numberArr);
-    return calculateSum(numberArr);
+    const resultStringArr = this.#splitByDelimiters();
+    this.#vaildateStringArr(resultStringArr);
+    const resultNumberArr = convertStringArrToNumberArr(resultStringArr);
+    this.#vaildateNumberArr(resultNumberArr);
+
+    return calculateSum(resultNumberArr);
   }
 
   #splitByDelimiters() {
     const delimiterString = this.#delimiters.join("");
     const delimiterRegex = new RegExp(`[${delimiterString}]`);
-    return this.#inputString.split(delimiterRegex).map(Number);
+    return this.#inputString.split(delimiterRegex);
   }
 
   #addCustomDelimiter() {
-    const customDelimiterPattern = /^\/\/(.+)\\n/;
+    const customDelimiterPattern = /^\/\/(.*?)\\n/;
     const customDelimiterMatch = this.#inputString.match(customDelimiterPattern);
 
     if (customDelimiterMatch) {
@@ -42,7 +46,11 @@ export default class Calculator {
   }
 
   #vaildateNumberArr(numberArr) {
-    inputValidator.invalidIsNumber(numberArr);
-    inputValidator.invalidPositiveNumber(numberArr);
+    inputValidator.number(numberArr);
+    inputValidator.positiveNumber(numberArr);
+  }
+
+  #vaildateStringArr(stringArr) {
+    inputValidator.numberBetweenDelimiter(stringArr);
   }
 }

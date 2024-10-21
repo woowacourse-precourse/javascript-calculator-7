@@ -15,15 +15,22 @@ const inputValidator = {
     }
   },
 
-  invalidIsNumber: (numberArr) => {
+  number: (numberArr) => {
     if (numberArr.some((num) => isNaN(num))) {
       throw new Error(ERROR_MESSAGES.INVALID_NUMBER);
     }
   },
 
-  invalidPositiveNumber: (numberArr) => {
+  positiveNumber: (numberArr) => {
     if (numberArr.some((num) => num <= 0)) {
       throw new Error(ERROR_MESSAGES.POSITIVE_NUMBER);
+    }
+  },
+
+  numberBetweenDelimiter: (stringArr) => {
+    const hasEmptyValue = stringArr.some((value) => value.trim() === "");
+    if (hasEmptyValue) {
+      throw new Error(ERROR_MESSAGES.NUMBER_BETWEEN_DELIMITER);
     }
   },
 };
