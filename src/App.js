@@ -8,10 +8,10 @@ class App {
 
     try {
       const result = this.handlingInput(input);
-      Console.print(`결과: ${result}`);
+      Console.print(`결과 : ${result}`);
     } catch (error) {
       Console.print(error.message);
-      return;
+      throw error; // 예외를 다시 던져야 rejects.toThrow에서 인식됨
     }
   }
 
