@@ -18,6 +18,5 @@ export function preprocessing(param, customSeparator) {
         ? new RegExp(`[${customSeparator}:,]`, 'g')
         : defaultSeparator;
 
-    const splitArray = param.split(argument);
-    return splitArray.map(elem => Number(elem));
+    return param.split(argument);
 }
