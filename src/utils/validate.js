@@ -1,9 +1,8 @@
-import extractCustomSeparator from "./extractCustomSeparator.js";
-import splitNumbers from "./splitNumbers.js";
+import { extractCustomSeparator, splitSeparator } from "./separator.js";
 
 export async function validatePositiveNumber(userInputValue) {
   const { separators, inputWithoutSeparator } = await extractCustomSeparator(userInputValue);
-  const numbers = splitNumbers(separators, inputWithoutSeparator);
+  const numbers = splitSeparator(separators, inputWithoutSeparator);
 
 	const allPositive = numbers.every((number) => {
 		const num = parseInt(number, 10);
