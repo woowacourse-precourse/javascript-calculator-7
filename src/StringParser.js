@@ -71,6 +71,16 @@ class StringParser{
         return strings.split(new RegExp(regexSeparators,"g")).filter(str => str !== ''); 
 
     }
+
+    static convertToNumbers(tokens){
+        return tokens.map(token => {
+            const parsed = Number(token)
+            if (isNaN(parsed)|| parsed<0 ) {
+              throw new Error(`[ERROR] 잘못된 입력값입니다. ${token}`);
+            }
+            return parsed;
+          });
+    }
 }
 
 export default StringParser

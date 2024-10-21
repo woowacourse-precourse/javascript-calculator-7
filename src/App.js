@@ -12,13 +12,14 @@ class App {
         return 
       }
       const {separators: customSeparators, strippedInput: customStrippedInput} = StringParser.extractCustomSeparators(input); 
-
       const {separators: defaultSeparators ,strippedInput } = StringParser.extractDefaultSeparators(customStrippedInput);
 
       const splitResult = StringParser.splitByMultipleSeparators([...customSeparators, ...defaultSeparators, " "], strippedInput)
+      const result = StringParser.convertToNumbers(splitResult)
 
+      return result
     }catch(err){
-      Console.print(`[ERROR]:${err}`)
+      throw err
     }
   }
 }
