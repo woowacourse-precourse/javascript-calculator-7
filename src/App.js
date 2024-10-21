@@ -24,7 +24,7 @@ class App {
     );
     numbers = input.split(delimiter_regex).map((num) => {
       const parsed = parseInt(num.trim(), 10);
-      if (isNaN(parsed)) {
+      if (isNaN(parsed) || parsed < 0) {
         throw new Error(`[ERROR] 유효하지 않은 입력값: ${num}`);
       }
       return parsed;
@@ -33,16 +33,12 @@ class App {
     return numbers;
   };
   async run() {
-    try {
-      const user_line = await Console.readLineAsync(
-        '덧셈할 문자열을 입력해주세요.\n'
-      );
+    const user_line = await Console.readLineAsync(
+      '덧셈할 문자열을 입력해주세요.\n'
+    );
 
-      const numbers = this.parse_string(user_line);
-      Console.print(`결과 : ${numbers.reduce((sum, num) => sum + num, 0)}`);
-    } catch (error) {
-      Console.print(error);
-    }
+    const numbers = this.parse_string(user_line);
+    Console.print(`결과 : ${numbers.reduce((sum, num) => sum + num, 0)}`);
   }
 }
 
