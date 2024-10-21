@@ -1,148 +1,19 @@
 import { Console } from "@woowacourse/mission-utils";
-import {
-  RUN_MESSAGES,
-  EXTRA_NUMBERS_MESSAGE,
-  CUSTOM_DELIMITER,
-  ERROR_MESSAGE,
-} from "./message.js";
+import { RUN_MESSAGES } from "./message.js";
+import { calculateSum } from "./calculator.js";
+import { extractNumbers } from "./parser.js";
+import { hasNegativeNumber } from "./validation.js";
 class App {
   async run() {
     const input = await Console.readLineAsync(RUN_MESSAGES.INPUT);
-    const numberArray = this.extractNumbers(input);
+    const numberArray = extractNumbers(input);
 
-    this.hasNegativeNumber(numberArray);
+    hasNegativeNumber(numberArray);
 
-    const invalidCharacterRegexResult = this.calculateSum(numberArray);
+    const invalidCharacterRegexResult = calculateSum(numberArray);
     return Console.print(
       `${RUN_MESSAGES.RESULT}${invalidCharacterRegexResult}`
     );
-  }
-
-  extractNumbers(input) {
-    const hasComma = this.hasSeparator(input, EXTRA_NUMBERS_MESSAGE.COMMA);
-    const hasSemicolon = this.hasSeparator(
-      input,
-      EXTRA_NUMBERS_MESSAGE.SEMICOLON
-    );
-    const hasCustomDelimiterPrefix = this.hasSeparator(
-      input,
-      EXTRA_NUMBERS_MESSAGE.CUSTOM_DELIMITER_PREFIX
-    );
-    const hasCustomDelimiterSuffix = this.hasSeparator(
-      input,
-      EXTRA_NUMBERS_MESSAGE.CUSTOM_DELIMITER_SUFFIX
-    );
-
-    const hasCommaAndSemicolon = hasComma && hasSemicolon;
-    const hasCustomSeparator =
-      hasCustomDelimiterPrefix && hasCustomDelimiterSuffix;
-
-    if (hasCustomSeparator) {
-      const isCustomDelimiterAtStart = input.indexOf(
-        EXTRA_NUMBERS_MESSAGE.CUSTOM_DELIMITER_PREFIX
-      );
-
-      if (isCustomDelimiterAtStart)
-        throw new Error(ERROR_MESSAGE.CUSTOM_DELIMITER_POSITION);
-      if (!isCustomDelimiterAtStart)
-        return this.splitUsingCustomDelimiterAndConvertToNumbers(
-          input,
-          EXTRA_NUMBERS_MESSAGE.CUSTOM_DELIMITER_SUFFIX
-        );
-    }
-    if (hasCommaAndSemicolon)
-      return this.validateSpecialCharactersInString(input, [
-        EXTRA_NUMBERS_MESSAGE.COMMA,
-        EXTRA_NUMBERS_MESSAGE.SEMICOLON,
-      ]);
-    if (hasComma)
-      return this.validateSpecialCharactersInString(
-        input,
-        EXTRA_NUMBERS_MESSAGE.COMMA
-      );
-    if (hasSemicolon)
-      return this.validateSpecialCharactersInString(
-        input,
-        EXTRA_NUMBERS_MESSAGE.SEMICOLON
-      );
-    throw new Error(ERROR_MESSAGE.INVALID_SPECIAL_CHAR_MESSAGE);
-  }
-
-  splitUsingCustomDelimiterAndConvertToNumbers(input, customDelimiterSuffix) {
-    const customDelimiterSuffixIndex = input.indexOf(customDelimiterSuffix);
-    const customDelimiter = input.slice(
-      CUSTOM_DELIMITER.PREFIX_LENGTH,
-      customDelimiterSuffixIndex
-    );
-    const stringToSeparate = input.slice(
-      customDelimiterSuffixIndex + CUSTOM_DELIMITER.SUFFIX_LENGTH
-    );
-
-    return this.validateSpecialCharactersInString(
-      stringToSeparate,
-      customDelimiter
-    );
-  }
-
-  validateSpecialCharactersInString(string, separator) {
-    const isTwoSeparators = typeof separator === "object";
-
-    let invalidSpecialCharRegex;
-
-    if (isTwoSeparators) {
-      const [comma, semicolon] = separator;
-      invalidSpecialCharRegex = new RegExp(
-        `^[-${comma}${semicolon}ㄱ-ㅎ가-힣a-zA-Z0-9]+$`
-      );
-    }
-    if (!isTwoSeparators) {
-      invalidSpecialCharRegex = new RegExp(
-        `^[-${separator}ㄱ-ㅎ가-힣a-zA-Z0-9]+$`
-      );
-    }
-
-    const isValid = invalidSpecialCharRegex.test(string);
-    if (isValid) return this.separatingStrings(string, separator);
-    if (!isValid) throw new Error(ERROR_MESSAGE.INVALID_SPECIAL_CHAR_MESSAGE);
-  }
-
-  hasSeparator(input, separator) {
-    return input.includes(separator);
-  }
-
-  separatingStrings(input, separator) {
-    const isTwoSeparators = typeof separator === "object";
-
-    if (isTwoSeparators) {
-      const [comma, semicolon] = separator;
-      const separatedString = input.replaceAll(semicolon, comma).split(comma);
-      return this.validateNumericInput(separatedString);
-    }
-    if (!isTwoSeparators) {
-      const separatedString = input.split(separator);
-      return this.validateNumericInput(separatedString);
-    }
-  }
-
-  validateNumericInput(separatedString) {
-    const numericOnlyRegex = /^[ㄱ-ㅎ가-힣a-zA-Z]+$/;
-    const isValid = separatedString.every((el) => !numericOnlyRegex.test(el));
-    if (isValid) return this.convertToNumbers(separatedString);
-    if (!isValid) throw new Error(ERROR_MESSAGE.NUMERIC_ONLY);
-  }
-
-  convertToNumbers(separatedString) {
-    return separatedString.map(Number);
-  }
-
-  calculateSum(numbers) {
-    return numbers.reduce((acc, cur) => acc + cur, 0);
-  }
-
-  hasNegativeNumber(numberArray) {
-    for (let i = 0; i < numberArray.length; i++) {
-      if (numberArray[i] < 0) throw new Error(ERROR_MESSAGE.NEGATIVE_NUMBERS);
-    }
   }
 }
 
