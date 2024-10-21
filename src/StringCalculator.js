@@ -71,15 +71,13 @@ class StringCalculator {
       const customSeparator = this.extractCustomSeparator(value);
 
       if (customSeparator === "") {
-        throw new Error(
-          STRING_CALCULATOR_ERROR_MESSAGES.invalidCustomSeparator
-        );
+        throw new Error(STRING_CALCULATOR_ERROR_MESSAGES.emptyCustomSeparator);
       }
     }
 
     const splitResultList = splitBySeparatorList(cleanedValue, separatorList);
 
-    if (splitResultList.length === 0) {
+    if (splitResultList.includes("")) {
       throw new Error(STRING_CALCULATOR_ERROR_MESSAGES.noNumbers);
     }
 
