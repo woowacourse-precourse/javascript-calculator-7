@@ -22,6 +22,10 @@ class App {
   }
 
   getAnswer(input) {
+    if (!input) {
+      throw new Error("입력값이 없습니다.");
+    }
+
     let answer,
       inputString = input;
 
@@ -33,6 +37,10 @@ class App {
       const numbers = inputString.split("\\n")[1];
 
       inputString = this.replaceDelimeter(numbers, delimeter);
+    }
+
+    if (input.match(this.defaultDelimeterValidation)) {
+      throw new Error("유효하지 않은 입력입니다.");
     }
 
     inputString = this.replaceDelimeter(inputString);
