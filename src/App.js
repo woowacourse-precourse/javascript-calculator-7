@@ -9,7 +9,12 @@ class App {
     );
 
     if (userInput.startsWith("//") && userInput.indexOf("\\n") !== -1) {
-      numbers = userInput.substr(5).split(userInput[2]);
+      const finishIdx = userInput.indexOf("\\n");
+      const customDelimiter = userInput.substring(2, finishIdx);
+      if (!isNaN(customDelimiter)) {
+        throw new Error("[ERROR]잘못된 구분자 입력");
+      }
+      numbers = userInput.substring(finishIdx + 2).split(customDelimiter);
     } else {
       numbers = userInput.split(/,|:/);
     }
