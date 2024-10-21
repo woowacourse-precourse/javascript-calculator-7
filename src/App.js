@@ -1,4 +1,4 @@
-import { MissionUtils } from "@woowacourse/mission-utils";
+import { Console } from "@woowacourse/mission-utils";
 
 const START_CUSTOM_SEPERATOR_SETTING = '//';
 const END_CUSTOM_SEPERATOR_SETTING = '\\n';
@@ -9,13 +9,13 @@ class App {
     let result = 0;
 
     // 사용자 입력값을 받는다.
-    const input = await MissionUtils.Console.readLineAsync('덧셈할 문자열을 입력해 주세요.\n');
+    const input = await Console.readLineAsync('덧셈할 문자열을 입력해 주세요.\n');
     if(input.replace(' ', '').length > 0) {
       result = caculateNumberOfString(input);
     }
 
      // 결과 출력
-     MissionUtils.Console.print(`결과 : ${result}`);
+     Console.print(`결과 : ${result}`);
   }
 }  
 
