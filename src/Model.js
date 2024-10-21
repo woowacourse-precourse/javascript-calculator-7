@@ -1,3 +1,10 @@
+const ERROR_MESSAGES = {
+  INVALID_INTEGER: '[ERROR] 유효하지 않은 정수가 포함되어 있습니다',
+  NEGATIVE_NUMBER: '[ERROR] 음수는 입력할 수 없습니다',
+  INVALID_CHARACTER: '[ERROR] 구분자와 숫자 이외의 허용되지 않은 문자가 존재합니다',
+  EMPTY_INPUT: '[ERROR] 한 자리 이상의 문자열을 입력해주세요',
+};
+
 const DELIMITER_REGEX = {
   CUSTOM: /^\/\/(.+)\\n/, // 커스텀 구분자 정규표현식
   DEFAULT: /[,|:]/, // 기본 구분자 정규표현식 (쉼표와 콜론)
@@ -35,7 +42,7 @@ class Model {
     const invalidCharMatch = this.string.match(invalidCharRegex);
 
     if (invalidCharMatch) {
-      throw new Error(`[ERROR] 허용되지 않은 문자가 포함되어 있습니다: ${invalidCharMatch[0]}`);
+      throw new Error(`${ERROR_MESSAGES.INVALID_CHARACTER}: 문자 ${invalidCharMatch[0]}`);
     }
   }
 
@@ -48,10 +55,10 @@ class Model {
     const number = Number(string);
 
     if (!Number.isSafeInteger(number)) {
-      throw new Error('[ERROR] 유효하지 않은 정수가 포함되어 있습니다');
+      throw new Error(ERROR_MESSAGES.INVALID_INTEGER);
     }
     if (number < 0) {
-      throw new Error('[ERROR] 음수는 입력할 수 없습니다');
+      throw new Error(ERROR_MESSAGES.NEGATIVE_NUMBER);
     }
     return number;
   }
@@ -62,7 +69,7 @@ class Model {
 
   calculate() {
     if (this.string === '') {
-      throw new Error('[ERROR] 한 자리 이상의 문자열을 입력해주세요');
+      throw new Error(ERROR_MESSAGES.EMPTY_INPUT);
     }
     this.checkInvalidCharacter();
     this.extractNumber(); // 숫자 추출
