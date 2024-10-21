@@ -6,6 +6,8 @@ class App {
 
     let delimiters = [",", ":"]; //구분자
 
+    const numReg = /\d/;
+
     //추가 커스텀 구분자확인
     //앞의 두문자가 //인지 확인
     if (input.indexOf("//") === 0) {
@@ -17,7 +19,7 @@ class App {
 
       //구분자가 문자로 이루어져있는지 확인(예외)
 
-      if (/\d/.test(newDelimiter)) {
+      if (numReg.test(newDelimiter)) {
         //숫자가 포함되면 에러 처리
         throw new Error("[ERROR]");
       }
@@ -30,7 +32,13 @@ class App {
     }
     //구분자들을 정규표현식을 이용하도록 조합
     const regex = new RegExp(`[${delimiters.join("")}]`);
-    const result = input.split(regex).map(Number); //
+    const result = input.split(regex).map((ele) => {
+      if (ele < 0) {
+        //음수이면 에러
+        throw new Error("[ERROR]");
+      }
+      return Number(ele);
+    }); //
 
     //result들을 합하여 결과 출력
     const output = result.reduce((acc, ele) => acc + ele, 0);
