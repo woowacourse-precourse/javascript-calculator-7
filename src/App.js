@@ -43,7 +43,7 @@ class App {
   sumNumbers(stringNumbers) {
     return stringNumbers.reduce((acc, num) => {
       const parsed = parseInt(num.trim(), 10);
-      if (isNaN(parsed)) {
+      if (isNaN(parsed) || parsed < 0) {
         throw new Error('[ERROR] 유효하지 않은 숫자가 포함되어 있습니다.');
       }
       return acc + parsed;
