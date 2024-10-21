@@ -8,10 +8,6 @@ class ConsoleView {
   displayResult(result) {
     Console.print(`결과 : ${result}`);
   }
-
-  displayError(message) {
-    Console.print(message);
-  }
 }
 
 export default ConsoleView;

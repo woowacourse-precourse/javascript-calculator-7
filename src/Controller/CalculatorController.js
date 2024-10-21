@@ -6,14 +6,10 @@ class CalculatorController {
   }
 
   async run() {
-    try {
-      const input = await this.view.readInput();
-      const numbers = this.inputParser.parse(input);
-      const result = this.calculator.calculate(numbers);
-      this.view.displayResult(result);
-    } catch (error) {
-      this.view.displayError(error.message);
-    }
+    const input = await this.view.readInput();
+    const numbers = this.inputParser.parse(input);
+    const result = this.calculator.calculate(numbers);
+    this.view.displayResult(result);
   }
 }
 
