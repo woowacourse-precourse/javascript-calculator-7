@@ -1,12 +1,13 @@
 import separateNumber from "../utils/separateNumber.js";
+import { DEFAULT_SEPARATOR } from "../constants/constants.js";
 
 class Calculator {
     #inputData;
-    #defaultSeparator;
+    #separator;
 
     constructor() {
         this.#inputData = null;
-        this.#defaultSeparator = /[,:]/;
+        this.#separator = DEFAULT_SEPARATOR;
     }
 
     setData(inputData) {
@@ -16,7 +17,7 @@ class Calculator {
     calculate() {
         if (this.#inputData.trim() === "") return 0;
 
-        const numberArray = separateNumber(this.#inputData, this.#defaultSeparator);
+        const numberArray = separateNumber(this.#inputData, this.#separator);
         return numberArray.reduce((sum, num) => sum + num, 0);
     }
     

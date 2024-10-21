@@ -8,4 +8,6 @@ export const ERROR_MESSAGE = {
     invalidInputError : `${ERROR_PREFIX} 유효한 정수 값을 입력해야 합니다.`,
     negativeInputError : `${ERROR_PREFIX} 음수값은 허용되지 않습니다.`,
     separatorError : `${ERROR_PREFIX} 구분자가 맞지 않습니다.`,
-}
+};
+
+export const DEFAULT_SEPARATOR = /[,:]/;
