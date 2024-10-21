@@ -29,5 +29,9 @@ class App{
       NUMBERS=[Number(DATA)]
     }
 
+    // 6. 예외 처리 3( ERROR 발생 ) : 잘못된 숫자나 음수 예외 처리
+    if (NUMBERS.some((NUM) => isNaN(NUM) || NUM < 0)) {
+      throw new Error("[ERROR]");
+    }
   }
 }
