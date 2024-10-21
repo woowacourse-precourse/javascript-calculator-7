@@ -1,4 +1,5 @@
 import isVaildateNumber from '../utils/isVaildateNumber.js';
+import MESSAGES from '../assets/message.js';
 
 const createEscapedDelimiter = function createEscapedDelimiterFunc(delimiters) {
   const escapedDelimiters = delimiters
@@ -12,9 +13,7 @@ const isValidateInput = function validateInputFunc(input, escapedDelimiters) {
   const validInputRegex = new RegExp(`^[0-9${escapedDelimiters}]+$`);
 
   if (!validInputRegex.test(input)) {
-    throw new Error(
-      '[ERROR] 유효하지 않은 입력: 구분자와 양수로 구성된 문자열만 입력 가능합니다.',
-    );
+    throw new Error(MESSAGES.ERROR.INVALID_INPUT);
   }
 };
 

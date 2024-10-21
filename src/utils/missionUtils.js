@@ -1,8 +1,9 @@
 import { MissionUtils } from '@woowacourse/mission-utils';
+import MESSAGES from '../assets/message.js';
 
 const getUserInput = async function getUserInputFunc() {
   const inputString = await MissionUtils.Console.readLineAsync(
-    '\n덧셈할 문자열을 입력해 주세요.\n',
+    MESSAGES.START_INFORM,
   );
   return inputString;
 };
