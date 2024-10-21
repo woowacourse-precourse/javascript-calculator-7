@@ -32,6 +32,11 @@ class App {
       const numbers = numberPart.replace(/\s/g, '').split(regex).filter(Boolean).map(Number);
       console.log('numbers', numbers);
 
+      const negative = numbers.filter((num) => num < 0);
+      if (negative.length > 0) {
+         throw new Error('[ERROR] 음수는 허용되지 않습니다');
+      }
+
       const sum = numbers.reduce((acc, curr) => acc + curr, 0);
       return sum;
    }
