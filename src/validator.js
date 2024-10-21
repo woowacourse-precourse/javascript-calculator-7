@@ -1,6 +1,5 @@
 import {
   isDuplicateCustomSeparator,
-  isEmpty,
   isNegativeNumber,
   isNotNumber,
   isOnlyStringOrNumber,
@@ -9,8 +8,6 @@ import { ERROR_MESSAGE } from "./constants/error.js";
 
 const userInputValidator = (input) => {
   switch (true) {
-    case isEmpty(input):
-      return 0;
     case isOnlyStringOrNumber(input):
       throw new Error(ERROR_MESSAGE.NO_SEPARATOR);
     default:
@@ -29,10 +26,14 @@ const customInputValidator = (input) => {
 
 const parsedInputValidator = (input) => {
   switch (true) {
+    case input === "INVALIDATE_FORMAT":
+      throw new Error(ERROR_MESSAGE.INVALIDATE_FORMAT);
     case isNotNumber(input):
       throw new Error(ERROR_MESSAGE.NOT_NUMBER);
     case isNegativeNumber(input):
       throw new Error(ERROR_MESSAGE.NEGATIVE_NUMBER);
+    default:
+      return;
   }
 };
 
