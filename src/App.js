@@ -12,6 +12,13 @@ class App {
       return; // 함수 종료
     }
   }
+  // 커스텀 구분자 처리하기
+  getCustomSeparator(INPUT) {
+    if (INPUT.startsWith("//") && INPUT.includes("\\n")) {
+      return INPUT[2]; // 커스텀 구분자를 반환
+    }
+    return null;
+  }
 }
 
 export default App;
