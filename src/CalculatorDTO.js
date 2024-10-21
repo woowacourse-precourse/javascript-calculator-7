@@ -1,9 +1,7 @@
 class CalculatorDTO {
-  static #delimeters = [];
-  constructor(input){}
-
-  #validate(input){}
-
+  constructor(numbers){
+    this.values = numbers;
+  }
 }
 
 export default CalculatorDTO;
