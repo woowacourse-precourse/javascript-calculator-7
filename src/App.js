@@ -46,19 +46,28 @@ class App {
 
   startsAndEndsWithNumber(input) {
     if (isNaN(input[0]) || isNaN(input[input.length - 1])) {
-      return false;
+      throw new Error(ERROR_MESSAGE);
     }
-    return true;
   }
 
   hasConsecutiveSeparators(input, sep) {
     const pattern = new RegExp(`[${sep}]{2,}`);
-    return pattern.test(input);
+    if (pattern.test(input)) {
+      throw new Error(ERROR_MESSAGE);
+    }
   }
 
   hasConsecutiveDecimalPoints(input) {
     const pattern = new RegExp(/[.]{2,}/);
-    return pattern.test(input);
+    if (pattern.test(input)) {
+      throw new Error(ERROR_MESSAGE);
+    }
+  }
+
+  isCustomSeparatorDot(input) {
+    if (input[2] === '.') {
+      throw new Error(ERROR_MESSAGE);
+    }
   }
 
   validateDefaultFormat(input) {
@@ -66,11 +75,9 @@ class App {
       return;
     }
 
-    if (!this.startsAndEndsWithNumber(input) ||
-        this.hasConsecutiveSeparators(input, DEFAULT_SEPARATOR) ||
-        this.hasConsecutiveDecimalPoints(input)) {
-      throw new Error(ERROR_MESSAGE);
-    }
+    this.startsAndEndsWithNumber(input);
+    this.hasConsecutiveSeparators(input, DEFAULT_SEPARATOR);
+    this.hasConsecutiveDecimalPoints(input);
   }
 
   validateCustomFormat(input) {
@@ -78,12 +85,10 @@ class App {
       return;
     }
 
-    if (!this.startsAndEndsWithNumber(input.slice(5)) ||
-        this.hasConsecutiveSeparators(input.slice(5), DEFAULT_SEPARATOR) ||
-        this.hasConsecutiveDecimalPoints(input.slice(5)) ||
-        input[2] === '.') {
-      throw new Error(ERROR_MESSAGE);
-    }
+    this.startsAndEndsWithNumber(input.slice(5));
+    this.hasConsecutiveSeparators(input.slice(5), DEFAULT_SEPARATOR);
+    this.hasConsecutiveDecimalPoints(input.slice(5));
+    this.isCustomSeparatorDot(input);
   }
 
   convertToNumberArray(input, sep) {
