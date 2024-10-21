@@ -3,10 +3,10 @@ import { MissionUtils } from "@woowacourse/mission-utils";
 class App {
   async run() {
     try {
-      const input = await MissionUtils.Console.readLineAsync('숫자를 입력하세요: ');
+      const input = await MissionUtils.Console.readLineAsync('덧셈할 문자열을 입력해 주세요: ');
       const result = this.divide(input); // this로 divide 메소드 호출
       const sum = this.calculate(result); // calculate 호출
-      MissionUtils.Console.print(`결과: ${sum}`);
+      MissionUtils.Console.print(`결과 : ${sum}`);
     } catch (error) {
       MissionUtils.Console.print(`[ERROR] ${error.message}`);
     }
