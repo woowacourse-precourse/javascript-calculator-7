@@ -37,7 +37,7 @@ describe('문자열 계산기', () => {
 
     mockQuestions(inputs);
 
-    for (let i = 0; inputs.length; i++) {
+    for (let i = 0; i < inputs.length; i++) {
       const logSpy = getLogSpy();
       const outputs = ['결과 : 6', '결과 : 33', '결과 : 7'];
 
