@@ -30,6 +30,18 @@ class App {
     const delimiters = [",", ":"];
     let numbers = input;
 
+    // 커스터머 구분자 처리
+    if (input.startsWith("//")) {
+      const customDelimiterEnd = input.indexOf("\n");
+      if (customDelimiterEnd === -1) {
+        throw new Error("[ERROR] 커스텀 구분자 입력 오류");
+      }
+
+      const customDelimiter = input.slice(2, customDelimiterEnd);
+      delimiters.push(this.escapeRegExp(customDelimiter));
+      numbers = input.slice(customDelimiterEnd + 1);
+    }
+    
     const delimiterRegex = new RegExp(`[${delimiters.join("")}]`);
     const numArray = numbers.split(delimiterRegex)
       .filter(Boolean) 
