@@ -6,7 +6,7 @@ import outputView from "./OutputView.js";
 class App {
   async run() {
     const inputString = await this.getInputData();
-    const numbers = this.splitString(inputString);
+    const numbers = this.parseString(inputString);
     const result = this.calculateSum(numbers);
     outputView(result);
   }
@@ -16,9 +16,9 @@ class App {
     return string;
   }
 
-  splitString(input) {
+  parseString(input) {
     const parser = new DelimiterParser();
-    const numbers = parser.parseAndSplit(input);
+    const numbers = parser.splitString(input);
     return numbers;
   }
 
