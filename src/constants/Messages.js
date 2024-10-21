@@ -4,5 +4,4 @@ export const ERROR_MESSAGE = {
   INVALID_CUSTOM_DELIMITER: "[ERROR] 잘못된 커스텀 구분자 형식입니다.",
   MULTIPLE_CUSTOM_DELIMITERS: "[ERROR] 다중 커스텀 구분자는 지원하지 않습니다.",
   CONSECUTIVE_DELIMITERS: "[ERROR] 연속된 구분자는 허용되지 않습니다.",
-  NO_DELIMITER: "[ERROR] 최소한 하나의 구분자를 포함해야 합니다.",
 };

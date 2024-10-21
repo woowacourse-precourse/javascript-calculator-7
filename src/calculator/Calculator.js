@@ -1,4 +1,5 @@
 import InputValidator from "./InputValidator.js";
+import { Console } from '@woowacourse/mission-utils'; 
 import { ERROR_MESSAGE } from "../constants/Messages.js";
 
 class Calculator {
@@ -9,7 +10,7 @@ class Calculator {
     let numbers = input;
 
     if (input.startsWith("//")) {
-      const customDelimiterMatch = input.match(/^\/\/(.+)\n(.*)$/);
+      const customDelimiterMatch = input.match(/^\/\/(.+)\\n(.*)$/);
       
       if (!customDelimiterMatch) {
         throw new Error(ERROR_MESSAGE.INVALID_CUSTOM_DELIMITER);

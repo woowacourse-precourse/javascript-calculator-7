@@ -7,14 +7,12 @@ class InputValidator {
         throw new Error(ERROR_MESSAGE.INVALID_INPUT);
       }
 
-      // 음수 값이 있으면 에러
       if (parseInt(num, 10) < 0) {
         throw new Error(ERROR_MESSAGE.NEGATIVE_NUMBER);
       }
     }
   }
 
-  // 연속된 구분자를 검증하는 함수
   static validateConsecutiveDelimiters(input, delimiters) {
     const delimiterRegex = new RegExp(`[${delimiters.join("")}]{2,}`);
     if (delimiterRegex.test(input)) {
