@@ -18,7 +18,7 @@ class App {
       if (char === '/') { // "/"로 시작하는 경우
         this.handleCustomSeparator(strArr);
       } else if (isNaN(Number(char))) { // 숫자가 아닌 경우
-        this.handleNotNumber(char);
+        this.handleNotNumber(char, strArr);
       } else { // 숫자인 경우
         this.handleNumber();
       }
@@ -38,11 +38,15 @@ class App {
         throw new Error('[ERROR] 입력 형식을 다시 확인해 주세요. 커스텀 구분자를 지정하려면 "//[1자리의 숫자가 아닌 문자]\n" 형식으로 입력해 주세요. (ex. "//;\n1;2;3")');
       }
     } else {
-      // handleNotNumber(); // "/"가 커스텀 구분자를 지정하기 위해 등장한게 아니라면 (숫자 사이 구분자로서 입력된 경우)
+      handleNotNumber(char, this.cursor); // "/"가 커스텀 구분자를 지정하기 위해 등장한게 아니라면 (숫자 사이 구분자로서 입력된 경우)
     }
   }
 
-  handleNotNumber(char) {
+  handleNotNumber(char, strArr) {
+    if (this.cursor === 0 || this.cursor === strArr.length - 1) {
+      throw new Error('[ERROR] 입력 형식을 다시 확인해 주세요.');
+    }
+
     if (this.separator.includes(char)) {
       this.sum += Number(this.number.join(''));
       this.number = [];
