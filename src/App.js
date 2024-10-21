@@ -25,6 +25,11 @@ class App {
         delimiters.push(customDelimiter);
       }
 
+      const SUPPORTED_DELIMITERS_REGEX = new RegExp(`^[0-9${delimiters.join('')}]+$`);
+      if (!SUPPORTED_DELIMITERS_REGEX.test(input)) {
+        throw new Error("[ERROR] 올바르지 않은 입력입니다. 올바른 구분자를 사용하세요.");
+      }
+
       const REGEX = new RegExp(`[${delimiters.join('')}]`);
       const NUMBERS = input.split(REGEX).map(Number);
 
