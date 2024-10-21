@@ -1,1 +1,4 @@
-export const ZERO = 0;
+export const NUMBERS = Object.freeze({
+  NUMBERS_ZERO: 0,
+  NUMBERS_FIRST_CHARACTER: 0,
+});
