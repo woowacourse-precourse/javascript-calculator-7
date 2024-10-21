@@ -1,4 +1,4 @@
-import { ERROR_MESSAGE, DELIMITER_CONSTANTS } from "./constants.js";
+import { ERROR_MESSAGES, DELIMITER_CONSTANTS } from "./constants.js";
 
 export class Validator {
     // 계산식 전체 예외 처리
