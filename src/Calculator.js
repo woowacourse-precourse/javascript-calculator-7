@@ -2,10 +2,14 @@ import { INPUT_ERROR_MESSAGE } from "./constants/Messages.js";
 
 export class Calculator {
   calculate(operatorList, expression) {
-    const op = this.#makeRegularExpression(operatorList);
-    const splitNumbers = expression.split(op);
+    const regExp = this.#makeRegularExpression(operatorList);
+    const splitNumbers = this.#splitExpression(expression, regExp)
     splitNumbers.some((number) => this.#validateNumber(number));
     return splitNumbers.reduce((a, c) => Number(a) + Number(c));
+  }
+
+  #splitExpression(expression, regExp) {
+    return expression.split(regExp);
   }
 
   #makeRegularExpression(operatorList) {
