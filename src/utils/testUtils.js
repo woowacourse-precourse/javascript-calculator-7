@@ -16,14 +16,14 @@ export const getLogSpy = () => {
 
 export const expectResults = async (app, outputs) => {
   const logSpy = getLogSpy();
-  const runTests = outputs.map((output) => {
+  const promiseArray = outputs.map((output) => {
     return async () => {
       await app.run();
       expect(logSpy).toHaveBeenCalledWith(expect.stringContaining(output));
       logSpy.mockClear();
     };
   });
-  await Promise.all(runTests);
+  await Promise.all(promiseArray);
 };
 
 export const expectToThrow = async (app, inputs) => {
