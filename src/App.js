@@ -16,7 +16,7 @@ class App {
       let startIdx = numString.indexOf("//") + 2;
       let endIdx = numString.indexOf("\\n");
       if (endIdx === -1) {
-        Console.print("[ERROR] 잘못된 입력입니다.");
+        throw new Error("[ERROR] 잘못된 입력입니다.")
         return;
       }
       // 커스텀 구분자를 추출
@@ -24,7 +24,7 @@ class App {
 
       // 예외처리 2: 커스텀 구분자가 숫자일 경우
       if (!isNaN(custom_separator)) {
-        Console.print("[ERROR] 커스텀 구분자로 숫자는 허용되지 않습니다.");
+        throw new Error("[ERROR] 커스텀 구분자로 숫자는 허용되지 않습니다.")
         return;
       }
 
@@ -49,13 +49,13 @@ class App {
       // 숫자로 변환 가능한지 확인
       let num = Number(currentNum);
       if (isNaN(num)) {
-        Console.print("[ERROR] 잘못된 입력입니다.");
+        throw new Error("[ERROR] 잘못된 입력입니다.")
         return;
       }
 
       // 예외처리 1: 음수 값이 들어왔을 때
       if (num < 0) {
-        Console.print("[ERROR] 음수는 허용되지 않습니다.");
+        throw new Error("[ERROR] 음수는 허용되지 않습니다.")
         return;
       }
 
