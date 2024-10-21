@@ -1,8 +1,12 @@
-import { calculator } from './Calculator.js';
+import Calculator from './Calculator.js';
 
 class App {
+  constructor() {
+    this.calculator = new Calculator();  
+  }
+
   async run() {
-    await calculator();
+    await this.calculator.run();  
   }
 }
 
