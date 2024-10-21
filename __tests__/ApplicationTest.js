@@ -6,6 +6,7 @@ const mockQuestions = (inputs) => {
 
   MissionUtils.Console.readLineAsync.mockImplementation(() => {
     const input = inputs.shift();
+    console.log("mockQuestions에서 입력된 값:", input);
     return Promise.resolve(input);
   });
 };
