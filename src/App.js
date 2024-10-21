@@ -1,5 +1,7 @@
 import { Console } from "@woowacourse/mission-utils";
 
+const CUSTOM_SEPARATOR_FORMAT_LENGTH = 5;
+
 class App {
   constructor() {
     this.cursor = 0;
@@ -29,7 +31,7 @@ class App {
 
   handleCustomSeparator(char, strArr) {
     if (this.cursor === 0) {
-      const customSeparatorPlaceholder = strArr.join('').substr(this.cursor, 6);
+      const customSeparatorPlaceholder = strArr.join('').substr(this.cursor, CUSTOM_SEPARATOR_FORMAT_LENGTH);
       const customSeparatorReg = new RegExp(/\/\/(\D{1})\\n/);
 
       if (customSeparatorReg.test(customSeparatorPlaceholder)) {
