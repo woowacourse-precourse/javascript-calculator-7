@@ -14,7 +14,7 @@ class App {
 
       let numbers = [];
       const customDelimiterMatch =
-        input.match(/^\/\/(.)\n(.*)/) || input.match(/^\/\/(.)\\n(.*)/);
+        input.match(/^\/\/(.)\\n(.*)/) || input.match(/^\/\/(.)\n(.*)/);
 
       if (customDelimiterMatch) {
         const customDelimiter = customDelimiterMatch[1];
@@ -30,11 +30,6 @@ class App {
         if (isNaN(parsed)) {
           throw new Error("[ERROR] 잘못된 입력입니다.");
         }
-
-        if (!Number.isInteger(parsed)) {
-          throw new Error("[ERROR] 소수는 입력할 수 없습니다.");
-        }
-
         return parsed;
       });
 
