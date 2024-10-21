@@ -9,6 +9,9 @@ class App {
     if (input == " ") {
       return 0;
     }
+
+    let base = [",", ":"];
+    let stringInput = input;
   }
 }
 
