@@ -12,9 +12,9 @@ class App {
     let inputText = input;
 
     if (input.startsWith('//')) {
-      const endIndex = input.indexOf('\n');
+      const endIndex = input.indexOf('\\n');
       delimiter = new RegExp(input.substring(2, endIndex));
-      inputText = input.substring(endIndex + 1);
+      inputText = input.substring(endIndex + 2);
     }
     
     const splitText = inputText.split(delimiter);
