@@ -3,7 +3,8 @@ import { Console } from "@woowacourse/mission-utils";
 class App {
   // 전체 실행 흐름
   async run() {
-    Console.print("덧셈할 문자열을 입력해 주세요."); // 시작
+    Console.print("덧셈할 문덧셈할 문자열을 입력해 주세요."); // 시작
+
     const INPUT = await Console.readLineAsync(""); // 사용자 입력
 
     // 빈 문자열일 경우 결과를 0으로 출력
@@ -30,8 +31,9 @@ class App {
       : BASE_SEPARATORS;
 
     const numbersString = CUSTOM_SEPARATOR
-      ? INPUT.substring(5 + CUSTOM_SEPARATOR.length)
+      ? INPUT.split("\\n")[1] // 커스텀 구분자 이후의 문자열을 가져옴
       : INPUT;
+
     return this.extractNumbers(numbersString, SEPARATORS);
   }
 
@@ -45,10 +47,9 @@ class App {
 
   // 숫자 추출하기
   extractNumbers(INPUT, SEPARATORS) {
-    const NUMBERS = INPUT.split(new RegExp(`[${SEPARATORS}]`)).map((num) => {
+    return INPUT.split(new RegExp(`[${SEPARATORS}]`)).map((num) => {
       return Number(num.trim());
     });
-    return NUMBERS;
   }
 
   // 숫자 검사하기
