@@ -13,7 +13,9 @@ class App {
       const numberArray = this.toNumbers(splitNumbers);
 	// 5. 변환한 Number 타입의 각 숫자들의 합을 계산한다.
       const totalSum = this.sumNumbers(numberArray);
-	
+	// 6. 계산된 합을 반환한다.
+      console.log('계산된 합:', totalSum);
+		
     } catch (error) {
       console.error(error.message);
     }
