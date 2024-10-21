@@ -8,11 +8,15 @@ class App {
   isStart() {
     // MissionUtils를 사용해 사용자가 문자열을 입력할 때까지 대기
     MissionUtils.Console.readLine("덧셈할 문자열을 입력해 주세요.", (input) => {
-      let custom = this.getCustom(input);
-      let numbers = this.getNumbers(input, custom);
-      if (this.ExceptionArray(numbers)) {
-        let sum = this.getSum(numbers);
-        MissionUtils.Console.print(`결과 : ${sum}`);
+      if (input.trim() === "") {
+        console.log("결과 : 0");
+      } else {
+        let custom = this.getCustom(input);
+        let numbers = this.getNumbers(input, custom);
+        if (this.ExceptionArray(numbers)) {
+          let sum = this.getSum(numbers);
+          MissionUtils.Console.print(`결과 : ${sum}`);
+        }
       }
     });
   }
@@ -26,7 +30,11 @@ class App {
       // // \n 기준으로 가운데값 추출 ;
       let custom = message.slice(FirstIndex + 2, SecondIndex);
       if (custom.length === 0) {
-        throw new Error("[Error] 커스텀 문자가 한개만");
+        throw new Error("[Error] 커스텀 문자가 적어주세요");
+      }
+
+      if (custom.length > 1) {
+        throw new Error("[Error] 커스텀 문자는 한개만 허용됩니다");
       }
       console.log(custom);
       return custom;
@@ -35,12 +43,20 @@ class App {
   }
 
   getNumbers(input, custom) {
-    // \n이 있으면 그 뒤의 값을 sliceMessage로 사용 (숫자 부분을 추출)
+    // \n이 있으면 그 뒤의 값을 sliceMessage로 사용
     let sliceMessage = input.includes("\n") ? input.split("\n")[1] : input;
     console.log(sliceMessage);
+    if (/\s/.test(sliceMessage)) {
+      throw new Error("[Error] 공백은 없애주세요");
+    }
+    // 구분자로 문자열을 나눈 후 빈값이 있는지 확인
+    let splitMessage = sliceMessage.split(custom);
+    if (splitMessage.some((v) => v === "")) {
+      throw new Error("[Error] 연속된 구분자 사이에는 숫자가 있어야한다");
+    }
 
     // sliceMessage가 문자열이므로 split을 사용하여 숫자들을 배열로 나눔
-    return sliceMessage.split(custom);
+    return splitMessage;
   }
 
   getSum(array) {
@@ -52,19 +68,30 @@ class App {
 
   // 배열 내 요소가 유효한 숫자인지 검사하는 함수
   ExceptionArray(array) {
+    const MAX_NUMBER = Number.MAX_SAFE_INTEGER; // 최대 숫자 제한
     if (array.length === 0 || (array.length === 1 && array[0] === "")) {
       // 배열이 비었거나, 배열이 하나의 빈 문자열인 경우
       throw new Error("[Error]빈값 넣지마세요");
     }
     for (let i = 0; i < array.length; i++) {
       const num = Number(array[i]); // 요소를 숫자로 변환
+
+      if (isNaN(num)) {
+        throw new Error("[Error] 숫자만 입력할수 있습니다");
+      }
       if (!Number.isInteger(num)) {
         // 숫자가 정수가 아닌 경우 에러 발생
         throw new Error("[Error] 제대로된 커스텀 문자를 입력하세요");
       }
       if (num < 0) {
         // 음수가 입력된 경우 에러 발생
-        throw new Error("[Error] 음수만 입력하세요");
+        throw new Error("[Error] 음수는 입력할수 없습니다");
+      }
+      // 최대숫자제한
+      if (num > MAX_NUMBER) {
+        throw new Error(
+          `[ERROR] ${MAX_NUMBER} 이상의 숫자는 입력할 수 없습니다.`
+        );
       }
     }
     // 배열에 있는 모든 숫자가 유효한 경우 true 반환
