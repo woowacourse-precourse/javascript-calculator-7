@@ -14,7 +14,7 @@ class App {
 
         MissionUtils.Console.print("결과 : " + result);
       } catch (error) {
-        // reject 되는 경우
+        throw new Error("[ERROR] This is an error.", error);
       }
     }
   }
@@ -22,20 +22,30 @@ class App {
 
 function extractSeperator(userInput) {
   if (typeof userInput !== "string") {
-    throw new Error("not string data type");
+    throw new Error("[ERROR] not string data type", error);
   }
 
   const REGEX = /\/\/(.)\\n/;
 
   if (userInput.includes(",") || userInput.includes(":")) {
-    const numbers = cutSeperator(userInput);
-    return sumNumbers(numbers);
-  } else if (userInput.startsWith(`//`) && userInput.match(REGEX)) {
-    const numbers = extractCharacter(userInput);
-    return sumNumbers(numbers);
-  } else {
-    return "error";
+    const _numbers = cutSeperator(userInput);
+    const numbers = _numbers.map(Number);
+    if (numbers.some((number) => Number.isNaN(number))) {
+      throw new Error("[ERROR] This is an error.", error);
+    }
+    return sum(numbers);
   }
+
+  if (userInput.startsWith(`//`) && userInput.match(REGEX)) {
+    const _numbers = extractCharacter(userInput);
+    const numbers = _numbers.map(Number);
+    if (numbers.some((number) => Number.isNaN(number))) {
+      throw new Error("[ERROR] This is an error.", error);
+    }
+    return sum(numbers);
+  }
+
+  throw new Error("[ERROR] This is an error.", error);
 }
 
 function cutSeperator(string) {
@@ -55,8 +65,8 @@ function extractCharacter(string) {
   return numbers;
 }
 
-function sumNumbers(numbers) {
-  return numbers.reduce((acc, curr) => Number(acc) + Number(curr));
+function sum(numbers) {
+  return numbers.reduce((acc, curr) => acc + curr, 0);
 }
 
 export default App;
