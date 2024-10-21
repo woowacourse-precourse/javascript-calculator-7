@@ -45,12 +45,27 @@ class App {
     return cleanNumArray;
   }
 
+  plusArray(input) {
+    const INITIAL_VALUE = 0;
+    const sumWithInitial = input.reduce(
+      (accumulator, currentValue) => accumulator + currentValue,
+      INITIAL_VALUE
+    );
+    return sumWithInitial;
+  }
+
+  printSum(input) {
+    return MissionUtils.Console.print("결과 : " + input);
+  }
+
   async run() {
     try {
       const sentence = await this.getSentence();
       const [customSeparator, findSentence] = this.findCustom(sentence);
       const splitArray = await this.splitSentence(customSeparator, findSentence);
       const numberArray = this.convertNumber(splitArray);
+      const sumArray = await this.plusArray(numberArray);
+      await this.printSum(sumArray);
     } catch (error) {
       throw new Error("[ERROR]");
     }
