@@ -20,6 +20,9 @@ class App {
       const NEXT_SLICED_STRING = STRING_TO_ADD.slice(i + 1, i + 2);
 
       if (CURRENT_SLICED_STRING === '/' && NEXT_SLICED_STRING === '/') {
+        if (pushedCustomStr.length !== 0) {
+          continue;
+        }
         pushedCustomStr.push(1);
         startCustomSeparatorIndex = i + 2;
       } else if (CURRENT_SLICED_STRING === '\\' && NEXT_SLICED_STRING === 'n') {
