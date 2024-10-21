@@ -35,22 +35,32 @@ class App {
   }
 
   getNumbers(input, custom) {
-    let sliceMessage = input.includes("\n") ? input.split("\n") : input;
+    // \n이 있으면 그 뒤의 값을 sliceMessage로 사용 (숫자 부분을 추출)
+    let sliceMessage = input.includes("\n") ? input.split("\n")[1] : input;
+    console.log(sliceMessage);
+
+    // sliceMessage가 문자열이므로 split을 사용하여 숫자들을 배열로 나눔
     return sliceMessage.split(custom);
   }
 
   getSum(array) {
     let sum = array.reduce((a, b) => Number(a) + Number(b), 0);
+    console.log(sum);
+
     return sum;
   }
 
   // 배열 내 요소가 유효한 숫자인지 검사하는 함수
   ExceptionArray(array) {
+    if (array.length === 0 || (array.length === 1 && array[0] === "")) {
+      // 배열이 비었거나, 배열이 하나의 빈 문자열인 경우
+      throw new Error("[Error]빈값 넣지마세요");
+    }
     for (let i = 0; i < array.length; i++) {
       const num = Number(array[i]); // 요소를 숫자로 변환
       if (!Number.isInteger(num)) {
         // 숫자가 정수가 아닌 경우 에러 발생
-        throw new Error("[Error] 숫자만 입력하세요");
+        throw new Error("[Error] 제대로된 커스텀 문자를 입력하세요");
       }
       if (num < 0) {
         // 음수가 입력된 경우 에러 발생

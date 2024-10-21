@@ -20,7 +20,7 @@ const getLogSpy = () => {
 
 describe("문자열 계산기", () => {
   test("커스텀 구분자 사용", async () => {
-    const inputs = ["//;\n1;2;3"]; // 커스텀 구분자 ; 사용
+    const inputs = ["//*\n1*2*3"]; // 커스텀 구분자 ; 사용
     mockQuestions(inputs); // 입력 모킹
 
     const logSpy = getLogSpy(); // 출력 모킹
@@ -80,7 +80,9 @@ describe("문자열 계산기", () => {
     const app = new App();
 
     // 정수가 아닌 값 입력 시 예외 발생하는지 확인
-    await expect(app.run()).rejects.toThrow("[Error] 숫자만 입력하세요");
+    await expect(app.run()).rejects.toThrow(
+      "[Error] 제대로된 커스텀 문자를 입력하세요"
+    );
   });
 
   test("빈 입력 처리 테스트", async () => {
@@ -90,8 +92,6 @@ describe("문자열 계산기", () => {
     const app = new App();
 
     // 정수가 아닌 값 입력 시 예외 발생하는지 확인
-    await expect(app.run()).rejects.toThrow(
-      "[Error] 제대로된 커스텀 문자를 입력하세요"
-    );
+    await expect(app.run()).rejects.toThrow("[Error]빈값 넣지마세요");
   });
 });
