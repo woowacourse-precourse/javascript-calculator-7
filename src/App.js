@@ -2,7 +2,7 @@ import { Console } from "@woowacourse/mission-utils";
 
 class App {
   constructor() {
-    this.CUSTOM_DELIMITER_REGEX = /^\/\/(.)\n(.*)/;
+    this.CUSTOM_DELIMITER_REGEX = /^\/\/(.+)\n(.*)/; // 커스텀 구분자를 다중 문자로 변경
     this.DEFAULT_DELIMITER = ",|:";
     this.ERROR_PREFIX = "[ERROR]";
   }
@@ -30,10 +30,15 @@ class App {
     const MATCH = input.match(this.CUSTOM_DELIMITER_REGEX);
 
     if (MATCH) {
-      return { DELIMITER: MATCH[1], NUMBERS: MATCH[2] };
+      return { DELIMITER: this.escapeDelimiter(MATCH[1]), NUMBERS: MATCH[2] };
     }
 
     return { DELIMITER: this.DEFAULT_DELIMITER, NUMBERS: input };
+  }
+
+  escapeDelimiter(delimiter) {
+    // 정규표현식에서 특수문자를 구분자로 사용할 때 문제가 생길 수 있으므로 이스케이프 처리
+    return delimiter.replace(/[.*+?^${}()|[\]\\]/g, '\\$&');
   }
 
   splitAndParse(numbers, delimiter) {
