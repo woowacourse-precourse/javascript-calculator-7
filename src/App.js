@@ -13,8 +13,9 @@ class App {
             // 결과 출력
             Console.print(`결과 : ${result}`);
         } catch (error) {
-            // 에러 발생 처리
+            // 에러 발생 시 에러 메시지 출력 및 Promise reject
             Console.print(error.message);
+            throw new Error(error.message);
         }
     }
 }
