@@ -1,4 +1,8 @@
 class StringCalculator {
+    escapeRegExp(string) {
+        return string.replace(/[.*+?^${}()|[\]\\]/g, '\\$&');
+    }
+
     add(numbers) {
       // 1. 빈 문자열 입력 시 0을 반환
       if (!numbers) {
@@ -20,7 +24,8 @@ class StringCalculator {
             throw new Error("[ERROR] 커스텀 구분자가 올바르지 않습니다.");
         }
 
-        delimiters = new RegExp(`[${customDelimiter},:]`);
+        // escapeRegExp를 사용하여 커스텀 구분자를 안전하게 처리
+        delimiters = new RegExp(`[${this.escapeRegExp(customDelimiter)},:]`);
         numbers = numbers.substring(delimiterEndIndex + 1);
       }
 
