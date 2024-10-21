@@ -52,11 +52,13 @@ class App {
     // 2. 구분자로 입력값 변환
     const inputSplited = this.workingCalculator(userInput);
 
-    // 3. 변환한 값 더하고 출력
+    // 3. 예외처리
+    this.errorCalculator(inputSplited);
+
+    // 4. 변환한 값 더하고 출력
     this.addNumber(inputSplited);
 
-    // 4. 예외처리
-    this.errorCalculator(inputSplited)
+
   }
 };
 
