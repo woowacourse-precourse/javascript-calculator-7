@@ -13,6 +13,11 @@ class App {
       Console.print(`결과 : ${result}`);
     } catch (error) {
       Console.print(error.message);
+
+      // 테스트 환경에서는 예외를 다시 던짐
+      if (process.env.NODE_ENV === "test") {
+        throw error;
+      }
     }
   }
 
