@@ -4,6 +4,9 @@
     "node": true,
     "jest": true
   },
+  "parserOptions": {
+    "ecmaVersion": "latest"
+  },
   "extends": ["eslint:recommended", "airbnb-base", "plugin:prettier/recommended"],
   "rules": {
     "class-methods-use-this": "off",
