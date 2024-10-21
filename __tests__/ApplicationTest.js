@@ -1,9 +1,8 @@
-import { describe, test } from '@jest/globals';
+import App from '../src/App.js';
 import { MissionUtils } from '@woowacourse/mission-utils';
-import App from '../src/App';
 
 const mockQuestions = (inputs) => {
-	MissionUtils.Console.readLineAsync = global.jest.fn();
+	MissionUtils.Console.readLineAsync = jest.fn();
 
 	MissionUtils.Console.readLineAsync.mockImplementation(() => {
 		const input = inputs.shift();
@@ -12,7 +11,7 @@ const mockQuestions = (inputs) => {
 };
 
 const getLogSpy = () => {
-	const logSpy = global.jest.spyOn(MissionUtils.Console, 'print');
+	const logSpy = jest.spyOn(MissionUtils.Console, 'print');
 	logSpy.mockClear();
 	return logSpy;
 };
@@ -29,9 +28,7 @@ describe('문자열 계산기', () => {
 		await app.run();
 
 		outputs.forEach((output) => {
-			global
-				.expect(logSpy)
-				.toHaveBeenCalledWith(global.expect.stringContaining(output));
+			expect(logSpy).toHaveBeenCalledWith(expect.stringContaining(output));
 		});
 	});
 
@@ -41,6 +38,6 @@ describe('문자열 계산기', () => {
 
 		const app = new App();
 
-		await global.expect(app.run()).rejects.toThrow('[ERROR]');
+		await expect(app.run()).rejects.toThrow('[ERROR]');
 	});
 });
