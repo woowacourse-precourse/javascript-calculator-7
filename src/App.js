@@ -14,7 +14,6 @@ class App {
       result = caculateNumberOfString(input);
     }
 
-
      // 결과 출력
      MissionUtils.Console.print(`결과 : ${result}`);
   }
@@ -63,7 +62,7 @@ function getCustomSeperators(input) {
 }
 
 function isOnlyNumberAndSeperators(str, seperators) {
-  const allRegExp = new RegExp(`[${seperators}\\d]`)
+  const allRegExp = new RegExp(`^[${seperators}\\d]+$`);
   if(!str.match(allRegExp)) {
     throw new Error(getErrorMessage("숫자와 구분자가 아닌 다른 문자가 포함되어 있습니다."));
   } 
