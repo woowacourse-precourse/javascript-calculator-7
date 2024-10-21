@@ -22,4 +22,6 @@ export const ERROR_MESSAGE = {
     "[ERROR] 커스텀 구분자는 문자열의 시작 부분에만 위치해야 합니다.",
   INVALID_SPECIAL_CHAR_MESSAGE:
     "[ERROR] 쉼표(,)와 세미콜론(;) 및 커스텀 구분자 외에 다른 특수 문자가 포함될 수 없습니다.",
+  NUMERIC_ONLY:
+    "[ERROR] 입력값에는 숫자만 허용되며, 한글 또는 알파벳이 포함되면 안 됩니다.",
 };

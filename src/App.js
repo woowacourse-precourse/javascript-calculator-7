@@ -105,12 +105,19 @@ class App {
     if (isTwoSeparators) {
       const [comma, semicolon] = separator;
       const separatedString = input.replaceAll(semicolon, comma).split(comma);
-      return this.convertToNumbers(separatedString);
+      return this.validateNumericInput(separatedString);
     }
     if (!isTwoSeparators) {
       const separatedString = input.split(separator);
-      return this.convertToNumbers(separatedString);
+      return this.validateNumericInput(separatedString);
     }
+  }
+
+  validateNumericInput(separatedString) {
+    const numericOnlyRegex = /^[ㄱ-ㅎ가-힣a-zA-Z]+$/;
+    const isValid = separatedString.every((el) => !numericOnlyRegex.test(el));
+    if (isValid) return this.convertToNumbers(separatedString);
+    if (!isValid) throw new Error(ERROR_MESSAGE.NUMERIC_ONLY);
   }
 
   convertToNumbers(separatedString) {
