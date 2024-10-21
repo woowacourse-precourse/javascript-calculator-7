@@ -1,11 +1,14 @@
+import { ERROR } from "./utils/messages.js";
+
 class DelimiterParser {
   constructor(input) {
-    this.validate(input);
     this.delimiters = [",", ":"];
   }
 
-  validate(input) {
-    this.checkCustomDelimiter(input);
+  checkDelimiterHasNumber(customDelimiter) {
+    if (/\d/.test(customDelimiter)) {
+      throw new Error(ERROR.CUSTOM_DELIMITER_HAS_NUMBER);
+    }
   }
 
   getCustomDelimiter(input) {
@@ -13,7 +16,14 @@ class DelimiterParser {
     let delimiters = [...this.delimiters];
     while (input.startsWith("//")) {
       const delimiterEndIndex = input.indexOf("\n");
+      if (delimiterEndIndex === -1) {
+        throw new Error(ERROR.INVALID_CUSTOM_DELIMITER);
+      }
+
       const customDelimiter = input.substring(2, delimiterEndIndex);
+
+      this.checkDelimiterHasNumber(customDelimiter);
+
       delimiters.push(this.escapeRegExp(customDelimiter));
       input = input.substring(delimiterEndIndex + 1);
     }
@@ -22,6 +32,7 @@ class DelimiterParser {
 
   splitString(input) {
     const [parseInput, delimiters] = this.getCustomDelimiter(input);
+    console.log(parseInput, delimiters);
     const delimiterRegex = new RegExp(`(${delimiters.join("|")})`);
 
     return parseInput
