@@ -2,25 +2,33 @@ import { Console } from "@woowacourse/mission-utils";
 
 class App {
 
-  getCustomKey = (string) => {
-    let customKey = '';
-    if (typeof string === 'string') {
-
-      if (string.toString().slice(0, 2) === '//' && string.toString().slice(3, 4) === '\n') {
-
-        customKey = string[2]
-      }
-      return customKey
+  getCustomReturns = (string) => {
+    let RETURN = {
+      customKey: '',
+      stringStart: 0
     }
+    if (string.toString().slice(0, 2) === '//') {
+      for (let i = 2; i < string.length; i++) {
+        if (string.toString().slice(i, i + 1) === "n") {
+          if (string.toString().slice(i - 1, i + 1) === '\\n') {
+            RETURN.customKey = string[2]
+            RETURN.stringStart = i + 1
+          }
+        }
+      }
+    }
+    return RETURN
+
   }
 
   caculateSum = (string) => {
-    let customKey = '';
+    let RETURN = {}
     let sliceString = '';
     let sum = 0;
     //커스텀 구분자 가져오기
-    customKey = this.getCustomKey(string)
-    if (customKey === '') {
+    RETURN = this.getCustomKey(string)
+
+    if (RETURN.customKey === '') {
       //기본 구분자 계산
       const key1 = ',', key2 = ":";
       for (let i = 0; i < string.length; i++) {
@@ -31,14 +39,13 @@ class App {
       }
     } else {
       //커스텀 구분자 사용 계산
-      sliceString = string.toString().slice(4)
+      sliceString = string.toString().slice(RETURN.stringStart)
 
       for (let i = 0; i < sliceString.length; i++) {
 
-        if (sliceString[i] === customKey) {
-
+        if (sliceString[i] === RETURN.customKey) {
           continue
-        } else if (sliceString[i] !== customKey) {
+        } else if (sliceString[i] !== RETURN.customKey) {
           //customKey에 해당하지 않으면 sum
 
           sum += +sliceString[i]
@@ -58,10 +65,10 @@ class App {
     //출력
     const result = "결과 : " + this.caculateSum(Input)
     Console.print(result)
-    //기본구분자사용
-    console.log(this.caculateSum('1,2,3'))
-    //커스텀구분자사용
-    console.log(this.caculateSum('//;\n1;2;3;4'))
+    // //기본구분자사용
+    // console.log(this.caculateSum('1,2,3'))
+    // //커스텀구분자사용
+    // console.log(this.caculateSum('//;\n1;2;3;4'))
 
   }
 }
