@@ -15,6 +15,10 @@ class App {
       inputString = inputString.split("\\n");
       customSeperator = inputString[0].substring(2);
       inputString = inputString[1];
+
+      //커스텀 구분자가 이스케이프 문자인 경우 처리
+      if (customSeperator.startsWith("\\"))
+        customSeperator = "\\" + customSeperator;
     }
 
     //문자열에서 숫자 추출하여 배열로 저장
