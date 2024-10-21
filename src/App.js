@@ -1,5 +1,5 @@
 import { Console } from '@woowacourse/mission-utils';
-import { VALIDATION_DEFAULT, VALIDATION_CUSTOM, ERROR_MESSAGE } from './constants.js';
+import { DEFAULT_SEPARATOR, VALIDATION_DEFAULT, VALIDATION_CUSTOM, ERROR_MESSAGE } from './constants.js';
 
 class App {
   validateInput(input) {
@@ -67,7 +67,7 @@ class App {
     }
 
     if (!this.startsAndEndsWithNumber(input) ||
-        this.hasConsecutiveSeparators(input, /,:/) ||
+        this.hasConsecutiveSeparators(input, DEFAULT_SEPARATOR) ||
         this.hasConsecutiveDecimalPoints(input)) {
       throw new Error(ERROR_MESSAGE);
     }
@@ -79,7 +79,7 @@ class App {
     }
 
     if (!this.startsAndEndsWithNumber(input.slice(5)) ||
-        this.hasConsecutiveSeparators(input.slice(5), /,:/) ||
+        this.hasConsecutiveSeparators(input.slice(5), DEFAULT_SEPARATOR) ||
         this.hasConsecutiveDecimalPoints(input.slice(5)) ||
         input[2] === '.') {
       throw new Error(ERROR_MESSAGE);
