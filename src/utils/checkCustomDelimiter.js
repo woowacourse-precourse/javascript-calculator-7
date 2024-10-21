@@ -1,3 +1,5 @@
+import ERROR_MESSAGES from "../constants/errorMessages.js";
+
 const checkCustomDelimiter = (input, delimiters) => {
   if (input.startsWith("//") && input.includes("\\n")) {
     const index = input.indexOf("\\n");
@@ -6,9 +8,7 @@ const checkCustomDelimiter = (input, delimiters) => {
 
     return input.slice(index + 2);
   } else if (input.includes("//") || input.includes("\\n")) {
-    throw new Error(
-      "[ERROR] 커스텀 구분자 지정은 문자열 앞부분의 “//”와 “\\n” 사이에 작성해주세요."
-    );
+    throw new Error(ERROR_MESSAGES.CUSTOM_DELIMITER);
   }
 
   return input;
