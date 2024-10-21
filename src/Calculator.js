@@ -1,4 +1,10 @@
-import { DEFAULT_SEPARATORS, CUSTOM_DESIGNATORS, CUSTOM_SEPARATOR_REGEX, ERROR_MESSAGE } from './constants.js';
+import {
+  DEFAULT_SEPARATORS,
+  CUSTOM_DESIGNATORS,
+  CUSTOM_SEPARATOR_REGEX,
+  ERROR_MESSAGE,
+  INVALID_CUSTOM_SEPARATOR_REGEX,
+} from './constants.js';
 
 class Calculator {
   #inputText;
@@ -17,7 +23,10 @@ class Calculator {
       return (this.#customSeparator = '');
     }
 
-    return this.#inputText.match(CUSTOM_SEPARATOR_REGEX)[0];
+    const customSeparator = this.#inputText.match(CUSTOM_SEPARATOR_REGEX)[0];
+    if (INVALID_CUSTOM_SEPARATOR_REGEX.test(customSeparator)) throw new Error(ERROR_MESSAGE.invalidCustom);
+
+    return customSeparator;
   }
 
   #splitTextToNumber() {
