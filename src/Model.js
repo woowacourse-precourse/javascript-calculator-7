@@ -37,7 +37,7 @@ class Model {
     const escapedDelimiter = String(this.#delimiter).replace(/[.*+?^${}()|[\]\\]/g, '\\$&');
 
     // 숫자와 구분자 외의 문자를 찾는 정규표현식 생성
-    const invalidCharRegex = new RegExp(`[^0-9${escapedDelimiter}]`);
+    const invalidCharRegex = new RegExp(`[^0-9${escapedDelimiter}-]`);
 
     const invalidCharMatch = this.string.match(invalidCharRegex);
 
@@ -68,7 +68,7 @@ class Model {
   }
 
   calculate() {
-    if (this.string === '') {
+    if (this.string.trim() === '') {
       throw new Error(ERROR_MESSAGES.EMPTY_INPUT);
     }
     this.checkInvalidCharacter();
