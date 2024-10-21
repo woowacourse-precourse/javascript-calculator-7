@@ -17,10 +17,10 @@ class App {
         const RESULT = this.add(RESULT_ARR);
         MissionUtils.Console.print(`결과 : ${RESULT}`);
       } else {
-        MissionUtils.Console.print("[ERROR] 유효한 입력값이 아닙니다.");
+        throw Error("[ERROR] 유효한 입력값이 아닙니다.");
       }
     } catch (error) {
-      MissionUtils.Console.print(`[ERROR] ${error}`);
+      throw Error("[ERROR]");
     }
   }
 
