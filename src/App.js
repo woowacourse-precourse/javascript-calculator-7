@@ -2,17 +2,16 @@ import { Console } from '@woowacourse/mission-utils';
 import { validateLine, validateCustomPart, validateLinePart } from './utils/stringValidator.js';
 import {
   checkIsDefaultString,
-  sumString as sumLine,
+  sumString,
   divideCustom,
   getFinalSeparators,
 } from './utils/stringParser.js';
 
 class App {
-  async run() {
-    const line = await Console.readLineAsync('덧셈할 문자열을 입력해 주세요.');
+  calculate(line) {
     validateLine(line);
     
-    if (checkIsDefaultString(line)) return Console.print(`결과 : ${sumLine(line)}`);
+    if (checkIsDefaultString(line)) return sumString(line);
 
     const [customPart, linePart] = divideCustom(line);
     validateCustomPart(customPart);
@@ -21,7 +20,13 @@ class App {
     Console.print(separators);
     validateLinePart(linePart, separators);
 
-    return Console.print(`결과 : ${sumLine(linePart, separators)}`);
+    return sumString(linePart, separators);
+  }
+
+  async run() {
+    const line = await Console.readLineAsync('덧셈할 문자열을 입력해 주세요.');
+    const result = this.calculate(line);
+    Console.print(`결과 : ${result}`);
   }
 }
 
