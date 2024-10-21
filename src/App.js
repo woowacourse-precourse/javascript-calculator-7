@@ -13,7 +13,6 @@ class App {
     } else {
       numbers = userInput.split(/,|:/);
     }
-    Console.print(numbers);
 
     if (numbers.includes("")) {
       throw new Error("[ERROR]빈 값이 입력되었습니다.");
@@ -21,6 +20,15 @@ class App {
     if (/-/.test(numbers)) {
       throw new Error("[ERROR]음수가 입력되었습니다.");
     }
+
+    const SUM = numbers.reduce((sum, number) => {
+      if (isNaN(number)) {
+        throw new Error("[ERROR] 잘못된 입력");
+      }
+      return sum + Number(number);
+    }, 0);
+
+    Console.print(`결과 : ${SUM}`);
   }
 }
 
