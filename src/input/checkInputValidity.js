@@ -7,12 +7,7 @@ export default function checkInputValidity(cleanedString, customDelimiter) {
 
   const allDelimiters = [...DEFAULT_DELIMITERS, customDelimiter].filter(Boolean);
 
-  let regex;
-  if (customDelimiter !== null) {
-    regex = new RegExp(`^[0-9,;${allDelimiters.join("")}]+$`);
-  } else {
-    regex = /^[\\d,;]+$/;
-  }
+  const regex = new RegExp(`^[0-9${allDelimiters.join("")}]+$`);
 
   if (!regex.test(cleanedString)) {
     throw new Error("[ERROR] : [,][;][커스텀 구분자][숫자 문자]를 제외한 입력이 존재합니다!");
