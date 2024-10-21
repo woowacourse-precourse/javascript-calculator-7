@@ -33,12 +33,54 @@ describe('문자열 계산기 model', () => {
     expect(result).toEqual([4, 5, 6, 7, 8, 9]);
   });
 
-  test('에러 발생 시 프로그램 종료 테스트', () => {
+  test('잘못된 구분자 입력 시 에러', () => {
     try {
       parseNumbers('1.2,3'); // 구분자가 잘못된 입력으로 에러 발생 예상
     } catch (error) {
       expect(error.message).toBe(
         '[ERROR] : 구분자가 아닌 문자는 입력할 수 없습니다.',
+      );
+      // 에러 발생 후 추가 로직이 없으면 사실상 프로그램 종료
+    }
+  });
+
+  test('잘못된 구분자와 0 입력 시 에러', () => {
+    try {
+      parseNumbers('1.2,3,0'); // 구분자가 잘못된 입력으로 에러 발생 예상
+    } catch (error) {
+      expect(error.message).toBe(
+        '[ERROR] : 구분자가 아닌 문자와 양수가 아닌 숫자는 입력할 수 없습니다.',
+      );
+      // 에러 발생 후 추가 로직이 없으면 사실상 프로그램 종료
+    }
+  });
+
+  test('잘못된 구분자와 음수 입력 시 에러', () => {
+    try {
+      parseNumbers('1.2,3,-1'); // 구분자가 잘못된 입력으로 에러 발생 예상
+    } catch (error) {
+      expect(error.message).toBe(
+        '[ERROR] : 구분자가 아닌 문자와 양수가 아닌 숫자는 입력할 수 없습니다.',
+      );
+      // 에러 발생 후 추가 로직이 없으면 사실상 프로그램 종료
+    }
+  });
+  test('음수 입력 시 에러 ', () => {
+    try {
+      parseNumbers('1,2,3,-3'); // 구분자가 잘못된 입력으로 에러 발생 예상
+    } catch (error) {
+      expect(error.message).toBe(
+        '[ERROR] : 양수가 아닌 숫자는 입력할 수 없습니다.',
+      );
+      // 에러 발생 후 추가 로직이 없으면 사실상 프로그램 종료
+    }
+  });
+  test('0입력 시 에러', () => {
+    try {
+      parseNumbers('1,2,3,0'); // 구분자가 잘못된 입력으로 에러 발생 예상
+    } catch (error) {
+      expect(error.message).toBe(
+        '[ERROR] : 양수가 아닌 숫자는 입력할 수 없습니다.',
       );
       // 에러 발생 후 추가 로직이 없으면 사실상 프로그램 종료
     }
@@ -52,7 +94,9 @@ describe('문자열 계산기 model', () => {
     try {
       parseNumbers('00,1,2,3'); // 구분자가 잘못된 입력으로 에러 발생 예상
     } catch (error) {
-      expect(error.message).toBe('[ERROR] : 0은 입력할 수 없습니다.');
+      expect(error.message).toBe(
+        '[ERROR] : 양수가 아닌 숫자는 입력할 수 없습니다.',
+      );
       // 에러 발생 후 추가 로직이 없으면 사실상 프로그램 종료
     }
   });
