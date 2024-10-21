@@ -88,7 +88,7 @@ function getSumAllNumber(arr) {
 }
 
 function getErrorMessage(message) {
-  return '[Error] ' + message;
+  return '[ERROR] ' + message;
 }
 
 export default App;
