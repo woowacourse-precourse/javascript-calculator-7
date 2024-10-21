@@ -10,10 +10,11 @@ describe('InputParser 테스트', () => {
   });
 
   test('커스텀 구분자가 한글자 들어온 경우', () => {
-    const userInput = '//;\\n1:2,3;4';
+    const userInput = '//;\\n1:2,3;4;5';
     const expected = [1, 2, 3, 4, 5];
     const parser = new InputParser();
     const numbers = parser.parse(userInput);
+
     expect(numbers).toStrictEqual(expected);
   });
 

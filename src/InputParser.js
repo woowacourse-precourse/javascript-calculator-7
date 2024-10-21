@@ -1,13 +1,17 @@
 import { CUSTOM_DELIMITER, ERROR, GROUPING_REGEX, NEED_ESCAPE_CHARS } from './constants.js';
 class InputParser {
-  #delimiterSet = new Set([',', ':']);
+  #delimiterSet;
+
+  constructor() {
+    this.#delimiterSet = new Set([',', ':']);
+  }
 
   /**
    * @param {string} input
    * @returns {number[]} numbers
    */
   parse(input) {
-    const { customDelimiters, expression } = this.getParts(input);
+    const { customDelimiters, expression } = InputParser.#getParts(input);
     this.#addDelimiters(customDelimiters);
     const numbers = this.#expressionToNumber(expression);
 
@@ -20,11 +24,12 @@ class InputParser {
    * @param {string} input
    * @returns {{customDelimiters:string, expression:string }} Regex Matched Group
    */
-  static getParts(input) {
+  static #getParts(input) {
     const { customDelimiters, expression } = input.match(GROUPING_REGEX).groups;
     if (
       !customDelimiters
-      && (input.startsWith(CUSTOM_DELIMITER.START) || input.includes(CUSTOM_DELIMITER.END))
+      && (input.startsWith(CUSTOM_DELIMITER.START)
+      || input.includes(CUSTOM_DELIMITER.END))
     ) {
       throw new Error(`${ERROR.HEADER} 커스텀 구분자의 형식이 바르지 않습니다.`);
     }
@@ -73,7 +78,7 @@ class InputParser {
       if (curr === '') {
         return result;
       }
-      const num = this.parseNumber(Number(curr));
+      const num = InputParser.#parseNumber(Number(curr));
 
       return [...result, num];
     }, []);
@@ -81,7 +86,7 @@ class InputParser {
     return numbers;
   }
 
-  static parseNumber(curr) {
+  static #parseNumber(curr) {
     if (isNaN(curr)) {
       throw new Error(`${ERROR.HEADER} ${ERROR.EXPRESSION_HAS_INVALID_CHARARACTER}`);
     }
