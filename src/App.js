@@ -10,7 +10,7 @@ class App {
       //쉼표 또는 콜론
       if((/,|:/).test(input)){
         const result = input.split((/,|:/)).map(Number).reduce((a,b)=>a+b,0); //합산
-        Console.print("결과: " + result);
+        this.printResult(result);
       } 
 
       //커스텀 구분자
@@ -22,16 +22,20 @@ class App {
         //분리할 문자열
         const str = input.replace(/\/\/.*?\\n/,'');
         const result = str.split(customChar).map(Number).reduce((a,b)=>a+b,0); //합산
-        Console.print("결과: " + result);
-      } 
-      
-      else {
+        this.printResult(result);
+      } else {
         throw new Error();
       }
+      
     } catch (err) {
       Console.print(err);
       Console.print("[ERROR] 잘못된 값을 입력하셨습니다. 앱을 다시 실행해주세요.");
     }
+  }
+
+  //결과 출력 함수
+  printResult(result) {
+    Console.print("결과: "+result);
   }
   
 }
