@@ -3,7 +3,7 @@ class App {
    async run() {
       let input = await Console.readLineAsync('덧셈할 문자열을 입력해 주세요.\n');
       const result = this.calculateSum(input);
-      Console.print(`결과 ${result}`);
+      Console.print(`결과 : ${result}`);
    }
 
    calculateSum(input) {
@@ -11,7 +11,7 @@ class App {
          throw new Error('[ERROR] 입력해주세요.');
       }
       const delimiterMatch = input.match(/^\/\/(.+)\\n(.+)/);
-      console.log('delimiterMatch', delimiterMatch);
+      // console.log('delimiterMatch', delimiterMatch);
 
       let numberPart;
       if (delimiterMatch) {
@@ -23,17 +23,14 @@ class App {
       }
 
       const delimiters = [',', ':', ...(delimiterMatch ? [delimiterMatch[1]] : [])];
-      console.log(delimiters.join(''));
+      // console.log(delimiters.join(''));
 
       const regex = new RegExp(`[${delimiters.join('')}]`);
-      console.log('regex', regex);
+      //대괄호가 없으면 ,: 이것과 정확히 일치하는 경우만 찾고 있으면 , 또는 : 중 하나와 일치해도 찾음
+      // console.log('regex', regex);
 
-      const numbers = numberPart.split(regex).map(Number);
+      const numbers = numberPart.replace(/\s/g, '').split(regex).filter(Boolean).map(Number);
       console.log('numbers', numbers);
-
-      const sum = numbers.reduce((acc, curr) => acc + curr, 0);
-      return sum;
    }
 }
-
 export default App;
