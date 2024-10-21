@@ -3,7 +3,7 @@ import { Console } from '@woowacourse/mission-utils';
 class StringCalculator {
   static #DEFAULT_DELIMITERS = [',', ':'];
 
-  static #CUSTOM_DELIMITER_REGEXP = /^\/\/.+\\n/;
+  static #CUSTOM_DELIMITER_REGEXP = /^\/\/(.+)\\n/;
 
   constructor() {
     this.delimiters = [...StringCalculator.#DEFAULT_DELIMITERS];
@@ -38,14 +38,11 @@ class StringCalculator {
   parseCustomDelimiter(input) {
     const DIGIT_REGEXP = /\d/;
 
-    const match = input.match(StringCalculator.#CUSTOM_DELIMITER_REGEXP)[0];
+    const match = input.match(StringCalculator.#CUSTOM_DELIMITER_REGEXP)[1];
 
-    const regexp = /[/\\n]/g;
-    const customDelimiter = match.replace(regexp, '');
+    if (DIGIT_REGEXP.test(match)) throw new Error('[ERROR]');
 
-    if (DIGIT_REGEXP.test(customDelimiter)) throw new Error('[ERROR]');
-
-    return match.replace(regexp, '');
+    return match;
   }
 
   removeCustomDelimiter(input) {
