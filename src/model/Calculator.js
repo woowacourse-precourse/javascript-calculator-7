@@ -1,21 +1,21 @@
+import separateNumber from "../utils/separateNumber.js";
+
 class Calculator {
     #inputData;
     #defaultSeparator;
 
-    constructor(inputData) {
-        this.#inputData = inputData;
+    constructor() {
+        this.#inputData = null;
         this.#defaultSeparator = /[,:]/;
     }
 
-    calculate() {
-        if (this.#inputData.trim() === "") return 0;
-        
-        const numbers = this.#inputData.split(this.#defaultSeparator).map(number => {
-            const parsedNumber = parseInt(number);
-            return parsedNumber;
-        });
+    setData(inputData) {
+        this.#inputData = inputData;
+    }
 
-        return numbers.reduce((sum, num) => sum + num, 0);
+    calculate() {
+        const numberArray = separateNumber(this.#inputData, this.#defaultSeparator);
+        return numberArray.reduce((sum, num) => sum + num, 0);
     }
     
 }

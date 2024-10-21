@@ -3,17 +3,18 @@ import Calculator from "../model/calculator.js";
 
 class Controller {
     #view;
+    #calculator;
 
     constructor() {
         this.#view = new View();
+        this.#calculator = new Calculator();
     }
 
     async calculate() {
-        let inputData = await this.#view.readInput();
+        const inputData = await this.#view.readInput();
+        this.#calculator.setData(inputData);
 
-        let calculator = new Calculator(inputData);
-        let result = calculator.calculate();
-        
+        const result = this.#calculator.calculate();   
         this.#view.printResult(result);
     }
 }
