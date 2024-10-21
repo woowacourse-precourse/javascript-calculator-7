@@ -8,16 +8,13 @@ class App {
   async run() {
     const INPUT = await inputHandler();
     const STRING_NUM_LIST = extractNumbersAsString(INPUT);
-    let output = "";
 
     try {
       const NUM_LIST = convertNumberList(STRING_NUM_LIST);
       const SUM = sumNumberList(NUM_LIST);
-      output = `결과: ${SUM}`;
+      outputHandler(`결과 : ${SUM}`);
     } catch (error) {
-      output = `[ERROR]: ${error.message}`;
-    } finally {
-      outputHandler(output);
+      throw new Error(`[ERROR]: ${error.message}`);
     }
   }
 }
