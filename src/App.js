@@ -12,7 +12,7 @@ class App {
       // 결과 출력
       Console.print(`결과 : ${result}`);
     } catch (error) {
-      Console.print(error.message);
+      throw error;
     }
   }
 
