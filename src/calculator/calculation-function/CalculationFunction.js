@@ -1,4 +1,4 @@
-export class CalculationFunction {
+class CalculationFunction {
   #result = 0;
 
   calculateString() {
@@ -13,3 +13,5 @@ export class CalculationFunction {
     this.#result += value;
   }
 }
+
+export default CalculationFunction;

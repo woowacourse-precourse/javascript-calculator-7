@@ -1,5 +1,5 @@
 import { MissionUtils } from '@woowacourse/mission-utils';
-import { Calculator } from './calculator.js';
+import Calculator from './Calculator.js';
 
 const getInput = async () => {
   try {

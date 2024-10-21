@@ -1,6 +1,6 @@
-import { CalculationFunction } from './calculation-function';
+import CalculationFunction from './CalculationFunction.js';
 
-export class AdditionFunction extends CalculationFunction {
+class AdditionFunction extends CalculationFunction {
   calculateString(calculationArray) {
     // 배열의 각 요소를 숫자로 변환하고 유효성 검사 후 결과 값에 더하기
     calculationArray
@@ -26,3 +26,5 @@ export class AdditionFunction extends CalculationFunction {
     return this.getResult();
   }
 }
+
+export default AdditionFunction;

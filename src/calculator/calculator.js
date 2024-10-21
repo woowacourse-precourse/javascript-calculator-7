@@ -1,6 +1,6 @@
-import { AdditionFunction } from './calculation-function/add-function';
+import AdditionFunction from './calculation-function/AdditionFunction.js';
 
-export class Calculator {
+class Calculator {
   #calculationString = '';
   #result = 0;
   #separatorRegexPattern = ',|:';
@@ -68,3 +68,5 @@ export class Calculator {
     return this.#result;
   }
 }
+
+export default Calculator;
