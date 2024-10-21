@@ -11,37 +11,65 @@ class App {
   }
 
   //문자열 입력 함수
-  inputStr() {
-    const NOTICE = `- 문자열을 입력하고 enter를 눌러봐요\n- 커스텀 구분자를 추가하시고 싶으면, //를 입력 후 원하는 구분자를 입력하세요 \n- 종료를 원하시면 quit를 입력하세요 \n`
-    const INPUT_STR = Console.readLineAsync(NOTICE)
+  inputStr(notice) {
+    const INPUT_STR = Console.readLineAsync(notice)
     return INPUT_STR
   };
 
    //입력한 문자에서 커스텀 구분자 판별
   detectDelimeter(str) {
-    
-    var CHAR_ARRAY = {}
-    CHAR_ARRAY = str.split("")
-    var DELIMITER_INPUT = CHAR_ARRAY
-    if (CHAR_ARRAY.length >= 2 && (CHAR_ARRAY[0] == '/' && CHAR_ARRAY[1] == '/' )){
-      DELIMITER_INPUT = CHAR_ARRAY.splice(2)
-      DELIMITER_INPUT.forEach(delimeter => {
-        this.DELIMITERS_SET.add(delimeter)
-      })
-      return true
+    try {
+      var CHAR_ARRAY = []
+      CHAR_ARRAY = String(str).split("")
+      var TEMP_INPUT = ""
+      var IS_DELIMITER = false
+      // '//'로 시작되면 구분자 판별
+      if (CHAR_ARRAY.length >= 2 && (CHAR_ARRAY[0] == '/' && CHAR_ARRAY[1] == '/' )){
+        IS_DELIMITER = true
+        var DELIMITER_INPUT = CHAR_ARRAY.splice(2)
+        DELIMITER_INPUT.forEach((delimeter,index )=> {
+          if( delimeter !== '\\'){
+            if(TEMP_INPUT === '\\' && delimeter === 'n'){
+              IS_DELIMITER = false
+              CHAR_ARRAY = DELIMITER_INPUT.splice(index+1)
+            }
+            this.DELIMITERS_SET.add(delimeter)
+          }
+          else if (delimeter === '\\' ){
+            if(TEMP_INPUT === ''){
+              TEMP_INPUT = '\\'
+            }
+            else{
+              this.DELIMITERS_SET.add('\\')
+            }
+          }
+        })
+      }
+      // //*^ 같이 \n으로 끝나지 않을 때 에러 처리
+      if (IS_DELIMITER === true){
+        return Error("[ERROR] 구분자 입력 양식이 옳지 않습니다.")
+      }
+      const SUM_RESULT = this.sumInteger(CHAR_ARRAY)
+      return SUM_RESULT
+      
+    } catch (error) {
+      return Error("[ERROR] 구분자 입력 양식이 옳지 않습니다.")
     }
-  
-    return false
+    
   }
 
   //입력받은 문자에서 구분자 걸러내고 숫자 배열 리턴하는 함수
   filterInteger(str){
-    const CURRENT_DELIMITER = [...this.DELIMITERS_SET].map(delimiter => this.escapeRegExp(delimiter)).join('|')
-    const SPLIT_REG = RegExp(CURRENT_DELIMITER)
-    const INT_ARRAY = str.split(SPLIT_REG)
-    // Console.print([...INT_ARRAY])
-    return INT_ARRAY;
-
+    try {
+      Console.print(str)
+      const CURRENT_DELIMITER = [...this.DELIMITERS_SET].map(delimiter => this.escapeRegExp(delimiter)).join('|')
+      const SPLIT_REG = RegExp(CURRENT_DELIMITER)
+      const INT_ARRAY = str.split(SPLIT_REG)
+      return INT_ARRAY;
+    } catch (error) {
+      return Error('[ERROR] 숫자 배열을 리턴하는 중에 에러가 발생했습니다.')
+    }
+    
   }
   
   //숫자 더하는 함수
@@ -56,34 +84,26 @@ class App {
 
   async run() {
 
-    while(true){
-      try {
-        const INPUT_STR = await this.inputStr()
-        if (INPUT_STR === 'quit' ){
-          Console.print("종료")
-          break;
-        }
-        const DETECT_DELIMITER = this.detectDelimeter(INPUT_STR)
-        if (DETECT_DELIMITER == true){
-          // Console.print('- 현재 구분자')
-          // Console.print([...this.DELIMITERS_SET])
-        }
-        else{
-          const FILTERED_ARRAY = this.filterInteger(INPUT_STR);
-          const SUM_RESULT = this.sumInteger(FILTERED_ARRAY)
-          if(Number.isNaN(SUM_RESULT)){
-            Console.print("error")
-            throw new Error('[ERRROR] 구분자 이외의 문자를 입력했습니다.')
-          }
-          else{
-            Console.print(SUM_RESULT)
-          }
-        }
-      } catch (error) {
-        Console.print(error)
+    try {
+      var NOTICE = "덧셈할 문자열을 입력해 주세요.\n"
+      var INPUT_STR = await this.inputStr(NOTICE)
+      if (INPUT_STR === 'quit' ){
+        Console.print("종료")
       }
+      const SUM_RESULT = this.detectDelimeter(INPUT_STR)
+      if(Number.isNaN(SUM_RESULT)){
+        throw new Error('[ERROR] 구분자 이외의 문자를 입력했습니다.')
+      }
+      else{
+        Console.print(`결과 : ${SUM_RESULT}`)
+      }
+      
+    } catch (error) {
+      throw new Error(error)
     }
+    
   }
+  
 }
 
 export default App;
