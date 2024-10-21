@@ -27,17 +27,25 @@ class App {
       inputString = inputString.replace(regexp, "");
     }
 
-    // 구분자를 제외한 인풋스트링에 대해 문자와 숫자 판별
+    // 구분자를 제외한 입력값을 배열로 만든 후 문자와 숫자 판별
     let currentValue = "";
     let sum = 0;
     const inputArray = inputString.split("");
     inputArray.forEach((element) => {
-      //정수인 경우
+      //element가 정수인 경우
       if (!!parseInt(element)) {
         currentValue += element;
       } else {
-        //currentValue가 비어있지 않은 경우
+        /*
+        element가 정수가 아닌 경우 currentValue를 확인한다.
+        currentValue가 integer가 아닌 경우는 에러이다.
+        currentValue가 integer인 경우 element가 구분자인지 확인한다.
+        */
         if (!parseInt(currentValue)) {
+          Console.print("[ERROR]");
+          throw new Error("[ERROR]");
+        }
+        if (!seperators.includes(element)) {
           Console.print("[ERROR]");
           throw new Error("[ERROR]");
         }
@@ -45,6 +53,7 @@ class App {
         currentValue = "";
       }
     });
+
     if (!!parseInt(currentValue)) {
       sum += parseInt(currentValue);
     }
