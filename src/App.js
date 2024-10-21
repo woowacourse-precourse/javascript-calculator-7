@@ -24,10 +24,17 @@ class App {
     }
   }
 
+  splitSentence(separator, input) {
+    const customRegex = separator ? new RegExp(`[${separator},:]+`) : /[,:]+/;
+    const splitArray = input.split(customRegex);
+    return splitArray;
+  }
+
   async run() {
     try {
       const sentence = await this.getSentence();
       const [customSeparator, findSentence] = this.findCustom(sentence);
+      const splitArray = await this.splitSentence(customSeparator, findSentence);
     } catch (error) {
       throw new Error("[ERROR]");
     }
