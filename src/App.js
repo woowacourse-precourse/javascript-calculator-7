@@ -23,12 +23,15 @@ class App {
         );
       }
 
+      //커스텀 구분자 추출
       let customDelimiter = numbers.slice(2, endIndex);
 
+      // 여러 구분자가 있을 경우 처리
       // 커스텀 구분자를 정규식으로 사용할 때 메타 문자 이스케이프
-      customDelimiter = this.escapeRegExp(customDelimiter);
+      const delimiterArray = customDelimiter.split('').map(this.escapeRegExp);
 
-      delimiter = new RegExp(`${delimiter.source}|${customDelimiter}`);
+      // 기본 구분자와 함께 새로운 정규식으로 만듦
+      delimiter = new RegExp(`${delimiter.source}|${delimiterArray.join('|')}`);
 
       numbers = numbers.slice(endIndex + 2);
     }
