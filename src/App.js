@@ -93,24 +93,33 @@ class App {
     for (let char of splitNumArr) {
       if (char === "") continue; // 빈 문자열의 경우 0으로 간주하고 continue
 
-      if (isNaN(Number(char))) {
-        // 숫자가 아닌 값일 경우 에러 출력
-        throw new Error(`[ERROR] 선언되지 않은 문자입니다: ${char}`);
-      }
+      // 유효성 검사 및 변환
+      const num = this.validateNumber(char);
 
-      if (Number(char) < 0) {
-        // 음수일 경우
-        throw new Error(`[ERROR] 숫자는 양수만 허용됩니다.`);
-      }
-
-      // 모든 조건을 통과하면 this.numbers 배열에 추가
-      this.numbers.push(Number(char));
+      // 유효한 숫자라면 배열에 추가
+      this.numbers.push(num);
     }
 
     Console.print("숫자 배열");
     Console.print(this.numbers);
   }
 
+  // 유효성 검사를 담당하는 메서드
+  validateNumber(char) {
+    const num = Number(char); // 숫자로 변환한 변수
+
+    if (isNaN(num)) {
+      // 숫자가 아닌 값일 경우 에러 출력
+      throw new Error(`[ERROR] 선언되지 않은 문자입니다: ${char}`);
+    }
+
+    if (num < 0) {
+      // 음수일 경우 에러 출력
+      throw new Error(`[ERROR] 숫자는 양수만 허용됩니다.`);
+    }
+
+    return num; // 유효한 숫자 반환
+  }
 }
 
 export default App;
