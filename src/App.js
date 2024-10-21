@@ -1,4 +1,5 @@
 import { Console } from "@woowacourse/mission-utils";
+import { ERROR_MESSAGES } from './constant.js';
 
 class App {
   async run() {
@@ -27,14 +28,14 @@ class App {
       const REGEX = new RegExp(`[${delimiters.join('')}]`);
       const numbers = input.split(REGEX).map(value => {
         if (isNaN(value)) {
-          throw new Error(`[ERROR] 숫자가 아닌 값이 포함되어 있습니다: ${value}`);
+          throw new Error(ERROR_MESSAGES.NON_NUMERIC_VALUE(value));
         }
         return Number(value);
       });
 
       const negativeNumbers = numbers.filter(num => num < 0);
       if (negativeNumbers.length > 0) {
-        throw new Error(`[ERROR] 음수는 허용되지 않습니다: ${negativeNumbers.join(', ')}`);
+        throw new Error(ERROR_MESSAGES.NEGATIVE_NUMBER(negativeNumbers));
       }
 
       answer = numbers.reduce((acc, cur) => acc + cur, 0);
