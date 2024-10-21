@@ -38,12 +38,10 @@ export const separatorSplit = (input) => {
       const parsedNum = parseInt(trimmedNum, 10);
 
       if (isNaN(parsedNum)) {
-        throw new Error(
-          "[ERROR_INVALID_NUMBER] : 숫자를 제외한 문자는 입력할 수 없습니다."
-        );
+        throw new Error("[ERROR] : 숫자를 제외한 문자는 입력할 수 없습니다.");
       }
       if (parsedNum < 0) {
-        throw new Error("[ERROR_NEGATIVE_NUMBER] : 음수는 입력할 수 없습니다.");
+        throw new Error("[ERROR] : 음수는 입력할 수 없습니다.");
       }
 
       return parsedNum;
