@@ -21,6 +21,19 @@ class App {
 
     // 기본 구분자 설정
     let delimiters = [',', ':'];
+
+    // 커스텀 구분자 처리
+    let delimiterEndIndex = input.indexOf("\\n");
+    if (input.startsWith("//") && delimiterEndIndex !== -1) {
+      const customDelimiter = input.substring(2, delimiterEndIndex);
+      delimiters.push(...customDelimiter.split(''));
+      input = input.substring(delimiterEndIndex + 2);
+    }
+
+    const regExp = new RegExp(delimiters.map(s => s.replace(/([.*+?^${}()|\[\]\\])/g, '\\$1')).join('|'), 'g');
+    const numbers = input.split(regExp).map(num => Number(num.trim()));
+
+    this.validateNumbers(numbers);
   }
 }
 
