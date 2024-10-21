@@ -22,8 +22,10 @@ class App {
 
         const NUMBERS = STR_NUMBERS.split(DIVIDER_EXP).map((NUM) => {
             const PARSE_NUM = Number(NUM);
-            if (isNaN(PARSE_NUM)) {
-                throw new Error("[ERROR]");
+            if (isNaN(PARSE_NUM) || PARSE_NUM < 0) {
+                throw new Error(
+                    `[ERROR] 구분자 외의 잘못된 값이 포함되었습니다. \n 잘못된 값:  ${PARSE_NUM}`
+                );
             }
             return PARSE_NUM;
         });
