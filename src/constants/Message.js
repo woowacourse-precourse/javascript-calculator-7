@@ -1,6 +1,6 @@
 const MESSAGE = Object.freeze({
-  startMessage: "덧셈할 문자열을 입력해 주세요.",
-  resultMessage: "결과 : ",
+  START_MESSAGE: "덧셈할 문자열을 입력해 주세요.",
+  RESULT_MESSAGE: "결과 : ",
 });
 
 const ERROR_MESSAGE = Object.freeze({

@@ -3,6 +3,6 @@ import { MESSAGE } from "../constants/Message.js";
 
 export default class OutPutView {
   static printResult(result) {
-    Console.print(MESSAGE.resultMessage + result);
+    Console.print(MESSAGE.RESULT_MESSAGE + result);
   }
 }
