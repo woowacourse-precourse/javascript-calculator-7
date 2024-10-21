@@ -1,17 +1,4 @@
 import { Console } from "@woowacourse/mission-utils";
-// npm install
-// npm run test
-// npm run start
-
-// * 인풋 처리 잘못됐을때 예외 던지기 
-class InputError extends Error {
-  constructor(message){
-    super(message);
-    this.name = "InputError"
-  }
-}
-
-
 
 class App {
   
@@ -110,18 +97,11 @@ class App {
       const answer = await Console.readLineAsync('덧셈할 문자열을 입력해 주세요.\n');
       const result = getResult(answer);
       Console.print(`결과 : ${result}`);
-      process.kill(process.pid, "SIGINT");
-      
-        // Ctrl+C 시그널을 날려서 프로그램 종료
     } catch (error) {
       // reject 되는 경우
         // 예외 발생 시 에러 메시지를 출력
       // Console.print(error);  // 에러 메시지 출력
       return Promise.reject(error);  //! Promise reject 처리 => 예외를 던져준다.
-      process.kill(process.pid, "SIGINT");
-      
-    } finally{
-      // process.kill(process.pid, "SIGINT");
     }
 
 
