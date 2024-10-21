@@ -57,9 +57,15 @@ class App {
         EXTRA_NUMBERS_MESSAGE.SEMICOLON,
       ]);
     if (hasComma)
-      return this.separatingStrings(input, EXTRA_NUMBERS_MESSAGE.COMMA);
+      return this.validateSpecialCharactersInString(
+        input,
+        EXTRA_NUMBERS_MESSAGE.COMMA
+      );
     if (hasSemicolon)
-      return this.separatingStrings(input, EXTRA_NUMBERS_MESSAGE.SEMICOLON);
+      return this.validateSpecialCharactersInString(
+        input,
+        EXTRA_NUMBERS_MESSAGE.SEMICOLON
+      );
     return [NaN];
   }
 
@@ -83,8 +89,9 @@ class App {
     const invalidSpecialCharRegex = new RegExp(
       `^[${separator}ㄱ-ㅎ가-힣a-zA-Z0-9]+$`
     );
+
     const isValid = invalidSpecialCharRegex.test(string);
-    if (isValid) return this.this.separatingStrings(string, separator);
+    if (isValid) return this.separatingStrings(string, separator);
     if (!isValid) throw new Error(ERROR_MESSAGE.INVALID_SPECIAL_CHAR_MESSAGE);
   }
 
