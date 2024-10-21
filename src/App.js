@@ -13,6 +13,12 @@ class App {
     if (!input) {
       return 0;
     }
+
+    const numbers = input.split(/,|:/).map((num) => {
+      return parseInt(num, 10);
+    });
+
+    return numbers.reduce((sum, num) => sum + num, 0);
   }
 }
 
