@@ -18,6 +18,9 @@ class App {
     if (numbers.includes("")) {
       throw new Error("[ERROR]빈 값이 입력되었습니다.");
     }
+    if (/-/.test(numbers)) {
+      throw new Error("[ERROR]음수가 입력되었습니다.");
+    }
   }
 }
 
