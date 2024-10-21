@@ -42,6 +42,7 @@ export default class Calculator {
   }
 
   #vaildateNumberArr(numberArr) {
-    inputValidator.invalidNumber(numberArr);
+    inputValidator.invalidIsNumber(numberArr);
+    inputValidator.invalidPositiveNumber(numberArr);
   }
 }

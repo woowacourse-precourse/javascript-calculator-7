@@ -15,9 +15,15 @@ const inputValidator = {
     }
   },
 
-  invalidNumber: (numberArr) => {
-    if (numberArr.some((num) => isNaN(num) || num < 0)) {
+  invalidIsNumber: (numberArr) => {
+    if (numberArr.some((num) => isNaN(num))) {
       throw new Error(ERROR_MESSAGES.INVALID_NUMBER);
+    }
+  },
+
+  invalidPositiveNumber: (numberArr) => {
+    if (numberArr.some((num) => num <= 0)) {
+      throw new Error(ERROR_MESSAGES.POSITIVE_NUMBER);
     }
   },
 };

@@ -33,13 +33,13 @@ describe("문자열 계산기", () => {
     });
   });
 
-  test("예외 테스트", async () => {
+  test("음수값을 입력할 경우", async () => {
     const inputs = ["-1,2,3"];
     mockQuestions(inputs);
 
     const app = new App();
 
-    await expect(app.run()).rejects.toThrow(ERROR_MESSAGES.INVALID_NUMBER);
+    await expect(app.run()).rejects.toThrow(ERROR_MESSAGES.POSITIVE_NUMBER);
   });
 
   test("사용자가 유효하지 않는 값을 입력할 경우", async () => {
