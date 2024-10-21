@@ -38,7 +38,6 @@ class App {
     }
 
     const numbers = input.split(delimiter);
-    Console.print(isNaN(Number(" ")));
     return numbers;
   }
 
