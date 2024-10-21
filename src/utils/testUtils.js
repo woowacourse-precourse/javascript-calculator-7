@@ -2,7 +2,6 @@ import { MissionUtils } from '@woowacourse/mission-utils';
 
 export const mockMultipleQuestions = (inputs) => {
   MissionUtils.Console.readLineAsync = jest.fn();
-
   inputs.forEach((input) => {
     MissionUtils.Console.readLineAsync.mockImplementationOnce(() => Promise.resolve(input));
   });
