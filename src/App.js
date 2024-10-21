@@ -9,10 +9,9 @@ class App {
   async run() {
     const input = await Console.readLineAsync(RUN_MESSAGES.INPUT);
     const numberArray = this.extractNumbers(input);
-    const hasInvalidValue = numberArray.includes(NaN);
 
-    if (hasInvalidValue || this.hasNegativeNumber(numberArray))
-      throw new Error(RUN_MESSAGES.ERROR);
+    this.hasNegativeNumber(numberArray);
+
     const invalidCharacterRegexResult = this.calculateSum(numberArray);
     return Console.print(
       `${RUN_MESSAGES.RESULT}${invalidCharacterRegexResult}`
@@ -52,7 +51,7 @@ class App {
         );
     }
     if (hasCommaAndSemicolon)
-      return this.separatingStrings(input, [
+      return this.validateSpecialCharactersInString(input, [
         EXTRA_NUMBERS_MESSAGE.COMMA,
         EXTRA_NUMBERS_MESSAGE.SEMICOLON,
       ]);
@@ -66,7 +65,7 @@ class App {
         input,
         EXTRA_NUMBERS_MESSAGE.SEMICOLON
       );
-    return [NaN];
+    throw new Error(ERROR_MESSAGE.INVALID_SPECIAL_CHAR_MESSAGE);
   }
 
   splitUsingCustomDelimiterAndConvertToNumbers(input, customDelimiterSuffix) {
@@ -86,9 +85,21 @@ class App {
   }
 
   validateSpecialCharactersInString(string, separator) {
-    const invalidSpecialCharRegex = new RegExp(
-      `^[${separator}ㄱ-ㅎ가-힣a-zA-Z0-9]+$`
-    );
+    const isTwoSeparators = typeof separator === "object";
+
+    let invalidSpecialCharRegex;
+
+    if (isTwoSeparators) {
+      const [comma, semicolon] = separator;
+      invalidSpecialCharRegex = new RegExp(
+        `^[-${comma}${semicolon}ㄱ-ㅎ가-힣a-zA-Z0-9]+$`
+      );
+    }
+    if (!isTwoSeparators) {
+      invalidSpecialCharRegex = new RegExp(
+        `^[-${separator}ㄱ-ㅎ가-힣a-zA-Z0-9]+$`
+      );
+    }
 
     const isValid = invalidSpecialCharRegex.test(string);
     if (isValid) return this.separatingStrings(string, separator);
