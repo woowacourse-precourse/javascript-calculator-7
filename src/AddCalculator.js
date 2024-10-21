@@ -1,3 +1,4 @@
+
 import { Console } from "@woowacourse/mission-utils";
 
 class AddCalculator{
@@ -13,14 +14,13 @@ class AddCalculator{
         this.#errorlog = "[ERROR] : ";
     }
 
-    async run(){
-        try {
-            const input = await Console.readLineAsync("덧셈할 문자열을 입력해 주세요.\n");
-            this.#checkInput(input);
-        } catch (error) {
-            Console.print("[ERROR] : " + error.message);
-        }
-    };
+    async run() {
+        const input = await Console.readLineAsync(
+          "덧셈할 문자열을 입력해 주세요.\n"
+        );
+        if (this.#checkInput(input)) return;
+        return;
+      }
 
     #checkInput(input){
         if(!this.#checkLength(input)) return; // 길이 체크
@@ -40,7 +40,7 @@ class AddCalculator{
     }
 
     #checkLength(input){
-        if(input.length === 0){
+        if(input.trim() === ""){
             Console.print(this.#output + this.#sum);
             return false;
         };
@@ -71,7 +71,7 @@ class AddCalculator{
         };
         return input;
     };
-    
+
     #separate(input){
         let newArr;
         if(this.#separator.length ===2){
@@ -91,12 +91,11 @@ class AddCalculator{
             return false;
         }
         return true;
-    } 
+    }
 
     #checkNegative(input) {
-        if (input.some(value => Number(value) < 0)) {
-            Console.print(this.#errorlog + "양수만 입력하세요");
-            return false;
+        if (input.some((value) => Number(value) < 0)) {
+            throw new Error(this.#errorlog + "양수만 입력하세요");
         }
         return true;
     }

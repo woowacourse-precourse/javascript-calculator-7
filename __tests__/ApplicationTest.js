@@ -18,7 +18,7 @@ const getLogSpy = () => {
 
 describe("문자열 계산기", () => {
   test("커스텀 구분자 사용", async () => {
-    const inputs = ["//;\\n1"];
+    const inputs = ["//;\\n1;3;4;5"];
     mockQuestions(inputs);
 
     const logSpy = getLogSpy();
@@ -32,23 +32,32 @@ describe("문자열 계산기", () => {
     });
   });
 
-  test("음수 입력", async () => {
+  test("예외 테스트", async () => {
     const inputs = ["-1,2,3"];
     mockQuestions(inputs);
 
-    const logSpy = getLogSpy();
-    const outputs = ["[ERROR] : 양수만 입력하세요"];
-
     const app = new App();
-    await app.run();
 
-    outputs.forEach((output) => {
-      expect(logSpy).toHaveBeenCalledWith(expect.stringContaining(output));
-    });
+    await expect(app.run()).rejects.toThrow("[ERROR] : 양수만 입력하세요");
   });
 
+  // test("음수 입력", async () => {
+  //   const inputs = ["-1,2,3"];
+  //   mockQuestions(inputs);
+
+  //   const logSpy = getLogSpy();
+  //   const outputs = ["[ERROR] : 양수만 입력하세요"];
+
+  //   const app = new App();
+  //   await app.run();
+
+  //   outputs.forEach((output) => {
+  //     expect(logSpy).toHaveBeenCalledWith(expect.stringContaining(output));
+  //   });
+  // });
+
   test("여러개의 커스텀 문자열 사용", async () => {
-    const inputs = ["//;;;\\n1"];
+    const inputs = ["//;;;\\n1;;;3"];
     mockQuestions(inputs);
 
     const logSpy = getLogSpy();
@@ -93,7 +102,7 @@ describe("문자열 계산기", () => {
   });
 
   test("구분자가 숫자", async () => {
-    const inputs = ["//2\\n1"];
+    const inputs = ["//2\\n123"];
     mockQuestions(inputs);
 
     const logSpy = getLogSpy();
@@ -106,5 +115,6 @@ describe("문자열 계산기", () => {
       expect(logSpy).toHaveBeenCalledWith(expect.stringContaining(output));
     });
   });
+
 
 });
