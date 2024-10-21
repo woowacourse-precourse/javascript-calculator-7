@@ -49,6 +49,8 @@ function getCustomSeperators(input) {
       if(customSeperator.match(/^[0-9]$/) || customSeperator.length > 1) {
         throw new Error(getErrorMessage("커스텀 구분자의 형식이 잘못되었습니다."));
       }
+    } else {
+      throw new Error(getErrorMessage("커스텀 구분자 설정 패턴이 잘못되었습니다.(//와 \\n 사이에 커스텀 구분자를 입력해주세요.)"));
     }
   }
 
@@ -76,4 +78,5 @@ function getSumAllNumber(arr) {
 function getErrorMessage(message) {
   return '[Error] ' + message;
 }
+
 export default App;
