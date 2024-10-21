@@ -8,7 +8,8 @@ class App {
       const sum = this.calculate(result); // calculate 호출
       MissionUtils.Console.print(`결과 : ${sum}`);
     } catch (error) {
-      MissionUtils.Console.print(`[ERROR] ${error.message}`);
+      MissionUtils.Console.print(`${error.message}`);
+      throw error;
     }
   }
 
@@ -19,7 +20,7 @@ class App {
     if (input.startsWith('//')) {
       const symbolindex = input.indexOf('\\n');
       if (symbolindex === -1) {
-        this.throwError('잘못된 형식입니다.');
+        this.throwError('[ERROR] 잘못된 형식입니다.');
       }
 
       // 커스텀 구분자를 추출
@@ -35,10 +36,10 @@ class App {
     const numbers = result.map(num => {
       const parsedNumber = Number(num);
       if (isNaN(parsedNumber)) {
-        this.throwError('숫자가 아닌 값이 입력되었습니다.');
+        this.throwError('[ERROR] 숫자가 아닌 값이 입력되었습니다.');
       }
       if (parsedNumber < 0) {
-        this.throwError('음수는 처리할 수 없습니다.');
+        this.throwError('[ERROR] 음수는 처리할 수 없습니다.');
       }
       return parsedNumber;
     });
