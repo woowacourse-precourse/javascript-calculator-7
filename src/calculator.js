@@ -35,3 +35,11 @@ function setNumber(number) {
 
     return currentNumber;
 }
+
+function awareCustomSeprator(input, distinct) {
+    let removeFront = input.substr(2);
+    let seperate = removeFront.split('\\n');
+    distinct.push(seperate[0]);
+    input = seperate[1];
+    return distinct, input;
+}
