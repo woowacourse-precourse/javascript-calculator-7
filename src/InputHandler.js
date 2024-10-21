@@ -2,8 +2,7 @@ import { MissionUtils } from "@woowacourse/mission-utils";
 
 class InputHandler {
   regex1 = /^\d+([:,]\d+)*$/;
-  regex2 = /^\/\/(.)\n\d+([:,]\d+)*$/;
-  delRegex = /^\/\/(.)\n/;
+  delRegex = /^\/\/(.)\\n/;
   input;
   delimiter;
   constructor() {
@@ -20,36 +19,25 @@ class InputHandler {
     }
   }
 
-  checkDelimiter() {
-    if (this.input.match(this.regex2) !== null){
-      // 구분자 추출
-      const inputDel = input.match(/^\/\/(.)\n/);
-      // 구분자 추가
-      this.delimiter = new RegExp(`[,:${inputDel}]`);
-    }
-    else {
-      this.delimiter = new RegExp('[,:]');
-    }
-  }
-  inputTypeCheck() {
+  inputDelimiterCheck() {
+    console.log(this.input.match(this.delRegex));
     // 공백인 경우
     if (this.input === ''){
       console.log('공백\n');
       // sum = 0
     }
-    //구분자 없는 input인 경우
-    if (this.input.match(this.regex1) !== null){
+    // 구분자가 있는 input
+    else if (this.delRegex.test(this.input)){
+      console.log('구분자 O\n');
+      // 구분자 추가  
+      const inputDel = this.input.match(this.delRegex)[1];
+      this.delimiter = new RegExp(`[,:${inputDel}]`);
+    }
+    //구분자 없는 input
+    else if (this.regex1.test(this.input)){
       console.log('구분자 X\n');
       this.delimiter = new RegExp('[,:]');
       // pass
-    }
-    // 구분자가 있는 input
-    else if (this.input.match(this.regex2) !== null){
-      console.log('구분자 O\n');
-      // 구분자 추출
-      const inputDel = input.match(this.delRegex);
-      // 구분자 추가
-      this.delimiter = new RegExp(`[,:${inputDel}]`);
     }
     // 잘못된 input
     else {
