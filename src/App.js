@@ -7,7 +7,7 @@ class App {
       const result = this.add(input);
       Console.print(`결과 : ${result}`);
     } catch (error) {
-      Console.print(error.message);
+      throw new Error(error.message);
     }
   }
 
@@ -42,7 +42,7 @@ class App {
     const nonPositiveNumbers = numbers.filter((num) => num <= 0);
     if (nonPositiveNumbers.length > 0) {
       throw new Error(
-        `[ERROR] Invalid input : ${nonPositiveNumbers.join(", ")}`
+        `[ERROR] Invalid input : ${nonPositiveNumbers.join(",")}`
       );
     }
 
