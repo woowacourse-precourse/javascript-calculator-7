@@ -79,8 +79,7 @@ class App {
   // 5. 더하기
   sumPositiveNumber(numberInput) {
     const result = numberInput.reduce((a, b) => a + b);
-    Console.print("result: " + result);
-    return result;
+    Console.print("결과 : " + result);
   }
 
   async run() {
@@ -91,7 +90,7 @@ class App {
     try {
       this.vaildateInput(input);
     } catch (error) {
-      Console.print("[ERROR] " + error);
+      throw new Error("[ERROR]" + error);
     }
   }
 }
