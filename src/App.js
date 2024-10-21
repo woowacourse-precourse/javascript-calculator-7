@@ -13,6 +13,7 @@ class App {
     }
     const NUMBERS = this.parseInput(INPUT); // 구분자 처리
   }
+
   // 구분자 처리하기
   parseInput(INPUT) {
     const BASE_SEPARATORS = ",:"; // 기본 구분자
@@ -32,6 +33,14 @@ class App {
       return INPUT[2]; // 커스텀 구분자를 반환
     }
     return null;
+  }
+
+  // 숫자 추출하기
+  extractNumbers(INPUT, SEPARATORS) {
+    const NUMBERS = INPUT.split(new RegExp(`[${SEPARATORS}]`)).map((num) => {
+      return Number(num.trim());
+    });
+    return NUMBERS;
   }
 }
 
