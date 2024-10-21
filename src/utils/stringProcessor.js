@@ -1,5 +1,7 @@
 import {handleCustomSeparatorError} from "./errorHandler.js";
 
+const DEFAULT_SEPARATOR_REGEX = /[:,]/g
+
 export function parseInput(param) {
     const isCustom = param.startsWith("//") && param.includes("\\n");
     if (isCustom) {
@@ -17,7 +19,6 @@ export function sliceString(param) {
 }
 
 export function preprocessing(param, customSeparator) {
-    const defaultSeparator = /[:,]/g;
-    const argument = customSeparator ? new RegExp(`${customSeparator}|:|,`, 'g') : defaultSeparator;
+    const argument = customSeparator ? new RegExp(`${customSeparator}|:|,`, 'g') : DEFAULT_SEPARATOR_REGEX;
     return param.split(argument);
 }
