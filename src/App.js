@@ -5,21 +5,19 @@ class App {
   async run() {
 
     return new Promise((resolve, reject) => {
-      Console.readLineAsync("덧셈할 문자열을 입력해 주세요.\n")
-        .then((input) => {
-          try {
-            const result = this.add(input);
-            Console.print(`결과 : ${result}`);
-            resolve(); // 성공적으로 실행되면 resolve 호출
-          } catch (error) {
-            Console.print(`[ERROR] ${error.message}`);
-            reject(error); // 에러 발생 시 reject 호출
-          }
-        })
-        .catch((error) => {
+      Console.readLineAsync("덧셈할 문자열을 입력해 주세요.\n").then((input) => {
+        try {
+          const result = this.add(input);
+          Console.print(`결과 : ${result}`);
+          resolve(); // 성공적으로 실행되면 resolve 호출
+        } catch (error) {
           Console.print(`[ERROR] ${error.message}`);
-          reject(error);
-        });
+          reject(error); // 에러 발생 시 reject 호출
+        }
+      }).catch((error) => {
+        Console.print(`[ERROR] ${error.message}`);
+        reject(error);
+      });
     });
   }
 
@@ -32,8 +30,8 @@ class App {
     let delimiter = /,|:/; // 기본 구분자
 
     if (input.startsWith("//")) {
-      const parts = input.split("\n");
-      delimiter = new RegExp(parts[0].slice(2)); // 커스텀 구분자 추출
+      const parts = input.split("\\n");
+      delimiter = parts[0].slice(2); // 커스텀 구분자 추출
       input = parts[1]; // 문자열 부분 추출
     }
 
