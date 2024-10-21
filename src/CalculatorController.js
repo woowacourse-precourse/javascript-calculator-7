@@ -9,7 +9,7 @@ class CalculatorController {
   }
 
   async run(){
-    const input = await this.#io.readlineSync();
+    const input = await this.#io.readlineSync("덧셈할 문자열을 입력해 주세요.");
     return this.service.calculate(new CalculatorDTO(input));
   }
 
