@@ -19,11 +19,11 @@ class User {
   async readNumber() {
     const answer = await Console.readLineAsync(MESSAGES.inputNumber);
     validator.validateString(answer);
-    this.handleCustomDelimiter(answer);
-    this.printResult();
+    this.#handleCustomDelimiter(answer);
+    this.#printResult();
   }
 
-  handleCustomDelimiter(string) {
+  #handleCustomDelimiter(string) {
     const { customDelimiter, numbersString } =
       this.#customDelimiterHandler.getCustomDelimiterAndNumbersString(string);
     if (customDelimiter.length) validator.validateCustomDelimiter(customDelimiter);
@@ -31,13 +31,13 @@ class User {
     this.#numbersString = numbersString;
   }
 
-  printResult() {
-    const numbers = this.splitString(this.#numbersString);
+  #printResult() {
+    const numbers = this.#splitString(this.#numbersString);
     const sum = numbers.reduce((acc, number) => acc + number, 0);
     Console.print(MESSAGES.result + sum);
   }
 
-  splitString(answer) {
+  #splitString(answer) {
     const numbers = this.#delimiters
       .reduce((acc, delimiter) => acc.flatMap((string) => string.split(delimiter)), [answer])
       .map(Number);
