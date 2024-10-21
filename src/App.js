@@ -16,6 +16,7 @@ class Calculator {
     }
 
     let divider = this.setDivider(input);
+    let numberArray = this.createNumberArray(input, divider);
   }
 
   static setDivider(input) {
@@ -32,6 +33,36 @@ class Calculator {
     }
 
     throw new Error(ERROR_MESSAGES.NO_VALID_DIVIDER);
+  }
+
+  static createNumberArray(input, divider) {
+    let numberString = input;
+
+    if (numberString.startsWith("//")) {
+      const endIndex = numberString.indexOf("\\n");
+
+      numberString = numberString.slice(endIndex + 2);
+
+      if (numberString.length === 0) {
+        throw new Error(ERROR_MESSAGES.NO_NUMBERS_INPUT);
+      }
+
+      if (typeof divider === "string" && !numberString.includes(divider)) {
+        throw new Error(ERROR_MESSAGES.CUSTOM_DIVIDER_NOT_USED);
+      }
+
+      return numberString.split(divider).map(Number);
+    }
+
+    if (Array.isArray(divider)) {
+      divider.forEach((d) => {
+        numberString = numberString.split(d).join(",");
+      });
+
+      return numberString.split(",").map(Number);
+    }
+
+    return numberString.split(divider).map(Number);
   }
 }
 
