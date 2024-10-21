@@ -11,8 +11,21 @@ class App {
   }
 
   async readInput() {
-    Console.print("덧셈할 문자열을 입력해 주세요.");
+    Console.print("문자열을 입력해 주세요.");
     return await Console.readLineAsync();
+  }
+
+  calculate(input) {
+    if (input === "") return 0;
+
+    const number = parseInt(input, 10);
+    if (isNaN(number)) {
+      throw new Error("[ERROR] 유효하지 않은 입력값입니다.");
+    }
+    if (number < 0) {
+      throw new Error("[ERROR] 음수는 입력할 수 없습니다.");
+    }
+    return number;
   }
 
   printResult(result) {
