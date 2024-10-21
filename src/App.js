@@ -3,16 +3,19 @@ import { printResult } from './views/OutputView.js';
 import { Calculator } from './models/Calculator.js';
 import { Console } from "@woowacourse/mission-utils";
 
-const calculator = new Calculator();
+export default class App {
+  constructor() {
+    this.calculator = new Calculator();
+  }
 
-async function run() {
-  try {
-    const input = await getInput();
-    const result = calculator.calculate(input);
-    printResult(result);
-  } catch (error) {
-    Console.print(error.message);
+  async run() {
+    try {
+      const input = await getInput();
+      const result = this.calculator.calculate(input);
+      printResult(result);
+    } catch (error) {
+      Console.print(error.message);
+      throw error;
+    }
   }
 }
-
-export default run;

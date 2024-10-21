@@ -1,3 +1,4 @@
-import run from './App.js';
+import App from './App.js';
 
-run();
+const app = new App();
+app.run();
