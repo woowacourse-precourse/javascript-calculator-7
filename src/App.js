@@ -12,6 +12,17 @@ class StringCalculator {
     });
   }
 
+  add(input) {
+    if (this.isEmpty(input)) return 0;
+    const { numbers, delimiters } = this.parseInput(input);
+    const numberList = this.splitNumbers(numbers, delimiters);
+  
+    this.validateNumbers(numberList);
+  
+    return this.sumNumbers(numberList);
+  }
+  
+
   isEmpty(input) {
     return input.trim() === "";
   }
@@ -49,16 +60,13 @@ class StringCalculator {
     });
   }
 
-  add(input) {
-    if (this.isEmpty(input)) return 0;
-    const { numbers, delimiters } = this.parseInput(input);
-    const numberList = this.splitNumbers(numbers, delimiters);
-  
-    this.validateNumbers(numberList);
-  
-    return this.sumNumbers(numberList);
+  sumNumbers(numberList) {
+    return numberList.reduce((sum, num) => sum + Number(num), 0);
   }
   
 }
 
-export default App;
+const calculator = new StringCalculator();
+calculator.run();
+
+module.exports = StringCalculator;
