@@ -47,6 +47,21 @@ describe("문자열 계산기", () => {
     });
   });
 
+  test("구분자 미포함", async () => {
+    const inputs = ["1234"];
+    mockQuestions(inputs);
+
+    const logSpy = getLogSpy();
+    const outputs = ["결과 : 1234"];
+
+    const app = new App();
+    await app.run();
+
+    outputs.forEach((output) => {
+      expect(logSpy).toHaveBeenCalledWith(expect.stringContaining(output));
+    });
+  });
+
   test("예외 테스트(음수)", async () => {
     const inputs = ["-1,2,3"];
     mockQuestions(inputs);
