@@ -1,19 +1,23 @@
 // --- 에러 메시지 상수 ---
 const ERROR_MESSAGES = {
-  INVALID_CHARACTER: '[ERROR] : 구분자가 아닌 문자는 입력할 수 없습니다.',
-  ZERO_NOT_ALLOWED: '[ERROR] : 0은 입력할 수 없습니다.',
+  INVALID_CHARACTER: '구분자가 아닌 문자',
+  NON_POSITIVE_NUMBER: '양수가 아닌 숫자',
+  INVALID_CHARACTER_AND_NON_POSITIVE_NUMBER:
+    '구분자가 아닌 문자와 양수가 아닌 숫자',
 };
 
 const DEFAULT_DELIMITER = /,|:/;
 
 // --- 에러 처리 함수 ---
 export function throwError(errorCode) {
-  throw new Error(ERROR_MESSAGES[errorCode]);
+  throw new Error(
+    `[ERROR] : ${ERROR_MESSAGES[errorCode]}는 입력할 수 없습니다.`,
+  );
 }
 
 // 문자 포함 검증
 function isNonNumeric(value) {
-  return !/^\d+$/.test(value);
+  return !/^-?\d+$/.test(value);
 }
 
 // 0 포함 검증
@@ -21,13 +25,30 @@ function isZero(value) {
   return /^0+$/.test(value);
 }
 
+// 음수 포함 검증
+function isNegative(value) {
+  return Number(value) < 0;
+}
+
 // --- 입력 값 검증 함수 ---
 function validateInput(input) {
   const hasNonNumeric = input.map(Number).some((char) => isNonNumeric(char));
   const hasZero = input.some((char) => isZero(char));
+  const hasNegative = input.some((char) => isNegative(char));
+  // 문자와 0 또는 음수가 동시에 입력된 경우
 
-  if (hasNonNumeric) throwError('INVALID_CHARACTER');
-  if (hasZero) throwError('ZERO_NOT_ALLOWED');
+  // 잘못된 구분자와 0,음수 입력 에러
+  if (hasNonNumeric && (hasZero || hasNegative)) {
+    throwError('INVALID_CHARACTER_AND_NON_POSITIVE_NUMBER');
+  }
+  // 0이나 음수 입력
+  else if (hasNegative || hasZero) {
+    throwError('NON_POSITIVE_NUMBER');
+  }
+  // 잘못된 구분자 입력
+  else if (hasNonNumeric) {
+    throwError('INVALID_CHARACTER');
+  }
 }
 
 // --- 구분자 추출 ---
