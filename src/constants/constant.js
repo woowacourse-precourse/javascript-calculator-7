@@ -1,1 +1,1 @@
-export const DEFAULT_DELIMETER = [",", ":"];
+export const DEFAULT_DELIMITER = [",", ":"];

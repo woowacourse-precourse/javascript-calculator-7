@@ -1,4 +1,4 @@
-import { DEFAULT_DELIMETER } from "../constants/constant";
+import { DEFAULT_DELIMITER } from "../constants/constant";
 
 export function escapeRegExp(string) {
   return string.replace(/[.*+?^${}()|[\]\\]/g, "\\$&");
@@ -10,7 +10,7 @@ export function isNumeric(str) {
 
 export function checkDefaultFormat(input) {
   let cleanedInput = input;
-  DEFAULT_DELIMETER.forEach((delimiter) => {
+  DEFAULT_DELIMITER.forEach((delimiter) => {
     cleanedInput = cleanedInput.replaceAll(delimiter, "");
   });
   if (!isNumeric(cleanedInput)) {
@@ -21,7 +21,7 @@ export function checkDefaultFormat(input) {
 
 export function checkInputFormat(input) {
   if (input.slice(0, 2) === "//" && input.slice(3, 5) === "\\n") {
-    const customDelimiter = [...DEFAULT_DELIMETER, input[2]];
+    const customDelimiter = [...DEFAULT_DELIMITER, input[2]];
     let remain = input.slice(5);
     customDelimiter.forEach((delimiter) => {
       remain = remain.replaceAll(delimiter, "");
@@ -32,5 +32,5 @@ export function checkInputFormat(input) {
     return true;
   }
 
-  return checkDefaultFormat(input, DEFAULT_DELIMETER);
+  return checkDefaultFormat(input, DEFAULT_DELIMITER);
 }
