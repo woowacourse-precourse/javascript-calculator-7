@@ -1,5 +1,5 @@
 import { Console } from '@woowacourse/mission-utils';
-import { VALIDATION_DEFAULT, VALIDATION_CUSTOM } from './constants.js';
+import { VALIDATION_DEFAULT, VALIDATION_CUSTOM, ERROR_MESSAGE } from './constants.js';
 
 class App {
   validateInput(input) {
@@ -9,22 +9,14 @@ class App {
       return VALIDATION_CUSTOM;
     }
 
-    throw new Error('[ERROR]: 잘못된 값을 입력했습니다');
+    throw new Error(ERROR_MESSAGE);
   }
 
   isDefault(input) {
     const invalidInput = /[^0-9,:.]/;
 
     if (!invalidInput.test(input)) {
-      if (input.length !== 0 && !this.startsAndEndsWithNumber(input)) {
-        throw new Error('[ERROR]: 잘못된 값을 입력했습니다');
-      }
-      if (this.hasConsecutiveSeparators(input, /,:/)) {
-        throw new Error('[ERROR]: 잘못된 값을 입력했습니다');
-      }
-      if (this.hasConsecutiveDecimalPoints(input)) {
-        throw new Error('[ERROR]: 잘못된 값을 입력했습니다');
-      }
+      this.validateDefaultFormat(input);
       return true;
     }
     return false;
@@ -34,28 +26,17 @@ class App {
     const customSep = /^\/\/\D\\n/;
 
     if (customSep.test(input)) {
-      if (input.length > 5 && !this.startsAndEndsWithNumber(input.slice(5))) {
-        throw new Error('[ERROR]: 잘못된 값을 입력했습니다');
-      }
-      if (this.hasConsecutiveSeparators(input.slice(5), /,:/)) {
-        throw new Error('[ERROR]: 잘못된 값을 입력했습니다');
-      }
-      if (this.hasConsecutiveDecimalPoints(input.slice(5))) {
-        throw new Error('[ERROR]: 잘못된 값을 입력했습니다');
-      }
-      if (input[2] === '.') {
-        throw new Error('[ERROR]: 잘못된 값을 입력했습니다');
-      }
+      this.validateCustomFormat(input);
 
       if (input[2] !== '\\') {
         const pattern = new RegExp(`[^0-9,:.${input[2]}]`);
         if (pattern.test(input.slice(5)) || this.hasConsecutiveSeparators(input.slice(5), input[2])) {
-          throw new Error('[ERROR]: 잘못된 값을 입력했습니다');
+          throw new Error(ERROR_MESSAGE);
         }
       } else {
         const pattern = new RegExp(/[^0-9,:.\\]/);
         if (pattern.test(input.slice(5)) || this.hasConsecutiveSeparators(input.slice(5), '\\\\')) {
-          throw new Error('[ERROR]: 잘못된 값을 입력했습니다');
+          throw new Error(ERROR_MESSAGE);
         }
       }
       return true;
@@ -78,6 +59,31 @@ class App {
   hasConsecutiveDecimalPoints(input) {
     const pattern = new RegExp(/[.]{2,}/);
     return pattern.test(input);
+  }
+
+  validateDefaultFormat(input) {
+    if (input.length === 0) {
+      return;
+    }
+
+    if (!this.startsAndEndsWithNumber(input) ||
+        this.hasConsecutiveSeparators(input, /,:/) ||
+        this.hasConsecutiveDecimalPoints(input)) {
+      throw new Error(ERROR_MESSAGE);
+    }
+  }
+
+  validateCustomFormat(input) {
+    if (input.length === 5) {
+      return;
+    }
+
+    if (!this.startsAndEndsWithNumber(input.slice(5)) ||
+        this.hasConsecutiveSeparators(input.slice(5), /,:/) ||
+        this.hasConsecutiveDecimalPoints(input.slice(5)) ||
+        input[2] === '.') {
+      throw new Error(ERROR_MESSAGE);
+    }
   }
 
   convertToNumberArray(input, sep) {
