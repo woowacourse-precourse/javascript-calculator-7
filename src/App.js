@@ -69,6 +69,7 @@ class App { //하나의 메소드는 하나의 역할
 
     resultOutput() {
         Console.print(`결과 : ${this.sum}`)
+        this.sum = 0;
     }
 
     calculator(param) { //계산 담당
