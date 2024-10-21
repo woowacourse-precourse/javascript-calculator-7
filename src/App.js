@@ -20,10 +20,10 @@ class App {
       let nums = [];
 
       if (input.startsWith("//")) {
-        const startIndex = str.indexOf("//") + 2;
-        const endIndex = str.indexOf("\n");
-        const sep = str.substring(startIndex, endIndex);
-        const newstr = str.slice(endIndex + 1)
+        const startIndex = input.indexOf("//") + 2;
+        const endIndex = input.indexOf("n");
+        const sep = input.substring(startIndex, endIndex - 2);
+        const newstr = input.slice(endIndex + 1)
         nums = newstr.split(sep);
 
       }
@@ -47,3 +47,4 @@ class App {
 }
 
 export default App;
+
