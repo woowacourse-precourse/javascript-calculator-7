@@ -40,10 +40,14 @@ class App {
       const separatedInput = cleanedInput.replace(separatorRegex, ",");
 
       // ,기준으로 나누고 숫자 배열 생성
-      const numbers = separatedInput
-        .split(",")
-        .map((num) => num.trim())
-        .filter((num) => num !== "")
+      const splitValues = separatedInput.split(",").map((num) => num.trim());
+
+      // 구분자 사이에 숫자가 없는 경우 에러 발생
+      if (splitValues.some((value) => value === "")) {
+        throw new Error("[Error] 구분자 사이에 숫자가 없습니다");
+      }
+
+      const numbers = splitValues
         .map((num) => Number(num))
         .filter((num) => !isNaN(num));
 
