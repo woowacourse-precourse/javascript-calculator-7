@@ -11,6 +11,20 @@ class StringCalculator {
       }
     });
   }
+  isEmpty(input) {
+    return input.trim() === "";
+  }
+  
+  add(input) {
+    if (this.isEmpty(input)) return 0;
+    const { numbers, delimiters } = this.parseInput(input);
+    const numberList = this.splitNumbers(numbers, delimiters);
+  
+    this.validateNumbers(numberList);
+  
+    return this.sumNumbers(numberList);
+  }
+  
 }
 
 export default App;
