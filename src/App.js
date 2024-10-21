@@ -18,6 +18,9 @@ class App {
 
   checkCustomDelimiter(str) {
     const endOfCustomDelimiter = str.indexOf("\n");
+    if (endOfCustomDelimiter === -1) {
+      this.throwError("덧셈할 문자열이 없습니다.");
+    }
     const expression = str.substring(endOfCustomDelimiter + 1);
     return { customDelimiter, expression };
   }
