@@ -8,29 +8,25 @@ export function isNumeric(str) {
   return /^\d+$/.test(str);
 }
 
-export function checkDefaultFormat(input) {
+function cleanInput(input, delimiters) {
   let cleanedInput = input;
-  DEFAULT_DELIMITER.forEach((delimiter) => {
+  delimiters.forEach((delimiter) => {
     cleanedInput = cleanedInput.replaceAll(delimiter, "");
   });
+  return cleanedInput;
+}
+
+export function checkInputFormat(input) {
+  let cleanedInput;
+
+  if (input.slice(0, 2) === "//" && input.slice(3, 5) === "\\n") {
+    const customDelimiter = [...DEFAULT_DELIMITER, input[2]];
+    cleanedInput = cleanInput(input.slice(5), customDelimiter);
+  } else {
+    cleanedInput = cleanInput(input, DEFAULT_DELIMITER);
+  }
   if (!isNumeric(cleanedInput)) {
     throw new Error("[ERROR] 입력 형식이 올바르지 않습니다");
   }
   return true;
-}
-
-export function checkInputFormat(input) {
-  if (input.slice(0, 2) === "//" && input.slice(3, 5) === "\\n") {
-    const customDelimiter = [...DEFAULT_DELIMITER, input[2]];
-    let remain = input.slice(5);
-    customDelimiter.forEach((delimiter) => {
-      remain = remain.replaceAll(delimiter, "");
-    });
-    if (!isNumeric(remain)) {
-      throw new Error("[ERROR] 입력 형식이 올바르지 않습니다");
-    }
-    return true;
-  }
-
-  return checkDefaultFormat(input, DEFAULT_DELIMITER);
 }
