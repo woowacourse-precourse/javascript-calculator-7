@@ -41,6 +41,11 @@ class App {
         `음수는 허용되지 않습니다: ${negativeNumbers.join(", ")}`
       );
     }
+
+    const invalidNumbers = numberList.filter((num) => isNaN(num));
+    if (invalidNumbers.length > 0) {
+      throw new Error("숫자나 구분자가 아닌 문자가 포함되어 있습니다.");
+    }
   }
 
   calculateSum(numberList) {
