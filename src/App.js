@@ -21,16 +21,14 @@ class Calculator {
   }
 
   static parseInput(input) {
-    const customDividerRegex = /^\/\/(.+)\\n(.*)$/;
-    const matchCustomDivider = input.match(customDividerRegex);
-
-    if (matchCustomDivider) {
-      const [, customDivider, numberString] = matchCustomDivider;
-
+    if (input.startsWith("//")) {
+      const endIndex = input.indexOf("\\n");
+      const customDivider = input.slice(2, endIndex);
+      const numberString = input.slice(endIndex + 2);
+      
       if (numberString.length === 0) {
         throw new Error(ERROR_MESSAGES.NO_NUMBERS_INPUT);
       }
-
       if (!numberString.includes(customDivider)) {
         throw new Error(ERROR_MESSAGES.CUSTOM_DIVIDER_NOT_USED);
       }
