@@ -35,6 +35,11 @@ class App {
           const errMessage = `[ERROR] 적절하지 않은 입력 값(Contain Whitespace: ${num})`;
           throw new Error(errMessage);
         }
+
+        if(num == ''){
+          const errMessage = `[ERROR] 적절하지 않은 입력 값(No Number Following Separator: ${splitArr})`;
+          throw new Error(errMessage);
+        }
         
         if(isNaN(num)) {
           const errMessage = `[ERROR] 적절하지 않은 입력 값(Not Number: ${num})`;
