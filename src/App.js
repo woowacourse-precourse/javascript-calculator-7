@@ -6,9 +6,9 @@ class App {
     try {
       const inputStr = await Console.readLineAsync("문자열을 입력해주세요.\n");
 
-      const separator = new RegExp(`[${DEFAULT_SEPARATOR.join("")}]`);
+      const { customSeparator, inputData } = getSeparatorAndData(inputStr);
 
-      const result = inputStr ? sumNumbers(inputStr, separator) : 0;
+      const result = sumNumbers(inputData, customSeparator);
 
       Console.print(`결과 : ${result}`);
     } catch (error) {
@@ -17,9 +17,30 @@ class App {
   }
 }
 
+// 커스텀 구분자 처리 함수
+function getSeparatorAndData(input) {
+  let customSeparator;
+  let inputData = input;
+
+  if (!input) return { customSeparator: "", inputData: "0" };
+
+  if (input.startsWith("//")) {
+    const newlineIndex = input.indexOf("\\n");
+
+    customSeparator = input.substring(2, newlineIndex);
+
+    inputData = input.substring(newlineIndex + 2);
+  } else {
+    customSeparator = new RegExp(`[${DEFAULT_SEPARATOR.join("")}]`);
+    inputData = input;
+  }
+
+  return { customSeparator, inputData };
+}
+
 // 숫자 합산 함수
-function sumNumbers(numbers, separator) {
-  const splitNumbers = numbers.split(separator);
+function sumNumbers(numbers, customSeparator) {
+  const splitNumbers = numbers.split(customSeparator);
 
   const sum = splitNumbers.reduce((acc, current) => {
     const num = parseInt(current, 10);
