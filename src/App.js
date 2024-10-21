@@ -1,8 +1,9 @@
 import { MissionUtils } from "@woowacourse/mission-utils";
 import { readLineAsync } from "./utils/readLineAsync.js";
 import { print } from "./utils/print.js";
-import { calculateSum } from "./utils/calculateSum.js";
 import { handleError } from "./utils/errorHandler.js";
+import { calculateSum } from "./utils/calculateSum.js";
+
 
 
 class App{
