@@ -1,4 +1,4 @@
-import { ERROR_MESSAGE } from "../constant/index.js";
+import { ERROR_MESSAGE } from '../constant/index.js';
 
 export class StringStorage {
   constructor(separator, string) {
@@ -29,6 +29,6 @@ export class StringStorage {
   }
 
   getSeparatorArray() {
-    return this._separator.split("");
+    return this._separator.split('');
   }
 }

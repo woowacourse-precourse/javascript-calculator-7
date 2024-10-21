@@ -1,4 +1,4 @@
-import { escapeRegExp } from "../util/escapeRegExp.js";
+import { escapeRegExp } from '../util/escapeRegExp.js';
 
 export class Pattern {
   constructor(string) {
@@ -6,6 +6,6 @@ export class Pattern {
   }
 
   makeOrPattern() {
-    return escapeRegExp(this.string).split("").join("|");
+    return escapeRegExp(this.string).split('').join('|');
   }
 }
