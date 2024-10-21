@@ -54,6 +54,10 @@ class App {
     return sumWithInitial;
   }
 
+  printSum(input) {
+    return MissionUtils.Console.print("결과 : " + input);
+  }
+
   async run() {
     try {
       const sentence = await this.getSentence();
@@ -61,6 +65,7 @@ class App {
       const splitArray = await this.splitSentence(customSeparator, findSentence);
       const numberArray = this.convertNumber(splitArray);
       const sumArray = await this.plusArray(numberArray);
+      await this.printSum(sumArray);
     } catch (error) {
       throw new Error("[ERROR]");
     }
