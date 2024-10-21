@@ -20,7 +20,7 @@ class StringCalculator {
 
         const number = Number(num);
 
-        if (isNaN(number)) {
+        if (isNaN(number) || number <= 0) {
           throw new Error(ERROR_MESSAGE.INVALID_INPUT);
         }
 
