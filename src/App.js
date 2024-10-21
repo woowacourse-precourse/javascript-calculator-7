@@ -28,10 +28,7 @@ class App {
     isOnlyNumberAndSeperators(str, seperators);
 
     // 구분자만 구성된 정규식 생성
-    const sepRegExp = new RegExp(`[${seperators}]`);
-    
-    // 구분자들을 기준으로 나눈 숫자 배열 추출
-    const arr = str.split(sepRegExp);
+    const arr = getOnlyNumberArr(str, seperators);
 
     // 숫자배열의 숫자 총 합 계산
     result = arr.map(Number).reduce((a,b) => a+b);
@@ -63,6 +60,12 @@ function isOnlyNumberAndSeperators(str, seperators) {
   if(!str.match(allRegExp)) {
     throw new Error("[ERROR] 숫자와 구분자가 아닌 다른 문자가 포함되어 있습니다.");
   } 
+}
+
+function getOnlyNumberArr(str, seperators) {
+  // 구분자만 구성된 정규식 생성
+  const sepRegExp = new RegExp(`[${seperators}]`);
+  return str.split(sepRegExp);
 }
 
 export default App;
