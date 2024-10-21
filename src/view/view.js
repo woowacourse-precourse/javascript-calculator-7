@@ -1,6 +1,6 @@
 import { Console } from "@woowacourse/mission-utils";
-import { INPUT_MESSAGE } from "../constants/constants";
-import { OUTPUT_MESSAGE } from "../constants/constants";
+import { INPUT_MESSAGE } from "../constants/constants.js";
+import { OUTPUT_MESSAGE } from "../constants/constants.js";
 
 class View {
     #read
