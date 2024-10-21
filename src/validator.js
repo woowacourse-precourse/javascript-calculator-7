@@ -1,4 +1,4 @@
-import { Error_Message } from "./message.js";
+import { ERROR_MESSAGE } from "./message.js";
 
 class Validator {
   constructor(userInput) {
@@ -8,7 +8,7 @@ class Validator {
 
   validateEmptyInput() {
     if (this.userInput.trim() === "") {
-      throw new Error(Error_Message.empty_input);
+      throw new Error(ERROR_MESSAGE.empty_input);
     }
   }
 
@@ -18,7 +18,7 @@ class Validator {
     );
 
     if (HAS_INVALID_Number) {
-      throw new Error(Error_Message.invalid_number);
+      throw new Error(ERROR_MESSAGE.invalid_number);
     }
   }
 
@@ -27,7 +27,7 @@ class Validator {
     const CUSTOM_DELIMITER = this.userInput.match(CUSTOM_DELIMITER_REGEXP);
 
     if (!CUSTOM_DELIMITER) {
-      throw new Error(Error_Message.invalid_delimiter);
+      throw new Error(ERROR_MESSAGE.invalid_delimiter);
     }
 
     const NEW_DELIMITER = CUSTOM_DELIMITER[1];
