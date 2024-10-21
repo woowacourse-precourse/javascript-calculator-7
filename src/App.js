@@ -1,10 +1,17 @@
+import { Console } from "@woowacourse/mission-utils";
+
 class App {
-    async run(STR = "//,\n123:21,23") {
+    async run() {
+        const STR = await Console.readLineAsync(
+            "덧셈할 문자열을 입력해 주세요.\n"
+        );
+
         let DIVIDER = /[,|:]/;
         let STR_NUMBERS = STR;
 
         if (STR === "") return 0;
-        else if (STR.startsWith("//") && STR.indexOf("\n") !== -1) {
+
+        if (STR.startsWith("//") && STR.indexOf("\n") !== -1) {
             DIVIDER = new RegExp(`[${STR[2]}]`);
             STR_NUMBERS = STR.slice(STR.indexOf("\n") + 1);
         }
@@ -14,7 +21,12 @@ class App {
             if (isNaN(PARSENUM)) {
                 throw new Error("[ERROR]");
             }
+            return PARSENUM;
         });
+
+        const SUM = NUMBERS.reduce((SUM, NUM) => SUM + NUM, 0);
+
+        return SUM;
     }
 }
 
