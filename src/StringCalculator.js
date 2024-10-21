@@ -10,13 +10,17 @@ class StringCalculator {
 
     async start() {
         const input = await getInput(Console)
-        if (input === "") {
+        if (this.isEmptyInput(input)) {
             return this.getOutput(); // 빈 문자열의 경우 결과 출력
         }
         const {customSeparator, slicedString} = parseInput(input);
         this.#customSeparator = customSeparator;
         this.calculator(slicedString);
         this.getOutput();
+    }
+
+    isEmptyInput(input) {
+        return input === ""
     }
 
     getOutput() {
