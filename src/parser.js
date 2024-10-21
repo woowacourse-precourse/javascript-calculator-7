@@ -1,15 +1,8 @@
-import { ERROR_MESSAGE } from "./error.js";
-import {
-  isNegativeNumber,
-  isNotNumber,
-  isCustomSeparator,
-  isDuplicateCustomSeparator,
-} from "./utils/validateInput.js";
+import { isCustomSeparator } from "./utils/validateInput.js";
+import { customInputValidator } from "./validator.js";
 
 const customInputParser = (input) => {
-  if (isDuplicateCustomSeparator(input)) {
-    throw new Error(ERROR_MESSAGE.DUPLICATE_CUSTOM_SEPARATOR);
-  }
+  customInputValidator();
   const [separatorLine, contentLine] = input.split("\\n");
   const customSeparator = separatorLine.substring(2);
 
@@ -21,15 +14,11 @@ const regularInputParser = (input) => {
 };
 
 export const userInputParser = (input) => {
-  const parsedInputArray = isCustomSeparator(input)
+  const parsedInput = isCustomSeparator(input)
     ? customInputParser(input)
     : regularInputParser(input);
 
-  if (isNotNumber(parsedInputArray)) {
-    throw new Error(ERROR_MESSAGE.NOT_NUMBER);
-  } else if (isNegativeNumber(parsedInputArray)) {
-    throw new Error(ERROR_MESSAGE.NEGATIVE_NUMBER);
-  }
+  parsedInputValidator(parsedInput);
 
   return parsedInput;
 };
