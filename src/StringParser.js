@@ -1,9 +1,5 @@
 import DelimiterHandler from "./DelimiterHandler.js";
-import {
-  DEFAULT_DELIMITER,
-  CUSTOM_DELIMITER_START,
-  CUSTOM_DELIMITER_END,
-} from "./constant.js";
+import { CUSTOM_DELIMITER_START, CUSTOM_DELIMITER_END } from "./constant.js";
 
 /**
  * 문자열을 구분자로 나누는 클래스
