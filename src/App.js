@@ -26,7 +26,7 @@ class App {
     if (str.startsWith('//')) {
       // //은 있지만 \n이 없는 경우 예외 처리(에러코드: 5)
       if (!str.includes('\\n')) {
-        throw new Error('[ERROR] 커스텀 구분자가 올바르지 않습니다.');
+        throw new Error('[ERROR] 커스텀 구분자가 올바르지 않습니다.: 5');
       }
 
       // '\n'으로 나누기
@@ -34,7 +34,7 @@ class App {
 
       // //와 \n 사이 구분자가 없을 경우 예외 처리(에러코드: 3)
       if (splitedStr.length < 2 || splitedStr[0].length <= 2) {
-        throw new Error('[ERROR] 커스텀 구분자가 올바르지 않습니다.');
+        throw new Error('[ERROR] 커스텀 구분자가 올바르지 않습니다.: 3');
       }
 
       // '//' 다음의 문자를 구분자로 사용
@@ -42,7 +42,7 @@ class App {
 
       // 구분자가 숫자일 경우 예외 처리(에러코드 : 4)
       if (!isNaN(Number(customSeprator))) {
-        throw new Error('[ERROR] 커스텀 구분자는 숫자일 수 없습니다.');
+        throw new Error('[ERROR] 커스텀 구분자는 숫자일 수 없습니다.: 4');
       }
 
       // 실제 숫자 문자열
@@ -56,11 +56,11 @@ class App {
     const sum = numbers.reduce((acc, curr) => {
       // 음수를 전달할 경우 예외 처리(에러코드: 1)
       if (curr < 0) {
-        throw new Error('[ERROR] 음수가 포함되어 있습니다.');
+        throw new Error('[ERROR] 음수가 포함되어 있습니다.: 1');
       }
       // 숫자가 아닌 값을 전달할 경우 예외 처리(에러코드: 2)
       if (isNaN(curr)) {
-        throw new Error('[ERROR] 숫자가 아닌 값이 포함되어 있습니다.');
+        throw new Error('[ERROR] 숫자가 아닌 값이 포함되어 있습니다.: 2');
       }
       return acc + curr;
     }, 0);
