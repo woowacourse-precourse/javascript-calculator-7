@@ -2,6 +2,7 @@ import { Console } from '@woowacourse/mission-utils';
 import { CALCULATER, ERROR_MESSAGES } from './constants/Message.js';
 import { SYMBOL } from './constants/Symbol.js';
 import calculate from './Calculator.js';
+import validator from './Validator.js';
 
 class App {
   async run() {
@@ -54,20 +55,7 @@ class App {
       separatedValue = userInputValue.split(defaultDelimiter);
     }
 
-    separatedValue.forEach(value => {
-      if (value.trim() === SYMBOL.empty) {
-        throw new Error(ERROR_MESSAGES.empty_value_between_delimiter);
-      }
-      const number = Number(value.trim());
-
-      if (Number.isNaN(number)) {
-        throw new Error(ERROR_MESSAGES.not_number);
-      }
-
-      if (number <= SYMBOL.zero) {
-        throw new Error(ERROR_MESSAGES.not_positive_number);
-      }
-    });
+    validator(separatedValue);
 
     const convertedNumbers = separatedValue.map(Number);
 
