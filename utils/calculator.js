@@ -40,12 +40,12 @@ import printErrorMsg from './inout.js';
     const customCaseRegex = /^\/\/([^\d\s])\n\d+(?:\1\d+)*$/; // [^\d\s]는 규칙에 해당되는 문자를 저장(캡처)
   
     if (standardCaseRegex.test(str)) {
-      console.log("[지정 구분자]");
+      //console.log("[지정 구분자]");
   
       console.log("합계 : "+ SumNumbers(str));  // 숫자 배열의 합 출력
     } 
     else if (customCaseRegex.test(str)) {
-      console.log("[커스텀 구분자]");
+      //console.log("[커스텀 구분자]");
   
       if(checkCustomString(str)) {
         console.log("합계 : "+ SumNumbers(str));  // 숫자 배열의 합 출력
