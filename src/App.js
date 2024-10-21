@@ -75,10 +75,6 @@ class App {
       for (let i = 0; i < CUSTOM_DELIMITER.length; i++) {
         let num = CUSTOM_DELIMITER[i];
 
-        if (num === '' || isNaN(num)) {
-          // 공백일 때와 숫자가 아닐때 (커스텀 문자열일 때 다른 구분자가 있는 경우)
-          throw new Error('[ERROR] 잘못된 문자열입니다.');
-        }
 
         num = parseFloat(num);
         if (num <= 0) {
@@ -92,18 +88,7 @@ class App {
 
       for (let i = 0; i < CUSTOM_DELIMITER.length; i++) {
         let num = CUSTOM_DELIMITER[i];
-
-        if (num === '' || isNaN(num)) {
-          // 공백일 때와 숫자가 아닐때 
-          throw new Error('[ERROR] 잘못된 문자열입니다.');
-        }
-
-
-        num = parseFloat(num);
-        if (num <= 0) {
-          throw new Error('[ERROR] 양수가 아닙니다.');
-        }
-        sum += num
+        sum += VALIDATE_NUMBER(num);
       }
     }
 
