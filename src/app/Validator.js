@@ -103,9 +103,7 @@ class Validator {
    */
   validate(value) {
     this.#validateDelimiter(value);
-
-    const delimitedValues = this.#delimiter.splitByDelimiters(value);
-    this.#validateDelimited(delimitedValues);
+    this.#validateDelimited(this.#delimiter.splitByDelimiters(value));
   }
 }
 
