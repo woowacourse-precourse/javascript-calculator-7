@@ -1,23 +1,29 @@
 import { Console } from "@woowacourse/mission-utils";
 
 class App {
-  startCalculator() { // 숫자 입력받는 함수
+
+  // 숫자 입력받는 함수
+  startCalculator() {
     const userInput = Console.readLineAsync('덧셈할 문자열을 입력해 주세요.\n');
     return userInput;
   }
 
-  workingCalculator(userInput) { // 계산기 작동
+  // 숫자 추출 함수
+  workingCalculator(userInput) {
     let string = [];
-    // 커스텀 구분자 추출 하고나서 숫자만 추출하기
-    if (userInput.indexOf('//') != -1 === false) {
-      const startIndex = userInput.indexOf('//') + 2;
-      const endIndex = userInput.indexOf("\n");
-      const custom = userInput.substring(startIndex, endIndex);
-      const delFirst = userInput.replace('//', '');
-      const delSecond = delFirst.replace(/\n/g, "");
-      string = delSecond.split(custom).map(Number);
+    if (userInput.indexOf('//') == -1 === false) {
+      // 커스텀 구분자 추출 하고나서 숫자만 추출
+      const startIndex = userInput.indexOf('\\n');
+      const custom = userInput.substring(2, startIndex);
+      const inputSplited = userInput.substring(startIndex + 2);
+
+      const regex = new RegExp(`[${custom}:,]`);
+
+      string = inputSplited.split(regex).map(Number);
+
+
     } else {
-      // 입력받은 값에서 숫자만 추출하는 함수
+      // 입력받은 값에서 숫자만 추출
       const changeColon = userInput.replace(":", ",");
       const comma = changeColon.split(',').map(Number);
       string = comma;
@@ -25,35 +31,38 @@ class App {
     return string;
   }
 
-  addNumber(num) { // 더하는 함수
+  // 더하는 함수
+  addNumber(num) {
     const sum = num.reduce((a, b) => (a + b));
     Console.print(`결과 :${sum}`)
   }
 
-  errorCalculator(inputSplited) { // 오류창 띄우는 함수
-    if (/\d/.test(inputSplited) === false) { // 숫자 포함 되지 않을 때 에러
-      Console.print('[ERROR]');
+  // 예외처리 함수
+  errorCalculator(inputSplited) {
+    if (inputSplited.some((num) => num < 0)) {
+      // 음수 입력했을 때
+      Console.print('[ERROR]')
       throw new Error('ERROR');
-    } if (userInput.indexOf('//') != -1 === true) { // '//'으로 시작하지 않을 때 에러
-      Console.print('[ERROR]');
-      throw new Error('ERROR');
-    } if (isNaN(inputSplited) || inputSplited < 0) { // 음수 입력했을 때
-      Console.print('[ERROR]');
+    }
+
+    if (inputSplited.some((val) => isNaN(val))) {
+      Console.print('[ERROR]')
       throw new Error('ERROR');
     }
   }
 
-  async run() {
-    try {
-      const userInput = await this.startCalculator();
+  async run() { // 메인 실행 함수
+    // 1. 문자열 입력 받기
+    const userInput = await this.startCalculator();
 
-      const inputSplited = this.workingCalculator(userInput);
+    // 2. 구분자로 입력값 변환
+    const inputSplited = this.workingCalculator(userInput);
 
-      this.addNumber(inputSplited);
-    } catch (error) {
-      this.errorCalculator(inputSplited);
-      throw error;
-    }
+    // 3. 변환한 값 더하고 출력
+    this.addNumber(inputSplited);
+
+    // 4. 예외처리
+    this.errorCalculator(inputSplited)
   }
 };
 
