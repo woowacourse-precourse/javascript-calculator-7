@@ -1,28 +1,21 @@
 import { Console } from "@woowacourse/mission-utils";
+const findCustom = /^\/\/(.*?)\\n/;
+const checkNumberRegex = /^[0-9]*$/;
 
 class App {
 
-  // 숫자 입력받는 함수
-  startCalculator() {
-    const userInput = Console.readLineAsync('덧셈할 문자열을 입력해 주세요.\n');
-    return userInput;
+  // 기본 구분자
+  #REGEX = [",", ":"];
+
+  // 숫자만 있는지 확인하는 함수
+  checkNumber(array) {
+    return array.every((data) => checkNumberRegex.test(data));
   }
 
-  // 숫자 추출 함수
-  workingCalculator(userInput) {
-    let string = [];
-    if (userInput.indexOf('//') == -1 === false) {
-      // 커스텀 구분자 추출 하고나서 숫자만 추출
-      const startIndex = userInput.indexOf('\\n');
-      const custom = userInput.substring(2, startIndex);
-      const splited = userInput.substring(startIndex + 2);
-      const regex = new RegExp(`[${custom}:,]`);
-      string = splited.split(regex).map(Number);
-    } else {
-      // 입력받은 값에서 숫자만 추출
-      string = userInput.split(/,|:/).map(Number);
-    }
-    return string;
+  // 값 입력받는 함수
+  startCalculator() {
+    let userInput = Console.readLineAsync('덧셈할 문자열을 입력해 주세요.\n');
+    return userInput;
   }
 
   // 더하는 함수
@@ -32,31 +25,37 @@ class App {
   }
 
   // 예외처리 함수
-  catchException(inputSplited) {
-    if (inputSplited.some((num) => num < 0)) {
-      // 음수 입력했을 때
-      Console.print('[ERROR]');
-      throw new Error('ERROR');
-    }
-
-    if (inputSplited.some((val) => isNaN(val))) {
-      Console.print('[ERROR]');
-      throw new Error('ERROR');
-    }
+  escapeRegExp() {
+    return this.#REGEX
+      .map((regex) => regex.replace(/[.*+?^${}()|[\]\\]/g, "\\$&"))
+      .join("|");
   }
 
-  async run() { // 메인 실행 함수
-    // 1. 문자열 입력 받기
-    const userInput = await this.startCalculator();
+  // 메인 실행 함수
+  async run() {
+    // 문자열 입력 받기
+    let userInput = await this.startCalculator();
 
-    // 2. 구분자로 입력값 변환
-    const inputSplited = this.workingCalculator(userInput);
+    // 커스텀 구분자 있는지 확인
+    if (findCustom.test(userInput)) {
+      const customRegex = findCustom.exec(userInput);
+      this.#REGEX.push(customRegex[1]);
 
-    // 3. 예외처리
-    this.catchException(inputSplited);
+      userInput = userInput.replace(findCustom, '');
+    }
 
-    // 4. 변환한 값 더하고 출력
-    this.addNumber(inputSplited);
+    const splitRegex = new RegExp(this.escapeRegExp());
+
+    // 구분자로 문자열 나누기
+    const inputArr = userInput.split(splitRegex).map(Number);
+
+    // 예외처리
+    if (!this.checkNumber(inputArr)) {
+      throw new Error('[ERROR]');
+    }
+
+    // 변환한 값 더하고 출력
+    this.addNumber(inputArr);
   }
 };
 
