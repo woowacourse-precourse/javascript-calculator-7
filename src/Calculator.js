@@ -16,8 +16,7 @@ class Calculator {
 
     this.isValidateInput(calculateText);
     const numbers = this.parseNumber(calculateText); //추출한 숫자 담기
-    const addResult = this.addNums(numbers); //덧셈 결과 담기
-    this.result = addResult;
+    this.result = this.addNums(numbers); //덧셈 결과 담기
     return this.result;
   }
 
