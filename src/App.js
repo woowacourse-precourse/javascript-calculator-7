@@ -3,7 +3,9 @@ import Validator from "./Validator.js";
 class App {
   async run() {}
 
-  getString() {}
+  getString() {
+    return Console.readLineAsync(`덧셈할 문자열을 입력해 주세요.\n`);
+  }
   getSeparatorAndNumber() {}
   findCustomSeparator() {}
   changeToRegex() {}
