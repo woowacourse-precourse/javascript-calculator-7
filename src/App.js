@@ -34,6 +34,12 @@ class App {
 
       // '//' 다음의 문자를 구분자로 사용
       customSeprator = splitedStr[0].substring(2);
+
+      // 구분자가 숫자일 경우 예외 처리(에러코드 : 4)
+      if (!isNaN(Number(customSeprator))) {
+        throw new Error('[ERROR] 커스텀 구분자는 숫자일 수 없습니다.');
+      }
+
       // 실제 숫자 문자열
       str = splitedStr.slice(1).join('');
     }
