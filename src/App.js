@@ -33,11 +33,10 @@ class App {
     const nums = numString.split(new RegExp(`[${delimiterArray.join('')}]`)).map(Number);
 
     //에러처리 => 음수랑 잘못된 문자열
-    if (nums.some((num) => num < 0 || isNaN(num))){
+    if (nums.some((num) => num < 0 || isNaN(num))) {
       throw new Error("[ERROR] 잘못된 입력 값 입니다.");
     }
-
-    return nums.reduce((sum, nums) => sum + nums, 0);
+    return nums.reduce((sum, num) => sum + num, 0);
   }
 }
 export default App;
