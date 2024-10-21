@@ -9,5 +9,10 @@ class App{
     let SEPARATOR=/[,|:]/;
     let NUMBERS=[]
     let RESULT = 0;
+
+    // 2. 구분자 분리 1 : 쉼표(,)와 클론(:) 파악 조건문
+    if (DATA.match(SEPARATOR)){
+      NUMBERS=DATA.split(SEPARATOR).map(Number)
+    }
   }
 }
