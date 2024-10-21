@@ -24,7 +24,8 @@ class App {
     if (input.startsWith("//")) {
       const customDelimiterMatch = input.match(/^\/\/(.)\n/);
       if (customDelimiterMatch) {
-        delimiter = new RegExp(customDelimiterMatch[1]);
+        const customDelimiter = customDelimiterMatch[1];
+        delimiter = new RegExp(`[,:${customDelimiter}]`);
         input = input.split("\n")[1];
       } else {
         throw new Error(`[ERROR] Invalid custom delimiter : ${input}`);
