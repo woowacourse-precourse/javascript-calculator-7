@@ -1,35 +1,36 @@
 import { Console } from "@woowacourse/mission-utils";
+import {
+  RUN_MESSAGES,
+  EXTRA_NUMBERS_MESSAGE,
+  CUSTOM_DELIMITER,
+} from "./message";
 class App {
   async run() {
-    const INPUT_MESSAGE = "덧셈할 문자열을 입력해 주세요.\n";
-    const RESULT = "결과 : ";
-    const ERROR = "[ERROR]";
-
-    const input = await Console.readLineAsync(INPUT_MESSAGE);
+    const input = await Console.readLineAsync(RUN_MESSAGES.INPUT);
     const numberArray = this.extractNumbers(input);
     const hasInvalidValue = numberArray.includes(NaN);
 
     if (hasInvalidValue || this.hasNegativeNumber(numberArray))
-      throw new Error(ERROR);
-    const result = this.calculateSum(numberArray);
-    return Console.print(`${RESULT}${result}`);
+      throw new Error(RUN_MESSAGES.ERROR);
+    const invalidCharacterRegexResult = this.calculateSum(numberArray);
+    return Console.print(
+      `${RUN_MESSAGES.RESULT}${invalidCharacterRegexResult}`
+    );
   }
 
   extractNumbers(input) {
-    const COMMA = ",";
-    const SEMICOLON = ";";
-    const CUSTOM_DELIMITER_PREFIX = "//";
-    const CUSTOM_DELIMITER_SUFFIX = "\\n";
-
-    const hasComma = this.hasSeparator(input, COMMA);
-    const hasSemicolon = this.hasSeparator(input, SEMICOLON);
+    const hasComma = this.hasSeparator(input, EXTRA_NUMBERS_MESSAGE.COMMA);
+    const hasSemicolon = this.hasSeparator(
+      input,
+      EXTRA_NUMBERS_MESSAGE.SEMICOLON
+    );
     const hasCustomDelimiterPrefix = this.hasSeparator(
       input,
-      CUSTOM_DELIMITER_PREFIX
+      EXTRA_NUMBERS_MESSAGE.CUSTOM_DELIMITER_PREFIX
     );
     const hasCustomDelimiterSuffix = this.hasSeparator(
       input,
-      CUSTOM_DELIMITER_SUFFIX
+      EXTRA_NUMBERS_MESSAGE.CUSTOM_DELIMITER_SUFFIX
     );
 
     const hasCommaAndSemicolon = hasComma && hasSemicolon;
@@ -37,32 +38,36 @@ class App {
       hasCustomDelimiterPrefix && hasCustomDelimiterSuffix;
 
     if (hasCustomSeparator) {
-      const isCustomDelimiterAtStart = input.indexOf(CUSTOM_DELIMITER_PREFIX);
+      const isCustomDelimiterAtStart = input.indexOf(
+        EXTRA_NUMBERS_MESSAGE.CUSTOM_DELIMITER_PREFIX
+      );
       return isCustomDelimiterAtStart
         ? [NaN]
         : this.splitUsingCustomDelimiterAndConvertToNumbers(
             input,
-            CUSTOM_DELIMITER_SUFFIX
+            EXTRA_NUMBERS_MESSAGE.CUSTOM_DELIMITER_SUFFIX
           );
     }
     if (hasCommaAndSemicolon)
-      return this.separatingStrings(input, [COMMA, SEMICOLON]);
-    if (hasComma) return this.separatingStrings(input, COMMA);
-    if (hasSemicolon) return this.separatingStrings(input, SEMICOLON);
+      return this.separatingStrings(input, [
+        EXTRA_NUMBERS_MESSAGE.COMMA,
+        EXTRA_NUMBERS_MESSAGE.SEMICOLON,
+      ]);
+    if (hasComma)
+      return this.separatingStrings(input, EXTRA_NUMBERS_MESSAGE.COMMA);
+    if (hasSemicolon)
+      return this.separatingStrings(input, EXTRA_NUMBERS_MESSAGE.SEMICOLON);
     return [NaN];
   }
 
-  splitUsingCustomDelimiterAndConvertToNumbers(input, CUSTOM_DELIMITER_SUFFIX) {
-    const CUSTOM_DELIMITER_PREFIX_LENGTH = 2;
-    const CUSTOM_DELIMITER_SUFFIX_LENGTH = 2;
-
-    const customDelimiterSuffixIndex = input.indexOf(CUSTOM_DELIMITER_SUFFIX);
+  splitUsingCustomDelimiterAndConvertToNumbers(input, customDelimiterSuffix) {
+    const customDelimiterSuffixIndex = input.indexOf(customDelimiterSuffix);
     const customDelimiter = input.slice(
-      CUSTOM_DELIMITER_PREFIX_LENGTH,
+      CUSTOM_DELIMITER.PREFIX_LENGTH,
       customDelimiterSuffixIndex
     );
     const stringToSeparate = input.slice(
-      customDelimiterSuffixIndex + CUSTOM_DELIMITER_SUFFIX_LENGTH
+      customDelimiterSuffixIndex + CUSTOM_DELIMITER.SUFFIX_LENGTH
     );
     return this.separatingStrings(stringToSeparate, customDelimiter);
   }
