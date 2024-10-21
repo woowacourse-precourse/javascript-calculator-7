@@ -13,6 +13,7 @@ class App {
     }
 
     const result = this.calculateSum(expression, delimiters);
+    Console.print(`결과 : ${result}`);
   }
 
   checkCustomDelimiter(str) {
