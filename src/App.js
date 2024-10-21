@@ -17,7 +17,7 @@ class App {
 
       await this.handleSeparator(afterCustomSeparator);
 
-      const result = input;
+      const result = await this.addNumbers(this.numbers);
       Console.print(`결과: ${result}`);
     } catch (error) {
       Console.print(`${error}`);
@@ -119,6 +119,17 @@ class App {
     }
 
     return num; // 유효한 숫자 반환
+  }
+
+  // 덧셈 처리하는 메서드
+  async addNumbers(numberArr) {
+    let result = 0; // 숫자 합 저장하는 변수
+
+    numberArr.forEach((num)=>{
+      result += num; // 반복문 돌면서 숫자 더하기
+    });
+
+    return result;
   }
 }
 
