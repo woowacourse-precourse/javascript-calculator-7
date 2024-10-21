@@ -1,13 +1,15 @@
 export default class CalculationService{
   #ioHandler;
+  #parser;
 
-  constructor(ioHandler){
+  constructor(ioHandler, parser){
     this.#ioHandler = ioHandler;
+    this.#parser = parser;
   }
 
   execute(){
     const rawInput = this.#ioHandler.getInput();
-    const result = rawInput;
-    this.#ioHandler.printOutput(result);
+    const parsedInput = this.#parser.parse(rawInput);
+    this.#ioHandler.displayResult(parsedInput);
   }
 }
