@@ -30,7 +30,8 @@ class App {
 
     // 커스텀 구분자 처리
     if (str.startsWith('//')) {
-      const [customDelimiter, rest] = str.split('\\n');
+      str = str.replace('\\n', '\n');
+      const [customDelimiter, rest] = str.split('\n');
       delimiter = customDelimiter[2];
       return this.sumNumbers(rest.split(delimiter));
     }
