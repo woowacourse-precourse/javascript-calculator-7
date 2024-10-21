@@ -101,16 +101,6 @@ class Delimiter {
 
   /**
    *
-   * @param {object} delimiterRegEx
-   * @param {string} value
-   * @returns {Array<string>}
-   */
-  #delimite(delimiterRegEx, value) {
-    return value.split(delimiterRegEx);
-  }
-
-  /**
-   *
    * @param {string} value
    * @returns {string}
    */
@@ -128,7 +118,7 @@ class Delimiter {
    * @returns {Array<string>}
    */
   #splitByDelimiters(value) {
-    return this.#delimite(this.#getDelimiterRegEx(value), this.#selectDelimiterValue(value));
+    return this.#selectDelimiterValue(value).split(this.#getDelimiterRegEx(value));
   }
 
   /**
