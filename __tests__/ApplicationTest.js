@@ -78,4 +78,43 @@ describe('문자열 계산기', () => {
     const app = new App();
     await expect(app.run()).rejects.toThrow('[ERROR]');
   });
+
+  test('예외 테스트', async () => {
+    const inputs = ['1,2,,'];
+    mockQuestions(inputs);
+
+    const app = new App();
+    await expect(app.run()).rejects.toThrow('[ERROR]');
+  });
+
+  test('예외 테스트', async () => {
+    const inputs = ['1,2,\n'];
+    mockQuestions(inputs);
+
+    const app = new App();
+    await expect(app.run()).rejects.toThrow('[ERROR]');
+  });
+
+  test('커스텀 문자가 정규식 특수문자인 경우', async () => {
+    const inputs = ['//[\n1[2'];
+    mockQuestions(inputs);
+
+    const logSpy = getLogSpy();
+    const outputs = ['결과 : 3'];
+
+    const app = new App();
+    await app.run();
+
+    outputs.forEach((output) => {
+      expect(logSpy).toHaveBeenCalledWith(expect.stringContaining(output));
+    });
+  });
+
+  test('커스텀 구분자가 뒤에 나오는 경우', async () => {
+    const inputs = ['1[2//[\n'];
+    mockQuestions(inputs);
+
+    const app = new App();
+    await expect(app.run()).rejects.toThrow('[ERROR]');
+  });
 });
