@@ -20,11 +20,7 @@ export const runCalculator = async () => {
 }
 
 // 사용자에게 계산식 입력 받는 메서드
-const getUserInput = async () => {
-    const userInput = await Console.readLineAsync(INPUT_PROMPTS.USER_INPUT_PROMPT);
-
-    return userInput;
-}
+const getUserInput = async () => await Console.readLineAsync(INPUT_PROMPTS.USER_INPUT_PROMPT);
 
 // 구분자 정의 메서드
 const defineDelimiters = (userInput, delimiters) => {
@@ -49,13 +45,7 @@ const splitStringByDelimiters = (userInput, delimiters) => {
 }
 
 // 문자 리스트를 숫자 리스트로 변환하는 메서드
-const convertToNumberList = (splitedString) => {
-    return splitedString.map(Number);
-}
+const convertToNumberList = splitedString => splitedString.map(Number);
 
 // 모든 수의 합 계산 메서드
-const calculateSum = (numbers) => {
-    const sum = numbers.reduce((accumulator, currentValue) => accumulator + currentValue, 0);
-
-    return sum;
-}
+const calculateSum = numbers => numbers.reduce((accumulator, currentValue) => accumulator + currentValue, 0);
