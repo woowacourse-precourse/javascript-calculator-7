@@ -36,4 +36,30 @@ describe('Validator', () => {
       });
     });
   });
+
+  describe('validateNumberString', () => {
+    test('올바른 숫자 문자열과 구분자에 대한 예외 발생 여부 확인', () => {
+      const numberStringAndDelimiters = [
+        {numberString: '1,2:3', delimiters : [',', ':']},
+        {numberString: '1', delimiters : [',', ':']},
+        {numberString: ';,1,2:', delimiters : [',', ':', ';']},
+      ];
+      numberStringAndDelimiters.forEach( e => {
+        expect(() => validator.validateNumberString(e.numberString, e.delimiters)).not.toThrow();
+      });
+    });
+  
+    test('숫자와 구분자 이외의 문자 포함 시 예외 발생 확인', () => {
+      expect(() => validator.validateNumberString('1,2:a', [',', ':']))
+        .toThrow(ERROR_MESSAGE.INVALID_INPUT);
+    });
+  
+    test('빈 문자열의 유효성 확인', () => {
+      expect(() => validator.validateNumberString('', [',', ':'])).not.toThrow();
+    });
+  
+    test('구분자만 있는 문자열의 유효성 확인', () => {
+      expect(() => validator.validateNumberString(',:', [',', ':'])).not.toThrow();
+    });
+  });
 });
