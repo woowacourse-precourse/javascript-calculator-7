@@ -6,7 +6,41 @@ class App {
 
     const replacedString = input.replaceAll(":", ",");
     let resultString = replacedString;
+
+    if (validateIncludeCustomSeperator(replacedString)) {
+      const customSeprator = getCustomSeperator(resultString);
+
+      if (customSeprator === "-") {
+        validateMinusNumberInDashSperator(resultString);
+      }
+
+      resultString = resultString.replaceAll(customSeprator, ",");
+      resultString = resultString.replaceAll("//,\\n", "");
+    }
   }
 }
+
+const validateIncludeCustomSeperator = (string) => {
+  const CUSTOM_SPERATOR_REGEX = /\/\/.+\\n/;
+  return CUSTOM_SPERATOR_REGEX.test(string);
+};
+
+const getCustomSeperator = (string) => {
+  const MATCH_REGEX = /\/\/(.*?)\\n/;
+  const match = string.match(MATCH_REGEX);
+
+  if (match) {
+    return match[1];
+  } else {
+    throw new Error("[ERROR] 올바르지 않은 형식입니다.");
+  }
+};
+
+const validateMinusNumberInDashSperator = (string) => {
+  if (string.indexOf("--") >= 0) {
+    throw new Error("[ERROR] 음수는 입력 불가능합니다.");
+  }
+};
+
 
 export default App;
