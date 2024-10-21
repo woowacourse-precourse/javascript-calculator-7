@@ -130,4 +130,49 @@ describe('문자열 계산기', () => {
 
     await expect(app.run()).rejects.toThrow('[ERROR]');
   });
+
+  test('null 예외 테스트', async () => {
+    const inputs = [null];
+    mockQuestions(inputs);
+
+    const app = new App();
+
+    await expect(app.run()).rejects.toThrow('[ERROR]');
+  });
+
+  test('undefined 예외 테스트', async () => {
+    const inputs = [undefined];
+    mockQuestions(inputs);
+
+    const app = new App();
+
+    await expect(app.run()).rejects.toThrow('[ERROR]');
+  });
+
+  test('공백 예외 테스트', async () => {
+    const inputs = ['    '];
+    mockQuestions(inputs);
+
+    const app = new App();
+
+    await expect(app.run()).rejects.toThrow('[ERROR]');
+  });
+
+  test('문자 예외 테스트', async () => {
+    const inputs = ['abc'];
+    mockQuestions(inputs);
+
+    const app = new App();
+
+    await expect(app.run()).rejects.toThrow('[ERROR]');
+  });
+
+  test('숫자와 문자 예외 테스트', async () => {
+    const inputs = ['1,2,abc'];
+    mockQuestions(inputs);
+
+    const app = new App();
+
+    await expect(app.run()).rejects.toThrow('[ERROR]');
+  });
 });
