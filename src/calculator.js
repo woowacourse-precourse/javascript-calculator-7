@@ -31,5 +31,11 @@ export function tokenizeString(input, dividerList) {
 }
 
 function convertToNumber(token) {
+  if (token === '') {
+    throw new Error("[ERROR] 빈 문자열을 연산할 수 없습니다.");
+  }
+  if (isNaN(token)) {
+    throw new Error("[ERROR] 숫자가 아닌 경우 연산할 수 없습니다.");
+  }
   return parseInt(token);
 }
