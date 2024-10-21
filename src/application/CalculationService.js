@@ -1,6 +1,8 @@
 export default class CalculationService {
   #ioPort;
+
   #parser;
+
   #Calculator;
 
   constructor(ioPort, parser, calculator) {

@@ -1,15 +1,17 @@
-import { MissionUtils } from '@woowacourse/mission-utils';
 import { INPUT_MESSAGE, OUTPUT_MESSAGE } from '../constant/MESSAGE.js';
 import { IOPort } from '../application/IOPort.js';
+import { MissionUtils } from '@woowacourse/mission-utils';
 
-const Console = MissionUtils.Console;
+const { Console } = MissionUtils;
 
 export default class IOHandler extends IOPort {
-  async getInput() {
+  static async getInput() {
     const input = await Console.readLineAsync(INPUT_MESSAGE.INPUT_GUIDE);
+
     return input;
   }
-  displayResult(result) {
-    Console.print(OUTPUT_MESSAGE.RESULT(result));
+
+  static displayResult(result) {
+    Console.print(OUTPUT_MESSAGE.result(result));
   }
 }

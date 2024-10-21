@@ -1,5 +1,5 @@
 export default class NumberSplitter {
-  split(delimiters, str) {
+  static split(delimiters, str) {
     const result = str.split('').reduce((acc, char) => {
       if (delimiters.includes(char)) {
         if (acc.currentNumber) {
@@ -9,12 +9,14 @@ export default class NumberSplitter {
       } else {
         acc.currentNumber += char;
       }
+
       return acc;
     }, { numbers: [], currentNumber: '' });
-    
+
     if (result.currentNumber) {
       result.numbers.push(parseInt(result.currentNumber, 10));
     }
+
     return result.numbers;
   }
 }

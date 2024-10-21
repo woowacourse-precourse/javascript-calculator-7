@@ -1,10 +1,10 @@
 import NumberSplitter from '../../src/application/parser/NumberSplitter.js';
 
 describe('NumberSplitter', () => {
-  let numberSplitter;
+  let numberSplitter = NumberSplitter;
 
   beforeEach(() => {
-    numberSplitter = new NumberSplitter();
+    numberSplitter = NumberSplitter;
   });
 
   describe('split 메소드', () => {
@@ -35,8 +35,7 @@ describe('NumberSplitter', () => {
 
     test('큰 숫자 처리 확인', () => {
       const result = numberSplitter.split([','], '1000000000000,200000000000,30000000000');
-      expect(result).toEqual([1000000000000,200000000000,30000000000]);
+      expect(result).toEqual([1000000000000, 200000000000, 30000000000]);
     });
-
   });
 });

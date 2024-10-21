@@ -1,12 +1,12 @@
+import { DEFAULT_DELIMITERS } from '../../src/constant/DELIMITER.js';
+import { ERROR_MESSAGE } from '../../src/constant/MESSAGE.js';
 import Validator from '../../src/validation/Validator.js';
-import { ERROR_MESSAGE } from "../../src/constant/MESSAGE.js";
-import { DEFAULT_DELIMITERS } from "../../src/constant/DELIMITER.js";
 
 describe('Validator', () => {
-  let validator;
+  let validator = null;
 
   beforeEach(() => {
-    validator = new Validator();
+    validator = Validator;
   });
 
   describe('validateCustomDelimiter', () => {
@@ -14,7 +14,7 @@ describe('Validator', () => {
       const correctDelimiters = [';', '\\', 'a', 'A', '가', ' '];
       correctDelimiters.forEach(delimiter => {
         expect(() => validator.validateCustomDelimiter(delimiter)).not.toThrow();
-      });      
+      });
     });
 
     test('null 값에 대한 유효성 확인', () => {
@@ -44,17 +44,17 @@ describe('Validator', () => {
         {numberString: '1', delimiters : [',', ':']},
         {numberString: ';,1,2:', delimiters : [',', ':', ';']},
       ];
-      numberStringAndDelimiters.forEach( e => {
+      numberStringAndDelimiters.forEach(e => {
         expect(() => validator.validateNumberString(e.numberString, e.delimiters)).not.toThrow();
       });
     });
   
     test('숫자와 구분자 이외의 문자 포함 시 예외 발생 확인', () => {
       const numberStringAndDelimiters = [
-        {numberString: ' ', delimiters : [',', ':']},
-        {numberString: '1,2:a', delimiters : [',', ':']},
+        { numberString: ' ', delimiters: [',', ':'] },
+        { numberString: '1,2:a', delimiters: [',', ':'] },
       ];
-      numberStringAndDelimiters.forEach( e => {
+      numberStringAndDelimiters.forEach(e => {
         expect(() => validator.validateNumberString(e.numberString, e.delimiters))
           .toThrow(ERROR_MESSAGE.INVALID_INPUT);
       });

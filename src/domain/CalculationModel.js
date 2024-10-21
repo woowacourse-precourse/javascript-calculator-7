@@ -1,10 +1,10 @@
 export default class CalculationModel {
-  #numbers
+  #numbers;
 
   constructor(numbers) {
     this.#numbers = numbers;
   }
-  
+
   getNumbers() {
     return [...this.#numbers];
   }

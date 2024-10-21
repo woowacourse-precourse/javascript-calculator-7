@@ -17,8 +17,7 @@ describe('InputSeparator', () => {
   describe('hasCustomDelimiter 메서드 테스트', () => {
     test('hasCustomDelimiter 메서드가 커스텀 구분자 존재 여부를 올바르게 판별하는지 확인', () => {
       TEST_CASES.forEach(({ input, hasCustom }) => {
-        const inputSeparator = new InputSeparator();
-        const result = inputSeparator.hasCustomDelimiter(input);
+        const result = InputSeparator.hasCustomDelimiter(input);
         expect(result).toBe(hasCustom);
       });
     });

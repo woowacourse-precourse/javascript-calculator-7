@@ -1,8 +1,8 @@
-import { MissionUtils } from '@woowacourse/mission-utils';
 import IOHandler from '../../src/presentation/IOHandler.js';
+import { MissionUtils } from '@woowacourse/mission-utils';
 
 describe('IOHandler 테스트', () => {
-  const mockReadLineAsync = (input) => {
+  const mockReadLineAsync = input => {
     MissionUtils.Console.readLineAsync = jest.fn().mockResolvedValue(input);
   };
 
@@ -13,8 +13,7 @@ describe('IOHandler 테스트', () => {
       mockReadLineAsync(input);
 
       const readLineSpy = jest.spyOn(MissionUtils.Console, 'readLineAsync');
-      const ioHandler = new IOHandler();
-      await ioHandler.getInput();
+      await IOHandler.getInput();
 
       expect(readLineSpy).toHaveBeenCalledWith(expectedPrompt);
     });
@@ -29,9 +28,8 @@ describe('IOHandler 테스트', () => {
       ];
 
       for (const { input, expected } of testCases) {
-        const ioHandler = new IOHandler();
         mockReadLineAsync(input);
-        const result = await ioHandler.getInput();
+        const result = await IOHandler.getInput();
         expect(result).toBe(expected);
       }
     });
@@ -48,7 +46,7 @@ describe('IOHandler 테스트', () => {
       const printSpy = jest.spyOn(MissionUtils.Console, 'print');
 
       testCases.forEach(({ input, expected }) => {
-        const ioHandler = new IOHandler();
+        const ioHandler = IOHandler;
         ioHandler.displayResult(input);
         expect(printSpy).toHaveBeenCalledWith(expected);
         printSpy.mockClear();

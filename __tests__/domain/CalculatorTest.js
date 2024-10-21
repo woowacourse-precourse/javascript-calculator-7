@@ -1,7 +1,7 @@
 import Calculator from '../../src/domain/Calculator.js';
 
 describe('CalculatorModel', () => {
-  let calculator;
+  let calculator = null;
 
   beforeEach(() => {
     calculator = new Calculator();
