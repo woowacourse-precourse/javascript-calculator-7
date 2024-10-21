@@ -31,7 +31,14 @@ class App { //하나의 메소드는 하나의 역할
     sliceString(param) {//커스텀 구분자 슬라이싱
         const lastIdx = param.indexOf("\\n")
         this.customSeparator = param.slice(2, lastIdx)
+        this.isCustomSeparatorError(this.customSeparator)
         return param.slice(lastIdx + 2)
+    }
+
+    isCustomSeparatorError(param) {
+        if (param.length > 1 || !isNaN(param)) {
+            throw new Error("[Error]: 에러발생")
+        }
     }
 
     preprocessing(param) {
