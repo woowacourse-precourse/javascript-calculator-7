@@ -1,7 +1,4 @@
-const DEFAULT_DELIMITER_REGEX = /,|:/g;
-const CUSTOM_DELIMITER_REGEX = /^\/\/([\s\S]*?)\\n/g;
-const SPACE_REGEX = /\s/g;
-const REGEX_META_CHARACTERS = /[-\/\\^$*+?.()|[\]{}]/g;
+import { DELIMITER_REGEX, REGEX_PATTERNS } from '../constants/regex';
 
 /**
  * 문자열에서 구분자를 파싱하고, 숫자로 변환하는 클래스입니다.
@@ -15,21 +12,24 @@ class Parser {
    * @throws {Error} 커스텀 구분자가 잘못된 경우 오류를 발생시킵니다.
    */
   static parseDelimiter(inputValue) {
-    if (CUSTOM_DELIMITER_REGEX.test(inputValue)) {
-      const [matchedCustomDelimiterFormatString, customDelimiter] =
-        inputValue.match(CUSTOM_DELIMITER_REGEX);
+    if (DELIMITER_REGEX.CUSTOM.test(inputValue)) {
+      const [matchedCustomDelimiterFormatString, customDelimiter] = inputValue.match(
+        DELIMITER_REGEX.CUSTOM
+      );
 
       this.validateCustomDelimiter(customDelimiter);
 
       const parsedString = inputValue.replace(matchedCustomDelimiterFormatString, ''); // 커스텀 구분자 형식 제거
-      const delimiterRegex = new RegExp(customDelimiter.replace(REGEX_META_CHARACTERS, '\\$&')); // 정규식 메타 문자 이스케이프
+      const delimiterRegex = new RegExp(
+        customDelimiter.replace(REGEX_PATTERNS.META_CHARACTERS, '\\$&') // 정규식 메타 문자 이스케이프
+      );
 
       // 커스텀 구분자를 사용하는 경우
       return { parsedString, delimiterRegex };
     }
 
     // 기본 구분자를 사용하는 경우
-    return { parsedString: inputValue, delimiterRegex: DEFAULT_DELIMITER_REGEX };
+    return { parsedString: inputValue, delimiterRegex: DELIMITER_REGEX.DEFAULT };
   }
 
   /**
@@ -52,7 +52,7 @@ class Parser {
    * @throws {Error} 커스텀 구분자가 유효하지 않을 경우 오류를 발생시킵니다.
    */
   static validateCustomDelimiter(customDelimiter) {
-    if (!customDelimiter || SPACE_REGEX.test(customDelimiter)) {
+    if (!customDelimiter || REGEX_PATTERNS.SPACE.test(customDelimiter)) {
       throw new Error('[ERROR] 커스텀 구분자가 입력되지 않았습니다.');
     }
 
