@@ -25,11 +25,10 @@ class App {
   }
 
   caculateSum = (string) => {
-    const RETURNS = {}
     let sliceString = '';
     let sum = 0;
     //커스텀 구분자 가져오기
-    RETURNS = this.getCustomReturns(string)
+    const RETURNS = this.getCustomReturns(string)
     let str = string.toString()
 
     if (RETURNS.customKey === '') {
