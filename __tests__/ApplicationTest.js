@@ -1,8 +1,12 @@
 // __tests__/ApplicationTest.js
 
-import { MissionUtils } from "@woowacourse/mission-utils";
+import { MissionUtils } from '@woowacourse/mission-utils';
 import App from '../src/App.js';
 
+/**
+ * 사용자 입력을 모킹하는 함수
+ * @param {string[]} inputs - 순서대로 입력될 문자열 배열
+ */
 const mockQuestions = (inputs) => {
   MissionUtils.Console.readLineAsync = jest.fn();
 
@@ -12,6 +16,10 @@ const mockQuestions = (inputs) => {
   });
 };
 
+/**
+ * Console.print 메서드를 스파이하는 함수
+ * @returns {jest.SpyInstance} - 스파이 인스턴스
+ */
 const getLogSpy = () => {
   const logSpy = jest.spyOn(MissionUtils.Console, 'print');
   logSpy.mockClear();
@@ -102,4 +110,25 @@ describe('문자열 계산기 - 기본 기능', () => {
 
     expect(logSpy).toHaveBeenCalledWith(expect.stringContaining('[ERROR] 유효한 숫자가 아닙니다.'));
   });
+
+  
+  });
+
+  describe('문자열 계산기 - 커스텀 구분자', () => {
+    // 커스텀 구분자 기능 테스트 추가
+  test('커스텀 구분자를 사용하여 숫자를 더한다', async () => {
+    const inputs = ['//;\n1;2;3'];
+    mockQuestions(inputs);
+
+    const logSpy = getLogSpy();
+    const outputs = ['결과 : 6'];
+
+    const app = new App();
+    await app.run();
+
+    outputs.forEach((output) => {
+      expect(logSpy).toHaveBeenCalledWith(expect.stringContaining(output));
+    });
+  });
+
 });

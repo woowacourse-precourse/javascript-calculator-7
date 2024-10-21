@@ -1,7 +1,10 @@
 // src/App.js
 
-import { MissionUtils } from "@woowacourse/mission-utils";
+import { MissionUtils } from '@woowacourse/mission-utils';
 
+/**
+ * 문자열 계산기 클래스
+ */
 class App {
   /**
    * 애플리케이션 실행 메서드
@@ -15,7 +18,7 @@ class App {
     } catch (error) {
       MissionUtils.Console.print(`[ERROR] ${error.message}`);
     }
-    // Console.close()는 패키지에 존재하지 않으므로 제거합니다.
+    // 프로그램 종료 시 process.exit()를 호출하지 않음
   }
 
   /**
@@ -37,23 +40,48 @@ class App {
    * @returns {number} - 계산 결과
    */
   calculate(input) {
-    // 빈 문자열을 입력받는다면 0을 반환
     if (input === '') {
       return 0;
     }
 
-    const numbers = this.parseInput(input);
+    const delimiters = this.extractDelimiters(input);
+    const numbers = this.parseInput(input, delimiters);
     return this.sumNumbers(numbers);
+  }
+
+  /**
+   * 입력된 문자열에서 구분자를 추출하는 메서드
+   * @param {string} input - 입력된 문자열
+   * @returns {string[]} - 구분자 배열
+   */
+  extractDelimiters(input) {
+    const custom_delimiter_pattern = /^\/\/(.+)\n/;
+    const match = input.match(custom_delimiter_pattern);
+    if (match) {
+      const delimiterSection = match[1];
+      // 현재는 한 개의 구분자만 처리하지만, 확장성을 위해 배열로 반환
+      const delimiters = delimiterSection.split(',').map((delimiter) => this.escapeRegex(delimiter));
+      return delimiters;
+    }
+    // 기본 구분자: 쉼표(,)와 콜론(:)
+    return [',', ':'];
   }
 
   /**
    * 입력된 문자열을 숫자 배열로 변환하는 메서드
    * @param {string} input - 파싱할 문자열
+   * @param {string[]} delimiters - 구분자 배열
    * @returns {number[]} - 숫자 배열
    */
-  parseInput(input) {
-    const delimiters = [',', ':'];
-    const tokens = input.split(new RegExp(`[${delimiters.join('')}]`));
+  parseInput(input, delimiters) {
+    // 커스텀 구분자가 있는 경우 구분자 선언 부분을 제거
+    const custom_delimiter_pattern = /^\/\/(.+)\n/;
+    const sanitizedInput = input.replace(custom_delimiter_pattern, '');
+
+    // 구분자 배열을 정규표현식 패턴으로 변환
+    const delimiter_regex = new RegExp(`[${delimiters.join('')}]`);
+
+    const tokens = sanitizedInput.split(delimiter_regex);
 
     const numbers = tokens.map((token) => {
       const number = Number(token);
@@ -76,6 +104,15 @@ class App {
    */
   sumNumbers(numbers) {
     return numbers.reduce((acc, curr) => acc + curr, 0);
+  }
+
+  /**
+   * 정규표현식에서 특수문자를 이스케이프하는 메서드
+   * @param {string} delimiter - 구분자 문자열
+   * @returns {string} - 이스케이프된 구분자
+   */
+  escapeRegex(delimiter) {
+    return delimiter.replace(/[.*+?^${}()|[\]\\]/g, '\\$&');
   }
 }
 
