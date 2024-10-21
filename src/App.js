@@ -19,7 +19,7 @@ class App {
       let SEPARATOR = [",", ":"];
 
       // 2-2. 커스텀 구분자 - "//로 시작시 커스텀 구분자로 설정"
-      const CUSTOM_SEPARATOR = INPUT.match(/^\/\/\(.+)\\n(.+)/);
+      const CUSTOM_SEPARATOR = INPUT.match(/^\/\/(.+)\\n(.+)/);
 
       if (CUSTOM_SEPARATOR) {
         // 커스텀 구분자가 존재하면 기본 구분자에 추가
