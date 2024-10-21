@@ -1,3 +1,4 @@
+// @ts-check
 import { calculateTotal } from '../lib/utils.js';
 import Delimiter from './Delimiter.js';
 

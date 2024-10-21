@@ -1,3 +1,4 @@
+// @ts-check
 import { Console } from '@woowacourse/mission-utils';
 import { trimWhitespace } from '../lib/utils.js';
 

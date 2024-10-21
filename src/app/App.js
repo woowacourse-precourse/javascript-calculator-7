@@ -1,3 +1,4 @@
+// @ts-check
 import View from './View.js';
 import Validator from './Validator.js';
 import Calculator from './Calculator.js';

@@ -1,3 +1,4 @@
+// @ts-check
 import { isNumericString, isPositiveNumber, trimWhitespace } from '../lib/utils.js';
 import SchemaValidator from '../lib/SchemaValidator.js';
 import Error from './Error.js';
@@ -45,6 +46,7 @@ class Validator {
    */
   #isNotEmptyCustomDelimiter(value) {
     if (this.#delimiter.hasCustomDelimiter(value)) {
+      // @ts-ignore - hasCustomDelimiter를 확인한 value는 getCustomDelimiter에서 null을 반환하지 않는다.
       return !(trimWhitespace(this.#delimiter.getCustomDelimiter(value)) === '');
     }
 
@@ -58,6 +60,7 @@ class Validator {
    */
   #isNotNumericCustomDelimiter(value) {
     if (this.#delimiter.hasCustomDelimiter(value)) {
+      // @ts-ignore - hasCustomDelimiter를 확인한 value는 getCustomDelimiter에서 null을 반환하지 않는다.
       return !isNumericString(this.#delimiter.getCustomDelimiter(value));
     }
 
