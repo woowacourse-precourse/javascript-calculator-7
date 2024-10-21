@@ -29,9 +29,6 @@ class Calculator {
       if (numberString.length === 0) {
         throw new Error(ERROR_MESSAGES.NO_NUMBERS_INPUT);
       }
-      if (!numberString.includes(customDivider)) {
-        throw new Error(ERROR_MESSAGES.CUSTOM_DIVIDER_NOT_USED);
-      }
 
       return { divider: customDivider, numberString };
     }
@@ -53,6 +50,13 @@ class Calculator {
   }
 
   static createNumberArray(numberString, divider) {
+    console.log('🚀 numberString', numberString);
+    console.log('🚀 divider', divider);
+    if (divider.includes(",") && divider.includes(":")) {
+      let numberArray = numberString.split(',').flatMap(numStr => numStr.split(':')).map(Number);
+      return numberArray;
+    }
+
     if (divider == ",") {
       let numberArray = numberString.split(",").map(Number);
       return numberArray;
@@ -63,15 +67,11 @@ class Calculator {
       return numberArray;
     }
 
-    if (divider.includes(",") && divider.includes(":")) {
-      let numberArray = numberString.split(',').flatMap(numStr => numStr.split(':')).map(Number);
-      return numberArray;
-    }
-
     return numberString.split(divider).map(Number);
   }
 
   static sum(numberArray) {
+    console.log('🚀 numberArray', numberArray);
     if (numberArray.some(isNaN)) {
       throw new Error(ERROR_MESSAGES.INVALID_INPUT);
     }
