@@ -67,17 +67,32 @@ class App {
     const formula = userInput.replace(customDelimiterRegex, "");
 
 
-     // 수식에서 숫자를 추출하는 함수
-     function extractNumbers(string, delimiter) {
+    // 수식에서 숫자를 추출하는 함수
+    function extractNumbers(string, delimiter) {
       return string
           .split(delimiter)
           .map((s) => s.trim()) // 공백 제거
           .filter((s) => s !== ""); // 빈 문자열 제거
-  }
+    }
 
     // 추출된 숫자 배열 생성
     const numbers = extractNumbers(formula, customDelimiter || /,|:/);
+    
+    // 값이 숫자인지 확인하는 함수
+    const isNumber = (value) => !isNaN(value);
+
+    // 숫자 검증 함수
+    const validateExtractedNumbers = (numbers) => {
+                numbers.forEach((n) => {
+                    if (!isNumber(n)) throwError(errorMessages.invalidNumber);
+                });
+    };
+    
+    // 숫자 검증 실행
+    validateExtractedNumbers(numbers);
     }
+
+    
 
     
 }
