@@ -73,7 +73,7 @@ class App { //하나의 메소드는 하나의 역할
 
     calculator(param) { //계산 담당
         const numberArray = this.preprocessing(param)
-        this.sum = numberArray.reduce((a, b) => a + b)
+        this.sum = numberArray.reduce((a, b) => a + b, 0)
     }
 }
 
