@@ -19,7 +19,7 @@ class App { //하나의 메소드는 하나의 역할
     }
 
     isCustom(param) { //커스텀 구분자 여부 판단
-        const lastIdx = param.indexOf("\\n")
+        const lastIdx = param.indexOf("\n")
         if (lastIdx === -1) {
             return false
         }
@@ -29,7 +29,7 @@ class App { //하나의 메소드는 하나의 역할
     }
 
     sliceString(param) {//커스텀 구분자 슬라이싱
-        const lastIdx = param.indexOf("\\n")
+        const lastIdx = param.indexOf("\n")
         this.customSeparator = param.slice(2, lastIdx)
         this.isCustomSeparatorError(this.customSeparator)
         return param.slice(lastIdx + 2)
