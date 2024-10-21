@@ -46,6 +46,23 @@ class App {
     
     let sum = 0;
 
+    const VALIDATE_NUMBER = (num) => {
+      if (num === '' || isNaN(num)) {
+        throw new Error('[ERROR] 잘못된 문자열입니다.');
+      }
+
+      if (num.endsWith('.')) {
+        throw new Error('[ERROR] 숫자 끝에 소수점이 있습니다.');
+      }
+
+      num = parseFloat(num);
+      if (num <= 0) {
+        throw new Error('[ERROR] 양수가 아닙니다.');
+      }
+
+      return num;
+    }
+
     if (customSeparator.length !== 0) {
       const escapedSeparators = customSeparator.map(separator => {
         return separator.replace(/[-\/\\^$.*+?()[\]{}|]/g, '\\$&'); 
