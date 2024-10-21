@@ -37,16 +37,32 @@ class App {
     let numbers = [];
 
     try {
-      numbers = numbersString.split(regex).map((num) => {
-        // console.log(`num: "${num}"`);
-        return parseInt(num, 10);
-      });
+      numbers = numbersString.split(regex).map((num) => parseInt(num, 10));
     } catch (error) {
       throw new Error('[ERROR] 잘못된 입력입니다.');
     }
 
+    this.validateNumbers(numbers);
+
     return numbers.reduce((acc, cur) => acc + cur, 0);
   };
+
+  validateNumbers(numbers) {
+    if (numbers.empty) {
+      throw new Error('[ERROR] 잘못된 입력입니다.');
+    }
+    for (const num of numbers) {
+      if (isNaN(num)) {
+        throw new Error('[ERROR] 잘못된 입력입니다.');
+      }
+      if (num === 0) {
+        throw new Error('[ERROR] 0은 허용되지 않습니다.');
+      }
+      if (num < 0) {
+        throw new Error('[ERROR] 음수는 허용되지 않습니다.');
+      }
+    }
+  }
 }
 
 export default App;
