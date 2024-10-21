@@ -10,6 +10,9 @@ class App {
         );
 
         if (input[0] == '/') {
+            if (input.slice(0, 2) !== '//' || input.slice(3, 5) !== '\\n') {
+                this.throwError('커스텀 구분자 인식 형식을 따라야 합니다.');
+            }
             [distinct, input] = awareCustomSeprator(input, distinct);
             if (distinct[distinct.length - 1].length > 1) {
                 this.throwError(
