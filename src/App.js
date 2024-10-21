@@ -18,18 +18,23 @@ async getInput() {
   return await Console.readLineAsync('');
 }
 
-// 숫자 추출: 구분자 분리 + 숫자 변환 메소드
+// 숫자 추출: 구분자 분리 + 합 계산 메소드
 extractNumbers(input) {
-let custom = ',:'; 
+// 기본 구분자
+let custom = ',:';  
 let sum = 0; 
 
+// 커스텀 구분자
 if(input.slice(0,2) === "//"){
   custom=input.slice(2,3);
   input=input.slice(5);
 }
+
+// 구분자 분리
 const delimiter = new RegExp(`[${custom},:]+`);
 const result = input.split(delimiter);
 
+// 합 계산
 for (let i = 0; i < result.length; i++) {
   if (result[i] === "" || isNaN(result[i])) {
     sum += 0; 
