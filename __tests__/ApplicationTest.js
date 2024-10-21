@@ -38,6 +38,6 @@ describe("문자열 계산기", () => {
 
     const app = new App();
 
-    await expect(app.run()).rejects.toThrow("[ERROR]");
+    await expect(app.run()).rejects.toThrow("[ERROR]: 잘못된 값입니다.");
   });
 });
