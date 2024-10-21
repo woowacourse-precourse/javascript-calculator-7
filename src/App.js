@@ -6,7 +6,6 @@ class App {
 
   // 기본 구분자
   #REGEX = [",", ":"];
-  #SUM = 0;
 
   // 숫자만 있는지 확인하는 함수
   checkNumber(array) {
