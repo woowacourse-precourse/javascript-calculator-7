@@ -57,7 +57,7 @@ class App {
       throw new Error('[ERROR] 문장의 마지막은 숫자로 끝내야 합니다!');
     }
     if (CHECK_DIGIT_NUMBER.test(text)) {
-      throw new Error(`[ERROR] 최대 한 자리 숫자만 허용하고 있습니다!`);
+      throw new Error('[ERROR] 최대 한 자리 숫자만 허용하고 있습니다!');
     }
     if (!CHECK_NUMBER_DELIMITER_PATTERN_REGEX.test(text)) {
       throw new Error(`[ERROR] 허용되지 않은 구분자가 포함되어있습니다! 사용가능한 구분자: ${delimiter},:`);
@@ -66,16 +66,24 @@ class App {
     return text;
   }
 
+  extractNumbers(number_line, delimiter) {
+    const SPLIT_REGEX = new RegExp(`[${delimiter},:]`);
+    return number_line.split(SPLIT_REGEX).map(Number);
+  }
+
+
   async run() {
     try {
       const INPUT_DATA = await MissionUtils.Console.readLineAsync('덧셈할 문자열을 입력해 주세요.\n');
-      const result = this.splitLine(INPUT_DATA);
-      MissionUtils.Console.print(result);
-      this.validateDelimiterLine(result.delimiter_line);
-      this.validateNumberLine(result.number_line);
+      const LINES = this.splitLine(INPUT_DATA);
+      const VALIDATE_DELIMITER_LINE = await this.validateDelimiterLine(LINES.delimiter_line);
+      const VALIDATE_NUMBER_LINE = await this.validateNumberLine(LINES.number_line, VALIDATE_DELIMITER_LINE);
+      const EXTRACT_NUMBERS = await this.extractNumbers(VALIDATE_NUMBER_LINE, VALIDATE_DELIMITER_LINE);
+
+      MissionUtils.Console.print(`${EXTRACT_NUMBERS}`)
 
     } catch (error) {
-      MissionUtils.Console.print(error);  
+      throw error;  
     }  
   }
 }
