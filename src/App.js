@@ -1,12 +1,21 @@
 import { Console } from "@woowacourse/mission-utils";
 const MSG = {
   INFORM: "덧셈할 문자열을 입력해 주세요.",
+  WARN: {
+    NO_VALID_INPUT: "[ERROR] 입력 값이 유효하지 않습니다.",
+    INPUT_ERROR: "[ERROR] 입력을 받을 수 없습니다.",
+    SPLITTER_FORM_ERROR: "[ERROR] 잘못된 구분자 형식입니다.",
+    NEGATIVE_NUM_ERROR: "[ERROR] 음수는 허용되지 않습니다.",
+    NUM_FORM_ERROR: "[ERROR] 숫자 형식이 잘못되었습니다.",
+  },
 };
+
 class App {
   async run() {
     const res = await this.getUserInput(MSG.INFORM);
 
-    Console.print(`결과 : ${res}`);
+    const result = await this.calculate(res);
+    Console.print(`결과 : ${result}`);
   }
 
   /** 사용자 입력 받기 */
@@ -21,6 +30,28 @@ class App {
       throw new Error(MSG.WARN.INPUT_ERROR);
     }
   };
+
+  /** 계산 */
+  async calculate(input) {
+    if (!input) return 0;
+
+    let customSplitter = /[,:\n]/;
+    let nums = input;
+
+    const numbers = nums.split(new RegExp(customSplitter));
+    let resnum = 0;
+    numbers.forEach((num) => {
+      num = num.trim();
+      if (num === "") {
+        throw new Error(MSG.WARN.NUM_FORM_ERROR);
+      }
+      if (parseInt(num, 10) < 0) {
+        throw new Error(MSG.WARN.NEGATIVE_NUM_ERROR);
+      }
+      resnum += parseInt(num, 10);
+    });
+    return resnum;
+  }
 }
 
 export default App;
