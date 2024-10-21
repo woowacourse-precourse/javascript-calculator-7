@@ -29,7 +29,7 @@ class App {
     
     const isAllNum = function isAllNumericStrings(array) {
       return array.every(element => 
-        typeof element === 'string' && /^\d+$/.test(element)
+        typeof element === 'string' && /^\d*$/.test(element)
       );
     }
   
