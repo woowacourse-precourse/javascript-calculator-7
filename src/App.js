@@ -28,10 +28,10 @@ class App {
     return true;
   }
 
-  separateInput(INPUT) {
+  separateInput(input) {
     // 커스텀 구분자로 시작하는 경우
-    if (INPUT.startsWith("/")) {
-      const [LETTER, NUMBER] = INPUT.split(/\\n/);
+    if (input.startsWith("/")) {
+      const [LETTER, NUMBER] = input.split(/\\n/);
 
       if (!LETTER.startsWith("//") || !NUMBER) {
         throw Error("[ERROR]");
@@ -41,15 +41,30 @@ class App {
       const RESULT = NUMBER.split(SEPARATOR);
 
       return RESULT.map((item) => {
-        const NUM = Number(item);
-        if (isNaN(NUM)) {
-          throw Error("[ERROR] 구분자를 제외하고 숫자로 입력해주세요.");
+        const num = Number(item);
+        if (isNaN(num)) {
+          throw Error("[ERROR]");
         }
-        if (NUM < 0) {
-          throw Error("[ERROR] 양수를 입력하세요.");
+        if (num < 0) {
+          throw Error("[ERROR]");
         }
-        return NUM;
+        return num;
       });
+    } else if (!isNaN(Number(input[0]))) {
+      const RESULT = input.split(/[,;]/);
+
+      return RESULT.map((item) => {
+        const num = Number(item);
+        if (isNaN(num)) {
+          throw Error("[ERROR]");
+        }
+        if (num < 0) {
+          throw Error("[ERROR]");
+        }
+        return num;
+      });
+    } else {
+      throw Error("[ERROR]");
     }
   }
 
