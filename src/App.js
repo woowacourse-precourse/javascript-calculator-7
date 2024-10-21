@@ -47,9 +47,15 @@ class App {
         throw new Error("[Error] 구분자 사이에 숫자가 없습니다");
       }
 
-      const numbers = splitValues
-        .map((num) => Number(num))
-        .filter((num) => !isNaN(num));
+      // 숫자 이외의 값 검증 (순수 숫자가 아닌 경우 에러 발생)
+      splitValues.forEach((value) => {
+        if (!/^\d+$/.test(value)) {
+          throw new Error("[Error] 잘못된 값이 입력되었습니다");
+        }
+      });
+
+      // 숫자로 변환 후 배열 생성
+      const numbers = splitValues.map(Number);
 
       // 숫자가 없으면 0 출력 후 종료
       if (numbers.length === 0) {
