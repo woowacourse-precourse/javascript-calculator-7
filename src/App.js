@@ -34,9 +34,21 @@ class App {
     const numbers = input.split(regExp).map(num => Number(num.trim()));
 
     this.validateNumbers(numbers);
-    
+
     // 숫자 덧셈 수행
     return numbers.reduce((acc, num) => acc + num, 0);
+  }
+
+  // 예외 처리
+  validateNumbers(numbers) {
+    numbers.forEach(num => {
+      if (isNaN(num)) {  // 숫자가 아닌 값이 있을 때
+        throw new Error("[ERROR] 잘못된 입력입니다.");
+      }
+      if (num < 0) {  // 음수일 때
+        throw new Error("[ERROR] 음수는 허용되지 않습니다.");
+      }
+    });
   }
 }
 
