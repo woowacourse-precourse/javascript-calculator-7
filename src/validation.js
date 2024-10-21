@@ -5,10 +5,10 @@ export function isSeparatorValid(separator) {
 }
 
 export function isExpressionValid(separator, expression) {
-  const expressionArr = expression.split("").map((val) => val.trim());
-  for (const num of expressionArr) {
-    if (!separator.includes(num) && isNaN(num)) return false;
-    if (num < 0) return false;
+  const expressionArr = expression.split("");
+  for (const str of expressionArr) {
+    if (!separator.includes(str) && isNaN(str)) return false;
+    if (str < 0) return false;
   }
   return true;
 }
