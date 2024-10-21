@@ -70,15 +70,32 @@ class App {
       }
     }
 
-    const sumCaculator = (userInputNumber) => {
+    function sumCaculator(inputNumber) {
+      inputNumber.forEach((number) => {
+        if (/[^0-9\s-]/.test(number)) {
+          throw new Error(ERROR.SEPARATOR_ERROR);
+        }
+      });
+
       let sum = 0;
 
-      for (let i = 0; i < userInputNumber.length; i++) {
-        sum += parseInt(userInputNumber[i]);
+      for (let i = 0; i < inputNumber.length; i++) {
+        let currentNumber =
+          inputNumber[i].trim() === '' ? '0' : inputNumber[i].trim();
+
+        let num = parseInt(currentNumber, 10);
+
+        Console.print(num);
+
+        if (num < 0) {
+          throw new Error(ERROR.NEGATIVE_NUMBER_ERROR);
+        }
+
+        sum += num;
       }
 
       return sum;
-    };
+    }
 
     const caculator = (userInputNumber) => {
       const caculation = sumCaculator(userInputNumber);
