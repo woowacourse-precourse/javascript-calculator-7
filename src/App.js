@@ -9,6 +9,7 @@ class App {
       Console.print(`결과 : ${result}`);
     } catch (error) {
       Console.print(`[ERROR] ${error.message}`);
+      throw error;
     }
   }
 
@@ -27,7 +28,9 @@ class App {
     return numArray.reduce((acc, current) => {
       const num = Number(current);
       if (isNaN(num) || num < 0) {
-        throw new Error("구분자와 양수로 구성된 문자열을 입력해주세요.");
+        throw new Error(
+          "[ERROR] 구분자와 양수로 구성된 문자열을 입력해주세요."
+        );
       }
       return acc + num;
     }, 0);
