@@ -95,6 +95,10 @@ class App {
       const [slicedInput, customSeparator] = extractCustomSeparator(input);
       input = slicedInput;
       separators.push(customSeparator);
+
+      if (isInputEmpty(input)) {
+        return Console.print('결과 : 0');
+      }
     }
 
     const splitedInputArray = splitInputBySeparators(input, separators);
