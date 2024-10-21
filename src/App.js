@@ -9,8 +9,8 @@ class App {
 
     ////// 입력한 값이 적절한 값인지 확인하기위한 기능 구현
 
-    // 구분자 기준으로 입력받은 문자열 split 하기
-    const array = printStr.split(",");
+    // , 과 : 구분자 기준으로 입력받은 문자열 split 하기
+    const array = printStr.split(/[:,]+/);
     Console.print(array);
   }
 }
