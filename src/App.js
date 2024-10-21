@@ -34,20 +34,20 @@ class App {
       const custom_separator =
         input.match(/^\/\/(.)\\n/) || input.match(/^\/\/(.)\n/); // 커스텀 구분자 추출
 
-      // 디버깅 커스텀 구분자가 제대로 추출되었는지 확인
-      // console.log("추출된 커스텀 구분자:", custom_separator);
-
       if (custom_separator) {
         separator = new RegExp(`[${custom_separator[1]}]`); // 커스텀 구분자 정규식 변환
         numbersInput = input.split("\\n")[1] || input.split("\n")[1]; // 이후의 문자열(숫자)을 사용
-
-        // 디버깅: 숫자 부분이 제대로 추출되었는지 확인
-        // console.log("추출된 문자열 (숫자):", numbersInput);
       }
     }
 
     // 쉼표(,)와 콜론(:)을 구분자로 가지는 문자열을 전달하는 경우, 구분자를 기준으로 분리한 각 숫자의 합을 반환
-    const numbers = numbersInput.split(separator).map(Number); // 숫자로 변환
+    const numbers = numbersInput.split(separator).map((num) => {
+      const parsed = Number(num);
+      if (isNaN(parsed)) {
+        throw new Error("[ERROR] 잘못된 문자가 포함되어 있습니다.");
+      }
+      return parsed;
+    });
 
     // numbers에 있는 숫자들의 합 구하기
     let sum = 0;
