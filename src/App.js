@@ -22,16 +22,16 @@ class App {
 
 function extractSeperator(userInput) {
   if (typeof userInput !== "string") {
-    throw new Error("[ERROR] not string data type", error);
+    throw new Error("[ERROR] not string data type");
   }
 
-  const REGEX = /\/\/(.)\\n/;
+  const REGEX = /\/\/(.+)\\n/;
 
   if (userInput.includes(",") || userInput.includes(":")) {
     const _numbers = cutSeperator(userInput);
     const numbers = _numbers.map(Number);
-    if (numbers.some((number) => Number.isNaN(number))) {
-      throw new Error("[ERROR] This is an error.", error);
+    if (numbers.some((number) => Number.isNaN(number) || number < 0)) {
+      throw new Error("[ERROR] This is an error.");
     }
     return sum(numbers);
   }
@@ -39,13 +39,13 @@ function extractSeperator(userInput) {
   if (userInput.startsWith(`//`) && userInput.match(REGEX)) {
     const _numbers = extractCharacter(userInput);
     const numbers = _numbers.map(Number);
-    if (numbers.some((number) => Number.isNaN(number))) {
-      throw new Error("[ERROR] This is an error.", error);
+    if (numbers.some((number) => Number.isNaN(number) || number < 0)) {
+      throw new Error("[ERROR] This is an error.");
     }
     return sum(numbers);
   }
 
-  throw new Error("[ERROR] This is an error.", error);
+  throw new Error("[ERROR] This is an error.");
 }
 
 function cutSeperator(string) {
@@ -55,11 +55,11 @@ function cutSeperator(string) {
 }
 
 function extractCharacter(string) {
-  const REGEX = /\/\/(.)/;
+  const REGEX = /\/\//;
 
-  const seperator = string.match(REGEX)[1];
-
+  const seperator = string.split("\\n")[0].replace(REGEX, "");
   const customString = string.split("\\n")[1];
+
   const numbers = customString.split(seperator);
 
   return numbers;
