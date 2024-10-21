@@ -11,15 +11,18 @@ import {
 class App {
   static DEFAULT_SEPARATOR = ',:';
   static CUSTOM_SEPARATOR_REGEXP = /\/\/(.+)\\n/;
+
   async run() {
     const userInput = await readLineAsync();
     const processedInput = this.processInput(userInput);
     const sum = this.calculateSum(processedInput);
+
     printResult(sum);
   }
 
   processInput(input) {
-    if (input === '') return [];
+    if (input === '') return []; // 빈 문자열은 예외로 0을 리턴한다.
+
     const stringified = stringifyToJSON(input);
     const separator = this.getSeparator(stringified);
     const content = this.extractContent(stringified);
@@ -29,6 +32,7 @@ class App {
 
   getSeparator(str) {
     const customSeparator = str.match(App.CUSTOM_SEPARATOR_REGEXP);
+
     return customSeparator ? customSeparator[0] : App.DEFAULT_SEPARATOR;
   }
 
@@ -41,6 +45,7 @@ class App {
 
   splitContent(content, separator) {
     const separatorRegExp = convertCharacterClassRegex(separator);
+
     return content.split(separatorRegExp);
   }
 
