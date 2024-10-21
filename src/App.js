@@ -25,6 +25,11 @@ class App {
       return 0;
     }
 
+    // 연속된 쉼표(,) 또는 콜론(:)을 감지하는 정규식 추가
+    if (/[,|:]{2,}/.test(input)) {
+      throw new Error("[ERROR] 잘못된 형식의 입력입니다.");
+    }
+
     let separator = /[,\:]/; // 기본 구분자는 쉼표와 콜론
     let numbersInput = input; // 기본 문자열 입력
 
