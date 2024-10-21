@@ -15,7 +15,8 @@ class App {
         throw new Error(ERROR_MESSAGE.NO_SEPARATOR);
       } else {
         const parseredUserInputArray = userInputParser(userInput);
-        Console.print(`결과 : ${userInput}`);
+        const answer = calculator.addition(parseredUserInputArray);
+        Console.print(`결과 : ${answer}`);
       }
     } catch (error) {
       return Promise.reject(error);
