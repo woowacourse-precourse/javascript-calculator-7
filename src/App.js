@@ -67,18 +67,18 @@ class App {
     }
 
     const cleanedArray = customStr
-      .replaceAll('//', '-')
-      .replaceAll('\\n', '-')
-      .replaceAll(customSeperator, '-');
+      .replaceAll('//', '*')
+      .replaceAll('\\n', '*')
+      .replaceAll(customSeperator, '*');
     
     return this.strToArrayHandler(cleanedArray);
   }
 
   strToArrayHandler(arrToChange) {
     return arrToChange
-      .replaceAll(',', '-')
-      .replaceAll(':', '-')
-      .split('-');
+      .replaceAll(',', '*')
+      .replaceAll(':', '*')
+      .split('*');
   }
 
   addAllArray(arr) {
