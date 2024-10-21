@@ -25,7 +25,7 @@ class Calculator {
       const endIndex = input.indexOf("\\n");
       const customDivider = input.slice(2, endIndex);
       const numberString = input.slice(endIndex + 2);
-      
+
       if (numberString.length === 0) {
         throw new Error(ERROR_MESSAGES.NO_NUMBERS_INPUT);
       }
@@ -37,24 +37,39 @@ class Calculator {
     }
 
     const defaultDivider = [",", ":"];
-    if (defaultDivider.some((d) => input.includes(d))) {
+    if (input.includes(':') && input.includes(',')) {
       return { divider: defaultDivider, numberString: input };
+    }
+
+    if (input.includes(",")) {
+      return { divider: ",", numberString: input };
+    }
+
+    if (input.includes(":")) {
+      return { divider: ":", numberString: input };
     }
 
     throw new Error(ERROR_MESSAGES.NO_VALID_DIVIDER);
   }
 
   static createNumberArray(numberString, divider) {
-    if (Array.isArray(divider)) {
-      divider.forEach((d) => {
-        numberString = numberString.split(d).join(",");
-      });
-      divider = ",";
+    if (divider == ",") {
+      let numberArray = numberString.split(",").map(Number);
+      return numberArray;
     }
 
-    let numberArray = numberString.split(divider).map(Number);
+    if (divider == ":") {
+      let numberArray = numberString.split(":").map(Number);
+      return numberArray;
+    }
 
-    return numberArray;
+    if (divider.includes(",") && divider.includes(":")) {
+      let numberArray = numberString.split(',').join('')
+      let filterednumberArray = numberArray.split(':').map(Number);
+      return filterednumberArray;
+    }
+
+    return numberString.split(divider).map(Number);
   }
 
   static sum(numberArray) {
