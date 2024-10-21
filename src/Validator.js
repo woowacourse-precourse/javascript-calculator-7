@@ -47,6 +47,7 @@ class Validator {
   #validate() {
     for (const num of this.#numbers) {
       this.#validateNumberFormat(num);
+      this.#validateNonNegative(num);
     }
   }
 
@@ -54,6 +55,15 @@ class Validator {
   #validateNumberFormat(num) {
     if (!/^\d+$/.test(num)) {
       throw new Error(`[ERROR] '${num}'은(는) 유효한 숫자 형식이 아닙니다.`);
+    }
+  }
+
+  // 양수인지 검증
+  #validateNonNegative(num) {
+    const parseNum = parseInt(num, 10);
+
+    if (parseNum < 0) {
+      throw new Error(`[ERROR] 양수만 가능합니다.`);
     }
   }
 }
