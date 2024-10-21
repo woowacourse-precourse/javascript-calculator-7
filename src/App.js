@@ -14,6 +14,14 @@ class App {
 
       //두 사이의 문자를 추출한다.
       const newDelimiter = input.slice(2, endIdx);
+
+      //구분자가 문자로 이루어져있는지 확인(예외)
+
+      if (/\d/.test(newDelimiter)) {
+        //숫자가 포함되면 에러 처리
+        throw new Error("[ERROR]");
+      }
+
       //새로운 구분자로 추가
       delimiters.push(newDelimiter);
 
