@@ -18,7 +18,7 @@ class Validator {
     );
 
     if (HAS_INVALID_Number) {
-      throw new Error(Error_Message.invalid_negative_number);
+      throw new Error(Error_Message.invalid_number);
     }
   }
 
