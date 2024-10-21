@@ -33,6 +33,11 @@ class App {
     //구분자들을 정규표현식을 이용하도록 조합
     const regex = new RegExp(`[${delimiters.join("")}]`);
     const result = input.split(regex).map((ele) => {
+      //숫자가 아닌경우 에러
+      if (isNaN(Number(ele))) {
+        throw new Error("[ERROR]");
+      }
+
       if (ele < 0) {
         //음수이면 에러
         throw new Error("[ERROR]");
