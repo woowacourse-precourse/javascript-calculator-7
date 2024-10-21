@@ -1,5 +1,6 @@
 import {Console} from "@woowacourse/mission-utils";
 import {getInput} from "./utils/inputHandler.js";
+import {isCustom, sliceString} from "./utils/stringProcessor.js";
 
 class StringCalculator {
     sum = 0;
@@ -10,39 +11,15 @@ class StringCalculator {
         if (input === "") {
             return this.resultOutput(); // 빈 문자열의 경우 결과 출력
         }
-        const argument = this.isCustom(input) ? this.sliceString(input) : input;
+        const argument = isCustom(input) ? sliceString(input).slicedString : input;
         this.calculator(argument);
         this.resultOutput();
-    }
-
-    isCustom(param) {
-        const lastIdx = param.indexOf("\\n");
-        return param.startsWith("//") && lastIdx !== -1;
-    }
-
-    sliceString(param) {
-        const lastIdx = param.indexOf("\\n");
-        this.customSeparator = param.slice(2, lastIdx);
-        this.isCustomSeparatorError(this.customSeparator);
-        return param.slice(lastIdx + 2);
     }
 
     isCustomSeparatorError(param) {
         if (!isNaN(param)) {
             throw new Error("[ERROR]: 에러발생");
         }
-    }
-
-    preprocessing(param) {
-        const defaultSeparator = /[:,]/g;
-        const argument = this.customSeparator
-            ? new RegExp(`[${this.customSeparator}:,]`, "g")
-            : defaultSeparator;
-
-        const splitArray = param.split(argument);
-        return splitArray.map((elem) =>
-            this.isError(elem) || Number(elem)
-        );
     }
 
     isError(param) {
