@@ -18,11 +18,11 @@ const getLogSpy = () => {
 
 describe("문자열 계산기", () => {
   test("커스텀 구분자 사용", async () => {
-    const inputs = ["1:111"];
+    const inputs = ["//3\\n353"];
     mockQuestions(inputs);
 
     const logSpy = getLogSpy();
-    const outputs = ["결과 : 112"];
+    const outputs = ["결과 : 5"];
 
     const app = new App();
     await app.run();
