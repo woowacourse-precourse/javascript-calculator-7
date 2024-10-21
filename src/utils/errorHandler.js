@@ -5,7 +5,15 @@ export function isCustomSeparatorError(param) {
 }
 
 export function checkForErrors(param) {
-    if (Number(param) < 0 || param === "" || isNaN(param.trim())) {
-        throw new Error("[ERROR]: 에러발생");
+    if (param === "" || isNaN(param)) {
+        throw new Error("[ERROR]: 잘못된 입력");
+    }
+
+    if (Number(param) < 0) {
+        throw new Error("[ERROR]: 음수 입력 불가");
+    }
+
+    if (param.trim() !== param || param === " ") {
+        throw new Error("[ERROR]: 공백은 입력 불가");
     }
 }
