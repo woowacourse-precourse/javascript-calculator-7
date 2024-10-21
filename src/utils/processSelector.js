@@ -14,9 +14,14 @@ export const isSelectorExisted = (stringForCheck) => {
 // 지정된 구분자와 숫자배열 문자열 분리
 export const seperateSelector = (beginningString) => {
   const endLetterIndex = beginningString.indexOf(END_LETTER);
-  const selectorPart = beginningString.substring(START_LETTER.length, endLetterIndex)
-  const noSelectorPart = beginningString.substring(endLetterIndex+END_LETTER.length)
-  return [selectorPart, noSelectorPart]
+  const selectorPart = beginningString.substring(
+    START_LETTER.length,
+    endLetterIndex
+  );
+  const noSelectorPart = beginningString.substring(
+    endLetterIndex + END_LETTER.length
+  );
+  return [selectorPart, noSelectorPart];
 };
 
 // string => string
