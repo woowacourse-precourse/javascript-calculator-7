@@ -2,9 +2,11 @@ import { Console } from '@woowacourse/mission-utils';
 
 class App {
   async run() {
-    const USERINFO = await Console.readLineAsync('덧셈할 문자열을 입력해 주세요.\n');
-    
-    if (USERINFO.trim() === '') {
+    const STRING_TO_ADD = await Console.readLineAsync('덧셈할 문자열을 입력해 주세요.\n');
+
+    const DELETE_CUSTOM_SEPARATOR = STRING_TO_ADD.replace(/\/\/.*\\n/g, '');
+
+    if (DELETE_CUSTOM_SEPARATOR === '') {
       Console.print(`결과 : 0`);
       return;
     }
