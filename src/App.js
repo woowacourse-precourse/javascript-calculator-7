@@ -4,9 +4,7 @@ import {
   ValidateError,
   ParseError,
 } from "./CustomErrors.js";
-
-const CUSTOM_SEPARATOR_REG = new RegExp(/\/\/.*\\n/);
-const DEGREE_REG = /[^\d]/;
+import { CUSTOM_SEPARATOR_REG, DEGREE_REG } from "./constants.js";
 
 class App {
   constructor() {
@@ -64,23 +62,23 @@ class App {
     this.sum = numbers.reduce((acc, cur) => acc + cur, 0);
   }
 
-  checkCustomSeparatorError(userInput) {
-    if (userInput.slice(0, 2) !== "//")
+  checkCustomSeparatorError() {
+    if (this.userInput.slice(0, 2) !== "//")
       throw new CustomSeparatorError(
         "커스텀 구분자는 맨 앞에 존재해야 합니다."
       );
-    
-    if (!DEGREE_REG.test(userInput[2]))
+
+    if (!DEGREE_REG.test(this.userInput[2]))
       throw new CustomSeparatorError("숫자는 커스텀 구분자가 될 수 없습니다.");
-    if (userInput[4] != "n")
+    if (this.userInput[4] != "n")
       throw new CustomSeparatorError(
         "커스텀 구분자는 한 글자만 사용 가능합니다."
       );
   }
 
-  checkValidateError(userInput) {
+  checkValidateError() {
     const validateSeparator = new RegExp(`^[0-9${this.separator}]+$`, "g");
-    if (!validateSeparator.test(userInput))
+    if (!validateSeparator.test(this.userInput))
       throw new ValidateError("구분자와 양수를 입력해주세요.");
   }
 
