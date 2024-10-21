@@ -29,12 +29,19 @@ class App {
         .join("")}]`,
       "g"
     );
-    const SeparatedInput = cleanedInput.replace(separatorRegex, ",");
+    const separatedInput = cleanedInput.replace(separatorRegex, ",");
+
+    // ,를 기준으로 문자열을 나누고 숫자 배열 생성
+    const numbers = separatedInput
+      .split(",")
+      .map((num) => Number(num))
+      .filter((num) => !isNaN(num));
 
     // 테스트용
     Console.print(separators);
     Console.print(cleanedInput);
-    Console.print(SeparatedInput);
+    Console.print(separatedInput);
+    Console.print(numbers);
   }
 }
 
