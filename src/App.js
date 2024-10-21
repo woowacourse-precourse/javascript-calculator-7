@@ -13,7 +13,7 @@ class App {
       }
 
       let numbers = [];
-      const customDelimiterMatch = input.match(/^\/\/(.)\\n(.*)/);
+      const customDelimiterMatch = input.match(/^\/\/(.)\n(.*)/);
 
       if (customDelimiterMatch) {
         const customDelimiter = customDelimiterMatch[1];
@@ -46,7 +46,7 @@ class App {
       MissionUtils.Console.print(`결과 : ${result}`);
     } catch (error) {
       MissionUtils.Console.print("[ERROR]" + error.message);
-      console.error(error);
+      MissionUtils.Console.print(error);
     }
   }
 }
