@@ -14,6 +14,12 @@ const inputValidator = {
       throw new Error(ERROR_MESSAGES.CUSTOM_DELIMITER);
     }
   },
+
+  invalidNumber: (numberArr) => {
+    if (numberArr.some((num) => isNaN(num) || num < 0)) {
+      throw new Error(ERROR_MESSAGES.INVALID_NUMBER);
+    }
+  },
 };
 
 export default inputValidator;

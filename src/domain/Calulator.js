@@ -7,15 +7,15 @@ export default class Calculator {
   #delimiters;
 
   constructor(inputString) {
-    inputValidator.emptyInput(inputString);
     this.#inputString = inputString;
     this.#delimiters = DEFAULT_DELIMITERS;
-    this.#validateInput();
+    this.#validateInputString(this.#inputString);
   }
 
   calculate() {
     this.#addCustomDelimiter();
     const numberArr = this.#splitByDelimiters();
+    this.#vaildateNumberArr(numberArr);
     return calculateSum(numberArr);
   }
 
@@ -36,7 +36,12 @@ export default class Calculator {
     }
   }
 
-  #validateInput() {
-    inputValidator.customDelimiter(this.#inputString);
+  #validateInputString(inputString) {
+    inputValidator.emptyInput(inputString);
+    inputValidator.customDelimiter(inputString);
+  }
+
+  #vaildateNumberArr(numberArr) {
+    inputValidator.invalidNumber(numberArr);
   }
 }
