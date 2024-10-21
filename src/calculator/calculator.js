@@ -1,3 +1,5 @@
+import { AdditionFunction } from './calculation-function/add-function';
+
 export class Calculator {
   #calculationString = '';
   #result = 0;
@@ -39,32 +41,13 @@ export class Calculator {
     }
   }
 
-  // 계산할 문자열을 구분자로 나누고 숫자로 변환하여 덧셈을 수행
-  calculateString() {
+  // 계산할 문자열을 구분자로 나누기
+  splitString() {
     const calculationArray = this.#calculationString.split(
       new RegExp(`[${this.#separatorRegexPattern}]`)
     );
 
-    // 배열의 각 요소를 숫자로 변환하고 유효성 검사 후 반환
-    calculationArray
-      .filter((element) => element !== '')
-      .forEach((element) => {
-        const num = Number(element);
-
-        if (isNaN(num)) {
-          throw new Error(
-            '[ERROR] 입력 문자열에 유효하지 않은 구분자가 있습니다.'
-          );
-        }
-
-        if (num <= 0) {
-          throw new Error(
-            '[ERROR] 입력 문자열에 0이나 음수가 포함되어 있습니다.'
-          );
-        }
-
-        this.#result += num;
-      });
+    return calculationArray;
   }
 
   // 입력 문자열을 계산하여 결과를 반환
@@ -76,7 +59,10 @@ export class Calculator {
         this.extractCustomSeparator();
       }
 
-      this.calculateString();
+      const calculationArray = this.splitString();
+
+      const additionFunction = new AdditionFunction();
+      this.#result = additionFunction.calculateString(calculationArray);
     }
 
     return this.#result;
