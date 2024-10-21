@@ -2,35 +2,39 @@ import { Console } from "@woowacourse/mission-utils";
 
 class App {
   async run() {
-    const DEFAULT = [",", ":"];
-    const defaultSeparator = new RegExp(DEFAULT.join("|")); // 정규 표현식: /,|:/
-    let numbers = [];
-    let result;
-
     const input = await Console.readLineAsync(
       "덧셈할 문자열을 입력해 주세요.\n"
     );
 
     try {
-      if (input === "") {
-        result = 0;
-      } else if (input.startsWith("//") && input.includes("\\n")) {
-        const { customSeparator, numberPart } = trimCustom(input);
-
-        const combinedSeparator = new RegExp(
-          `${customSeparator}|${DEFAULT.join("|")}`
-        );
-
-        numbers = numberPart.split(combinedSeparator);
-        result = calculate(numbers);
-      } else {
-        numbers = input.split(defaultSeparator);
-
-        result = calculate(numbers);
-      }
+      const result = this.handlingInput(input);
       Console.print(`결과: ${result}`);
     } catch (error) {
       Console.print(error.message);
+      // 에러 발생 시 여기서 다른 처리 없이 메서드를 종료
+      return; // 또는 이곳에서 다른 종료 처리를 할 수 있음
+    }
+  }
+
+  handlingInput(input) {
+    const DEFAULT = [",", ":"];
+    const defaultSeparator = new RegExp(DEFAULT.join("|")); // 정규 표현식: /,|:/
+    let numbers = [];
+
+    if (input === "") {
+      return 0;
+    } else if (input.startsWith("//") && input.includes("\\n")) {
+      const { customSeparator, numberPart } = trimCustom(input);
+
+      const combinedSeparator = new RegExp(
+        `${customSeparator}|${DEFAULT.join("|")}`
+      );
+
+      numbers = numberPart.split(combinedSeparator);
+      return calculate(numbers);
+    } else {
+      numbers = input.split(defaultSeparator);
+      return calculate(numbers);
     }
   }
 }
