@@ -16,3 +16,129 @@
 - [x] 숫자에 대한 문자열을 구분자를 기준으로 분리하는 기능
 
 - [x] 분리된 숫자들로 더하기 연산을 하는 기능
+
+
+## 📄 기능 구현 상세
+
+###  🗂️ 파일 트리
+
+```
+📂 calculator
+├─ 📂 src
+│  ├─ index.js
+│  ├─ App.js
+│  ├─ 📂 application
+│  │  ├─ 📂 parser
+│  │  │  ├─ InputSeparator.js
+│  │  │  ├─ NumberSplitter.js
+│  │  │  └─ Parser.js
+│  │  ├─ IOPort.js
+│  │  └─ CalucationService.js
+│  ├─ 📂 constant
+│  │  ├─ DELIMITER.js
+│  │  └─ MESSAGE.js
+│  ├─ 📂 domain
+│  │  ├─ CaulationModel.js
+│  │  └─ Calculator.js
+│  ├─ 📂 presentation
+│  │  └─ IOHandler.js
+│  └─ 📂 validation
+│     └─ Validator.js
+├─ 📂 __tests__
+└─ README.MD
+```
+
+### 🌊 Flow Chart
+
+<div style="text-align: center; width: 80%; margin: auto;">
+
+```Mermaid
+
+flowchart TD
+    A[시작] --> B[App.run 실행]
+    B --> C[CalculationService.execute 호출]
+    C --> D[사용자 입력 받기]
+    D --> K[입력 파싱]
+    K --> E{유효성 검사}
+    E -- Yes --> F[숫자 분리]
+    E -- No --> G[에러 메시지]
+    G --> J
+    F --> H[계산 수행]
+    H --> I[결과 표시]
+    I --> J[종료]
+
+```
+</div>
+
+### 🗄️ UML DIAGRAM
+
+<div style="text-align: center; width: 80%; margin: auto;">
+
+```Mermaid
+
+classDiagram
+    class App {
+        -CalculationService calculationService
+        +run()
+    }
+    class CalculationService {
+        -IOPort ioPort
+        -Parser parser
+        -Calculator calculator
+        +execute()
+    }
+    class IOPort {
+        <<interface>>
+        +getInput()
+        +displayResult()
+    }
+    class IOHandler {
+        +getInput()
+        +displayResult()
+    }
+    class Parser {
+        +parse()
+    }
+    class Calculator {
+        +executeCalculation()
+    }
+    class InputSeparator {
+        +getCustomDelimiter()
+        +getNumberString()
+    }
+    class NumberSplitter {
+        +split()
+    }
+    class Validator {
+        +validateNumberString()
+        +validateDelimiter()
+    }
+    class CalculationModel {
+        -numbers
+        +getNumbers()
+    }
+
+    App --> CalculationService : creates
+    App --> IOHandler : creates
+    App --> Parser : creates
+    App --> Calculator : creates
+    CalculationService --> IOPort : uses
+    CalculationService --> Parser : uses
+    CalculationService --> Calculator : uses
+    IOHandler ..|> IOPort : implements
+    Parser --> InputSeparator : uses
+    Parser --> NumberSplitter : uses
+    Parser --> Validator : uses
+    Calculator --> CalculationModel : creates
+
+    %% Sequence of method calls
+    App : 1) run()
+    CalculationService : 2) execute()
+    IOPort : 3) getInput()
+    Parser : 4) parse()
+    Calculator : 5) executeCalculation()
+    IOPort : 6) displayResult()
+
+```
+
+</div>
