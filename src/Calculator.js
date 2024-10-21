@@ -2,6 +2,7 @@ import {
   DEFAULT_SEPARATORS,
   CUSTOM_DESIGNATORS,
   CUSTOM_SEPARATOR_REGEX,
+  ERROR_CASE,
   ERROR_MESSAGE,
   INVALID_CUSTOM_SEPARATOR_REGEX,
   DESCRIPTION,
@@ -21,19 +22,19 @@ class Calculator {
 
   #validate(target, type) {
     switch (type) {
-      case 'customPosition':
+      case ERROR_CASE.customPosition:
         if (CUSTOM_SEPARATOR_REGEX.test(target)) throw new Error(ERROR_MESSAGE.customPosition);
         break;
-      case 'invalidCustom':
+      case ERROR_CASE.invalidCustom:
         if (INVALID_CUSTOM_SEPARATOR_REGEX.test(target)) throw new Error(ERROR_MESSAGE.invalidCustom);
         break;
-      case 'duplicatedCustom':
+      case ERROR_CASE.duplicatedCustom:
         if (CUSTOM_SEPARATOR_REGEX.test(target)) throw new Error(ERROR_MESSAGE.duplicatedCustom);
         break;
-      case 'positiveNum':
+      case ERROR_CASE.positiveNum:
         if (target.length) throw new Error(ERROR_MESSAGE.positiveNum);
         break;
-      case 'invalidFormat':
+      case ERROR_CASE.invalidFormat:
         if (target.length) throw new Error(ERROR_MESSAGE.invalidFormat);
         break;
     }
@@ -41,13 +42,13 @@ class Calculator {
 
   #findCustomSeparator() {
     if (!this.#inputText.startsWith(CUSTOM_DESIGNATORS.start)) {
-      this.#validate(this.#inputText, 'customPosition');
+      this.#validate(this.#inputText, ERROR_CASE.customPosition);
       return (this.#customSeparator = '');
     }
 
     const customSeparator = this.#inputText.match(CUSTOM_SEPARATOR_REGEX)[0];
 
-    this.#validate(customSeparator, 'invalidCustom');
+    this.#validate(customSeparator, ERROR_CASE.invalidCustom);
 
     return customSeparator;
   }
@@ -63,7 +64,7 @@ class Calculator {
       ? this.#inputText.slice(this.#inputText.indexOf(CUSTOM_DESIGNATORS.end) + 2)
       : this.#inputText;
 
-    this.#validate(splitTarget, 'duplicatedCustom');
+    this.#validate(splitTarget, ERROR_CASE.duplicatedCustom);
 
     this.#numbers = splitTarget.split(separatorsRegex).map((char) => (char.length ? Number(char) : ''));
   }
@@ -71,8 +72,8 @@ class Calculator {
   #calculateSum() {
     const nonPositiveNumbers = this.#numbers.filter((number) => typeof number !== 'string' && Math.sign(number) < 1);
     const invalidFormats = this.#numbers.filter((number) => typeof number !== 'number' || Number.isNaN(number));
-    this.#validate(nonPositiveNumbers, 'positiveNum');
-    this.#validate(invalidFormats, 'invalidFormat');
+    this.#validate(nonPositiveNumbers, ERROR_CASE.positiveNum);
+    this.#validate(invalidFormats, ERROR_CASE.invalidFormat);
 
     return this.#numbers.reduce((acc, cur) => acc + cur, 0);
   }

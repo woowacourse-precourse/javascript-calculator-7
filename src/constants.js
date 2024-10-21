@@ -4,6 +4,14 @@ export const CUSTOM_SEPARATOR_REGEX = /(?<=\/\/).+(?=\\n)/;
 
 export const INVALID_CUSTOM_SEPARATOR_REGEX = /[a-zA-Z0-9가-힣ㄱ-ㅎ]/;
 
+export const ERROR_CASE = {
+  positiveNum: 'positiveNum',
+  invalidFormat: 'invalidFormat',
+  customPosition: 'customPosition',
+  duplicatedCustom: 'duplicatedCustom',
+  invalidCustom: 'invalidCustom',
+};
+
 export const ERROR_MESSAGE = {
   positiveNum: '[ERROR] 문자열 덧셈은 1이상의 양수부터 가능합니다.',
   invalidFormat:
