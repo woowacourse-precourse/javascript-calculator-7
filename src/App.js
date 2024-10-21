@@ -1,7 +1,7 @@
 import { Console } from '@woowacourse/mission-utils';
-import { CALCULATER, ERROR_MESSAGES } from './constants/message.js';
-import { SYMBOL } from './constants/symbol.js';
-import calculate from './calculator.js';
+import { CALCULATER, ERROR_MESSAGES } from './constants/Message.js';
+import { SYMBOL } from './constants/Symbol.js';
+import calculate from './Calculator.js';
 
 class App {
   async run() {
