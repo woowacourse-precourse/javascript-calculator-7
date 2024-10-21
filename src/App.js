@@ -21,15 +21,23 @@ class App {
 
     // 기본 구분자 처리
     if (str.match(delimiter)) {
-      return str.split(delimiter);
+      return this.sumNumbers(str.split(delimiter));
     }
 
     // 커스텀 구분자 처리
     if (str.startsWith('//')) {
       const [customDelimiter, rest] = str.split('\\n');
       delimiter = customDelimiter[2];
-      return rest.split(delimiter);
+      return this.sumNumbers(rest.split(delimiter));
     }
+  }
+
+  // 구분자로 분리된 문자열을 숫자로 변환하여 더하는 함수
+  sumNumbers(stringNumbers) {
+    return stringNumbers.reduce((acc, num) => {
+      const parsed = parseInt(num.trim(), 10);
+      return acc + parsed;
+    }, 0);
   }
 }
 
