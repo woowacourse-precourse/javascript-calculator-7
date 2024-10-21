@@ -15,12 +15,11 @@ class App {
     try {
       const numbers = this.stringParser.parseString(input);
       const result = this.StringCalculator.calculate(numbers);
+      this.ioProcessor.processOutput(result);
     } catch (error) {
       this.ioProcessor.processErrorOutput(error.message);
       return;
     }
-
-    this.ioProcessor.processOutput(result);
   }
 }
 
