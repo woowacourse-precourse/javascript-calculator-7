@@ -60,10 +60,6 @@ class App {
     return string.slice(findIndex + 2);
   }
 
-  parseToNumber(numbers) {
-    return this.validateNoNegativeNumbers(numbers.map(Number));
-  }
-
   sum(numbers) {
     if (!numbers.length) return 0;
 
