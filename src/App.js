@@ -61,8 +61,10 @@ class App {
       
           const numbers = input.split(delimiter).map(Number);
           
-
-      }
-    }
-  }
-}
+          // 숫자 확인 과정
+          this.validateNumbers(numbers);
+          //계산 후 반환
+          return numbers.reduce((sum, num) => sum + num, 0);
+        }
+      
+        
