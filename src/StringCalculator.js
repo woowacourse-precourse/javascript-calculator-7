@@ -5,10 +5,10 @@ class StringCalculator {
   /**
    *
    * @param {Number[]} numbers 구분자로 나뉜 문자열 배열
-   * @returns 문자열 배열을 숫자로 변환 후 더한 값
+   * @returns {string} 구분자로 나뉜 문자열을 숫자로 변환 후 더한 값
    */
   calculate(numbers) {
-    return numbers.reduce((acc, num) => acc + parseInt(num), 0);
+    return numbers.reduce((acc, num) => acc + parseInt(num), 0).toString();
   }
 }
 
