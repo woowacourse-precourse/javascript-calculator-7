@@ -15,11 +15,7 @@ class App {
         this.addCustomSeparator(input, separator);
       }
 
-      const pattern = this.sliceCustomPattern(input);
-      const numberStringWithSeparators = input.slice(pattern.length);
-      const nums = numberStringWithSeparators
-        .split(new RegExp(`[${separator.join("")}]`))
-        .map(Number);
+      const nums = this.getNumbers(input, separator);
 
       this.nanError(nums);
       this.negativeNumberError(nums);
@@ -59,6 +55,16 @@ class App {
       .split(/[//,\\n]/)
       .filter((i) => i.length > 0);
     separator.push(...customSeparator);
+  }
+
+  getNumbers(input, separator) {
+    const pattern = this.sliceCustomPattern(input);
+    const numberStringWithSeparators = input.slice(pattern.length);
+    const nums = numberStringWithSeparators
+      .split(new RegExp(`[${separator.join("")}]`))
+      .map(Number);
+
+    return nums;
   }
 
   hasNegativeNumber(nums) {
