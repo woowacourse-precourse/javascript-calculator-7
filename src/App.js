@@ -8,12 +8,13 @@ class App {
       );
 
       if (input.trim() === "") {
-        Console.print("결과 : 0");
+        MissionUtils.Console.print("결과 : 0");
         return;
       }
 
       let numbers = [];
-      const customDelimiterMatch = input.match(/^\/\/(.)\\n(.*)/);
+      const customDelimiterMatch =
+        input.match(/^\/\/(.)\\n(.*)/) || input.match(/^\/\/(.)\n(.*)/);
 
       if (customDelimiterMatch) {
         const customDelimiter = customDelimiterMatch[1];
