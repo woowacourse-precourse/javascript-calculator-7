@@ -1,7 +1,5 @@
 function separateNumber(inputData, defaultSeparator) {
 
-    if (inputData.trim() === "") return 0;
-
     const numbers = inputData.split(defaultSeparator).map(number => {
         const parsedNumber = parseInt(number);
         return parsedNumber;
@@ -10,4 +8,4 @@ function separateNumber(inputData, defaultSeparator) {
     return numbers;
 }
 
-export default separator;
+export default separateNumber;
