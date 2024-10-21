@@ -13,9 +13,8 @@ class InputParser {
 
   // 커스텀 구분자로 분리
   splitByCustomSeparator() {
-    this.value = this.input
-      .replace(this.customMatch[0], '')
-      .split(this.customMatch[1]);
+    const inputValue = this.input.replace(this.customMatch[0], '');
+    this.value = inputValue.split(this.customMatch[1]);
   }
 
   // 분리 실행
