@@ -38,6 +38,38 @@ class App {
       return { userInputCustomFormula, userInputCustomSeparator };
     }
 
+    function userInputNumber(userInput) {
+      if (!CUSTOM_EXPRESS.test(userInput)) {
+        if (!DEFAULT_SEPARATOR.test(userInput)) {
+          throw new Error(ERROR.FORMULA_ERROR);
+        }
+
+        if (!FORMULA.test(userInput)) {
+          throw new Error(ERROR.FORMULA_ERROR);
+        }
+
+        const inputNumber = userInput.split(DEFAULT_SEPARATOR);
+        Console.print(inputNumber);
+
+        return inputNumber;
+      } else if (userInput.includes('n') && CUSTOM_EXPRESS.test(userInput)) {
+        const { userInputCustomSeparator, userInputCustomFormula } =
+          userInputCustom(userInput);
+        const combinedSeparator = new RegExp(`[,:${userInputCustomSeparator}]`);
+
+        if (!FORMULA.test(userInputCustomFormula)) {
+          throw new Error(ERROR.FORMULA_ERROR);
+        }
+
+        const inputNumber = userInputCustomFormula.split(combinedSeparator);
+        Console.print(inputNumber);
+
+        return inputNumber;
+      } else {
+        throw new Error('[ERROR]' + error.message);
+      }
+    }
+
     const sumCaculator = (userInputNumber) => {
       let sum = 0;
 
