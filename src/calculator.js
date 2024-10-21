@@ -1,6 +1,5 @@
 export function calculator(input) {
     const baseSeparators = /[,:]/;
-    const allowedCustomSeparators = /[~!@#$%^&*_\/\?]/
     let customSeparator;
     let numbersPart = input;
     let isCustom = false;
@@ -26,11 +25,6 @@ export function calculator(input) {
         const separatorPart = input.split('\n')[0].substring(2);
         if (separatorPart.length != 1) {
             throw new Error(`[ERROR] 커스텀 구분자는 한 글자여야 합니다.`);
-        }
-
-        // 예외처리: 커스텀 구분자가 허용된 특수문자가 아닌 경우
-        if (!customSeparator.match(allowedCustomSeparators)) {
-            throw new Error(`[ERROR] 커스텀 구분자는 다음 중 하나여야 합니다: ~, !, @, #, $, %, ^, &, *, _, /, ?`);
         }
 
         numbersPart = input.split('\n')[1];
