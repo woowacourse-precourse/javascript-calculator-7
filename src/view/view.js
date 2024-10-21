@@ -13,9 +13,12 @@ class View {
 
     async readInput() {
         const inputData = await this.#read(INPUT_MESSAGE);
+        return inputData;
     }
 
     printResult(result) {
         this.#print(OUTPUT_MESSAGE(result));
     }
 }
+
+export default View;
