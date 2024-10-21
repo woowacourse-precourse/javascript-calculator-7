@@ -1,6 +1,5 @@
-import { Console } from "@woowacourse/mission-utils";
 import { MESSAGE } from "./constants.js";
-import { handleError } from "./utils.js";
+import { handleError, printResult, readInput, sum } from "./utils.js";
 
 class App {
   validateAndCovertNumbers(strings) {
@@ -60,30 +59,12 @@ class App {
     return string.slice(findIndex + 2);
   }
 
-  sum(numbers) {
-    if (!numbers.length) return 0;
-
-    let result = 0;
-    for (const number of numbers) result += number;
-
-    return result;
-  }
-
-  async readInput() {
-    const userInput = await Console.readLineAsync(MESSAGE.INPUT);
-    return userInput;
-  }
-
-  printResult(result) {
-    return Console.print(MESSAGE.PRINT + result);
-  }
-
   async run() {
-    const input = await this.readInput();
+    const input = await readInput();
     const numbers = this.parseStringToNumbers(input);
-    const result = this.sum(numbers);
+    const result = sum(numbers);
 
-    return this.printResult(result);
+    return printResult(result);
   }
 }
 
