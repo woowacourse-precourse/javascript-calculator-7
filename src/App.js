@@ -60,7 +60,6 @@ function splitCustomDelimiter(input) {
         throw new Error('[ERROR] 제공된 구분자 외 다른 구분자를 사용했습니다');
       }
 
-      //;\n1
       return { delimiter: commonDelimiter, numbers: inputtedNumber };
     }
 
