@@ -26,13 +26,20 @@ class App {
       inputString = inputString.split(separator).join(",");
     }
 
-    // 잘못된 입력값 처리
+    // 잘못된 입력값 처리 및 숫자 변환
     const numbers = inputString.split(",").map(num => Number(num.trim()));
+    
+    // 구분자만 있거나 숫자가 아닌 경우 처리
+    if (inputString === "" || inputString.match(/^[,:\n]+$/)) {
+      return Console.print("[ERROR] 잘못된 형식입니다. 숫자를 입력해 주세요.");
+    }
+
+    // 음수 또는 NaN 처리
     if (numbers.some(num => isNaN(num) || num < 0)) {
       return Console.print("[ERROR] 음수 또는 잘못된 값을 입력했습니다.");
     }
 
-    // 숫자 더하기 및 결과 반환 (
+    // 숫자 더하기 및 결과 반환
     const sum = numbers.reduce((acc, curr) => acc + curr, 0);
     Console.print(`결과 : ${sum}`);
   }
@@ -53,4 +60,3 @@ class App {
 
 export default App;
 
-c
