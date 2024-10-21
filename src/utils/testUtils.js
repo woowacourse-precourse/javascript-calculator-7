@@ -25,3 +25,13 @@ export const expectResults = async (app, outputs) => {
   });
   await Promise.all(runTests);
 };
+
+export const expectToThrow = async (app, inputs) => {
+  const promiseArray = [];
+  for (let i = 0; i < inputs.length; i += 1) {
+    promiseArray.push(async () => {
+      await expect(app.run()).rejects.toThrow('[ERROR]');
+    });
+  }
+  await Promise.all(promiseArray);
+};
