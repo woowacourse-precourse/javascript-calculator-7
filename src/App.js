@@ -11,6 +11,8 @@ class App {
     try {
       const input = await this.userInput();
       this.checkSeparator(input);
+      const result = this.calculate(input);
+      Console.print(`결과 : ${result}`);
     } catch (error) {
       throw error;
     }
@@ -31,6 +33,21 @@ class App {
     }
   }
 
+  calculate(input) {
+    input = input.replace(CUSTOM_SEPARATOR_PATTERN, "");
+    const regex = new RegExp(`[${this.separators}]`);
+    const numbers = input.split(regex).map((num) => parseInt(num, 10));
+    let sum = 0;
+
+    for (const number of numbers) {
+      if (number < 0) {
+        throw new Error("[ERROR] 숫자는 양수만 가능합니다.");
+      }
+      sum += number;
+    }
+
+    return sum;
+  }
 }
 
 export default App;
