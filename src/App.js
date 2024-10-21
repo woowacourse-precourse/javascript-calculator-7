@@ -2,29 +2,32 @@ import { Console } from "@woowacourse/mission-utils";
 
 class App {
   async run() {
-    const READ_STRING = await Console.readLineAsync("입력할 문자열: ");
-    const custom_seperator = this.findCustomSeperator(READ_STRING);
-    Console.print(custom_seperator);
+    const readString = await Console.readLineAsync("입력할 문자열: ");
+    const { success, customSeperator } = this.findCustomSeperator(readString);
+    if (success) {
+      Console.print(customSeperator);
+    } else {
+      Console.print("기본 구분자 사용: ,");
+    }
   }
 
   // 만약 문자열에 커스텀 구분자가 있다면, 그 구분자를 반환한다.
-  findCustomSeperator(READ_STRING) {
-    let custom_seperator = ",";
-    const REGEX = /(\/\/).+(\\n)/gm;
-    let m = REGEX.exec(READ_STRING);
-    if (m) {
-      const st = m[0];
-      custom_seperator = st.substring(2, st.length - 2);
+  findCustomSeperator(readString) {
+    let customSeperator = ",";
+    const regex = /\/\/(.+)\n/gm;
+    const match = regex.exec(readString);
 
+    if (match) {
+      customSeperator = match[1];
       return {
         success: true,
-        custom_seperator: custom_seperator,
-      };
-    } else {
-      return {
-        success: false,
+        customSeperator,
       };
     }
+
+    return {
+      success: false,
+    };
   }
 }
 
