@@ -18,7 +18,11 @@ class Model {
   }
 
   checkStringChangeWithNumber(stringArray) {
-    if (stringArray.filter((string) => isNaN(+string)).length > 0) {
+    if (
+      stringArray.filter(
+        (string) => isNaN(+string) || +string < 0 || string === ""
+      ).length > 0
+    ) {
       throwError("구분자 외에 다른 문자열은 계산 부분에 들어올 수 없습니다.");
     }
   }
