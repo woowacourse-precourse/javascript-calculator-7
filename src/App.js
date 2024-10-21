@@ -12,7 +12,15 @@ class App {
     // , 과 : 구분자 처리
     const arr = printStr.split(/[:,]+/).map((num) => +num.trim());
 
-    Console.print(arr);
+    // 숫자만을 찾아 합하는 기능 구현
+
+    let sum = 0;
+    for (let i = 0; i < arr.length; i++) {
+      if (isNaN(arr[i]) === false) {
+        sum += arr[i];
+      }
+      Console.print(sum);
+    }
   }
 }
 
