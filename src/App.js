@@ -35,7 +35,7 @@ export function getCustomSeparator(userInput) {
 export function validateUserInput(customSeparator, formattedUserInput) {
   const regex = customSeparator
     ? new RegExp(`\\s|^\\d+([,:${customSeparator}]\\d+)*$`)
-    : /\s|^\d+([,:]\d+)*$/;
+    : /^\s*$|^\d+([,:]\d+)*$/;
 
   if (!formattedUserInput.match(regex)) {
     throw new Error('[ERROR]');
