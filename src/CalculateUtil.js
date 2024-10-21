@@ -1,6 +1,8 @@
+import BASIC_SEPARATOR from "./constants/basicSeparator";
+
 const CalculateUtil = {
   parseInput(input) {
-    const separator = [",", ":"];
+    const separator = [...BASIC_SEPARATOR];
     const re = /(\/\/).+(\\n)/;
 
     if (input.match(re)) {
