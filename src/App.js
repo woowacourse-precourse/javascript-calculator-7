@@ -12,7 +12,8 @@ class App {
         const input = await this.getInput("덧셈할 문자열을 입력해 주세요.");
         const numbers = this.splitInput(input);
 
-        console.log(numbers);
+        const sum = numbers.reduce((acc, cur) => acc + cur, 0);
+        console.log("결과 :", sum);
         this.rl.close();
     }
 
