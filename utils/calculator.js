@@ -35,6 +35,8 @@ import { printErrorMsg } from './inout.js';
   
   
   export function checkTypeAndCalc(str) {
+    
+    
     // 지정 문자 정규표현식 - 숫자, 콤마(,), 콜론(:)으로만 이루어지며 시작과 끝은 숫자
     const standardCaseRegex = /^\d[0-9,:]*\d$/;
     
@@ -44,7 +46,10 @@ import { printErrorMsg } from './inout.js';
     const transStr = str.replace("\n", "\\n");
     //console.log(transStr);
 
-    if (standardCaseRegex.test(transStr)) {
+    if(str == ""){      
+      console.log("결과 : "+ SumNumbers("0"));
+    }
+    else if (standardCaseRegex.test(transStr)) {
       //console.log("[지정 구분자]");
   
       console.log("결과 : "+ SumNumbers(transStr));  // 숫자 배열의 합 출력
