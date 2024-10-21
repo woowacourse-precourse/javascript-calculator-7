@@ -12,6 +12,10 @@ class CalculatorController {
     const input = await this.#io.readlineSync();
     return this.service.calculate(new CalculatorDTO(input));
   }
+
+  printResult(result){
+    this.#io.print(`결과 : ${result}`);
+  }
 }
 
 export default CalculatorController;
