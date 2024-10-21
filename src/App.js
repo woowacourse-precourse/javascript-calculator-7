@@ -21,6 +21,8 @@ class App {
       numbers = input.split(defaultSeparator);
       result = calculate(numbers);
     }
+
+    Console.print(result);
   }
 }
 
