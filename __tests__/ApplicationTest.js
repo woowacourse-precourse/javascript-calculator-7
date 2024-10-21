@@ -77,8 +77,26 @@ describe("문자열 계산기", () => {
     });
   });
 
-  test("예외 테스트", async () => {
+  test("예외 테스트 음수 입력", async () => {
     const inputs = ["-1,2,3"];
+    mockQuestions(inputs);
+
+    const app = new App();
+
+    await expect(app.run()).rejects.toThrow("[ERROR]");
+  });
+
+  test("예외 테스트 문자 입력", async () => {
+    const inputs = ["abc,def"];
+    mockQuestions(inputs);
+
+    const app = new App();
+
+    await expect(app.run()).rejects.toThrow("[ERROR]");
+  });
+
+  test("예외 테스트 실수 입력", async () => {
+    const inputs = ["1.5,3,5"];
     mockQuestions(inputs);
 
     const app = new App();
