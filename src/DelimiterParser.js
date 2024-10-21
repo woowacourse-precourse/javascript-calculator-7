@@ -1,13 +1,20 @@
 import { ERROR } from "./utils/messages.js";
 
 class DelimiterParser {
-  constructor(input) {
+  constructor() {
     this.delimiters = [",", ":"];
   }
 
   checkDelimiterHasNumber(customDelimiter) {
     if (/\d/.test(customDelimiter)) {
       throw new Error(ERROR.CUSTOM_DELIMITER_HAS_NUMBER);
+    }
+  }
+
+  checkNegativeNumbers(numbers) {
+    const negativeNumbers = numbers.filter((num) => num < 0);
+    if (negativeNumbers.length > 0) {
+      throw new Error(`${ERROR.NEGATIVE_NUMBER} ${negativeNumbers.join(", ")}`);
     }
   }
 
@@ -44,15 +51,19 @@ class DelimiterParser {
 
   splitString(input) {
     const [parseInput, delimiters] = this.getCustomDelimiter(input);
-    this.checkInvalidCharacters(parseInput, delimiters);
-    console.log(parseInput, delimiters);
 
     const delimiterRegex = new RegExp(`(${delimiters.join("|")})`);
-
-    return parseInput
+    const numbers = parseInput
       .split(delimiterRegex)
       .map(Number)
       .filter((num) => !isNaN(num));
+
+    if (!delimiters.includes("-")) {
+      this.checkNegativeNumbers(numbers);
+    }
+    this.checkInvalidCharacters(parseInput, delimiters);
+
+    return numbers;
   }
 
   escapeRegExp(string) {
