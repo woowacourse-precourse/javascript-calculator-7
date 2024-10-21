@@ -6,8 +6,13 @@ class App {
       "덧셈할 문자열을 입력해 주세요. \n"
     );
 
-    const result = this.calculate(input);
-    MissionUtils.Console.print(`결과 : ${result}`);
+    try {
+      const result = this.calculate(input);
+      MissionUtils.Console.print(`결과 : ${result}`);
+    } catch (error) {
+      MissionUtils.Console.print(error.message);
+      return;
+    }
   }
 
   calculate(input) {
