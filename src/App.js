@@ -16,9 +16,9 @@ class App {
       await this.handleSeparator(afterCustomSeparator); // 구분자 배열을 바탕으로 숫자 추출하기
 
       const result = await this.addNumbers(this.numbers); // 덧셈 처리
-      Console.print(`결과: ${result}`);
+      Console.print(`결과 : ${result}`);
     } catch (error) {
-      Console.print(`${error}`);
+      throw error;
     }
   }
 
