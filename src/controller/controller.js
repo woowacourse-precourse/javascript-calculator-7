@@ -1,4 +1,5 @@
 import View from "../view/view.js";
+import Calculator from "../model/calculator.js";
 
 class Controller {
     #view;
@@ -9,8 +10,11 @@ class Controller {
 
     async calculate() {
         let inputData = await this.#view.readInput();
+
+        let calculator = new Calculator(inputData);
+        let result = calculator.calculate();
         
-        this.#view.printResult(inputData);
+        this.#view.printResult(result);
     }
 }
 
