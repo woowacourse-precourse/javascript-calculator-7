@@ -17,22 +17,20 @@ export function throwError(errorCode) {
   throw new Error(`[ERROR] : ${ERROR_MESSAGES[errorCode]}`);
 }
 
-// 문자 포함 검증
 function isNonNumeric(value) {
+  // 빈문자열은 0으로 대체해야 하기 때문에 제외함.
   return value !== '' && !/^-?\d+$/.test(value);
 }
 
-// 0 포함 검증
 function isZero(value) {
   return /^0+$/.test(value);
 }
 
-// 음수 포함 검증
 function isNegative(value) {
   return Number(value) < 0;
 }
 
-// --- 입력 검증 함수 분리 ---
+// --- 입력 검증  ---
 function validateTooLarge(input) {
   const hasTooLarge = input.some((char) => Number(char) > MAX_LIMIT);
   if (hasTooLarge) throwError('NUMBER_TOO_LARGE');
@@ -69,7 +67,6 @@ function validateNonNumeric(input) {
   }
 }
 
-// --- 입력 검증 ---
 function validateInput(input) {
   validateTooLarge(input);
   validateNonNumericAndNegative(input);
@@ -77,23 +74,24 @@ function validateInput(input) {
   validateNegativeOrZero(input);
   validateNonNumeric(input);
 }
+
 // --- 구분자 추출 ---
 function getCustomDelimiter(input) {
   const hasCustomDelimiter = input.startsWith('//');
   if (!hasCustomDelimiter) return null;
 
   const delimiterEndIndex = input.indexOf('\\n');
-  return input.substring(2, delimiterEndIndex);
+
+  return input.substring(2, delimiterEndIndex); // '//' 다음 문자부터 '\\n' 전까지의 문자 추출
 }
 
 // --- 커스텀구분자 입력 부분 제외 ---
 function removeDelimiterSection(customDelimiter, input) {
   if (!customDelimiter) {
-    return input; // 커스텀 구분자가 없을 경우 원래 입력 반환.
+    return input;
   }
-
   const delimiterEndIndex = input.indexOf('\\n');
-  return input.substring(delimiterEndIndex + 2);
+  return input.substring(delimiterEndIndex + 2); // '\\n' 다음 부분부터 끝까지 추출
 }
 
 // --- 문자열을 구분자 기준으로 나누기 ---
@@ -117,12 +115,8 @@ function replaceEmptyWithZero(inputArr) {
 
 // --- 숫자 파싱 로직 ---
 export function parseNumbers(input) {
-  if (!input) {
-    return [0];
-  }
   const customDelimiter = getCustomDelimiter(input);
   const processedInput = removeDelimiterSection(customDelimiter, input);
-
   const splitByDelimiters = splitString(customDelimiter, processedInput);
 
   validateInput(splitByDelimiters);
