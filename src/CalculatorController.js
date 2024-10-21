@@ -1,5 +1,4 @@
 import { MissionUtils } from "@woowacourse/mission-utils";
-import CalculatorDTO from './CalculatorDTO.js';
 import InputParser from "./InputParser.js";
 import { UI } from "./constants.js";
 
@@ -14,7 +13,7 @@ class CalculatorController {
     const input = await this.#io.readLineAsync(UI.INPUT_QUERY);
     const parser = new InputParser();
     const numbers = parser.parse(input);
-    const result = this.service.calculate(new CalculatorDTO(numbers));
+    const result = this.service.calculate(numbers);
     this.printResult(result);
   }
 

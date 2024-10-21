@@ -1,11 +1,10 @@
-import CalculatorDTO from '../src/CalculatorDTO';
-import CalculatorService from '../src/CalculatorService';
+import CalculatorService from '../src/CalculatorService.js';
 
 describe('서비스 로직 테스트', () => {
   test("주어진 DTO를 기반으로 덧셈을 수행할 수 있다.", () => {
-    const dto = new CalculatorDTO([1,2,3,4,5]);
+    const input = [1,2,3,4,5];
     const expected = 1 + 2 +3 + 4 + 5;
-    const result = CalculatorService.calculate(dto);
+    const result = CalculatorService.calculate(input);
     expect(result).toEqual(expected);
   });
 })
