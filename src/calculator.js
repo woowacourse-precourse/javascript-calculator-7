@@ -10,7 +10,7 @@ function extractNumbers(input, distinct) {
                 number = [];
             }
         } else {
-            number.push(i);
+            number.push(currentChar);
             if (i === input.length - 1) {
                 sum += setNumber(number);
             }
