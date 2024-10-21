@@ -10,7 +10,7 @@ class CustomDelimiterHandler {
     this.#numbersString = '';
   }
 
-  #getNumbersString(string) {
+  #getNumbersStringAndCustomDelimiterInput(string) {
     const startIndex = string.lastIndexOf(CUSTOM_DELIMITER_INPUT.start);
     const endIndex = string.lastIndexOf(CUSTOM_DELIMITER_INPUT.end);
     const numbersString = string.slice(endIndex + CUSTOM_DELIMITER_INPUT.end.length);
@@ -42,7 +42,8 @@ class CustomDelimiterHandler {
   }
 
   #handleWithCustomDelimiter(string) {
-    const { numbersString, customDelimiterInput } = this.#getNumbersString(string);
+    const { numbersString, customDelimiterInput } =
+      this.#getNumbersStringAndCustomDelimiterInput(string);
     const customDelimiter = this.#exportDelimiter(customDelimiterInput);
     this.#customDelimiter = customDelimiter;
     this.#numbersString = numbersString;
