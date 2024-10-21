@@ -14,6 +14,8 @@ class App {
         }
 
         const result = extractNumbers(input, distinct);
+
+        Console.print(`결과 : ${result}`);
     }
 }
 
