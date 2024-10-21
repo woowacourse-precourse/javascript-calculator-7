@@ -4,6 +4,7 @@ class App {
   async run() {
     const input = await this.getUserInput();
     const splitedString = this.stringSplitDelimiter(input);
+    this.addNumbers(splitedString);
   }
 
   async getUserInput() {
@@ -26,6 +27,11 @@ class App {
     }
 
     return str;
+  }
+
+  sumNumbers(numbers) {
+    const sum = numbers.reduce((acc, cur) => acc + cur, 0);
+    Console.print("결과 : " + sum);
   }
 }
 
