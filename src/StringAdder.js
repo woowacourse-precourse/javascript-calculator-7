@@ -1,7 +1,7 @@
 import { MissionUtils } from "@woowacourse/mission-utils";
 
 
-const CalculatorType = Object.freeze({
+export const CalculatorType = Object.freeze({
     basic : Symbol(0),
     custom : Symbol(1),
     error : Symbol(2)
@@ -32,11 +32,11 @@ export class StringAdder {
             if ((idx == 0 || idx==1) && input[idx]!='/'){
                 break;
             }
-            while (idx>=2 && input[idx]!='\n'){
+            while (idx>=2 && idx < input.length && input[idx]!='\n'){
                 this.seperator += input[idx]; 
                 idx++;
             }
-            if (input[idx]=='\n'){
+            if (idx < input.length && input[idx]=='\n'){
                 isFindSeperator = true;
                 break;
             }
@@ -45,7 +45,7 @@ export class StringAdder {
         if (isFindSeperator){
             this.type = CalculatorType.custom;
             this.input = input.substr(idx+1, input.length - idx);    
-            console.log(this.seperator);
+            //console.log(this.seperator);
         }else{
             this.type = CalculatorType.error;
         }
