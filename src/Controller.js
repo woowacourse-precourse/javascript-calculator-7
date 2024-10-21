@@ -41,4 +41,9 @@ export default class Controller {
             .map(num => parseInt(num.trim(), 10))
             .filter(num => !isNaN(num));
     }
+
+    sumCalculatorList(list){
+        return list.reduce((total, curr) => total + curr, 0);
+    }
+
 }

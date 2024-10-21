@@ -26,9 +26,12 @@ class App {
       Console.print("이것은 기본 구문자 입니다.");
     }
 
+    const sum = Control.sumCalculatorList(input.numberList);
+
     Console.print(`입력한 값: ${input.inputValue}`);
     Console.print(`커스텀 구분자: ${input.customSeparator}`);
-    Console.print(`분할된 숫자 리스트: ${input.numberList}`)
+    Console.print(`분할된 숫자 리스트: ${input.numberList}`);
+    Console.print(`연산 결과 : ${sum}`);
   }
 }
 
