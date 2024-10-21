@@ -22,9 +22,19 @@ class App {
       cleanedInput = input.replace(/^\/\/(.)\\n/, "");
     }
 
+    // 모든 구분자들을 ','로 변환
+    const separatorRegex = new RegExp(
+      `[${separators
+        .map((sep) => sep.replace(/[-/\\^$*+?.()|[\]{}]/g, "\\$&"))
+        .join("")}]`,
+      "g"
+    );
+    const SeparatedInput = cleanedInput.replace(separatorRegex, ",");
+
     // 테스트용
     Console.print(separators);
     Console.print(cleanedInput);
+    Console.print(SeparatedInput);
   }
 }
 
