@@ -11,5 +11,6 @@ export default class Model{
     updateData(input){
         this.stringValue.inputValue = input;
         this.stringValue.numberList = [];
+        this.stringValue.customSeparator = "";
     }
 }

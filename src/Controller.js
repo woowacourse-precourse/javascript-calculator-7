@@ -1,6 +1,7 @@
 export default class Controller {
 
-    baseSeparatorSplit(st, lst){
+    baseSeparatorSplit(st){
+        let lst = [];
         let currentNumber = "";
         for (let ch of st){
             if(ch === ":" || ch === ','){
@@ -17,16 +18,27 @@ export default class Controller {
         }
         return lst;
     }
-
     extractCustomSeparator(st){
         let separator = ""
 
         if(st.startsWith('//')){
             const idx = st.indexOf("\\n");
             if(idx > 2){
-                separator = st.slice(2, idx-1);
+                separator = st.slice(2, idx);
             }
         }
         return separator;
+    }
+
+    CommonSeparatorSplit(st, customSeparator){
+        if (customSeparator === ""){
+            return this.baseSeparatorSplit(st);
+        }
+        const separatorIndex = st.indexOf("\\n");
+        const numberString = st.slice(separatorIndex + 2);
+        console.log(`숫자 배열 인덱스 : ${numberString}`)
+        return numberString.split(customSeparator)
+            .map(num => parseInt(num.trim(), 10))
+            .filter(num => !isNaN(num));
     }
 }
