@@ -10,6 +10,17 @@ class App {
   computeSum(inputString) {
     let separator = /[,:]/;
 
+    if (inputString.startsWith("//")) {
+      inputString = inputString.replace("\\n", "\n");
+      const delimiterPosition = inputString.indexOf("\n");
+
+      this.exceptionHandler(delimiterPosition === -1, "[ERROR]");
+
+      const customSeparator = inputString.substring(2, delimiterPosition);
+      separator = new RegExp(`[${customSeparator}]`);
+      inputString = inputString.substring(delimiterPosition + 1);
+    }
+
     const numberArray = inputString.split(separator).map((value) => value.trim()).map(Number);
     this.exceptionHandler(numberArray.length === 0, "[ERROR]");
 
