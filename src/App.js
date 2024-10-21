@@ -2,9 +2,8 @@ import { Console } from "@woowacourse/mission-utils";
 
 class App {
   async run() {
-    const input = await Console.readLineAsync(
-      "덧셈할 문자열을 입력해 주세요.\n"
-    );
+    let input = await Console.readLineAsync("덧셈할 문자열을 입력해 주세요.\n");
+
     const result = this.add(input);
     Console.print(`결과 : ${result}`);
   }
@@ -14,7 +13,24 @@ class App {
       return 0;
     }
 
-    const numbers = input.split(/,|:/).map((num) => {
+    if (input.includes("\\n")) {
+      input = input.replace(/\\n/g, "\n");
+    }
+
+    let delimiter = /,|:/;
+    if (input.startsWith("//")) {
+      const customDelimiterMatch = input.match(/^\/\/(.)\n/);
+      if (customDelimiterMatch) {
+        delimiter = new RegExp(customDelimiterMatch[1]);
+        input = input.split("\n")[1];
+      } else {
+        throw new Error(
+          `[ERROR] Invalid custom delimiter ${customDelimiterMatch}`
+        );
+      }
+    }
+
+    const numbers = input.split(delimiter).map((num) => {
       return parseInt(num, 10);
     });
 
