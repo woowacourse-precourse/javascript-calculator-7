@@ -18,7 +18,10 @@ const splitByDefaultSeparator=(value)=>{
 const splitByCustomSeparator=(value)=>{
     const index = 2;
     const lineBreakIndex = value.indexOf("\\n");
-    const customSeperator = value.slice(index,lineBreakIndex);
+    const customSeperator = value.slice(index,lineBreakIndex).trim();
+    if(!customSeperator){
+        throw new Error("[ERROR] 커스텀 구분자가 비어있습니다. 어플리케이션이 종료됩니다. ");
+    }
     const substringValue = value.slice(lineBreakIndex+2);
     const seperatedValue = substringValue.split(customSeperator)
 
