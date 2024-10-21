@@ -16,17 +16,11 @@ class App {
       const startIndex = userInput.indexOf('\\n');
       const custom = userInput.substring(2, startIndex);
       const inputSplited = userInput.substring(startIndex + 2);
-
       const regex = new RegExp(`[${custom}:,]`);
-
       string = inputSplited.split(regex).map(Number);
-
-
     } else {
       // 입력받은 값에서 숫자만 추출
-      const changeColon = userInput.replace(":", ",");
-      const comma = changeColon.split(',').map(Number);
-      string = comma;
+      string = userInput.split(/,|:/).map(Number);
     }
     return string;
   }
