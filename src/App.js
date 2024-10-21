@@ -2,9 +2,9 @@ import { Console } from "@woowacourse/mission-utils";
 class App {
   async run() {
     // readLineAsync() 이용해서 문자열 입력 받기
-    const input = await Console.readLineAsync(
-      "덧셈할 문자열을 입력해 주세요.\n"
-    );
+    const input = (
+      await Console.readLineAsync("덧셈할 문자열을 입력해 주세요.\n")
+    ).trim();
 
     // 구분자 저장하는 배열 만들기
     const separators = [".", ":"];
@@ -19,7 +19,7 @@ class App {
       separators.push(customSeparator[1]);
 
       // 입력 문자열에서 커스텀 구분자 부분 제거
-      cleanedInput = input.replace(/^\/\/(.)\\n/, "");
+      cleanedInput = input.replace(/^\/\/(.)\\n/, "").trim();
     }
 
     // 모든 구분자들을 ','로 변환
@@ -34,6 +34,8 @@ class App {
     // ,를 기준으로 문자열을 나누고 숫자 배열 생성
     const numbers = separatedInput
       .split(",")
+      .map((num) => num.trim())
+      .filter((num) => num !== "")
       .map((num) => Number(num))
       .filter((num) => !isNaN(num));
 
