@@ -15,7 +15,9 @@ class App {
       if (CUSTOM_SEPARATOR) {
         this.SEPARATORS.push(CUSTOM_SEPARATOR);
       }
-      
+
+      const NUMBERS = App.getNumbers(INPUT, this.SEPARATORS);
+
     } catch(error) {
       console.print(error.message);
     }
@@ -43,6 +45,11 @@ class App {
     }
 
     return false;
+  }
+
+  static getNumbers(INPUT, SEPARATORS) {
+    const NUMBERS_PART = SEPARATORS.length > 2 ? INPUT.split('\n')[1] : INPUT;
+
   }
 }
 
