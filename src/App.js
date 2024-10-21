@@ -20,7 +20,7 @@ class App {
     let delimiters = [",", ":"];
 
     if (input.startsWith("//")) {
-      const parts = input.split("\n");
+      const parts = input.split("\\n");
       if (parts.length < 2) {
         throw new Error("커스텀 구분자 형식이 잘못되었습니다.");
       }
