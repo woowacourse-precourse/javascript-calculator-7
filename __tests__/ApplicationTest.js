@@ -39,7 +39,7 @@ describe("문자열 계산기", () => {
 
     const app = new App();
 
-    await expect(app.run()).rejects.toThrow("[ERROR]");
+    await expect(app.run()).rejects.toThrow(ERROR_MESSAGES.INVALID_NUMBER);
   });
 
   test("사용자가 유효하지 않는 값을 입력할 경우", async () => {
@@ -48,7 +48,7 @@ describe("문자열 계산기", () => {
 
     const app = new App();
 
-    await expect(app.run()).rejects.toThrow(ERROR_MESSAGES);
+    await expect(app.run()).rejects.toThrow(ERROR_MESSAGES.INVALID_NUMBER);
   });
 
   test("빈 문자열을 입력할 경우", async () => {
