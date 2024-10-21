@@ -1,4 +1,6 @@
 const PRINT_MESSAGES = {
+  USER_GUIDE:
+    '커스텀 구분자 지정은 입력의 앞부분에 위치해야 하고, 점(.) 기호, 영문, 한글 등은 사용할 수 없습니다.\nex) //>\\n1,2,3>4 or 2,3:5',
   ENTER_ADDITION_STRING: '덧셈할 문자열을 입력해 주세요.\n',
   FINAL_RESULT: '결과 : ',
 };

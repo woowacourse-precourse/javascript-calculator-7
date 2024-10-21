@@ -11,6 +11,7 @@ class App {
   }
 
   async run() {
+    this.printUserGuide();
     const input = await this.getInputForAddition();
     const inputWithoutSpace = this.removeSpace(input);
 
@@ -71,6 +72,10 @@ class App {
 
   calculateSum(additionArray) {
     return additionArray.reduce((acc, cur) => acc + cur * 10, 0) / 10;
+  }
+
+  printUserGuide() {
+    Console.print(PRINT_MESSAGES.USER_GUIDE);
   }
 
   printResult(result) {
