@@ -50,4 +50,13 @@ describe('허용되는 예외상황 테스트', () => {
     const app = new App();
     await expectResults(app, outputs);
   });
+  test('10이상의 수가 입력된 경우', async () => {
+    const inputs = ['1,10,100,1000,10000'];
+    mockMultipleQuestions(inputs);
+
+    const outputs = ['결과 : 11111'];
+
+    const app = new App();
+    await expectResults(app, outputs);
+  });
 });
