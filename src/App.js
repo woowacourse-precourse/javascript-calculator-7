@@ -64,9 +64,8 @@ class Calculator {
     }
 
     if (divider.includes(",") && divider.includes(":")) {
-      let numberArray = numberString.split(',').join('')
-      let filterednumberArray = numberArray.split(':').map(Number);
-      return filterednumberArray;
+      let numberArray = numberString.split(',').flatMap(numStr => numStr.split(':')).map(Number);
+      return numberArray;
     }
 
     return numberString.split(divider).map(Number);
