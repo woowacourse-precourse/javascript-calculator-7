@@ -1,6 +1,6 @@
 import { MissionUtils } from "@woowacourse/mission-utils";
-import CalculatorDTO from './CalculatorDTO';
-import InputParser from "./InputParser";
+import CalculatorDTO from './CalculatorDTO.js';
+import InputParser from "./InputParser.js";
 
 class CalculatorController {
   #io = MissionUtils.Console;
