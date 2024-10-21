@@ -55,12 +55,18 @@ describe('InputParser 테스트', () => {
 })
 
 describe('엣지 케이스 테스트', () => {
-  test("입력이 \"\" 인경우", () =>{
+  test("입력이 \"\" 인경우", () => {
      const userInput = "";
      const parser = new InputParser();
      const numbers = parser.parse(userInput);
      expect(numbers).toStrictEqual([0]);
   });
+
+  test("입력이 \" \"인 경우", () =>{
+    const userInput = " ";
+    const parser = new InputParser();
+    expect(()=> parser.parse(userInput)).toThrow("[ERROR]")
+  })
   
 })
 
