@@ -35,6 +35,8 @@ class App {
 
     this.exceptionHandler(inputString === "", "[ERROR]");
 
+    const totalSum = this.computeSum(inputString);
+    Console.print(`결과 : ${totalSum}`);
   }
 }
 
