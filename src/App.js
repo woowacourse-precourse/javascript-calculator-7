@@ -58,7 +58,11 @@ class App {
 
   }
 
+  // 기본 구분자만 포함하는지 검증하는 함수
   validateDefaultDelimiters(input) {
+
+    const invalidChars = input.split("").filter((char) => !char.match(/[0-9,:\s]/));
+    return invalidChars.length === 0; // 모든 파트가 숫자면 true 반환
 
   }
 }
