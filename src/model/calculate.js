@@ -3,6 +3,7 @@ import { CONSTANTS } from '../constants/constants.js';
 const {
   SEPARATOR_COMMON,
   ERROR_MESSAGE_CANNOT_CONVERT_NUMBER,
+  ERROR_MESSAGE_NOT_INCLUDE_SEPARATOR,
   SEPARATOR_CUSTOM_START,
   SEPARATOR_CUSTOM_END,
   NUMBERS_ZERO,
@@ -13,21 +14,20 @@ export const determineNumber = (numberString) => {
   return isNumber;
 };
 
-/**
- * 맨 앞 숫자가 숫자인지 문자인지 판별하는 함수.
- * 숫자면 true, 문자면 false를 반환.
- *
- * true 일 경우 common 구분자로 나누고 합을 구하는 함수로 이동
- * false 일 경우 custom 구분자로 나누고 합을 구하는 함수로 이동
- */
-export const classificationDelimiter = (inputNumber, isNumber) => {
-  if (isNumber === true) {
-    return calculateCommonSeparator(inputNumber);
-  }
+// 숫자 배열을 받아서 합을 구하는 함수
+export const processNumberArray = (numberArray, initialValue) => {
+  let result = initialValue;
 
-  if (isNumber === false) {
-    return calculateCustomSeparator(inputNumber);
-  }
+  numberArray.forEach((numberString) => {
+    const num = Number(numberString);
+    if (!Number.isNaN(num)) {
+      result += num;
+    } else {
+      throw new Error(ERROR_MESSAGE_CANNOT_CONVERT_NUMBER);
+    }
+  });
+
+  return result;
 };
 
 // common 구분자를 받아서 합을 구하는 함수
@@ -53,18 +53,21 @@ export const calculateCustomSeparator = (inputNumber) => {
   return processNumberArray(numberArray, NUMBERS_ZERO);
 };
 
-// 숫자 배열을 받아서 합을 구하는 함수
-export const processNumberArray = (numberArray, initialValue) => {
-  let result = initialValue;
+/**
+ * 맨 앞 숫자가 숫자인지 문자인지 판별하는 함수.
+ * 숫자면 true, 문자면 false를 반환.
+ *
+ * true 일 경우 common 구분자로 나누고 합을 구하는 함수로 이동
+ * false 일 경우 custom 구분자로 나누고 합을 구하는 함수로 이동
+ */
+export const classificationDelimiter = (inputNumber, isNumber) => {
+  if (isNumber === true) {
+    return calculateCommonSeparator(inputNumber);
+  }
 
-  numberArray.forEach((numberString) => {
-    const num = Number(numberString);
-    if (!Number.isNaN(num)) {
-      result += num;
-    } else {
-      throw new Error(ERROR_MESSAGE_CANNOT_CONVERT_NUMBER);
-    }
-  });
+  if (isNumber === false) {
+    return calculateCustomSeparator(inputNumber);
+  }
 
-  return result;
+  return null;
 };
