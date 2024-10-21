@@ -24,7 +24,7 @@ class StringCalculator {
         numbers = numbers.substring(delimiterEndIndex + 1);
       }
 
-      const splitNumbers = numbers.split(delimiters);
+      const splitNumbers = numbers.split(delimiters).filter((numStr) => numStr.trim() !== ""); // 빈 문자열 제거
 
       // 음수 및 유효하지 않은 입력 처리
       splitNumbers.forEach(num => {
