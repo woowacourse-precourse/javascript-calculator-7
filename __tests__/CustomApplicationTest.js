@@ -62,4 +62,15 @@ describe('문자열 계산기', () => {
       expect(logSpy).toHaveBeenCalledWith(expect.stringContaining(output));
     });
   });
+
+  test('잘못된 값은 예외로 처리한다.', async () => {
+    const inputs = ['1;2,3', '1,a,2', '//-\\n1,2+3'];
+    mockQuestions(inputs);
+
+    for (let i = 0; i < inputs.length; i++) {
+      const app = new App();
+
+      await expect(app.run()).rejects.toThrow('[ERROR]');
+    }
+  });
 });
