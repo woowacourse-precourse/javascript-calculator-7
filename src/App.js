@@ -8,6 +8,8 @@ class App {
 
     if (userInput.startsWith("//") && userInput.indexOf("\\n") !== -1) {
       const NUMBERS = userInput.substr(5).split(userInput[2]);
+    } else {
+      const NUMBERS = userInput.split(/,|:/);
     }
   }
 }
