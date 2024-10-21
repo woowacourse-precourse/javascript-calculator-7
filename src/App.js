@@ -19,11 +19,19 @@ class App {
         Console.print("[ERROR] 잘못된 입력입니다.");
         return;
       }
-      // 커스텀 구분자를 추가
+      // 커스텀 구분자를 추출
       let custom_separator = numString.slice(startIdx, endIdx);
+
+      // 예외처리 2: 커스텀 구분자가 숫자일 경우
+      if (!isNaN(custom_separator)) {
+        Console.print("[ERROR] 커스텀 구분자로 숫자는 허용되지 않습니다.");
+        return;
+      }
+
       if (custom_separator.length > 0) {
         separator_2.push(custom_separator);
       }
+
       // 문자열에서 구분자 정보를 제거
       numString = numString.slice(endIdx + 2);  // \n은 두 문자니까 +2
     }
