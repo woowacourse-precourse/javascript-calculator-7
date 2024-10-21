@@ -14,26 +14,26 @@ describe("extractNumbersAsString 테스트", () => {
   });
 
   test("기본 구분자를 처리하는 지 확인", () => {
-    const input = "1,2,3";
-    const expected = ["1", "2", "3"];
-    expect(extractNumbersAsString(input)).toEqual(expected);
+    const INPUT = "1,2,3";
+    const EXPECTED = ["1", "2", "3"];
+    expect(extractNumbersAsString(INPUT)).toEqual(EXPECTED);
   });
 
   test("커스텀 구분자를 처리하는 지 확인", () => {
-    const input = "//;\n1;2;3";
-    const expected = ["1", "2", "3"];
-    expect(extractNumbersAsString(input)).toEqual(expected);
+    const INPUT = "//;\n1;2;3";
+    const EXPECTED = ["1", "2", "3"];
+    expect(extractNumbersAsString(INPUT)).toEqual(EXPECTED);
   });
 
   test("구분자가 없는 경우 확인", () => {
-    const input = "12345";
-    const expected = ["12345"];
-    expect(extractNumbersAsString(input)).toEqual(expected);
+    const INPUT = "12345";
+    const EXPECTED = ["12345"];
+    expect(extractNumbersAsString(INPUT)).toEqual(EXPECTED);
   });
 
   test("숫자가 없는 경우 확인", () => {
-    const input = "//;\na;b;c";
-    const expected = ["a", "b", "c"];
-    expect(extractNumbersAsString(input)).toEqual(expected);
+    const INPUT = "//;\na;b;c";
+    const EXPECTED = ["a", "b", "c"];
+    expect(extractNumbersAsString(INPUT)).toEqual(EXPECTED);
   });
 });
