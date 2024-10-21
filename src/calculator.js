@@ -1,5 +1,6 @@
 export function calculator(input) {
-    let baseSeparators = /[,:]/;
+    const baseSeparators = /[,:]/;
+    const allowedCustomSeparators = /[~!@#$%^&*_\/\?]/
     let customSeparator;
     let numbersPart = input;
     let isCustom = false;
@@ -20,6 +21,18 @@ export function calculator(input) {
 
         isCustom = true
         customSeparator = input.substring(2, 3);
+
+        // 예외처리: 커스텀 구분자가 한 글자가 아닌 경우
+        const separatorPart = input.split('\n')[0].substring(2);
+        if (separatorPart.length != 1) {
+            throw new Error(`[ERROR] 커스텀 구분자는 한 글자여야 합니다.`);
+        }
+
+        // 예외처리: 커스텀 구분자가 허용된 특수문자가 아닌 경우
+        if (!customSeparator.match(allowedCustomSeparators)) {
+            throw new Error(`[ERROR] 커스텀 구분자는 다음 중 하나여야 합니다: ~, !, @, #, $, %, ^, &, *, _, /, ?`);
+        }
+
         numbersPart = input.split('\n')[1];
     }
 
@@ -30,17 +43,17 @@ export function calculator(input) {
         numbersArr = numbersPart.split(baseSeparators);
     }
 
-    // 공백이나 연속된 구분자가 있는지 검증
+    // 예외처리: 공백이나 연속된 구분자가 있는 경우
     if (numbersArr.some(num => num.trim() === '')) {
         throw new Error('[ERROR] 공백이나 연속된 구분자가 있으면 안 됩니다.');
     }
 
-    // 숫자가 아닌 값이 있는지 검증
+    // 예외처리: 숫자가 아닌 값이 있는 경우
     if (numbersArr.some(num => isNaN(num))) {
         throw new Error('[ERROR] 숫자가 아닌 값이 들어올 수 없습니다.');
     }
 
-    // 양수가 아닌 값이 있는지 검증
+    // 예외처리: 양수가 아닌 값이 있는 경우
     numbersArr = numbersArr.map(Number);
     if (numbersArr.some(num => num <= 0)) {
         throw new Error('[ERROR] 음수나 0은 입력할 수 없습니다.');
