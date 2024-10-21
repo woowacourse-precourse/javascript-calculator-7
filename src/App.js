@@ -71,6 +71,14 @@ class App {
     return number_line.split(SPLIT_REGEX).map(Number);
   }
 
+  sumNumbers(numbers) {
+    let total_value = 0;
+    numbers.forEach(number => {
+      total_value = total_value + number
+    });
+
+    return total_value;
+  }
 
   async run() {
     try {
@@ -79,8 +87,9 @@ class App {
       const VALIDATE_DELIMITER_LINE = await this.validateDelimiterLine(LINES.delimiter_line);
       const VALIDATE_NUMBER_LINE = await this.validateNumberLine(LINES.number_line, VALIDATE_DELIMITER_LINE);
       const EXTRACT_NUMBERS = await this.extractNumbers(VALIDATE_NUMBER_LINE, VALIDATE_DELIMITER_LINE);
+      const VALUE = this.sumNumbers(EXTRACT_NUMBERS);
 
-      MissionUtils.Console.print(`${EXTRACT_NUMBERS}`)
+      MissionUtils.Console.print(`결과 : ${VALUE}`)
 
     } catch (error) {
       throw error;  
