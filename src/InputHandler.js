@@ -1,7 +1,7 @@
 import { MissionUtils } from "@woowacourse/mission-utils";
 
 class InputHandler {
-  regex1 = /^\d+([:,]\d+)*$/;
+  regex;
   delRegex = /^\/\/(.)\\n/;
   
   input;
@@ -21,15 +21,19 @@ class InputHandler {
     }
   }
 
-  // 커스텀 구분자 있는 input. 커스텀 구분자 추가 및 input 수정
+  // 구분자 get : 커스텀 구분자 추가 및 input 수정
   getInputDelimiter() {
-    console.log(this.input);
     if (this.delRegex.test(this.input)){   
       const inputDel = this.input.match(this.delRegex)[1];
       this.delimiter = new RegExp(`[,:${inputDel}]`);
       this.input = this.input.replace(this.delRegex, '');
     }
-    console.log(this.input);
+    // 추가된 구분자 정규표현식 생성
+    this.regex = new RegExp(`^\\d+(${this.delimiter.source}\\d+)*$`);
+    
+    //debug 용
+    //console.log('del : ', this.delimiter.source);
+    //console.log('regex: ', this.regex);
   }
 
   getNumbers() {
@@ -38,15 +42,30 @@ class InputHandler {
       this.num = [];
     }
     // 구분자 input 
-    else if (this.regex1.test(this.input)) {
+    else if (this.regex.test(this.input)) {
       this.num = this.input.split(this.delimiter).filter(Boolean);
     }
     else {
       console.error("error getNumbers");
     }
-    console.log(this.num);
+    //console.log('num : ', this.num);
   }
-
+  
+  // 합계 계산
+  getSum() {
+    if (this.num == null ){
+      console.error("error : num is null");
+    }
+    else if (this.num.length === 0) {
+      this.sum = 0;
+    }
+    else {
+      this.num.forEach((num) => {
+        this.sum += Number(num);
+      });
+    }
+    return this.sum;
+  }
 
 }
 

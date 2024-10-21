@@ -8,6 +8,8 @@ class App {
     await this.#inputHandler.getInput();
     this.#inputHandler.getInputDelimiter();
     this.#inputHandler.getNumbers();
+    const sum = this.#inputHandler.getSum();
+    console.log('합계 ', sum);
   }
 }
 
