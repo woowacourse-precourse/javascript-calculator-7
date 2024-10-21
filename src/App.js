@@ -3,6 +3,7 @@ class App {
   async run() {
     let input = await Console.readLineAsync("덧셈할 문자열을 입력해 주세요.\n");
     input = this.validateInitialInput(input);
+    const splitInputBySeparators = this.parseInput(input);
   }
 
   validateInitialInput(input) {
@@ -10,6 +11,12 @@ class App {
       throw new Error("[ERROR] 공백이 포함될 수 없습니다.");
     }
     return input.length === 0 ? 0 : input;
+  }
+
+  parseInput(input) {
+    return input.startsWith(this.prefixCustomSeparator)
+      ? this.extractAndSplitByCustomSeparator(input)
+      : this.extractAndSplitByDefaultSeparator(input);
   }
 
   getCustomSeparator(input) {
