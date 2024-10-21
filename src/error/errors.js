@@ -21,7 +21,7 @@ class Errors {
     // 문자 포함 오류
     strError() {
         this.nums.map((value) => {
-            if (value !== '' && /[a-zA-Z가-힣]/.test(value)) {
+            if (value !== '' && /[a-zA-Z가-힣ㄱ-ㅎㅏ-ㅣ]/.test(value)) {
                 throw new Error(ERROR_MESSAGE.ERROR_STR);
             }
         });
@@ -36,7 +36,8 @@ class Errors {
     // 기본 구분자 형식 오류
     basicSeparatorError() {
         this.nums.map((value) => {
-            if (/[^a-zA-Z0-9-]/.test(value)) throw new Error(ERROR_MESSAGE.ERROR_BASIC_SEPARATOR);
+            if (/[^a-zA-Z0-9가-힣ㄱ-ㅎㅏ-ㅣ-]/.test(value))
+                throw new Error(ERROR_MESSAGE.ERROR_BASIC_SEPARATOR);
         });
     }
 
