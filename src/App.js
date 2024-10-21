@@ -2,10 +2,14 @@
 
 import { MissionUtils } from '@woowacourse/mission-utils';
 
-/**
- * 문자열 계산기 클래스
- */
+
 class App {
+  /**
+   * 플래그: 여러 개의 커스텀 구분자 허용 여부
+   * @type {boolean}
+   */
+  static ALLOW_MULTIPLE_DELIMITERS = false; // 필요 시 true로 변경
+
   /**
    * 애플리케이션 실행 메서드
    */
@@ -27,11 +31,7 @@ class App {
    * @returns {Promise<string>} - 사용자의 입력값
    */
   readLineAsync(question) {
-    return new Promise((resolve) => {
-      MissionUtils.Console.readLineAsync(question, (input) => {
-        resolve(input);
-      });
-    });
+    return MissionUtils.Console.readLineAsync(question);
   }
 
   /**
@@ -55,14 +55,34 @@ class App {
    * @returns {string[]} - 구분자 배열
    */
   extractDelimiters(input) {
-    const custom_delimiter_pattern = /^\/\/(.+)\n/;
-    const match = input.match(custom_delimiter_pattern);
+    const CUSTOM_DELIMITER_PATTERN = /^\/\/(.+)\n/;
+    const match = input.match(CUSTOM_DELIMITER_PATTERN);
+
     if (match) {
       const delimiterSection = match[1];
-      // 현재는 한 개의 구분자만 처리하지만, 확장성을 위해 배열로 반환
-      const delimiters = delimiterSection.split(',').map((delimiter) => this.escapeRegex(delimiter));
+      const delimiters = [];
+
+      if (App.ALLOW_MULTIPLE_DELIMITERS) {
+        // 여러 개의 커스텀 구분자 지원
+        const MULTI_DELIMITER_REGEX = /\[([^\]]+)\]/g;
+        let delimiterMatch;
+
+        while ((delimiterMatch = MULTI_DELIMITER_REGEX.exec(delimiterSection)) !== null) {
+          delimiters.push(this.escapeRegex(delimiterMatch[1]));
+        }
+
+        if (delimiters.length === 0) {
+          // 대괄호가 없는 경우 단일 구분자 처리
+          delimiters.push(this.escapeRegex(delimiterSection));
+        }
+      } else {
+        // 기본적으로 하나의 커스텀 구분자만 처리
+        delimiters.push(this.escapeRegex(delimiterSection));
+      }
+
       return delimiters;
     }
+
     // 기본 구분자: 쉼표(,)와 콜론(:)
     return [',', ':'];
   }
@@ -74,14 +94,13 @@ class App {
    * @returns {number[]} - 숫자 배열
    */
   parseInput(input, delimiters) {
-    // 커스텀 구분자가 있는 경우 구분자 선언 부분을 제거
-    const custom_delimiter_pattern = /^\/\/(.+)\n/;
-    const sanitizedInput = input.replace(custom_delimiter_pattern, '');
+    const CUSTOM_DELIMITER_PATTERN = /^\/\/(.+)\n/;
+    const sanitizedInput = input.replace(CUSTOM_DELIMITER_PATTERN, '');
 
-    // 구분자 배열을 정규표현식 패턴으로 변환
-    const delimiter_regex = new RegExp(`[${delimiters.join('')}]`);
+    // 구분자 배열을 정규표현식 패턴으로 변환 (구분자 사이에 | 추가)
+    const delimiterRegex = new RegExp(delimiters.join('|'), 'g');
 
-    const tokens = sanitizedInput.split(delimiter_regex);
+    const tokens = sanitizedInput.split(delimiterRegex);
 
     const numbers = tokens.map((token) => {
       const number = Number(token);
