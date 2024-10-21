@@ -15,6 +15,7 @@ class App {
 
       const {separators: defaultSeparators ,strippedInput } = StringParser.extractDefaultSeparators(customStrippedInput);
 
+      const splitResult = StringParser.splitByMultipleSeparators([...customSeparators, ...defaultSeparators, " "], strippedInput)
 
     }catch(err){
       Console.print(`[ERROR]:${err}`)

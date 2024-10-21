@@ -65,6 +65,12 @@ class StringParser{
         return {separators, strippedInput:input}
         
     }
+
+    static splitByMultipleSeparators(separators, strings){
+        const regexSeparators = `[${separators}]`
+        return strings.split(new RegExp(regexSeparators,"g")).filter(str => str !== ''); 
+
+    }
 }
 
 export default StringParser
