@@ -19,11 +19,23 @@ class App {
     add(input) {
         if (input === "") return 0;
 
-        let delimiters = [",", ":"];
-        const delimiterRegex = new RegExp(`[${delimiters.join("")}]`);
-        const numbers = input.split(delimiterRegex).map(Number);
+        let delimiters = [",", ":"]; 
+        let numbersStr = input;
 
-        return numbers.reduce((sum, num) => sum + num, 0);
+        if (input.startsWith("//")) {
+            const customDelimiterMatch = input.match(/^\/\/(.)\n(.*)/);
+            if (customDelimiterMatch) {
+                delimiters.push(customDelimiterMatch[1]);
+                numbersStr = customDelimiterMatch[2]; 
+            } else {
+                throw new Error("[ERROR] 잘못된 구분자 형식입니다.");
+            }
+        }
+
+        const delimiterRegex = new RegExp(`[${delimiters.join("")}]`);
+        const numbers = numbersStr.split(delimiterRegex).map(Number); 
+
+        return numbers.reduce((sum, num) => sum + num, 0); 
     }
 }
 
