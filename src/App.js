@@ -6,6 +6,11 @@ class App {
     try{
       let input = await Console.readLineAsync('덧셈할 문자열을 입력해 주세요.\n');
 
+      if(!input) {
+        const errMessage = `[ERROR] 적절하지 않은 입력 값(Empty Input)`;
+        throw new Error(errMessage);
+      }
+
       const separator = [',', ':'];
   
       while(input.match(/^\/\//g)) {
