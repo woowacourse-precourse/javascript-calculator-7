@@ -1,12 +1,12 @@
 import { Console } from '@woowacourse/mission-utils';
 import Parser from './Parser.js';
+import { VIEW_MESSAGES } from './resources/String.js';
 
 class CalculatorProcess {
   inputString = '';
 
   async getString() {
-    let initInput =
-      await Console.readLineAsync('덧셈할 문자열을 입력해 주세요.');
+    let initInput = await Console.readLineAsync(VIEW_MESSAGES.QUERY);
     if (initInput === '') {
       // 어떠한 입력도 없는 경우
       initInput = '0';
@@ -26,8 +26,7 @@ class CalculatorProcess {
   }
 
   printResult() {
-    const PREFIX_MESSAGE = '결과 : ';
-    Console.print(PREFIX_MESSAGE + String(this.outputNum));
+    Console.print(VIEW_MESSAGES.PREFIX_RESULT + String(this.outputNum));
   }
 }
 

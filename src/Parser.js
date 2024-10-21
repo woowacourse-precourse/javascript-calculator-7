@@ -1,3 +1,5 @@
+import { REGEX, ERROR_MESSAGES } from './resources/String.js';
+
 class Parser {
   constructor(inputString) {
     this.inputString = inputString;
@@ -5,7 +7,7 @@ class Parser {
   }
 
   handleDefaultDelimiter() {
-    if (/^\d+([,:]\d+)*$/.test(this.inputString)) {
+    if (REGEX.DEFAULT_DELIMITER.test(this.inputString)) {
       const parsedNums = this.inputString.match(/\d+/g);
       this.inputNums = parsedNums.map(Number);
       return true;
@@ -14,7 +16,7 @@ class Parser {
   }
 
   handleCustomDelimiter() {
-    const customDelimiterMatch = this.inputString.match(/^\/\/(.)\\n(.*)$/);
+    const customDelimiterMatch = this.inputString.match(REGEX.CUSTOM_DELIMITER);
 
     if (customDelimiterMatch) {
       const customDelimiter = this.escapeRegExp(customDelimiterMatch[1]);
@@ -24,18 +26,18 @@ class Parser {
       if (validationRegex.test(customDelimiterMatch[2])) {
         this.inputString = customDelimiterMatch[2];
       } else {
-        throw new Error('[ERROR] 계산을 위한 문자열의 형식이 잘못 되었습니다.');
+        throw new Error(ERROR_MESSAGES.INVALID_CALCULATION_STRING);
       }
 
       const parsedNums = this.inputString.split(delimiterRegex).map(Number);
       this.inputNums = parsedNums;
     } else {
-      throw new Error('[ERROR] 커스텀 구분자 할당 형식이 잘못 되었습니다.');
+      throw new Error(ERROR_MESSAGES.INVALID_CUSTOM_DELIMITER);
     }
   }
 
   escapeRegExp(string) {
-    return string.replace(/[.*+?^${}()|[\]\\]/g, '\\$&');
+    return string.replace(REGEX.ESCAPE_SPECIAL_CHARS, '\\$&');
   }
 
   parse() {
