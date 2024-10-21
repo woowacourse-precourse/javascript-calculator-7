@@ -23,6 +23,10 @@ class Splitter {
       return acc.flatMap(element => element.split(delimiter));
     }, [numberSection]);
   }
+
+  static getDelimiters() {
+    return this.#DEFAULT_DELIMITERS;
+  }
 }
 
 export default Splitter;
