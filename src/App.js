@@ -24,10 +24,11 @@ class App {
         }
     }
 
-    validateInput(inputBody, delimiters) {
-        const regex = new RegExp(`^^(0|[1-9][0-9]*)([${delimiters}](0|[1-9][0-9]*))*$`);
-        if (inputBody && !regex.test(inputBody)) {
-            this.throwError("입력값이 유효하지 않습니다.");
+    splitCustomDelimiter(input) {
+        if (!this.checkCustomDelimiter(input)) {
+            return [undefined, input];
+        } else {
+            return [input[2], input.slice(5)];
         }
     }
 
@@ -36,11 +37,10 @@ class App {
         return regex.test(input);
     }
 
-    splitCustomDelimiter(input) {
-        if (!this.checkCustomDelimiter(input)) {
-            return [undefined, input];
-        } else {
-            return [input[2], input.slice(5)];
+    validateInput(inputBody, delimiters) {
+        const regex = new RegExp(`^^(0|[1-9][0-9]*)([${delimiters}](0|[1-9][0-9]*))*$`);
+        if (inputBody && !regex.test(inputBody)) {
+            this.throwError("입력값이 유효하지 않습니다.");
         }
     }
 
