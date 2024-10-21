@@ -22,17 +22,17 @@ class App {
       separators = checkSeparator(message);
       message = message.replace(/\/\/.*?\\n/, '');
     } else {
-      const INVALID_SEPARATORS_REGEX = /[^\d,:\n]/;
+      const INVALID_SEPARATORS_REGEX = /[^\d,:]/;
 
       if (INVALID_SEPARATORS_REGEX.test(message)) {
         throw new Error('[ERROR] 유효하지 않은 구분자입니다.');
       }
     }
 
-    let numbers = message.split(separators).filter(v => v);
+    let numbers = message.split(separators);
 
     numbers.forEach(v => {
-      const NUM = parseFloat(v);
+      const NUM = Number(v);
       if (NUM <= 0 || Number.isNaN(NUM)) {
         throw new Error(
           '[ERROR] 음수, 0 또는 비정상적인 값이 포함되어 있습니다.',
