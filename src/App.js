@@ -17,6 +17,11 @@ class App {
         // Error 처리
       }
     }
+
+    const separatorRegex = new RegExp(`[${separator.join('')}]`);
+    const splitArr = input.split(separatorRegex);
+
+
   }
 }
 
