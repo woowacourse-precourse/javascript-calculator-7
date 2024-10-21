@@ -7,7 +7,7 @@ class App {
         "덧셈할 문자열을 입력해 주세요.\n"
       );
 
-      if (input === "") {
+      if (input.trim() === "") {
         Console.print("결과 : 0");
         return;
       }
