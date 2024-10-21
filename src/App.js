@@ -46,6 +46,9 @@ class App {
       if (isNaN(parsed)) {
         throw new Error("[ERROR] 잘못된 문자가 포함되어 있습니다.");
       }
+      if (parsed < 0) {
+        throw new Error("[ERROR] 음수는 허용되지 않습니다.");
+      }
       return parsed;
     });
 
