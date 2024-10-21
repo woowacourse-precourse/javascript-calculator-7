@@ -9,6 +9,11 @@ class App {
             '덧셈할 문자열을 입력해 주세요.\n'
         );
 
+        if (input === '') {
+            Console.print('결과 : ' + 0);
+            return;
+        }
+
         if (input.startsWith('/')) {
             if (!input.startsWith('//') || input.slice(3, 5) !== '\\n') {
                 this.throwError('커스텀 구분자 인식 형식을 따라야 합니다.');
