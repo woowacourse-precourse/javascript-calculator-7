@@ -2,6 +2,7 @@ import { Console } from '@woowacourse/mission-utils';
 
 const REGEX_NORMAL = /^[0-9,:]+$/;
 const REGEX_CUSTOM = /^\/\/.\\n/;
+const ERROR_MESSAGE = '[ERROR] 올바른 형식을 입력해주세요.';
 
 class App {
   constructor() {
@@ -35,7 +36,7 @@ class App {
 
   async run() {
     const input = await Console.readLineAsync('덧셈할 문자열을 입력해 주세요\n');
-    if (!this.handleInput(input)) throw new Error('[ERROR] 올바른 형식을 입력해주세요.');
+    if (!this.handleInput(input)) throw new Error(ERROR_MESSAGE);
     const arr = this.extractNumber();
     const answer = arr.reduce((acc, cur) => acc + cur);
     Console.print(`결과 : ${answer}`);
