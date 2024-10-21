@@ -14,7 +14,7 @@ class App {
   async run() {
     const res = await this.getUserInput(MSG.INFORM);
 
-    const result = await this.calculate(res);
+    const result = this.calculate(res);
     Console.print(`결과 : ${result}`);
   }
 
@@ -32,7 +32,7 @@ class App {
   };
 
   /** 계산 */
-  async calculate(input) {
+  calculate(input) {
     if (!input) return 0;
 
     let customSplitter = /[,:\n]/;
