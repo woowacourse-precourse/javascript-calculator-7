@@ -62,10 +62,14 @@ function validateCustomSeparator(customSeparator) {
   }
 }
 
-// 숫자가 아난 문자가 들어간 경우 예외 처리
+// 숫자가 아니거나 음수인 경우 예외 처리
 function validateNumber(num) {
   if (isNaN(num)) {
     throw new Error(ERROR_MESSAGES.INVALID_FORMAT);
+  }
+
+  if (num < 0) {
+    throw new Error(ERROR_MESSAGES.NEGATIVE_NOT_ALLOWED);
   }
 }
 
