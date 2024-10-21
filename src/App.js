@@ -24,6 +24,7 @@ class App {
     const numberArray = inputString.split(separator).map((value) => value.trim()).map(Number);
     this.exceptionHandler(numberArray.length === 0, "[ERROR]");
     this.exceptionHandler(numberArray.some(isNaN), "[ERROR]");
+    this.exceptionHandler(numberArray.some((num) => num < 0), "[ERROR]");
 
     return numberArray.reduce((total, currentValue) => total + currentValue, 0);
   }
