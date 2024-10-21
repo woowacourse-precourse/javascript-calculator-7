@@ -1,10 +1,9 @@
 import displayInputGuide from './functions/displayInputGuide.js';
-import getCustomDelimiter from './functions/getCustomDelimiter.js';
 import Delimiter from './Delimiter.js';
-import getNumbers from './functions/getNumbers.js';
-import sumNumbers from './functions/sumNumbers.js';
 import { getUserInput, printResult } from './utils/missionUtils.js';
 import checkEmptyInput from './functions/checkEmptyInput.js';
+import getInputWithDelimiter from './functions/getInputWithDelimiter.js';
+import getCalculateResult from './functions/getCalculateResult.js';
 
 class App {
   constructor() {
@@ -13,16 +12,14 @@ class App {
 
   async run() {
     displayInputGuide();
+
     const input = await getUserInput();
     if (checkEmptyInput(input)) return;
 
-    const customDelimiter = getCustomDelimiter(input);
-    const processedInput = customDelimiter ? input.split('\\n')[1] : input;
-    if (customDelimiter) this.delimiter.setCustomDelimiter(customDelimiter);
+    const processedInput = getInputWithDelimiter(input, this.delimiter);
+    const result = getCalculateResult(processedInput, this.delimiter);
 
-    const numbers = getNumbers(processedInput, this.delimiter.getDelimiters());
-    const total = sumNumbers(numbers);
-    printResult(total);
+    printResult(result);
   }
 }
 
