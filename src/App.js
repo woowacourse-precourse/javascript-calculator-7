@@ -22,7 +22,14 @@ class App {
         [validators.isNumber, validators.isPositiveNumber]
       );
 
-      Console.print(`결과 : ${tokens}`);
+      const result = tokens.reduce((total, value) => {
+        if (validators.isNumber(value)) {
+          total += BigInt(value);
+        }
+        return total;
+      }, BigInt(0));
+
+      Console.print(`결과 : ${result}`);
     } catch (error) {
       throw new Error(`[ERROR] ${error.message}`);
     }
