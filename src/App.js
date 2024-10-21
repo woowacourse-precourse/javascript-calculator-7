@@ -38,6 +38,15 @@ class App {
       return parseInt(num, 10);
     });
 
+    const negativeNumbers = numbers.filter((num) => num < 0);
+    if (negativeNumbers.length > 0) {
+      throw new Error(
+        `[ERROR] Invalid input (Negative numbers) : ${negativeNumbers.join(
+          ", "
+        )}`
+      );
+    }
+
     return numbers.reduce((sum, num) => sum + num, 0);
   }
 }
