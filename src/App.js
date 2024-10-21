@@ -34,11 +34,16 @@ class App {
 
     // 문자열을 구분자로 분리하고 각 요소를 숫자로 변환
     numbers = str.split(new RegExp(customSeprator)).map(Number);
+
     // 숫자 배열의 합계 계산
     const sum = numbers.reduce((acc, curr) => {
       // 음수를 전달할 경우 예외 처리(에러코드: 1)
       if (curr < 0) {
         throw new Error('[ERROR] 음수가 포함되어 있습니다.');
+      }
+      // 숫자가 아닌 값을 전달할 경우 예외처리(에러코드: 2)
+      if (isNaN(curr)) {
+        throw new Error('[ERROR] 숫자가 아닌 값이 포함되어 있습니다.');
       }
       return acc + curr;
     }, 0);
