@@ -20,7 +20,7 @@ class StringCalculator {
             throw new Error("[ERROR] 커스텀 구분자가 올바르지 않습니다.");
         }
 
-        delimiters = new RegExp(`[${customDelimiter}]`);
+        delimiters = new RegExp(`[${customDelimiter},:]`);
         numbers = numbers.substring(delimiterEndIndex + 1);
       }
 
