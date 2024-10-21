@@ -13,4 +13,11 @@ export default class Validator {
       throw new Error(ERROR_MESSAGE.INVALID_DEFAULT_DELIMITER);
     }  
   }
+  validateNumberString(numberString, delimiters) {
+    for (let char of numberString) {
+      if (!delimiters.includes(char) && isNaN(char)) {
+        throw new Error(ERROR_MESSAGE.INVALID_INPUT);
+      }
+    }
+  };
 }
