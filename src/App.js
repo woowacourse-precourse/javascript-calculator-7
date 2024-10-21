@@ -11,32 +11,32 @@ class App {
     const DEFAULT_SEPARATOR = /[,:]/;
     const FORMULA = /(\d+([\W_][?!\W_]))*\d+$/;
 
-    const userInputSeparate = (userInput) => {
-      if (!customSymbols.test(userInput) && defaultSeparator.test(userInput)) {
-        const userInputNumber = userInput.split(defaultSeparator);
+    function userInputCustom(userInput) {
+      const inputSplit = userInput.split('n');
 
-        return userInputNumber;
-      } else if (userInput.includes('n') && customSymbols.test(userInput)) {
-        const inputSplit = userInput.split('n');
+      const userInputCustomFormula = inputSplit[1];
 
-        const userCustomSymbols = inputSplit[0];
-        const reCustomSymbols = userCustomSymbols.replace('//', '');
-        const customSeparator = reCustomSymbols.slice(
-          0,
-          reCustomSymbols.length - 1
-        );
+      // ERROR
+      if (!FORMULA.test(userInputCustomFormula)) {
+        throw new Error(ERROR.FORMULA_ERROR);
+      }
 
-        const combinedSeparator = new RegExp(`[,:${customSeparator}]`);
+      const userInputCustomExpress = inputSplit[0];
 
-        const userInputNumber = inputSplit[1].split(combinedSeparator);
+      const deleteSlash = userInputCustomExpress.replace('//', '');
+      const userInputCustomSeparator = deleteSlash.slice(
+        0,
+        deleteSlash.length - 1
+      );
+      Console.print(userInputCustomSeparator);
 
-        return userInputNumber;
-      } else {
+      // ERROR
+      if (/\d+/.test(userInputCustomSeparator)) {
         throw new Error(ERROR.CUSTOM_SEPERATOR_ERROR);
       }
-    };
 
-    const userInputNumber = userInputSeparate(userInput);
+      return { userInputCustomFormula, userInputCustomSeparator };
+    }
 
     const sumCaculator = (userInputNumber) => {
       let sum = 0;

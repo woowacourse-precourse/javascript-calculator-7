@@ -36,10 +36,10 @@
 
   - 커스텀 구분자 입력 예외사항
 
-    - [ ] 커스텀 구분자를 숫자로 설정한 경우 -> ('[ERROR] CUSTOM_SEPERATOR_ERROR')
+    - [x] 커스텀 구분자를 숫자로 설정한 경우 -> ('[ERROR] CUSTOM_SEPERATOR_ERROR')
     - [ ] 구분자가 '-' 가 아닌데 '-'를 써서 음수가 된 경우 -> ('[ERROR] NEGATIVE_NUMBER_ERROR')
-    - [x] 구분자 커스텀 기호가 아닌 경우 (예 : '/$\n' or '\n$//') -> ('[ERROR] CUSTOM_SEPERATE_ERROR')
-    - [x] '\n'이 아닌 다른 기호로 구분자를 끝낸 경우 -> ('[ERROR] CUSTOM_SEPERATE_ERRO')
+    - [ ] 구분자 커스텀 기호가 아닌 경우 (예 : '/$\n' or '\n$//') -> ('[ERROR] CUSTOM_SEPERATE_ERROR')
+    - [ ] '\n'이 아닌 다른 기호로 구분자를 끝낸 경우 -> ('[ERROR] CUSTOM_SEPERATE_ERRO')
 
 ### TEST
 
