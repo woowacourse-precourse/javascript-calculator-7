@@ -3,4 +3,8 @@ const MESSAGE = Object.freeze({
   resultMessage: "결과 : ",
 });
 
-export default MESSAGE;
+const ERROR_MESSAGE = Object.freeze({
+  INVALID_NUMBER: "[ERROR] 0이 아닌 양수를 입력해주세요.",
+});
+
+export { MESSAGE, ERROR_MESSAGE };
