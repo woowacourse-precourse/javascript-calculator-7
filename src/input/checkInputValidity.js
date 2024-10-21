@@ -1,6 +1,6 @@
 import { DEFAULT_DELIMITERS } from '../constant/constant.js';
 
-export default function isValidInput(cleanedString, customDelimiter) {
+export default function checkInputValidity(cleanedString, customDelimiter) {
   if (cleanedString.trim() === "") {
     return;
   }

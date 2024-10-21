@@ -1,7 +1,7 @@
 import getInputString from './input/getUserInput.js';
 import { cleanStringAfterDelimiter, getCustomDelimiter } from './input/CustomDelimiterHandler.js';
 import splitByDelimiters from './parser/splitByDelimiters.js';
-import isValidInput from './input/isValidInput.js';
+import checkInputValidity from './input/checkInputValidity.js';
 import calculateSum from './calculater/calculateSum.js';
 import printResult from './output/output.js';
 
@@ -15,7 +15,7 @@ class App {
     if (customDelimiter !== null) {
       cleanedString = cleanStringAfterDelimiter(input);
     }
-    isValidInput(cleanedString, customDelimiter);
+    checkInputValidity(cleanedString, customDelimiter);
     const parsedNumberList = splitByDelimiters(cleanedString, customDelimiter);
     const sum = calculateSum(parsedNumberList);
     printResult(sum);
