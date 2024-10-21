@@ -1,3 +1,5 @@
+import { DELEMITER_DEFINITION } from "../../constant/DELIMITER.js";
+
 export default class InputSeparator {
   #customDelimiter;
   #numberString;
@@ -8,7 +10,9 @@ export default class InputSeparator {
   }
 
   hasCustomDelimiter(rawInput) {
-    if (rawInput.length >= 5 && rawInput.startsWith('//') &&  rawInput.indexOf('\\n') === 3) {
+    if (rawInput.length >= DELEMITER_DEFINITION.LEN 
+      && rawInput.startsWith(DELEMITER_DEFINITION.START) 
+      &&  rawInput.indexOf(DELEMITER_DEFINITION.END) === DELEMITER_DEFINITION.END_INDEX) {
       return true;
     }
     return false;
@@ -16,14 +20,14 @@ export default class InputSeparator {
 
   getCustomDelimiter(rawInput) {
     if (this.hasCustomDelimiter(rawInput)) {
-      this.#customDelimiter = rawInput[2];
+      this.#customDelimiter = rawInput[DELEMITER_DEFINITION.DELIMITER_INDEX];
     }
     return this.#customDelimiter;
   }
 
   getNumberString(rawInput) {
     if (this.hasCustomDelimiter(rawInput)) {
-      this.#numberString = rawInput.slice(5);
+      this.#numberString = rawInput.slice(DELEMITER_DEFINITION.LEN);
     } else {
       this.#numberString = rawInput;
     }
