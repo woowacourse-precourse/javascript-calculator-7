@@ -28,7 +28,6 @@ class App {
         0,
         deleteSlash.length - 1
       );
-      Console.print(userInputCustomSeparator);
 
       // ERROR
       if (/\d+/.test(userInputCustomSeparator)) {
@@ -87,8 +86,6 @@ class App {
           inputNumber[i].trim() === '' ? '0' : inputNumber[i].trim();
 
         let num = parseInt(currentNumber, 10);
-
-        Console.print(num);
 
         if (num < 0) {
           throw new Error(ERROR.NEGATIVE_NUMBER_ERROR);
