@@ -1,20 +1,23 @@
 import {
   ZERO,
-  ERROR,
   COLON,
   SPACE,
   COMMA,
   EMPTY_STRING,
   SLASH,
   ENTER,
-} from "./constant";
+  BASIC_ERROR,
+  MINUS_ERROR,
+} from "./constant.js";
 
 export const addNumber = (numberList) => {
   let sum = ZERO;
-
   for (let i = 0; i < numberList.length; i++) {
-    if (isNaN(parseInt(numberList[i])) || parseInt(numberList[i]) < 0) {
-      throw new Error(ERROR);
+    if (isNaN(parseInt(numberList[i]))) {
+      throw new Error(BASIC_ERROR);
+    }
+    if (parseInt(numberList[i]) < 0) {
+      throw new Error(MINUS_ERROR);
     }
 
     sum += parseInt(numberList[i]);
@@ -23,16 +26,16 @@ export const addNumber = (numberList) => {
 };
 
 export const removeSeparator = (stringData, customSeparator) => {
-  stringData = stringData.replace(COLON, SPACE).replace(COMMA, SPACE);
+  stringData = stringData.replaceAll(COLON, SPACE).replaceAll(COMMA, SPACE);
   if (customSeparator !== EMPTY_STRING)
-    stringData.replace(customSeparator, SPACE);
+    stringData = stringData.replaceAll(customSeparator, SPACE);
 
   return stringData;
 };
 
 export const customSeparator = (stringData) => {
   if (stringData[0] !== SLASH || stringData[1] !== SLASH) {
-    return [0, EMPTY_STRING]; // 커스텀 구분자가 없다.
+    return [ZERO, EMPTY_STRING]; // 커스텀 구분자가 없다.
   }
 
   let customSeparator = EMPTY_STRING;
@@ -46,7 +49,7 @@ export const customSeparator = (stringData) => {
   } // string.length - 2까지 가면 에러 처리 필요
 
   if (i >= stringData.length - 2) {
-    throw new Error(ERROR);
+    throw new Error(BASIC_ERROR);
   }
 
   return [i + 2, customSeparator];
