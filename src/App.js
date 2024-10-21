@@ -36,6 +36,25 @@ class StringCalculator {
     return { delimiter: ',|:', numbersString: input };
   }
 
+  splitNumbers(numbersString, delimiter) {
+    if (!numbersString) return [0]; // 빈 문자열 처리
+  
+    // 커스텀 구분자가 있는 경우 해당 구분자로만 숫자 분리
+    if (typeof delimiter === 'string') {
+      return numbersString.split(delimiter).map(num => {
+        const parsed = Number(num.trim()); // 공백 제거 후 숫자로 변환
+        if (isNaN(parsed)) throw new Error('[ERROR] 잘못된 입력입니다.');
+        return parsed;
+      });
+    }
+  
+    // 기본 구분자(쉼표, 콜론) 처리
+    return numbersString.split(new RegExp(delimiter)).map(num => {
+      const parsed = Number(num.trim());
+      if (isNaN(parsed)) throw new Error('[ERROR] 잘못된 입력입니다.');
+      return parsed;
+    });
+  }
 }
 
 export default StringCalculator;
