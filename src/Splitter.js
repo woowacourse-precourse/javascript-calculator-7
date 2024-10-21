@@ -1,17 +1,19 @@
+import { ErrorMessages, DELIMITER_SECTION_START, INPUT_DELIMITER, EMPTY_STRING, DefaultDelimiters } from "./Strings.js";
+
 class Splitter {
-  static #DEFAULT_DELIMITERS = [",", ":"];
+  static #DEFAULT_DELIMITERS = [DefaultDelimiters.FIRST_DELIMITER, DefaultDelimiters.SECOND_DELIMITER];
 
   static splitInput(input) {
-    const result = input.split("\\n");
-    if (result.length > 2) throw new Error("[ERROR] 입력 문자열에 \'\\n\'이 2개 이상입니다.");
-    if (result.length === 1) result.unshift("");
+    const result = input.split(INPUT_DELIMITER);
+    if (result.length > 2) throw new Error(ErrorMessages.SPLITTER_SPLIT_INPUT);
+    if (result.length === 1) result.unshift(EMPTY_STRING);
     return result;
   }
 
   static addDelimiter(delimiterSection) {
-    if (delimiterSection === "") return;
+    if (delimiterSection === EMPTY_STRING) return;
 
-    if (!delimiterSection.startsWith("//")) throw new Error("[ERROR] 커스텀 구분자 입력부는 문자열 앞에 위치하여 \"//\"로 시작하고 \"\\n\"으로 끝나야 합니다.");
+    if (!delimiterSection.startsWith(DELIMITER_SECTION_START)) throw new Error(ErrorMessages.SPLITTER_ADD_DELIMITER);
 
     this.#DEFAULT_DELIMITERS.unshift(delimiterSection.slice(2));
   }

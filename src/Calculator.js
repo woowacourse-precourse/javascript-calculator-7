@@ -1,15 +1,15 @@
-import { MissionUtils } from "@woowacourse/mission-utils";
+import { ErrorMessages, EMPTY_STRING } from "./Strings.js";
 
 class Calculator {
   static checkIsPositiveNumber(numStrArray) {
     const result = [];
     numStrArray.forEach((numStr) => {
-      if (numStr === "") {
+      if (numStr === EMPTY_STRING) {
         result.push(0);
         return;
       }
       const parsedNum = Number(numStr);
-      if (isNaN(parsedNum) || parsedNum <= 0) throw new Error("[ERROR] 양수가 아닌 값은 계산할 수 없습니다.");
+      if (isNaN(parsedNum) || parsedNum <= 0) throw new Error(ErrorMessages.CALCULATOR_CHECK_IS_POSITIVENUMBER);
       result.push(parsedNum);
     });
 
@@ -24,6 +24,5 @@ class Calculator {
     return sum;
   }
 }
-
 
 export default Calculator;
