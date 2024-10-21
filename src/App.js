@@ -12,6 +12,7 @@ class App {
       output.result(result);
     } catch (error) {
       Console.print(error.message);
+      throw error;
     }
   }
 }
