@@ -17,7 +17,13 @@ class App {
     }
 
     add(input) {
-        return 0; 
+        if (input === "") return 0;
+
+        let delimiters = [",", ":"];
+        const delimiterRegex = new RegExp(`[${delimiters.join("")}]`);
+        const numbers = input.split(delimiterRegex).map(Number);
+
+        return numbers.reduce((sum, num) => sum + num, 0);
     }
 }
 
