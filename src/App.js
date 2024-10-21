@@ -7,10 +7,11 @@ class App {
       await Console.readLineAsync('덧셈할 문자열을 입력해 주세요.\n')
     ).trim();
 
-    const userInputSeparate = (userInput) => {
-      const defaultSeparator = /[,:]/;
-      const customSymbols = /\/\/(.+)\\/;
+    const CUSTOM_EXPRESS = /\/\/(.+)\\/;
+    const DEFAULT_SEPARATOR = /[,:]/;
+    const FORMULA = /(\d+([\W_][?!\W_]))*\d+$/;
 
+    const userInputSeparate = (userInput) => {
       if (!customSymbols.test(userInput) && defaultSeparator.test(userInput)) {
         const userInputNumber = userInput.split(defaultSeparator);
 
