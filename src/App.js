@@ -6,6 +6,7 @@ import {
   checkIsPositive,
 } from "./utils/validation.js";
 import { add } from "./utils/sum.js";
+import { ERROR } from "./constants/error.js";
 
 class App {
   async run() {
@@ -35,7 +36,7 @@ class App {
         Console.print(add(array));
       } else {
         // "\n"이 없는 경우
-        throw new Error(JSON.stringify("[ERROR]: //는 있는데 \n는 없습니다."));
+        throw new Error(JSON.stringify(ERROR.MISSING_CLOSE));
       }
     } else {
       const array = input.split(BASIC_REGEXP);

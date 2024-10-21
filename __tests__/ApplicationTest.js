@@ -1,5 +1,6 @@
 import App from "../src/App.js";
 import { MissionUtils } from "@woowacourse/mission-utils";
+import { ERROR } from "../src/constants/error.js";
 
 const mockQuestions = (inputs) => {
   MissionUtils.Console.readLineAsync = jest.fn();
@@ -53,9 +54,7 @@ describe("문자열 계산기", () => {
 
     const app = new App();
 
-    await expect(app.run()).rejects.toThrow(
-      "[ERROR]: 배열의 요소에 0 혹은 음수가 있습니다."
-    );
+    await expect(app.run()).rejects.toThrow(ERROR.NEGATIVE_OR_ZERO_ELEMENT);
   });
 
   test("예외 테스트 -> 입력 값에 0 포함", async () => {
@@ -64,8 +63,6 @@ describe("문자열 계산기", () => {
 
     const app = new App();
 
-    await expect(app.run()).rejects.toThrow(
-      "[ERROR]: 배열의 요소에 0 혹은 음수가 있습니다."
-    );
+    await expect(app.run()).rejects.toThrow(ERROR.NEGATIVE_OR_ZERO_ELEMENT);
   });
 });
