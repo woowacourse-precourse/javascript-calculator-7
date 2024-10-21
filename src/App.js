@@ -10,6 +10,7 @@ class App {
       let re = new RegExp("//(.*?)\\\\n");
       let split_input;
       let output;
+      let check = 0;
 
       if ((split_input = re.exec(input)) !== null) {
         let new_re = split_input[1];
@@ -18,17 +19,21 @@ class App {
       } else {
         let default_re = new RegExp(",|:");
         output = input.split(default_re).map(Number);
-        if (input.includes("-")) {
-          Console.print("[ERROR]");
-          break;
+      }
+
+      for (let i = 0; i < output.length; i++) {
+        let value = output[i];
+        if (value < 0 || value == NaN) {
+          check = 1;
         }
       }
-      if (output.includes(NaN)) {
+      if (check == 0) {
+        const sum = output.reduce((acc, cur) => acc + cur, 0);
+        Console.print("결과 : " + sum);
+      } else {
         Console.print("[ERROR]");
         break;
       }
-      const sum = output.reduce((acc, cur) => acc + cur, 0);
-      Console.print("결과 : " + sum);
     }
   }
 }
