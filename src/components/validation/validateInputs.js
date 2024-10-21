@@ -11,16 +11,21 @@ export default function validateInputs(inputs) {
     }
 
     //  커스텀 구분자가 있는지 확인
-
     if (inputs.includes('//') === true && inputs.includes('\\n') === true) {
         return true;
     }
-
-    //  입력값에 숫자가 아닌 값 / 음수가 포함되어 있는지 확인
-    inputs.split('').forEach((input) => {
-        if (Number(input) < 0) {
-            throw new Error('[ERROR] 음수는 입력할 수 없습니다.');
+    //  음수가 입력되어 있는지 확인
+    if (inputs.includes('-')) {
+        //  '-'가 구분자로 사용되었을 때는 정상으로 판단
+        if (inputs.includes('//-\\n')) {
+            return true;
         }
+        //  이외의 경우 음수로 판단
+        throw new Error('[ERROR] 음수는 입력할 수 없습니다.');
+    }
+
+    //  입력값에 숫자가 아닌 값 확인
+    inputs.split('').forEach((input) => {
         if (
             Number.isNaN(Number(input)) === true &&
             input !== ',' &&
@@ -39,15 +44,5 @@ export default function validateInputs(inputs) {
         }
     });
 
-    if (inputs.includes('-')) {
-        //  '-'가 구분자로 사용되었을 때는 정상으로 판단
-        if (inputs.includes('//-\\n')) {
-            return true;
-        }
-        //  이외의 경우 음수로 판단
-        throw new Error('[ERROR] 음수는 입력할 수 없습니다.');
-    }
     return true;
-
-    // 분리한 값 중에 음수가 있을 때
 }
