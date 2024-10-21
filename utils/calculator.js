@@ -42,7 +42,7 @@ import { printErrorMsg } from './inout.js';
     const customCaseRegex = /^\/\/([^\d\s])\\n\d+(?:\1\d+)*$/; // [^\d\s]는 규칙에 해당되는 문자를 저장(캡처)
         
     const transStr = str.replace("\n", "\\n");
-    console.log(transStr);
+    //console.log(transStr);
 
     if (standardCaseRegex.test(transStr)) {
       //console.log("[지정 구분자]");
