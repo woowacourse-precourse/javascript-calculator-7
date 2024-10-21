@@ -52,9 +52,7 @@ class App {
 
   toNumberArray() {
     // 입력된 값을 검증하여 숫자 배열로 만들어주는 함수
-    const numArr = this.sepStrArr.filter(v => App.isValid(v)).map(v => +v);
-
-    return numArr;
+    return this.sepStrArr.filter(v => App.isValid(v)).map(v => +v);
   }
 
   static isValid(str) {
