@@ -1,6 +1,7 @@
 import { Console } from "@woowacourse/mission-utils";
 import { INPUT_MESSAGE, RESULT_MESSAGE } from "./message.js";
 import { extractDividerList } from "./divider.js";
+import { tokenizeString } from "./calculator.js";
 
 class App {
   input = "";
@@ -14,6 +15,7 @@ class App {
     this.input = updatedInput;
     this.dividerList = updatedDividerList;
 
+    tokenizeString(this.input, this.dividerList);
     await this.resultPrint();
   }
   
