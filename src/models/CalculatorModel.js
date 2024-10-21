@@ -32,34 +32,51 @@ function isNegative(value) {
   return Number(value) < 0;
 }
 
-// --- 입력 값 검증 함수 ---
-function validateInput(input) {
-  const hasNonNumeric = input.some((char) => isNonNumeric(char));
-  const hasZero = input.some((char) => isZero(char));
-  const hasNegative = input.some((char) => isNegative(char));
+// --- 입력 검증 함수 분리 ---
+function validateTooLarge(input) {
   const hasTooLarge = input.some((char) => Number(char) > MAX_LIMIT);
+  if (hasTooLarge) throwError('NUMBER_TOO_LARGE');
+}
 
-  // 문자와 0 또는 음수가 동시에 입력된 경우
-
-  // 입력된 숫자가 최대 허용 크기를 초과하면 에러를 발생시킴
-  if (hasTooLarge) {
-    throwError('NUMBER_TOO_LARGE');
-  }
-
-  // 잘못된 구분자와 0,음수 입력 에러
-  if (hasNonNumeric && (hasZero || hasNegative)) {
+function validateNonNumericAndNegative(input) {
+  const hasNonNumeric = input.some((char) => isNonNumeric(char));
+  const hasNegative = input.some((char) => isNegative(char));
+  if (hasNonNumeric && hasNegative) {
     throwError('INVALID_CHARACTER_AND_NON_POSITIVE_NUMBER');
   }
-  // 0이나 음수 입력
-  else if (hasNegative || hasZero) {
+}
+
+function validateNonNumericAndZero(input) {
+  const hasNonNumeric = input.some((char) => isNonNumeric(char));
+  const hasZero = input.some((char) => isZero(char));
+  if (hasNonNumeric && hasZero) {
+    throwError('INVALID_CHARACTER_AND_NON_POSITIVE_NUMBER');
+  }
+}
+
+function validateNegativeOrZero(input) {
+  const hasNegative = input.some((char) => isNegative(char));
+  const hasZero = input.some((char) => isZero(char));
+  if (hasNegative || hasZero) {
     throwError('NON_POSITIVE_NUMBER');
   }
-  // 잘못된 구분자 입력
-  else if (hasNonNumeric) {
+}
+
+function validateNonNumeric(input) {
+  const hasNonNumeric = input.some((char) => isNonNumeric(char));
+  if (hasNonNumeric) {
     throwError('INVALID_CHARACTER');
   }
 }
 
+// --- 입력 검증 ---
+function validateInput(input) {
+  validateTooLarge(input);
+  validateNonNumericAndNegative(input);
+  validateNonNumericAndZero(input);
+  validateNegativeOrZero(input);
+  validateNonNumeric(input);
+}
 // --- 구분자 추출 ---
 function getCustomDelimiter(input) {
   const hasCustomDelimiter = input.startsWith('//');
