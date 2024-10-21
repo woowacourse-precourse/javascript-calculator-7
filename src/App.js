@@ -1,7 +1,7 @@
 import { MissionUtils } from "@woowacourse/mission-utils";
 import Calculator from './Calculator.js';
 import Splitter from "./Splitter.js";
-import { RESULT_PREFIX, INPUT_MESSAGE } from "./Strings.js";
+import { RESULT_PREFIX, INPUT_MESSAGE } from "./Constant.js";
 
 class App {
   async run() {
