@@ -7,10 +7,17 @@ class Calculator {
     if (input === '') {
       return 0;
     }
+    const useCustomDelimiter = this.hasCustomDelimiter(input); //커스텀 구분자 사용 여부 담기
     this.isValidateInput(input);
     const numbers = this.parseNumber(input); //추출한 숫자 담기
     const result = this.addNums(numbers); //덧셈 결과 담기
     return result;
+  }
+
+  //커스텀 구분자 사용 여부 판단
+  hasCustomDelimiter(text) {
+    const regex = /\/\/.*\\n/g;
+    return regex.test(text);
   }
 
   //문자열 유효성 검사
