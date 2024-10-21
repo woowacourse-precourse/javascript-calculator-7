@@ -30,7 +30,7 @@ class App {
         throw new Error(ERROR_MESSAGE);
       }
       const regexString = customDelimiter
-        ? `${escapeRegExp(customDelimiter)}`
+        ? `${escapeRegExp(customDelimiter)}|,|:`
         : ",|:";
       const regex = new RegExp(regexString, "g");
       const numbersWithMark = customDelimiter
@@ -41,7 +41,7 @@ class App {
         .split("!")
         .map((value) => {
           const num = Number(value);
-          if (isNaN(num)) {
+          if (isNaN(num) | (num < 0)) {
             throw new Error(ERROR_MESSAGE);
           }
           return num;
@@ -50,7 +50,7 @@ class App {
 
       Console.print("결과 : " + sum);
     } catch (error) {
-      Console.print(error.message);
+      Console.print(error);
       throw error;
     }
   }
