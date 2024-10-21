@@ -20,15 +20,13 @@ class App {
 
       let delimiters = [",", ":"];
       const customDelimiters = match.map((match) => match[1]);
-
-      if (match) {
-        for (let i = 0; i < customDelimiters.length; i++) {
-          delimiters.push(match[i]);
-        }
+      // delimiters에
+      if (match.length > 0) {
+        delimiters.push(...customDelimiters);
       }
 
       if (hasRepeatCustomOperator(input)) {
-        throw new Error("커스텀 구분자는 연속으로 입력이 불가능합니다.");
+        throw new Error("[ERROR]커스텀 구분자는 연속으로 입력이 불가능합니다.");
       }
 
       if (countDelimters) {
@@ -43,20 +41,19 @@ class App {
 
       const delimiterRegex = new RegExp(`[${delimiters.join("")}]`);
       let numberString = input.split(delimiterRegex);
-
       let sum = 0;
 
       for (let num of numberString) {
         if (hasRepeatOperator(input)) {
-          throw new Error("구분자는 연속으로 입력이 불가능합니다.");
+          throw new Error("[ERROR]구분자는 연속으로 입력이 불가능합니다.");
         }
         if (isQuote(num)) {
           throw new Error(
-            "입력 값은 단일 따옴표(')나 이중 따옴표(\")를 제외하고 입력해야합니다."
+            "[ERROR]입력 값은 단일 따옴표(')나 이중 따옴표(\")를 제외하고 입력해야합니다."
           );
         }
         if (!isPositive(num)) {
-          throw new Error("입력 값은 양수여야 합니다.");
+          throw new Error("[ERROR]입력 값은 양수여야 합니다.");
         }
         sum += parseInt(num, 10);
       }
@@ -64,6 +61,7 @@ class App {
       Console.print(`결과 : ${sum}`);
     } catch (error) {
       Console.print(error.message);
+      throw error;
     }
   }
 }
