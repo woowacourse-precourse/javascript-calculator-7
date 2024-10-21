@@ -49,6 +49,9 @@ class App { //하나의 메소드는 하나의 역할
     }
 
     isError(param) {
+        if (Number(param) < 0) {
+            throw new Error("[Error]: 에러발생")
+        }
         if (param === "") {
             throw new Error("[Error]: 에러발생")
         }
