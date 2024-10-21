@@ -1,12 +1,12 @@
-class CalculatorService{
-  constructor(){}
+class CalculatorService {
+  constructor() {}
 
-  static calcuate(calcuateDTO){
+  static calculate(calcuateDTO) {
     const numbers = calcuateDTO.values;
     return numbers.reduce(this.#sum, 0);
   }
 
-  static #sum(a,b){
+  static #sum(a, b) {
     return a + b;
   }
 }
