@@ -26,5 +26,4 @@
 
 - [ ] 입력 값에 숫자외의 값이 포함된 경우 (`"1,a,3" => [Error] Invalid input`)
 - [ ] 커스텀 구분자 형식이 올바르지 않은 경우 (`"//;\n1;2,3" => [Error] Invalid custom format`)
-- [ ] 입력 값에 음수가 포함된 경우 (`"1, -2, 3" => [Error] Negative numbers not allowed: -2`)
 - [ ] 애플리케이션을 종료한다.
