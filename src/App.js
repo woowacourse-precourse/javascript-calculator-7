@@ -8,13 +8,13 @@ import {
 
 class App {
   #input;
-  separatorList = [...INITIAL_SEPARATOR_LIST];
+  #separatorList = [...INITIAL_SEPARATOR_LIST];
   #inputNumberList = [];
 
   async run() {
     await this.readInput();
 
-    const validator = new Validator(this.#input, this.separatorList);
+    const validator = new Validator(this.#input, this.#separatorList);
     validator.parse();
 
     this.generateInputNumberList();
