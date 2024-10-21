@@ -10,6 +10,7 @@ export default class Calculator {
     inputValidator.emptyInput(inputString);
     this.#inputString = inputString;
     this.#delimiters = DEFAULT_DELIMITERS;
+    this.#validateInput();
   }
 
   calculate() {
@@ -35,5 +36,7 @@ export default class Calculator {
     }
   }
 
-  #validateInput() {}
+  #validateInput() {
+    inputValidator.customDelimiter(this.#inputString);
+  }
 }
