@@ -30,7 +30,17 @@ export function calculator(input) {
         numbersArr = numbersPart.split(baseSeparators);
     }
 
-    // 양수인지 검증
+    // 공백이나 연속된 구분자가 있는지 검증
+    if (numbersArr.some(num => num.trim() === '')) {
+        throw new Error('[ERROR] 공백이나 연속된 구분자가 있으면 안 됩니다.');
+    }
+
+    // 숫자가 아닌 값이 있는지 검증
+    if (numbersArr.some(num => isNaN(num))) {
+        throw new Error('[ERROR] 숫자가 아닌 값이 들어올 수 없습니다.');
+    }
+
+    // 양수가 아닌 값이 있는지 검증
     numbersArr = numbersArr.map(Number);
     if (numbersArr.some(num => num <= 0)) {
         throw new Error('[ERROR] 음수나 0은 입력할 수 없습니다.');
