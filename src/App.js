@@ -22,18 +22,16 @@ class App {
       // 문자열 탐색
       // 커스텀 구분자가 있으면 5번째 문자부터 for문 시작
       let startIndex = 0
-      if ((typeof customseparator) == 'string') startIndex = 5 
+      if ((typeof customseparator) == 'string') startIndex = 5
 
       for (let i = startIndex; i < input.length; i++) {
-        if (isNaN(input[i])) {
-          if (input[i] == ',' || input[i] == ':'|| input[i] == customseparator) { 
-              sum += parseInt(number);
-              number = '0'
-          } else {
-            throw Error(`[ERROR] '${input[i]}'는 구분자 또는 양수가 아닙니다.`)
-          }
-        } else {
+        if (!isNaN( parseInt(input[i]) ) && input[i] != customseparator) {
           number += input[i]
+        } else if (input[i] == ',' || input[i] == ':'|| input[i] == customseparator) { 
+          sum += parseInt(number)
+          number = '0'
+        } else {
+          throw Error(`[ERROR] '${input[i]}'는 구분자 또는 양수가 아닙니다.`)
         }
       }
       sum += parseInt(number);
