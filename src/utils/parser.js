@@ -1,4 +1,5 @@
-import { DELIMITER_REGEX, REGEX_PATTERNS } from '../constants/regex';
+import { ERROR_MESSAGE } from "../constants/errorMessage.js";
+import { DELIMITER_REGEX, REGEX_PATTERNS } from "../constants/regex.js";
 
 /**
  * 문자열에서 구분자를 파싱하고, 숫자로 변환하는 클래스입니다.
@@ -19,9 +20,9 @@ class Parser {
 
       this.validateCustomDelimiter(customDelimiter);
 
-      const parsedString = inputValue.replace(matchedCustomDelimiterFormatString, ''); // 커스텀 구분자 형식 제거
+      const parsedString = inputValue.replace(matchedCustomDelimiterFormatString, ""); // 커스텀 구분자 형식 제거
       const delimiterRegex = new RegExp(
-        customDelimiter.replace(REGEX_PATTERNS.META_CHARACTERS, '\\$&') // 정규식 메타 문자 이스케이프
+        customDelimiter.replace(REGEX_PATTERNS.META_CHARACTERS, "\\$&") // 정규식 메타 문자 이스케이프
       );
 
       // 커스텀 구분자를 사용하는 경우
@@ -53,15 +54,15 @@ class Parser {
    */
   static validateCustomDelimiter(customDelimiter) {
     if (!customDelimiter || REGEX_PATTERNS.SPACE.test(customDelimiter)) {
-      throw new Error('[ERROR] 커스텀 구분자가 입력되지 않았습니다.');
+      throw new Error(ERROR_MESSAGE.INVALID_CUSTOM_DELIMITER);
     }
 
     if (customDelimiter.length < 1) {
-      throw new Error('[ERROR] 커스텀 구분자는 1글자 이상 가능합니다.');
+      throw new Error(ERROR_MESSAGE.CUSTOM_DELIMITER_TOO_SHORT);
     }
 
     if (!isNaN(Number(customDelimiter))) {
-      throw new Error('[ERROR] 커스텀 구분자로 숫자를 사용할 수 없습니다.');
+      throw new Error(ERROR_MESSAGE.CUSTOM_DELIMITER_IS_NUMBER);
     }
   }
 
@@ -72,11 +73,11 @@ class Parser {
    */
   static validateOperands(operands) {
     if (operands.some((operand) => isNaN(operand))) {
-      throw new Error('[ERROR] 숫자가 아닌 피연산자가 포함되어 있습니다.');
+      throw new Error(ERROR_MESSAGE.INVALID_OPERAND);
     }
 
     if (operands.some((operand) => operand < 0)) {
-      throw new Error('[ERROR] 음수 피연산자는 허용되지 않습니다.');
+      throw new Error(ERROR_MESSAGE.NEGATIVE_OPERAND);
     }
   }
 }

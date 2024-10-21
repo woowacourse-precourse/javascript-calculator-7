@@ -1,4 +1,4 @@
-import Calculator from './utils/calculator.js';
+import Calculator from "./utils/calculator.js";
 
 class App {
   async run() {

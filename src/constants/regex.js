@@ -20,6 +20,6 @@ export const DELIMITER_REGEX = Object.freeze({
  * @property {RegExp} META_CHARACTERS - 메타 문자를 전역 검색하는 정규식입니다.
  */
 export const REGEX_PATTERNS = Object.freeze({
-  SPACE: /\s/g,
+  SPACE: /\s/,
   META_CHARACTERS: /[-\/\\^$*+?.()|[\]{}]/g,
 });

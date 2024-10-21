@@ -1,6 +1,6 @@
-import { Console } from '@woowacourse/mission-utils';
-import Input from './input.js';
-import Parser from './parser.js';
+import { Console } from "@woowacourse/mission-utils";
+import Input from "./input.js";
+import Parser from "./parser.js";
 
 /**
  * 문자열을 파싱하여 숫자의 합을 구하는 클래스입니다.
