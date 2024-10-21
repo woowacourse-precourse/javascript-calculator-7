@@ -36,7 +36,19 @@ class App { //하나의 메소드는 하나의 역할
         const argument = this.customSeparator || /[:,]/g
         const splitArray = param.split(argument)
         return splitArray.map((elem) =>
-            Number.isNaN(elem) ? new Error("[Error]: 에러발생") : Number(elem))
+            this.isError(elem) || Number(elem))
+    }
+
+    isError(param) {
+        if (param === "") {
+            throw new Error("[Error]: 에러발생")
+        }
+        if (param === "." || param === " ") {
+            throw new Error("[Error]: 에러발생")
+        }
+        if (isNaN(param)) {
+            throw new Error("[Error]: 에러발생");
+        }
     }
 
     resultOutput() {
