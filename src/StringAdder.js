@@ -108,7 +108,8 @@ export class StringAdder {
     // 출력
     printResult() {
         if(this.type == CalculatorType.error){
-            throw new Error("[Error]");
+            // throw new Error("[Error]");
+            throw Error("[ERROR]");
         }else{
             // console.log(this.result);
             MissionUtils.Console.print("결과 : " + this.result);
