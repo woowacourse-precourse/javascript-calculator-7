@@ -82,6 +82,8 @@ class App {
   }
 
   addAllArray(arr) {
+    if (arr.some(num => Number(num) < 0))
+      return this.printError("[ERROR] 음수는 사용 할 수 없습니다");
     return arr.reduce((a, b) => Number(a) + Number(b));
   }
 
