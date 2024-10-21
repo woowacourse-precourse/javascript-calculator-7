@@ -15,7 +15,7 @@ export default class Validator {
   }
   validateNumberString(numberString, delimiters) {
     for (let char of numberString) {
-      if (!delimiters.includes(char) && isNaN(char)) {
+      if (!delimiters.includes(char) && isNaN(parseInt(char))) {
         throw new Error(ERROR_MESSAGE.INVALID_INPUT);
       }
     }

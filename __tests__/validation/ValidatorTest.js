@@ -50,8 +50,14 @@ describe('Validator', () => {
     });
   
     test('숫자와 구분자 이외의 문자 포함 시 예외 발생 확인', () => {
-      expect(() => validator.validateNumberString('1,2:a', [',', ':']))
-        .toThrow(ERROR_MESSAGE.INVALID_INPUT);
+      const numberStringAndDelimiters = [
+        {numberString: ' ', delimiters : [',', ':']},
+        {numberString: '1,2:a', delimiters : [',', ':']},
+      ];
+      numberStringAndDelimiters.forEach( e => {
+        expect(() => validator.validateNumberString(e.numberString, e.delimiters))
+          .toThrow(ERROR_MESSAGE.INVALID_INPUT);
+      });
     });
   
     test('빈 문자열의 유효성 확인', () => {
