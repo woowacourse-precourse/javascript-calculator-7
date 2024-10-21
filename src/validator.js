@@ -42,9 +42,11 @@ class Validator {
       this.extractCustomDelimiter();
     }
 
-    const NUMBERS = this.userInput.split(this.defaultDelimiter).map(Number);
-    this.validateNumbers(NUMBERS);
-    return NUMBERS;
+    const EXTRACTED_NUMBERS = this.userInput
+      .split(this.defaultDelimiter)
+      .map(Number);
+    this.validateNumbers(EXTRACTED_NUMBERS);
+    return EXTRACTED_NUMBERS;
   }
 }
 
