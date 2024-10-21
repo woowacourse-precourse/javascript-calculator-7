@@ -15,8 +15,8 @@ class App {
 
     if (CUSTOM_START_INDEX) {
       if (CUSTOM_END_INDEX !== -1){ 
-          const customSepartion = input.substring(2, CUSTOM_END_INDEX)
-          separation = new RegExp(`[${customSepartion},|:]`);
+          const CUSTOM_SEPERATION = input.substring(2, CUSTOM_END_INDEX)
+          separation = new RegExp(`[${CUSTOM_SEPERATION},|:]`);
           numbers = input.substring(CUSTOM_END_INDEX+2).split(separation)
           }
           else{
