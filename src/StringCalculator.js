@@ -1,11 +1,12 @@
 import {Console} from "@woowacourse/mission-utils";
+import {getInput} from "./utils/inputHandler.js";
 
 class StringCalculator {
     sum = 0;
     customSeparator = null;
 
     async start() {
-        const input = await this.input();
+        const input = await getInput(Console)
         if (input === "") {
             return this.resultOutput(); // 빈 문자열의 경우 결과 출력
         }
