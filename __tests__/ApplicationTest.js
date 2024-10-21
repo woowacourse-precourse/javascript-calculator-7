@@ -1,6 +1,6 @@
 import App from "../src/App.js";
 import { MissionUtils } from "@woowacourse/mission-utils";
-import { ERROR_MESSAGES } from "../src/constants/messages.js";
+import { DEFAULT_ERROR_MESSAGE, ERROR_MESSAGES } from "../src/constants/messages.js";
 
 const mockQuestions = (inputs) => {
   MissionUtils.Console.readLineAsync = jest.fn();
@@ -48,7 +48,9 @@ describe("문자열 계산기", () => {
 
     const app = new App();
 
-    await expect(app.run()).rejects.toThrow(ERROR_MESSAGES.INVALID_NUMBER);
+    await expect(app.run()).rejects.toThrow(
+      `${DEFAULT_ERROR_MESSAGE} ${ERROR_MESSAGES.INVALID_NUMBER}`
+    );
   });
 
   test("빈 문자열을 입력할 경우", async () => {
@@ -57,7 +59,9 @@ describe("문자열 계산기", () => {
 
     const app = new App();
 
-    await expect(app.run()).rejects.toThrow(ERROR_MESSAGES.EMPTY_INPUT);
+    await expect(app.run()).rejects.toThrow(
+      `${DEFAULT_ERROR_MESSAGE} ${ERROR_MESSAGES.EMPTY_INPUT}`
+    );
   });
 
   test("구분자 사이에 숫자가 없을 경우", async () => {
@@ -66,6 +70,8 @@ describe("문자열 계산기", () => {
 
     const app = new App();
 
-    await expect(app.run()).rejects.toThrow(ERROR_MESSAGES.NUMBER_BETWEEN_DELIMITER);
+    await expect(app.run()).rejects.toThrow(
+      `${DEFAULT_ERROR_MESSAGE} ${ERROR_MESSAGES.NUMBER_BETWEEN_DELIMITER}`
+    );
   });
 });
