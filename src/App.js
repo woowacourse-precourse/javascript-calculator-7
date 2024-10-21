@@ -21,6 +21,18 @@ class App {
     const separatorRegex = new RegExp(`[${separator.join('')}]`);
     const splitArr = input.split(separatorRegex);
 
+    const numbers = splitArr.map(num => {
+      const parsedNum = parseFloat(num);
+
+      return parsedNum;
+    });
+
+    const result = +(numbers.reduce((acc, cur) => acc + cur, 0)).toFixed(12);
+
+    const message = `결과 : ${result}`;
+
+    Console.print(message);
+
 
   }
 }
