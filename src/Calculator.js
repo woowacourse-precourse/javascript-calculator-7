@@ -8,12 +8,25 @@ class Calculator {
     this.defaultDelimiters = [...DEFAULT_DELIMITERS];
   }
 
+  async run() {
+    try {
+      const input = await this.getInput();
+      this.validateInput(input);
+      const customDelimiter = this.getCustomDelimiter(input);
+      const numbers = this.splitByDelimiter(input, customDelimiter);
+      const sum = this.sumArray(numbers);
+      printMessage(`${LOG_MESSAGE.RESULT_MESSAGE}${sum}`);
+    } catch (error) {
+      throw new Error(`Calculator Error: ${error.message}`);
+    }
+  }
+
   async getInput() {
-    const answer = await Console.readLineAsync(LOG_MESSAGE.START_MESSAGE);
-    validateEmptyInput(answer);
-    const customDelimiter = this.getCustomDelimiter(answer);
-    const result = this.splitByDelimiter(answer, customDelimiter);
-    this.sumArray(result);
+    return await Console.readLineAsync(LOG_MESSAGE.START_MESSAGE);
+  }
+
+  validateInput(input) {
+    validateEmptyInput(input);
   }
 
   getCustomDelimiter(input) {
@@ -41,18 +54,9 @@ class Calculator {
     const sum = arr
       .map(Number)
       .reduce((acc, curr) => acc + curr, 0);
-
-      printMessage(`${LOG_MESSAGE.RESULT_MESSAGE}${sum}`);
     return sum;
   }
 
-  async run() {
-    try {
-      await this.getInput();
-    } catch (error) {
-      throw new Error(`Calculator Error: ${error.message}`);
-    }
-  }
 }
 
 export default Calculator;
