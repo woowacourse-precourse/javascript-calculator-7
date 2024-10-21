@@ -5,7 +5,7 @@ export function extractNumbers(input, distinct) {
     for (let i = 0; i < input.length; i++) {
         let currentChar = input[i];
         if (distinct.includes(currentChar)) {
-            if (number != []) {
+            if (number.length !== 0) {
                 sum += setNumber(number);
                 number = [];
             }
