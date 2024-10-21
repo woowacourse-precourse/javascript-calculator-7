@@ -16,7 +16,14 @@ class App {
     if (input === "") {
       return 0;  // 공백 문자열 처리
     }
-    return input;  
+
+    const numbers = this.extractNumbers(input);
+    return numbers.reduce((sum, num) => sum + num, 0);  // 숫자의 합 반환
+  }
+
+  extractNumbers(numbersString) {
+    const delimiter = /[,:]/;  // 쉼표와 콜론을 구분자로 사용
+    return numbersString.split(delimiter).map(Number);  // 문자열을 숫자로 변환
   }
 }
 
