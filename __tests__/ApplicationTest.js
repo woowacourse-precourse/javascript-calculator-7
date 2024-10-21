@@ -58,7 +58,9 @@ describe("문자열 계산기", () => {
     const app = new App();
 
     // 음수 입력 시 예외 발생하는지 확인
-    await expect(app.run()).rejects.toThrow("[Error] 숫자만 입력할수 있습니다");
+    await expect(app.run()).rejects.toThrow(
+      "[Error] 숫자만 입력할 수 있습니다"
+    );
   });
 
   test("음수 입력 예외 테스트", async () => {
@@ -68,7 +70,9 @@ describe("문자열 계산기", () => {
     const app = new App();
 
     // 음수 입력 시 예외 발생하는지 확인
-    await expect(app.run()).rejects.toThrow("[Error] 음수는 입력할수 없습니다");
+    await expect(app.run()).rejects.toThrow(
+      "[Error] 음수는 입력할 수 없습니다"
+    );
   });
 
   test("정수가 아닌 입력 예외 테스트", async () => {
@@ -78,6 +82,8 @@ describe("문자열 계산기", () => {
     const app = new App();
 
     // 정수가 아닌 값 입력 시 예외 발생하는지 확인
-    await expect(app.run()).rejects.toThrow("[Error] 숫자만 입력할수 있습니다");
+    await expect(app.run()).rejects.toThrow(
+      "[Error] 숫자만 입력할 수 있습니다"
+    );
   });
 });

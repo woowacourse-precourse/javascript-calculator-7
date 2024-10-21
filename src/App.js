@@ -80,7 +80,7 @@ class App {
         throw new Error("[Error]빈값 넣지마세요");
       }
       if (isNaN(num)) {
-        throw new Error("[Error] 숫자만 입력할수 있습니다");
+        throw new Error("[Error] 숫자만 입력할 수 있습니다");
       }
       if (!Number.isInteger(num)) {
         // 숫자가 정수가 아닌 경우 에러 발생
@@ -88,7 +88,7 @@ class App {
       }
       if (num < 0) {
         // 음수가 입력된 경우 에러 발생
-        throw new Error("[Error] 음수는 입력할수 없습니다");
+        throw new Error("[Error] 음수는 입력할 수 없습니다");
       }
       // 최대숫자제한
       if (num > MAX_NUMBER) {
