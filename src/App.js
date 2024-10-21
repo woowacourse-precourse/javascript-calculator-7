@@ -43,6 +43,8 @@ class App {
         if (num) {
             result += parseInt(num);
         }
+
+        Console.print('결과 : ' + result);
     }
 }
 
