@@ -71,12 +71,18 @@ function isOnlyNumberAndSeperators(str, seperators) {
 function getOnlyNumberArr(str, seperators) {
   // 구분자만 구성된 정규식 생성
   const sepRegExp = new RegExp(`[${seperators}]`);
-  return str.split(sepRegExp);
+  return str.split(sepRegExp).map((numstr) => {
+    if(numstr === '') {
+        throw new Error(getErrorMessage("연속된 구분자는 사용할 수 없습니다."));
+    } 
+
+    return Number(numstr);
+  });
 }
 
 function getSumAllNumber(arr) {
   // 숫자배열의 숫자 총 합 계산
-  return arr.map(Number).reduce((a,b) => a+b);
+  return arr.reduce((a,b) => a+b);
 }
 
 function getErrorMessage(message) {
