@@ -1,33 +1,34 @@
 class StringSpliter {
-  #commaSeperator = ",";
-  #colonSeperator = ":";
+  #splitTargetString;
+  #customSeperator = "";
+  #seperators = [",", ":"];
 
-  constructor(userInputString = "") {
-    this.customSeperator = this.getSeperatorFrom(userInputString);
+  constructor(userInputString) {
+    this.#splitTargetString = userInputString;
   }
 
-  getSeperatorFrom(userInputString) {
-    const customSeperator = userInputString.match(/\/\/(.*?)\\n/);
+  findCustomSeperator() {
+    const customSeperator = this.#splitTargetString.match(/\/\/(.*?)\\n/);
 
     if (!customSeperator) {
-      return "";
+      return;
     }
 
-    return customSeperator[1];
+    this.#customSeperator = customSeperator[1];
   }
 
-  removeCustomSeperator(string) {
-    if (!this.customSeperator) {
-      return string;
+  seperateNumberString() {
+    if (!this.#customSeperator) {
+      return;
     }
 
-    return string.match(/\\n(.*)/)[1];
+    this.#splitTargetString = this.#splitTargetString.match(/\\n(.*)/)[1];
   }
 
-  getNumberFrom(string) {
-    const seperator = new RegExp(`[${this.#commaSeperator} ${this.#colonSeperator} ${this.customSeperator}]`, "g");
+  getNumbers() {
+    const seperator = new RegExp(`[${this.#seperators[0]} ${this.#seperators[1]} ${this.#customSeperator}]`, "g");
 
-    return string.split(seperator).map((element) => Number(element));
+    return this.#splitTargetString.split(seperator).map((element) => Number(element));
   }
 }
 
