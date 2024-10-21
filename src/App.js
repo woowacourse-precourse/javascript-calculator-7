@@ -18,6 +18,7 @@ class App {
 
       const NUMBERS = App.getNumbers(INPUT, this.SEPARATORS);
 
+      const RESULT = App.calculate(NUMBERS);
     } catch(error) {
       console.print(error.message);
     }
@@ -67,6 +68,10 @@ class App {
     }
 
     return NUMBERS;
+  }
+
+  static calculate(NUMBERS) {
+    return NUMBERS.reduce((acc, cur) => acc + Number(cur), 0);
   }
 }
 
