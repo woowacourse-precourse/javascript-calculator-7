@@ -1,5 +1,7 @@
 import { Console } from "@woowacourse/mission-utils";
 import sumNum from "./Calculator.js";
+import InputView from "./InputView.js";
+import OutputView from "./OutputView.js";
 
 class App {
   async run() {
@@ -7,9 +9,9 @@ class App {
     let customSeperator = "";
 
     try {
-      let string = await Console.readLineAsync(
-        "덧셈할 문자열을 입력해 주세요.\n"
-      );
+      const inputView = new InputView();
+      let string = await inputView.getInput();
+
       separator = string.match(/\/\/(.*?)\\n(.*)/);
 
       if (string.slice(0, 2) === "//" && !string.includes("\\n")) {
@@ -40,9 +42,8 @@ class App {
         }
         return Number(num);
       });
-
       const answer = sumNum(numArr);
-      Console.print(`결과 : ${answer}`);
+      OutputView(answer);
     } catch (error) {
       throw error;
     }
