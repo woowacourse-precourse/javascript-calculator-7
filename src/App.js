@@ -23,9 +23,9 @@ class App {
   }
 
   checkSeparator(input) {
-    const match = input.match(CUSTOM_SEPARATOR_PATTERN);
-    if (match) {
-      this.separators.push(match[1]);
+    const isCustom = input.match(CUSTOM_SEPARATOR_PATTERN);
+    if (isCustom) {
+      this.separators.push(isCustom[1]);
       const regex = new RegExp(`[${this.separators}]`);
       if (regex.test(input) && input.match(regex).some((el) => el === "")) {
         throw new Error("[ERROR] 연속된 구분자는 허용되지 않습니다.");
