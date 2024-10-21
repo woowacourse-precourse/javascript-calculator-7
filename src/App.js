@@ -1,5 +1,5 @@
-import CalculationService from "./application/CalculationService.js";
-import IOHandler from "./presentation/IOHandler.js";
+import CalculationService from './application/CalculationService.js';
+import IOHandler from './presentation/IOHandler.js';
 
 class App {
   #calculationService;
