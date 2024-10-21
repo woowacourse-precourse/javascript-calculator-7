@@ -30,6 +30,8 @@ function getSeparatorAndData(input) {
     customSeparator = input.substring(2, newlineIndex);
 
     inputData = input.substring(newlineIndex + 2);
+
+    validateCustomSeparator(customSeparator);
   } else {
     customSeparator = new RegExp(`[${DEFAULT_SEPARATOR.join("")}]`);
     inputData = input;
@@ -51,6 +53,13 @@ function sumNumbers(numbers, customSeparator) {
   }, 0);
 
   return sum;
+}
+
+// 커스텀 구분자가 기본 구분자와 겹치는 경우 예외 처리
+function validateCustomSeparator(customSeparator) {
+  if (DEFAULT_SEPARATOR.includes(customSeparator)) {
+    throw new Error(ERROR_MESSAGES.INVALID_CUSTOM_SEPERATOR);
+  }
 }
 
 // 숫자가 아난 문자가 들어간 경우 예외 처리
