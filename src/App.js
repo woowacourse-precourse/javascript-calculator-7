@@ -97,13 +97,14 @@ class App {
       return sum;
     }
 
-    const caculator = (userInputNumber) => {
-      const caculation = sumCaculator(userInputNumber);
+    try {
+      let inputNumbers = userInputNumber(userInput);
+      let result = sumCaculator(inputNumbers);
 
-      return caculation;
-    };
-
-    Console.print('결과 : ' + caculator(userInputNumber));
+      Console.print('결과 : ' + result);
+    } catch (error) {
+      throw new Error(error.message);
+    }
   }
 }
 
