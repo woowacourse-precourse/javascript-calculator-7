@@ -10,6 +10,9 @@ class App {
 
     async run() {
         const input = await this.getInput("덧셈할 문자열을 입력해 주세요.");
+        const numbers = this.splitInput(input);
+
+        console.log(numbers);
         this.rl.close();
     }
 
@@ -19,6 +22,10 @@ class App {
                 resolve(input);
             });
         });
+    }
+
+    splitInput(input) {
+        return input.split(/[,:]/).map((item) => item.trim());
     }
 }
 
