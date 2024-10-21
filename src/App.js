@@ -25,6 +25,10 @@ class App {
 
       //커스텀 구분자 추출
       let customDelimiter = numbers.slice(2, endIndex);
+      // 커스텀 구분자에 숫자가 포함되어 있는지 확인
+      if (/\d/.test(customDelimiter)) {
+        throw new Error('[ERROR] 구분자에 숫자가 포함될 수 없습니다.');
+      }
 
       // 여러 구분자가 있을 경우 처리
       // 커스텀 구분자를 정규식으로 사용할 때 메타 문자 이스케이프
