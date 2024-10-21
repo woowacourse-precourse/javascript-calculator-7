@@ -34,6 +34,9 @@ class App {
     const numbers = input.split(regExp).map(num => Number(num.trim()));
 
     this.validateNumbers(numbers);
+    
+    // 숫자 덧셈 수행
+    return numbers.reduce((acc, num) => acc + num, 0);
   }
 }
 
