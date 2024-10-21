@@ -9,8 +9,8 @@ class App {
     this.separator = '';
   }
 
-  static handleInput(input) {
-    if (!input.match(REGEX_NORMAL)) {
+  handleInput(input) {
+    if (input.match(REGEX_NORMAL)) {
       this.str = input;
       this.separator = /,|:/;
       return true;
@@ -29,9 +29,13 @@ class App {
     return false;
   }
 
+  extractNumber() {
+    return this.str.split(this.separator).map(Number);
+  }
+
   async run() {
     const input = await Console.readLineAsync('덧셈할 문자열을 입력해 주세요\n');
-    if (!this.handleInput(input)) return new Error('[ERROR] 올바른 형식을 입력해주세요.');
+    if (!this.handleInput(input)) throw new Error('[ERROR] 올바른 형식을 입력해주세요.');
   }
 }
 
