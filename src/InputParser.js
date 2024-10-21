@@ -4,32 +4,32 @@ class InputParser {
     }
 
     parse() {
-
         if (this.input === "") {
             return [0];
         }
 
-        let numbers; 
-        let delimiterRegex = /[,:]/; 
-        let numberString; 
+        let numbers;
+        let delimiterRegex = /[,:]/;
+        let numberString;
 
-        if (this.input.startsWith('//')) {
-            const delimiterEndIndex = this.input.indexOf('\n');
-            if (delimiterEndIndex !== -1) { // 줄바꿈 문자가 있는 경우
-                const delimiterChar = this.input[2]; 
-                const escapedDelimiterRegex = delimiterChar.replace(/[.*+?^${}()|[\]\\]/g, '\\$&');
-                delimiterRegex = new RegExp(`[${escapedDelimiterRegex}]`);
-                numberString = this.input.slice(delimiterEndIndex + 1); // 줄바꿈 이후의 문자열
+        const formattedInput = this.input.replace(/\\n/, '\n');  
+
+        if (formattedInput.startsWith('//')) {
+            const delimiterEndIndex = formattedInput.indexOf('\n');
+
+            if (delimiterEndIndex !== -1) {
+                const delimiterChar = formattedInput.slice(2, delimiterEndIndex);
+                const escapedDelimiter = delimiterChar.replace(/[.*+?^${}()|[\]\\]/g, '\\$&');
+                delimiterRegex = new RegExp(`[${escapedDelimiter}]`);
+                numberString = formattedInput.slice(delimiterEndIndex + 1);
             } else {
-
-                numberString = this.input.slice(5); // 입력 문자열에서 커스텀 구분자를 제외한 나머지 부분
+                throw new Error("[ERROR] 잘못된 형식의 입력입니다.");
             }
         } else {
-            numberString = this.input; // 기본 구분자를 사용할 경우 전체 입력 사용
+            numberString = formattedInput; // 기본 구분자를 사용할 경우 전체 입력 사용
         }
 
         numbers = numberString.split(delimiterRegex).map(Number);
-
         return numbers;
     }
 }
