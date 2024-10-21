@@ -2,9 +2,9 @@ import { ERROR_MESSAGES, DELIMITER_CONSTANTS } from "./constants.js";
 
 export class Validator {
     // 계산식 전체 예외 처리
-    static validateInput = (input) => {
+    static validateInput(input) {
         // null 또는 undefined인 경우
-        if (input == null) {
+        if (!input) {
             throw new Error(ERROR_MESSAGES.UNDEFINED_EXPRESSION);
         }
 
@@ -12,14 +12,14 @@ export class Validator {
     }
 
     // 올바르게 선언된 구분자 예외 처리
-    static validateCorrectlyDeclaredDelimiters = (userInput) => {
+    static validateCorrectlyDeclaredDelimiters(userInput) {
         if ('0' <= userInput[2] && '9' >= userInput[2]) {
             throw new Error(ERROR_MESSAGES.CUSTOM_DELIMITER_CANNOT_BE_NUMBER);
         }
     }
 
     // 잘못 선언된 구분자 예외 처리
-    static validateIncorrectlyDeclaredDelimiters = (userInput) => {
+    static validateIncorrectlyDeclaredDelimiters(userInput) {
         if (userInput.includes(DELIMITER_CONSTANTS.CUSTOM_DELIMITER_START) && userInput.includes(DELIMITER_CONSTANTS.CUSTOM_DELIMITER_END)) {
             const startDelimiter = userInput.indexOf(DELIMITER_CONSTANTS.CUSTOM_DELIMITER_START);
             const endDelimiter = userInput.indexOf(DELIMITER_CONSTANTS.CUSTOM_DELIMITER_END);
@@ -45,7 +45,7 @@ export class Validator {
     }
 
     // 숫자 예외 처리
-    static validateNumbers = (splitedString) => {
+    static validateNumbers(splitedString) {
         const numbers = splitedString.map((value) => {
             const num = Number(value);
 
