@@ -1,5 +1,3 @@
-# javascript-calculator-precourse
-
 ## 문자열 계산기 기능 목록
 
 1. 빈 문자열이 입력될 경우 예외 처리 기능을 구현
