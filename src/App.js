@@ -7,7 +7,10 @@ class App {
     );
 
     const customSeparator = this.hasCustomSeparator(inputString);
-    const result = this.stringSplitSumCalc(inputString, customSeparator);
+    const result = this.stringSplitSumCalc(
+      inputString,
+      this.validateSeparator(customSeparator)
+    );
 
     Console.print(`결과 : ${result}`);
   }
@@ -36,6 +39,14 @@ class App {
     }
 
     return Number(string);
+  }
+
+  validateSeparator(sep) {
+    if ("0123456789".includes(sep)) {
+      throw new Error("[ERROR] 커스텀 문자로 숫자를 입력했습니다");
+    }
+
+    return sep;
   }
 
   hasCustomSeparator(string) {
