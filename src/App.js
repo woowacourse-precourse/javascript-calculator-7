@@ -9,7 +9,10 @@ class App {
       const userInput = await this.getInput();
 	// 3. 쉼표(,) 또는 콜론(:)을 구분자로 가지는 문자열을 전달하는 경우 구분자를 기준으로 분리한다.
       const splitNumbers = this.splitInput(userInput);
-		
+	// 4. 분리한 각 숫자들을 String에서 Number 타입으로 변환한다.
+      const numberArray = this.toNumbers(splitNumbers);
+	// 5. 변환한 Number 타입의 각 숫자들의 합을 계산한다.
+      const totalSum = this.sumNumbers(numberArray);
     } catch (error) {
       console.error(error.message);
     }
@@ -36,6 +39,10 @@ class App {
 	  // 3. 쉼표(,) 또는 콜론(:)을 구분자로 가지는 문자열을 전달하는 경우 구분자를 기준으로 분리한다.
   splitInput(input) {
     return input.split(/[,|:]/); // 쉼표 또는 콜론을 기준으로 분리
+  }
+	  // 4. 분리한 각 숫자들을 String에서 Number 타입으로 변환한다.
+  toNumbers(strings) {
+    return strings.map(Number);
   }
 	
 }
