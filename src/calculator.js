@@ -1,3 +1,5 @@
+import { ERROR_MESSAGE } from "./message";
+
 export function tokenizeString(input, dividerList) {
   let tokens = [];
   let currentToken = '';
@@ -27,15 +29,17 @@ export function tokenizeString(input, dividerList) {
 
     index++;
   }
-  console.log(tokens);
+  if (tokens.length === 0) {
+    throw new Error(ERROR_MESSAGE.NO_TOKEN);
+  }
 }
 
 function convertToNumber(token) {
   if (token === '') {
-    throw new Error("[ERROR] 빈 문자열을 연산할 수 없습니다.");
+    throw new Error(ERROR_MESSAGE.EMPTY_TOKEN);
   }
   if (isNaN(token)) {
-    throw new Error("[ERROR] 숫자가 아닌 경우 연산할 수 없습니다.");
+    throw new Error(ERROR_MESSAGE.NOT_NUMBER_TOKEN);
   }
   return parseInt(token);
 }
