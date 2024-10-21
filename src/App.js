@@ -32,7 +32,9 @@ class App {
       return Console.print("[ERROR] 음수 또는 잘못된 값을 입력했습니다.");
     }
 
-    Console.print(inputString); 
+    // 숫자 더하기 및 결과 반환 (
+    const sum = numbers.reduce((acc, curr) => acc + curr, 0);
+    Console.print(`결과 : ${sum}`);
   }
 
   // 커스텀 구분자 스트링인지 확인 
@@ -40,7 +42,7 @@ class App {
     return input.startsWith("//");
   }
 
-  //커스텀 구분자를 추출하고 새로운 입력 문자열을 반환 
+  // 커스텀 구분자를 추출하고 새로운 입력 문자열을 반환 
   splitCustom(input) {
     const parts = input.split("\n");
     const customSeparator = parts[0].slice(2); 
@@ -50,3 +52,5 @@ class App {
 }
 
 export default App;
+
+c
