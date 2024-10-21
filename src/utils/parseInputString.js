@@ -1,4 +1,25 @@
-const getCustomSeparator = (string) => {};
+/**
+ * 문자열에서 커스텀 구분자를 추출하는 함수입니다.
+ * @param {string} string - 커스텀 구분자를 포함한 문자열 ("//구분자\n" 형식에서 구분자 추출)
+ * @returns {object}
+ * @returns {string} returns.separator - 커스텀 구분자 문자열을 반환합니다.
+ * @returns {string} returns.newNumberString - 커스텀 구분자 지정 이후의 숫자 문자열을 반환합니다.
+ */
+const getCustomSeparator = (string) => {
+  const modifiedString = string.replace("\\n", "\n");
+  const endIndex = modifiedString.indexOf("\n");
+
+  if (endIndex === -1) {
+    throw new Error(
+      "커스텀 구분자 형식에 오류가 있습니다. 다시 한 번 확인해주세요."
+    );
+  }
+
+  const separator = string.slice(2, endIndex);
+  const newNumberString = string.slice(endIndex + 2);
+
+  return { separator, newNumberString };
+};
 
 /**
  * 사용자 입력값에서 숫자 목록을 추출하는 함수입니다.
@@ -7,13 +28,13 @@ const getCustomSeparator = (string) => {};
  */
 export const getNumbers = (input) => {
   const SEPARATOR = /[,:]/;
-  let customSeparator;
   let strings = [];
   let numbers = [];
 
   if (input.startsWith("//")) {
-    customSeparator = getCustomSeparator(input);
-    strings = input.split(customSeparator);
+    const { separator: customSeparator, newNumberString } =
+      getCustomSeparator(input);
+    strings = newNumberString.split(customSeparator);
   } else {
     strings = input.split(SEPARATOR);
   }
