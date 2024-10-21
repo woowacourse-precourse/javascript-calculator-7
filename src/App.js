@@ -1,11 +1,15 @@
 import { Console } from '@woowacourse/mission-utils';
 
 class App {
-  parse_string = (input) => {
+  constructor() {
+    this.default_delimiters = [',', ':'];
+  }
+
+  parse_string(input) {
     if (input === '') return [0];
 
     let numbers;
-    let delimiter = [',', ':'];
+    let delimiter = [...this.default_delimiters];
 
     if (input.startsWith('//')) {
       const parts = input.split('\\n');
@@ -31,14 +35,19 @@ class App {
     });
 
     return numbers;
-  };
+  }
+
+  calculate_sum(numbers) {
+    return numbers.reduce((sum, num) => sum + num, 0);
+  }
+
   async run() {
     const user_line = await Console.readLineAsync(
       '덧셈할 문자열을 입력해주세요.\n'
     );
-
     const numbers = this.parse_string(user_line);
-    Console.print(`결과 : ${numbers.reduce((sum, num) => sum + num, 0)}`);
+    const result = this.calculate_sum(numbers);
+    Console.print(`결과 : ${result}`);
   }
 }
 
