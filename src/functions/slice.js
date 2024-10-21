@@ -17,7 +17,6 @@ export default function slice(string, custom) {
     } else {
       // 구분자가 아닐 경우
       number += CHAR;
-      console.log(number);
     }
   }
   if (number != "") number_array.push(number);
