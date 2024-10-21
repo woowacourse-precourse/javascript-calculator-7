@@ -1,56 +1,69 @@
-import { Console } from "@woowacourse/mission-utils";
+import { Console } from '@woowacourse/mission-utils';
 
 class App {
-	checkNumberSign(number) {
-		return Math.sign(number);
-	}
-	sumInputNumbers(array) {
-		let result = 0;
-		for (let i = 0; i < array.length; i++) {
-			if (this.checkNumberSign(array[i]) >= 0) {
-				result = Number(array[i]) + result;
-			} else {
-				throw new Error("양수가 아닙니다");
-			}
-		}
-		return result;
-	}
-	async run() {
-		const regexes = {
-			check_special_chracter: RegExp(/[,;/\n]/, "g"),
-			check_empty_string: RegExp(/^$/),
-			check_front: /^\/\//,
-			split_normal: RegExp(/[,:]/, "g"),
-			split_custom: /[^//]/,
-		};
+  validateInputFormat(inputString) {
+    const validatePatterns = {
+      containsSpecialCharater: /[,;/\n]/g,
+      isEmpty: /^$/,
+    };
+    return (
+      inputString.match(validatePatterns.containsSpecialCharater) ||
+      inputString.match(validatePatterns.isEmpty)
+    );
+  }
 
-		let custom_seperator;
-		let custom_regex;
-		let input_array = [];
+  extractCustomDelimiter(inputString) {
+    const customPattern = /[^//]/;
+    const customDelimiter = inputString.match(customPattern)[0];
+    return new RegExp(`[\\\\/\\sA-Za-z${customDelimiter}]`, 'g');
+  }
 
-		let input = await Console.readLineAsync(",(쉼표)와 ;(세미 콜론)과 숫자를 조합한 문자열을 입력해주세요. ex)1,2:3 ");
+  getDelimiter(inputString) {
+    const hasCustomDelimiter = inputString.match(/^\/\//);
+    const delimiter = hasCustomDelimiter
+      ? this.extractCustomDelimiter(inputString)
+      : /[,:]/g;
+    return delimiter;
+  }
 
-		try {
-			if (input.match(regexes.check_special_chracter) || input.match(regexes.check_empty_string)) {
-				let is_using_custom_reg = input.match(regexes.check_front);
+  isPositiveNumber(number) {
+    return Math.sign(number);
+  }
 
-				if (is_using_custom_reg) {
-					custom_seperator = input.match(regexes.split_custom)[0];
-					custom_regex = RegExp(`[\\\\/\\sA-Za-z${custom_seperator}]`, "g");
+  calculateSumOfNumbers(numberArray) {
+    let totalSum = 0;
+    numberArray.forEach((number) => {
+      if (this.isPositiveNumber(number) >= 0) {
+        totalSum += Number(number);
+      } else {
+        throw new Error('양수가 아닙니다');
+      }
+    });
 
-					input_array = input.split(custom_regex);
-				} else {
-					input_array = input.split(regexes.split_normal);
-				}
-				const answer = this.sumInputNumbers(input_array);
-				Console.print(`결과 : ${answer}`);
-			} else {
-				throw new Error("[ERROR] 구분자가 필요합니다");
-			}
-		} catch (error) {
-			throw new Error(`[ERROR] ${error.message}`);
-		}
-	}
+    return totalSum;
+  }
+
+  getParsedNumberArray(inputString) {
+    if (!this.validateInputFormat(inputString)) {
+      throw new Error('구분자를 입력하세요');
+    }
+    const delimiter = this.getDelimiter(inputString);
+    return inputString.split(delimiter);
+  }
+
+  async run() {
+    const PROMPT_MESSAGE = '덧셈할 문자열을 입력해주세요. ex)1,2:3 ';
+
+    const userInput = await Console.readLineAsync(PROMPT_MESSAGE);
+
+    try {
+      const parsedNumbers = this.getParsedNumberArray(userInput);
+      const answer = this.calculateSumOfNumbers(parsedNumbers);
+      Console.print(`결과 : ${answer}`);
+    } catch (error) {
+      throw new Error(`[ERROR] ${error.message}`);
+    }
+  }
 }
 
 export default App;
