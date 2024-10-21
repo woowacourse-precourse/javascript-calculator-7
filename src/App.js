@@ -64,8 +64,8 @@ class App {
     }
 
     if (customSeparator.length !== 0) {
-      const escapedSeparators = customSeparator.map(separator => {
-        return separator.replace(/[-\/\\^$.*+?()[\]{}|]/g, '\\$&'); 
+      const ESCAPED_SEPARATORS = customSeparator.map(separator => {
+        return separator.replace(/[-\/\\^$.*+?()[\]{}|]/g, '\\$&');
       });
 
       const reg = new RegExp(escapedSeparators.sort((a, b) => b.length - a.length).join('|'));
