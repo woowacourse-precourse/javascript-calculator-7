@@ -5,7 +5,7 @@ class App {
     Console.print("덧셈할 문자열을 입력해 주세요.");
   }
   isAllNumber(arr) {
-    return arr.every((v) => !isNaN(v));
+    return arr.every((v) => !isNaN(v)) && arr.every((v) => v > 0);
   }
   verifyInput(input) {
     // 커스텀 방식일 때 최소 길이.
@@ -52,13 +52,17 @@ class App {
 
     return [false];
   }
+  calculate(arr) {}
   async getInput() {
     const inputValue = await Console.readLineAsync("");
     const result = this.verifyInput(inputValue);
     if (result[0]) {
-      Console.print("올바른 식");
+      Console.print(result[1]);
+      // this.calculate(result[1]);
     } else {
-      throw Error("[ERROR] 올바른 문자열을 입력해주세요");
+      throw Error(
+        "[ERROR] 양수와 구분자(, 또는 : 또는 커스텀 //x\\n)로 이루어진 문자열을 입력해주세요"
+      );
     }
   }
   async run() {
