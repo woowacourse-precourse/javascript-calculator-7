@@ -8,7 +8,7 @@ async function running() {
         const PRINT_ANS = await app.run();
         console.log('결과: ', PRINT_ANS)
     } catch (error) {
-        console.log("[ERROR]가 발생하였습니다.");
+        // console.log("[ERROR]가 발생하였습니다.");
         console.log(error)
     }
 };

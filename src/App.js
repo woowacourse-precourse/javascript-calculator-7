@@ -103,12 +103,14 @@ class App {
     // 1. STRING_INPUT 값을 확인하고, error 여부를 판단하여 throw
     // 2. index.js 파일의 try catch문 작동
     const CHECK_INPUT = checkInput(STRING_INPUT)
+    
     if (!CHECK_INPUT) {
       throw new Error("[ERROR]")
     } else {
       // 입력 형식이 올바를 경우 returnSum 함수를 통해 STRING_INPUT에 대한 결과를 저장
       // return RETURN_ANS
-      if (CHECK_INPUT === 'answer zero') {
+      // if (CHECK_INPUT === 'answer zero') {
+      if (STRING_INPUT.length === 0) {
         return 0
       } else if (CHECK_INPUT === 'non custom pattern') {
         return returnSum(STRING_INPUT)
