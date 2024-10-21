@@ -24,7 +24,11 @@ class App {
       numbersString = line.substring(customDelimiterMatch[0].length);
     }
 
-    const regex = new RegExp(`${delimiters.join('|')}`);
+    const regex = new RegExp(
+      `${delimiters
+        .map((d) => d.replace(/[.*+?^${}()|[\]\\]/g, '\\$&'))
+        .join('|')}`
+    );
 
     let numbers = [];
 
