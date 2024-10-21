@@ -32,7 +32,7 @@ class App {
   }
 
   // 예외처리 함수
-  errorCalculator(inputSplited) {
+  catchException(inputSplited) {
     if (inputSplited.some((num) => num < 0)) {
       // 음수 입력했을 때
       Console.print('[ERROR]');
@@ -53,12 +53,10 @@ class App {
     const inputSplited = this.workingCalculator(userInput);
 
     // 3. 예외처리
-    this.errorCalculator(inputSplited);
+    this.catchException(inputSplited);
 
     // 4. 변환한 값 더하고 출력
     this.addNumber(inputSplited);
-
-
   }
 };
 
