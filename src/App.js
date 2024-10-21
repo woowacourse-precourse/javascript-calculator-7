@@ -31,9 +31,13 @@ class App {
     if (isNaN(userInput[0])) {
       throwError(ERROR_MESSAGES.INVALID_START);
     }
+    
+    if (isNaN(userInput[userInput.length-1])) {
+      throwError(ERROR_MESSAGES.INVALID_END);
+    }
 
-    [...userInput].forEach((char, index) => {
-      if (isNaN(char) && isNaN(userInput[index - 1])) {
+    userInput.split(/\d+/).forEach((sep) => {
+      if (sep && !separators.includes(sep)) {
         throwError(ERROR_MESSAGES.MULTIPLE_SEPARATORS);
       }
     });
