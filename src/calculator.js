@@ -1,4 +1,4 @@
-function extractNumbers(input, distinct) {
+export function extractNumbers(input, distinct) {
     let number = [];
     let sum = 0;
 
@@ -36,7 +36,7 @@ function setNumber(number) {
     return currentNumber;
 }
 
-function awareCustomSeprator(input, distinct) {
+export function awareCustomSeprator(input, distinct) {
     let removeFront = input.substr(2);
     let seperate = removeFront.split('\\n');
     distinct.push(seperate[0]);
