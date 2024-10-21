@@ -45,17 +45,21 @@ class App {
 
     // [feat] 2.2.1 커스텀 구분자가 있을 경우 delimiters 수정
     if(input.startsWith("//")){
-      const delimiterEndIndex = input.indexOf("\n");
+      const delimiterStartIndex = input.indexOf("//") + 2;
+      const delimiterEndIndex = input.indexOf("\\n");
+
       if(delimiterEndIndex === -1){
-        throw new Error("[ERROR] 잘못된 구분자 형식입니다.");
+        throw new Error("[ERROR] 잘못된 구분자 형식입니!!!!다.");
       }
-      const customDelimiter = input.substring(2,delimiterEndIndex);
+
+      // "//"와 "\n" 사이에 있는 문자를 구분자로 설정
+      const customDelimiter = input.substring(delimiterStartIndex, delimiterEndIndex);
       
       // 커스텀 구분자를 추가
       delimiters = new RegExp(`[,:${customDelimiter}]`);
 
       // 커스텀 구분자 설정 제외한 숫자 부분
-      numberString = input.substring(delimiterEndIndex+1);
+      numberString = input.substring(delimiterEndIndex+2);
     } else {
       // 커스텀 구분자가 없는 경우, 쉼표(,)와 콜론(:) 이외의 구분자 사용 여부 확인
       const invalidDelimiter = /[^0-9,:]/;
