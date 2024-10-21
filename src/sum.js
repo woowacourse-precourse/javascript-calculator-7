@@ -1,5 +1,4 @@
 const sumNums = (datas) => {
-  console.log(datas);
   let sum = 0;
 
   datas.forEach((num) => {
