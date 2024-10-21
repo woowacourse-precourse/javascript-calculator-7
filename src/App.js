@@ -1,6 +1,7 @@
 import { Console } from '@woowacourse/mission-utils';
 
 class App {
+  add() {}
   async run() {
     const input = await Console.readLineAsync('입력: ');
     let sort = /,|:/;
@@ -14,11 +15,11 @@ class App {
 
     if (sort_Custom) {
       sort = sort_Custom[1];
-       // [0]= //@\n이니까  문자인 @이 나오게 1번째
+      // [0]= //@\n이니까  문자인 @이 나오게 1번째
       numbers = input.slice(sort_Custom[0].length);
     }
     const result = numbers.split(sort).map(Number);
-    Console.print(result);
+    Console.print(result.reduce((a, b) => a + b));
   }
 }
 
