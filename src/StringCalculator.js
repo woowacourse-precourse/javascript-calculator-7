@@ -11,8 +11,8 @@ class StringCalculator {
    * @thorws 숫자가 아닌 문자열이 포함되어 있을 경우 에러 발생
    * @thorws 숫자가 Number.MAX_SAFE_INTEGER를 초과할 경우 에러 발생
    */
-  calculate(numbers) {
-    return numbers
+  calculate(stringNumbers) {
+    return stringNumbers
       .reduce((acc, num) => {
         if (num === "") {
           return acc;

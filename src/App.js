@@ -13,8 +13,8 @@ class App {
     const input = await this.ioProcessor.processInput();
 
     try {
-      const numbers = this.stringParser.parseString(input);
-      const result = this.StringCalculator.calculate(numbers);
+      const stringNumbers = this.stringParser.parseString(input);
+      const result = this.StringCalculator.calculate(stringNumbers);
       this.ioProcessor.processOutput(result);
     } catch (error) {
       this.ioProcessor.processErrorOutput(error.message);
