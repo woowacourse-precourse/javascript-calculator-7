@@ -3,15 +3,14 @@ import { INPUT_ERROR_MESSAGE } from "./constants/Messages.js";
 
 export class CustomOperatorExtractor {
   extractCustomStartOperator(input) {
-    if (input.startsWith(START_CUSTOM_OPERATOR)) {
-      const endOperatorIndex = input.indexOf(END_CUSTOM_OPERATOR);
-      this.#isExistEndOperator(endOperatorIndex);
-      const customOperator = input.slice(START_CUSTOM_OPERATOR.length, endOperatorIndex);
-      this.#isExistCustomOperator(customOperator);
-      return customOperator;
-    } else {
+    if (!input.startsWith(START_CUSTOM_OPERATOR)) {
       return '';
     }
+    const endOperatorIndex = input.indexOf(END_CUSTOM_OPERATOR);
+    this.#isExistEndOperator(endOperatorIndex);
+    const customOperator = input.slice(START_CUSTOM_OPERATOR.length, endOperatorIndex);
+    this.#isExistCustomOperator(customOperator);
+    return customOperator;
   }
 
   #isExistEndOperator(endOperatorIndex) {
