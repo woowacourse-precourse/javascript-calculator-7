@@ -7,7 +7,11 @@ const ERROR_MESSAGE = Object.freeze({
   위 정보를 참고하여 다시 입력해 주세요!`
 });
 
+const LOG_MESSAGE = Object.freeze({
+  START_MESSAGE: "덧셈할 문자열을 입력해 주세요.",
+})
 
 export {
-  ERROR_MESSAGE
+  ERROR_MESSAGE, 
+  LOG_MESSAGE
 };
