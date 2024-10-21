@@ -1,5 +1,6 @@
 import App from "../src/App.js";
 import { MissionUtils } from "@woowacourse/mission-utils";
+import { ERROR } from "../src/constants/error.js";
 
 const mockQuestions = (inputs) => {
   MissionUtils.Console.readLineAsync = jest.fn();
@@ -32,12 +33,36 @@ describe("문자열 계산기", () => {
     });
   });
 
-  test("예외 테스트", async () => {
+  test("커스텀 구분자 미사용 -> 콜론(:) 사용", async () => {
+    const inputs = ["2:8:31"];
+    mockQuestions(inputs);
+
+    const logSpy = getLogSpy();
+    const outputs = ["결과 : 41"];
+
+    const app = new App();
+    await app.run();
+
+    outputs.forEach((output) => {
+      expect(logSpy).toHaveBeenCalledWith(expect.stringContaining(output));
+    });
+  });
+
+  test("예외 테스트 -> 입력 값에 음수 포함", async () => {
     const inputs = ["-1,2,3"];
     mockQuestions(inputs);
 
     const app = new App();
 
-    await expect(app.run()).rejects.toThrow("[ERROR]");
+    await expect(app.run()).rejects.toThrow(ERROR.NEGATIVE_OR_ZERO_ELEMENT);
+  });
+
+  test("예외 테스트 -> 입력 값에 0 포함", async () => {
+    const inputs = ["1,0,3"];
+    mockQuestions(inputs);
+
+    const app = new App();
+
+    await expect(app.run()).rejects.toThrow(ERROR.NEGATIVE_OR_ZERO_ELEMENT);
   });
 });
