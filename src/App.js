@@ -2,7 +2,7 @@ import { Console } from "@woowacourse/mission-utils";
 
 class App {
   constructor() {
-    this.CUSTOM_DELIMITER_REGEX = /^\/\/(.)\\n(.*)$/;
+    this.CUSTOM_DELIMITER_REGEX = /^\/\/(.*?)\\n(.*)$/;
     this.DEFAULT_DELIMITER = ",|:";
     this.ERROR_PREFIX = "[ERROR]";
   }
