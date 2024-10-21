@@ -18,7 +18,7 @@ describe("inputHandler 테스트", () => {
   });
 
   test("Console.readlineAsync로 입력을 받아서 반환하는지 확인", async () => {
-    const input = await inputHandler();
-    expect(input).toBe("1,2,3"); // 모킹된 값인 "1,2,3"이 반환되는지 검증
+    const INPUT = await inputHandler();
+    expect(INPUT).toBe("1,2,3"); // 모킹된 값인 "1,2,3"이 반환되는지 검증
   });
 });
