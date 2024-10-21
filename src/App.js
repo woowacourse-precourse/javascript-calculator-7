@@ -31,7 +31,7 @@ class App {
   }
 
   validateNumber(string) {
-    if (isNaN(string)) {
+    if (Number.isNaN(Number(string))) {
       throw new Error("[ERROR] 숫자가 아닌 값을 입력했습니다");
     }
     if (Number(string) < 0) {
