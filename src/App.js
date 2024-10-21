@@ -6,17 +6,23 @@ class App {
       '덧셈할 문자열을 입력해 주세요.'
     );
 
-    const baseDivision = ':|,';
-    const customPattern = /^\/\/(.+)\\n/;
+    const BASE_DIVISION = ':|,';
+    const CUSTOM_PATTERN = /^\/\/(.+)\\n/;
     const customDivision =
-      input.match(customPattern) && input.match(customPattern)[1];
+      input.match(CUSTOM_PATTERN) && input.match(CUSTOM_PATTERN)[1];
 
+    const NON_SPECIAL_PATTERN = /[0-9a-zA-Z]/;
     let division = '';
+
     if (customDivision) {
-      division = new RegExp(`${customDivision}|${baseDivision}`);
+      if (NON_SPECIAL_PATTERN.test(customDivision)) {
+        division = new RegExp(`${customDivision}|${BASE_DIVISION}`);
+      } else {
+        division = new RegExp(`\\${customDivision}|${BASE_DIVISION}`);
+      }
       input = input.substring(4 + customDivision.length);
     } else {
-      division = new RegExp(baseDivision);
+      division = new RegExp(BASE_DIVISION);
     }
 
     const divisionArr = input.split(division);
