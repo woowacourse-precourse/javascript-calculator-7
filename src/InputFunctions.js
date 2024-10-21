@@ -5,7 +5,7 @@ export function getInput() {
 }
 
 function isPositiveNumber(numberList) {
-  return numberList.every((number) => Number(number) > 0);
+  return numberList.every((number) => number === "" || Number(number) > 0);
 }
 
 export function allValidationAndCalc(input) {
@@ -19,7 +19,11 @@ export function allValidationAndCalc(input) {
       return 0;
     }
     charList.forEach((number) => {
-      input.resultAdd(Number(number));
+      if(number===""){
+        input.resultAdd(0);
+      }else{
+        input.resultAdd(Number(number));
+      }
     });
     return 1;
   }
@@ -29,7 +33,11 @@ export function allValidationAndCalc(input) {
       return 0;
     }
     inputList.forEach((number) => {
-      input.resultAdd(Number(number));
+      if(number===""){
+        input.resultAdd(0);
+      }else{
+        input.resultAdd(Number(number));
+      }
     });
     return 2;
   }
