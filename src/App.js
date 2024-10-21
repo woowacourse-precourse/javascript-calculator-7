@@ -17,6 +17,8 @@ class App {
       resultString = resultString.replaceAll(customSeprator, ",");
       resultString = resultString.replaceAll("//,\\n", "");
     }
+
+    validateAcceptableString(resultString);
   }
 }
 
@@ -39,6 +41,14 @@ const getCustomSeperator = (string) => {
 const validateMinusNumberInDashSperator = (string) => {
   if (string.indexOf("--") >= 0) {
     throw new Error("[ERROR] 음수는 입력 불가능합니다.");
+  }
+};
+
+const validateAcceptableString = (string) => {
+  const ACCEPTABLE_REGEX = /^[0-9,]+$/;
+
+  if (!ACCEPTABLE_REGEX.test(string)) {
+    throw new Error("[ERROR] 올바르지 않은 문자를 포함하고 있습니다.");
   }
 };
 
