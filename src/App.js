@@ -11,11 +11,20 @@ class App {
 
         if (input[0] == '/') {
             [distinct, input] = awareCustomSeprator(input, distinct);
+            if (distinct[distinct.length - 1].length > 1) {
+                this.throwError(
+                    '커스텀 구분자는 두 문자를 초과할 수 없습니다.'
+                );
+            }
         }
 
         const result = extractNumbers(input, distinct);
 
         Console.print(`결과 : ${result}`);
+    }
+
+    throwError(message) {
+        throw new Error(`[ERROR] ${message}`);
     }
 }
 
