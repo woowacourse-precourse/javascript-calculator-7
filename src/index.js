@@ -1,4 +1,4 @@
-import App from "./App.js";
+import StringCalculator from "./StringCalculator.js";
 
-const app = new App();
+const app = new StringCalculator();
 await app.run();
