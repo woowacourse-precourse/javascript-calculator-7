@@ -37,7 +37,7 @@ class App {
   validateNumbers(numbers) {
     const negatives = numbers.filter((num) => num < 0);
     if (negatives.length > 0) {
-      throw new Error('음수는 허용되지 않습니다.');
+      throw new Error('[ERROR] 음수는 허용되지 않습니다.');
     }
   }
 }
