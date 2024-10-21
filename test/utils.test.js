@@ -164,5 +164,14 @@ describe('utils', () => {
 
       expect(result).toBe('woowacourse');
     });
+
+    it('주어진 정규표현식에 일치하는 캡처된 값이 없는 경우 null을 반환한다', () => {
+      const value = '123';
+      const regEx = /\/\/(.*?)\\n/;
+
+      const result = findCapturedValue(regEx, value);
+
+      expect(result).toBe(null);
+    });
   });
 });

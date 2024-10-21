@@ -85,5 +85,7 @@ export function calculateTotal(values) {
  * @returns {string | null}
  */
 export function findCapturedValue(regEx, value) {
-  return value.match(regEx)[1];
+  const cpaturedValue = value.match(regEx);
+
+  return cpaturedValue ? cpaturedValue[1] : null;
 }
