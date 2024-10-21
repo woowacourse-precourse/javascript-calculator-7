@@ -25,6 +25,10 @@ class App {
         }
       }
 
+      // 구분자가 "-" 일 때, 맨 앞 숫자가 음수인 경우 처리
+      if (input[0] === "-")
+        throw new Error("[ERROR] 음수는 입력할 수 없습니다.");
+
       // 정규식으로 구분 기준을 정함 -> ",",":",커스텀 구분자
       let splitInputArray = input.split(/[,:]/);
 
