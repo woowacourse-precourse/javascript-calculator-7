@@ -24,7 +24,7 @@ class App {
     if (result.filter(n => n < 0).length > 0) {
       throw new Error('[ERROR]');
     }
-    Console.print(result.reduce((a, b) => a + b));
+    Console.print(`결과 : ${result.reduce((a, b) => a + b)}`);
   }
 }
 
