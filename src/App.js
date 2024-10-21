@@ -19,7 +19,9 @@ class App {
       if (customDelimiterMatch) {
         const customDelimiter = customDelimiterMatch[1];
         const numberPart = customDelimiterMatch[2];
-        numbers = numberPart.split(new RegExp(`[${customDelimiter}]`));
+        numbers = numberPart.split(
+          new RegExp(`[${this.escapeRegExp(customDelimiter)}]`)
+        );
       } else {
         numbers = input.split(/[,:]/);
       }
@@ -43,6 +45,10 @@ class App {
     } catch (error) {
       Console.print(error.message);
     }
+  }
+
+  escapeRegExp(string) {
+    return string.replace(/[.*+?^${}()|[\]\\]/g, "\\$&");
   }
 }
 
