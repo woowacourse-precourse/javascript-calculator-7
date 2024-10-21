@@ -1,5 +1,8 @@
 # javascript-calculator-precourse
 
+## 1주차 학습 내용 정리
+[@sooyeoniya - 1주차 학습 내용 정리](https://www.notion.so/sooyeoniya/1-12628d20974f8054979cf63673c6ff2c)
+
 ## 🎯 기능 목록
 
 ### 시작 출력
