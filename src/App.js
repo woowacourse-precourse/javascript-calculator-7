@@ -6,11 +6,11 @@ class App {
 
     async function getString() {
       try {
-        const STRING = await MissionUtils.Console.readLineAsync(
+        const userInput = await MissionUtils.Console.readLineAsync(
           "덧셈할 문자열을 입력해 주세요.\n"
         );
 
-        const RESULT = string;
+        const result = extractSeperator(userInput);
 
         MissionUtils.Console.print("결과 : " + result);
       } catch (error) {
@@ -18,6 +18,30 @@ class App {
       }
     }
   }
+}
+
+function extractSeperator(userInput) {
+  if (typeof userInput !== "string") {
+    throw new Error("not string data type");
+  }
+
+  const REGEX = /\/\/(.)\\n/;
+
+  if (userInput.includes(",") || userInput.includes(":")) {
+    return cutSeperator(userInput);
+  } else if (userInput.startsWith(`//`) && userInput.match(REGEX)) {
+    return extractCharacter(userInput);
+  } else {
+    return "error";
+  }
+}
+
+function cutSeperator(string) {
+  return ",";
+}
+
+function extractCharacter(string) {
+  return "//";
 }
 
 export default App;
