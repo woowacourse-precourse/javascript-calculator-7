@@ -24,23 +24,27 @@ class CalculatorProcess {
     return false;
   }
 
+  handleCustomDelimiter() {
+    const customDelimiterMatch = this.inputString.match(/^\/\/(.)\\n(.*)$/);
+
+    if (customDelimiterMatch) {
+      const customDelimiter = this.escapeRegExp(customDelimiterMatch[1]);
+      const delimiterRegex = new RegExp(`[${customDelimiter},:]`);
+      this.inputString = customDelimiterMatch[2];
+      const parsedNums = this.inputString.split(delimiterRegex).map(Number);
+      this.inputNums = parsedNums;
+    } else {
+      throw new Error('[ERROR] 커스텀 구분자 할당 형식이 잘못 되었습니다.');
+    }
+  }
+
   escapeRegExp(string) {
     return string.replace(/[.*+?^${}()|[\]\\]/g, '\\$&');
   }
 
   doParsing() {
     if (!this.handleDefaultDelimiter) {
-      const customDelimiterMatch = this.inputString.match(/^\/\/(.)\\n(.*)$/);
-
-      if (customDelimiterMatch) {
-        const customDelimiter = this.escapeRegExp(customDelimiterMatch[1]);
-        const delimiterRegex = new RegExp(`[${customDelimiter},:]`);
-        this.inputString = customDelimiterMatch[2];
-        const parsedNums = this.inputString.split(delimiterRegex).map(Number);
-        this.inputNums = parsedNums;
-      } else {
-        throw new Error('[ERROR] 커스텀 구분자 할당 형식이 잘못 되었습니다.');
-      }
+      this.handleCustomDelimiter();
     }
   }
 
