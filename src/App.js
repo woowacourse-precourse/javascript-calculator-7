@@ -36,4 +36,25 @@ const result = this.calculateSum(input);
      return numbers.reduce((sum, num) => sum + num, 0);
    }
  
-   
+   validateNumbers(numbers) {
+    //음수 체크
+    const negatives = numbers.filter(n => n < 0);
+    if (negatives.length > 0) {
+      throw new Error("음수는 사용할 수 없습니다.");
+    }
+    
+
+    //숫자가 아닌 문자 값 체크
+    const invalidNumbers = numbers.filter(n => isNaN(n));
+    if (invalidNumbers.length > 0) {
+      throw new Error("잘못된 문자입니다.");
+    }
+  }
+
+  escapeRegExp(string) {
+    return string.replace(/[.*+?^${}()|[\]\\]/g, '\\$&');
+  }
+}
+
+export default App;
+
