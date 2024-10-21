@@ -1,4 +1,7 @@
-import { isCustomSeparator } from "./utils/validateInput.js";
+import {
+  isCustomSeparator,
+  isRegularSeparator,
+} from "./utils/validateInput.js";
 import { customInputValidator, parsedInputValidator } from "./validator.js";
 
 const customInputParser = (input) => {
@@ -13,12 +16,16 @@ const regularInputParser = (input) => {
   return input.split(/[,:]/g);
 };
 
-export const userInputParser = (input) => {
+const userInputParser = (input) => {
   const parsedInput = isCustomSeparator(input)
     ? customInputParser(input)
-    : regularInputParser(input);
+    : isRegularSeparator(input)
+    ? regularInputParser(input)
+    : "INVALIDATE_FORMAT";
 
   parsedInputValidator(parsedInput);
 
   return parsedInput;
 };
+
+export default userInputParser;

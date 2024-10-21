@@ -17,6 +17,9 @@ const validateInput = {
   isNegativeNumber: (input) => {
     return input.some((value) => Number(value) < 0);
   },
+  isRegularSeparator: (input) => {
+    return input.split(/[,:]/g).length > 2;
+  },
 };
 
 export const {
@@ -26,4 +29,5 @@ export const {
   isOnlyStringOrNumber,
   isCustomSeparator,
   isDuplicateCustomSeparator,
+  isRegularSeparator,
 } = validateInput;

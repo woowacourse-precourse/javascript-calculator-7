@@ -9,6 +9,8 @@ const ERROR_MESSAGE = {
     "숫자가 아닌 값이 입력되었습니다. 계산을 위해 숫자만 입력해주세요",
   NEGATIVE_NUMBER:
     "양수가 아닌 음수값이 입력되었습니다. 계산을 위해 양수만 입력해주세요",
+  INVALIDATE_FORMAT:
+    "잘못된 형식입니다. 커스텀 구분자 또는 기본 구분자 (',' 또는 ':'를 사용해주세요) ",
 };
 
 const PREFIX_ERROR_MESSAGE = Object.entries(ERROR_MESSAGE).reduce(
