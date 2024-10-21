@@ -51,15 +51,15 @@ describe("문자열 계산기", () => {
     });
   });
 
-  test("커스텀 문자가 잘못됐을 경우", async () => {
-    const inputs = ["//;\\n1;2;3"]; // 음수 입력
+  test("잘못된 커스텀 문자가 입력된 경우", async () => {
+    const inputs = ["//**\n1*2*3"]; // 커스텀 구분자 두 개 사용
     mockQuestions(inputs); // 입력 모킹
 
     const app = new App();
 
-    // 음수 입력 시 예외 발생하는지 확인
+    // 커스텀 구분자 입력 시 예외 발생하는지 확인
     await expect(app.run()).rejects.toThrow(
-      "[Error] 숫자만 입력할 수 있습니다"
+      "[Error] 커스텀 구분자는 하나만 입력 가능합니다."
     );
   });
 
@@ -82,8 +82,31 @@ describe("문자열 계산기", () => {
     const app = new App();
 
     // 정수가 아닌 값 입력 시 예외 발생하는지 확인
+    await expect(app.run()).rejects.toThrow("[Error] 숫자만 입력 가능합니다.");
+  });
+  test("커스텀 구분자 사용", async () => {
+    const inputs = ["//;\\n1"];
+    mockQuestions(inputs);
+
+    const logSpy = getLogSpy();
+    const outputs = ["결과 : 1"];
+
+    const app = new App();
+    await app.run();
+
+    outputs.forEach((output) => {
+      expect(logSpy).toHaveBeenCalledWith(expect.stringContaining(output));
+    });
+  });
+
+  test("예외 테스트", async () => {
+    const inputs = ["-1,2,3"];
+    mockQuestions(inputs);
+
+    const app = new App();
+
     await expect(app.run()).rejects.toThrow(
-      "[Error] 숫자만 입력할 수 있습니다"
+      "[Error] 음수는 입력할 수 없습니다"
     );
   });
 });

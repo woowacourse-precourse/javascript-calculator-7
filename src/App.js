@@ -34,7 +34,7 @@ class App {
       }
 
       if (custom.length > 1) {
-        throw new Error("[Error] 커스텀 문자는 한개만 허용됩니다");
+        throw new Error("[Error] 커스텀 구분자는 하나만 입력 가능합니다.");
       }
       console.log(custom);
       return custom;
@@ -45,17 +45,21 @@ class App {
   getNumbers(input, custom) {
     // \n이 있으면 그 뒤의 값을 sliceMessage로 사용
     let sliceMessage = input.includes("\n") ? input.split("\n")[1] : input;
-    console.log(sliceMessage);
+
+    // 공백 체크 및 빈값 검사
     if (/\s/.test(sliceMessage)) {
       throw new Error("[Error] 공백은 없애주세요");
     }
+
     // 구분자로 문자열을 나눈 후 빈값이 있는지 확인
     let splitMessage = sliceMessage.split(custom);
+
+    // 빈 값 처리 확인
     if (splitMessage.some((v) => v === "")) {
-      throw new Error("[Error] 연속된 구분자 사이에는 숫자가 있어야한다");
+      throw new Error("[Error] 연속된 구분자 사이에는 숫자가 있어야 합니다");
     }
 
-    // sliceMessage가 문자열이므로 split을 사용하여 숫자들을 배열로 나눔
+    // sliceMessage가 숫자 하나라도 배열로 나눔
     return splitMessage;
   }
 
@@ -80,7 +84,7 @@ class App {
         throw new Error("[Error]빈값 넣지마세요");
       }
       if (isNaN(num)) {
-        throw new Error("[Error] 숫자만 입력할 수 있습니다");
+        throw new Error("[Error] 숫자만 입력 가능합니다.");
       }
       if (!Number.isInteger(num)) {
         // 숫자가 정수가 아닌 경우 에러 발생
