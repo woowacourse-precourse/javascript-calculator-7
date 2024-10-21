@@ -11,22 +11,22 @@ class App {
       // 구분자 저장하는 배열 만들기
       const separators = [".", ":"];
 
-      // 커스텀 구분자 저장 변수 : customSeparator
-      const customSeparator = input.match(/^\/\/(.)\\n/);
+      // 커스텀 구분자 매칭
+      const customSeparatorMatch = input.match(/^\/\/(.)\\n/);
 
       let cleanedInput = input;
 
-      // 만약 customSeparator가 존재한다면 해당 구분자 배열에 저장하기
-      if (customSeparator) {
-        separators.push(customSeparator[1]);
+      // 만약 커스텀 구분자가 존재하면 구분자 배열에 추가
+      if (customSeparatorMatch) {
+        separators.push(customSeparatorMatch[1]);
 
-        // 입력 문자열에서 커스텀 구분자 부분 제거
+        // 커스텀 구분자 부분 제거
         cleanedInput = input.replace(/^\/\/(.)\\n/, "").trim();
       }
 
-      // 입력받은 문자가 없으면 0 출력 후 종료
+      // 입력된 문자가 없으면 0 출력 후 종료
       if (!cleanedInput) {
-        Console.print(0);
+        Console.print("결과 : 0");
         return;
       }
 
@@ -44,13 +44,13 @@ class App {
 
       // 구분자 사이에 숫자가 없는 경우 에러 발생
       if (splitValues.some((value) => value === "")) {
-        throw new Error("[Error] 구분자 사이에 숫자가 없습니다");
+        throw new Error("[ERROR] 구분자 사이에 숫자가 없습니다");
       }
 
-      // 숫자 이외의 값 검증 (순수 숫자가 아닌 경우 에러 발생)
+      // 숫자 이외의 값 검증
       splitValues.forEach((value) => {
         if (!/^\d+$/.test(value)) {
-          throw new Error("[Error] 잘못된 값이 입력되었습니다");
+          throw new Error("[ERROR] 잘못된 값이 입력되었습니다");
         }
       });
 
@@ -59,27 +59,23 @@ class App {
 
       // 숫자가 없으면 0 출력 후 종료
       if (numbers.length === 0) {
-        Console.print(0);
+        Console.print("결과 : 0");
         return;
       }
 
       // 음수나 0이 포함된 경우 에러 발생
       if (numbers.some((num) => num <= 0)) {
-        throw new Error("[Error] 입력값은 양수로만 구성되어야 합니다");
+        throw new Error("[ERROR] 입력값은 양수로만 구성되어야 합니다");
       }
 
       // 숫자 배열의 합계를 계산
       const sum = numbers.reduce((acc, curr) => acc + curr, 0);
 
-      // 테스트용 출력
-      Console.print(separators);
-      Console.print(cleanedInput);
-      Console.print(separatedInput);
-      Console.print(numbers);
-      Console.print(sum);
+      Console.print(`결과 : ${sum}`);
     } catch (error) {
       // 에러 발생 시 메시지 출력
       Console.print(error.message);
+      throw error;
     }
   }
 }
