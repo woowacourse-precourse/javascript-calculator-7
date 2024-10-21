@@ -2,13 +2,16 @@ class Separator {
   makeCustomSeparator(string) {
     let customSeparator = "";
     this.checkSeparatorValid(string);
+    let IS_CUSTOM = false;
 
     const separator = string.match(/\/\/(.*?)\\n(.*)/);
     if (separator) {
       customSeparator = separator[1];
       string = separator[2];
+      IS_CUSTOM = true;
     }
-    return [customSeparator, string];
+
+    return [customSeparator, string, IS_CUSTOM];
   }
 
   checkSeparatorValid(string) {

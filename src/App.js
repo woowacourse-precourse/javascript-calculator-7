@@ -1,6 +1,7 @@
 import { Console } from "@woowacourse/mission-utils";
 import sumNum from "./Calculator.js";
 import Separator from "./Separator.js";
+import NumberArr from "./NumberArr.js";
 
 import InputView from "./InputView.js";
 import OutputView from "./OutputView.js";
@@ -8,32 +9,24 @@ import OutputView from "./OutputView.js";
 class App {
   async run() {
     let customSeparator = "";
-    let string = "";
+    let IS_CUSTOM = true;
 
     try {
       const inputView = new InputView();
       const separator = new Separator();
+      const numberArr = new NumberArr();
 
-      string = await inputView.getInput();
-      [customSeparator, string] = separator.makeCustomSeparator(string);
+      let string = await inputView.getInput();
+      [customSeparator, string, IS_CUSTOM] =
+        separator.makeCustomSeparator(string);
 
-      // 기본 구분자, 커스텀 구분자 기준으로 숫자 배열 생성
-      let regexp = new RegExp(`[,:${customSeparator}]`);
-      if (customSeparator == "" && separator) regexp = /(?=.)/;
+      numberArr.makeRegexp(customSeparator, IS_CUSTOM);
+      const numArr = numberArr.makeNumArr(string);
 
-      const numArr = string.split(regexp).map((num) => {
-        if (num < 0) {
-          throw new Error("[ERROR]양수로 구성된 문자열을 입력해주세요.");
-        } else if (isNaN(num)) {
-          throw new Error("[ERROR]구분자의 범위를 벗어났습니다.");
-        }
-        return Number(num);
-      });
-
-      // 출력
       const answer = sumNum(numArr);
       OutputView(answer);
     } catch (error) {
+      Console.print(error.message);
       throw error;
     }
   }
