@@ -77,47 +77,43 @@ class DelimiterManager {
    * @throws {Error} 등록되지 않은 구분자, 유효하지 않은 숫자, 또는 숫자가 정수 범위를 초과할 때 에러
    */
   extractNumbers(calculationString) {
-    try {
-      // 구분자들을 "|"로 연결하여 정규 표현식으로 변환
-      const delimiterRegex = new RegExp(
-        this.delimiters.map((d) => `\\${d}`).join("|"),
-        "g"
-      );
-      const stringNumbers = calculationString.split(delimiterRegex);
+    // 구분자들을 "|"로 연결하여 정규 표현식으로 변환
+    const delimiterRegex = new RegExp(
+      this.delimiters.map((d) => `\\${d}`).join("|"),
+      "g"
+    );
+    const stringNumbers = calculationString.split(delimiterRegex);
 
-      // 등록되지 않은 구분자가 사용되었는지 확인
-      const allowedDelimiters = this.delimiters.map((d) => `\\${d}`).join("");
-      const invalidDelimiterRegex = new RegExp(`[^0-9${allowedDelimiters}]`);
+    // 등록되지 않은 구분자가 사용되었는지 확인
+    const allowedDelimiters = this.delimiters.map((d) => `\\${d}`).join("");
+    const invalidDelimiterRegex = new RegExp(`[^0-9${allowedDelimiters}]`);
 
-      if (invalidDelimiterRegex.test(calculationString)) {
-        throw new Error("[ERROR] 등록되지 않은 구분자");
+    if (invalidDelimiterRegex.test(calculationString)) {
+      throw new Error("[ERROR] 등록되지 않은 구분자");
+    }
+
+    const numbers = stringNumbers.map((stringNumber) => {
+      const number = Number(stringNumber);
+
+      if (isNaN(number)) {
+        throw new Error("[ERROR] 유효하지 않은 숫자 입력");
       }
 
-      const numbers = stringNumbers.map((stringNumber) => {
-        const number = Number(stringNumber);
+      if (number < 0) {
+        throw new Error("[ERROR] 현재 음수 사용. 양수만 사용 가능");
+      }
 
-        if (isNaN(number)) {
-          throw new Error("[ERROR] 유효하지 않은 숫자 입력");
-        }
+      if (
+        number > Number.MAX_SAFE_INTEGER ||
+        number < Number.MIN_SAFE_INTEGER
+      ) {
+        throw new Error("[ERROR] 숫자가 정수의 범위를 초과");
+      }
 
-        if (number < 0) {
-          throw new Error("[ERROR] 현재 음수 사용. 양수만 사용 가능");
-        }
+      return number;
+    });
 
-        if (
-          number > Number.MAX_SAFE_INTEGER ||
-          number < Number.MIN_SAFE_INTEGER
-        ) {
-          throw new Error("[ERROR] 숫자가 정수의 범위를 초과");
-        }
-
-        return number;
-      });
-
-      return numbers;
-    } catch (error) {
-      throw error;
-    }
+    return numbers;
   }
 }
 
