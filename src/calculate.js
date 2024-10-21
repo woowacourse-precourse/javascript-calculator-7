@@ -1,3 +1,5 @@
+import { Console } from "@woowacourse/mission-utils";
+
 class Calculator {
     constructor() {}
   
@@ -29,4 +31,30 @@ class Calculator {
   
       return sum;
     }
-}
+    async askForInput() {
+        while (true) {
+          try {
+            const userInput = await Console.readLineAsync(
+              "덧셈할 문자열을 입력해 주세요."
+            );
+    
+            if (userInput.toLowerCase() === "종료") {
+              Console.print("프로그램을 종료합니다.");
+              return;
+            }
+    
+            Console.print(`결과 : ${this.add(userInput)}`);
+          } catch (error) {
+            Console.print("[ERROR]");
+            throw error;
+          }
+        }
+      }
+    }
+    
+    async function run() {
+      const calculator = new Calculator();
+      await calculator.askForInput();
+    }
+    
+    export { run };
