@@ -15,9 +15,11 @@ class App {
       const {separators: defaultSeparators ,strippedInput } = StringParser.extractDefaultSeparators(customStrippedInput);
 
       const splitResult = StringParser.splitByMultipleSeparators([...customSeparators, ...defaultSeparators, " "], strippedInput)
-      const result = StringParser.convertToNumbers(splitResult)
+      const numbers = StringParser.convertToNumbers(splitResult)
+      
+      const sum = numbers.reduce((acc, cur)=> acc+cur,0)
 
-      return result
+      Console.print(`결과 : ${sum}`)
     }catch(err){
       throw err
     }
