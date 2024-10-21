@@ -3,9 +3,13 @@ import { ERROR_MESSAGES } from "./errorMessages.js";
 
 class App {
   async run() {
-    const input = await Console.readLineAsync("덧셈할 문자열을 입력해 주세요.");
-    const answer = Calculator.calculate(input);
-    Console.print(`결과 : ${answer}`);
+    try {
+      const input = await Console.readLineAsync("덧셈할 문자열을 입력해 주세요.");
+      const answer = Calculator.calculate(input);
+      Console.print(`결과 : ${answer}`);
+    } catch (error) {
+      Console.error(ERROR_MESSAGES.DEFAULT_ERROR);
+    }
   }
 }
 
