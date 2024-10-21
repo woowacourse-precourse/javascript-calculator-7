@@ -8,6 +8,9 @@ class App {
   isStart() {
     // MissionUtils를 사용해 사용자가 문자열을 입력할 때까지 대기
     MissionUtils.Console.readLine("덧셈할 문자열을 입력해 주세요.", (input) => {
+      if (input.includes("\\n")) {
+        input = input.replace(/\\n/g, "\n");
+      }
       if (input.trim() === "") {
         console.log("결과 : 0");
       } else {
@@ -46,21 +49,26 @@ class App {
     // \n이 있으면 그 뒤의 값을 sliceMessage로 사용
     let sliceMessage = input.includes("\n") ? input.split("\n")[1] : input;
 
-    // 공백 체크 및 빈값 검사
+    // 공백 체크 및 빈 값 검사
     if (/\s/.test(sliceMessage)) {
       throw new Error("[Error] 공백은 없애주세요");
     }
 
-    // 구분자로 문자열을 나눈 후 빈값이 있는지 확인
+    // 구분자로 문자열을 나눈 후 빈 값이 있는지 확인
     let splitMessage = sliceMessage.split(custom);
 
     // 빈 값 처리 확인
     if (splitMessage.some((v) => v === "")) {
-      throw new Error("[Error] 연속된 구분자 사이에는 숫자가 있어야 합니다");
+      throw new Error("[Error] 연속된 구분자 사이에는 숫자가 있어야 합니다.");
     }
 
-    // sliceMessage가 숫자 하나라도 배열로 나눔
-    return splitMessage;
+    // 각 요소를 숫자로 변환한 후 배열로 반환
+    return splitMessage.map((num) => {
+      if (isNaN(num)) {
+        throw new Error("[Error] 숫자만 입력 가능합니다.");
+      }
+      return num;
+    });
   }
 
   getSum(array) {

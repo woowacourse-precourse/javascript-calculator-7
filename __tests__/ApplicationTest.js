@@ -35,6 +35,22 @@ describe("문자열 계산기", () => {
     });
   });
 
+  test("커스텀 구분자 사용", async () => {
+    const inputs = ["//;\n1"]; // 커스텀 구분자 ; 사용
+    mockQuestions(inputs); // 입력 모킹
+
+    const logSpy = getLogSpy(); // 출력 모킹
+    const outputs = ["결과 : 1"]; // 예상 출력값
+
+    const app = new App();
+    await app.run(); // App 실행
+
+    // 출력값이 예상한 대로 나오는지 확인
+    outputs.forEach((output) => {
+      expect(logSpy).toHaveBeenCalledWith(expect.stringContaining(output));
+    });
+  });
+
   test("기본 구분자 (콤마, 콜론) 사용", async () => {
     const inputs = ["1,2:3"]; // 기본 구분자 , 및 : 사용
     mockQuestions(inputs); // 입력 모킹
