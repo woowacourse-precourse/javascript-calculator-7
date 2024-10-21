@@ -1,18 +1,18 @@
-export default class CalculationService{
-  #ioHandler;
+export default class CalculationService {
+  #ioPort;
   #parser;
   #Calculator;
 
-  constructor(ioHandler, parser, calculator) {
-    this.#ioHandler = ioHandler;
+  constructor(ioPort, parser, calculator) {
+    this.#ioPort = ioPort;
     this.#parser = parser;
     this.#Calculator = calculator;
   }
 
   async execute() {
-    const rawInput = await this.#ioHandler.getInput();
+    const rawInput = await this.#ioPort.getInput();
     const parsedInput = this.#parser.parse(rawInput);
     const result = this.#Calculator.executeCalculation(parsedInput);
-    this.#ioHandler.displayResult(result);
+    this.#ioPort.displayResult(result);
   }
 }
