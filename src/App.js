@@ -37,6 +37,18 @@ class StringCalculator {
     return numbers.split(delimiterPattern).filter((num) => num !== "");
   }
 
+  validateNumbers(numberList) {
+    if (numberList.length === 0) {
+      throw new Error("[ERROR] 숫자가 입력되지 않았습니다.");
+    }
+  
+    numberList.forEach((num) => {
+      if (isNaN(num) || Number(num) < 0) {
+        throw new Error("[ERROR] 잘못된 입력입니다. 양수를 입력하세요.");
+      }
+    });
+  }
+
   add(input) {
     if (this.isEmpty(input)) return 0;
     const { numbers, delimiters } = this.parseInput(input);
