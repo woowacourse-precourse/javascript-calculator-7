@@ -1,4 +1,5 @@
 import { MissionUtils } from "@woowacourse/mission-utils";
+import { IO_MESSAGES, ERROR_MESSAGES, throwError } from "./constants.js";
 
 class App {
   async run() {
@@ -8,32 +9,32 @@ class App {
     let isMinus = false;
     let isBigNum = false;
 
-    let userInput = await Console.readLineAsync("덧셈할 문자열을 입력해 주세요.\n");
+    let userInput = await Console.readLineAsync(IO_MESSAGES.INPUT_MESSAGE);
 
     while (userInput.startsWith('//')) {
       const end = userInput.indexOf('\\n');
-      if (end === -1) break
+      if (end === -1) break;
       const newSeparator = userInput.slice(2, end);
 
       // 사용자의 의도를 해치는 경우 에러 발생
       if (banSeparators.includes(newSeparator)) {
-        throw new Error(`[ERROR]: 공백과 .은 구분자로 사용할 수 없습니다.`);
+        throwError(ERROR_MESSAGES.INVALID_SEPARATOR);
       };
       if (newSeparator.trim() != '' && !isNaN(newSeparator)) {
-        throw new Error(`[ERROR]: 숫자는 구분자로 사용할 수 없습니다.`);
+        throwError(ERROR_MESSAGES.NUMERIC_SEPARATOR);
       }
 
       separators.push(newSeparator);
-      userInput = userInput.slice(end + 2)
+      userInput = userInput.slice(end + 2);
     }
 
     if (isNaN(userInput[0])) {
-      throw new Error(`[ERROR]: 입력은 숫자가 먼저 와야합니다.`);
+      throwError(ERROR_MESSAGES.INVALID_START);
     }
 
     [...userInput].forEach((char, index) => {
       if (isNaN(char) && isNaN(userInput[index - 1])) {
-        throw new Error(`[ERROR]: 숫자 사이에는 한 개의 구분자만 존재해야 합니다.`);
+        throwError(ERROR_MESSAGES.MULTIPLE_SEPARATORS);
       }
     });
 
@@ -49,7 +50,7 @@ class App {
     });
 
     if (isMinus) {
-      throw new Error("[ERROR]: 입력은 양수만 가능합니다.");
+      throwError(ERROR_MESSAGES.NEGATIVE_NUMBER);
     }
 
     const addTwoNum = (num1, num2) => {
@@ -69,13 +70,14 @@ class App {
 
       return result;
     }
+
     const resultSum = isBigNum? stringNumbers.reduce((acc, num) => addTwoNum(acc,num), '0') : intNumbers.reduce((acc, num) => acc + num, 0);
 
     if (isNaN(resultSum)) {
-      throw new Error("[ERROR]");
+      throwError(ERROR_MESSAGES.INVALID_RESULT);
     } else {
-      Console.print(`결과 : ${resultSum}`);
-      return
+      Console.print(`${IO_MESSAGES.OUTPUT_MESSAGE}${resultSum}`);
+      return;
     }
   }
 }
