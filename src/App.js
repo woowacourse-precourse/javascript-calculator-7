@@ -20,19 +20,19 @@ class App {
             const userInput = await Console.readLineAsync("덧셈할 문자열을 입력해 주세요.\n");
             return userInput;
         } catch (error) {
-            this.throwError("입력값을 받아오는 데 실패했습니다.");
+            App.throwError("입력값을 받아오는 데 실패했습니다.");
         }
     }
 
     splitCustomDelimiter(input) {
-        if (!this.checkCustomDelimiter(input)) {
+        if (!App.checkCustomDelimiter(input)) {
             return [undefined, input];
         } else {
             return [input[2], input.slice(5)];
         }
     }
 
-    checkCustomDelimiter(input) {
+    static checkCustomDelimiter(input) {
         const regex = /^\/\/([^0-9])\\n/;
         return regex.test(input);
     }
@@ -40,7 +40,7 @@ class App {
     validateInput(inputBody, delimiters) {
         const regex = new RegExp(`^^(0|[1-9][0-9]*)([${delimiters}](0|[1-9][0-9]*))*$`);
         if (inputBody && !regex.test(inputBody)) {
-            this.throwError("입력값이 유효하지 않습니다.");
+            App.throwError("입력값이 유효하지 않습니다.");
         }
     }
 
@@ -54,7 +54,7 @@ class App {
         return numbers.reduce((acc, cur) => acc + cur, 0);
     }
 
-    throwError(message) {
+    static throwError(message) {
         throw new Error(`[ERROR] ${message}`);
     }
 }
