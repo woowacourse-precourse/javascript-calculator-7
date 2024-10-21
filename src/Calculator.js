@@ -32,8 +32,8 @@ class Calculator {
     const regex = /\/\/(.*?)\\n/g;
     let findCustom;
 
-    while ((findCustom = regex.exec(text)) != null) {
-      if (findCustom.index != this.startIndex) {
+    while ((findCustom = regex.exec(text)) !== null) {
+      if (findCustom.index !== this.startIndex) {
         //커스텀 구분자 조건 1 : 문자열 앞에서 연속적으로 주어질 때
         throw new Error('[ERROR] 커스텀 구분자의 위치가 올바르지 않습니다.');
       }
