@@ -28,6 +28,10 @@ class App {
         // '\n'뒤 부분을 input으로 재설정
         INPUT = CUSTOM_SEPARATOR[2].trim();
       }
+
+      // 3. 구분자 기준으로 문자열을 나눠 숫자를 배열에 저장하기
+      const SEPARATOR_REGEX = new RegExp(`[${SEPARATOR.join("")}]`);
+      const NUMBERS = INPUT.split(SEPARATOR_REGEX).map(Number);
     } catch (error) {}
   }
 }
