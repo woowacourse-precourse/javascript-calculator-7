@@ -43,3 +43,5 @@ class App{
     Console.print(`결과 : ${RESULT}`);
   }
 }
+
+export default App;
