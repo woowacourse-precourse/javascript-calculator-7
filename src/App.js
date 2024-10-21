@@ -20,10 +20,15 @@ class App {
     return input.split(regex).map(Number);
   }
 
+  calculateSum(numbers) {
+    return numbers.reduce((acc, cur) => acc + cur, 0);
+  }
+
   async run() {
     const input = await this.getInput();
     const delimiters = this.getDelimiters();
     const numbers = this.parseInput(input, delimiters);
+    const sum = this.calculateSum(numbers);
   }
 }
 
