@@ -2,6 +2,53 @@
 # ➕ 문자열 덧셈 계산기
 > 입력한 문자열에서 숫자를 추출하여 더하는 계산기 구현
 
+## 프로젝트 구조
+src  
+├── Controller  
+│   ├── isCommaSemicolonCondition.js  
+│   ├── isCustomConditionCheck.js  
+│   └── isInputEmpty.js  
+├── Model  
+│   └── addNumbers.js  
+├── View  
+│   ├── getUserInput.js  
+│   ├── printErrorMessageForInputError.js  
+│   ├── printErrorMessageForTypo.js  
+│   └── printUserOutput.js  
+└── App.js  
+
+### 파일 설명
+1. Controller
+- isCommaSemicolonCondition.js
+: 입력값에 콤마(,)나 세미콜론(;)이 포함되어 있는 입력인지 확인하고, 조건에 맞는지 확인합니다.
+
+- isCustomConditionCheck.js
+: 입력값에 사용자가 원하는 구분자로 사용되었는지 확인하며 조건에 맞는지 확인합니다.
+
+- isInputEmpty.js
+: 입력값이 비어있는지 여부를 확인합니다.
+
+2. Model
+- addNumbers.js
+: 각 자리의 숫자를 더하는 함수입니다. 
+
+3. View
+- getUserInput.js
+: 사용자로부터 입력을 받아오는 함수입니다.
+
+- printErrorMessageForInputError.js
+: 비어있는 입력값에 대한 오류에 대한 에러 메시지를 출력합니다.
+
+- printErrorMessageForTypo.js
+: 오타가 포함되어있는 입력값에 대한 에러 메시지를 출력합니다.
+
+- printUserOutput.js
+: 계산 결과를 사용자에게 출력합니다.
+
+4. App.js
+: 애플리케이션의 진입점(Entry Point)으로, Controller, Model, View를 조합하여 애플리케이션을 실행합니다.
+
+
 <br/>
 
 ## ✅ 과제 요구 사항 체크리스트
