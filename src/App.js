@@ -41,7 +41,7 @@ class App {
       // 각 배열의 인자가 올바른지 확인 및 숫자 타입으로 형 변환 시킴
       splitInputArray = splitInputArray.map((stringNumber) => {
         if (!Number(stringNumber)) {
-          throw new Error("[ERROR] 지정되지 않은 구분자를 입력했습니다.");
+          throw new Error("[ERROR] 올바르지 않은 구분자를 입력했습니다.");
         }
         if (Number(stringNumber) < 0) {
           throw new Error("[ERROR] 음수는 입력할 수 없습니다.");
