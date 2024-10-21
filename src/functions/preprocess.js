@@ -11,11 +11,11 @@ export default function preprocess(input) {
 
     if (custom.length == 4) throw "[ERROR] 커스텀 구분자를 입력해주세요.";
     else if (custom.length > 5)
-      throw "[ERROR] 커스텀 구분자는 문자 하나만 사용할 수 있어요.";
+      throw new Error("[ERROR] 커스텀 구분자는 문자 하나만 사용할 수 있어요.");
     else custom = custom.substring(2, 3);
 
-    let string = input.replace(isCustom, custom);
-    return preprocess_custom(string, "-");
+    let string = input.replace(isCustom, "");
+    return preprocess_custom(string, custom);
   } else return preprocess_nocustom(input);
 }
 
