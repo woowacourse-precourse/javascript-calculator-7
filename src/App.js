@@ -7,6 +7,15 @@ function isInputEmpty(input) {
   return false;
 }
 
+function isInvalidInput(input) {
+  if (input === null) {
+    throw new Error('[ERROR] null은 입력값이 될 수 없습니다.');
+  }
+  if (input === undefined) {
+    throw new Error('[ERROR] undefined는 입력값이 될 수 없습니다.');
+  }
+}
+
 function hasCustomSeparator(input) {
   if (input.startsWith('//')) {
     const separatorIndex = input.indexOf('\\n');
@@ -88,6 +97,8 @@ class App {
     if (isInputEmpty(input)) {
       return Console.print('결과: 0');
     }
+
+    isInvalidInput(input);
 
     const separators = [',', ':'];
 
