@@ -31,6 +31,8 @@ class Calculator {
       ? this.#inputText.slice(this.#inputText.indexOf(CUSTOM_DESIGNATORS.end) + 2)
       : this.#inputText;
 
+    if (CUSTOM_SEPARATOR_REGEX.test(splitTarget)) throw new Error(ERROR_MESSAGE.duplicatedCustom);
+
     this.#numbers = splitTarget.split(separatorsRegex).map((char) => (char.length ? Number(char) : ''));
   }
 
