@@ -18,6 +18,27 @@ class App {
           throw Error('[ERROR] 커스텀 구분자 지정에 실패했습니다.')
         }
       }
+
+      // 문자열 탐색
+      // 커스텀 구분자가 있으면 5번째 문자부터 for문 시작
+      let startIndex = 0
+      if ((typeof customseparator) == 'string') startIndex = 5 
+
+      for (let i = startIndex; i < input.length; i++) {
+        if (isNaN(input[i])) {
+          if (input[i] == ',' || input[i] == ':'|| input[i] == customseparator) { 
+              sum += parseInt(number);
+              number = '0'
+          } else {
+            throw Error(`[ERROR] '${input[i]}'는 구분자 또는 양수가 아닙니다.`)
+          }
+        } else {
+          number += input[i]
+        }
+      }
+      sum += parseInt(number);
+      
+      MissionUtils.Console.print(`결과 : ${sum}`)
     } catch (err) {
       console.error(err.message)
       throw err
