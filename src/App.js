@@ -38,7 +38,10 @@ class App {
     }
 
     if (pushedCustomStr.length !== 0) {
-      throw new Error('[ERROR] 잘못된 문자열입니다.');
+      const HAS_SLASH_SEPARATORS = customSeparator.some(separator => separator.includes("//"));
+      if (!HAS_SLASH_SEPARATORS) {
+        throw new Error('[ERROR] 잘못된 문자열입니다.');
+      }
     }
     
     let sum = 0;
