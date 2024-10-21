@@ -38,7 +38,7 @@ class App {
 
     // 예외 2: 숫자가 아닌 값 포함 확인
     numberArray.forEach((num) => {
-      if (isNaN(num)) {
+      if (num.trim() === '' || isNaN(num)) {
         throw new Error(`[ERROR] 잘못된 값이 포함되어 있습니다.`);
       }
     });
