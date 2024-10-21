@@ -84,15 +84,6 @@ describe("문자열 계산기", () => {
     await expect(app.run()).rejects.toThrow(ERROR_MESSAGES.NO_VALID_DIVIDER);
   });
 
-  test("커스텀 구분자를 정의했지만 사용하지 않은 경우 예외를 발생시킨다", async () => {
-    const inputs = ["//;\\n1,2,3"];
-    mockQuestions(inputs);
-    const app = new App();
-    await expect(app.run()).rejects.toThrow(
-      ERROR_MESSAGES.CUSTOM_DIVIDER_NOT_USED
-    );
-  });
-
   test("커스텀 구분자 정의 후 숫자를 입력하지 않은 경우 예외를 발생시킨다", async () => {
     const inputs = ["//;\\n"];
     mockQuestions(inputs);

@@ -34,7 +34,7 @@ class Calculator {
     }
 
     const defaultDivider = [",", ":"];
-    if (input.includes(':') && input.includes(',')) {
+    if (input.includes(defaultDivider[0]) && input.includes(defaultDivider[1])) {
       return { divider: defaultDivider, numberString: input };
     }
 
@@ -50,8 +50,6 @@ class Calculator {
   }
 
   static createNumberArray(numberString, divider) {
-    console.log('🚀 numberString', numberString);
-    console.log('🚀 divider', divider);
     if (divider.includes(",") && divider.includes(":")) {
       let numberArray = numberString.split(',').flatMap(numStr => numStr.split(':')).map(Number);
       return numberArray;
@@ -71,7 +69,6 @@ class Calculator {
   }
 
   static sum(numberArray) {
-    console.log('🚀 numberArray', numberArray);
     if (numberArray.some(isNaN)) {
       throw new Error(ERROR_MESSAGES.INVALID_INPUT);
     }
