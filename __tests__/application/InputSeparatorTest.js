@@ -46,3 +46,27 @@ describe('hasCustomDelimiter 메서드 테스트', () => {
     });
   });
 });
+
+describe('getNumberString 메서드 테스트', () => {
+  test('getNumberString 메서드가 숫자 문자열을 반환하는지 확인', () => {
+    const testCases = [
+      { input: '//:\\n2:3:4', expected: '2:3:4' },
+      { input: '//\\\\n', expected: '' },
+      { input: '', expected: '' },
+      { input: '/', expected: '/' },
+      { input: '//', expected: '//' },
+      { input: '\\n', expected: '\\n' },
+      { input: '   \\n', expected: '   \\n' },
+      { input: '//\\n', expected: '//\\n' },
+      { input: '1,2,3', expected: '1,2,3' },
+      { input: 'sadfa', expected: 'sadfa' },
+    ];
+
+    testCases.forEach(({ input, expected }) => {
+      const inputSeparator = new InputSeparator();
+      inputSeparator.getNumberString(input);
+      const result = inputSeparator.getNumberString(input);
+      expect(result).toBe(expected);
+    });
+  });
+});
