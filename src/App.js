@@ -6,17 +6,17 @@ class App {
       '덧셈할 문자열을 입력해 주세요.\n'
     );
     // 빈 문자열일 경우
-    if (input == '') {
-      Console.print('결과 : 0 ');
+    if (input === '') {
+      Console.print('결과 : 0');
     }
 
     // 기본 구분자
     if (!input.startsWith('//')) {
       // 예외 처리
       if (
-        input.startsWith(',') |
-        input.startsWith(':') |
-        input.endsWith(',') |
+        input.startsWith(',') ||
+        input.startsWith(':') ||
+        input.endsWith(',') ||
         input.endsWith(':')
       ) {
         throw new Error(
@@ -49,7 +49,7 @@ class App {
 
       // 예외처리
       if (
-        inputCustomNumbers.startsWith(delimiter) |
+        inputCustomNumbers.startsWith(delimiter) ||
         inputCustomNumbers.endsWith(delimiter)
       ) {
         throw new Error('[ERROR] 구분자로 시작하거나 끝날 수 없습니다.');
