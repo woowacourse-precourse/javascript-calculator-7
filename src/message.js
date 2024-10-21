@@ -15,3 +15,7 @@ export const CUSTOM_DELIMITER = {
   PREFIX_LENGTH: 2,
   SUFFIX_LENGTH: 2,
 };
+
+export const ERROR_MESSAGE = {
+  NEGATIVE_NUMBERS: "[ERROR] 입력값에 음수를 포함할 수 없습니다.",
+};
