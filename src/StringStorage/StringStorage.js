@@ -1,4 +1,4 @@
-import { ERROE_MESSAGE } from "../constant";
+import { ERROR_MESSAGE } from "../constant/index.js";
 
 export class StringStorage {
   constructor(separator, string) {
@@ -23,7 +23,7 @@ export class StringStorage {
       /^\s*$/.test(string) || /(?<!\d)-[1-9]\d*|\b-?0+\b/g.test(string);
 
     if (validate) {
-      throw new Error(ERROE_MESSAGE);
+      throw new Error(ERROR_MESSAGE);
     }
     this._string = string;
   }

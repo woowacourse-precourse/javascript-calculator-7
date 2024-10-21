@@ -11,7 +11,7 @@ class App {
   async run() {
     const userInput = new UserInput(await input(START));
     const storage = new StringStorage(...userInput.splitInput());
-    const pattern = new Pattern(storage.getSeparatorArray());
+    const pattern = new Pattern(storage.separator);
     const calculator = new Calculator(
       separateString(new RegExp(pattern.makeOrPattern()), storage.string).map(
         Number

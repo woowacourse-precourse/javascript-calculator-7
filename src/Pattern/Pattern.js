@@ -1,38 +1,11 @@
-import { REGEX_SPECIAL_CAHRS } from "../constant/index.js";
+import { escapeRegExp } from "../util/escapeRegExp.js";
 
 export class Pattern {
-  constructor(chars) {
-    this.chars = chars;
+  constructor(string) {
+    this.string = string;
   }
 
-  static REGEX_SPECIAL_CAHRS = [
-    "\\",
-    "^",
-    "$",
-    ".",
-    "|",
-    "?",
-    "*",
-    "+",
-    "(",
-    ")",
-    "[",
-    "]",
-    "{",
-    "}",
-    "-",
-    "/",
-  ];
-
   makeOrPattern() {
-    return this.chars
-      .map((elem) => {
-        if (Pattern.REGEX_SPECIAL_CAHRS.includes(elem)) {
-          return "\\" + elem;
-        } else {
-          return elem;
-        }
-      })
-      .join("|");
+    return escapeRegExp(this.string).split("").join("|");
   }
 }
