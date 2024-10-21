@@ -30,7 +30,14 @@ class CalculatorProcess {
     if (customDelimiterMatch) {
       const customDelimiter = this.escapeRegExp(customDelimiterMatch[1]);
       const delimiterRegex = new RegExp(`[${customDelimiter},:]`);
-      this.inputString = customDelimiterMatch[2];
+      const validationRegex = new RegExp(`^\\d+([${customDelimiter},:]\\d+)*$`);
+
+      if (validationRegex.test(customDelimiterMatch[2])) {
+        this.inputString = customDelimiterMatch[2];
+      } else {
+        throw new Error('[ERROR] 계산을 위한 문자열의 형식이 잘못 되었습니다.');
+      }
+
       const parsedNums = this.inputString.split(delimiterRegex).map(Number);
       this.inputNums = parsedNums;
     } else {
@@ -43,7 +50,7 @@ class CalculatorProcess {
   }
 
   doParsing() {
-    if (!this.handleDefaultDelimiter) {
+    if (!this.handleDefaultDelimiter()) {
       this.handleCustomDelimiter();
     }
   }
