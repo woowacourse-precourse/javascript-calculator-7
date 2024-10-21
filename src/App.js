@@ -12,7 +12,7 @@ class App {
       const result = this.calculate(input.trim());
 
       // 결과 출력
-      MissionUtils.Console.print(`결과: ${result}`);
+      MissionUtils.Console.print(`결과 : ${result}`);
     } catch (error) {
       // 오류났을 때 출력
       MissionUtils.Console.print(error.message);
