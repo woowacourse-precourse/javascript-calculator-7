@@ -7,7 +7,7 @@ export class UserInput {
 
   static DEFAULT_SEPARATOR = ",:";
 
-  splitInput() {
+  getSplitInput() {
     return this.userInput.startsWith("/")
       ? separateString(/\\n/, this.userInput.slice(2))
       : [UserInput.DEFAULT_SEPARATOR, this.userInput];

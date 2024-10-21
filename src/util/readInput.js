@@ -1,5 +1,5 @@
 import { Console } from "@woowacourse/mission-utils";
 
-export const input = (message) => {
+export const readInput = (message) => {
   return Console.readLineAsync(message);
 };
