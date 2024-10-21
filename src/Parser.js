@@ -24,7 +24,10 @@ class Parser {
       const validationRegex = new RegExp(
         `^\\d+(\\.\\d+)?([${customDelimiter},:]\\d+(\\.\\d+)?)*$`,
       );
-
+      /*
+       * 커스텀 구분자를 감싸는 '//', '\n'을 제외한 나머지 문자열이
+       * 계산을 위한 문자열 형식(validationRegex)에 부합하는지 판단한다.
+       */
       if (validationRegex.test(customDelimiterMatch[2])) {
         this.inputString = customDelimiterMatch[2];
       } else {
