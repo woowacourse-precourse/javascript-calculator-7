@@ -1,5 +1,5 @@
 import { Console } from "@woowacourse/mission-utils";
-import { DEFAULT_SEPARATOR } from "./constant.js";
+import { DEFAULT_SEPARATOR, ERROR_MESSAGES } from "./constant.js";
 
 class App {
   async run() {
@@ -45,10 +45,19 @@ function sumNumbers(numbers, customSeparator) {
   const sum = splitNumbers.reduce((acc, current) => {
     const num = parseInt(current, 10);
 
+    validateNumber(num);
+
     return acc + num;
   }, 0);
 
   return sum;
+}
+
+// 숫자가 아난 문자가 들어간 경우 예외 처리
+function validateNumber(num) {
+  if (isNaN(num)) {
+    throw new Error(ERROR_MESSAGES.INVALID_FORMAT);
+  }
 }
 
 export default App;
