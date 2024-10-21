@@ -23,8 +23,17 @@ class App {
       const CUSTOM_SEPARATOR = INPUT.match(/^\/\/(.+)\\n(.+)/);
 
       if (CUSTOM_SEPARATOR) {
-        // 커스텀 구분자가 존재하면 기본 구분자에 추가
-        SEPARATOR = [CUSTOM_SEPARATOR[1].trim()];
+        // 커스텀 구분자로 설정된 문자 저장
+        const CUSTOM_SEPARATOR_VAL = CUSTOM_SEPARATOR[1].trim();
+
+        // 커스텀 구분자에 숫자가 포함되어있으면 에러발생
+        if (/\d/.test(CUSTOM_SEPARATOR_VAL)) {
+          throw new Error(
+            "[ERROR] 커스텀 구분자에는 숫자가 포함되면 안됩니다. 문자만 사용 가능합니다."
+          );
+        }
+        // 커스텀 구분자가 맞으면 기본 구분자에 추가
+        SEPARATOR = [CUSTOM_SEPARATOR_VAL];
 
         // '\n'뒤 부분을 input으로 재설정
         INPUT = CUSTOM_SEPARATOR[2].trim();
