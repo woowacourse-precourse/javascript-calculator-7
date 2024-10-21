@@ -11,6 +11,18 @@ class DelimiterParser {
     }
   }
 
+  checkInvalidCharacters(input, delimiters) {
+    const delimiterRegex = new RegExp(
+      `${delimiters.map((d) => `(${d})`).join("|")}|\\d`
+    );
+
+    for (const char of input) {
+      if (!delimiterRegex.test(char)) {
+        throw new Error(ERROR.INVALID_CHARACTER);
+      }
+    }
+  }
+
   getCustomDelimiter(input) {
     input = input.replace("\\n", "\n").trim();
     let delimiters = [...this.delimiters];
@@ -32,7 +44,9 @@ class DelimiterParser {
 
   splitString(input) {
     const [parseInput, delimiters] = this.getCustomDelimiter(input);
+    this.checkInvalidCharacters(parseInput, delimiters);
     console.log(parseInput, delimiters);
+
     const delimiterRegex = new RegExp(`(${delimiters.join("|")})`);
 
     return parseInput
