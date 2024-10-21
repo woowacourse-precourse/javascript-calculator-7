@@ -40,6 +40,11 @@ class App {
       return;
     }
 
+    if (typeof message !== "string") {
+      throw new Error("[ERROR] 입력값이 올바르지 않습니다. 문자열 형식으로 입력해주세요");
+    }
+
+
     let separators = DEFAULT_SEPARATORS; // 기본 구분자 설정
 
     if (message.startsWith("//")) {
