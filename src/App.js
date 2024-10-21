@@ -25,8 +25,7 @@ class App {
     const inputNumbers = numbers.map(Number);
 
     if (inputNumbers.some((num) => isNaN(num) || num < 0)) {
-      Console.print("[ERROR] 양수가 아닌 값이 포함되어 있습니다.");
-      return;
+      throw new Error("[ERROR] 양수가 아닌 값이 포함되어 있습니다.");
     }
 
     const sumNumbers = inputNumbers.reduce((acc, cur) => acc + cur, 0);
