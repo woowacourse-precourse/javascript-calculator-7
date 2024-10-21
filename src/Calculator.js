@@ -12,6 +12,7 @@ class Calculator {
     try {
       const input = await this.getInput();
       const numbers = this.parseInput(input);
+      this.validateNumbers(numbers);
       const sum = this.sumArray(numbers);
       printMessage(`${LOG_MESSAGE.RESULT_MESSAGE}${sum}`);
     } catch (error) {
@@ -53,13 +54,13 @@ class Calculator {
     return new RegExp(escapedDelimiters.join('|'), 'g');
   }
 
-  sumArray(arr) {
+  validateNumbers(arr) {
     validateNegativeNumbers(arr);
     validateInvalidNumbers(arr);
-    const sum = arr
-      .map(Number)
-      .reduce((acc, curr) => acc + curr, 0);
-    return sum;
+  }
+
+  sumArray(arr) {
+    return arr.map(Number).reduce((acc, curr) => acc + curr, 0);
   }
 
 }
