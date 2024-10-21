@@ -62,7 +62,7 @@ class App {
       numberString = input.substring(delimiterEndIndex+2);
     } else {
       // 커스텀 구분자가 없는 경우, 쉼표(,)와 콜론(:) 이외의 구분자 사용 여부 확인
-      const invalidDelimiter = /[^0-9,:]/;
+      const invalidDelimiter = /[^0-9,:-]/;
       if(invalidDelimiter.test(input)){
         throw new Error("[ERROR] 잘못된 구분자 형식입니다.");
       }
