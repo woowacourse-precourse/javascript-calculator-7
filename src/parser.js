@@ -1,6 +1,13 @@
-import { isCustomSeparator } from "./utils/validateInput.js";
+import { ERROR_MESSAGE } from "./constants/error.js";
+import {
+  isCustomSeparator,
+  isDuplicateCustomSeparator,
+} from "./utils/validateInput.js";
 
 const customInputParser = (input) => {
+  if (isDuplicateCustomSeparator(input)) {
+    throw new Error(ERROR_MESSAGE.DUPLICATE_CUSTOM_SEPARATOR);
+  }
   const [separatorLine, contentLine] = input.split("\\n");
   const customSeparator = separatorLine.substring(2);
 

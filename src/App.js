@@ -1,6 +1,7 @@
 import { Console } from "@woowacourse/mission-utils";
 import { isEmpty, isOnlyStringOrNumber } from "./utils/validateInput.js";
 import { userInputParser } from "./parser.js";
+import { ERROR_MESSAGE } from "./constants/error.js";
 
 class App {
   async run() {
