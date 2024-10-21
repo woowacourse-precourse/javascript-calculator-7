@@ -2,7 +2,11 @@ import { getInput } from './utils/IOUtils.js';
 
 class App {
   async run() {
-    const input = await getInput();
+    try {
+      const input = await getInput();
+    } catch (err) {
+      throw err;
+    }
   }
 }
 
