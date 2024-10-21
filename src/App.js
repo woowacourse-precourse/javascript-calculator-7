@@ -13,6 +13,7 @@ class App {
     }
 
     const numberArr = splitString(splitter, string);
+    const calculateNumber = numberArr.reduce((acc, cur) => acc + +cur, 0);
   }
 }
 
