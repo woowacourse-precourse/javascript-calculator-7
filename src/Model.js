@@ -5,32 +5,31 @@ const DELIMITER_REGEX = {
 
 class Model {
   #numberList = [];
-  delimiter = DELIMITER_REGEX.DEFAULT; // 기본 구분자를 초기값으로 설정
-  inputString;
+  #delimiter = DELIMITER_REGEX.DEFAULT; // 기본 구분자를 초기값으로 설정
+  string;
 
   constructor(input) {
-    this.inputString = input; // 입력값 저장
+    this.string = input; // 입력값 저장
+    this.applyCustomDelimiter();
   }
 
   extractNumber() {
-    this.applyCustomDelimiter(); // 커스텀 구분자 적용
-    const splitedStringList = this.inputString.split(this.delimiter);
-
+    const splitedStringList = this.string.split(this.#delimiter);
     this.#numberList = splitedStringList.map((string) => this.convertToNumber(string));
   }
 
   applyCustomDelimiter() {
-    const customDelimiterMatch = this.inputString.match(DELIMITER_REGEX.CUSTOM);
+    const customDelimiterMatch = this.string.match(DELIMITER_REGEX.CUSTOM);
     if (customDelimiterMatch) {
-      this.delimiter = customDelimiterMatch[1]; // 커스텀 구분자 설정
-      this.inputString = this.inputString.replace(DELIMITER_REGEX.CUSTOM, ''); // 커스텀 구분자 제거
+      this.#delimiter = customDelimiterMatch[1]; // 커스텀 구분자 설정
+      this.string = this.string.replace(DELIMITER_REGEX.CUSTOM, ''); // 커스텀 구분자 제거
     }
   }
 
   convertToNumber(string) {
     const number = Number(string);
-    if (isNaN(number)) {
-      throw new Error('[ERROR] 유효하지 않은 숫자가 포함되어 있습니다');
+    if (Number.isSafeInteger(number)) {
+      throw new Error('[ERROR] 유효하지 않은 정수가 포함되어 있습니다');
     }
     if (number < 0) {
       throw new Error('[ERROR] 음수는 입력할 수 없습니다');
@@ -43,7 +42,7 @@ class Model {
   }
 
   calculate() {
-    if (this.inputString === '') {
+    if (this.string === '') {
       throw new Error('[ERROR] 한 자리 이상의 문자열을 입력해주세요');
     }
     this.extractNumber(); // 숫자 추출
