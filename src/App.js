@@ -34,7 +34,9 @@ class App {
         const customSeparator = customSeparatorPlaceholder.match(customSeparatorReg)[1];
         this.separator.push(customSeparator);
         this.cursor += 5;
-      } 
+      } else {
+        throw new Error('[ERROR] 입력 형식을 다시 확인해 주세요. 커스텀 구분자를 지정하려면 "//[1자리의 숫자가 아닌 문자]\n" 형식으로 입력해 주세요. (ex. "//;\n1;2;3")');
+      }
     } else {
       // handleNotNumber(); // "/"가 커스텀 구분자를 지정하기 위해 등장한게 아니라면 (숫자 사이 구분자로서 입력된 경우)
     }
