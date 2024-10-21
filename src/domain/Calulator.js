@@ -1,4 +1,3 @@
-import { Console } from "@woowacourse/mission-utils";
 import { DEFAULT_DELIMITERS } from "../constants/delimiters.js";
 import calculateSum from "../utils/calculateSum.js";
 
@@ -28,9 +27,9 @@ export default class Calculator {
     const customDelimiterMatch = this.#inputString.match(customDelimiterPattern);
 
     if (customDelimiterMatch) {
-      Console.print(customDelimiterMatch[1]);
       const costomDelimiter = customDelimiterMatch[1];
       this.#delimiters.push(costomDelimiter);
+      this.#inputString = this.#inputString.replace(customDelimiterPattern, "");
     }
   }
 }
