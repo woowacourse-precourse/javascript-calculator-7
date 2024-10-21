@@ -116,6 +116,45 @@ describe('문자열 계산기', () => {
     });
   });
 
+  test('커스텀 구분자 사용 8', async () => {
+    const inputs = ['//123456789\\n112345678910'];
+    mockQuestions(inputs);
+
+    const logSpy = getLogSpy();
+    const outputs = ['결과 : 11'];
+
+    const app = new App();
+    await app.run();
+
+    outputs.forEach((output) => {
+      expect(logSpy).toHaveBeenCalledWith(expect.stringContaining(output));
+    });
+  });
+
+  test('커스텀 구분자 사용 9', async () => {
+    const inputs = ['//seungwonme\\n1seungwonme12'];
+    mockQuestions(inputs);
+
+    const logSpy = getLogSpy();
+    const outputs = ['결과 : 13'];
+
+    const app = new App();
+    await app.run();
+
+    outputs.forEach((output) => {
+      expect(logSpy).toHaveBeenCalledWith(expect.stringContaining(output));
+    });
+  });
+
+  test('커스텀 구분자 사용 10', async () => {
+    const inputs = ['//seungwonme\\na1seungwonme12'];
+    mockQuestions(inputs);
+
+    const app = new App();
+
+    await expect(app.run()).rejects.toThrow('[ERROR]');
+  });
+
   test('음수 테스트 1', async () => {
     const inputs = ['-1'];
     mockQuestions(inputs);
