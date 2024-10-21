@@ -26,7 +26,7 @@ function setNumber(number){
     if (realNumber === 0) {
         throw new Error('[ERROR] 입력에 0이 포함되어 있습니다.');
     }
-    return hi;
+    return realNumber;
 }
 
 export function awareCustomSeparator(input, distinct) {
