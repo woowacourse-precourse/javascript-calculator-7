@@ -1,3 +1,22 @@
+const getNumbers = (input) => {
+    const baseSeperator = [":", ","]; // 사전 정의 구분자
+
+    try {
+        let { customSeperator, targetString } = getCustomSeperatorAndTargetString(input);
+        const seperator = customSeperator ? [...baseSeperator, customSeperator] : baseSeperator;
+
+        validate(
+            seperator,
+            targetString
+        );
+
+        return targetString.split(new RegExp(seperator.join("|")))
+
+    } catch (err) {
+        throw err;
+    }
+}
+
 // 커스텀 구분자를 추출하고 그 외 처리 문자열과 함께 반환한다.
 const getCustomSeperatorAndTargetString = (str) => {
     const start = "//";
@@ -29,3 +48,5 @@ const validate = (separator, targetString) => {
     else 
         throw new Error("[ERROR] 구분자와 양수만 입력할 수 있습니다.")
 }
+
+export { getNumbers };
