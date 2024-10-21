@@ -1,5 +1,13 @@
+import Calculator from './Calculator.js';
+
 class App {
-  async run() {}
+  constructor() {
+    this.calculator = new Calculator();  
+  }
+
+  async run() {
+    await this.calculator.run();  
+  }
 }
 
 export default App;
