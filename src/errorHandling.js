@@ -19,3 +19,9 @@ export const hasInvalidSymbol = (array)=> {
     }
     return false
 }
+
+//입력에 숫자가 없는경우 
+export const hasStringNumber = (string)=> {
+    return ONLY_NUMBER.test(string);
+}
+
