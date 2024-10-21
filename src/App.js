@@ -2,9 +2,33 @@ import { Console } from '@woowacourse/mission-utils';
 
 const ERROR_MESSAGE = '[ERROR]';
 class App {
+  async getUserInput() {
+    try {
+      const input = await Console.readLineAsync(
+        '덧셈할 문자열을 입력해 주세요: ',
+      );
+      return input;
+    } catch (error) {
+      throw error('입력이 잘못 되었습니다.');
+    }
+  }
+
+  customSeparatorsFormat(str) {
+    for (let i = 0; i < str.length; i++) {
+      if (!isNaN(str[i]) || str[i] === ' ') {
+        // 문자가 숫자이거나 공백이면 true 반환
+        return false;
+      }
+    }
+    // 숫자나 공백이 포함되지 않았으면 false 반환
+    return true;
+  }
+
   async run() {
     try {
-      const userInput = await getUserInput().then((result) => result.trim());
+      const userInput = await this.getUserInput().then((result) =>
+        result.trim(),
+      );
       const separators = [':', ','];
       let formula = '';
       if (userInput.length === 0) {
@@ -22,7 +46,7 @@ class App {
           // "//"와 "\n" 사이에 문자열이 있는지 확인
           const customSeprator = userInput.slice(2, endIndex);
 
-          if (!customSeparatorsFormat(customSeprator)) {
+          if (!this.customSeparatorsFormat(customSeprator)) {
             // 커스텀 구분자에 숫자나 공백이 포함된 경우 에러반환
             throw new Error(
               '커스텀 구분자에 공백이나 숫자는 포함할 수 없습니다.',
@@ -64,28 +88,6 @@ class App {
       // Console.print(ERROR_MESSAGE);
       throw new Error(ERROR_MESSAGE);
     }
-  }
-}
-
-function customSeparatorsFormat(str) {
-  for (let i = 0; i < str.length; i++) {
-    if (!isNaN(str[i]) || str[i] === ' ') {
-      // 문자가 숫자이거나 공백이면 true 반환
-      return false;
-    }
-  }
-  // 숫자나 공백이 포함되지 않았으면 false 반환
-  return true;
-}
-
-async function getUserInput() {
-  try {
-    const input = await Console.readLineAsync(
-      '덧셈할 문자열을 입력해 주세요: ',
-    );
-    return input;
-  } catch (error) {
-    throw error('입력이 잘못 되었습니다.');
   }
 }
 
