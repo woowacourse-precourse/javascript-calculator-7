@@ -117,4 +117,22 @@ describe("추가 예외 테스트", () => {
 
     await expect(app.run()).rejects.toThrow("[ERROR]");
   });
+
+  test("커스텀 구분자가 음수 표시(-)인 경우", async () => {
+    const inputs = ["//-\\n1"];
+    mockQuestions(inputs);
+
+    const app = new App();
+
+    await expect(app.run()).rejects.toThrow("[ERROR]");
+  });
+
+  test("커스텀 구분자가 소수점 표시(.)인 경우", async () => {
+    const inputs = ["//.\\n1"];
+    mockQuestions(inputs);
+
+    const app = new App();
+
+    await expect(app.run()).rejects.toThrow("[ERROR]");
+  });
 });
