@@ -12,33 +12,33 @@ class App {
   #inputNumberList = [];
 
   async run() {
-    await this.readInput();
+    await this.#readInput();
 
     const validator = new Validator(this.#input, this.#separatorList);
     validator.parse();
 
-    this.generateInputNumberList();
-    this.printResult();
+    this.#generateInputNumberList();
+    this.#printResult();
   }
 
-  async readInput() {
+  async #readInput() {
     this.#input = await Console.readLineAsync(INPUT_QUERY);
   }
 
-  generateInputNumberList() {
+  #generateInputNumberList() {
     this.#inputNumberList = this.#input.match(/[0-9]+/g).map(Number);
   }
 
-  getResult() {
+  #getTotalSum() {
     return this.#inputNumberList.reduce((acc, current) => acc + current);
   }
 
-  printResult() {
-    Console.print(this.getPrintResult());
+  #printResult() {
+    Console.print(this.#getFormattedResult());
   }
 
-  getPrintResult() {
-    return `${OUTPUT_PREFIX}${this.getResult()}`;
+  #getFormattedResult() {
+    return `${OUTPUT_PREFIX}${this.#getTotalSum()}`;
   }
 }
 
