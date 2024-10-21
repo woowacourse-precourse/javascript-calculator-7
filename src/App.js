@@ -23,6 +23,7 @@ class App {
       Console.print(`결과 : ${RESULT}`);
     } catch(error) {
       Console.print(error.message);
+      throw error;
     }
   }
 
