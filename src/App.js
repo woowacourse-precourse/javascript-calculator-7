@@ -37,34 +37,31 @@ class App {
         Console.print("덧셈할 문자열을 입력해 주세요.")
 
         let input = ""
-        let output = Console.readLineAsync(input)
+        let value = await Console.readLineAsync(input)
 
-        output.then((value) => {
-            //2-1) 커스텀 구분자를 찾아냅니다.
-            // 1) "\\n"를 포함한다면, 그를 기준으로 앞부분은 커스텀 구분자를 작성했다고 판단합니다.
-            let splitIndex = value.lastIndexOf('\\n');
 
-            let customSeps = ''; //커스텀 구분자 부분
-            let operands = value;//계산의 대상이 될 부분
+        //2-1) 커스텀 구분자를 찾아냅니다.
+        // 1) "\\n"를 포함한다면, 그를 기준으로 앞부분은 커스텀 구분자를 작성했다고 판단합니다.
+        let splitIndex = value.lastIndexOf('\\n');
 
-            if (splitIndex !== -1) { //커스텀 구분자가 존재한다면 값을 변경
-                customSeps = value.substring(0, splitIndex + 2);
-                operands = value.substring(splitIndex + 2);
-            }
+        let customSeps = ''; //커스텀 구분자 부분
+        let operands = value;//계산의 대상이 될 부분
 
-            //유효한 구분자
-            const SEPARATORS = this.findSeparator(customSeps)
+        if (splitIndex !== -1) { //커스텀 구분자가 존재한다면 값을 변경
+            customSeps = value.substring(0, splitIndex + 2);
+            operands = value.substring(splitIndex + 2);
+        }
 
-            //2-2) 구분자를 이용해 숫자를 분리해냄
-            let operandList = this.makeOperandList(SEPARATORS, operands)
-            //2-3) 총합 계산
-            let result = operandList.reduce((sum, num) => sum + num, 0)
+        //유효한 구분자
+        const SEPARATORS = this.findSeparator(customSeps)
 
-            Console.print("결과 : " + result)
+        //2-2) 구분자를 이용해 숫자를 분리해냄
+        let operandList = this.makeOperandList(SEPARATORS, operands)
+        //2-3) 총합 계산
+        let result = operandList.reduce((sum, num) => sum + num, 0)
 
-        }).catch(() => {
-            Console.print("[ERROR] 문자열을 입력해주세요.")
-        })
+        Console.print("결과 : " + result)
+
 
     }
 }
