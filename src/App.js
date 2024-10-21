@@ -1,4 +1,5 @@
 import { Console } from "@woowacourse/mission-utils";
+import ValidateInput from "./ValidateInput";
 import DelimiterHandler from "./DelimiterHandler";
 import Calculator from "./Calculator";
 
@@ -8,6 +9,7 @@ class App {
       '덧셈할 문자열을 입력해 주세요.\n'
     );
     try {
+      ValidateInput(input);
       const numbers = DelimiterHandler(input);
       const result = new Calculator().calculateSum(numbers);
       Console.print(`결과 : ${result}`);
