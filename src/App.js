@@ -10,7 +10,7 @@ class App {
         let wrongSeparators = str.replace(REGEX, '');
 
         if (wrongSeparators.length !== 0) {
-            Console.print(new Error(`[ERROR] 구분자 정의 방식이 올바르지 않음`))
+            Console.print(new Error(`[ERROR] 구분자는 형식을 지켜 표기해주세요. //로 시작하여 \\n종료되며, 한 문자입니다.`))
         }
 
         return separators + str.replace(/\/\/|\\n/g, '');
@@ -24,7 +24,7 @@ class App {
             if (!isNaN(num) && Number(num) >= 0) {//숫자인 경우에는 리스트에 담는다
                 arr.push(+num) //숫자로 변경
             } else {//유효한 구분자를 이용했는데 숫자가 아닌 경우에는 에러
-                throw new Error("[ERROR] 유효하지 않은 구분자 포함")
+                throw new Error("[ERROR] 유효하지 않은 구분자(\",\", \":\" 및 커스텀구분자)가 포함되어 있는지 확인해주세요.")
             }
             return arr;
         }, []);
