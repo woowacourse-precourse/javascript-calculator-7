@@ -29,7 +29,7 @@ class App {
     }
 
     const numbers = input
-      .split(new RegExp(`[${delimiters.join("")}]`))
+      .split(new RegExp(`[${delimiters.join("|")}]`))
       .map((num) => {
         const parsedNum = parseInt(num.trim(), 10);
         if (isNaN(parsedNum)) {
