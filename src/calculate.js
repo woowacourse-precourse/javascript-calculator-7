@@ -17,13 +17,9 @@ class Calculator {
         throw new Error("[ERROR]");
       }
       const customDelimiter = parts[0].substring(2);
-
-      delimiter = new RegExp(
-        `[${customDelimiter.replace(/[.*+?^${}()|[\]\\]/g, "\\$&")}]`
-      );
+      delimiter = new RegExp(`[${customDelimiter}]`);
       numbersString = parts[1];
     }
-
     const numbers = numbersString.split(delimiter);
     const sum = numbers.reduce((total, current) => {
       const num = parseInt(current, 10);
@@ -35,7 +31,6 @@ class Calculator {
 
     return sum;
   }
-
   async askForInput() {
     while (true) {
       try {
@@ -46,7 +41,7 @@ class Calculator {
         Console.print(`결과 : ${this.add(userInput)}`);
       } catch (error) {
         Console.print("[ERROR]");
-        return;
+        throw error;
       }
     }
   }
