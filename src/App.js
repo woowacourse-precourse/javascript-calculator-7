@@ -18,16 +18,19 @@ class App {
         }
 
         let numbers = [];
-        const default_split_text = /[,|:]/;
+        const default_split_text = /[,|:]/;  // 기본 구분자: 콤마와 콜론
         let custom_split_text = null;
 
         // 커스텀 구분자 확인
         if (input.startsWith("//")) {
+            // 입력에서 '\\n'을 기준으로 분할
             const parts = input.split('\\n');
             if (parts.length < 2) {
                 throw new Error("[ERROR] 커스텀 구분자 형식이 올바르지 않습니다.");
             }
+            // 첫 줄에서 커스텀 구분자 추출
             custom_split_text = new RegExp(parts[0].slice(2));
+            // 나머지 부분을 실제 숫자 데이터로 사용
             input = parts.slice(1).join('\\n');
         }
 
