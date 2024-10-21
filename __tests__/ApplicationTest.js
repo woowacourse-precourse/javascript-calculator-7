@@ -32,12 +32,60 @@ describe("문자열 계산기", () => {
     });
   });
 
-  test("예외 테스트", async () => {
+  test("예외 테스트 - 음수 입력", async () => {
     const inputs = ["-1,2,3"];
     mockQuestions(inputs);
 
     const app = new App();
 
+    await expect(app.run()).rejects.toThrow("[ERROR]");
+  });
+
+  test("예외 테스트 - 공백 포함", async () => {
+    const inputs = ["1 ,2,3"];
+    mockQuestions(inputs);
+
+    const app = new App();
+    await expect(app.run()).rejects.toThrow("[ERROR]");
+  });
+
+  test("예외 테스트 - 숫자, 구분자 외의 문자 포함", async () => {
+    const inputs = ["1,a,2"];
+    mockQuestions(inputs);
+
+    const app = new App();
+    await expect(app.run()).rejects.toThrow("[ERROR]");
+  });
+
+  test("예외 테스트 - 잘못된 커스텀 구분자", async () => {
+    const inputs = ["//;\\1,2;3"];
+    mockQuestions(inputs);
+
+    const app = new App();
+    await expect(app.run()).rejects.toThrow("[ERROR]");
+  });
+
+  test("예외 테스트 - 커스텀 구분자가 숫자인 경우", async () => {
+    const inputs = ["//1\\n1,2,3"];
+    mockQuestions(inputs);
+
+    const app = new App();
+    await expect(app.run()).rejects.toThrow("[ERROR]");
+  });
+
+  test("예외 테스트 - 커스텀 구분자가 여러 개인 경우", async () => {
+    const inputs = ["//;;\\n1;2;3"];
+    mockQuestions(inputs);
+
+    const app = new App();
+    await expect(app.run()).rejects.toThrow("[ERROR]");
+  });
+
+  test("예외 테스트 - 구분자가 없는 경우", async () => {
+    const inputs = ["//\\n1,2,3"];
+    mockQuestions(inputs);
+
+    const app = new App();
     await expect(app.run()).rejects.toThrow("[ERROR]");
   });
 });
