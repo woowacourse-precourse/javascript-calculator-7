@@ -1,7 +1,7 @@
 import InterfaceUtil from "./InterfaceUtil.js";
 import CalculateUtil from "./CalculateUtil.js";
 import { isExpressionValid, isSeparatorValid } from "./validation.js";
-import MESSAGES from "./messages.js";
+import MESSAGES from "./constants/messages.js";
 
 class App {
   async run() {

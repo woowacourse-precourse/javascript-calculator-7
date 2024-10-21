@@ -1,5 +1,5 @@
 import { Console } from "@woowacourse/mission-utils";
-import MESSAGES from "./messages.js";
+import MESSAGES from "./constants/messages.js";
 
 const InterfaceUtil = {
   async inputString() {
