@@ -26,8 +26,10 @@ class User {
   #handleCustomDelimiter(string) {
     const { customDelimiter, numbersString } =
       this.#customDelimiterHandler.getCustomDelimiterAndNumbersString(string);
-    if (customDelimiter.length) validator.validateCustomDelimiter(customDelimiter);
-    this.#delimiters = [...this.#delimiters, customDelimiter];
+    if (customDelimiter.length) {
+      validator.validateCustomDelimiter(customDelimiter);
+      this.#delimiters = [...this.#delimiters, customDelimiter];
+    }
     this.#numbersString = numbersString;
   }
 
