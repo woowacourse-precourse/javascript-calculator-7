@@ -2,10 +2,10 @@
 export function parseInput(input) {
     let delimiter = /[,|:]/; // 기본 구분자
 
-    if (input.startsWith("//")) {
-        const parts = input.split("\\n");
+    if (input.startsWith('//')) {
+        const parts = input.split('\\n');
 
-        if (parts.length < 2 || parts[1].trim() === "") {
+        if (parts.length < 2 || parts[1].trim() === '') {
             throw new Error('[ERROR] 잘못된 입력 형식입니다.');
         }
 
