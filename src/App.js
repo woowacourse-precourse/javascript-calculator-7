@@ -73,22 +73,18 @@ class App {
   }
 
   async run() {
-    //try {
-      const inputStr = await Console.readLineAsync('덧셈할 문자열을 입력해주세요.\n');
+    const inputStr = await Console.readLineAsync('덧셈할 문자열을 입력해주세요.\n');
 
-      //입력 값이 올바른지 체크
-      this.checkInput(inputStr);
+    //입력 값이 올바른지 체크
+    this.checkInput(inputStr);
 
-      let result = 0;
+    let result = 0;
 
-      //입력 값이 올바르다면 숫자 추출 후 덧셈 진행
-      result = this.addAll(this.splitDelim(inputStr));
-
-      //덧셈 결과 출력
-      Console.print('결과 : ' + result);
-    //} catch (err) {
-      //Console.print(err.message);
-    //}
+    //입력 값이 올바르다면 숫자 추출 후 덧셈 진행
+    result = this.addAll(this.splitDelim(inputStr));
+    
+    //덧셈 결과 출력
+    Console.print('결과 : ' + result);
   }
 }
 
