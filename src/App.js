@@ -60,13 +60,13 @@ class App {
     try {
       // 사용자 입력
       const input = await Console.readLineAsync(
-        '구분자와 양수로 구성된 문자열을 입력해주세요: '
+        '덧셈할 문자열을 입력해 주세요.'
       );
       // 계산 결과
       const result = this.calculator(input);
 
       // 결과 출력
-      Console.print(`결과: ${result}`);
+      Console.print(`결과 : ${result}`);
     } catch (e) {
       Console.print(e.message);
     }
