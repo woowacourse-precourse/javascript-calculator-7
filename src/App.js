@@ -9,7 +9,10 @@ class App {
         let DIVIDER = /[,|:]/;
         let STR_NUMBERS = STR;
 
-        if (STR === "") return 0;
+        if (STR === "") {
+            await Console.print(`결과: 0`);
+            return 0;
+        }
 
         if (STR.startsWith("//") && STR.indexOf("\n") !== -1) {
             DIVIDER = new RegExp(`[${STR[2]}]`);
