@@ -34,7 +34,7 @@ class App {
   /** \n 기준으로 나누고 구분자 추출 */
   splitCustom(input) {
     const [customDelimiterString, inputString] = input.split('\\n');
-    const customDelimiter = customDelimiterString.slice(2);
+    const customDelimiter = customDelimiterString.split('')[2];
     return [customDelimiter, inputString];
   }
 
