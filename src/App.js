@@ -5,6 +5,8 @@ class App {
     try {
       const input = await Console.readLineAsync('덧셈할 문자열을 입력해 주세요.\n');
       const numbers = this.extractNumbers(input);
+      const sum = this.sumNumbers(numbers);
+      Console.print(`결과 : ${sum}`);
     } catch (error) {
       Console.print(`[ERROR] ${error.message}`);
     }
@@ -25,6 +27,15 @@ class App {
     const numbers = splitText.map(Number);
     this.validateNumbers(numbers);
     return numbers;
+  }
+
+  // 숫자의 합을 계산하는 함수
+  sumNumbers(numbers) {
+    let sum = 0;
+    numbers.forEach(number => {
+      sum += number;
+    });
+    return sum;
   }
 
   // 예외 처리 함수
