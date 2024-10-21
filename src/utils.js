@@ -14,9 +14,7 @@ export const separatorSplit = (input) => {
     customSeparator = match[1]; // 구분자 추출
 
     // if (customSeparator.length !== 1) {
-    //   throw new Error(
-    //     "[ERROR_INVALID_SEPARATOR] : 구분자에 문자열을 입력할 수 없습니다."
-    //   );
+    //   throw new Error("[ERROR] : 구분자에 문자열을 입력할 수 없습니다.");
     // }
 
     input = input.substring(match[0].length); // 숫자 부분 추출
@@ -35,9 +33,9 @@ export const separatorSplit = (input) => {
         return;
       }
 
-      const parsedNum = parseInt(trimmedNum, 10);
+      const parsedNum = +trimmedNum;
 
-      if (isNaN(parsedNum)) {
+      if (Number.isNaN(parsedNum)) {
         throw new Error("[ERROR] : 숫자를 제외한 문자는 입력할 수 없습니다.");
       }
       if (parsedNum < 0) {
