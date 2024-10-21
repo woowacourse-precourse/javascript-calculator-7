@@ -23,7 +23,7 @@ function checkIsBasicMinus(input) {
 }
 
 //커스텀 구분자 추출
-function customSeparatorValid(input) {
+function getCustomSeparator(input) {
     let separator;
     if (input.indexOf('//') == 0 && input.indexOf('\\n') != -1) {
         separator = input.substring(input.indexOf('//') + 2, input.indexOf('\\n'));
@@ -36,7 +36,7 @@ function customSeparatorValid(input) {
 
 //커스텀 구분자가 있을때 음수 확인
 function checkIsCustomMinus(input) {
-    let custom = customSeparatorValid(input)
+    let custom = getCustomSeparator(input)
     if (custom == 0) {
         return true;
     }
@@ -53,7 +53,7 @@ function checkIsCustomMinus(input) {
 }
 
 function checkSeparator(input) {
-    let custom = customSeparatorValid(input);
+    let custom = getCustomSeparator(input);
     // 쉼표, 콜론 확인
     if (custom == 0) {
         let nums = input.indexOf(/,|:/);
