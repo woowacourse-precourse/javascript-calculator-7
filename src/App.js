@@ -11,7 +11,7 @@ class App {
       return;
     }
 
-    MissionUtils.Console.print("결과 : " + STRING_INPUT);
+    Console.print("결과 : " + STRING_INPUT);
   }
 }
 
