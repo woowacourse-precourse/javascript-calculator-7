@@ -3,7 +3,6 @@ import View from './View.js';
 
 class Controller {
   constructor() {
-    this.model = new Model();
     this.view = new View();
   }
 
@@ -14,7 +13,7 @@ class Controller {
       const result = model.calculate(); // 결과 계산
       this.view.printResult(result); // 결과 출력
     } catch (error) {
-      throw error;
+      throw error; // 에러 발생 시 처리
     }
   }
 }
