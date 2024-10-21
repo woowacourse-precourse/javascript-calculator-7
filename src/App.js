@@ -18,7 +18,7 @@ class App {
       if (char === '/') { // "/"로 시작하는 경우
         this.handleCustomSeparator(strArr);
       } else if (isNaN(Number(char))) { // 숫자가 아닌 경우
-        this.handleNotNumber();
+        this.handleNotNumber(char);
       } else { // 숫자인 경우
         this.handleNumber();
       }
@@ -42,7 +42,13 @@ class App {
     }
   }
 
-  handleNotNumber() {}
+  handleNotNumber(char) {
+    if (this.separator.includes(char)) {
+      this.sum += Number(this.number.join(''));
+      this.number = [];
+      this.cursor++;
+    }
+  }
 
   handleNumber() {}
 }
