@@ -25,6 +25,7 @@ class App {
       console.log('계산된 합:', totalSum);
     } catch (error) {
       console.error(`[ERROR] ${error.message}`);
+      process.exit(1); // 애플리케이션 종료
     }
   }
 
