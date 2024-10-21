@@ -11,8 +11,18 @@ class App {
       return;
     }
 
-    const inputNumbers = stringInput.split(/[,|:]/).map(Number);
-    const sumNumbers = inputNumbers.reduce((acc, curr) => acc + curr, 0);
+    const defaultRegExp = /[,|:]/;
+    const customRegExp = /^\/\/(.*?)\\n/;
+    const customMatch = stringInput.match(customRegExp);
+    let numbers;
+
+    if (customMatch === null) {
+      numbers = stringInput.split(defaultRegExp);
+    } else {
+      numbers = stringInput.slice(customMatch[0].length).split(customMatch[1]);
+    }
+
+    const sumNumbers = numbers.map(Number).reduce((acc, cur) => acc + cur, 0);
 
     Console.print("결과 : " + sumNumbers);
   }
