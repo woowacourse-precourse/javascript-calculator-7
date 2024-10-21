@@ -5,11 +5,11 @@ import { UserInput } from "./UserInput/UserInput.js";
 import { input } from "./util/input.js";
 import { Pattern } from "./Pattern/Pattern.js";
 import { Calculator } from "./Calculator/Calculator.js";
-import { RESULT, START } from "./constant/index.js";
+import { RESULT_MESSAGE, START_MESSAGE } from "./constant/index.js";
 
 class App {
   async run() {
-    const userInput = new UserInput(await input(START));
+    const userInput = new UserInput(await input(START_MESSAGE));
     const storage = new StringStorage(...userInput.splitInput());
     const pattern = new Pattern(storage.separator);
     const calculator = new Calculator(
@@ -17,7 +17,7 @@ class App {
         Number
       )
     );
-    Console.print(`${RESULT}${calculator.add()}`);
+    Console.print(`${RESULT_MESSAGE}${calculator.add()}`);
   }
 }
 
