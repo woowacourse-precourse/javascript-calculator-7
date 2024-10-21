@@ -19,8 +19,6 @@ export default function parseCustomInput(input) {
   if (delimiter === '') {
     throw new Error(`${ERROR_PREFIX}${ERROR_MESSAGES.EMPTY_DELIMITER}`);
   }
-  // console.log(delimiter);
-  // console.log('1||2'.split('|'));
 
   // escape 처리.
 
@@ -36,8 +34,6 @@ export default function parseCustomInput(input) {
   }
 
   const parts = content.split(delimiter);
-  // validateNoDuplicateDelimiters(parts);
-  // 모든 숫자의 합을 반환한다.
 
   return sumAllNumbers(parts);
 }
