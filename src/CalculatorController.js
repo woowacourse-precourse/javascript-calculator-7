@@ -1,6 +1,7 @@
 import { MissionUtils } from "@woowacourse/mission-utils";
 import CalculatorDTO from './CalculatorDTO.js';
 import InputParser from "./InputParser.js";
+import { UI } from "./constants.js";
 
 class CalculatorController {
   #io = MissionUtils.Console;
@@ -10,7 +11,7 @@ class CalculatorController {
   }
 
   async run(){
-    const input = await this.#io.readLineAsync("덧셈할 문자열을 입력해 주세요.");
+    const input = await this.#io.readLineAsync(UI.INPUT_QUERY);
     const parser = new InputParser();
     const numbers = parser.parse(input);
     const result = this.service.calculate(new CalculatorDTO(numbers));
@@ -18,7 +19,7 @@ class CalculatorController {
   }
 
   printResult(result){
-    this.#io.print(`결과 : ${result}`);
+    this.#io.print(UI.OUTPUT(result));
   }
 }
 
