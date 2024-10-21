@@ -51,6 +51,9 @@ class StringCalculator { //하나의 메소드는 하나의 역할
         if (isNaN(param)) {
             throw new Error("[Error]: 에러발생");
         }
+        if (param.trim() !== param) {
+            throw new Error("[Error]: 에러발생");
+        }
     }
 
     resultOutput() {
