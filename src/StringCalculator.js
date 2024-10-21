@@ -14,7 +14,15 @@ class StringCalculator {
             numbers = numbers.substring(delimiterEndIndex + 1); // 구분자 이후 숫자 추출
         }
 
-        const numberArray = numbers.split(delimiter).map((num) => parseInt(num, 10));
+        // 숫자 배열 변환, 음수 및 잘못된 입력 처리
+        const numberArray = numbers.split(delimiter).map((num) => {
+            const parsedNum = parseInt(num, 10);
+            if (isNaN(parsedNum) || parsedNum < 0) {
+                throw new Error("[ERROR] 잘못된 입력입니다.");
+            }
+            return parsedNum;
+        });
+
         return numberArray.reduce((sum, num) => sum + num, 0);
     }
 }
