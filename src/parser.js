@@ -1,8 +1,8 @@
 import { isCustomSeparator } from "./utils/validateInput.js";
-import { customInputValidator } from "./validator.js";
+import { customInputValidator, parsedInputValidator } from "./validator.js";
 
 const customInputParser = (input) => {
-  customInputValidator();
+  customInputValidator(input);
   const [separatorLine, contentLine] = input.split("\\n");
   const customSeparator = separatorLine.substring(2);
 

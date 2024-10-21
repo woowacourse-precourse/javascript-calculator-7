@@ -1,10 +1,11 @@
-import { ERROR_MESSAGE } from "./error.js";
 import {
   isDuplicateCustomSeparator,
   isEmpty,
   isNegativeNumber,
   isNotNumber,
+  isOnlyStringOrNumber,
 } from "./utils/validateInput.js";
+import { ERROR_MESSAGE } from "./constants/error.js";
 
 const userInputValidator = (input) => {
   switch (true) {

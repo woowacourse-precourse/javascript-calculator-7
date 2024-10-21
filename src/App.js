@@ -1,6 +1,7 @@
 import { Console } from "@woowacourse/mission-utils";
 import { userInputParser } from "./parser.js";
 import { userInputValidator } from "./validator.js";
+import { calculator } from "./utils/calculator.js";
 
 class App {
   async run() {
