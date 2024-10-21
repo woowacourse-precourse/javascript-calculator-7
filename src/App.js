@@ -5,10 +5,22 @@ class App {
     return Console.readLineAsync("덧셈할 문자열을 입력해 주세요\n");
   }
 
+  // 에러 발생 함수
+  throwError() {
+    Console.print("[ERROR]");
+    throw new Error("[ERROR]");
+  }
+
   stringSplitDelimiter(inputString) {
     // 커스텀 구분자 사용 시
-    if (inputString[0] === "/" && inputString[1] === "/") {
+    if (inputString.startsWith("//")) {
       const index = inputString.indexOf("\\n");
+
+      // 커스텀 구분자 끝 지정을 잘못한 경우
+      if (index === -1) {
+        this.throwError();
+      }
+
       const delimiter = inputString.substring(2, index);
       const stringToSplit = inputString.substring(index + 2);
 
@@ -28,22 +40,15 @@ class App {
     Console.print("결과 : " + sum);
   }
 
-  printError() {
-    Console.print("[ERROR]");
-  }
-
   catchException(splitString) {
     // 음수가 포함된 경우
     if (splitString.some((num) => num < 0)) {
-      this.printError();
-      throw new Error("[ERROR]");
+      this.throwError();
     }
     // 숫자 아닌 문자 입력 한 경우, 올바르지 않은 구분자 사용한 경우
-    // 커스텀 구분자 시작과 끝을 잘못 지정한 경우
 
     if (splitString.some((val) => isNaN(val))) {
-      this.printError();
-      throw new Error("[ERROR]");
+      this.throwError();
     }
   }
 
