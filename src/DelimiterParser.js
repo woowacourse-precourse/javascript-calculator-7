@@ -17,6 +17,7 @@ class DelimiterParser {
     }
 
     const delimiterRegex = new RegExp(`(${delimiters.join("|")})`);
+
     return input
       .split(delimiterRegex)
       .map(Number)
