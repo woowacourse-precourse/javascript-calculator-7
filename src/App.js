@@ -15,7 +15,10 @@ class App {
   }
 
   calculateSum(str) {
-    return str;
+    const numbers = str.split(/[,:]/).map(Number);
+    const sum = numbers.reduce((acc, curr) => acc + curr, 0);
+
+    return sum;
   }
 }
 
