@@ -11,16 +11,16 @@ class App {
   calculate(line) {    
     if (checkIsDefaultString(line)) {
       validateDefaultLine(line);
+
       return sumString(line)
     };
 
-    const [customPart, linePart] = divideCustom(line);
-    validateCustomPart(customPart);
-
+    const [customPart, targetStringPart] = divideCustom(line);
     const separators = getFinalSeparators(customPart);
-    validateTargetStringPart(linePart, separators);
+    validateCustomPart(customPart);
+    validateTargetStringPart(targetStringPart, separators);
 
-    return sumString(linePart, separators);
+    return sumString(targetStringPart, separators);
   }
 
   async run() {
