@@ -1,36 +1,16 @@
 import { CUSTOM_DELIMITER_REGEX } from '../constant/constant.js';
 
-//커스텀 구분자와 정리된 문자열을 반환해주는 함수
-export default function handleCustomDelimiter(input) {
-  const result = {
-    cleanedString: input,
-    customDelimiter: null,
-  };
-
-  if (hasCustomDelimiter(input)) {
-    result.cleanedString = cleanStringAfterDelimiter(input);
-    result.customDelimiter = getCustomDelimiter(input);
-  }
-
-  return result;
-}
-
-//커스텀 구분자를 사용하는 문자열인지 확인
-function hasCustomDelimiter(input) {
-  return CUSTOM_DELIMITER_REGEX.test(input);
-}
-
-//커스텀 구분자를 추출하는 함수
-function getCustomDelimiter(input) {
+//커스텀 구분자가 있다면 추출해 반환하는 함수
+export function getCustomDelimiter(input) {
   const match = input.match(CUSTOM_DELIMITER_REGEX);
   if (match) {
-    return match[1];
+    const customDelimiter = match[1];
+    return customDelimiter;
   }
-  //추후 예외처리 필요
-  // 구분자가 숫자인 경우
+  return null;
 }
 
 //커스텀 구분자 부분을 문자열에서 제거하는 함수
-function cleanStringAfterDelimiter(input) {
+export function cleanStringAfterDelimiter(input) {
   return input.replace(CUSTOM_DELIMITER_REGEX, "");
 }
