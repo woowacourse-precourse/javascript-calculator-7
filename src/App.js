@@ -12,7 +12,7 @@ class App {
     }
 
     const defaultRegExp = /[, :]/;
-    const customRegExp = /^\/\/(.*?)\n/;
+    const customRegExp = /^\/\/(.*?)\\n/;
     const customMatch = stringInput.match(customRegExp);
     const numbers =
       customMatch === null
