@@ -23,7 +23,7 @@ class App {
     let _str = str;
 
     if(str.indexOf("//") === -1) {
-      regExp = new RegExp(`^([0-9]+[,:])*[0-9]*$`, 'g');
+      regExp = new RegExp(`^([0-9]+[,:]*)*[0-9]*$`, 'g');
     } else {
       // 커스텀 구분자가 있다면 커스텀 구분자를 추출한다.
       this.getCustomDelim(str);
@@ -32,7 +32,7 @@ class App {
       _str = str.slice(str.indexOf("\\n") + 2);
 
       // 커스텀 구분자를 인식할 수 있도록 정규식 작성
-      regExp = new RegExp(`^([0-9]+[,:${this.customDelim}])*[0-9]*$`, 'g');
+      regExp = new RegExp(`^([0-9]+[,:${this.customDelim}]*)*[0-9]*$`, 'g');
     }
 
     //정규식 테스트를 통해 입력 값이 잘못된지 체크 후 잘못 됐다면 에러를 throw
