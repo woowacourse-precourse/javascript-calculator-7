@@ -8,52 +8,64 @@ async function getString() {
     const input = await Console.readLineAsync('덧셈할 문자열을 입력해 주세요.\n');
     return input;
   } catch (err) {
-    Console.print(err)
+    throw new Error('[ERROR]');
   }
+}
+
+// 커스텀 구분자 찾기
+function findCustomSeparators(input) {
+  const customSeparators = [];
+  const regExp = /\/\/(.*?)\\n/g;
+  let match;
+
+  while ((match = regExp.exec(input)) !== null) { 
+    customSeparators.push(match[1].trim());
+  }
+  return customSeparators;
+}
+
+// 구분자를 중심으로 문자열 파싱하기
+function splitString(input, separators) {
+  let numberArray = [input];
+
+  separators.forEach(separator => {
+    numberArray = numberArray.flatMap(item => item.split(separator));
+  });
+  return numberArray;
+}
+
+// 숫자 더하기
+function sum(numberArray) {
+  var output = 0;
+  
+  numberArray.map((value, index) => {
+    if ((!Number(value) && value.length >= 1) || Number(value) < 0)
+      throw new Error('[ERROR]');
+    else {
+      output += Number(value);
+    }
+  })
+  return output;
 }
 
 class App {
   async run() {
     try {
-      // 1. 입출력 기능 -  입력
       const input = await getString();
 
-      // 2. 구분자를 기준으로 문자열을 파싱하는 기능 구현
-      var separators = [',', ':', '\//', '\\n']; // 구분자 배열 : 기본 구분자들, //, \n
+      var separators = [',', ':', '\//', '\\n', ...findCustomSeparators(input)];
       var tempString = input.trim();
 
-      // 커스텀 구분자 찾기
-      const regExp = /\/\/(.*?)\\n/g; // 커스텀 구분자 찾는 정규식
-      let match;
-      while ((match = regExp.exec(tempString)) !== null) { 
-        separators.push(match[1].trim());
-      }
-
-      // 3. 구분자를 기준으로 문자열을 파싱하는 기능 구현
-      let NumberArray = [input]; // 초기 배열에 input을 담고 시작
-
-      separators.forEach(separator => {
-        NumberArray = NumberArray.flatMap(item => item.split(separator));
-      });
-
-      // 4. 숫자인 경우만 출력값에 합하는 기능 구현
-      var output = 0;
-      NumberArray.map((value, index) => {
-        if ((!Number(value) && value.length >= 1) || Number(value) < 0)
-          throw new Error('[ERROR]');
-        else {
-          output += Number(value);
-        }
-      })
+      const numberArray = splitString(tempString, separators);
+      const result = sum(numberArray);
 
       // 결과 출력
-      Console.print(`결과 : ${output}`);
+      Console.print(`결과 : ${result}`);
       return;
     } catch(err) {
-      throw err; // 에러 throw -> 테스트 코드 통과
+      throw err;
     }
   }
-  
 }
 
 export default App;
