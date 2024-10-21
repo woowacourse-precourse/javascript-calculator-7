@@ -16,6 +16,10 @@ class App {
       '덧셈할 문자열을 입력해주세요.\n'
     );
 
+    if (!INPUT) {
+      throw new Error('[ERROR] 입력 값이 없습니다.');
+    }
+
     return INPUT;
   }
 }
