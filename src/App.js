@@ -4,7 +4,7 @@ class App {
   async run() {
     try {
       const input = await this.getInput();
-      const parseInput = this.parseString(input);
+      const parseInput = this.parseString(input.trim());
       const result = this.calculateSum(parseInput);
       MissionUtils.Console.print(`결과 : ${result}`);
     } catch (error) {
