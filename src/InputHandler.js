@@ -14,9 +14,8 @@ class InputHandler {
   async getInput() {
     try {
       this.input = await MissionUtils.Console.readLineAsync('덧셈할 문자열을 입력해주세요.');
-      return 1;
     } catch (error) {
-      console.error("error");
+      throw new Error("[Error] : 잘못된 문자열을 입력하였습니다.");
       // reject 되는 경우
     }
   }
@@ -31,9 +30,6 @@ class InputHandler {
     // 추가된 구분자 정규표현식 생성
     this.regex = new RegExp(`^\\d+(${this.delimiter.source}\\d+)*$`);
     
-    //debug 용
-    //console.log('del : ', this.delimiter.source);
-    //console.log('regex: ', this.regex);
   }
 
   getNumbers() {
@@ -46,7 +42,7 @@ class InputHandler {
       this.num = this.input.split(this.delimiter).filter(Boolean);
     }
     else {
-      console.error("error getNumbers");
+      throw new Error("[ERROR] : 잘못된 문자열을 입력하였습니다.");
     }
     //console.log('num : ', this.num);
   }
@@ -54,7 +50,7 @@ class InputHandler {
   // 합계 계산
   getSum() {
     if (this.num == null ){
-      console.error("error : num is null");
+      throw new Error("[ERROR] : 잘못된 문자열을 입력하였습니다.");
     }
     else if (this.num.length === 0) {
       this.sum = 0;

@@ -1,7 +1,6 @@
 import InputHandler from "./InputHandler.js";
 import { MissionUtils } from "@woowacourse/mission-utils";
 
-
 class App {
   #inputHandler = new InputHandler();
   async run() {
@@ -9,7 +8,7 @@ class App {
     this.#inputHandler.getInputDelimiter();
     this.#inputHandler.getNumbers();
     const sum = this.#inputHandler.getSum();
-    console.log('합계 ', sum);
+    MissionUtils.Console.print(`결과 : ${sum}`);
   }
 }
 
