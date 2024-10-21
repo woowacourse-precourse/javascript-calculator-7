@@ -20,7 +20,8 @@ class App {
           separator.push(customSep);
           input = input.substr(match[0].length);
         } else {
-          // Error 처리
+          const errMessage = `[ERROR] 올바르지 않은 커스텀 구분자 지정 형식`;
+          throw new Error(errMessage);
         }
       }
 
