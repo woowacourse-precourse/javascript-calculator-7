@@ -13,5 +13,8 @@ export default function isValidInput(cleanedString, customDelimiter) {
   } else {
     regex = /^[\\d,;]+$/;
   }
-  return regex.test(cleanedString);
+
+  if (!regex.test(cleanedString)) {
+    throw new Error("[ERROR] : [,][;][커스텀 구분자][숫자 문자]를 제외한 입력이 존재합니다!");
+  }
 }
