@@ -38,6 +38,7 @@ class App {
     if (!this.handleInput(input)) throw new Error('[ERROR] 올바른 형식을 입력해주세요.');
     const arr = this.extractNumber();
     const answer = arr.reduce((acc, cur) => acc + cur);
+    Console.print(`결과 : ${answer}`);
   }
 }
 
