@@ -11,8 +11,8 @@ class App {
           Console.print(`결과 : ${RESULT}`);
           resolve(); // 성공적으로 실행되면 resolve 호출
         } catch (error) {
-          Console.print(`[ERROR] ${error.message}`);
-          //reject(error); // 에러 발생 시 reject 호출
+          Console.print(`${error.message}`);
+          reject(error); // 에러 발생 시 reject 호출
         }
       }).catch((error) => {
         Console.print(`[ERROR] ${error.message}`);
@@ -39,7 +39,7 @@ class App {
       const PARSEDNUM = Number(num);
       
       if (isNaN(PARSEDNUM)) {
-        throw new Error(`유효하지 않은 입력: ${num}`); // 숫자가 아닌 경우 에러 메시지
+        throw new Error(`[ERROR] 유효하지 않은 입력: ${num}`); // 숫자가 아닌 경우 에러 메시지
       }
       
       return PARSEDNUM;
@@ -47,7 +47,7 @@ class App {
 
     const NEGATIVENUMBERS = numbers.filter(num => num < 0);
     if (NEGATIVENUMBERS.length > 0) {
-      throw new Error(`음수는 허용되지 않습니다: ${NEGATIVENUMBERS.join(", ")}`); // 숫자가 음수인 경우 에러 메시지
+      throw new Error(`[ERROR] 음수는 허용되지 않습니다: ${NEGATIVENUMBERS.join(", ")}`); // 숫자가 음수인 경우 에러 메시지
     }
 
     return this.sumNumbers(numbers); // 숫자의 합 계산
