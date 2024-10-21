@@ -11,9 +11,11 @@ class StringCalculator {
       }
     });
   }
+
   isEmpty(input) {
     return input.trim() === "";
   }
+
   parseInput(input) {
     const customDelimiterMatch = input.match(/^\/\/(.)\n(.*)$/);
 
@@ -29,7 +31,12 @@ class StringCalculator {
       numbers: input,
     };
   }
-  
+
+  splitNumbers(numbers, delimiters) {
+    const delimiterPattern = new RegExp(`[${delimiters.join("")}]`);
+    return numbers.split(delimiterPattern).filter((num) => num !== "");
+  }
+
   add(input) {
     if (this.isEmpty(input)) return 0;
     const { numbers, delimiters } = this.parseInput(input);
