@@ -16,7 +16,7 @@ class App {
       const char = strArr[this.cursor];
 
       if (char === '/') { // "/"로 시작하는 경우
-        this.handleCustomSeparator(strArr);
+        this.handleCustomSeparator(char, strArr);
       } else if (isNaN(Number(char))) { // 숫자가 아닌 경우
         this.handleNotNumber(char, strArr);
       } else { // 숫자인 경우
@@ -27,7 +27,7 @@ class App {
     Console.print(`결과 : ${this.sum}`);
   }
 
-  handleCustomSeparator(strArr) {
+  handleCustomSeparator(char, strArr) {
     if (this.cursor === 0) {
       const customSeparatorPlaceholder = strArr.join('').substr(this.cursor, 6);
       const customSeparatorReg = new RegExp(/\/\/(\D{1})\\n/);
