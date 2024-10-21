@@ -4,6 +4,8 @@ class App {
     let input = await Console.readLineAsync("덧셈할 문자열을 입력해 주세요.\n");
     input = this.validateInitialInput(input);
     const splitInputBySeparators = this.parseInput(input);
+    const sum = this.calculateSum(splitInputBySeparators);
+    Console.print(`결과 : ${sum}`);
   }
 
   validateInitialInput(input) {
@@ -56,6 +58,10 @@ class App {
   splitInputBySeparators(input, separator) {
     const pattern = `[${separator}${this.defaultSeparators}]`;
     return input.split(new RegExp(pattern));
+  }
+
+  calculateSum(numbers) {
+    return numbers.map(this.convertToNumber).reduce((sum, num) => sum + num, 0);
   }
 
   convertToNumber(str) {
