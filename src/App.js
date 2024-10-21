@@ -20,7 +20,7 @@ class App {
       } else if (isNaN(Number(char))) { // 숫자가 아닌 경우
         this.handleNotNumber(char, strArr);
       } else { // 숫자인 경우
-        this.handleNumber();
+        this.handleNumber(char);
       }
     }
   }
@@ -56,7 +56,10 @@ class App {
     }
   }
 
-  handleNumber() {}
+  handleNumber(char) {
+    this.number.push(char);
+    this.cursor++;
+  }
 }
 
 export default App;
