@@ -39,11 +39,10 @@ class App {
     }
 
     function userInputNumber(userInput) {
-      if (!CUSTOM_EXPRESS.test(userInput)) {
-        if (!DEFAULT_SEPARATOR.test(userInput)) {
-          throw new Error(ERROR.FORMULA_ERROR);
-        }
-
+      if (
+        !CUSTOM_EXPRESS.test(userInput) &&
+        DEFAULT_SEPARATOR.test(userInput)
+      ) {
         if (!FORMULA.test(userInput)) {
           throw new Error(ERROR.FORMULA_ERROR);
         }
@@ -66,6 +65,8 @@ class App {
         return inputNumber;
       } else if (!userInput.includes('n')) {
         throw new Error(ERROR.CUSTOM_SEPERATE_N_ERROR);
+      } else if (!CUSTOM_EXPRESS.test(userInput)) {
+        throw new Error(ERROR.CUSTOM_SEPERATE_ERROR);
       } else {
         throw new Error('[ERROR]');
       }
