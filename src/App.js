@@ -7,7 +7,12 @@ class App {
         "덧셈할 문자열을 입력해 주세요.\n"
       );
 
-      let numbers = input;
+      let numbers = input.trim(); // 공백 제거
+      if (numbers === "") {
+        MissionUtils.Console.print("결과 : 0"); // 빈 문자열인 경우 0 반환
+        return; // 메서드 종료
+      }
+
       let separator = [",", ":"]; // 기본 구분자
       let numberList;
 
