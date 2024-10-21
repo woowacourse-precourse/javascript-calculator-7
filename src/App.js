@@ -7,7 +7,7 @@ class App {
     let input = await Console.readLineAsync("");
 
     if (input.length === 0) {
-      this.printResult(0);
+      this.printResult(0);  //빈문자열이 들어오는 경우 바로 결과 0을 출력. 
       return;
     }
 
@@ -24,14 +24,14 @@ class App {
 
     numbers = numbers.map((v) => {
       if (v.length === 0 || isNaN(+v))
-        throw new Error("[ERROR] 잘못된 입력입니다.");
+        throw new Error("[ERROR] 잘못된 입력입니다."); //커스텀 구분자 사이에 빈 문자열이나 숫자가 아닌 값이 포함되는 경우
       if (+v < 0)
-        throw new Error("[ERROR] 잘못된 입력입니다. 음수가 입력에 포함됩니다.");
+        throw new Error("[ERROR] 잘못된 입력입니다. 음수가 입력에 포함됩니다.");  //음수가 입력에 포함되는 경우
       return +v;
     })
     let sum = numbers.reduce((acc, cur) => acc + cur, 0);
 
-    Console.print(`결과 : ${sum}`);
+    this.printResult(sum);
     
   }
 
@@ -41,13 +41,14 @@ class App {
 
   getDelimiter(input) {
     const match = input.match(/\/\/(.)\\n(.*)/);  // "//"와 "\n" 사이의 커스텀 구분자 추출
-    if (match === null) {
+
+    if (match === null) // // \n 사이의 커스텀 구분자를 읽을 수 없는 경우. 
       throw new Error("[ERROR] 잘못된 입력입니다. 커스텀 구분자를 읽을 수 없습니다.");
-    }
-    if (match[1].length >= 2) {
+    
+    if (match[1].length >= 2) // 커스텀 구분자에 여러 문자가 들어온 경우.
       throw new Error("[ERROR] 잘못된 입력입니다. 커스텀 구분자 형식이 틀렸습니다.");
-    }
-    if (match[1].length === 1 && !isNaN(+match[1]))
+
+    if (match[1].length === 1 && !isNaN(+match[1]))  //커스텀 구분자에 숫자가 포함되는 경우
       throw new Error("[ERROR] 잘못된 입력입니다. 숫자는 커스텀 구분자가 될 수 없습니다.");
 
     return new RegExp(`[${match[1]},:]`); // 커스텀 구분자 + 기본 구분자를 정규식으로 변환
