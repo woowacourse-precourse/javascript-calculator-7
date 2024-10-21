@@ -3,7 +3,8 @@ import {Console} from '@woowacourse/mission-utils';
 export async function calculator() {
     const input = await Console.readLineAsync('덧셈할 문자열을 입력해 주세요.')
     const parseResult = parseInput(input)
-    Console.print(parseResult)
+    const result = add(parseResult)
+    Console.print(result)
 }
 
 function parseInput(input) {
@@ -20,4 +21,6 @@ function parseInput(input) {
     }
 }
 
-
+function add(parseResult) {
+    return parseResult.reduce((acc, cur) => acc + cur, 0)
+}
