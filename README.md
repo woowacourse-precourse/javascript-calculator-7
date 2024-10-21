@@ -1,4 +1,4 @@
-# javascript-calculator-precourse (우아한테크코스 1차 과제) 
+# 문자열 덧셈 계산기 (우아한테크코스 1차 과제) 
 
 ### 노션 정리 : [개발 관련 일지](https://www.notion.so/126221c9c51380a4b1cbdb7473dac00f)
 
