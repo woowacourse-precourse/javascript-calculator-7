@@ -22,7 +22,7 @@ class App {
       result = calculate(numbers);
     }
 
-    Console.print(result);
+    Console.print(`결과: ${result}`);
   }
 }
 
@@ -35,7 +35,8 @@ function trimCustom(str) {
 
 function calculate(numbers) {
   return numbers.reduce((sum, num) => {
-    const number = parseInt(num);
+    const number = Number(num);
+
     return sum + number;
   }, 0);
 }
