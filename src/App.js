@@ -30,9 +30,16 @@ class App {
     return splitArray;
   }
 
+  validationTest(num) {
+    if (isNaN(num) || num < 0) {
+      throw new Error("[ERROR]");
+    }
+  }
+
   convertNumber(input) {
     const cleanNumArray = input.map((num) => {
       const cleanNum = Number(num);
+      this.validationTest(cleanNum);
       return cleanNum;
     });
     return cleanNumArray;
