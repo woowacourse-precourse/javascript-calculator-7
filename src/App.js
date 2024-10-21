@@ -1,52 +1,66 @@
 import { Console } from '@woowacourse/mission-utils';
-import { VALIDATION_DEFAULT, VALIDATION_CUSTOM, VALIDATION_ERROR } from './constants.js';
+import { VALIDATION_DEFAULT, VALIDATION_CUSTOM } from './constants.js';
 
 class App {
   validateInput(input) {
-    const sep = /[^0-9,:.]/;
-    const customSep = /^\/\/\D\\n/;
+    if (this.isDefault(input)) {
+      return VALIDATION_DEFAULT;
+    } else if (this.isCustom(input)) {
+      return VALIDATION_CUSTOM;
+    }
 
-    if (!sep.test(input)) {
+    throw new Error('[ERROR]: 잘못된 값을 입력했습니다');
+  }
+
+  isDefault(input) {
+    const invalidInput = /[^0-9,:.]/;
+
+    if (!invalidInput.test(input)) {
       if (input.length !== 0 && !this.startsAndEndsWithNumber(input)) {
-        return VALIDATION_ERROR;
+        throw new Error('[ERROR]: 잘못된 값을 입력했습니다');
       }
       if (this.hasConsecutiveSeparators(input, /,:/)) {
-        return VALIDATION_ERROR;
+        throw new Error('[ERROR]: 잘못된 값을 입력했습니다');
       }
       if (this.hasConsecutiveDecimalPoints(input)) {
-        return VALIDATION_ERROR;
+        throw new Error('[ERROR]: 잘못된 값을 입력했습니다');
       }
+      return true;
+    }
+    return false;
+  }
 
-      return VALIDATION_DEFAULT;
-    } else if (customSep.test(input)) {
+  isCustom(input) {
+    const customSep = /^\/\/\D\\n/;
+
+    if (customSep.test(input)) {
       if (input.length > 5 && !this.startsAndEndsWithNumber(input.slice(5))) {
-        return VALIDATION_ERROR;
+        throw new Error('[ERROR]: 잘못된 값을 입력했습니다');
       }
       if (this.hasConsecutiveSeparators(input.slice(5), /,:/)) {
-        return VALIDATION_ERROR;
+        throw new Error('[ERROR]: 잘못된 값을 입력했습니다');
       }
       if (this.hasConsecutiveDecimalPoints(input.slice(5))) {
-        return VALIDATION_ERROR;
+        throw new Error('[ERROR]: 잘못된 값을 입력했습니다');
       }
       if (input[2] === '.') {
-        return VALIDATION_ERROR;
+        throw new Error('[ERROR]: 잘못된 값을 입력했습니다');
       }
 
       if (input[2] !== '\\') {
         const pattern = new RegExp(`[^0-9,:.${input[2]}]`);
         if (pattern.test(input.slice(5)) || this.hasConsecutiveSeparators(input.slice(5), input[2])) {
-          return VALIDATION_ERROR;
+          throw new Error('[ERROR]: 잘못된 값을 입력했습니다');
         }
       } else {
         const pattern = new RegExp(/[^0-9,:.\\]/);
         if (pattern.test(input.slice(5)) || this.hasConsecutiveSeparators(input.slice(5), '\\\\')) {
-          return VALIDATION_ERROR;
+          throw new Error('[ERROR]: 잘못된 값을 입력했습니다');
         }
       }
-
-      return VALIDATION_CUSTOM;
+      return true;
     }
-    return VALIDATION_ERROR;
+    return false;
   }
 
   startsAndEndsWithNumber(input) {
@@ -94,8 +108,6 @@ class App {
         const numArr = this.convertToNumberArray(input.slice(5), new RegExp(/[,:\\]/));
         sum = this.calculateSum(numArr);
       }
-    } else {
-      throw new Error('[ERROR]: 잘못된 값을 입력했습니다');
     }
 
     Console.print(`결과 : ${sum}`);
