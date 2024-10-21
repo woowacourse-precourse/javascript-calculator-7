@@ -1,5 +1,3 @@
-// 문자열 덧셈 계산기
-
 import { MissionUtils } from '@woowacourse/mission-utils';
 
 class App {
@@ -12,6 +10,7 @@ class App {
       MissionUtils.Console.print(`결과 : ${result}`);
     } catch (error) {
       MissionUtils.Console.print(error.message);
+      throw error;
     }
   }
 
@@ -32,7 +31,7 @@ class App {
   }
 
   parseInput(input) {
-    const customDelimiterMatch = input.match(/^\/\/(.)\n(.*)/);
+    const customDelimiterMatch = input.match(/^\/\/(.)\\n(.*)/);
     if (customDelimiterMatch) {
       const [, delimiter, numbers] = customDelimiterMatch;
       return { delimiter, numbers };
