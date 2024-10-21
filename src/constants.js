@@ -7,4 +7,5 @@ export const ERROR_MESSAGE = {
   invalidFormat:
     '[ERROR] 유효하지 않은 형식입니다. 숫자와 기본 구분자(, 또는 :) 및 지정한 커스텀 구분자(`//지정문자\\n`)만 사용 가능합니다.',
   customPosition: '[ERROR] 커스텀 구분자 지정은 입력 앞부분에서만 가능합니다.',
+  duplicatedCustom: '[ERROR] 커스텀 구분자 지정은 한 번만 가능합니다.',
 };
