@@ -1,5 +1,11 @@
 import { Console } from "@woowacourse/mission-utils";
 class App {
+  constructor() {
+    this.prefixCustomSeparator = "//";
+    this.suffixCustomSeparator = "\\n";
+    this.defaultSeparators = ",:";
+  }
+
   async run() {
     let input = await Console.readLineAsync("덧셈할 문자열을 입력해 주세요.\n");
     input = this.validateInitialInput(input);
