@@ -37,7 +37,6 @@ class CustomDelimiterHandler {
   }
 
   #handleWithoutCustomDelimiter(string) {
-    this.#customDelimiter = '';
     this.#numbersString = string;
   }
 
