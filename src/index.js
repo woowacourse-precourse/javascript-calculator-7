@@ -1,4 +1,12 @@
-import App from "./App.js";
+import App from './App.js';
 
-const app = new App();
-await app.run();
+async function startApp() {
+  const app = new App();
+  try {
+    await app.run();
+  } catch (error) {
+    // handle any errors here
+  }
+}
+
+startApp();
