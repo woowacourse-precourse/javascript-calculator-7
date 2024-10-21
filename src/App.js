@@ -7,16 +7,22 @@ class App {
   async run() {
     // 결과값 변수
     let result = 0;
+    // 구분자 설정 - 기본 구분자 쉼표(,), 콜론(:)
+    let seperators = ',:';
+
 
     // 사용자 입력값을 받는다.
     const input = await MissionUtils.Console.readLineAsync('덧셈할 문자열을 입력해 주세요.\n');
 
-    // 문자열에 커스텀 구분자가 있는지 판단
-    const seperators = getSeperators(input);
-   
+    // 커스텀 구분자 추출
+    const customSeperators = getCustomSeperators(input);
 
-    // 커스텀 구분자 설정을 제외한 문자열 추출
-    const str = input.substring(input.indexOf('\\n')+2);
+    let str = input;    
+    if(customSeperators.length > 0) {
+      seperators += customSeperators;
+      // 커스텀 구분자 설정을 제외한 문자열 추출
+      str = input.substring(input.indexOf(END_CUSTOM_SEPERATOR_SETTING)+2);
+    }
 
     // 숫자와 구분자를 제외한 다른 형식의 문자가 포함되어 있는지 확인
     const allRegExp = new RegExp(`[${seperators}\\d]`)
@@ -38,26 +44,21 @@ class App {
   }
 }
 
-function getSeperators(input) {
-  // 구분자 설정 - 기본 구분자 쉼표(,), 콜론(:)
-  let seperators = ',:';
-
+function getCustomSeperators(input) {
+  let customSeperator = '';
   if(input.startsWith(START_CUSTOM_SEPERATOR_SETTING)) {
     if(input.includes(END_CUSTOM_SEPERATOR_SETTING)){
       // 구분자 추출
-      const customSeperator = input.slice(2, input.indexOf(END_CUSTOM_SEPERATOR_SETTING));
+      customSeperator = input.slice(2, input.indexOf(END_CUSTOM_SEPERATOR_SETTING));
 
       // 숫자 혹은 문자열인지 확인
       if(customSeperator.match(/^[0-9]$/) || customSeperator.length > 1) {
         throw new Error("[ERROR] 커스텀 구분자의 형식이 잘못되었습니다.");
       }
-
-      // 구분자 문자열에 커스텀 구분자 추가
-      seperators += customSeperator;
     }
   }
 
-  return seperators;
+  return customSeperator;
 }
 
 export default App;
