@@ -1,6 +1,8 @@
-export function isSeparatorValid(separator) {
-  if (!isNaN(separator)) return false;
-  if (separator === "-" || separator === ".") return false;
+export function isSeparatorsValid(separators) {
+  for (const separator of separators) {
+    if (!isNaN(separator)) return false;
+    if (separator === "-" || separator === ".") return false;
+  }
   return true;
 }
 

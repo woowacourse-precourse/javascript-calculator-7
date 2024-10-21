@@ -1,6 +1,6 @@
 import InterfaceUtil from "./InterfaceUtil.js";
 import CalculateUtil from "./CalculateUtil.js";
-import { isExpressionValid, isSeparatorValid } from "./validation.js";
+import { isExpressionValid, isSeparatorsValid } from "./validation.js";
 import MESSAGES from "./constants/messages.js";
 
 class App {
@@ -8,9 +8,7 @@ class App {
     const input = await InterfaceUtil.inputString();
 
     const { separator, expression } = CalculateUtil.parseInput(input);
-    for (const sep of separator) {
-      if (!isSeparatorValid(sep)) throw new Error(MESSAGES.ERROR);
-    }
+    if (!isSeparatorsValid(separator)) throw new Error(MESSAGES.ERROR);
     if (!isExpressionValid(separator, expression)) throw new Error(MESSAGES.ERROR);
 
     const sum = CalculateUtil.sumExpression(separator, expression);
