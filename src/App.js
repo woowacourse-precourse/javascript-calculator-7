@@ -3,9 +3,12 @@ import { Console } from "@woowacourse/mission-utils";
 class App {
   async run() {
     let input = await Console.readLineAsync("덧셈할 문자열을 입력해 주세요.\n");
-
-    const result = this.add(input);
-    Console.print(`결과 : ${result}`);
+    try {
+      const result = this.add(input);
+      Console.print(`결과 : ${result}`);
+    } catch (error) {
+      Console.print(error.message);
+    }
   }
 
   add(input) {
@@ -24,13 +27,14 @@ class App {
         delimiter = new RegExp(customDelimiterMatch[1]);
         input = input.split("\n")[1];
       } else {
-        throw new Error(
-          `[ERROR] Invalid custom delimiter ${customDelimiterMatch}`
-        );
+        throw new Error(`[ERROR] Invalid custom delimiter : ${input}`);
       }
     }
 
     const numbers = input.split(delimiter).map((num) => {
+      if (isNaN(num) || num.trim() === "") {
+        throw new Error(`[ERROR] Invalid input : ${input}`);
+      }
       return parseInt(num, 10);
     });
 
