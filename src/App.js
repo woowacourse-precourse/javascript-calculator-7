@@ -1,6 +1,6 @@
 import {Console} from "@woowacourse/mission-utils";
 
-class StringCalculator { //하나의 메소드는 하나의 역할
+class App { //하나의 메소드는 하나의 역할
     sum = 0
     customSeparator = null//인스턴스 변수는 최대 2개
 
@@ -66,4 +66,4 @@ class StringCalculator { //하나의 메소드는 하나의 역할
     }
 }
 
-export default StringCalculator;
+export default App;

@@ -1,4 +1,4 @@
-import StringCalculator from "../src/StringCalculator.js";
+import App from "../src/App.js";
 import {MissionUtils} from "@woowacourse/mission-utils";
 
 const mockQuestions = (inputs) => {
@@ -24,7 +24,7 @@ describe("문자열 계산기", () => {
         const logSpy = getLogSpy();
         const outputs = ["결과 : 1"];
 
-        const app = new StringCalculator();
+        const app = new App();
         await app.run();
 
         outputs.forEach((output) => {
@@ -36,7 +36,7 @@ describe("문자열 계산기", () => {
         const inputs = ["-1,2,3"];
         mockQuestions(inputs);
 
-        const app = new StringCalculator();
+        const app = new App();
 
         await expect(app.run()).rejects.toThrow("[ERROR]");
     });
