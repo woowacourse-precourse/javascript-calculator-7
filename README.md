@@ -79,9 +79,9 @@ test/
 ### 📝 Description
 
 - `OOP(Object-Oriented Programming)` 관점에서 문제를 해결하기 위해 노력했습니다.
+- `선언적인(Declarative)` 코드를 작성하기 위해 노력했습니다.
 - 가능한 모든 함수에 테스트를 작성하기 위해 노력했습니다.
 - `type-safe`한 코드를 작성하기 위해 노력했습니다.
-- `선언적인(Declarative)` 코드를 작성하기 위해 노력했습니다.
 - 가능한 작은 함수를 만들기 위해 노력했습니다.
 
 ### ♻️ Object
@@ -157,4 +157,5 @@ classDiagram
 **Lib**
 
 - SchemaValidator: 유효성 검증을 선언적으로 사용하기 위한 유틸 클래스입니다.
+
 - utils: 재사용될 수 있는 작은 단위의 유틸 함수 모음입니다.
