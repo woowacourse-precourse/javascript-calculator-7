@@ -29,9 +29,10 @@ class App {
       if (input[0] === "-")
         throw new Error("[ERROR] 음수는 입력할 수 없습니다.");
 
-      // 정규식으로 구분 기준을 정함 -> ",",":",커스텀 구분자
+      // 기본 제공 구분자 기준으로 문자열 나누기
       let splitInputArray = input.split(/[,:]/);
 
+      // 배열 각 요소에서 커스텀 구분자 기준으로 문자열 나누기
       splitInputArray = splitInputArray.map((x) => x.split(customSeparator));
       splitInputArray = splitInputArray.flat();
 
