@@ -26,18 +26,14 @@ class Model {
   }
 
   checkInvalidCharacter() {
-    // 기본 구분자는 정규표현식 그대로 사용하고, 커스텀 구분자는 이스케이프 처리
-    let escapedDelimiter = this.#delimiter;
+    // 구분자를 이스케이프 처리
+    const escapedDelimiter = String(this.#delimiter).replace(/[.*+?^${}()|[\]\\]/g, '\\$&');
 
-    if (typeof this.#delimiter === 'string') {
-      // 커스텀 구분자가 문자열일 경우 이스케이프 처리
-      escapedDelimiter = this.#delimiter.replace(/[.*+?^${}()|[\]\\]/g, '\\$&');
-    }
-
-    // 숫자(0-9)와 현재 구분자 외의 문자 찾기
+    // 숫자와 구분자 외의 문자를 찾는 정규표현식 생성
     const invalidCharRegex = new RegExp(`[^0-9${escapedDelimiter}]`);
 
     const invalidCharMatch = this.string.match(invalidCharRegex);
+
     if (invalidCharMatch) {
       throw new Error(`[ERROR] 허용되지 않은 문자가 포함되어 있습니다: ${invalidCharMatch[0]}`);
     }
