@@ -26,6 +26,18 @@ class App {
     return costomSeparator;
   }
 
+  extractAndSplitByCustomSeparator(input) {
+    const customSeparator = this.getCustomSeparator(input);
+    const extractInputWithoutCustomSeparator = input.slice(
+      input.indexOf(this.suffixCustomSeparator) + 2
+    );
+    const splitInputBySeparators = this.splitInputBySeparators(
+      extractInputWithoutCustomSeparator,
+      customSeparator
+    );
+    return splitInputBySeparators;
+  }
+
   splitInputBySeparators(input, separator) {
     const pattern = `[${separator}${this.defaultSeparators}]`;
     return input.split(new RegExp(pattern));
