@@ -11,7 +11,8 @@ class App {
 
       // 1-2. INPUT이 빈 문자열이나 공백인 경우 0 반환 후 종료
       if (INPUT.trim() === "") {
-        return 0;
+        Console.print("결과 : 0");
+        return;
       }
 
       // 2. 구분자 단위로 문자열 분리
