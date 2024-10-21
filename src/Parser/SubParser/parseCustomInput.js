@@ -1,7 +1,6 @@
 import sumAllNumbers from '../../Util/sumAllNumbers.js';
 import {
   validateCustomInput,
-  // validateNoDuplicateDelimiters,
   validateCustomInputFormat,
 } from '../../validator/validator.js';
 import { ERROR_MESSAGES, ERROR_PREFIX } from '../../Constraints/Constraints.js';
@@ -21,13 +20,13 @@ export default function parseCustomInput(input) {
   }
 
   // escape 처리.
-
   const escapedDelimiter = escapeRegExp(delimiter);
 
   // delimiter 이후의 내용을 추출한다.
   const content = input.slice(delimiterEnd + 2);
 
   validateCustomInput(content, escapedDelimiter);
+
   // 구분자는 있지만, 내용이 빈경우
   if (content === '') {
     return 0;
