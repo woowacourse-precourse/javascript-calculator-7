@@ -25,7 +25,12 @@ class App {
       }
 
       const REGEX = new RegExp(`[${delimiters.join('')}]`);
-      const numbers = input.split(REGEX).map(Number);
+      const numbers = input.split(REGEX).map(value => {
+        if (isNaN(value)) {
+          throw new Error(`[ERROR] 숫자가 아닌 값이 포함되어 있습니다: ${value}`);
+        }
+        return Number(value);
+      });
 
       const negativeNumbers = numbers.filter(num => num < 0);
       if (negativeNumbers.length > 0) {
