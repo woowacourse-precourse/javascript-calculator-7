@@ -6,15 +6,28 @@ class App {
       "덧셈할 문자열을 입력해 주세요.\n"
     );
 
-    const TempValueArray = inputValue.split(",");
+    const customSeparator = inputValue.startsWith("//") && inputValue[2];
 
-    const splitedValueArray = TempValueArray.map((value) => {
-      if (value.includes(":")) {
-        return value.split(":");
-      }
+    const numbers = customSeparator ? inputValue.split("\\n")[1] : inputValue;
 
-      return value;
-    }).flat();
+    const splitedValueArray = numbers
+      .split(",")
+      .map((value) => {
+        if (value.includes(":")) {
+          return value.split(":");
+        }
+
+        return value;
+      })
+      .flat()
+      .map((value) => {
+        if (value.includes(customSeparator)) {
+          return value.split(customSeparator);
+        }
+
+        return value;
+      })
+      .flat();
 
     const sum = splitedValueArray.reduce((acc, curr) => acc + +curr, 0);
 
