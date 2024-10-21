@@ -15,6 +15,22 @@ class App {
     const isCustom = CUSTOM_PATTERN.test(inputValue);
     console.log(`xxxxx(확인용 - 커스텀 구분자인가요? : ${isCustom})`);
 
+    // [3] 커스텀구분자를 처리하는 함수 만들기
+    const extractCustomDelimiter = (inputValue) => {
+      const inputSplit = inputValue.split('\\n');
+      const customDelimiter = inputSplit[0].replace('//', '');
+      const customDelimiterNums = inputSplit[1];
+      const customStringArray = customDelimiterNums.split(customDelimiter);
+      const customNumbersArray = customStringArray.map(Number);
+      console.log(
+        `xxxxx(확인용 - 커스텀구분자 숫자배열 추출여부 : ${customNumbersArray})`
+      );
+      return customNumbersArray;
+    };
+
+    // 테스트
+    extractCustomDelimiter(inputValue);
+
   }
 }
 
