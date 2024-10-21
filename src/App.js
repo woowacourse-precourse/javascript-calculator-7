@@ -35,6 +35,10 @@ class App {
             numbers = input.split(custom_split_text);
         } else {
             numbers = input.split(default_split_text);
+            // 구분자가 없는 숫자만 입력된 경우 검사
+            if (numbers.length === 1 && input === numbers[0] && !default_split_text.test(input)) {
+                throw new Error("[ERROR] 구분자를 포함하여 입력해 주세요.");
+            }
         }
 
         // 숫자 유효성 검사
@@ -42,7 +46,7 @@ class App {
         for (let num of numbers) {
             num = num.trim();
             if (num === "" || /[^0-9]/.test(num)) {
-                throw new Error("[ERROR] 잘못된 문자입력했습니다.");
+                throw new Error("[ERROR] 잘못된 문자 입력했습니다.");
             }
             const value = parseInt(num, 10);
             if (value < 0) {
