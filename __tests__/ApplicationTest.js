@@ -59,4 +59,13 @@ describe("문자열 계산기", () => {
 
     await expect(app.run()).rejects.toThrow(ERROR_MESSAGES.EMPTY_INPUT);
   });
+
+  test("구분자 사이에 숫자가 없을 경우", async () => {
+    const inputs = ["//;\\n;;;"];
+    mockQuestions(inputs);
+
+    const app = new App();
+
+    await expect(app.run()).rejects.toThrow(ERROR_MESSAGES.NUMBER_BETWEEN_DELIMITER);
+  });
 });
