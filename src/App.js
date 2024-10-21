@@ -1,10 +1,11 @@
-import AdditionController from './CalculatorController.js';
-import AdditionService from './CalculatorService.js';
+import CalculatorController from './CalculatorController.js';
+import CalculatorService from './CalculatorService.js';
 
 class App {
   async run() {
-    const additoonController = new AdditionController(AdditionService);
-    additoonController.run();
+    const calculatorController = new CalculatorController(CalculatorService);
+    const result = await calculatorController.run();
+    calculatorController.showresult(result);
   }
 }
 
