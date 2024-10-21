@@ -21,7 +21,7 @@ class App {
         }
 
         const numbers = strNumbers.split(dividerExp).map((NUM) => {
-            const PARSE_NUM = Number(num.trim());
+            const PARSE_NUM = Number(NUM.trim());
             if (isNaN(PARSE_NUM) || PARSE_NUM < 0) {
                 throw new Error(
                     `[ERROR] 구분자 외의 잘못된 값이 포함되었습니다. \n 잘못된 값:  ${PARSE_NUM}`
@@ -31,7 +31,6 @@ class App {
         });
 
         const SUM = numbers.reduce((SUM, NUM) => SUM + NUM, 0);
-        console.log(SUM);
         await Console.print(`결과: ${SUM}`);
     }
 }
