@@ -17,11 +17,11 @@ class App {
         }
 
         const NUMBERS = STR_NUMBERS.split(DIVIDER).map((NUM) => {
-            const PARSENUM = Number(NUM);
-            if (isNaN(PARSENUM)) {
+            const PARSE_NUM = Number(NUM);
+            if (isNaN(PARSE_NUM)) {
                 throw new Error("[ERROR]");
             }
-            return PARSENUM;
+            return PARSE_NUM;
         });
 
         const SUM = NUMBERS.reduce((SUM, NUM) => SUM + NUM, 0);
