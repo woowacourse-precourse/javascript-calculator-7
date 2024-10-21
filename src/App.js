@@ -33,10 +33,13 @@ class App{
     if (NUMBERS.some((NUM) => isNaN(NUM) || NUM < 0)) {
       throw new Error("[ERROR]");
     }
-    
+
     // 7. 분리하여 얻은 숫자의 합 구하기
     for (const NUM of NUMBERS) {
       RESULT += NUM;
     }
+
+    // 8. 결과 출력
+    Console.print(`결과 : ${RESULT}`);
   }
 }
