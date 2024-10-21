@@ -2,6 +2,7 @@ import {Console} from "@woowacourse/mission-utils";
 import {getInput} from "./utils/inputHandler.js";
 import {parseInput, preprocessing} from "./utils/stringProcessor.js";
 import {checkForErrors} from "./utils/errorHandler.js";
+import {RESULT_MESSAGE} from "./constants/message.js";
 
 class StringCalculator {
     sum = 0;
@@ -19,7 +20,7 @@ class StringCalculator {
     }
 
     getOutput() {
-        Console.print(`결과 : ${this.sum}`);
+        Console.print(RESULT_MESSAGE + this.sum);
     }
 
     calculator(param) {
