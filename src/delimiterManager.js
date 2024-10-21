@@ -100,6 +100,10 @@ class DelimiterManager {
           throw new Error("[ERROR] 유효하지 않은 숫자 입력");
         }
 
+        if (number < 0) {
+          throw new Error("[ERROR] 현재 음수 사용. 양수만 사용 가능");
+        }
+
         if (
           number > Number.MAX_SAFE_INTEGER ||
           number < Number.MIN_SAFE_INTEGER

@@ -2,7 +2,6 @@ import { Console } from "@woowacourse/mission-utils"; // woowacourse에서 제�
 import DelimiterManager from "./delimiterManager.js";
 import ResultPrinter from "./resultPrinter.js";
 import Calculator from "./calculator.js";
-import ErrorHandler from "./errorHandler.js";
 
 // App 클래스는 프로그램 제어를 담당
 class App {
@@ -10,7 +9,6 @@ class App {
     this.delimiterManager = new DelimiterManager();
     this.resultPrinter = new ResultPrinter();
     this.calculator = new Calculator();
-    this.errorHandler = new ErrorHandler();
   }
 
   getInput() {
