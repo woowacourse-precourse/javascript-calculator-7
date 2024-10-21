@@ -39,12 +39,14 @@ class App {
 
     const numbers = input.split(regex).map(Number);
 
-    if (numbers.includes(NaN)) {
+    if (numbers.some((num) => Number.isNaN(num))) {
       throw new Error(
         '[ERROR] 올바른 값을 얻으려면 새로운 커스텀 구분자를 지정하거나 올바른 값을 입력해주세요.',
       );
     }
-
+    if (numbers.some((num) => num < 0)) {
+      throw new Error('[ERROR] 음수는 입력할 수 없습니다.');
+    }
     const result = numbers.reduce((sum, num) => sum + num, 0);
     return result;
   }
