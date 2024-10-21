@@ -16,7 +16,7 @@ class Calculator {
       const sum = this.sumArray(numbers);
       printMessage(`${LOG_MESSAGE.RESULT_MESSAGE}${sum}`);
     } catch (error) {
-      throw new Error(`Calculator Error: ${error.message}`);
+      throw new Error(`${error.message}`);
     }
   }
 
