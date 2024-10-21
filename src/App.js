@@ -17,6 +17,7 @@ class Calculator {
 
     let divider = this.setDivider(input);
     let numberArray = this.createNumberArray(input, divider);
+    return this.sum(numberArray);
   }
 
   static setDivider(input) {
@@ -63,6 +64,18 @@ class Calculator {
     }
 
     return numberString.split(divider).map(Number);
+  }
+
+  static sum(numberArray) {
+    if (numberArray.some((num) => num < 0)) {
+      throw new Error(ERROR_MESSAGES.NEGATIVE_NUMBER);
+    }
+
+    if (numberArray.some(isNaN)) {
+      throw new Error(ERROR_MESSAGES.INVALID_INPUT);
+    }
+
+    return numberArray.reduce((acc, cur) => acc + cur, 0);
   }
 }
 
