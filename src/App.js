@@ -17,6 +17,7 @@ class App {
     const { delimiter, numbers } = this.parseInput(input);
     const parsedNumbers = numbers.split(delimiter).map(Number);
 
+    this.validateNumbers(parsedNumbers);
     return parsedNumbers.reduce((sum, num) => sum + num, 0);
   }
 
@@ -27,6 +28,13 @@ class App {
       return { delimiter, numbers };
     }
     return { delimiter: /[,|:]/, numbers: input };
+  }
+
+  validateNumbers(numbers) {
+    const negatives = numbers.filter((num) => num < 0);
+    if (negatives.length > 0) {
+      throw new Error('음수는 허용되지 않습니다.');
+    }
   }
 }
 
