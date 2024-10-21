@@ -13,6 +13,13 @@ class App{
     // 2. 구분자 분리 1 : 쉼표(,)와 클론(:) 파악 조건문
     if (DATA.match(SEPARATOR)){
       NUMBERS=DATA.split(SEPARATOR).map(Number)
+    // 3. 구분자 분리 2. : 커스텀 구분자(//구분자\n) 파악 조건문
+    }else if (DATA.startsWith("//")&&DATA.includes("\\n")){
+      const custom_index_end=DATA.indexOf("\\n")
+      const custom_separator=DATA.substring(2,custom_index_end)
+
+      SEPARATOR=new RegExp(`[${custom_separator},|:]`);
+      NUMBERS=DATA.substring(custom_index_end+2).split(SEPARATOR).map(Number);
     }
   }
 }
