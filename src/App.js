@@ -42,7 +42,9 @@ class App {
   printAnswer(sum) {
     Console.print(`결과 : ${sum}`);
   }
-  printError() {}
+  printError(error) {
+    throw new Error(`[ERROR] ${error}`);
+  }
   validate() {}
 }
 
