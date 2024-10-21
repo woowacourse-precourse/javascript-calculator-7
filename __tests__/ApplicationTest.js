@@ -17,12 +17,57 @@ const getLogSpy = () => {
 };
 
 describe("문자열 계산기", () => {
+  test("기본 구분자 입력", async () => {
+    const inputs = ["1,3,4"];
+    mockQuestions(inputs);
+
+    const logSpy = getLogSpy();
+    const outputs = ["결과 : 8"];
+
+    const app = new App();
+    await app.run();
+
+    outputs.forEach((output) => {
+      expect(logSpy).toHaveBeenCalledWith(expect.stringContaining(output));
+    });
+  });
+
   test("커스텀 구분자 사용", async () => {
     const inputs = ["//;\\n1"];
     mockQuestions(inputs);
 
     const logSpy = getLogSpy();
     const outputs = ["결과 : 1"];
+
+    const app = new App();
+    await app.run();
+
+    outputs.forEach((output) => {
+      expect(logSpy).toHaveBeenCalledWith(expect.stringContaining(output));
+    });
+  });
+
+  test("커스텀 구분자, 기본 구분자 혼용 사용", async () => {
+    const inputs = ["//;\\n1;2,3"];
+    mockQuestions(inputs);
+
+    const logSpy = getLogSpy();
+    const outputs = ["결과 : 6"];
+
+    const app = new App();
+    await app.run();
+
+    outputs.forEach((output) => {
+      expect(logSpy).toHaveBeenCalledWith(expect.stringContaining(output));
+    });
+  });
+
+  test("빈 문자열", async () => {
+    const inputs = [""];
+    mockQuestions(inputs);
+
+    const logSpy = getLogSpy();
+    const outputs = ["결과 : 0"];
 
     const app = new App();
     await app.run();
