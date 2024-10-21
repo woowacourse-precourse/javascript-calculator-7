@@ -1,5 +1,3 @@
-# javascript-calculator-precourse
-
 # 미션1 - 문자열 덧셈 계산기
 
 ## 기능 요구 사항
