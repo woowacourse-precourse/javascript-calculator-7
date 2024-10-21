@@ -28,6 +28,9 @@ class App {
 
     // 분리한 문자를 숫자로 변환
     const numberArray = numbers.map(Number);
+
+    // 분리한 숫자들을 합산
+    const sum = numberArray.reduce((acc, curr) => acc + curr, 0);
   }
 }
 
