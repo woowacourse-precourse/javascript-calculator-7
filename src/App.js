@@ -15,9 +15,9 @@ class App {
       // 커스텀 구분자 추출 하고나서 숫자만 추출
       const startIndex = userInput.indexOf('\\n');
       const custom = userInput.substring(2, startIndex);
-      const inputSplited = userInput.substring(startIndex + 2);
+      const splited = userInput.substring(startIndex + 2);
       const regex = new RegExp(`[${custom}:,]`);
-      string = inputSplited.split(regex).map(Number);
+      string = splited.split(regex).map(Number);
     } else {
       // 입력받은 값에서 숫자만 추출
       string = userInput.split(/,|:/).map(Number);
@@ -28,19 +28,19 @@ class App {
   // 더하는 함수
   addNumber(num) {
     const sum = num.reduce((a, b) => (a + b));
-    Console.print(`결과 :${sum}`)
+    Console.print(`결과 :${sum}`);
   }
 
   // 예외처리 함수
   errorCalculator(inputSplited) {
     if (inputSplited.some((num) => num < 0)) {
       // 음수 입력했을 때
-      Console.print('[ERROR]')
+      Console.print('[ERROR]');
       throw new Error('ERROR');
     }
 
     if (inputSplited.some((val) => isNaN(val))) {
-      Console.print('[ERROR]')
+      Console.print('[ERROR]');
       throw new Error('ERROR');
     }
   }
@@ -59,6 +59,5 @@ class App {
     this.errorCalculator(inputSplited)
   }
 };
-
 
 export default App;
