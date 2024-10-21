@@ -92,6 +92,36 @@ describe('문자열 계산기', () => {
     });
   });
 
+  test('커스텀 구분자 이후 아무 값도 입력하지 않은 경우', async () => {
+    const inputs = ['//-\\n'];
+    mockQuestions(inputs);
+
+    const logSpy = getLogSpy();
+    const outputs = ['결과 : 0'];
+
+    const app = new App();
+    await app.run();
+
+    outputs.forEach((output) => {
+      expect(logSpy).toHaveBeenCalledWith(expect.stringContaining(output));
+    });
+  });
+
+  test('커스텀 구분자 이후 0을 입력한 경우', async () => {
+    const inputs = ['//-\\n0'];
+    mockQuestions(inputs);
+
+    const logSpy = getLogSpy();
+    const outputs = ['결과 : 0'];
+
+    const app = new App();
+    await app.run();
+
+    outputs.forEach((output) => {
+      expect(logSpy).toHaveBeenCalledWith(expect.stringContaining(output));
+    });
+  });
+
   test('예외 테스트', async () => {
     const inputs = ['-1,2,3'];
     mockQuestions(inputs);
