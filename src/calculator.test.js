@@ -100,6 +100,12 @@ describe('문자열 계산기 model', () => {
       // 에러 발생 후 추가 로직이 없으면 사실상 프로그램 종료
     }
   });
+  test('최대 허용 숫자 초과시 에러 발생', () => {
+    const largeInput = `${Number.MAX_SAFE_INTEGER + 1},2,3`; // MAX_SAFE_INTEGER 초과
+    expect(() => calculate(largeInput)).toThrow(
+      '[ERROR] : 입력한 숫자가 너무 큽니다. 더 작은 숫자를 입력해 주세요.',
+    );
+  });
 
   test('빈문자열 0반환', () => {
     const result = calculate('');
