@@ -1,6 +1,7 @@
 import INPUT from "../view/input.js";
 import { splitReg } from "../constants/reg.js";
 import Model from "../model/model.js";
+import OUTPUT from "../view/output.js";
 
 class Controller {
   model = new Model();
@@ -14,7 +15,7 @@ class Controller {
 
     this.model.addDelimiter(custom);
 
-    console.log(this.model.calculate(other));
+    OUTPUT.CONSOLE_RESULT(this.model.calculate(other));
   }
 
   findCustomDelimiter(string) {
