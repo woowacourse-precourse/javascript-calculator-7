@@ -2,9 +2,18 @@ import { Console } from '@woowacourse/mission-utils';
 
 class App {
   async run() {
+    let sum = 0;
+    const getSum = (arr) => {
+      arr.forEach((item) => {
+        sum += parseInt(item);
+      });
+      return Console.print(`결과 : ${sum}`);
+    };
+
     const input = await Console.readLineAsync(
       '덧셈할 문자열을 입력해 주세요.\n'
     );
+
     // 빈 문자열일 경우
     if (input === '') {
       Console.print('결과 : 0');
@@ -35,11 +44,7 @@ class App {
       }
 
       const result = input.split(/,|:/g);
-      let sum = 0;
-      result.forEach((item) => {
-        sum += parseInt(item);
-      });
-      Console.print(`결과 : ${sum}`);
+      getSum(result);
     }
 
     // 커스텀 구분자
@@ -65,14 +70,8 @@ class App {
         throw new Error('[ERROR] 잘못된 입력입니다.');
       }
 
-      // 합 구하기
       const result = inputCustomNumbers.split(delimiter);
-      let hap = 0;
-      result.forEach((item) => {
-        hap += parseInt(item);
-      });
-
-      Console.print(`결과 : ${hap}`);
+      getSum(result);
     }
   }
 }
