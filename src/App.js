@@ -13,6 +13,7 @@ class App {
 
     try {
       const inputView = new InputView();
+      const outputView = new OutputView();
       const separator = new Separator();
       const numberArr = new NumberArr();
 
@@ -24,7 +25,7 @@ class App {
       const numArr = numberArr.makeNumArr(string);
 
       const answer = sumNum(numArr);
-      OutputView(answer);
+      outputView.printAnswer(answer);
     } catch (error) {
       Console.print(error.message);
       throw error;
