@@ -1,12 +1,12 @@
 import {ERROR_MESSAGE} from "../constants/message.js";
 
-export function isCustomSeparatorError(param) {
-    if (!isNaN(param)) {
-        throw new Error("[ERROR]: 에러발생");
+export function handleCustomSeparatorError(param) {
+    if (param === "") {
+        throw new Error(ERROR_MESSAGE.WRONG_CUSTOM_SEPARATOR);
     }
 }
 
-export function checkForErrors(param) {
+export function handleStringError(param) {
     if (param === "" || isNaN(param)) {
         throw new Error(ERROR_MESSAGE.WRONG_INPUT);
     }

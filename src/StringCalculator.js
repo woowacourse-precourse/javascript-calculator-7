@@ -1,7 +1,7 @@
 import {Console} from "@woowacourse/mission-utils";
 import {getInput} from "./utils/inputHandler.js";
 import {parseInput, preprocessing} from "./utils/stringProcessor.js";
-import {checkForErrors} from "./utils/errorHandler.js";
+import {handleStringError} from "./utils/errorHandler.js";
 import {RESULT_MESSAGE} from "./constants/message.js";
 
 class StringCalculator {
@@ -29,7 +29,7 @@ class StringCalculator {
 
     #calculator(param) {
         const numberArray = preprocessing(param, this.#customSeparator);
-        numberArray.forEach(elem => checkForErrors(elem)); // 에러 체크
+        numberArray.forEach(elem => handleStringError(elem)); // 에러 체크
         this.#sum = numberArray.reduce((a, b) => Number(a) + Number(b), 0);
     }
 }
