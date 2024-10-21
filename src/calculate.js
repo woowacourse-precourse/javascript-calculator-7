@@ -38,11 +38,6 @@ class Calculator {
               "덧셈할 문자열을 입력해 주세요."
             );
     
-            if (userInput.toLowerCase() === "종료") {
-              Console.print("프로그램을 종료합니다.");
-              return;
-            }
-    
             Console.print(`결과 : ${this.add(userInput)}`);
           } catch (error) {
             Console.print("[ERROR]");
