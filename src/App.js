@@ -27,6 +27,11 @@ function getSeparatorAndData(input) {
   if (input.startsWith("//")) {
     const newlineIndex = input.indexOf("\\n");
 
+    // 줄 바꿈 문자가 없는 경우 예외 처리
+    if (newlineIndex === -1) {
+      throw new Error(ERROR_MESSAGES.INVALID_FORMAT);
+    }
+
     customSeparator = input.substring(2, newlineIndex);
 
     inputData = input.substring(newlineIndex + 2);
@@ -65,7 +70,7 @@ function validateCustomSeparator(customSeparator) {
 // 숫자가 아니거나 음수인 경우 예외 처리
 function validateNumber(num) {
   if (isNaN(num)) {
-    throw new Error(ERROR_MESSAGES.INVALID_FORMAT);
+    throw new Error(ERROR_MESSAGES.INVALID_NUMBER);
   }
 
   if (num < 0) {
