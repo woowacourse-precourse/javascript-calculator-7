@@ -6,18 +6,12 @@ class Validator {
     this.defaultDelimiter = /[,:]/;
   }
 
-  validateEmptyInput() {
-    if (this.userInput.trim() === "") {
-      throw new Error(ERROR_MESSAGE.empty_input);
-    }
-  }
-
   validateNumbers(numbers) {
-    const HAS_INVALID_Number = numbers.some(
-      (number) => isNaN(number) || number < 0
+    const HAS_INVALID_NUMBER = numbers.some(
+      (number) => Number.isNaN(number) || number < 0
     );
 
-    if (HAS_INVALID_Number) {
+    if (HAS_INVALID_NUMBER) {
       throw new Error(ERROR_MESSAGE.invalid_number);
     }
   }
@@ -36,8 +30,6 @@ class Validator {
   }
 
   parseInput() {
-    this.validateEmptyInput();
-
     if (this.userInput.startsWith("//")) {
       this.extractCustomDelimiter();
     }
