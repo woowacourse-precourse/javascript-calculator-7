@@ -35,15 +35,15 @@ class Calculator {
     while ((findCustom = regex.exec(text)) != null) {
       if (findCustom.index != this.startIndex) {
         //커스텀 구분자 조건 1 : 문자열 앞에서 연속적으로 주어질 때
-        throw new Error('커스텀 구분자의 위치가 올바르지 않습니다.');
+        throw new Error('[ERROR] 커스텀 구분자의 위치가 올바르지 않습니다.');
       }
       if (findCustom[1].length !== 1) {
         //커스텀 구분자 조건 2 : 문자 1개
-        throw new Error('커스텀 구분자의 문자가 1개가 아닙니다.');
+        throw new Error('[ERROR] 커스텀 구분자의 문자가 1개가 아닙니다.');
       }
       if (/\d/.test(findCustom[1])) {
         //커스텀 구분자 조건 3 : 숫자가 아닌 문자
-        throw new Error('커스텀 구분자는 숫자가 불가합니다.');
+        throw new Error('[ERROR] 커스텀 구분자는 숫자가 불가합니다.');
       }
       this.startIndex += findCustom[0].length;
       this.delimiter.add(findCustom[1]);
@@ -55,7 +55,7 @@ class Calculator {
     const pattern = `^[${[...this.delimiter].join('')}\\d]+$`; //구분자와 숫자로만 이루어진 문자열인지
     const regex = new RegExp(pattern);
     if (!regex.test(text)) {
-      throw new Error('구분자와 양수가 아닌 다른 문자가 존재합니다');
+      throw new Error('[ERROR] 구분자와 양수가 아닌 다른 문자가 존재합니다');
     }
   }
 

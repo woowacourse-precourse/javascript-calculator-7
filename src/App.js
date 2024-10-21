@@ -11,7 +11,8 @@ class App {
       const result = calc.calculate(input);
       Console.print(`결과 : ${result}`);
     } catch (error) {
-      Console.print(`[Error] : ${error.message}`);
+      Console.print(error.message);
+      throw error;
     }
   }
 }
