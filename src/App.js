@@ -19,7 +19,13 @@ class App {
     if (input.trim() === '') return 0;
 
     const { delimiter, numbers } = this.parseInput(input);
-    const parsedNumbers = numbers.split(delimiter).map(Number);
+    const parsedNumbers = numbers.split(delimiter).map((num) => {
+      const parsed = Number(num);
+      if (isNaN(parsed)) {
+        throw new Error('[ERROR] 숫자가 아닌 값이 포함되어 있습니다.');
+      }
+      return parsed;
+    });
 
     this.validateNumbers(parsedNumbers);
     return parsedNumbers.reduce((sum, num) => sum + num, 0);

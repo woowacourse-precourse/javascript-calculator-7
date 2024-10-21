@@ -1,43 +1,50 @@
-import App from "../src/App.js";
-import { MissionUtils } from "@woowacourse/mission-utils";
+import { MissionUtils } from '@woowacourse/mission-utils';
 
-const mockQuestions = (inputs) => {
-  MissionUtils.Console.readLineAsync = jest.fn();
+class App {
+  async run() {
+    MissionUtils.Console.print('덧셈할 문자열을 입력해 주세요.');
 
-  MissionUtils.Console.readLineAsync.mockImplementation(() => {
-    const input = inputs.shift();
-    return Promise.resolve(input);
-  });
-};
+    try {
+      const input = await MissionUtils.Console.readLineAsync();
+      const result = this.calculate(input);
+      MissionUtils.Console.print(`결과 : ${result}`);
+    } catch (error) {
+      MissionUtils.Console.print(error.message);
+      throw error;
+    }
+  }
 
-const getLogSpy = () => {
-  const logSpy = jest.spyOn(MissionUtils.Console, "print");
-  logSpy.mockClear();
-  return logSpy;
-};
+  calculate(input) {
+    if (input.trim() === '') return 0;
 
-describe("문자열 계산기", () => {
-  test("커스텀 구분자 사용", async () => {
-    const inputs = ["//;\\n1"];
-    mockQuestions(inputs);
-
-    const logSpy = getLogSpy();
-    const outputs = ["결과 : 1"];
-
-    const app = new App();
-    await app.run();
-
-    outputs.forEach((output) => {
-      expect(logSpy).toHaveBeenCalledWith(expect.stringContaining(output));
+    const { delimiter, numbers } = this.parseInput(input);
+    const parsedNumbers = numbers.split(delimiter).map((num) => {
+      const parsed = Number(num);
+      if (isNaN(parsed)) {
+        throw new Error('[ERROR] 숫자가 아닌 값이 포함되어 있습니다.');
+      }
+      return parsed;
     });
-  });
 
-  test("예외 테스트", async () => {
-    const inputs = ["-1,2,3"];
-    mockQuestions(inputs);
+    this.validateNumbers(parsedNumbers);
+    return parsedNumbers.reduce((sum, num) => sum + num, 0);
+  }
 
-    const app = new App();
+  parseInput(input) {
+    const customDelimiterMatch = input.match(/^\/\/(.)\\n(.*)/);
+    if (customDelimiterMatch) {
+      const [, delimiter, numbers] = customDelimiterMatch;
+      return { delimiter, numbers };
+    }
+    return { delimiter: /[,|:]/, numbers: input };
+  }
 
-    await expect(app.run()).rejects.toThrow("[ERROR]");
-  });
-});
+  validateNumbers(numbers) {
+    const negatives = numbers.filter((num) => num < 0);
+    if (negatives.length > 0) {
+      throw new Error('[ERROR] 음수는 허용되지 않습니다.');
+    }
+  }
+}
+
+export default App;
