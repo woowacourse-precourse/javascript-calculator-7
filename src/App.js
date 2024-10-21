@@ -1,5 +1,15 @@
+import Controller from "./controller/controller.js";
+
 class App {
-  async run() {}
+  #Controller = new Controller();
+
+  async run() {
+    try {
+      await this.#Controller.start();
+    } catch (e) {
+      throw new Error("[ERROR]");
+    }
+  }
 }
 
 export default App;
