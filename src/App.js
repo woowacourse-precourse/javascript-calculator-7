@@ -1,6 +1,6 @@
 import { formatInput } from "./model/formatter.js";
-import { getInput } from "./View/Input.js";
-import { printOutput } from "./View/Output.js";
+import { getInput } from "./view/Input.js";
+import { printOutput } from "./view/Output.js";
 import { checkInputValidation } from "./validation/validation.js";
 import { plusCalculator } from "./utils/plus.calculator.js";
 
