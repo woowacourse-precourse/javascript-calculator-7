@@ -86,7 +86,8 @@ class App {
   }
 
   printError(msg) {
-    Console.print('[ERROR]'+msg);
+    Console.print('[ERROR]' + msg);
+    throw new Error("[ERROR]");
   }
 
   print(str) {
