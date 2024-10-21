@@ -8,7 +8,7 @@ class CalculatorController {
   async run() {
     const input = await this.view.readInput();
     const numbers = this.inputParser.parse(input);
-    const result = this.calculator.calculate(numbers);
+    const result = this.calculator.sum(numbers);
     this.view.displayResult(result);
   }
 }
