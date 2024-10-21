@@ -1,7 +1,4 @@
-import { createRequire } from 'module';
-const require = createRequire(import.meta.url);
 const { Console } = require("@woowacourse/mission-utils");
-
 class StringCalculator {
   // 빈 문자열 처리
   add(numbers) {
@@ -65,9 +62,10 @@ class App {
     try {
       const input = await Console.readLineAsync("덧셈할 문자열을 입력해 주세요.\n");
       const result = calculator.add(input);
-      Console.print(`결과: ${result}`);
+      Console.print(`결과 : ${result}`);
     } catch (error) {
       Console.print(error.message);
+      throw new Error(error.message);  // Promise reject를 위해 에러 던짐
     }
   }
 }
