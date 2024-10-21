@@ -54,6 +54,16 @@ describe('InputParser 테스트', () => {
     });
 })
 
+describe('엣지 케이스 테스트', () => {
+  test("입력이 \"\" 인경우", () =>{
+     const userInput = "";
+     const parser = new InputParser();
+     const numbers = parser.parse(userInput);
+     expect(numbers).toStrictEqual([0]);
+  });
+  
+})
+
 describe('InputParser 예외 테스트', ()=>{
     test("커스텀 구분자에 아무것도 들어오지 않은 경우", () => {
       const userInput = "//\\n1:2,3";
