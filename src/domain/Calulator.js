@@ -13,8 +13,14 @@ export default class Calculator {
 
   calculate() {
     this.#addCustomDelimiter();
+    const numberArr = this.#splitByDelimiters();
   }
 
+  #splitByDelimiters() {
+    const delimiterString = this.#delimiters.join("");
+    const delimiterRegex = new RegExp(`[${delimiterString}]`);
+    return this.#inputString.split(delimiterRegex).map(Number);
+  }
 
   #addCustomDelimiter() {
     const customDelimiterPattern = /^\/\/(.+)\\n/;
