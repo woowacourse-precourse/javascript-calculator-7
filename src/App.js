@@ -105,7 +105,7 @@ class App {
   async run() {
     // 입력 기능 구현
     // 1. 덧셈할 문자열을 입력해 주세요. 문구를 띄워주자
-    MissionUtils.Console.print("덧셈할 문자열을 입력해 주세요.")
+    // MissionUtils.Console.print("덧셈할 문자열을 입력해 주세요.")
     const STRING_INPUT = await MissionUtils.Console.readLineAsync('')
 
     // 입력 형식에 맞지 않을 경우 ERROR 출력 후 종료
@@ -119,13 +119,15 @@ class App {
       // 입력 형식이 올바를 경우 returnSum 함수를 통해 STRING_INPUT에 대한 결과를 저장
       // return RETURN_ANS
       // if (CHECK_INPUT === 'answer zero') {
+      let result;
       if (STRING_INPUT.length === 0) {
-        return 0
+        result = 0
       } else if (CHECK_INPUT === 'non custom pattern') {
-        return returnSum(STRING_INPUT)
+        result = returnSum(STRING_INPUT)
       } else {
-        return returnCustomSum(CHECK_INPUT)
+        result = returnCustomSum(CHECK_INPUT)
       }
+      MissionUtils.Console.print(`결과 : ${result}`);
     }
   }
 }
