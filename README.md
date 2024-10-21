@@ -9,3 +9,5 @@
 - feat : parser된 문자 배열이 숫자이고 양수인지 유효성 검사
 - feat : validator 파일 분리
 - fix : 누락된 import 추가
+- refactor : 빈 문자열일 경우 결과값이 0일수 있도록 수정
+- feat : 기본 구분자 유효성 검사 추가
