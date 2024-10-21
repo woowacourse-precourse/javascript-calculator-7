@@ -35,6 +35,13 @@ class App {
 
     // 구분자에 따른 숫자 추출
     const numberArray = numbers.split(delimiter);
+
+    // 예외 2: 숫자가 아닌 값 포함 확인
+    numberArray.forEach((num) => {
+      if (isNaN(num)) {
+        throw new Error(`[ERROR] 잘못된 값이 포함되어 있습니다.`);
+      }
+    });
   }
   async run() {
     try {
