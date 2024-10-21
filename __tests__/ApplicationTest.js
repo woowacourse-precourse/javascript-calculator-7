@@ -117,4 +117,27 @@ describe('문자열 계산기', () => {
     const app = new App();
     await expect(app.run()).rejects.toThrow('[ERROR]');
   });
+
+  test('커스텀 구분자가 두자리인 경우', async () => {
+    const inputs = ['//[!\n1[!2'];
+    mockQuestions(inputs);
+
+    const logSpy = getLogSpy();
+    const outputs = ['결과 : 3'];
+
+    const app = new App();
+    await app.run();
+
+    outputs.forEach((output) => {
+      expect(logSpy).toHaveBeenCalledWith(expect.stringContaining(output));
+    });
+  });
+
+  test('커스텀 구분자가 두자리인 예외 경우', async () => {
+    const inputs = ['//[!\n1![2'];
+    mockQuestions(inputs);
+
+    const app = new App();
+    await expect(app.run()).rejects.toThrow('[ERROR]');
+  });
 });
