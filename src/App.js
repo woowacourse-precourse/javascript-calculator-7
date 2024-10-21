@@ -6,7 +6,12 @@ class App {
     const printStr = await Console.readLineAsync(
       "덧셈할 문자열을 입력해주세요.\n"
     );
-    Console.print(printStr);
+
+    ////// 입력한 값이 적절한 값인지 확인하기위한 기능 구현
+
+    // 구분자 기준으로 입력받은 문자열 split 하기
+    const array = printStr.split(",");
+    Console.print(array);
   }
 }
 
