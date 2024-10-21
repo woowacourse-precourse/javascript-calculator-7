@@ -20,9 +20,12 @@ const REGEX = Object.freeze({
   CUSTOM_DELIMITER_PATTERN: /^\/\/(.+)\\n/
 });
 
+const DEFAULT_DELIMITERS = Object.freeze([':', ',']);
+
 export {
   ERROR_MESSAGE, 
   LOG_MESSAGE,
   TAG,
   REGEX,
+  DEFAULT_DELIMITERS,
 };

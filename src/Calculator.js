@@ -1,11 +1,11 @@
 import { Console } from '@woowacourse/mission-utils';
 import { validateEmptyInput, validateNegativeNumbers, validateInvalidNumbers } from './validators.js';
 import { printMessage } from './utils.js';
-import { LOG_MESSAGE, REGEX } from './constants.js';
+import { LOG_MESSAGE, REGEX, DEFAULT_DELIMITERS } from './constants.js';
 
 class Calculator {
   constructor() {
-    this.defaultDelimiters = [':', ','];
+    this.defaultDelimiters = [...DEFAULT_DELIMITERS];
   }
 
   async getInput() {
