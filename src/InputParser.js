@@ -23,7 +23,6 @@ class InputParser {
     const { customDelimiters, expression } = input.match(GROUPING_REGEX).groups;
     if (!customDelimiters && (input.startsWith("//") || input.includes("\\n")))
       throw new Error("[ERROR] 커스텀 구분자의 형식이 바르지 않습니다.");
-    if (!expression) throw new Error("[ERROR] 식이 없거나 올바르지 않습니다.");
     return { customDelimiters, expression };
   }
 
@@ -54,7 +53,7 @@ class InputParser {
   }
 
   #expressionToNumber(expresssion) {
-    if (!expresssion) throw new Error("[ERROR] 식이 없습니다.");
+    if (!expresssion) return [0];
     const expressionTestRegex = this.#expressionTestRegex();
     if (!expressionTestRegex.test(expresssion))
       throw new Error("[ERROR] 들어온 식에 문제가 있습니다.");
@@ -62,6 +61,8 @@ class InputParser {
       if (curr === "") return result;
       if (isNaN(Number(curr)))
         throw new Error(`[ERROR] ${curr}은 주어진 식에 유요하지 않은 문자입니다.`);
+      if (Number(curr) <=0)
+        throw new Error(`[ERROR] ${curr}은 양수가 아닙니다.`);
       return [...result, Number(curr)];
     }, []);
   }
