@@ -66,6 +66,10 @@ class Validator {
       throw new Error(`[ERROR] 양수만 가능합니다.`);
     }
   }
+
+  getNumbers() {
+    return this.#numbers.map((num) => parseInt(num, 10));
+  }
 }
 
 export default Validator;
