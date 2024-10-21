@@ -29,6 +29,13 @@ class App {
       const splitArr = input.split(separatorRegex);
 
       const numbers = splitArr.map(num => {
+        const trimmedNum = num.trim();
+
+        if(num !== trimmedNum) {
+          const errMessage = `[ERROR] 적절하지 않은 입력 값(Contain Whitespace: ${num})`;
+          throw new Error(errMessage);
+        }
+        
         if(isNaN(num)) {
           const errMessage = `[ERROR] 적절하지 않은 입력 값(Not Number: ${num})`;
           throw new Error(errMessage);
