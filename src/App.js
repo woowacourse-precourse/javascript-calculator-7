@@ -3,6 +3,7 @@ import { CALCULATER, ERROR_MESSAGES } from './constants/Message.js';
 import { SYMBOL } from './constants/Symbol.js';
 import calculate from './Calculator.js';
 import validator from './Validator.js';
+import parseCustomDelimiter from './CustomDelimiter.js';
 
 class App {
   async run() {
@@ -17,38 +18,8 @@ class App {
     let separatedValue;
 
     if (userInputValue.startsWith(SYMBOL.custom_delimiter_prefix)) {
-      const formattedInput = userInputValue.replace(
-        SYMBOL.escaped_newline_pattern,
-        SYMBOL.formatted_newline,
-      );
-      const delimiterBoundary = formattedInput.indexOf(
-        SYMBOL.custom_delimiter_surffix,
-      );
-
-      if (delimiterBoundary === SYMBOL.no_delimiter_position) {
-        throw new Error(ERROR_MESSAGES.invalid_custom_delimiter);
-      }
-
-      const extractedDelimiter = formattedInput
-        .substring(SYMBOL.delimiter_start_index, delimiterBoundary)
-        .trim();
-
-      if (!extractedDelimiter) {
-        throw new Error(ERROR_MESSAGES.empty_custom_delimiter);
-      }
-
-      if (extractedDelimiter.length !== SYMBOL.max_custom_delimiter_length) {
-        throw new Error(ERROR_MESSAGES.invalid_custom_delimiter_length);
-      }
-
-      const escapedDelimiter = extractedDelimiter.replace(
-        SYMBOL.special_char_escape_pattern,
-        SYMBOL.special_char_escape_replacement,
-      );
-      const remainingValue = formattedInput.substring(
-        delimiterBoundary + SYMBOL.newline_offset,
-      );
-
+      const { escapedDelimiter, remainingValue } =
+        parseCustomDelimiter(userInputValue);
       const customDelimiter = new RegExp(`[${escapedDelimiter}]`);
       separatedValue = remainingValue.split(customDelimiter);
     } else {
@@ -58,7 +29,6 @@ class App {
     validator(separatedValue);
 
     const convertedNumbers = separatedValue.map(Number);
-
     const calculatedResult = calculate(convertedNumbers);
 
     Console.print(CALCULATER.result(calculatedResult));
