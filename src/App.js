@@ -8,11 +8,11 @@ class App {
 
   getCustomDelim(str) {
     let start = str.indexOf("//");
-    let end = str.indexOf("\\n");
+    let end = str.indexOf("\n");
     
     // 커스텀 구분자의 시작인 //의 길이 2를 끝문자인 \\n의 시작위치에서 뺐을 때 1보다 크다면 1개의 구분문자가 아닌 길이 1이상의 문자가 입력된 것으로 에러를 throw
-    if(end - 2 > 1)
-      throw new Error("[ERROR]: 입력 값이 잘못됐습니다.");
+    if((end + "\n".length) - (start + "//".length) > 1)
+      throw new Error("[ERROR]");
 
     // "//"와 "\n" 사이의 커스텀 구분자 문자를 customDelim 멤버변수에 저장한다.
     this.customDelim = str.charAt(start + 2);
@@ -37,7 +37,7 @@ class App {
 
     //정규식 테스트를 통해 입력 값이 잘못된지 체크 후 잘못 됐다면 에러를 throw
     if(!regExp.test(_str)) {
-      throw new Error("[ERROR]: 입력 값이 잘못됐습니다.");
+      throw new Error("[ERROR]");
     }
   }
 
