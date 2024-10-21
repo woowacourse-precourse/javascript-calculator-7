@@ -73,6 +73,7 @@ class App {
     } catch (error) {
       // 오류가 발생한 경우 콘솔에 출력
       Console.print(error.message);
+      throw error;
     }
   }
 }
