@@ -3,30 +3,31 @@ import { MissionUtils } from "@woowacourse/mission-utils";
 class App {
   async run() {
     try {
-      const input = await this.getInput();
-      const parseInput = this.parseString(input.trim());
-      const result = this.calculateSum(parseInput);
-      MissionUtils.Console.print(`결과 : ${result}`);
+      const input = await this.getInput(); // 입력
+      const parseInput = this.parseString(input.trim()); // 입력된 문자열에 trim 함수로 공백을 제거한다.
+      const result = this.calculateSum(parseInput); // parseInput 결과물을 덧셈 연산한다.
+      MissionUtils.Console.print(`결과 : ${result}`); // 결과 출력
     } catch (error) {
       throw error;
     }
   }
 
-  // input을 받는 함수
+  // 입력
   async getInput() {
     return await MissionUtils.Console.readLineAsync();
   }
 
-  // 구분자가 든 배열과 덧셈할 문자열을 리턴한다.
+  // 기본 구분자인 쉼표와 콜론을 delimiter 배열에 넣어서 초기화
   // 커스텀 구분자가 존재한다면 delimiter에 추가.
-  // 없다면 기본 구분자인 쉼표와 콜론을 delimiter에 추가.
+  // 구분자가 든 배열과 덧셈할 문자열을 리턴한다.
   disassembleDelimiterAndString(input) {
     const delimiter = [",", ":"]; // 기본 구분자
     let string = input;
-
+    // '//'과 '\\n'이나 '\n' 사이에 있는 문자열을 찾는 정규식
     const regex = /^\/\/(.+?)(?:\\n|\n)/;
     let match;
 
+    // string에 정규식에 맞는 부분이 있을 때까지 검색한다.
     while ((match = regex.exec(string)) !== null) {
       // 새로운 구분자 추출
       const newDelimiter = match[1];
@@ -63,9 +64,9 @@ class App {
     const { delimiter, string } = this.disassembleDelimiterAndString(input);
     // delimiter을 split 연산을 위해 정규표현식으로 변환
     const delimiterToRegex = this.makeSplitRegExp(delimiter);
-    // 있다면 커스텀 구분자 설정 뒤를 input으로 설정
-    const numStrs = string.split(delimiterToRegex);
     // 구분자를 기준으로 나뉜 문자열을 numStrs에 추가
+    const numStrs = string.split(delimiterToRegex);
+    // numStrs 배열에 있는 요소들이 유효한 숫자인지 검사한다.
     return this.verifyNumber(numStrs);
   }
 
