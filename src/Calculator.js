@@ -10,6 +10,7 @@ async function getInput() {
   sumArray(result);
 }
 
+
 function getCustomDelimiter(input) {
   const customDelimiterPattern = /^\/\/(.+)\\n/;
   return input.match(customDelimiterPattern);
@@ -43,6 +44,10 @@ function sumArray(arr) {
   return sum;
 }
 
-export function calculator() {
-  getInput();
+export async function calculator() {
+  try {
+    await getInput();
+  } catch (error) {
+    throw error;
+  }
 }
