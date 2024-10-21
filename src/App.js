@@ -1,23 +1,25 @@
-class App {
-    // run: main
-    async run() {
-      try {
-        Console.print("덧셈할 문자열을 입력해 주세요.\n");
-        const input = await Console.readLineAsync();
-  
-        if (!input.trim()) {
-          throw new Error("[ERROR] 입력값 오류");
-        }
-  
-        const result = this.calculate(input.trim());
-        Console.print(`결과 : ${result}`);
-      } catch (error) {
-        Console.print(error.message);
-        throw error; 
-      }
-    }
+import { Console } from "@woowacourse/mission-utils";
 
-    // escapeRegExp: 정규식 이스케이핑
+class App {
+  // run: main
+  async run() {
+    try {
+      Console.print("덧셈할 문자열을 입력해 주세요.\n");
+      const input = await Console.readLineAsync();
+
+      if (!input.trim()) {
+        throw new Error("[ERROR] 입력값 오류");
+      }
+
+      const result = this.calculate(input.trim());
+      Console.print(`결과 : ${result}`);
+    } catch (error) {
+      Console.print(error.message);
+      throw error; 
+    }
+  }
+
+  // escapeRegExp: 정규식 이스케이핑
   escapeRegExp(string) {
     return string.replace(/[.*+?^${}()|[\]\\]/g, '\\$&');
   }
@@ -30,7 +32,6 @@ class App {
     const delimiters = [",", ":"];
     let numbers = input;
 
-    // 커스터머 구분자 처리
     if (input.startsWith("//")) {
       const customDelimiterEnd = input.indexOf("\n");
       if (customDelimiterEnd === -1) {
@@ -41,13 +42,22 @@ class App {
       delimiters.push(this.escapeRegExp(customDelimiter));
       numbers = input.slice(customDelimiterEnd + 1);
     }
-    
+
     const delimiterRegex = new RegExp(`[${delimiters.join("")}]`);
     const numArray = numbers.split(delimiterRegex)
       .filter(Boolean) 
       .map(this.parseAndValidateNumber);
 
     return numArray.reduce((sum, num) => sum + num, 0);
+  }
+
+  // parseAndValidateNumber: 숫자 변환 및 예외 처리
+  parseAndValidateNumber(numStr) {
+    const parsedNum = parseInt(numStr, 10);
+    if (isNaN(parsedNum) || parsedNum < 0) {
+      throw new Error("[ERROR] 잘못된 입력 값입니다.");
+    }
+    return parsedNum;
   }
 }
 
