@@ -31,6 +31,9 @@ class App {
 
       const numbers = numberPart.replace(/\s/g, '').split(regex).filter(Boolean).map(Number);
       console.log('numbers', numbers);
+
+      const sum = numbers.reduce((acc, curr) => acc + curr, 0);
+      return sum;
    }
 }
 export default App;
