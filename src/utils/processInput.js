@@ -1,4 +1,5 @@
 import { PRE_SEPERATORS } from "../data/constants.js";
+import { NO_SEPERATOR_IN_SELECTOR } from "../data/errorMessage.js";
 import checkError from "./checkError.js";
 import { seperateNumbers, getSum } from "./processNumbers.js";
 import {
@@ -22,6 +23,9 @@ const processInput = (inputData) => {
     const selector = getSelector(selectorPart);
 
     // 구분자 추가 및 숫자배열 최신화
+    if (!selector) {
+      throw new Error(`[ERROR] ${NO_SEPERATOR_IN_SELECTOR}`);
+    }
     seperators.push(selector);
     restString = noSelectorPart;
   }
