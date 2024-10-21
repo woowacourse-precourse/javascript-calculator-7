@@ -91,15 +91,25 @@ class Delimiter {
   /**
    *
    * @param {string} value
+   * @returns {string}
+   */
+  #selectDelimiterValue(value) {
+    if (this.hasCustomDelimiter(value)) {
+      return this.#removeCustomDelimiterFormat(value);
+    }
+
+    return value;
+  }
+
+  /**
+   *
+   * @param {string} value
    * @returns {Array<string>}
    */
   splitByDelimiters(value) {
-    const delimiterRegEx = this.#getDelimiterRegEx(value);
-    const delimiteValue = this.hasCustomDelimiter(value)
-      ? this.#removeCustomDelimiterFormat(value)
-      : value;
-
-    return filterEmpty(this.#delimite(delimiterRegEx, delimiteValue));
+    return filterEmpty(
+      this.#delimite(this.#getDelimiterRegEx(value), this.#selectDelimiterValue(value)),
+    );
   }
 }
 
