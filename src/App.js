@@ -2,7 +2,7 @@ const MissionUtils = require("@woowacourse/mission-utils"); // 외부 라이브�
 
 class App {
   async run() {
-    this.isStart(); // 프로그램 실행 시 isStart 함수를 호출
+    await this.isStart(); // 프로그램 실행 시 isStart 함수를 호출
   }
 
   isStart() {
@@ -68,14 +68,17 @@ class App {
 
   // 배열 내 요소가 유효한 숫자인지 검사하는 함수
   ExceptionArray(array) {
-    const MAX_NUMBER = Number.MAX_SAFE_INTEGER; // 최대 숫자 제한
-    if (array.length === 0 || (array.length === 1 && array[0] === "")) {
+    if (array.length === 0 || (array.length === 1 && array[0].trim() === "")) {
       // 배열이 비었거나, 배열이 하나의 빈 문자열인 경우
-      throw new Error("[Error]빈값 넣지마세요");
+      throw new Error("[Error] 빈값 넣지마세요");
     }
+    const MAX_NUMBER = Number.MAX_SAFE_INTEGER; // 최대 숫자 제한
+
     for (let i = 0; i < array.length; i++) {
       const num = Number(array[i]); // 요소를 숫자로 변환
-
+      if (array[i].trim() === "") {
+        throw new Error("[Error]빈값 넣지마세요");
+      }
       if (isNaN(num)) {
         throw new Error("[Error] 숫자만 입력할수 있습니다");
       }
