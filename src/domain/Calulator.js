@@ -27,8 +27,8 @@ export default class Calculator {
     const customDelimiterMatch = this.#inputString.match(customDelimiterPattern);
 
     if (customDelimiterMatch) {
-      const costomDelimiter = customDelimiterMatch[1];
-      this.#delimiters.push(costomDelimiter);
+      const customDelimiter = customDelimiterMatch[1];
+      this.#delimiters.push(customDelimiter);
       this.#inputString = this.#inputString.replace(customDelimiterPattern, "");
     }
   }
