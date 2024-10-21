@@ -16,8 +16,12 @@ class App {
         result = 0;
       } else if (input.startsWith("//") && input.includes("\\n")) {
         const { customSeparator, numberPart } = trimCustom(input);
-        numbers = numberPart.split(customSeparator);
 
+        const combinedSeparator = new RegExp(
+          `${customSeparator}|${DEFAULT.join("|")}`
+        );
+
+        numbers = numberPart.split(combinedSeparator);
         result = calculate(numbers);
       } else {
         numbers = input.split(defaultSeparator);
