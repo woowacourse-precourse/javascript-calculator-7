@@ -26,6 +26,8 @@ class App {
 
         const SUM = NUMBERS.reduce((SUM, NUM) => SUM + NUM, 0);
 
+        await Console.print(`결과: ${SUM}`);
+
         return SUM;
     }
 }
