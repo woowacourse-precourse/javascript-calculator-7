@@ -1,4 +1,5 @@
 import { Console } from "@woowacourse/mission-utils";
+import { ERROR_MESSAGES } from "./errorMessages.js";
 
 class App {
   async run() {
@@ -13,6 +14,24 @@ class Calculator {
     if (input === "") {
       return 0;
     }
+
+    let divider = this.setDivider(input);
+  }
+
+  static setDivider(input) {
+    let defaultDivider = [",", ":"];
+
+    if (input.startsWith("//")) {
+      const endIndex = input.indexOf("\\n");
+
+      return input.slice(2, endIndex);
+    }
+
+    if (input.includes(",") || input.includes(":")) {
+      return defaultDivider;
+    }
+
+    throw new Error(ERROR_MESSAGES.NO_VALID_DIVIDER);
   }
 }
 
