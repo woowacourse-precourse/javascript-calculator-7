@@ -32,6 +32,10 @@ class App {
       const numbers = numberPart.replace(/\s/g, '').split(regex).filter(Boolean).map(Number);
       console.log('numbers', numbers);
 
+      if (numbers.some((num) => isNaN(num) || num === null)) {
+         throw new Error('[ERROR] 잘못입력되었습니다.');
+      }
+
       const negative = numbers.filter((num) => num < 0);
       if (negative.length > 0) {
          throw new Error('[ERROR] 음수는 허용되지 않습니다');
