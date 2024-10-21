@@ -19,14 +19,17 @@ class App {
             CUSTOM_START_INDEX,
             CUSTOM_END_INDEX
           );
+          if (customSeparator == "\\") customSeparator = "\\";
           input = input.replace("//", "");
           input = input.replace("\\n", "");
         }
       }
 
       // 정규식으로 구분 기준을 정함 -> ",",":",커스텀 구분자
-      const regex = new RegExp(`[,:${customSeparator}]`);
-      let splitInputArray = input.split(regex);
+      let splitInputArray = input.split(/[,:]/);
+
+      splitInputArray = splitInputArray.map((x) => x.split(customSeparator));
+      splitInputArray = splitInputArray.flat();
 
       if (splitInputArray[0] === "") splitInputArray.shift(); // 커스텀 구분자를 맨 앞에서 지정한 경우 ""가 생기므로 제거
 
