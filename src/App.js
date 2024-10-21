@@ -6,31 +6,26 @@ const WHOLE_PATTERN = /\/\/\D+\\n[\s\S]+/;
 class App {
   async run() {
     const input = await Console.readLineAsync();
-
     const separator = [":", ","];
-    const isString = this.isString(input);
+    this.isString(input);
 
-    if (isString) {
-      if (this.isUsedCustomSeparator(input)) {
-        this.addCustomSeparator(input, separator);
-      }
-
-      const nums = this.getNumbers(input, separator);
-
-      this.nanError(nums);
-      this.negativeNumberError(nums);
-
-      const answer = nums.reduce((a, b) => a + b, 0);
-      Console.print(`결과 : ${answer}`);
+    if (this.isUsedCustomSeparator(input)) {
+      this.addCustomSeparator(input, separator);
     }
+
+    const nums = this.getNumbers(input, separator);
+
+    this.nanError(nums);
+    this.negativeNumberError(nums);
+
+    const answer = nums.reduce((a, b) => a + b, 0);
+    Console.print(`결과 : ${answer}`);
   }
 
   isString(input) {
-    if (typeof input === "string") {
-      return true;
+    if (typeof input !== "string") {
+      throw new Error("[ERROR] 문자열을 입력해주세요.");
     }
-
-    throw new Error("[ERROR] 문자열을 입력해주세요.");
   }
 
   isUsedCustomSeparator(input) {
