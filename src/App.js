@@ -38,10 +38,23 @@ class App {
       return generalNumbersArray;
     };
 
+    // [5] 덧셈 계산 함수 만들기
+    const sum = (numbersArray) => {
+      return numbersArray.reduce(
+        (accumulator, currentValue) => accumulator + currentValue,
+        0
+      );
+    };
 
-    // 테스트
-    // extractCustomDelimiter(inputValue);
-    extractGeneralDelimiter(inputValue);
+    
+
+
+    // 테스트 코드
+    const testValue = extractCustomDelimiter(inputValue);
+    // const testValue = extractGeneralDelimiter(inputValue);
+    console.log('합계 :', sum(testValue));
+
+
 
   }
 }
