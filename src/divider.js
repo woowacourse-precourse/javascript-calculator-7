@@ -1,15 +1,17 @@
-export function extractDividerProcess(input, divider) {
-  while (input !== "") {
+import { EMPTY_STRING, ERROR_MESSAGE, MINUS_STRING } from "./message";
+
+export function extractDividerList(input, dividerList) {
+  while (input !== EMPTY_STRING) {
     const { extractedString, newInput } = extractCustomDvider(input);
-    if (extractedString === "") {
+    if (extractedString === EMPTY_STRING) {
       break;
     }
-    repetitionCheck(divider);
-    divider.push(extractedString);
+    repetitionCheck(dividerList);
+    dividerList.push(extractedString);
     input = newInput;
   }
 
-  return { updatedInput: input, updatedDivider: divider };
+  return { updatedInput: input, updatedDividerList: dividerList };
 }
 
 function extractCustomDvider(input) {
@@ -26,25 +28,25 @@ function extractCustomDvider(input) {
     return { extractedString, newInput };
   }
   
-  return { extractedString: "", newInput: input };
+  return { extractedString: EMPTY_STRING, newInput: input };
 }
 
 function validateDivider(divider) {
-  if (divider === "") {
-    throw new Error("[ERROR] 커스텀 구분자에 문자열이 없습니다.");
+  if (divider === EMPTY_STRING) {
+    throw new Error(ERROR_MESSAGE.NO_DIVIDER);
   }
-  if (divider[0] === '-' && divider.length > 1 && !isNaN(divider[1])) {
-    throw new Error("[ERROR] 커스텀 구분자가 음수로 시작되고 있습니다.");
+  if (divider[0] === MINUS_STRING && divider.length > 1 && !isNaN(divider[1])) {
+    throw new Error(ERROR_MESSAGE.NEGATIVE_DIVIDER);
   }
 
   if (!isNaN(divider[0])) {
-    throw new Error("[ERROR] 커스텀 구분자가 숫자로 시작되고 있습니다.");
+    throw new Error(ERROR_MESSAGE.NUMBER_DIVIDER);
   }
   return;
 }
 
-function repetitionCheck(divider, extractedString) {
-  if (divider.includes(extractedString)) {
+function repetitionCheck(dividerList, extractedString) {
+  if (dividerList.includes(extractedString)) {
     throw new Error("[ERROR] 구분자가 중복되었습니다.");
   }
   return;

@@ -1,19 +1,21 @@
 import { Console } from "@woowacourse/mission-utils";
 import { INPUT_MESSAGE, RESULT_MESSAGE } from "./message.js";
-import { extractDividerProcess } from "./divider.js";
+import { extractDividerList } from "./divider.js";
+import { tokenizeString } from "./calculator.js";
 
 class App {
   input = "";
   result = 0;
-  divider = [",", ":"];
+  dividerList = [",", ":"];
 
   async run() {
     await this.inputStart();
 
-    const { updatedInput, updatedDivider } = extractDividerProcess(this.input, this.divider);
+    const { updatedInput, updatedDividerList } = extractDividerList(this.input, this.dividerList);
     this.input = updatedInput;
-    this.divider = updatedDivider;
+    this.dividerList = updatedDividerList;
 
+    tokenizeString(this.input, this.dividerList);
     await this.resultPrint();
   }
   
