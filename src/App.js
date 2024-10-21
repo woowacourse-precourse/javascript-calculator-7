@@ -1,5 +1,5 @@
 import { Console } from "@woowacourse/mission-utils";
-import preprocess from "./functions/preprocess.js";
+import process from "./functions/process.js";
 
 class App {
   async run() {
@@ -9,8 +9,7 @@ class App {
     );
 
     // 출력값
-    let output;
-    output = preprocess(input);
+    let output = process(input);
 
     // 출력
     Console.print(`결과 : ${output}`);

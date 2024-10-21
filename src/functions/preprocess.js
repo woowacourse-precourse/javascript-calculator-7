@@ -1,5 +1,3 @@
-import slice from "./slice.js";
-
 export default function preprocess(input) {
   const isCustom = /^\/\/.*\\n/msu;
   // 커스텀 구분자를 분리해내기 위한 정규표현식
@@ -16,6 +14,11 @@ export default function preprocess(input) {
     else custom = custom.substring(2, 3);
 
     let string = input.replace(isCustom, "");
-    return slice(string, custom);
-  } else return slice(input, "");
+
+    return [string, custom];
+  } else {
+    let string = input;
+
+    return [string, ""];
+  }
 }
