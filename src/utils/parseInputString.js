@@ -1,3 +1,5 @@
+import { ERROR_MESSAGE } from "../constants/errorMessage";
+
 /**
  * 문자열에서 커스텀 구분자를 추출하는 함수입니다.
  * @param {string} string - 커스텀 구분자를 포함한 문자열 ("//구분자\n" 형식에서 구분자 추출)
@@ -10,9 +12,7 @@ const getCustomSeparator = (string) => {
   const endIndex = modifiedString.indexOf("\n");
 
   if (endIndex === -1) {
-    throw new Error(
-      "커스텀 구분자 형식에 오류가 있습니다. 다시 한 번 확인해주세요."
-    );
+    throw new Error(ERROR_MESSAGE.INVALID_CUSTOM_SEPARATOR);
   }
 
   const separator = string.slice(2, endIndex);
@@ -27,10 +27,10 @@ const getCustomSeparator = (string) => {
  */
 const validateNumber = (number) => {
   if (!Number.isInteger(number)) {
-    throw new Error("정수가 아닌 값은 허용하지 않습니다.");
+    throw new Error(ERROR_MESSAGE.NOT_INTEGER);
   }
   if (number < 0) {
-    throw new Error("음수를 허용하지 않습니다.");
+    throw new Error(ERROR_MESSAGE.NOT_POSITIVE);
   }
 };
 

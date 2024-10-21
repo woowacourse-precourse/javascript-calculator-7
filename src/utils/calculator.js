@@ -1,3 +1,5 @@
+import { ERROR_MESSAGE } from "../constants/errorMessage";
+
 /**
  * 숫자 배열 아이템을 합산하는 함수입니다.
  * @param {number[]} numbers - 숫자 배열을 매개변수로 받습니다.
@@ -6,7 +8,7 @@
 export const additionCalculator = (numbers) => {
   let sum = 0;
   if (!Array.isArray(numbers)) {
-    throw new Error("additionCalculator의 매개변수는 배열 형식이어야 합니다.");
+    throw new Error(ERROR_MESSAGE.CALCULATOR_TYPE_ERROR);
   }
   numbers.forEach((number) => (sum += number));
 
