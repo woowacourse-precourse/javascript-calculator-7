@@ -1,15 +1,15 @@
-import { MissionUtils } from "@woowacourse/mission-utils";
-import InputParser from "./InputParser.js";
-import { UI } from "./constants.js";
+import InputParser from './InputParser.js';
+import { MissionUtils } from '@woowacourse/mission-utils';
+import { UI } from './constants.js';
 
 class CalculatorController {
   #io = MissionUtils.Console;
-  
-  constructor(service){
+
+  constructor(service) {
     this.service = service;
   }
 
-  async run(){
+  async run() {
     const input = await this.#io.readLineAsync(UI.INPUT_QUERY);
     const parser = new InputParser();
     const numbers = parser.parse(input);
@@ -17,8 +17,8 @@ class CalculatorController {
     this.printResult(result);
   }
 
-  printResult(result){
-    this.#io.print(UI.OUTPUT(result));
+  printResult(result) {
+    this.#io.print(UI.output(result));
   }
 }
 

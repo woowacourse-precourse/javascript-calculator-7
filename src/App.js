@@ -3,8 +3,8 @@ import CalculatorService from './CalculatorService.js';
 
 class App {
   async run() {
-    const calculatorController = new CalculatorController(CalculatorService);
-    await calculatorController.run();
+    this.calculatorController = new CalculatorController(CalculatorService);
+    await this.calculatorController.run();
   }
 }
 

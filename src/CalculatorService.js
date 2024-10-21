@@ -1,6 +1,4 @@
 class CalculatorService {
-  constructor() {}
-
   static calculate(numbers) {
     return numbers.reduce(this.#sum, 0);
   }
