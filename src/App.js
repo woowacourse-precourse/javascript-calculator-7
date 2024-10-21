@@ -12,6 +12,11 @@ class App {
       Console.print(`[ERROR] ${error.message}`);
     }
   }
+  calculate(input) {
+    if (input.trim() === "") {
+      return 0;
+    }
+  }
 }
 
 export default App;
