@@ -38,6 +38,7 @@ class App {
     }
 
     const numbers = input.split(delimiter);
+    Console.print(isNaN(Number(" ")));
     return numbers;
   }
 
@@ -45,7 +46,7 @@ class App {
     let sum = 0;
 
     for (let num of numbers) {
-      if (isNaN(Number(num)) || Number(num) < 0) {
+      if (isNaN(Number(num)) || Number(num) < 0 || num === "") {
         throw new Error(ERROR_INVALID_DELIMITER);
       }
 
