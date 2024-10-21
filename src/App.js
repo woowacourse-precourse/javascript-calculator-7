@@ -44,6 +44,9 @@ class App {
       if (number < 0) {
         throw new Error('음수는 허용되지 않습니다.');
       }
+      if (isNaN(number)) {
+        throw new Error('잘못된 값이 입력되었습니다.');
+      }
     }
   }
 }
