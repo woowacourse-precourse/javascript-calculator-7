@@ -26,15 +26,15 @@ class App {
     sliceString(param) {
         const lastIdx = param.indexOf("\\n");
         this.customSeparator = param.slice(2, lastIdx);
-        //this.isCustomSeparatorError(this.customSeparator);
+        this.isCustomSeparatorError(this.customSeparator);
         return param.slice(lastIdx + 2);
     }
 
-    /*    isCustomSeparatorError(param) {
-            if (param.length > 1 || !isNaN(param)) {
-                throw new Error("[ERROR]: 에러발생");
-            }
-        }*/
+    isCustomSeparatorError(param) {
+        if (!isNaN(param)) {
+            throw new Error("[ERROR]: 에러발생");
+        }
+    }
 
     preprocessing(param) {
         const defaultSeparator = /[:,]/g;
@@ -56,7 +56,6 @@ class App {
 
     resultOutput() {
         Console.print(`결과 : ${this.sum}`);
-        this.sum = 0; // 다음 계산을 위해 sum 초기화
     }
 
     calculator(param) {
