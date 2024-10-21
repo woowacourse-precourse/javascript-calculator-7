@@ -62,6 +62,10 @@ class App {
       throw new Error('[ERROR] 숫자가 아닌 값이 포함되어 있습니다.');
     }
 
+    if (NUMBERS.some((number) => Number(number) < 0)) {
+      throw new Error('[ERROR] 음수를 입력할 수 없습니다.');
+    }
+
     return NUMBERS;
   }
 }
