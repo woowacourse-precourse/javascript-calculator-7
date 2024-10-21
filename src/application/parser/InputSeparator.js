@@ -1,9 +1,9 @@
 export default class InputSeparator {
-  #delimiter;
+  #customDelimiter;
   #numberString;
 
   constructor() {
-    this.#delimiter = null;
+    this.#customDelimiter = null;
     this.#numberString = null;
   }
 
@@ -16,9 +16,9 @@ export default class InputSeparator {
 
   getCustomDelimiter(rawInput) {
     if (this.hasCustomDelimiter(rawInput)) {
-      this.#delimiter = rawInput[2];
+      this.#customDelimiter = rawInput[2];
     }
-    return this.#delimiter;
+    return this.#customDelimiter;
   }
 
   getNumberString(rawInput) {
