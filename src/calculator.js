@@ -21,11 +21,11 @@ function parseInput(input) {
         const separator = custom.substring(2)
         const result = number.split(separator)
 
-        return result.map((item) => Number(item))
-    }else if(typeof Number(input[0]) !== 'number') {
+        return result.map(validateAndConvertNumber)
+    }else if(typeof Number(input[0]) === 'number') {
         const result =  input.split(/[,;]/)
 
-        return result.map((item) => Number(item))
+        return result.map(validateAndConvertNumber)
     }else {
         throw new Error(`[ERROR] 올바른 값이 아닙니다.`)
     }
@@ -45,5 +45,16 @@ function validateCustomSeparator(input,number ) {
     if(!input.startsWith('//') || !number) {
         throw new Error('[ERROR] 커스텀셀럭터 입력이 올바르지 않습니다.')
     }
+}
+
+function validateAndConvertNumber(item, index) {
+    const num = Number(item);
+    if (isNaN(num)) {
+        throw new Error(`[ERROR] 유효하지 않은 숫자입니다.`);
+    }
+    if (num < 0) {
+        throw new Error(`[ERROR] 음수는 허용되지 않습니다.`);
+    }
+    return num;
 }
 
