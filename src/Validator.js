@@ -16,9 +16,11 @@ class Validator {
     this.#validatorList.forEach((validator) => {
       const { success, errorMessage = "" } = validator.parse();
 
-      if (!success) {
-        throw new CustomError(errorMessage);
+      if (success) {
+        return;
       }
+
+      throw new CustomError(errorMessage);
     });
   }
 }
