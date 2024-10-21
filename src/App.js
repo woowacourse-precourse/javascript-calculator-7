@@ -41,18 +41,15 @@ class App {
 
   static getCustomSeparator(INPUT) {
     if (INPUT.startsWith('//')) {
-      if (INPUT.includes('\n')) {
-        const CUSTOM_SEPARATOR = INPUT[2];
-        return CUSTOM_SEPARATOR;
-      }
-      throw new Error('[ERROR] 커스텀 구분자가 잘못되었습니다.');
+      const CUSTOM_SEPARATOR = INPUT[2];
+      return CUSTOM_SEPARATOR;
     }
 
     return false;
   }
 
   static getNumbers(INPUT, SEPARATORS) {
-    const NUMBERS_PART = SEPARATORS.length > 2 ? INPUT.split('\n')[1] : INPUT;
+    const NUMBERS_PART = SEPARATORS.length > 2 ? INPUT.slice(5) : INPUT;
 
     const REGEX = new RegExp(`[${SEPARATORS.join('')}]`);
 
