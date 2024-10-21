@@ -6,9 +6,13 @@ class App {
   async run() {
     MissionUtils.Console.print('덧셈할 문자열을 입력해 주세요.');
 
-    const input = await MissionUtils.Console.readLineAsync();
-    const result = this.calculate(input);
-    MissionUtils.Console.print(`결과 : ${result}`);
+    try {
+      const input = await MissionUtils.Console.readLineAsync();
+      const result = this.calculate(input);
+      MissionUtils.Console.print(`결과 : ${result}`);
+    } catch (error) {
+      MissionUtils.Console.print(error.message);
+    }
   }
 
   calculate(input) {
