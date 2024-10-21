@@ -18,6 +18,11 @@ class App {
             }
         }
 
+        const validCharacters = new RegExp(`^[0-9${distinct.join('')}]+$`);
+        if (!validCharacters.test(input)) {
+            this.throwError('입력에 잘못된 문자가 포함되어 있습니다.');
+        }
+
         const result = extractNumbers(input, distinct);
 
         Console.print(`결과 : ${result}`);
