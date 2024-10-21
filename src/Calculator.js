@@ -1,8 +1,9 @@
 import { Console } from '@woowacourse/mission-utils';
 import { Validator } from './Validator.js'; // 사용자 입력 유효성 검사
+import { INPUT_PROMPTS, DEFAULT_DELIMITERS, DELIMITER_CONSTANTS } from './constants.js';
 
 // 구분자 저장 리스트
-const delimiters = [',', ':'];
+const delimiters = [...DEFAULT_DELIMITERS];
 
 // 덧셈 계산기 실행 메서드
 export const runCalculator = async () => {
@@ -22,14 +23,14 @@ export const runCalculator = async () => {
 
 // 사용자에게 계산식 입력 받는 메서드
 const getUserInput = async () => {
-    const userInput = await Console.readLineAsync('덧셈할 문자열을 입력해 주세요.\n');
+    const userInput = await Console.readLineAsync(INPUT_PROMPTS.USER_INPUT_PROMPT);
 
     return userInput;
 }
 
 // 구분자 정의 메서드
 const defineDelimiters = (userInput) => {
-    if (userInput.slice(0, 2) === '//' && userInput.slice(3, 5) === '\\n') {
+    if (userInput.slice(0, 2) === DELIMITER_CONSTANTS.CUSTOM_DELIMITER_START && userInput.slice(3, 5) === DELIMITER_CONSTANTS.CUSTOM_DELIMITER_END) {
         Validator.validateCorrectlyDeclaredDelimiters(userInput);
         delimiters.push(userInput[2]);
 
