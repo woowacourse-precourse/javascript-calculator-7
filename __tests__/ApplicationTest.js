@@ -110,6 +110,15 @@ describe("문자열 계산기", () => {
     });
   });
 
+  test("커스텀 구분자가 숫자인 예외", async () => {
+    const inputs = ["//1\\n1234123"];
+    mockQuestions(inputs);
+
+    const app = new App();
+
+    await expect(app.run()).rejects.toThrow("[ERROR]");
+  });
+
   test("커스텀 구분자 없는 예외", async () => {
     const inputs = ["//\\n1;2;3"];
     mockQuestions(inputs);
