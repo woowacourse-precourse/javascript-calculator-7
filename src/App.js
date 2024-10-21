@@ -11,34 +11,42 @@ class App {
     }
 
     function getArrSum(arr) {
+      if (isNegative(arr)) throw Error("[ERROR] 음수 입력 불가능");
       return arr.reduce(
-        (accumulator, currentValue) =>
-          Number(accumulator) + Number(currentValue),
+        (accumulator, currentValue) => accumulator + currentValue,
         0
       );
     }
 
-    async function getUsername() {
-      try {
-        const str = await Console.readLineAsync(
-          "덧셈할 문자열을 입력해 주세요.\n"
-        );
-        let sum = 0;
-        if (isCustomSeparator(str)) {
-          const numArr = str.split("\\n")[1].split(getCustomSeparator(str));
-
-          sum = getArrSum(numArr);
-        } else {
-          const numArr = str.split(/[,: ]/);
-          sum = getArrSum(numArr);
-        }
-        Console.print("결과 : " + sum);
-      } catch (error) {
-        Console.print("에러가 발생했습니다: ", error);
-      }
+    function isNegative(arr) {
+      return arr.some((num) => num < 0);
     }
 
-    getUsername();
+    async function getUsername() {
+      const str = await Console.readLineAsync(
+        "덧셈할 문자열을 입력해 주세요.\n"
+      );
+      let sum = 0;
+      if (isCustomSeparator(str)) {
+        const numArr = str
+          .split("\\n")[1]
+          .split(getCustomSeparator(str))
+          .map(Number);
+
+        sum = getArrSum(numArr);
+      } else {
+        const numArr = str.split(/[,: ]/).map(Number);
+        sum = getArrSum(numArr);
+      }
+      Console.print("결과 : " + sum);
+    }
+
+    try {
+      await getUsername();
+    } catch (error) {
+      Console.print(error.message); // 에러 메시지 출력
+      throw error; // 에러 다시 throw 해서 테스트에서 잡을 수 있도록 함
+    }
   }
 }
 
