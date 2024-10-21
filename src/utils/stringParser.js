@@ -1,7 +1,7 @@
 import { DEFAULT_SEPARATORS } from '../constants.js';
 
-export const checkIsDefaultString = (line) => {
-  return !line.split('').some((char) => 
+export const checkIsDefaultString = (str) => {
+  return !str.split('').some((char) => 
     isNaN(char) && !DEFAULT_SEPARATORS.includes(char)
   );
 };
@@ -24,8 +24,8 @@ export const separate = (str, separators) => {
   return replacedString.split(',').map(Number);
 };
 
-export const sumString = (line, separators = DEFAULT_SEPARATORS) => {
-  const separatedNumbers = separate(line, separators);
+export const sumString = (str, separators = DEFAULT_SEPARATORS) => {
+  const separatedNumbers = separate(str, separators);
 
   return separatedNumbers.reduce((acc, cur) => acc + cur, 0);
 };
