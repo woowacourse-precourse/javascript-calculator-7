@@ -16,4 +16,14 @@ export default class Validation {
       throw new Error(ERROR_MESSAGE.INVALID_NUMBER);
     }
   }
+
+  static checkInvalidDelimiter(userInput) {
+    const invalidDelimiter = userInput
+      .split(/[,:]/)
+      .some((num) => /[^0-9\s,:\n]/.test(num));
+
+    if (invalidDelimiter) {
+      throw new Error(ERROR_MESSAGE.INVALID_DELIMITER);
+    }
+  }
 }

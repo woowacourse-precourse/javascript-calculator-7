@@ -38,6 +38,8 @@ class Calculate {
 
   // 콤마, 콜론 기준으로 Input을 분리
   splitByCommaColon(userInput) {
+    Validation.checkInvalidDelimiter(userInput);
+
     return userInput.split(/[,:]/).map(Number);
   }
 
