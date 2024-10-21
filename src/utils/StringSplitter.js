@@ -3,7 +3,7 @@ import MESSAGE from "../constants/message.js";
 
 const StringSplitter = {
   split(input) {
-    const customDelimiterPattern = /^\/\/(.)\n/;
+    const customDelimiterPattern = /^\/\/(.)\\n/;
     let delimiter = /[,|:]/;
 
     if (input.startsWith("//")) {
@@ -12,7 +12,7 @@ const StringSplitter = {
         throw new ValidationError(MESSAGE.ERROR.INVALID_DELIMITER);
       }
       delimiter = new RegExp(matches[1]);
-      input = input.split("\n")[1];
+      input = input.split("\\n")[1];
     }
 
     const numbers = input.split(delimiter);

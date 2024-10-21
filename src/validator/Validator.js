@@ -8,7 +8,9 @@ const Validator = {
         throw new ValidationError(MESSAGE.ERROR.INVALID_NUMBER);
       }
       if (parseInt(num, 10) < 0) {
-        throw new ValidationError(MESSAGE.ERROR.NEGATIVE_NUMBER);
+        throw new ValidationError(
+          MESSAGE.OUTPUT.ERROR + MESSAGE.ERROR.NEGATIVE_NUMBER
+        );
       }
     });
   },
