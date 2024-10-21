@@ -67,8 +67,9 @@ class App {
       const ESCAPED_SEPARATORS = customSeparator.map(separator => {
         return separator.replace(/[-\/\\^$.*+?()[\]{}|]/g, '\\$&');
       });
+      const SEPARATOR_REGEX = new RegExp(ESCAPED_SEPARATORS.sort((a, b) => b.length - a.length)
+      .join('|'));
 
-      const reg = new RegExp(escapedSeparators.sort((a, b) => b.length - a.length).join('|'));
 
       const CUSTOM_DELIMITER = USERINFO.split(reg);
       
