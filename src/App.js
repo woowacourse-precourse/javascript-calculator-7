@@ -9,6 +9,9 @@ class App {
       
       // [feat] 2. 문자열에서 숫자를 추출하여 합산
       const result = this.calculate(input);
+
+      // [feat] 3. 결과값 출력
+      Console.print(`결과 : ${result}`);
     } catch (error) {
       Console.print(error.message);
     }
