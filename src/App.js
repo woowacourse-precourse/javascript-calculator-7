@@ -15,13 +15,24 @@ class App {
   }
 
   parseInput(input, delimiters) {
+    if (!input.trim()) {
+      return [];
+    }
     const regex = this.createRegex(delimiters);
 
     return input.split(regex).map(Number);
   }
 
   calculateSum(numbers) {
+    if (numbers.length === 0) {
+      return 0;
+    }
+
     return numbers.reduce((acc, cur) => acc + cur, 0);
+  }
+
+  printResult(result) {
+    Console.print(`${MESSAGE.PRINT}${result}`);
   }
 
   async run() {
@@ -29,6 +40,7 @@ class App {
     const delimiters = this.getDelimiters();
     const numbers = this.parseInput(input, delimiters);
     const sum = this.calculateSum(numbers);
+    this.printResult(sum);
   }
 }
 
