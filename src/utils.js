@@ -22,4 +22,34 @@ export const separatorSplit = (input) => {
     input = input.substring(match[0].length); // 숫자 부분 추출
   }
   input = input.replace(/\\n/g, "\n").trim(); // "\n"을 문자로 처리
+
+  // 구분자에 따라 문자열 분리
+  const numbers = customSeparator
+    ? input.split(customSeparator)
+    : input.split(basicSeparator);
+
+  // 숫자로 변환 및 유효성 검사
+  const parsedNumbers = numbers
+    .map((num) => {
+      const trimmedNum = num.trim();
+      if (trimmedNum === "") {
+        return;
+      }
+
+      const parsedNum = parseInt(trimmedNum, 10);
+
+      if (isNaN(parsedNum)) {
+        throw new Error(
+          "[ERROR_INVALID_NUMBER] : 숫자를 제외한 문자는 입력할 수 없습니다."
+        );
+      }
+      if (parsedNum < 0) {
+        throw new Error("[ERROR_NEGATIVE_NUMBER] : 음수는 입력할 수 없습니다.");
+      }
+
+      return parsedNum;
+    })
+    .filter((num) => num !== undefined);
+
+  return parsedNumbers;
 };
