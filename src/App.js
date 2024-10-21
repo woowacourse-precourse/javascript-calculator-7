@@ -12,13 +12,18 @@ class App {
       "덧셈할 문자열을 입력해 주세요.\n"
     );
     try {
-      const { DELIMITER, NUMBERS } = this.parseInput(INPUT);
-      const PARSED_NUMBERS = this.splitAndParse(NUMBERS, DELIMITER);
-      this.validateNumbers(PARSED_NUMBERS);
-      Console.print(`유효한 숫자들: ${PARSED_NUMBERS.join(", ")}`);
+      const RESULT = this.calculate(INPUT);
+      Console.print(`결과 : ${RESULT}`);
     } catch (error) {
       Console.print(error.message);
     }
+  }
+
+  calculate(input) {
+    const { DELIMITER, NUMBERS } = this.parseInput(input);
+    const PARSED_NUMBERS = this.splitAndParse(NUMBERS, DELIMITER);
+    this.validateNumbers(PARSED_NUMBERS);
+    return this.sum(PARSED_NUMBERS);
   }
 
   parseInput(input) {
@@ -47,6 +52,10 @@ class App {
     if (numbers.some((num) => num < 0)) {
       throw new Error(`${this.ERROR_PREFIX} 음수는 입력할 수 없습니다.`);
     }
+  }
+
+  sum(numbers) {
+    return numbers.reduce((ACC, CURR) => ACC + CURR, 0);
   }
 }
 
