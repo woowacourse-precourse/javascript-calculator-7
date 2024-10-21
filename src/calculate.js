@@ -1,8 +1,7 @@
 import { Console } from "@woowacourse/mission-utils";
 
 class Calculator {
-  constructor() {
-  }
+  constructor() {}
 
   add(input) {
     if (input === "") {
@@ -18,7 +17,7 @@ class Calculator {
         throw new Error("[ERROR]");
       }
       const customDelimiter = parts[0].substring(2);
-      delimiter = new RegExp(`[${customDelimiter}]`); 
+      delimiter = new RegExp(`[${customDelimiter}]`);
       numbersString = parts[1];
     }
 
@@ -26,7 +25,6 @@ class Calculator {
     const sum = numbers.reduce((total, current) => {
       const num = parseInt(current, 10);
       if (isNaN(num) || num < 0) {
-        // 음수와 NaN 처리
         throw new Error("[ERROR]");
       }
       return total + num;
@@ -47,18 +45,18 @@ class Calculator {
           return;
         }
 
-        Console.print(`결과 : ${this.add(userInput)}`); 
+        Console.print(`결과 : ${this.add(userInput)}`);
       } catch (error) {
         Console.print("[ERROR]");
-        return;
+        throw error;
       }
     }
   }
 }
 
 async function run() {
-  const calculator = new Calculator(); 
-  await calculator.askForInput(); 
+  const calculator = new Calculator();
+  await calculator.askForInput();
 }
 
 export { run };
