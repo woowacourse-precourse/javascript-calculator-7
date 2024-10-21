@@ -1,5 +1,6 @@
 import { Console } from "@woowacourse/mission-utils";
 import { isEmpty, isOnlyStringOrNumber } from "./utils/validateInput.js";
+import { userInputParser } from "./parser.js";
 
 class App {
   async run() {
@@ -13,6 +14,7 @@ class App {
       } else if (isOnlyStringOrNumber(userInput)) {
         throw new Error(ERROR_MESSAGE.NO_SEPARATOR);
       } else {
+        const parseredUserInputArray = userInputParser(userInput);
         Console.print(`결과 : ${userInput}`);
       }
     } catch (error) {
