@@ -11,8 +11,7 @@ class App {
       Console.print(`결과: ${result}`);
     } catch (error) {
       Console.print(error.message);
-      // 에러 발생 시 여기서 다른 처리 없이 메서드를 종료
-      return; // 또는 이곳에서 다른 종료 처리를 할 수 있음
+      return;
     }
   }
 
@@ -48,9 +47,14 @@ function trimCustom(str) {
 
 function calculate(numbers) {
   const invalidInputs = numbers.filter((num) => isNaN(Number(num))); // 숫자가 아닌 값
+  const negativeInputs = numbers.filter((num) => Number(num) < 0); // 음수 값
   if (invalidInputs.length > 0) {
     throw new Error(`[ERROR] Invalid input: ${invalidInputs.join(", ")}`);
   }
+  if (negativeInputs.length > 0) {
+    throw new Error(`[ERROR] Negative input: ${negativeInputs.join(", ")}`);
+  }
+
   return numbers.reduce((sum, num) => sum + Number(num), 0);
 }
 
