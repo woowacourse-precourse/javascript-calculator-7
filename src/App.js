@@ -10,7 +10,8 @@ class App {
       );
       if (this.isValidInput(INPUT)) {
         const RESULT_ARR = this.separateInput(INPUT);
-        // this.add(RESULT_ARR);
+        const RESULT = this.add(RESULT_ARR);
+        MissionUtils.Console.print(`결과 : ${RESULT}`);
       } else {
         MissionUtils.Console.print("[ERROR] 유효한 입력값이 아닙니다.");
       }
@@ -52,7 +53,13 @@ class App {
     }
   }
 
-  // add(RESULT_ARR) {}
+  add(RESULT_ARR) {
+    let sum = 0;
+    for (let i = 0; i < RESULT_ARR.length; i++) {
+      sum += RESULT_ARR[i];
+    }
+    return sum;
+  }
 }
 
 export default App;
