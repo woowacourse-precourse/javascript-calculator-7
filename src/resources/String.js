@@ -1,5 +1,5 @@
 export const REGEX = {
-  DEFAULT_DELIMITER: /^\d+([,:]\d+)*$/,
+  DEFAULT_DELIMITER: /^\d+(\.\d+)?([,:]\d+(\.\d+)?)*$/,
   CUSTOM_DELIMITER: /^\/\/(.)\\n(.*)$/,
   ESCAPE_SPECIAL_CHARS: /[.*+?^${}()|[\]\\]/g,
 };

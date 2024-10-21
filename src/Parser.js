@@ -8,7 +8,7 @@ class Parser {
 
   handleDefaultDelimiter() {
     if (REGEX.DEFAULT_DELIMITER.test(this.inputString)) {
-      const parsedNums = this.inputString.match(/\d+/g);
+      const parsedNums = this.inputString.match(/\d+(\.\d+)?/g);
       this.inputNums = parsedNums.map(Number);
       return true;
     }
@@ -21,7 +21,9 @@ class Parser {
     if (customDelimiterMatch) {
       const customDelimiter = this.escapeRegExp(customDelimiterMatch[1]);
       const delimiterRegex = new RegExp(`[${customDelimiter},:]`);
-      const validationRegex = new RegExp(`^\\d+([${customDelimiter},:]\\d+)*$`);
+      const validationRegex = new RegExp(
+        `^\\d+(\\.\\d+)?([${customDelimiter},:]\\d+(\\.\\d+)?)*$`,
+      );
 
       if (validationRegex.test(customDelimiterMatch[2])) {
         this.inputString = customDelimiterMatch[2];
