@@ -36,6 +36,6 @@ export function hasSeparator(input, separator) {
 
 export function hasNegativeNumber(numberArray) {
   for (let i = 0; i < numberArray.length; i++) {
-    if (numberArray[i] < 0) throw new Error(ERROR_MESSAGE.NEGATIVE_NUMBERS);
+    if (numberArray[i] < 0) return true;
   }
 }

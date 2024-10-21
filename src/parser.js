@@ -7,6 +7,7 @@ import {
   validateSpecialCharactersInString,
   validateNumericInput,
   hasSeparator,
+  hasNegativeNumber,
 } from "./validation.js";
 
 export function extractNumbers(input) {
@@ -89,5 +90,8 @@ export function separatingStrings(input, separator) {
 }
 
 export function convertToNumbers(separatedString) {
-  return separatedString.map(Number);
+  const result = separatedString.map(Number);
+  if (hasNegativeNumber(result))
+    throw new Error(ERROR_MESSAGE.NEGATIVE_NUMBERS);
+  return result;
 }
