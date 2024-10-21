@@ -17,49 +17,54 @@ class App {
       const result = input;
       Console.print(`결과: ${result}`);
     } catch (error) {
-      Console.print(`[ERROR] ${error}`);
+      Console.print(`${error}`);
     }
   }
 
   // 커스텀 구분자 처리하는 함수
   async handleCustomSeparator(input) {
-    // 정규식으로 "//"로 시작하고 "\n"으로 끝나는 문자열이 있는지 확인
+    const match = this.extractCustomSeparator(input); // 커스텀 구분자 추출
+
+    if (match) { // 커스텀 구분자가 있으면
+      const customSeparator = match[1];
+      this.validateCustomSeparator(customSeparator); // 구분자 유효성 검사
+      this.separators.push(customSeparator); // 구분자 배열에 커스텀 구분자 추가
+      return input.slice(match[0].length); // 구분자 뒤에 있는 실제 문자열 반환
+    }
+
+    Console.print("커스텀 구분자가 없다");
+    return input; // 커스텀 구분자가 없으면 입력 문자열 그대로 반환
+  }
+
+  // 커스텀 구분자를 추출하는 메서드
+  extractCustomSeparator(input) {
     const customSeparatorPattern = /\/\/(.+?)\\n/; // "//"로 시작하고 "\n"으로 끝나는 문자열 파악하는 정규식
-    const match = input.match(customSeparatorPattern); // [매칭된 문자열, 구분자 제외한 문자열, 매칭된 문자열 시작 위치, input, group], 매칭된 문자열이 없을 경우 null
+    const match = input.match(customSeparatorPattern); // 매칭된 문자열 추출
     Console.print(match);
 
-    if (match) {
+    if (match && input.startsWith(match[0])) { // 매칭되는 문자열이 있고 그 문자열이 입력 문자열 맨 앞에서 시작한다면
       Console.print("커스텀 구분자가 있다");
-      if (input.startsWith(match[0])) {
-        // 커스텀 구분자가 입력 문자열 맨 앞에 있는지 검사
-        Console.print("커스텀 구분자가 맨 앞에 있다");
-        const customSeparator = match[1];
-        Console.print(match[1]);
-
-        if (customSeparator.length !== 1) {
-          // 커스텀 구분자가 문자열인 경우
-          throw new Error(
-            "[ERROR] 문자열은 커스텀 구분자로 사용할 수 없습니다."
-          );
-        } else if (!isNaN(Number(customSeparator))) {
-          // 커스텀 구분자가 숫자인 경우
-          throw new Error("[ERROR] 숫자는 커스텀 구분자로 사용할 수 없습니다.");
-        } else {
-          this.separators.push(customSeparator); // 구분자 배열에 커스텀 구분자 추가
-          return input.slice(match[0].length); // 구분자 뒤에 있는 실제 문자열을 반환 (커스텀 구분자 부분을 제거하고 반환)
-        }
-      } else {
-        // 구분자가 맨 앞에 없을 때 에러 처리
-        throw new Error(
-          "[ERROR] 커스텀 구분자는 입력 문자열 맨 앞에 위치해야 합니다."
-        );
-      }
-    } else {
-      Console.print("커스텀 구분자가 없다");
+      return match;
     }
-    
-    // 커스텀 구분자가 없다면 입력 문자열 그대로 반환
-    return input;
+
+    if (match) { // 매칭되는 문자열이 있지만 맨 앞에서 시작하지 않는다면
+      throw new Error(
+        "[ERROR] 커스텀 구분자는 입력 문자열 맨 앞에 위치해야 합니다."
+      );
+    }
+
+    return null; // 매칭되지 않으면 null 반환
+  }
+
+  // 커스텀 구분자의 유효성을 검사하는 메서드
+  validateCustomSeparator(separator) {
+    if (separator.length !== 1) { // 커스텀 구분자의 길이 측정
+      throw new Error("[ERROR] 문자열은 커스텀 구분자로 사용할 수 없습니다.");
+    }
+
+    if (!isNaN(Number(separator))) {
+      throw new Error("[ERROR] 숫자는 커스텀 구분자로 사용할 수 없습니다.");
+    }
   }
 }
 
