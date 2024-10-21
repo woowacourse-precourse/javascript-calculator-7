@@ -6,7 +6,7 @@ class App {
     let delimiters = [",", ":"];
     let expression = input.trim();
 
-    if (expression.startsWith("//") && expression.includes("\n")) {
+    if (expression.startsWith("//") && expression.includes("\\n")) {
       const { customDelimiter, newExpression } = this.checkCustomDelimiter(expression);
       delimiters.push(customDelimiter);
       expression = newExpression;
@@ -17,16 +17,17 @@ class App {
   }
 
   checkCustomDelimiter(str) {
-    const endOfCustomDelimiter = str.indexOf("\n");
+    const endOfCustomDelimiter = str.indexOf("\\n");
     if (endOfCustomDelimiter === -1) {
       this.throwError("덧셈할 문자열이 없습니다.");
     }
-    const expression = str.substring(endOfCustomDelimiter + 1);
-    return { customDelimiter, expression };
+    const customDelimiter = str.substring(2, endOfCustomDelimiter);
+    const newExpression = str.substring(endOfCustomDelimiter + 2);
+    return { customDelimiter, newExpression };
   }
 
   calculateSum(expression, delimiters) {
-    const regExpOfDelimiter = new RegExp(delimiters.join('|'));
+    const regExpOfDelimiter = new RegExp(`[${delimiters.join('')}]`);
     const numbers = expression.split(regExpOfDelimiter);
     let sum = 0;
     
