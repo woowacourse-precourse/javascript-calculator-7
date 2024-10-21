@@ -35,6 +35,11 @@ class App {
 
         const parsedNum = parseFloat(num);
 
+        if(parsedNum < 0) {
+          const errMessage = `[ERROR] 적절하지 않은 입력 값(Negative Number: ${parsedNum})`;
+          throw new Error(errMessage);
+        }
+
         return parsedNum;
       });
 
