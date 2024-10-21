@@ -28,8 +28,20 @@ class App {
       return customNumbersArray;
     };
 
+    // [4] 일반구분자를 처리하는 함수 만들기
+    const extractGeneralDelimiter = (inputValue) => {
+      const generalStringArray = inputValue.split(/[,|;: ]+/);
+      const generalNumbersArray = generalStringArray.map(Number);
+      console.log(
+        `xxxxx(확인용 - 일반구분자 숫자배열 추출여부 : ${generalNumbersArray})`
+      );
+      return generalNumbersArray;
+    };
+
+
     // 테스트
-    extractCustomDelimiter(inputValue);
+    // extractCustomDelimiter(inputValue);
+    extractGeneralDelimiter(inputValue);
 
   }
 }
