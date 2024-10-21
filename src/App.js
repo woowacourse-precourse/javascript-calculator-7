@@ -1,6 +1,7 @@
 import input from './input.js';
 import getCustomSplitter from './getCustomSplitter.js';
 import checkValidate from './checkValidate.js';
+import splitString from './splitString.js';
 
 class App {
   async run() {
@@ -10,6 +11,8 @@ class App {
     if (!checkValidate(splitter, string)) {
       throw new Error('[ERROR]잘못된 입력입니다.');
     }
+
+    const numberArr = splitString(splitter, string);
   }
 }
 
