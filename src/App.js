@@ -3,6 +3,7 @@ import Calculator from "./template/Calculator.js";
 import { View } from './view/index.js';
 
 class App {
+  //진입점 세팅
   async init() {
     this.pipeline = await pipelineLoader();
     this.calculator = new Calculator(this.pipeline);

@@ -13,7 +13,6 @@ class Pipeline {
       if (index < this.middlewares.length) {
         const middleware = this.middlewares[index];
         index++;
-        console.log(middleware)
         middleware.next(context, next);
       }
     };

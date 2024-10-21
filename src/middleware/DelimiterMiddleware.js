@@ -3,10 +3,12 @@ class DelimiterMiddleware {
     this._defaultDelimiter = ",:"
   }
 
+  // Custom Delimiter 사용하는가
   hasCustomDelimiter(expression) {
     return expression.startsWith("//") || expression.includes("\\n");
   }
 
+  //Custom Delimiter 추출
   extractCustomDelimiter(expression) {
     return expression.replace("//", "").split("\\n");
 
