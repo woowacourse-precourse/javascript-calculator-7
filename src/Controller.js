@@ -1,4 +1,12 @@
 export default class Controller {
+    defaultNum(list, st){
+        if (list.length === 0){
+            return 0;
+        }
+        if (list.length === 1){
+            return parseInt(st, 10);
+        }
+    }
 
     baseSeparatorSplit(st){
         let lst = [];
@@ -18,10 +26,11 @@ export default class Controller {
         }
         return lst;
     }
+
     extractCustomSeparator(st){
         let separator = ""
 
-        if(st.startsWith('//')){
+         if(st.startsWith('//')){
             const idx = st.indexOf("\\n");
             if(idx > 2){
                 separator = st.slice(2, idx);
@@ -36,14 +45,17 @@ export default class Controller {
         }
         const separatorIndex = st.indexOf("\\n");
         const numberString = st.slice(separatorIndex + 2);
-        console.log(`숫자 배열 인덱스 : ${numberString}`)
         return numberString.split(customSeparator)
             .map(num => parseInt(num.trim(), 10))
             .filter(num => !isNaN(num));
     }
 
     sumCalculatorList(list){
-        return list.reduce((total, curr) => total + curr, 0);
+        return list.reduce((total, curr) => {
+            if (curr) {
+                throw new Error("[ERROR] 음수 입력은 허용되지 않습니다.");
+            }
+            return total + curr;
+        }, 0);
     }
-
 }
