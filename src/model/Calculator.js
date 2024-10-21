@@ -9,39 +9,56 @@ class Calculator {
   /**
    * @type {Array<string>}
    */
-  separators = [];
-  value = '';
+  _separators = [];
+  _value = '';
 
   /**
-   * @param {string} input 
+   * @param {string | undefined} input 
    */
   constructor(input) {
-    this.setSeparatorAndValue(input);
+    if (input) this.init(input);
+  }
+
+  /**
+   * @param {string} value
+   * @returns {void}
+   */
+  setValue(value) {
+    this._value = value;
+  }
+
+  /**
+   * @param {Array<string>} separators
+   * @returns {void}
+   */
+  setSeparators(separators) {
+    this._separators = separators;
   }
 
   /**
    * @param {string} input
+   * @returns {void}
    */
-  setSeparatorAndValue(input) {
+  init(input) {
     const prefixMatch = input.startsWith(CUSTOM_SEPARATOR_START);
     const splitText = input.split(CUSTOM_SEPARATOR_END);
     if (prefixMatch && splitText.length === 2) {
       const customSeparator = splitText[0].replace(CUSTOM_SEPARATOR_START, '');
-      this.separators = [...DEFAULT_SEPARATORS, customSeparator];
-      this.value = splitText[1];
+      this.setSeparators([...DEFAULT_SEPARATORS, customSeparator]);
+      this.setValue(splitText[1]);
       return
     }
-    this.separators = [...DEFAULT_SEPARATORS];
-    this.value = input;
+    this.setSeparators([...DEFAULT_SEPARATORS]);
+    this.setValue(input);
     return
   }
 
   /**
    * @returns {Array<number>}
    */
-  split() {
-    return this.separators
-      .reduce((inp, sep) => inp.replaceAll(sep, ' '), this.value)
+  getValues() {
+    return this._separators
+      .reduce((inp, sep) => inp.replaceAll(sep, ' '), this._value)
       .split(' ')
       .map(Number);
   }
@@ -67,7 +84,7 @@ class Calculator {
    * @returns {number}
    */
   compute() {
-    const values = this.split();
+    const values = this.getValues();
     if (!values.every(this.validator)) {
       throw new Error(ERROR_MESSAGE.INVALID_INPUT);
     }
