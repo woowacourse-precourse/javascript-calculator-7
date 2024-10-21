@@ -36,6 +36,7 @@ class App {
   async run() {
     const input = await Console.readLineAsync('덧셈할 문자열을 입력해 주세요\n');
     if (!this.handleInput(input)) throw new Error('[ERROR] 올바른 형식을 입력해주세요.');
+    const arr = this.extractNumber();
   }
 }
 
