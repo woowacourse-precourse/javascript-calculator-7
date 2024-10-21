@@ -56,7 +56,7 @@ function extractCharacter(string) {
 }
 
 function sumNumbers(numbers) {
-  return 1;
+  return numbers.reduce((acc, curr) => Number(acc) + Number(curr));
 }
 
 export default App;
