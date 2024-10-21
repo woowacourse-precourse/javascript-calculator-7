@@ -19,7 +19,7 @@ function parseInput(input) {
         const result = number.split(separator)
 
         return result.map(validateAndConvertNumber)
-    }else if(typeof Number(input[0]) === 'number') {
+    }else if(!isNaN(Number(input[0]))) {
         const result =  input.split(/[,;]/)
 
         return result.map(validateAndConvertNumber)
