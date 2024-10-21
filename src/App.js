@@ -52,6 +52,9 @@ class App {
       // 5. 덧셈 연산
       // sum은 누적값 (초기값 0), num은 NUMBERS의 요소 => 순환하며 누적합 갱신
       const SUM = NUMBERS.reduce((sum, num) => sum + num, 0);
+
+      // 6. 결과 출력하기
+      Console.print(`결과 : ${SUM}`);
     } catch (error) {
       Console.print(error.message);
     }
