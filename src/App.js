@@ -11,6 +11,8 @@ class App {
       delimiters.push(customDelimiter);
       expression = newExpression;
     }
+
+    const result = this.calculateSum(expression, delimiters);
   }
 
   checkCustomDelimiter(str) {
@@ -29,9 +31,12 @@ class App {
         this.throwError(`올바르지 않은 입력값이 있습니다. (${number})`);
       } else if (Number(number) <= 0) {
         this.throwError(`덧셈값은 양수만 입력할 수 있습니다. (${number})`);
-        
+      } else {
+        sum += Number(number);
       }
     }
+
+    return sum;
   }
 
   throwError(message) {
