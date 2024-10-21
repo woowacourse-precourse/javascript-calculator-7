@@ -1,4 +1,4 @@
-import { INVALID_SYMBOLS } from './constants'
+import { ONLY_NUMBER } from './constants'
 
 //배열안에 양수가 아닐때
 export const hasNegative = (array)=> {
@@ -10,10 +10,10 @@ export const hasNegative = (array)=> {
     return false
 }
 
-//배열안에 기호가 들어가 있을때 
+//배열안에 숫자말고 다른 기호가 들어가 있을때 
 export const hasInvalidSymbol = (array)=> {
     for(let i=0; i<array.length; i++ ){
-        if(INVALID_SYMBOLS.test(array)){
+        if(ONLY_NUMBER.test(array[i])){
             return true
         }
     }
