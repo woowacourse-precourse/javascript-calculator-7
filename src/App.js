@@ -69,18 +69,11 @@ class App {
       });
       const SEPARATOR_REGEX = new RegExp(ESCAPED_SEPARATORS.sort((a, b) => b.length - a.length)
       .join('|'));
+      const REMOVE_CUSTOM_SEPARATOR = STRING_TO_ADD.replace(/\/\/.*?\\n/g, '');
+      const CUSTOM_DELIMITER = REMOVE_CUSTOM_SEPARATOR.split(SEPARATOR_REGEX);
 
-
-      const CUSTOM_DELIMITER = USERINFO.split(reg);
-      
       for (let i = 0; i < CUSTOM_DELIMITER.length; i++) {
         let num = CUSTOM_DELIMITER[i];
-        if (num === '//') {
-          continue;
-        }
-        if (num.startsWith('\\n')) {
-          num = num.substring(2);
-        }
 
         if (num === '' || isNaN(num)) {
           // 공백일 때와 숫자가 아닐때 (커스텀 문자열일 때 다른 구분자가 있는 경우)
