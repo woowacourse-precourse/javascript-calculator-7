@@ -1,3 +1,5 @@
+import {ERROR_MESSAGE} from "../constants/message.js";
+
 export function isCustomSeparatorError(param) {
     if (!isNaN(param)) {
         throw new Error("[ERROR]: 에러발생");
@@ -6,14 +8,14 @@ export function isCustomSeparatorError(param) {
 
 export function checkForErrors(param) {
     if (param === "" || isNaN(param)) {
-        throw new Error("[ERROR]: 잘못된 입력");
+        throw new Error(ERROR_MESSAGE.WRONG_INPUT);
     }
 
     if (Number(param) < 0) {
-        throw new Error("[ERROR]: 음수 입력 불가");
+        throw new Error(ERROR_MESSAGE.WRONG_MINUS_INPUT);
     }
 
     if (param.trim() !== param || param === " ") {
-        throw new Error("[ERROR]: 공백은 입력 불가");
+        throw new Error(ERROR_MESSAGE.WRONG_EMPTY_INPUT);
     }
 }
