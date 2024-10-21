@@ -2,10 +2,14 @@ import { Console } from '@woowacourse/mission-utils';
 
 class App {
   async run() {
-    Console.print('덧셈할 문자열을 입력해주세요.');
-    const userInput = await this.getUserInput();
-    const result = this.sumNumbers(userInput);
-    result && Console.print(`결과 : ${result}`);
+    try {
+      Console.print('덧셈할 문자열을 입력해주세요.');
+      const userInput = await this.getUserInput();
+      const result = this.sumNumbers(userInput);
+      result && Console.print(`결과 : ${result}`);
+    } catch (error) {
+      return Promise.reject(error);
+    }
   }
 
   async getUserInput() {
@@ -15,8 +19,12 @@ class App {
   sumNumbers(input) {
     input = input.trim();
 
-    if (input === '') {
+    if (input === null || input === undefined || input === '') {
       return 0;
+    }
+
+    if (/[,;]{2,}/.test(input)) {
+      throw new Error('[ERROR] 연속된 구분자는 허용되지 않습니다.');
     }
 
     input = input.replace('\\n', '\n');
@@ -32,10 +40,9 @@ class App {
     const numbers = input.split(regex).map(Number);
 
     if (numbers.includes(NaN)) {
-      Console.print(
-        '[Error] 올바른 값을 얻으려면 새로운 커스텀 구분자를 지정하거나 올바른 값을 입력해주세요.',
+      throw new Error(
+        '[ERROR] 올바른 값을 얻으려면 새로운 커스텀 구분자를 지정하거나 올바른 값을 입력해주세요.',
       );
-      return;
     }
 
     const result = numbers.reduce((sum, num) => sum + num, 0);
@@ -44,8 +51,3 @@ class App {
 }
 
 export default App;
-
-// 덧셈할 문자열을 입력해 주세요.
-// 1,2:3
-// //;\n1;2;3
-// 결과 : 6
