@@ -15,11 +15,17 @@ class CalculatorProcess {
     this.inputString = initInput;
   }
 
-  doParsing() {
+  handleDefaultDelimiter() {
     if (/^\d+([,:]\d+)*$/.test(this.inputString)) {
       const parsedNums = this.inputString.match(/\d+/g);
       this.inputNums = parsedNums.map(Number);
-    } else {
+      return true;
+    }
+    return false;
+  }
+
+  doParsing() {
+    if (!this.handleDefaultDelimiter) {
       const customDelimiterMatch = this.inputString.match(/^\/\/(.)\\n(.*)$/);
       if (customDelimiterMatch) {
         const customDelimiter = new RegExp(`[${customDelimiterMatch[1]},:]`);
