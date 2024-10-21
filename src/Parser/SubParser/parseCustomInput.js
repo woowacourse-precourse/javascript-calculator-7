@@ -1,22 +1,22 @@
-import sumAllNumbers from "../../Util/sumAllNumbers.js";
+import sumAllNumbers from '../../Util/sumAllNumbers.js';
 import {
   validateCustomInput,
   // validateNoDuplicateDelimiters,
   validateCustomInputFormat,
-} from "../../validator/validator.js";
-import { ERROR_MESSAGES, ERROR_PREFIX } from "../../Constraints/Constraints.js";
+} from '../../validator/validator.js';
+import { ERROR_MESSAGES, ERROR_PREFIX } from '../../Constraints/Constraints.js';
 
-import { escapeRegExp } from "../../Util/regex.js";
+import { escapeRegExp } from '../../Util/regex.js';
 
 export default function parseCustomInput(input) {
   // 입력이 //로 시작하고 \n을 포함하는지 확인한다.
   validateCustomInputFormat(input);
 
-  const delimiterEnd = input.indexOf("\\n");
+  const delimiterEnd = input.indexOf('\\n');
   const delimiter = input.slice(2, delimiterEnd);
 
   // delimiter가 비어있으면 에러를 던진다.
-  if (delimiter === "") {
+  if (delimiter === '') {
     throw new Error(`${ERROR_PREFIX}${ERROR_MESSAGES.EMPTY_DELIMITER}`);
   }
   // console.log(delimiter);
@@ -31,7 +31,7 @@ export default function parseCustomInput(input) {
 
   validateCustomInput(content, escapedDelimiter);
   // 구분자는 있지만, 내용이 빈경우
-  if (content === "") {
+  if (content === '') {
     return 0;
   }
 
