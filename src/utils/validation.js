@@ -11,3 +11,10 @@ export const checkIsPositive = (array) => {
     throw new Error("ERROR: 배열의 요소에 0 혹은 음수가 있습니다.");
   }
 };
+
+export const checkIsBlank = (input) => {
+  if (input === "") {
+    throw new Error("ERROR: 입력 값이 공백입니다.");
+  }
+  return input;
+};

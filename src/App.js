@@ -1,6 +1,6 @@
 import { Console } from "@woowacourse/mission-utils";
 import BASIC_REGEXP from "./regExp.js";
-import { checkIsPositive } from "./utils/validation.js";
+import { checkIsBlank, checkIsPositive } from "./utils/validation.js";
 import { add } from "./utils/sum.js";
 
 class App {
@@ -10,6 +10,8 @@ class App {
 
     // 다음 줄에서 입력을 받음 + 입력 받은 문자열의 양 끝 공백 제거
     const input = await Console.readLineAsync("").then((input) => input.trim());
+
+    checkIsBlank(input);
 
     // "//"를 확인하기 위해 첫 두 글자 가져오기
     const startString = input.slice(0, 2);
