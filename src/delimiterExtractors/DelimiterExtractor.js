@@ -20,18 +20,23 @@ class DelimiterExtractor extends IDelimiterExtractor {
       return inputValue;
     }
 
-    if (customDelimiterMatch.index !== 0) {
+    this.validateCustomDelimiterPosition(customDelimiterMatch);
+    this.setCustomDelimiter(customDelimiterMatch[1]);
+
+    return inputValue.slice(customDelimiterMatch[0].length);
+  }
+
+  validateCustomDelimiterPosition(match) {
+    if (match.index !== 0) {
       throw new Error(ERROR_MESSAGES.CUSTOM_DELIMITER_NOT_AT_START);
     }
+  }
 
-    const customDelimiter = customDelimiterMatch[1];
-
+  setCustomDelimiter(customDelimiter) {
     if (customDelimiter.length > 1) {
       throw new Error(ERROR_MESSAGES.CUSTOM_DELIMITER_TOO_LONG);
     }
-
     this.#customDelimiter = customDelimiter;
-    return inputValue.slice(customDelimiterMatch[0].length);
   }
 
   getDelimiters() {
