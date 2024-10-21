@@ -1,7 +1,11 @@
+import { ERROR_MESSAGES } from "./constants.js";
+
 export const checkHasCustom = (string) => {
   if (string.startsWith("//") && string.includes("\\n")) {
     const DELIMITER = string.slice(2, string.indexOf("\\n"));
     return DELIMITER;
+  } else if (string.startsWith("//") && !string.includes("\n")) {
+    throw new Error(ERROR_MESSAGES.DUPLICATED_DELIMITER);
   }
   return null;
 };

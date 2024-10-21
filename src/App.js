@@ -1,8 +1,6 @@
 import { Console } from "@woowacourse/mission-utils";
 import { checkHasCustom, escapeRegExp, hasDuplicate } from "./utils.js";
-
-const ERROR_MESSAGE = "[ERROR] 잘못된 입력 값 형식입니다.";
-const DELIMITER = [",", ":"];
+import { ERROR_MESSAGES, DELIMITER } from "./constants.js";
 
 class App {
   async run() {
@@ -12,10 +10,12 @@ class App {
       );
 
       const customDelimiter = checkHasCustom(input);
-      DELIMITER.push(customDelimiter && customDelimiter);
+      if (customDelimiter) {
+        DELIMITER.push(escapeRegExp(customDelimiter));
+      }
 
       if (hasDuplicate(input, DELIMITER)) {
-        throw new Error(ERROR_MESSAGE);
+        throw new Error(ERROR_MESSAGES.DUPLICATED_DELIMITER);
       }
 
       const regexString = DELIMITER.join("|");
@@ -30,7 +30,7 @@ class App {
         .map((value) => {
           const num = Number(value);
           if (isNaN(num) | (num < 0)) {
-            throw new Error(ERROR_MESSAGE);
+            throw new Error(ERROR_MESSAGES.NON_NUMERIC_VALUE);
           }
           return num;
         })
@@ -38,7 +38,6 @@ class App {
 
       Console.print("결과 : " + sum);
     } catch (error) {
-      Console.print(error);
       throw error;
     }
   }
