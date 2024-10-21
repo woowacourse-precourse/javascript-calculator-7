@@ -5,13 +5,13 @@ class CalculatorController {
   #io = MissionUtils.Console;
   
   constructor(service){
+    this.service = service;
   }
 
   async run(){
-    const input = this.#io.readlineSync();
+    const input = await this.#io.readlineSync();
     return this.service.calculate(new CalculatorDTO(input));
   }
-
 }
 
 export default CalculatorController;
