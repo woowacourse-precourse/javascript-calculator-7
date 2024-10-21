@@ -35,7 +35,7 @@ class App {
 
   //결과 출력 함수
   printResult(result) {
-    Console.print("결과: "+result);
+    Console.print("결과 : "+result);
   }
   
 }
