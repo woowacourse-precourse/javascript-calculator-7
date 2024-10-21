@@ -1,4 +1,4 @@
-import { EMPTY_STRING, ERROR_MESSAGE, MINUS_STRING } from "./message";
+import { EMPTY_STRING, ERROR_MESSAGE, MINUS_STRING } from "./message.js";
 
 export function extractDividerList(input, dividerList) {
   while (input !== EMPTY_STRING) {

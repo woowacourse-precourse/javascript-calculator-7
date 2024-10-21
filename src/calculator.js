@@ -1,4 +1,4 @@
-import { EMPTY_STRING, ERROR_MESSAGE } from "./message";
+import { EMPTY_STRING, ERROR_MESSAGE } from "./message.js";
 
 export function tokenizeString(input, dividerList) {
   let tokens = [];
