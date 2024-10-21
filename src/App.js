@@ -87,7 +87,7 @@ class App {
         }
       }
     } else {
-      const CUSTOM_DELIMITER = USERINFO.split(/[,|:]/);
+      const CUSTOM_DELIMITER = STRING_TO_ADD.split(/[,|:]/);
 
       for (let i = 0; i < CUSTOM_DELIMITER.length; i++) {
         let num = CUSTOM_DELIMITER[i];
