@@ -30,11 +30,20 @@ class App {
     return splitArray;
   }
 
+  convertNumber(input) {
+    const cleanNumArray = input.map((num) => {
+      const cleanNum = Number(num);
+      return cleanNum;
+    });
+    return cleanNumArray;
+  }
+
   async run() {
     try {
       const sentence = await this.getSentence();
       const [customSeparator, findSentence] = this.findCustom(sentence);
       const splitArray = await this.splitSentence(customSeparator, findSentence);
+      const numberArray = this.convertNumber(splitArray);
     } catch (error) {
       throw new Error("[ERROR]");
     }
