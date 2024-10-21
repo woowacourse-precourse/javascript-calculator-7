@@ -45,7 +45,7 @@ class Calculator {
       .map(Number)
       .reduce((acc, curr) => acc + curr, 0);
 
-    printMessage(`결과 : ${sum}`);
+      printMessage(`${LOG_MESSAGE.RESULT_MESSAGE}${sum}`);
     return sum;
   }
 
