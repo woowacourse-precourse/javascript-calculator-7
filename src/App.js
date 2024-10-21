@@ -11,7 +11,10 @@ class App {
       return;
     }
 
-    Console.print("결과 : " + stringInput);
+    const inputNumbers = stringInput.split(/[,|:]/).map(Number);
+    const sumNumbers = inputNumbers.reduce((acc, curr) => acc + curr, 0);
+
+    Console.print("결과 : " + sumNumbers);
   }
 }
 
