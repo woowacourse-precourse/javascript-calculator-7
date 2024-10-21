@@ -7,33 +7,18 @@ export function extractNumbers(input, distinct) {
         
         if (distinct.includes(currentChar)) {
             if (number.length > 0) {
-                sum += setNumber(number);
+                sum += Number(number.join(''));
                 number = [];
             }
         } else {
             number.push(currentChar);
             if (i === input.length - 1) {
-                sum += setNumber(number);
+                sum += Number(number.join(''));;
             }
         }
     }
 
     return sum;
-}
-
-function setNumber(number) {
-    let currentNumber = 0;
-    let realNumber = number.map(Number);
-
-    if (realNumber.length > 1) {
-        realNumber.reverse().forEach((item, index) => {
-            currentNumber += item * 10 ** index;
-        });
-    } else {
-        currentNumber = realNumber[0];
-    }
-
-    return currentNumber;
 }
 
 export function awareCustomSeparator(input, distinct) {
