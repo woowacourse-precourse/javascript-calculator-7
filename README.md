@@ -146,3 +146,10 @@ throwError(message) {
 -   async/await, promise
 -   클래스
 -   정규표현식
+
+---
+
+## 학습 정리
+
+-   [이전에 정리해두었던 Git 관련 정리](https://angry-whale-416.notion.site/DAY01-29c79be9c52d410781b40fbd7228d2ac?pvs=4)
+-   [새로 작성한 클래스 Deep Dive 정리](http://angry-whale-416.notion.site)
