@@ -1,4 +1,4 @@
-import { extractCustomSeparator } from '../src/models/utils/extractCustomSeparator';
+import { extractCustomSeparator } from '../src/utils/extractCustomSeparator';
 import { expect } from '@jest/globals';
 
 describe('ExtractCustomSeparator', () => {

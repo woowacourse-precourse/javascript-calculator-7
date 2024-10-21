@@ -1,158 +1,326 @@
-// __tests__/isValidNumbers.test.js
+// isValidNumbers.test.js
+
 import { isValidNumbers } from '../src/models/validations/isValidNumbers.js';
-import { ERROR_MESSAGES } from '../src/constants/contants.js';
+import { ERROR_MESSAGES } from '../src/constants/constants.js';
 
-describe('isValidNumbers', () => {
-	const defaultSeparators = [',', ':'];
+/**
+ * 입력값을 안전하게 문자열로 변환하는 헬퍼 함수
+ * JSON.stringify가 실패할 경우, 해당 타입에 맞게 문자열로 변환
+ */
+const safeStringify = (input) => {
+	if (typeof input === 'bigint') {
+		return `${input}n`;
+	}
+	if (typeof input === 'function') {
+		return input.toString();
+	}
+	if (typeof input === 'symbol') {
+		return input.toString();
+	}
+	try {
+		return JSON.stringify(input);
+	} catch (e) {
+		return String(input);
+	}
+};
 
-	describe('유효하지 않은 입력 데이터 처리', () => {
-		test('입력이 문자열이 아닌 경우 예외를 던져야 합니다', () => {
-			expect(() => isValidNumbers(123, defaultSeparators)).toThrow(
-				ERROR_MESSAGES.INVALID_INPUT,
-			);
-		});
+describe('isValidNumbers 함수 테스트', () => {
+	describe('유효한 입력', () => {
+		const validInputs = [
+			{ input: [], description: '빈 배열' },
+			{ input: ['1', '2', '3'], description: '모든 요소가 숫자 문자열인 배열' },
+			{ input: [1, 2, 3], description: '모든 요소가 숫자인 배열' },
+			{ input: ['0', '00', '000'], description: '0을 포함한 숫자 문자열 배열' },
+			{ input: [0, 0, 0], description: '0으로만 구성된 숫자 배열' },
+			{ input: ['1', 2, '3', 0], description: '문자열과 숫자가 혼합된 배열' },
+			{ input: ['1234567890'], description: '매우 큰 숫자 문자열' },
+			{
+				input: [Number.MAX_SAFE_INTEGER],
+				description: 'JavaScript 최대 안전 정수',
+			},
+			{ input: ['99999999999999999999'], description: '매우 큰 숫자 문자열' },
+			{
+				input: ['001', '002', '003'],
+				description: '선행 0이 있는 숫자 문자열',
+			},
+			{ input: ['0000'], description: '모든 문자가 0인 숫자 문자열' },
+			{ input: [0], description: '단일 0 숫자' },
+			{ input: ['0'], description: '단일 0 문자열' },
+		];
 
-		test('구분자가 배열이 아닌 경우 예외를 던져야 합니다', () => {
-			expect(() => isValidNumbers('1,2,3', ';')).toThrow(
-				ERROR_MESSAGES.INVALID_INPUT,
-			);
-		});
-
-		test('구분자가 null인 경우 예외를 던져야 합니다', () => {
-			expect(() => isValidNumbers('1,2,3', null)).toThrow(
-				ERROR_MESSAGES.INVALID_INPUT,
-			);
-		});
-
-		test('아무 입력도 주어지지 않은 경우 예외를 던져야 합니다', () => {
-			expect(() => isValidNumbers(undefined, defaultSeparators)).toThrow(
-				ERROR_MESSAGES.INVALID_INPUT,
-			);
+		validInputs.forEach(({ input, description }) => {
+			test(`유효한 입력: ${description}`, () => {
+				expect(isValidNumbers(input)).toBe(true);
+			});
 		});
 	});
 
-	describe('유효한 입력 데이터 처리', () => {
-		test('모든 문자열이 양의 정수 또는 0인 경우 true를 반환해야 한다', () => {
-			const input = '0,1,2,3';
-			expect(isValidNumbers(input, defaultSeparators)).toBe(true);
-		});
+	describe('유효하지 않은 입력: 배열이 아닌 경우', () => {
+		const invalidInputs = [
+			{ value: undefined, type: 'undefined' },
+			{ value: null, type: 'null' },
+			{ value: '1,2,3', type: 'string' },
+			{ value: 123, type: 'number' },
+			{ value: 0, type: 'number' },
+			{ value: -1, type: 'number' },
+			{ value: 3.14, type: 'number' },
+			{ value: true, type: 'boolean' },
+			{ value: false, type: 'boolean' },
+			{ value: {}, type: 'object' },
+			{ value: { a: 1 }, type: 'object' },
+			{ value: () => {}, type: 'function' },
+			{ value: Symbol('sym'), type: 'symbol' },
+			{ value: BigInt(10), type: 'bigint' },
+			{ value: new Date(), type: 'Date object' },
+		];
 
-		test('문자열에 음수가 포함된 경우 예외를 던져야 한다', () => {
-			const input = '-1,2,3';
-			expect(() => isValidNumbers(input, defaultSeparators)).toThrow(
-				ERROR_MESSAGES.INVALID_NUMBER,
-			);
+		invalidInputs.forEach(({ value, type }) => {
+			test(`입력값 타입이 ${type}일 때 에러가 발생해야 한다.`, () => {
+				expect(() => isValidNumbers(value)).toThrow(Error);
+				expect(() => isValidNumbers(value)).toThrow(
+					ERROR_MESSAGES.INVALID_INPUT,
+				);
+			});
 		});
+	});
 
-		test('문자열에 소수가 포함된 경우 예외를 던져야 한다', () => {
-			const input = '1.5,2,3';
-			expect(() => isValidNumbers(input, defaultSeparators)).toThrow(
-				ERROR_MESSAGES.INVALID_NUMBER,
-			);
-		});
+	describe('유효하지 않은 입력: 배열이지만 요소가 유효하지 않은 경우', () => {
+		const invalidElementInputs = [
+			{
+				input: ['1', '2', 'three'],
+				description: '문자열 중 하나가 숫자가 아닌 문자열',
+				errorMessage: '[ERROR]',
+			},
+			{
+				input: [1, 2, -3],
+				description: '숫자 중 하나가 음수',
+				errorMessage: '[ERROR]',
+			},
+			{
+				input: ['1', 2, 3.5],
+				description: '숫자 중 하나가 소수',
+				errorMessage: '[ERROR]',
+			},
+			{
+				input: ['1', true, '3'],
+				description: '숫자 중 하나가 불리언',
+				errorMessage: '[ERROR]',
+			},
+			{
+				input: ['1', {}, '3'],
+				description: '숫자 중 하나가 객체',
+				errorMessage: '[ERROR]',
+			},
+			{
+				input: ['1', null, '3'],
+				description: '숫자 중 하나가 null',
+				errorMessage: '[ERROR]',
+			},
+			{
+				input: ['1', undefined, '3'],
+				description: '숫자 중 하나가 undefined',
+				errorMessage: '[ERROR]',
+			},
+			{
+				input: ['1', NaN, '3'],
+				description: '숫자 중 하나가 NaN',
+				errorMessage: '[ERROR]',
+			},
+			{
+				input: ['1', Infinity, '3'],
+				description: '숫자 중 하나가 Infinity',
+				errorMessage: '[ERROR]',
+			},
+			{
+				input: ['1', -Infinity, '3'],
+				description: '숫자 중 하나가 -Infinity',
+				errorMessage: '[ERROR]',
+			},
+			{
+				input: ['1', () => {}, '3'],
+				description: '숫자 중 하나가 함수',
+				errorMessage: '[ERROR]',
+			},
+			{
+				input: ['1', Symbol('sym'), '3'],
+				description: '숫자 중 하나가 심볼',
+				errorMessage: '[ERROR]',
+			},
+			{
+				input: ['1', BigInt(10), '3'],
+				description: '숫자 중 하나가 BigInt',
+				errorMessage: '[ERROR]',
+			},
+			{
+				input: ['1', ['2'], '3'],
+				description: '숫자 중 하나가 배열',
+				errorMessage: '[ERROR]',
+			},
+			{
+				input: ['1', new Date(), '3'],
+				description: '숫자 중 하나가 Date 객체',
+				errorMessage: '[ERROR]',
+			},
+			{
+				input: ['1', '', '3'],
+				description: '숫자 중 하나가 빈 문자열',
+				errorMessage: '[ERROR]',
+			},
+			{
+				input: ['1', '  ', '3'],
+				description: '숫자 중 하나가 공백 문자열',
+				errorMessage: '[ERROR]',
+			},
+			{
+				input: ['1', '1.2', '3'],
+				description: '문자열 중 하나가 소수',
+				errorMessage: '[ERROR]',
+			},
+			{
+				input: ['1', '-2', '3'],
+				description: '문자열 중 하나가 음수',
+				errorMessage: '[ERROR]',
+			},
+			{
+				input: ['1', '2a', '3'],
+				description: '문자열 중 하나에 문자가 포함됨',
+				errorMessage: '[ERROR]',
+			},
+			{
+				input: ['1', 'a2', '3'],
+				description: '문자열 중 하나에 문자가 포함됨',
+				errorMessage: '[ERROR]',
+			},
+			{
+				input: ['1', '2 ', '3'],
+				description: '문자열 중 하나에 공백이 포함됨',
+				errorMessage: '[ERROR]',
+			},
+			{
+				input: ['1', ' 2', '3'],
+				description: '문자열 중 하나에 공백이 포함됨',
+				errorMessage: '[ERROR]',
+			},
+			{
+				input: ['1', '2.0', '3'],
+				description: '문자열 중 하나가 소수 포맷',
+				errorMessage: '[ERROR]',
+			},
+		];
 
-		test('문자열에 숫자가 아닌 값이 포함된 경우 예외를 던져야 한다', () => {
-			const input = '1,a,3';
-			expect(() => isValidNumbers(input, defaultSeparators)).toThrow(
-				ERROR_MESSAGES.INVALID_NUMBER,
-			);
+		invalidElementInputs.forEach(({ input, description, errorMessage }) => {
+			test(`입력값: ${safeStringify(input)} (${description}) 일 때 에러가 발생해야 한다.`, () => {
+				expect(() => isValidNumbers(input)).toThrow(Error);
+				expect(() => isValidNumbers(input)).toThrow(errorMessage);
+			});
 		});
+	});
 
-		test('빈 문자열을 입력받은 경우 true를 반환해야 한다', () => {
-			const input = '';
-			expect(isValidNumbers(input, defaultSeparators)).toBe(true);
-		});
+	describe('경계값 테스트', () => {
+		const boundaryInputs = [
+			{
+				input: ['0'],
+				description: '단일 0 문자열',
+				expected: true,
+			},
+			{
+				input: [0],
+				description: '단일 0 숫자',
+				expected: true,
+			},
+			{
+				input: ['0000000000'],
+				description: '여러 개의 0을 가진 문자열',
+				expected: true,
+			},
+			{
+				input: [Number.MAX_SAFE_INTEGER],
+				description: '최대 안전 정수',
+				expected: true,
+			},
+			{
+				input: ['99999999999999999999'],
+				description: '매우 큰 숫자 문자열',
+				expected: true,
+			},
+			{
+				input: ['1', '2', '3'],
+				description: '일반적인 작은 숫자 문자열 배열',
+				expected: true,
+			},
+			{
+				input: [1, 2, 3],
+				description: '일반적인 작은 숫자 배열',
+				expected: true,
+			},
+		];
 
-		test('문자열 중 빈 문자열이 있는 경우 예외를 던져야 한다', () => {
-			const input = '1,,3';
-			expect(() => isValidNumbers(input, defaultSeparators)).toThrow(
-				ERROR_MESSAGES.INVALID_NUMBER,
-			);
+		boundaryInputs.forEach(({ input, description, expected }) => {
+			test(`경계값 입력: ${description}`, () => {
+				expect(isValidNumbers(input)).toBe(expected);
+			});
 		});
+	});
 
-		test('공백이 포함된 경우 예외를 던져야 한다', () => {
-			const input = '1, 2,3';
-			expect(() => isValidNumbers(input, defaultSeparators)).toThrow(
-				ERROR_MESSAGES.INVALID_NUMBER,
-			);
-		});
+	describe('특수 케이스', () => {
+		const specialCaseInputs = [
+			{
+				input: [[]],
+				description: '빈 배열을 요소로 가진 배열',
+				expected: false,
+				errorMessage: '[ERROR]',
+			},
+			{
+				input: [['1', '2', '3']],
+				description: '중첩 배열을 요소로 가진 배열',
+				expected: false,
+				errorMessage: '[ERROR]',
+			},
+			{
+				input: [null],
+				description: 'null을 요소로 가진 배열',
+				expected: false,
+				errorMessage: '[ERROR]',
+			},
+			{
+				input: [undefined],
+				description: 'undefined를 요소로 가진 배열',
+				expected: false,
+				errorMessage: '[ERROR]',
+			},
+			{
+				input: [new Date()],
+				description: 'Date 객체를 요소로 가진 배열',
+				expected: false,
+				errorMessage: '[ERROR]',
+			},
+			{
+				input: [Symbol('sym')],
+				description: 'Symbol을 요소로 가진 배열',
+				expected: false,
+				errorMessage: '[ERROR]',
+			},
+			{
+				input: [function () {}],
+				description: '함수를 요소로 가진 배열',
+				expected: false,
+				errorMessage: '[ERROR]',
+			},
+		];
 
-		test('여러 구분자를 사용하는 경우 올바르게 동작해야 한다', () => {
-			const input = '1,2:3';
-			expect(isValidNumbers(input, defaultSeparators)).toBe(true);
-		});
-
-		test('구분자에 특수 문자가 포함된 경우 올바르게 처리해야 한다', () => {
-			const input = '1*2*3';
-			const separators = ['*'];
-			expect(isValidNumbers(input, separators)).toBe(true);
-		});
-
-		test('NaN 문자열이 포함된 경우 예외를 던져야 한다', () => {
-			const input = '1,NaN,3';
-			expect(() => isValidNumbers(input, defaultSeparators)).toThrow(
-				ERROR_MESSAGES.INVALID_NUMBER,
-			);
-		});
-
-		test('Infinity 문자열이 포함된 경우 예외를 던져야 한다', () => {
-			const input = '1,Infinity,3';
-			expect(() => isValidNumbers(input, defaultSeparators)).toThrow(
-				ERROR_MESSAGES.INVALID_NUMBER,
-			);
-		});
-
-		test('16진수 형식의 숫자가 포함된 경우 예외를 던져야 한다', () => {
-			const input = '0x1,0x2,0x3';
-			expect(() => isValidNumbers(input, defaultSeparators)).toThrow(
-				ERROR_MESSAGES.INVALID_NUMBER,
-			);
-		});
-
-		test('지수 표기법의 숫자가 포함된 경우 예외를 던져야 한다', () => {
-			const input = '1e2,2e3,3e4';
-			expect(() => isValidNumbers(input, defaultSeparators)).toThrow(
-				ERROR_MESSAGES.INVALID_NUMBER,
-			);
-		});
-
-		test('공백만 있는 경우 true를 반환해야 한다', () => {
-			const input = '   ';
-			expect(isValidNumbers(input, defaultSeparators)).toBe(true);
-		});
-
-		test('숫자와 문자 조합이 포함된 경우 예외를 던져야 한다', () => {
-			const input = '1a,2b,3c';
-			expect(() => isValidNumbers(input, defaultSeparators)).toThrow(
-				ERROR_MESSAGES.INVALID_NUMBER,
-			);
-		});
-
-		test('탭과 개행 문자가 포함된 경우 올바르게 처리해야 한다', () => {
-			const input = '1\t2\n3';
-			const separators = ['\t', '\n'];
-			expect(isValidNumbers(input, separators)).toBe(true);
-		});
-
-		test('구분자가 없는 경우 전체 문자열이 양의 정수 또는 0인지 검사한다', () => {
-			const input = '123';
-			const separators = [];
-			expect(isValidNumbers(input, separators)).toBe(true);
-		});
-
-		test('구분자가 없고, 문자열이 숫자가 아닌 경우 예외를 던져야 한다', () => {
-			const input = 'abc';
-			const separators = [];
-			expect(() => isValidNumbers(input, separators)).toThrow(
-				ERROR_MESSAGES.INVALID_NUMBER,
-			);
-		});
-
-		test('유니코드 숫자가 포함된 경우 예외를 던져야 한다', () => {
-			const input = '①,②,③';
-			expect(() => isValidNumbers(input, defaultSeparators)).toThrow(
-				ERROR_MESSAGES.INVALID_NUMBER,
-			);
-		});
+		specialCaseInputs.forEach(
+			({ input, description, expected, errorMessage }) => {
+				if (expected) {
+					test(`특수 케이스: ${description} 일 때, 에러가 발생하지 않아야 한다.`, () => {
+						expect(isValidNumbers(input)).toBe(true);
+					});
+				} else {
+					test(`특수 케이스: ${safeStringify(input)} (${description}) 일 때, 에러가 발생해야 한다.`, () => {
+						expect(() => isValidNumbers(input)).toThrow(Error);
+						expect(() => isValidNumbers(input)).toThrow(errorMessage);
+					});
+				}
+			},
+		);
 	});
 });
