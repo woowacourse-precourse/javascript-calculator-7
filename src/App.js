@@ -47,6 +47,10 @@ class App {
       );
     }
 
+    if (numberList.every((num) => num === 0)) {
+      throw new Error("숫자가 없습니다.");
+    }
+
     const invalidNumbers = numberList.filter((num) => isNaN(num));
     if (invalidNumbers.length > 0) {
       throw new Error("숫자나 구분자가 아닌 문자가 포함되어 있습니다.");
