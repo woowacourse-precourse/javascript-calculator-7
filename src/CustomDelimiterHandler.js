@@ -32,7 +32,8 @@ class CustomDelimiterHandler {
 
   #seperateCustomDelimiter(string) {
     const startIndex = string.lastIndexOf(CUSTOM_DELIMITER_INPUT.start);
-    if (startIndex !== 0) return this.#handleWithoutCustomDelimiter(string);
+    const endIndex = string.lastIndexOf(CUSTOM_DELIMITER_INPUT.end);
+    if (startIndex !== 0 || endIndex === -1) return this.#handleWithoutCustomDelimiter(string);
     return this.#handleWithCustomDelimiter(string);
   }
 
