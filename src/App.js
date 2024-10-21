@@ -44,13 +44,16 @@ class App {
   }
 
   async run() {
-    const userInput = await this.startCalculator();
+    try {
+      const userInput = await this.startCalculator();
 
-    const inputSplited = this.workingCalculator(userInput);
+      const inputSplited = this.workingCalculator(userInput);
 
-    this.errorCalculator(inputSplited);
-
-    this.addNumber(inputSplited);
+      this.addNumber(inputSplited);
+    } catch (error) {
+      this.errorCalculator(inputSplited);
+      throw error;
+    }
   }
 };
 
