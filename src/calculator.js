@@ -7,18 +7,26 @@ export function extractNumbers(input, distinct) {
         
         if (distinct.includes(currentChar)) {
             if (number.length > 0) {
-                sum += Number(number.join(''));
+                sum += setNumber(number);
                 number = [];
             }
         } else {
             number.push(currentChar);
             if (i === input.length - 1) {
-                sum += Number(number.join(''));;
+                sum += setNumber(number);
             }
         }
     }
 
     return sum;
+}
+
+function setNumber(number){
+    let realNumber = Number(number.join(''));
+    if (realNumber === 0) {
+        throw new Error('[ERROR] 입력에 0이 포함되어 있습니다.');
+    }
+    return hi;
 }
 
 export function awareCustomSeparator(input, distinct) {
