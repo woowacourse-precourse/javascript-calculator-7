@@ -11,8 +11,10 @@ class App {
         Console.print("결과 : 0")
         return 
       }
+      const {separators: customSeparators, strippedInput: customStrippedInput} = StringParser.extractCustomSeparators(input); 
 
-      const {separators: defaultSeparators ,strippedInput } = StringParser.extractDefaultSeparators(input);
+      const {separators: defaultSeparators ,strippedInput } = StringParser.extractDefaultSeparators(customStrippedInput);
+
 
     }catch(err){
       Console.print(`[ERROR]:${err}`)
