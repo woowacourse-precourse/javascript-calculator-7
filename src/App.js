@@ -1,60 +1,66 @@
 import { MissionUtils } from "@woowacourse/mission-utils";
 
-class App {
-    async run() {
-       
-            let input = await MissionUtils.Console.readLineAsync("덧셈할 문자열을 입력해 주세요.\n");
-            
-            let result = this.calculate(input);
-            MissionUtils.Console.print(`결과 : ${result}`);
-    
+class InputParser {// 입력을 숫자 배열로 나누는 클래스
+    constructor(input) {
+        this.input = input;
+        this.delimiter = /,|:/; // 기본 구분자
+        this.numbers = String(input);
     }
 
-    calculate(input) {
-        // 빈 문자열 입력 처리
-        if (input === "") {
-            return 0;
+    parse() { // 입력 문자열을 구분자로 나누기
+        if (this.numbers.startsWith("//")) {
+            this.extractCustomDelimiter();
+        }
+        return this.splitNumbers();
+    }
+
+    extractCustomDelimiter() {// 커스텀 구분자를 추출
+        let customDelimiterEnd = this.numbers.search(/\\n/);
+
+        if (customDelimiterEnd == -1 || customDelimiterEnd == 2) {//\n이 없거나 커스텀 구분자가 없는 경우 오류
+            throw new Error("[ERROR] 입력 형식이 잘못되었습니다.");
         }
 
-        let delimiter = /,|:/; // 기본 구분자
-        let numbers = String(input);
-        
-        // 커스텀 구분자가 있는 경우
-        if (numbers.startsWith("//")) {
-            let customDelimiterEnd = numbers.search(/\\n/);
-            
-            // 커스텀 구분자가 없으면 에러 발생
-            if (customDelimiterEnd == -1||customDelimiterEnd == 2) {
-                throw new Error("[ERROR] 입력 형식이 잘못되었습니다.");
-            }
+        let customDelimiter = this.numbers.substring(2, customDelimiterEnd);
+        this.delimiter = new RegExp(`[${customDelimiter},:]`);
+        const CUSTOM_DELIMITER_PREFIX_LENGTH = 2;
+        this.numbers = this.numbers.substring(customDelimiterEnd + CUSTOM_DELIMITER_PREFIX_LENGTH);
+    }
 
-            // 커스텀 구분자를 정의
-            let customDelimiter = numbers.substring(2, customDelimiterEnd);
-            delimiter = new RegExp(`[${customDelimiter},:]`); // 정규 표현식으로 변환
+    splitNumbers() {//문자열을 구분자로 나누고 공백 제거
+        return this.numbers.split(this.delimiter).map(part => part.trim());
+    }
+}
 
-            // 구분자 이후의 숫자 부분 추출
-            const CUSTOM_DELIMITER_PREFIX_LENGTH = 2;
-            numbers = numbers.substring(customDelimiterEnd + CUSTOM_DELIMITER_PREFIX_LENGTH);
-        }
-
-        // 숫자 문자열을 주어진 구분자로 나누기
-        const numberArray = numbers.split(delimiter);
-        if (numberArray.some(part => !/^\d+$/.test(part.trim()))) {
+class SumCalculator {// 합계를 계산하는 클래스
+    calculate(numberArray) {
+        if (numberArray.some(part => !/^\d+$/.test(part))) {//숫자 외 문자 확인
             throw new Error("[ERROR] 양수 외의 문자가 있습니다.");
         }
-        // 숫자로 변환하고, 음수 확인
-        const sum = numberArray.reduce((acc, current) => {
+
+        return numberArray.reduce((acc, current) => {
             const num = parseInt(current, 10);
-            if (isNaN(num)) {
+            if (isNaN(num)) {//형식 오류
                 throw new Error("[ERROR] 입력 형식이 잘못되었습니다.");
             }
-            if (num < 0) {
+            if (num < 0) {//음수 오류
                 throw new Error("[ERROR] 음수는 허용되지 않습니다.");
             }
             return acc + num;
         }, 0);
+    }
+}
 
-        return sum;
+class App {
+    async run() {
+        let input = await MissionUtils.Console.readLineAsync("덧셈할 문자열을 입력해 주세요.\n");
+        let inputParser = new InputParser(input);
+        let numbers = inputParser.parse();
+        
+        let sumCalculator = new SumCalculator();
+        let result = sumCalculator.calculate(numbers);
+        
+        MissionUtils.Console.print(`결과 : ${result}`);
     }
 }
 
