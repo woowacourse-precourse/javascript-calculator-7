@@ -6,11 +6,11 @@ class CommonValidator {
   #separatorList;
 
   constructor(target, separatorList) {
-    this.#target = this.getInitialTarget(target);
+    this.#target = this.#getInitialTarget(target);
     this.#separatorList = separatorList;
   }
 
-  getInitialTarget(target) {
+  #getInitialTarget(target) {
     const WITHOUT_CUSTOM_SEPARATOR_INDEX = 5;
 
     if (target.startsWith(CORRECT_CUSTOM_SEPARATOR.PREFIX)) {
@@ -20,47 +20,28 @@ class CommonValidator {
   }
 
   parse() {
-    if (
-      this.#target.replaceAll(
-        new RegExp(`[${this.#separatorList.join("")}0-9]`, "g"),
-        ""
-      ).length !== 0
-    ) {
+    if (this.#includesNotAllowedString()) {
       return {
         success: false,
         errorMessage: ERROR_MESSAGE.UNACCEPTABLE_INPUT,
       };
     }
 
-    const combinations = createDelimiterCombinationList(this.#separatorList);
-
-    const isIncludesMixedSeparator = combinations.some((combination) =>
-      this.#target.includes(combination)
-    );
-
-    if (isIncludesMixedSeparator) {
+    if (this.#isIncludesMixedSeparator()) {
       return {
         success: false,
         errorMessage: ERROR_MESSAGE.UNACCEPTABLE_INPUT,
       };
     }
 
-    const isStartsWithSeparator = this.#separatorList.some((separator) =>
-      this.#target.startsWith(separator)
-    );
-
-    if (isStartsWithSeparator) {
+    if (this.#isStartsWithSeparator()) {
       return {
         success: false,
         errorMessage: ERROR_MESSAGE.START_WITH_SEPARATOR,
       };
     }
 
-    const isEndsWithSeparator = this.#separatorList.some((separator) =>
-      this.#target.endsWith(separator)
-    );
-
-    if (isEndsWithSeparator) {
+    if (this.#isEndsWithSeparator()) {
       return {
         success: false,
         errorMessage: ERROR_MESSAGE.END_WITH_SEPARATOR,
@@ -70,6 +51,37 @@ class CommonValidator {
     return {
       success: true,
     };
+  }
+
+  #includesNotAllowedString() {
+    const EMPTY_STRING_LENGTH = 0;
+
+    return (
+      this.#target.replaceAll(
+        new RegExp(`[${this.#separatorList.join("")}0-9]`, "g"),
+        ""
+      ).length !== EMPTY_STRING_LENGTH
+    );
+  }
+
+  #isIncludesMixedSeparator() {
+    const combinations = createDelimiterCombinationList(this.#separatorList);
+
+    return combinations.some((combination) =>
+      this.#target.includes(combination)
+    );
+  }
+
+  #isStartsWithSeparator() {
+    return this.#separatorList.some((separator) =>
+      this.#target.startsWith(separator)
+    );
+  }
+
+  #isEndsWithSeparator() {
+    return this.#separatorList.some((separator) =>
+      this.#target.endsWith(separator)
+    );
   }
 }
 
