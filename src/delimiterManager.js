@@ -5,12 +5,19 @@ class DelimiterManager {
     this.delimiters = [",", ":"];
   }
 
-  // 현재 저장된 구분자 배열을 반환
+  /**
+   * 현재 저장된 구분자 배열을 반환
+   * @returns {string[]} 현재 구분자 배열
+   */
   getDelimiters() {
     return this.delimiters;
   }
 
-  // 새로운 커스텀 구분자를 구분자 배열에 추가하는 메서드
+  /**
+   * 새로운 커스텀 구분자를 구분자 배열에 추가
+   * @param {string} delimiter - 추가할 커스텀 구분자
+   * @throws {Error} 숫자를 구분자로 추가할 때 에러
+   */
   addCustomDelimiter(delimiter) {
     if (!isNaN(delimiter)) {
       throw new Error(
@@ -20,7 +27,12 @@ class DelimiterManager {
     this.delimiters.push(delimiter);
   }
 
-  // 입력 문자열을 분석하여 커스텀 구분자와 계산할 숫자 문자열을 추출
+  /**
+   * 입력 문자열을 분석하여 커스텀 구분자와 계산할 숫자 문자열을 추출
+   * @param {string} input - 사용자가 입력한 문자열
+   * @returns {Object} 구분자와 계산할 문자열을 포함한 객체
+   * @throws {Error} 커스텀 구분자 문법이 잘못되었거나 입력 문자열이 구분자로 시작하거나 끝날 때 에러
+   */
   parseInput(input) {
     let calculationString = input;
 
@@ -41,14 +53,14 @@ class DelimiterManager {
     }
 
     // 입력 문자열이 구분자로 시작하거나 끝나는지 확인
-    const startsWithDelimiter = this.delimiters.some((delimiter) =>
+    const startDelimiter = this.delimiters.some((delimiter) =>
       calculationString.startsWith(delimiter)
     );
-    const endsWithDelimiter = this.delimiters.some((delimiter) =>
+    const endDelimiter = this.delimiters.some((delimiter) =>
       calculationString.endsWith(delimiter)
     );
 
-    if (startsWithDelimiter || endsWithDelimiter) {
+    if (startDelimiter || endDelimiter) {
       throw new Error("[ERROR] 입력 문자열이 구분자로 시작하거나 종료");
     }
 
@@ -58,7 +70,12 @@ class DelimiterManager {
     };
   }
 
-  // 계산할 문자열에서 구분자들을 사용해 숫자들을 추출하는 메서드
+  /**
+   * 계산할 문자열에서 구분자들을 사용해 숫자들을 추출
+   * @param {string} calculationString - 계산할 문자열
+   * @returns {number[]} 추출된 숫자 배열
+   * @throws {Error} 등록되지 않은 구분자, 유효하지 않은 숫자, 또는 숫자가 정수 범위를 초과할 때 에러
+   */
   extractNumbers(calculationString) {
     try {
       // 구분자들을 "|"로 연결하여 정규 표현식으로 변환
@@ -66,19 +83,18 @@ class DelimiterManager {
         this.delimiters.map((d) => `\\${d}`).join("|"),
         "g"
       );
-      const tokens = calculationString.split(delimiterRegex);
+      const stringNumbers = calculationString.split(delimiterRegex);
 
       // 등록되지 않은 구분자가 사용되었는지 확인
-      const allowedChars = this.delimiters.map((d) => `\\${d}`).join("");
-      const invalidCharRegex = new RegExp(`[^0-9${allowedChars}]`);
+      const allowedDelimiters = this.delimiters.map((d) => `\\${d}`).join("");
+      const invalidDelimiterRegex = new RegExp(`[^0-9${allowedDelimiters}]`);
 
-      if (invalidCharRegex.test(calculationString)) {
-        const invalidChar = calculationString.match(invalidCharRegex)[0];
+      if (invalidDelimiterRegex.test(calculationString)) {
         throw new Error("[ERROR] 등록되지 않은 구분자");
       }
 
-      const numbers = tokens.map((token) => {
-        const number = Number(token);
+      const numbers = stringNumbers.map((stringNumber) => {
+        const number = Number(stringNumber);
 
         if (isNaN(number)) {
           throw new Error("[ERROR] 유효하지 않은 숫자 입력");
