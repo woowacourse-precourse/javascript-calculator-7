@@ -1,30 +1,43 @@
-import { Console } from '@woowacourse/mission-utils';
+// src/App.js
+
+import { MissionUtils } from "@woowacourse/mission-utils";
 
 class App {
+  /**
+   * 애플리케이션 실행 메서드
+   */
   async run() {
-    Console.print('덧셈할 문자열을 입력해 주세요.');
+    MissionUtils.Console.print('덧셈할 문자열을 입력해 주세요.');
     try {
       const input = await this.readLineAsync('');
       const result = this.calculate(input);
-      Console.print(`결과 : ${result}`);
+      MissionUtils.Console.print(`결과 : ${result}`);
     } catch (error) {
-      Console.print(`[ERROR] ${error.message}`);
-    } finally {
-      Console.close();
+      MissionUtils.Console.print(`[ERROR] ${error.message}`);
     }
+    // Console.close()는 패키지에 존재하지 않으므로 제거합니다.
   }
 
+  /**
+   * 비동기적으로 사용자 입력을 받는 메서드
+   * @param {string} question - 사용자에게 물어볼 질문
+   * @returns {Promise<string>} - 사용자의 입력값
+   */
   readLineAsync(question) {
     return new Promise((resolve) => {
-      Console.readLineAsync(question, (input) => {
+      MissionUtils.Console.readLineAsync(question, (input) => {
         resolve(input);
       });
     });
   }
-   
-  // 변환한 숫자의 합을 반환한다.
+
+  /**
+   * 입력된 문자열을 계산하는 메서드
+   * @param {string} input - 계산할 문자열
+   * @returns {number} - 계산 결과
+   */
   calculate(input) {
-    // 빈 문자열을 입력받는다면 0을 반환한다.
+    // 빈 문자열을 입력받는다면 0을 반환
     if (input === '') {
       return 0;
     }
@@ -32,7 +45,12 @@ class App {
     const numbers = this.parseInput(input);
     return this.sumNumbers(numbers);
   }
-  // 문자열을 입력받아 숫자로 변환한다.
+
+  /**
+   * 입력된 문자열을 숫자 배열로 변환하는 메서드
+   * @param {string} input - 파싱할 문자열
+   * @returns {number[]} - 숫자 배열
+   */
   parseInput(input) {
     const delimiters = [',', ':'];
     const tokens = input.split(new RegExp(`[${delimiters.join('')}]`));
@@ -51,6 +69,11 @@ class App {
     return numbers;
   }
 
+  /**
+   * 숫자 배열의 합을 계산하는 메서드
+   * @param {number[]} numbers - 합산할 숫자 배열
+   * @returns {number} - 합산 결과
+   */
   sumNumbers(numbers) {
     return numbers.reduce((acc, curr) => acc + curr, 0);
   }
