@@ -1,5 +1,5 @@
-import { ERROR_MESSAGE } from "../constant/MESSAGE.js";
-import { DEFAULT_DELIMITERS } from "../constant/DELIMITER.js";
+import { ERROR_MESSAGE } from '../constant/MESSAGE.js';
+import { DEFAULT_DELIMITERS } from '../constant/DELIMITER.js';
 
 export default class Validator {
   validateCustomDelimiter(customDelimiter) {
