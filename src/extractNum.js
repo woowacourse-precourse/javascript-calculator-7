@@ -2,14 +2,14 @@ const extractNum = (input) => {
   let delimiter = /[,:]/;
 
   if (input.startsWith('//')) {
-    const delimiterEnd = input.indexOf('n');
+    const delimiterEnd = input.indexOf('\n');
     if (delimiterEnd !== -1) {
       const customDelimiter = input.slice(2, delimiterEnd);
       delimiter = new RegExp(`[${customDelimiter}]`);
 
       input = input.slice(delimiterEnd + 1);
     } else {
-      // '//'로 시작하지만 n으로 끝나지 않기 때문에 throw error
+      new Error();
     }
   }
 
