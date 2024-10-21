@@ -13,6 +13,9 @@ class App {
 
       const afterCustomSeparator = await this.handleCustomSeparator(input); // 커스텀 구분자 제외한 문자열
       Console.print(afterCustomSeparator);
+      Console.print(this.separators);
+
+      await this.handleSeparator(afterCustomSeparator);
 
       const result = input;
       Console.print(`결과: ${result}`);
@@ -78,6 +81,36 @@ class App {
       throw new Error("[ERROR] 숫자는 커스텀 구분자로 사용할 수 없습니다.");
     }
   }
+
+  // 구분자를 바탕으로 숫자를 추출하는 메서드
+  async handleSeparator(input) {
+    // 구분자 배열을 정규식 패턴으로 변환
+    const separatorPattern = new RegExp(`[${this.separators.join("")}]`);
+
+    // 구분자를 기준으로 문자열을 분리
+    const splitNumArr = input.split(separatorPattern);
+
+    for (let char of splitNumArr) {
+      if (char === "") continue; // 빈 문자열의 경우 0으로 간주하고 continue
+
+      if (isNaN(Number(char))) {
+        // 숫자가 아닌 값일 경우 에러 출력
+        throw new Error(`[ERROR] 선언되지 않은 문자입니다: ${char}`);
+      }
+
+      if (Number(char) < 0) {
+        // 음수일 경우
+        throw new Error(`[ERROR] 숫자는 양수만 허용됩니다.`);
+      }
+
+      // 모든 조건을 통과하면 this.numbers 배열에 추가
+      this.numbers.push(Number(char));
+    }
+
+    Console.print("숫자 배열");
+    Console.print(this.numbers);
+  }
+
 }
 
 export default App;
