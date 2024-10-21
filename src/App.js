@@ -21,7 +21,7 @@ class App {
       })
       .flat()
       .map((value) => {
-        if (value.includes(customSeparator)) {
+        if (customSeparator && value.includes(customSeparator)) {
           return value.split(customSeparator);
         }
 
@@ -29,7 +29,13 @@ class App {
       })
       .flat();
 
-    const sum = splitedValueArray.reduce((acc, curr) => acc + +curr, 0);
+    const sum = splitedValueArray.reduce((acc, curr) => acc + Number(curr), 0);
+
+    if (splitedValueArray.some((value) => Number(value) <= 0)) {
+      throw new Error("[ERROR]양수의 올바른 숫자를 입력해 주세요.");
+    } else if (Number.isNaN(sum)) {
+      throw new Error("[ERROR]형식에 맞게 문자열을 입력해 주세요.");
+    }
 
     Console.print(`결과 : ${sum}`);
   }
