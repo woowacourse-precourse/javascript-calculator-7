@@ -1,4 +1,3 @@
-import { Console } from '@woowacourse/mission-utils';
 import { DEFAULT_SEPARATORS } from '../constants.js';
 
 export const checkIsDefaultString = (line) => {

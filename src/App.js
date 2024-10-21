@@ -1,5 +1,5 @@
 import { Console } from '@woowacourse/mission-utils';
-import { validateLine, validateCustomPart, validateLinePart } from './utils/stringValidator.js';
+import { validateDefaultLine, validateCustomPart, validateTargetStringPart } from './utils/stringValidator.js';
 import {
   checkIsDefaultString,
   sumString,
@@ -8,17 +8,17 @@ import {
 } from './utils/stringParser.js';
 
 class App {
-  calculate(line) {
-    validateLine(line);
-    
-    if (checkIsDefaultString(line)) return sumString(line);
+  calculate(line) {    
+    if (checkIsDefaultString(line)) {
+      validateDefaultLine(line);
+      return sumString(line)
+    };
 
     const [customPart, linePart] = divideCustom(line);
     validateCustomPart(customPart);
 
     const separators = getFinalSeparators(customPart);
-    Console.print(separators);
-    validateLinePart(linePart, separators);
+    validateTargetStringPart(linePart, separators);
 
     return sumString(linePart, separators);
   }
