@@ -6,8 +6,8 @@ class App {
   #inputHandler = new InputHandler();
   async run() {
     await this.#inputHandler.getInput();
-    this.#inputHandler.inputTypeCheck();
-    
+    this.#inputHandler.getInputDelimiter();
+    this.#inputHandler.getNumbers();
   }
 }
 

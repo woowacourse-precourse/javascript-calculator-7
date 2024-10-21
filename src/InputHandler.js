@@ -3,10 +3,12 @@ import { MissionUtils } from "@woowacourse/mission-utils";
 class InputHandler {
   regex1 = /^\d+([:,]\d+)*$/;
   delRegex = /^\/\/(.)\\n/;
+  
   input;
-  delimiter;
+  num;
   constructor() {
     this.sum = 0;
+    this.delimiter = /[,:]/;
   }
 
   async getInput() {
@@ -19,39 +21,30 @@ class InputHandler {
     }
   }
 
-  inputDelimiterCheck() {
-    console.log(this.input.match(this.delRegex));
-    // 공백인 경우
-    if (this.input === ''){
-      console.log('공백\n');
-      // sum = 0
-    }
-    // 구분자가 있는 input
-    else if (this.delRegex.test(this.input)){
-      console.log('구분자 O\n');
-      // 구분자 추가  
+  // 커스텀 구분자 있는 input. 커스텀 구분자 추가 및 input 수정
+  getInputDelimiter() {
+    console.log(this.input);
+    if (this.delRegex.test(this.input)){   
       const inputDel = this.input.match(this.delRegex)[1];
       this.delimiter = new RegExp(`[,:${inputDel}]`);
+      this.input = this.input.replace(this.delRegex, '');
     }
-    //구분자 없는 input
-    else if (this.regex1.test(this.input)){
-      console.log('구분자 X\n');
-      this.delimiter = new RegExp('[,:]');
-      // pass
-    }
-    // 잘못된 input
-    else {
-      console.log('에러\n');
-      // error throw
-    }
+    console.log(this.input);
   }
 
   getNumbers() {
-    // 구분자 사이의 숫자 추출 후 저장
-  }
-
-  getSum() {
-    // 합계 계산
+    // 공백
+    if (this.input === '') {
+      this.num = [];
+    }
+    // 구분자 input 
+    else if (this.regex1.test(this.input)) {
+      this.num = this.input.split(this.delimiter).filter(Boolean);
+    }
+    else {
+      console.error("error getNumbers");
+    }
+    console.log(this.num);
   }
 
 
