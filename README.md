@@ -29,24 +29,44 @@
 ## :file_folder: 패키지 구조 및 파일명
 ```
 - src
-  - contants
-  - - calculatorMessages.js
-  - - errorMessages.js
-  - controllers
-  - - CalculatorController.js
-  - errors
-  - - AppError.js
-  - - CalculatorError.js
-  - - DelimiterError.js
-  - models
-  - - Calculator.js
-  - - Delimiter.js
-  - views
-  - - InputView.js
-  - - OutputView.js
+  - 📂 contants
+  - - 📜 calculatorMessages.js
+  - - 📜 errorMessages.js
+  - 📂 controllers
+  - - 📜 CalculatorController.js
+  - 📂 errors
+  - - 📜 AppError.js
+  - - 📜 CalculatorError.js
+  - - 📜 DelimiterError.js
+  - 📂 models
+  - - 📜 Calculator.js
+  - - 📜 Delimiter.js
+  - 📂 views
+  - - 📜 InputView.js
+  - - 📜 OutputView.js
   - App.js
   - index.js
 ```
+### CalculatorController.js [문자열 덧셈 계산기의 메인이 되는 클래스]
+* calculatorProcess
+- 문자열을 입력받아 구분자, 값을 분리하여 값을 더한 후 사용자에게 보여줍니다.
+* getDelimiter
+- 사용자에게 문자열을 입력받아 구분자와 값을 분리한 뒤 this.#delimiter에 할당합니다
+* getSumNumbers
+- 구분자와 값을 통하여 더해준 뒤 this.#sum에 할당합니다.
+* printOutput
+- 사용자에게 더한 값을 출력합니다.
+
+### getDelimiter.js [구분자 ,값을 담당하는 클래스]
+* getDelimiter
+- 입력받은 값을 공백, 기본 구분자, 커스텀 구분자를 구분합니다
+* defaultDelimiter
+- 입력받은 값에 기본 구분자와 값을 분리한 뒤 this.#delimiter, this.#operationText에 값을 할당합니다.
+* customDelimiter
+- 입력받은 값에 커스텀 구분자와 값을 분리합니다.
+* validate
+- 입력받은 문자열의 유효성 검사를 진행합니다.
+
 
 ## :computer: 커밋 메세지 컨벤션
 ```
@@ -61,7 +81,10 @@
 ```
 
 ## 테스트 결과
-<!-- 문자열 덧셈 계산기 기능 완성 후 작성예정 -->
+<div style="display: flex">
+    <img src="https://github.com/gkstj8300/javascript-calculator-7/tree/gkstj8300/__tests__/CalculatorTest_result.png" style="width: 50%;">
+</div>
+
 
 ## :high_brightness: 기능 구조
 - 쉼표(,) 또는 콜론(:)을 구분자로 가지는 문자열을 전달하는 경우 구분자를 기준으로 분리한 각 숫자의 합을 반환한다.
