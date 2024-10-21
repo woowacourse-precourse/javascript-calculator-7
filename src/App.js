@@ -1,5 +1,5 @@
 import { Console } from '@woowacourse/mission-utils';
-import { checkLine, checkCustomPart, checkLinePart } from './utils/check.js';
+import { checkLine, checkCustomPart, checkLinePart } from './utils/stringValidator.js';
 import {
   checkIsNormal,
   sumString,
