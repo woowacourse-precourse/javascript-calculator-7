@@ -10,20 +10,24 @@ class Model {
 
   constructor(input) {
     this.string = input; // 입력값 저장
-    this.applyCustomDelimiter();
+    this.checkCustomDelimiter();
+  }
+
+  checkCustomDelimiter() {
+    const customDelimiterMatchResult = this.findCustomDelimiter();
+    if (customDelimiterMatchResult) {
+      this.#delimiter = customDelimiterMatchResult[1]; // 커스텀 구분자 설정
+      this.string = this.string.replace(DELIMITER_REGEX.CUSTOM, ''); // 커스텀 구분자 제거
+    }
+  }
+
+  findCustomDelimiter() {
+    return this.string.match(DELIMITER_REGEX.CUSTOM);
   }
 
   extractNumber() {
-    const splitedStringList = this.string.split(this.#delimiter);
-    this.#numberList = splitedStringList.map((string) => this.convertToNumber(string));
-  }
-
-  applyCustomDelimiter() {
-    const customDelimiterMatch = this.string.match(DELIMITER_REGEX.CUSTOM);
-    if (customDelimiterMatch) {
-      this.#delimiter = customDelimiterMatch[1]; // 커스텀 구분자 설정
-      this.string = this.string.replace(DELIMITER_REGEX.CUSTOM, ''); // 커스텀 구분자 제거
-    }
+    const splitedString = this.string.split(this.#delimiter);
+    this.#numberList = splitedString.map((string) => this.convertToNumber(string));
   }
 
   convertToNumber(string) {
