@@ -10,22 +10,23 @@ class App {
       const CUSTOM_STRING = userInput.match(CUSTOM_REGEX);
       let customIdentifier = "";
 
+      if (customIdentifier.length > 1) {
+        throw new Error("[ERROR] 커스텀 구분자는 1자리여야 합니다.");
+      }
+
+      if (!isNaN(customIdentifier)) {
+        throw new Error("[ERROR] 커스텀 구분자는 문자여야 합니다.");
+      }
+
+      if (customIdentifier === ":" || customIdentifier === ",") {
+        throw new Error("[ERROR] 기본 구분자와 중복됩니다.");
+      }
+
       if (CUSTOM_STRING === null) {
         return userInput;
-      } else {
-        customIdentifier = CUSTOM_STRING[1];
-
-        if (customIdentifier.length > 1) {
-          throw new Error("[ERROR] 커스텀 구분자는 1자리여야 합니다.");
-        }
-        if (!isNaN(customIdentifier)) {
-          throw new Error("[ERROR] 커스텀 구분자는 문자여야 합니다.");
-        }
-
-        if (customIdentifier === ":" || customIdentifier === ",") {
-          throw new Error("[ERROR] 기본 구분자와 중복됩니다.");
-        }
       }
+
+      customIdentifier = CUSTOM_STRING[1];
 
       userInput = userInput.replace(CUSTOM_REGEX, "");
       return { userInput, customIdentifier };
@@ -36,9 +37,8 @@ class App {
       const MINUS_STRING = userInput.match(MINUS_REGEX);
       if (MINUS_STRING === null) {
         return userInput;
-      } else {
-        throw new Error("[ERROR] 음수는 입력할 수 없습니다.");
       }
+      throw new Error("[ERROR] 음수는 입력할 수 없습니다.");
     }
 
     function calculateSum(userInput) {
@@ -77,23 +77,23 @@ class App {
     if (userInput === "") {
       Console.print(0);
       return;
+    }
+    checkMinus(userInput);
+    if (userInput === checkCustomIdentifier(userInput)) {
+      checkString(userInput);
+      result = calculateSum(userInput);
+      Console.print(`결과 : ${result}`);
     } else {
-      checkMinus(userInput);
-      if (userInput === checkCustomIdentifier(userInput)) {
-        checkString(userInput);
-        result = calculateSum(userInput);
-        Console.print(`결과 : ${result}`);
-      } else {
-        userInput = userInput.replaceAll(
-          checkCustomIdentifier(userInput).customIdentifier,
-          ","
-        );
-        userInput = removeCustomPattern(userInput);
-        checkString(userInput);
-        result = calculateSum(userInput);
+      userInput = userInput.replaceAll(
+        checkCustomIdentifier(userInput).customIdentifier,
+        ","
+      );
+      userInput = removeCustomPattern(userInput);
+      checkString(userInput);
+      result = calculateSum(userInput);
 
-        Console.print(`결과 : ${result}`);
-      }
+      Console.print(`결과 : ${result}`);
+      return;
     }
   }
 }
