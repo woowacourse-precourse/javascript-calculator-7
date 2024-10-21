@@ -6,6 +6,7 @@ class App {
     if (!input.length) return this.printAnswer(0);
 
     const [separators, numberString] = this.getSeparatorAndNumber(input);
+    const regex = this.changeToRegex(separators);
   }
 
   getString() {
@@ -26,7 +27,9 @@ class App {
     if (str[3] === "\\" && str[4] === "n") return str[2];
     return null;
   }
-  changeToRegex() {}
+  changeToRegex(separators) {
+    return new RegExp(separators.join("|"), "g");
+  }
   getNumberCutWithSeparator() {}
   calculateSum() {}
   printAnswer() {}
