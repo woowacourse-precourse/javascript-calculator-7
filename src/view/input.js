@@ -1,6 +1,7 @@
 import { MissionUtils } from '@woowacourse/mission-utils';
+import { CONSTANTS } from '../constants/constants.js';
 
-import { INPUT_MESSAGE } from '../constants/message/input-message.js';
+const { INPUT_MESSAGE } = CONSTANTS;
 
 export const getStringInput = async () => {
   const inputString = await MissionUtils.Console.readLineAsync(INPUT_MESSAGE);
