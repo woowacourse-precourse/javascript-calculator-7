@@ -46,14 +46,22 @@ class App {
       );
     };
 
-    
-
-
-    // 테스트 코드
-    const testValue = extractCustomDelimiter(inputValue);
-    // const testValue = extractGeneralDelimiter(inputValue);
-    console.log('합계 :', sum(testValue));
-
+    // [6][동작] 구분자를 기준으로 숫자를 추출하고 숫자 모두 더하기
+    if (isCustom) {
+      console.log(`xxxxx(확인용 - 커스텀구분자 if문 들어감`);
+      const customNumbersArray = extractCustomDelimiter(inputValue);
+      const customResult = sum(customNumbersArray);
+      console.log(
+        `xxxxx(확인용 - 커스텀 구분자 최종 결과 : ${customResult})`
+      );
+      Console.print(`결과 : ${customResult}`);
+    } else {
+      console.log(`xxxxx(확인용 - 일반구분자 if문 들어감`);
+      const generalNumbersArray = extractGeneralDelimiter(inputValue);
+      const generalResult = sum(generalNumbersArray);
+      console.log(`xxxxx(확인용 - 일반 구분자 최종 결과 : ${generalResult})`);
+      Console.print(`결과 : ${generalResult}`);
+    }
 
 
   }
