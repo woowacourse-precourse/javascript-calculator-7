@@ -11,7 +11,7 @@ class App {
     }
 
     // 기본 구분자
-    if (!input.startsWith('//')) {
+    if (!input.startsWith('//') && input.length != 0) {
       // 예외 처리
       if (
         input.startsWith(',') ||
@@ -29,7 +29,7 @@ class App {
         throw new Error('[ERROR] 구분자는 2번 이상 사용할 수 없습니다.');
       }
 
-      const inputReg = /^[1-9]\d*([,:][1-9]\d*)*$/;
+      const inputReg = /^(|[1-9]\d*([,:][1-9]\d*)*)$/;
       if (!inputReg.test(input)) {
         throw new Error('[ERROR] 잘못된 입력입니다.');
       }
