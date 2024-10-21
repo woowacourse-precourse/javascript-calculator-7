@@ -21,14 +21,16 @@ class Calculator {
   }
 
   static parseInput(input) {
-    if (input.startsWith("//")) {
-      const endIndex = input.indexOf("\\n");
-      const customDivider = input.slice(2, endIndex);
-      const numberString = input.slice(endIndex + 2);
+    const customDividerRegex = /^\/\/(.+)\\n(.*)$/;
+    const matchCustomDivider = input.match(customDividerRegex);
+
+    if (matchCustomDivider) {
+      const [, customDivider, numberString] = matchCustomDivider;
 
       if (numberString.length === 0) {
         throw new Error(ERROR_MESSAGES.NO_NUMBERS_INPUT);
       }
+
       if (!numberString.includes(customDivider)) {
         throw new Error(ERROR_MESSAGES.CUSTOM_DIVIDER_NOT_USED);
       }
@@ -61,7 +63,7 @@ class Calculator {
     if (numberArray.some(isNaN)) {
       throw new Error(ERROR_MESSAGES.INVALID_INPUT);
     }
-    
+
     if (numberArray.some((num) => num < 0)) {
       throw new Error(ERROR_MESSAGES.NEGATIVE_NUMBER);
     }
