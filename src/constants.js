@@ -1,1 +1,1 @@
-export const DEFAULT_SEPARATORS = [',', ':'];
+export const DEFAULT_SEPARATORS = Object.freeze([',', ':']);
