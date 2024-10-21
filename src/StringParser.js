@@ -16,16 +16,16 @@ class StringParser {
    * @throws 구분자 명령문이 잘못되었을 경우
    */
   parseString(input) {
-    const delemeter = this.delimiter.extractDelimiter(input);
+    const delimiter = this.delimiter.extractDelimiter(input);
     let newString = input;
 
-    if (delemeter.length !== DEFAULT_DELIMITER.length) {
+    if (delimiter.length !== DEFAULT_DELIMITER.length) {
       const newStringIndex =
         input.indexOf(CUSTOM_DELIMITER_END) + CUSTOM_DELIMITER_END.length;
       newString = input.substring(newStringIndex, input.length);
     }
 
-    return newString.split(new RegExp(`[${delemeter.join("")}]`));
+    return newString.split(new RegExp(`[${delimiter.join("")}]`));
   }
 }
 
