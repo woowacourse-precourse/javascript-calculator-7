@@ -1,6 +1,7 @@
 import { Console } from '@woowacourse/mission-utils';
 import { validateEmptyInput, validateNegativeNumbers, validateInvalidNumbers } from './validators.js';
 import { printMessage } from './utils.js';
+import { LOG_MESSAGE } from './constants.js';
 
 class Calculator {
   constructor() {
@@ -8,7 +9,7 @@ class Calculator {
   }
 
   async getInput() {
-    const answer = await Console.readLineAsync('덧셈할 문자열을 입력해 주세요.');
+    const answer = await Console.readLineAsync(LOG_MESSAGE.START_MESSAGE);
     validateEmptyInput(answer);
     const customDelimiter = this.getCustomDelimiter(answer);
     const result = this.splitByDelimiter(answer, customDelimiter);
