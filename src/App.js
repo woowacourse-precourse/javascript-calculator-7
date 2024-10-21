@@ -22,7 +22,14 @@ class App {
       numbers = stringInput.slice(customMatch[0].length).split(customMatch[1]);
     }
 
-    const sumNumbers = numbers.map(Number).reduce((acc, cur) => acc + cur, 0);
+    const inputNumbers = numbers.map(Number);
+
+    if (inputNumbers.some((num) => isNaN(num) || num < 0)) {
+      Console.print("[ERROR] 양수가 아닌 값이 포함되어 있습니다.");
+      return;
+    }
+
+    const sumNumbers = inputNumbers.reduce((acc, cur) => acc + cur, 0);
 
     Console.print("결과 : " + sumNumbers);
   }
