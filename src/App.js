@@ -46,9 +46,9 @@ class App {
           );
     }
     if (hasCommaAndSemicolon)
-      return this.splitAndConvertToNumbers(input, [COMMA, SEMICOLON]);
-    if (hasComma) return this.splitAndConvertToNumbers(input, COMMA);
-    if (hasSemicolon) return this.splitAndConvertToNumbers(input, SEMICOLON);
+      return this.separatingStrings(input, [COMMA, SEMICOLON]);
+    if (hasComma) return this.separatingStrings(input, COMMA);
+    if (hasSemicolon) return this.separatingStrings(input, SEMICOLON);
     return [NaN];
   }
 
@@ -64,21 +64,29 @@ class App {
     const stringToSeparate = input.slice(
       customDelimiterSuffixIndex + CUSTOM_DELIMITER_SUFFIX_LENGTH
     );
-    return this.splitAndConvertToNumbers(stringToSeparate, customDelimiter);
+    return this.separatingStrings(stringToSeparate, customDelimiter);
   }
 
   hasSeparator(input, separator) {
     return input.includes(separator);
   }
 
-  splitAndConvertToNumbers(input, separator) {
+  separatingStrings(input, separator) {
     const isTwoSeparators = typeof separator === "object";
 
     if (isTwoSeparators) {
       const [comma, semicolon] = separator;
-      return input.replaceAll(semicolon, comma).split(comma).map(Number);
+      const separatedString = input.replaceAll(semicolon, comma).split(comma);
+      return this.convertToNumbers(separatedString);
     }
-    if (!isTwoSeparators) return input.split(separator).map(Number);
+    if (!isTwoSeparators) {
+      const separatedString = input.split(separator);
+      return this.convertToNumbers(separatedString);
+    }
+  }
+
+  convertToNumbers(separatedString) {
+    return separatedString.map(Number);
   }
 
   calculateSum(numbers) {
