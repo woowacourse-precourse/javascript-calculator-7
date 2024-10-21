@@ -1,6 +1,6 @@
 # javascript-calculator-precourse (우아한테크코스 1차 과제) 
 
-### 노션 정리 : [text](https://www.notion.so/126221c9c51380a4b1cbdb7473dac00f)
+### 노션 정리 : [개발 관련 일지](https://www.notion.so/126221c9c51380a4b1cbdb7473dac00f)
 
 ## 구현 기능 목록 (기능 요구 사항)
 
