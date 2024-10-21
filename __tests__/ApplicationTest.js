@@ -32,12 +32,36 @@ describe("문자열 계산기", () => {
     });
   });
 
-  test("예외 테스트", async () => {
+  test("예외 테스트 1", async () => {
     const inputs = ["-1,2,3"];
     mockQuestions(inputs);
 
     const app = new App();
 
     await expect(app.run()).rejects.toThrow("[ERROR]");
+  });
+
+  test("예외 테스트 2", async () => {
+    const inputs = ["//;\\n1;10'20"];
+    mockQuestions(inputs);
+
+    const app = new App();
+
+    await expect(app.run()).rejects.toThrow("[ERROR]");
+  });
+
+  test("예외 테스트 3", async () => {
+    const inputs = ["//;\\n1;10;20"];
+    mockQuestions(inputs);
+
+    const logSpy = getLogSpy();
+    const outputs = ["결과 : 31"];
+
+    const app = new App();
+    await app.run();
+
+    outputs.forEach((output) => {
+      expect(logSpy).toHaveBeenCalledWith(expect.stringContaining(output));
+    });
   });
 });
