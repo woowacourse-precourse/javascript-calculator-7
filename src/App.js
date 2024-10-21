@@ -14,16 +14,20 @@ class App{
     if (DATA.match(SEPARATOR)){
       NUMBERS=DATA.split(SEPARATOR).map(Number)
     // 3. 구분자 분리 2. : 커스텀 구분자(//구분자\n) 파악 조건문
-    }else if (DATA.startsWith("//")&&DATA.includes("\\n")){
+    } else if (DATA.startsWith("//")&&DATA.includes("\\n")){
       const custom_index_end=DATA.indexOf("\\n")
       const custom_separator=DATA.substring(2,custom_index_end)
 
       SEPARATOR=new RegExp(`[${custom_separator},|:]`);
       NUMBERS=DATA.substring(custom_index_end+2).split(SEPARATOR).map(Number);
     // 4. 예외 처리 1 : 빈 문자열 입력시 출력값
-    }else if (DATA===""){
+    } else if (DATA===""){
       Console.print("0");
       return ;
+    // 5. 예외 처리 2 : 숫자로만 구성된 문자열 입력시 처리
+    } else {
+      NUMBERS=[Number(DATA)]
     }
+
   }
 }
