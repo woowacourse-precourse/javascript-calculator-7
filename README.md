@@ -52,19 +52,6 @@
 
 - [O] print(result): 계산 결과를 출력
 
-#### ErrorHandler
-
-역할: 에러를 처리하고 메시지를 출력
-
-메서드:
-
-- [] handleInvalidDelimiter(usedDelimiter): 입력된 구분자가 등록된 구분자 리스트에 없는 경우 에러 메시지를 출력
-- [] handleInvalidCustomDelimiter(customDelimiter): 커스텀 구분자가 숫자인지 검증하고, 숫자일 경우 에러 메시지를 출력
-- [] handleDelimiterAtStringEnds(inputString): 입력 문자열이 구분자로 시작하거나 끝나는지 확인하고, 그렇다면 에러 메시지를 출력
-- [] handleMissingCustomDelimiterSyntax(): 커스텀 구분자 지정 시 // 또는 \n 중 하나가 부재할 경우 에러를 출력
-- [] handleNumberOutOfRange(number): 숫자의 범위가 정수 범위를 벗어나는 경우 에러를 출력
-- [] handleGenericError(errorMessage): 기타 에러 상황에 대해 일반적인 에러 메시지를 출력
-
 ### 함수
 
 #### run()
