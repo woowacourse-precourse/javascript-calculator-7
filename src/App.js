@@ -22,6 +22,7 @@ class App {
       }
 
       const userInputCustomExpress = inputSplit[0];
+      checkCustomSeparate(userInputCustomExpress);
 
       const deleteSlash = userInputCustomExpress.replace('//', '');
       const userInputCustomSeparator = deleteSlash.slice(
@@ -65,6 +66,8 @@ class App {
         checkSeparator(inputNumber);
 
         return inputNumber;
+      } else if (!userInput.includes('n')) {
+        throw new Error(ERROR.CUSTOM_SEPERATE_N_ERROR);
       } else {
         throw new Error('[ERROR]');
       }
@@ -90,7 +93,6 @@ class App {
         if (num < 0) {
           throw new Error(ERROR.NEGATIVE_NUMBER_ERROR);
         }
-
         sum += num;
       }
 
