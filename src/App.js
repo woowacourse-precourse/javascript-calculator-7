@@ -11,42 +11,38 @@ class App {
       }
       const isQuote = (input) => /['"]+/.test(input);
       const isPositive = (input) => /^[+]?[1-9]\d*(\.\d+)?$/.test(input);
-      const hasRepeatOperator = (input) => /[,:]{2,}/.test(input);
+
+      let delimiters = [",", ":"];
+
       const customDelimiterRegex = /\/\/([^a-zA-Z0-9])\\n/g;
-      const match = [...input.matchAll(customDelimiterRegex)];
-      const countDelimters = (input) => /(\/\/|\\n).*\1/.test(input);
+
+      const hasRepeatOperator = (input) => /[,:]{2,}/.test(input);
       const hasRepeatCustomOperator = (input) =>
         /\/\/[^a-zA-Z0-9]{2,}\\n/.test(input);
 
-      let delimiters = [",", ":"];
-      const customDelimiters = match.map((match) => match[1]);
-      // delimiters에
+      const match = [...input.matchAll(customDelimiterRegex)];
+      const inputCustomDelimiters = match.map((match) => match[1]);
+
       if (match.length > 0) {
-        delimiters.push(...customDelimiters);
+        delimiters.push(...inputCustomDelimiters);
+        input = input.replace(/\/\/|\\n/g, "");
       }
 
       if (hasRepeatCustomOperator(input)) {
         throw new Error("[ERROR]커스텀 구분자는 연속으로 입력이 불가능합니다.");
       }
 
-      if (countDelimters) {
-        for (let i = 0; i < input.length; i++) {
-          if (input.includes("//")) {
-            input = input.replace("//", "");
-          } else if (input.includes("\\n")) {
-            input = input.replace("\\n", "");
-          }
-        }
+      if (hasRepeatOperator(input)) {
+        throw new Error("[ERROR]구분자는 연속으로 입력이 불가능합니다.");
       }
 
       const delimiterRegex = new RegExp(`[${delimiters.join("")}]`);
-      let numberString = input.split(delimiterRegex);
+      let numberString = input
+        .split(delimiterRegex)
+        .filter((num) => num !== "");
       let sum = 0;
 
       for (let num of numberString) {
-        if (hasRepeatOperator(input)) {
-          throw new Error("[ERROR]구분자는 연속으로 입력이 불가능합니다.");
-        }
         if (isQuote(num)) {
           throw new Error(
             "[ERROR]입력 값은 단일 따옴표(')나 이중 따옴표(\")를 제외하고 입력해야합니다."
