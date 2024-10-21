@@ -1,10 +1,16 @@
-const NEED_ESCAPE_CHARS = ["[","]", "{","}","*", "+", "?", "|", "^", "$", ".", "\\"];
+import { CUSTOM_DELIMITER, ERROR, GROUPING_REGEX, NEED_ESCAPE_CHARS } from "./constants.js";
+
 
 class InputParser {
   #delimiterSet = new Set([",", ":"]);
 
   constructor() {}
 
+  /**
+   * 
+   * @param {string} input 
+   * @returns {number[]} numbers
+   */
   parse(input) {
     const { customDelimiters, expression } = this.getParts(input);
     this.#addDelimiters(customDelimiters);
@@ -18,11 +24,9 @@ class InputParser {
    * @returns {{customDelimiters:string, expression:string }} Regex Matched Group
    */
   getParts(input) {
-    const GROUPING_REGEX =
-      /^(\/\/(?<customDelimiters>.*)\\n)?(?<expression>.*)$/;
     const { customDelimiters, expression } = input.match(GROUPING_REGEX).groups;
-    if (!customDelimiters && (input.startsWith("//") || input.includes("\\n")))
-      throw new Error("[ERROR] 커스텀 구분자의 형식이 바르지 않습니다.");
+    if (!customDelimiters && (input.startsWith(CUSTOM_DELIMITER.START) || input.includes(CUSTOM_DELIMITER.END)))
+      throw new Error(`${ERROR.HEADER} 커스텀 구분자의 형식이 바르지 않습니다.`);
     return { customDelimiters, expression };
   }
 
@@ -34,16 +38,14 @@ class InputParser {
   #addDelimiters(customDelimiter) {
     if (!customDelimiter) return;
     if (customDelimiter.length === 0)
-      throw new Error(
-        "[ERROR] 커스텀 구분자 형식이 들어왔지만,커스텀 구분자가 들어오지 않았습니다."
-      );
+      throw new Error(`${ERROR.HEADER} ${ERROR.MISSING_CUSTOM_DELIMITER}`);
     Array.from(customDelimiter).forEach(this.#addDelimiter.bind(this));
   }
 
   /**
-   *
+   * @private
    * @param {string} delimiter
-   * @returns void
+   * @returns {Set<string>} delimiterSet
    */
   #addDelimiter(delimiter) {
     if (NEED_ESCAPE_CHARS.some((char) => char === delimiter)) {
@@ -52,23 +54,28 @@ class InputParser {
     return this.#delimiterSet.add(delimiter);
   }
 
+  /**
+   * 
+   * @param {string | undefined} expresssion 
+   * @returns {number[]} 
+   */
   #expressionToNumber(expresssion) {
     if (!expresssion) return [0];
-    const expressionTestRegex = this.#expressionTestRegex();
-    if (!expressionTestRegex.test(expresssion))
-      throw new Error("[ERROR] 들어온 식에 문제가 있습니다.");
-    return expresssion.split(this.#getSplitRegex()).reduce((result, curr) => {
+    const splitedExpression = expresssion.split(this.#getSplitRegex());
+    const numbers = splitedExpression.reduce((result, curr) => {
       if (curr === "") return result;
-      if (isNaN(Number(curr)))
-        throw new Error(`[ERROR] ${curr}은 주어진 식에 유요하지 않은 문자입니다.`);
-      if (Number(curr) <=0)
-        throw new Error(`[ERROR] ${curr}은 양수가 아닙니다.`);
-      return [...result, Number(curr)];
+      const num = this.#parseNumber(Number(curr));
+      return [...result, num];
     }, []);
+    return numbers;
   }
 
-  #expressionTestRegex() {
-    return new RegExp(`(${Array.from(this.#delimiterSet).join("|")}|\d+)*`);
+  #parseNumber(curr){
+    if (isNaN(curr))
+        throw new Error(`${ERROR.HEADER} ${ERROR.EXPRESSION_HAS_INVALID_CHARARACTER}`);
+    if (curr <= 0)
+      throw new Error(`${ERROR.HEADER} ${curr}${ERROR.INCOREECT_NUMBER}`);
+    return curr;
   }
 
   #getSplitRegex() {
