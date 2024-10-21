@@ -25,10 +25,7 @@ class App {
     }
 
     // 숫자와 구분자를 제외한 다른 형식의 문자가 포함되어 있는지 확인
-    const allRegExp = new RegExp(`[${seperators}\\d]`)
-    if(!str.match(allRegExp)) {
-      throw new Error("[ERROR] 숫자와 구분자가 아닌 다른 문자가 포함되어 있습니다.");
-    } 
+    isOnlyNumberAndSeperators(str, seperators);
 
     // 구분자만 구성된 정규식 생성
     const sepRegExp = new RegExp(`[${seperators}]`);
@@ -59,6 +56,13 @@ function getCustomSeperators(input) {
   }
 
   return customSeperator;
+}
+
+function isOnlyNumberAndSeperators(str, seperators) {
+  const allRegExp = new RegExp(`[${seperators}\\d]`)
+  if(!str.match(allRegExp)) {
+    throw new Error("[ERROR] 숫자와 구분자가 아닌 다른 문자가 포함되어 있습니다.");
+  } 
 }
 
 export default App;
