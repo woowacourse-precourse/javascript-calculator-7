@@ -1,7 +1,11 @@
 # Changelog
 
-## 2024-10-20
+## 2024-10-21
 
+- fix(view): 입출력 수정 (kimgho, 2024-10-21, 1fcf440) 
+- refactor(middleware-filter): .연산자 조정 (kimgho, 2024-10-21, e4f96f2) 
+- docs(all): 코드 주석 추가 (kimgho, 2024-10-21, 4b42177) 
+- docs(changelog): CHANGELOG.md 최신화 (kimgho, 2024-10-20, e3a766d) 
 - test(all): i/o 테스트 추가 (kimgho, 2024-10-20, 6cc7a2e) 
 - feat(app): 계산기 파이프라인을 위한 App 클래스 구현 (kimgho, 2024-10-20, eebe51d) 
 - feat(calculator): Calculator 클래스 추가 (kimgho, 2024-10-20, 71fd789) 
