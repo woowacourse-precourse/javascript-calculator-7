@@ -95,7 +95,10 @@ class App {
     const sumNumbers = (numbers) => {
               return numbers.reduce((acc, val) => acc + parseInt(val), 0);
           };
-      
+
+    // 합계 계산 및 결과 출력
+    const sum = sumNumbers(numbers);
+    Console.print(`결과 : ${sum}`);
     }
     
 
