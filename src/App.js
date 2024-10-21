@@ -1,6 +1,16 @@
 import { Console } from "@woowacourse/mission-utils";
 class App {
     async run() {
+        const sum = (numbers) => {
+            return numbers.reduce((acc, num) => {
+                const number = Number(num);
+                if (number < 0) {
+                    throw new Error("[ERROR] : 양수를 입력해주세요.");
+                }
+                return acc + number;
+            }, 0);
+        };
+
         try {
             let result = 0;
 
@@ -10,14 +20,11 @@ class App {
             );
 
             // case1: 기본 구분자(,:) 케이스
-            const NORMAL_SEPARATOR = /^[0-9,\:]+$/; // 기본 구분자와 숫자로만 구성되어 있는가?
+            const NORMAL_SEPARATOR = /[,:]/; // 기본 구분자와 숫자로만 구성되어 있는가?
             let separatorNormalCase = NORMAL_SEPARATOR.test(inputData);
             if (separatorNormalCase) {
                 const exportNumbers = inputData.split(/[, :]+/);
-                result = exportNumbers.reduce(
-                    (acc, num) => acc + Number(num),
-                    0
-                );
+                result = sum(exportNumbers);
             }
 
             // case2: 커스텀 구분자 케이스
@@ -27,16 +34,13 @@ class App {
                 const customSeparator = separatorCustomCase[1];
                 const exportNumbers =
                     separatorCustomCase[2].split(customSeparator);
-                result = exportNumbers.reduce(
-                    (acc, num) => acc + Number(num),
-                    0
-                );
+                result = sum(exportNumbers);
             }
 
             // 출력 : 결과 값 출력
             Console.print(`결과 : ${result}`);
         } catch (error) {
-            Console.print(`[ERROR] : ${error.message}`);
+            Console.print(`${error.message}`);
             throw error;
         }
     }
