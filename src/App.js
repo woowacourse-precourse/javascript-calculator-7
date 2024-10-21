@@ -37,13 +37,13 @@ class App {
       for (const NUM of NUMBERS) {
         // 4-1. 숫자가 아닌 값인 경우 에러 출력
         if (isNaN(NUM)) {
-          throw new ERROR(
+          throw new Error(
             "[ERROR] 입력값이나 구분자를 확인해주세요. 숫자만 입력 가능합니다."
           );
         }
         // 4-2. 음수인 경우 에러 출력
         if (NUM < 0) {
-          throw new ERROR(
+          throw new Error(
             "[ERROR] 음수는 입력할 수 없습니다. 양수를 입력해주세요."
           );
         }
