@@ -6,6 +6,8 @@ class App {
 
       const INPUT = await App.getInput();
 
+      const CUSTOM_SEPARATOR = App.getCustomSeparator(INPUT);
+
     } catch(error) {
       console.print(error.message);
     }
@@ -21,6 +23,15 @@ class App {
     }
 
     return INPUT;
+  }
+
+  static getCustomSeparator(INPUT) {
+    if (INPUT.startsWith('//')) {
+      const CUSTOM_SEPARATOR = INPUT[2];
+      return CUSTOM_SEPARATOR;
+    }
+
+    return false;
   }
 }
 
