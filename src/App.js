@@ -16,7 +16,27 @@ class App {
         throw error; 
       }
     }
-  
+
+    // escapeRegExp: 정규식 이스케이핑
+  escapeRegExp(string) {
+    return string.replace(/[.*+?^${}()|[\]\\]/g, '\\$&');
+  }
+
+  // calculate: 구분자 처리 및 합계 계산
+  calculate(_input) {
+    if (!_input) return 0;
+    const input = _input.replace("\\n", "\n");
+
+    const delimiters = [",", ":"];
+    let numbers = input;
+
+    const delimiterRegex = new RegExp(`[${delimiters.join("")}]`);
+    const numArray = numbers.split(delimiterRegex)
+      .filter(Boolean) 
+      .map(this.parseAndValidateNumber);
+
+    return numArray.reduce((sum, num) => sum + num, 0);
+  }
 }
 
 export default App;
