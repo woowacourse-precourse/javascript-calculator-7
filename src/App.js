@@ -1,10 +1,10 @@
 import { Console } from "@woowacourse/mission-utils";
+import sumNum from "./Calculator.js";
 
 class App {
   async run() {
     let separator = [];
     let customSeperator = "";
-    let answer = 0;
 
     try {
       let string = await Console.readLineAsync(
@@ -41,10 +41,7 @@ class App {
         return Number(num);
       });
 
-      answer = numArr.reduce((prev, cur) => {
-        return prev + cur;
-      });
-
+      const answer = sumNum(numArr);
       Console.print(`결과 : ${answer}`);
     } catch (error) {
       throw error;
