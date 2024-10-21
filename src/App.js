@@ -2,15 +2,20 @@ import { MissionUtils } from "@woowacourse/mission-utils";
 
 class App {
   async run() {
-    const input = await this.getInput();
-    const { inputString, delimiters } = this.splitInput(input);
-    if (inputString === "0") {
-      MissionUtils.Console.print("결과 : 0");
-      return;
+    try {
+      const input = await this.getInput();
+      const { inputString, delimiters } = this.splitInput(input);
+      if (inputString === "0") {
+        MissionUtils.Console.print("결과 : 0");
+        return;
+      }
+      const numbers = this.validateInput(inputString, delimiters);
+      const result = this.sumNumbers(numbers);
+      this.printResult(result);
+    } catch (error) {
+      this.handleError(error);
+      throw error;
     }
-    const numbers = this.validateInput(inputString, delimiters);
-    const result = this.sumNumbers(numbers);
-    this.printResult(result);
   }
 
   async getInput() {
@@ -69,6 +74,11 @@ class App {
 
   printResult(result) {
     MissionUtils.Console.print(`결과 : ${result}`);
+  }
+
+  handleError(error) {
+    MissionUtils.Console.print(error.message);
+    throw error;
   }
 }
 
