@@ -31,7 +31,7 @@ class App {
     const arr = getOnlyNumberArr(str, seperators);
 
     // 숫자배열의 숫자 총 합 계산
-    result = arr.map(Number).reduce((a,b) => a+b);
+    result = getSumAllNumber(arr);
 
      // 결과 출력
      MissionUtils.Console.print(`결과 : ${result}`);
@@ -66,6 +66,11 @@ function getOnlyNumberArr(str, seperators) {
   // 구분자만 구성된 정규식 생성
   const sepRegExp = new RegExp(`[${seperators}]`);
   return str.split(sepRegExp);
+}
+
+function getSumAllNumber(arr) {
+  // 숫자배열의 숫자 총 합 계산
+  return arr.map(Number).reduce((a,b) => a+b);
 }
 
 export default App;
