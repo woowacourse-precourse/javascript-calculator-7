@@ -73,7 +73,7 @@ class App {
   }
 
   async run() {
-    try {
+    //try {
       const inputStr = await Console.readLineAsync('덧셈할 문자열을 입력해주세요.\n');
 
       //입력 값이 올바른지 체크
@@ -86,9 +86,9 @@ class App {
 
       //덧셈 결과 출력
       Console.print('결과 : ' + result);
-    } catch (err) {
-      Console.print(err.message);
-    }
+    //} catch (err) {
+      //Console.print(err.message);
+    //}
   }
 }
 
