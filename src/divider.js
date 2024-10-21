@@ -47,7 +47,7 @@ function validateDivider(divider) {
 
 function repetitionCheck(dividerList, extractedString) {
   if (dividerList.includes(extractedString)) {
-    throw new Error("[ERROR] 구분자가 중복되었습니다.");
+    throw new Error(ERROR_MESSAGE.DUPLICATE_DIVIDER);
   }
   return;
 }

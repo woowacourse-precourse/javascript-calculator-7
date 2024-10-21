@@ -11,4 +11,5 @@ export const ERROR_MESSAGE = {
   NO_DIVIDER: "[ERROR] 커스텀 구분자에 문자열이 없습니다.",
   NEGATIVE_DIVIDER: "[ERROR] 커스텀 구분자가 음수로 시작되고 있습니다.",
   NUMBER_DIVIDER: "[ERROR] 커스텀 구분자가 숫자로 시작되고 있습니다.",
+  DUPLICATE_DIVIDER: "[ERROR] 구분자가 중복되었습니다.",
 };
