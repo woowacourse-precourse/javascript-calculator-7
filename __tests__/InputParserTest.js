@@ -36,21 +36,21 @@ describe('InputParser 테스트', () => {
     const expected = [1,2,3,4,5];
     const parser = new InputParser();
     const numbers = parser.parse(userInput);
-    epxect(numbers).toStrictEqual(expected);
+    expect(numbers).toStrictEqual(expected);
   })
    test("구분자가 /인 경우", () => {
-     const userInput = "///\\n1:2-3-4-5";
+     const userInput = "///\\n1:2/3/4/5";
      const expected = [1, 2, 3, 4, 5];
      const parser = new InputParser();
      const numbers = parser.parse(userInput);
-     epxect(numbers).toStrictEqual(expected);
+     expect(numbers).toStrictEqual(expected);
    });
     test("구분자가 \\ 인 경우", () => {
-      const userInput = "//\\\\n1:2-3-4-5";
+      const userInput = "//\\\\n1:2\\3\\4\\5";
       const expected = [1, 2, 3, 4, 5];
       const parser = new InputParser();
       const numbers = parser.parse(userInput);
-      epxect(numbers).toStrictEqual(expected);
+      expect(numbers).toStrictEqual(expected);
     });
 })
 
