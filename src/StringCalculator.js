@@ -15,10 +15,6 @@ class StringCalculator {
         this.resultOutput();
     }
 
-    async input() {
-        return await Console.readLineAsync("덧셈할 문자열을 입력해 주세요.\n");
-    }
-
     isCustom(param) {
         const lastIdx = param.indexOf("\\n");
         return param.startsWith("//") && lastIdx !== -1;
