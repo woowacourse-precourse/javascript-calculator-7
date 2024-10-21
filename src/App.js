@@ -1,6 +1,10 @@
 import { Console } from '@woowacourse/mission-utils';
 
 class App {
+  constructor() {
+    this.SEPARATORS = [',', ':'];
+  }
+
   async run() {
     try {
 
@@ -8,6 +12,10 @@ class App {
 
       const CUSTOM_SEPARATOR = App.getCustomSeparator(INPUT);
 
+      if (CUSTOM_SEPARATOR) {
+        this.SEPARATORS.push(CUSTOM_SEPARATOR);
+      }
+      
     } catch(error) {
       console.print(error.message);
     }
