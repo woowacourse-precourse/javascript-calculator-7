@@ -1,44 +1,51 @@
 import { Console } from '@woowacourse/mission-utils';
+import { CALCULATER, ERROR_MESSAGES } from './constants/message.js';
+import { SYMBOL } from './constants/symbol.js';
 
 class App {
   async run() {
-    const userInputValue = await Console.readLineAsync(
-      '덧셈할 문자열을 입력해 주세요.\n',
-    );
+    const userInputValue = await Console.readLineAsync(CALCULATER.input_prompt);
 
-    if (userInputValue.trim() === '') {
-      Console.print('결과 : 0');
+    if (userInputValue.trim() === SYMBOL.empty) {
+      Console.print(CALCULATER.empty_result);
       return;
     }
 
-    const defaultDelimiter = /,|:/;
+    const defaultDelimiter = SYMBOL.default_delimiter;
     let separatedValue;
 
-    if (userInputValue.startsWith('//')) {
-      const formattedInput = userInputValue.replace(/\\n/, '\n');
-      const delimiterBoundary = formattedInput.indexOf('\n');
+    if (userInputValue.startsWith(SYMBOL.custom_delimiter_prefix)) {
+      const formattedInput = userInputValue.replace(
+        SYMBOL.escaped_newline_pattern,
+        SYMBOL.formatted_newline,
+      );
+      const delimiterBoundary = formattedInput.indexOf(
+        SYMBOL.custom_delimiter_surffix,
+      );
 
-      if (delimiterBoundary === -1) {
-        throw new Error('[ERROR] 커스텀 구분자가 잘못 입력되었습니다.');
+      if (delimiterBoundary === SYMBOL.no_delimiter_position) {
+        throw new Error(ERROR_MESSAGES.invalid_custom_delimiter);
       }
 
       const extractedDelimiter = formattedInput
-        .substring(2, delimiterBoundary)
+        .substring(SYMBOL.delimiter_start_index, delimiterBoundary)
         .trim();
 
       if (!extractedDelimiter) {
-        throw new Error('[ERROR] 커스텀 구분자가 입력되지 않았습니다.');
+        throw new Error(ERROR_MESSAGES.empty_custom_delimiter);
       }
 
-      if (extractedDelimiter.length !== 1) {
-        throw new Error('[ERROR] 커스텀 구분자는 한 글자여야 합니다.');
+      if (extractedDelimiter.length !== SYMBOL.max_custom_delimiter_length) {
+        throw new Error(ERROR_MESSAGES.invalid_custom_delimiter_length);
       }
 
       const escapedDelimiter = extractedDelimiter.replace(
-        /[.*+?^${}()|[\]\\]/g,
-        '\\$&',
+        SYMBOL.special_char_escape_pattern,
+        SYMBOL.special_char_escape_replacement,
       );
-      const remainingValue = formattedInput.substring(delimiterBoundary + 1);
+      const remainingValue = formattedInput.substring(
+        delimiterBoundary + SYMBOL.newline_offset,
+      );
 
       const customDelimiter = new RegExp(`[${escapedDelimiter}]`);
       separatedValue = remainingValue.split(customDelimiter);
@@ -47,17 +54,17 @@ class App {
     }
 
     separatedValue.forEach(value => {
-      if (value.trim() === '') {
-        throw new Error('[ERROR] 구분자 사이에 값이 없습니다.');
+      if (value.trim() === SYMBOL.empty) {
+        throw new Error(ERROR_MESSAGES.empty_value_between_delimiter);
       }
       const number = Number(value.trim());
 
       if (Number.isNaN(number)) {
-        throw new Error('[ERROR] 숫자가 아닌 값을 입력하시면 안됩니다.');
+        throw new Error(ERROR_MESSAGES.not_number);
       }
 
-      if (number <= 0) {
-        throw new Error('[ERROR] 양수만 입력할 수 있습니다.');
+      if (number <= SYMBOL.zero) {
+        throw new Error(ERROR_MESSAGES.not_positive_number);
       }
     });
 
@@ -68,7 +75,7 @@ class App {
       0,
     );
 
-    Console.print(`결과 : ${calculatedResult}`);
+    Console.print(CALCULATER.result(calculatedResult));
   }
 }
 
