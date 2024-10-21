@@ -1,5 +1,5 @@
 import separateNumber from "../utils/separateNumber.js";
-import { DEFAULT_SEPARATOR } from "../constants/constants.js";
+import useCustomSeparator from "../utils/useCustomSeparator.js";
 
 class Calculator {
     #inputData;
@@ -7,11 +7,11 @@ class Calculator {
 
     constructor() {
         this.#inputData = null;
-        this.#separator = DEFAULT_SEPARATOR;
+        this.#separator = null;
     }
 
     setData(inputData) {
-        this.#inputData = inputData;
+        [this.#inputData, this.#separator] = useCustomSeparator(inputData);
     }
 
     calculate() {
