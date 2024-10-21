@@ -4,28 +4,30 @@ const DELIMITER_REGEX = {
 };
 
 class Model {
+  #numberList = [];
+  delimiter = DELIMITER_REGEX.DEFAULT; // 기본 구분자를 초기값으로 설정
+  inputString;
+
   constructor(input) {
-    this.numbers = []; // 상태로 숫자 목록을 저장
-    this.delimiter = DELIMITER_REGEX.DEFAULT;
-    this.input = input;
+    this.inputString = input; // 입력값 저장
   }
 
   extractNumber() {
-    // 커스텀 구분자 찾는 정규표현식
-    const customDelimiterMatch = this.input.match(DELIMITER_REGEX.CUSTOM);
+    this.applyCustomDelimiter(); // 커스텀 구분자 적용
+    const splitedStringList = this.inputString.split(this.delimiter);
 
-    let stringNumbers;
-
-    if (customDelimiterMatch) {
-      this.delimiter = customDelimiterMatch[1];
-      this.input = this.input.replace(DELIMITER_REGEX.CUSTOM, ''); // 커스텀 구분자를 정의한 부분 제거
-    }
-
-    stringNumbers = this.input.split(this.delimiter);
-    this.numbers = stringNumbers.map((string) => this.converToNumber(string));
+    this.#numberList = splitedStringList.map((string) => this.convertToNumber(string));
   }
 
-  converToNumber(string) {
+  applyCustomDelimiter() {
+    const customDelimiterMatch = this.inputString.match(DELIMITER_REGEX.CUSTOM);
+    if (customDelimiterMatch) {
+      this.delimiter = customDelimiterMatch[1]; // 커스텀 구분자 설정
+      this.inputString = this.inputString.replace(DELIMITER_REGEX.CUSTOM, ''); // 커스텀 구분자 제거
+    }
+  }
+
+  convertToNumber(string) {
     const number = Number(string);
     if (isNaN(number)) {
       throw new Error('[ERROR] 유효하지 않은 숫자가 포함되어 있습니다');
@@ -37,12 +39,15 @@ class Model {
   }
 
   sum() {
-    return this.numbers.reduce((acc, number) => acc + number, 0);
+    return this.#numberList.reduce((acc, number) => acc + number, 0); // 숫자의 합을 반환
   }
 
   calculate() {
-    this.extractNumber();
-    return this.sum();
+    if (this.inputString === '') {
+      throw new Error('[ERROR] 한 자리 이상의 문자열을 입력해주세요');
+    }
+    this.extractNumber(); // 숫자 추출
+    return this.sum(); // 합산 결과 반환
   }
 }
 
