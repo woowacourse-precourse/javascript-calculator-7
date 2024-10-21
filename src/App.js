@@ -12,10 +12,11 @@ class App {
       let numberList;
 
       numberList = this.extractNumbers(numbers, separator); // 숫자 리스트 생성
+      this.validateNumbers(numberList);
       const result = this.calculateSum(numberList); // 숫자 합산
       MissionUtils.Console.print(`결과 : ${result}`);
     } catch (error) {
-      MissionUtils.Console.print(`[ERROR] ${error.message}`);
+      throw new Error(`[ERROR] ${error.message}`);
     }
   }
 
@@ -31,6 +32,15 @@ class App {
       numberList = numbers.split(new RegExp(separator.join("|"))).map(Number);
     }
     return numberList;
+  }
+
+  validateNumbers(numberList) {
+    const negativeNumbers = numberList.filter((num) => num < 0);
+    if (negativeNumbers.length > 0) {
+      throw new Error(
+        `음수는 허용되지 않습니다: ${negativeNumbers.join(", ")}`
+      );
+    }
   }
 
   calculateSum(numberList) {
