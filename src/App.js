@@ -16,8 +16,10 @@ class App {
     } else if (input.startsWith("//") && input.includes("\\n")) {
       const { customSeparator, numberPart } = trimCustom(input);
       numbers = numberPart.split(customSeparator);
+      result = calculate(numbers);
     } else {
       numbers = input.split(defaultSeparator);
+      result = calculate(numbers);
     }
   }
 }
@@ -28,4 +30,12 @@ function trimCustom(str) {
 
   return { customSeparator, numberPart };
 }
+
+function calculate(numbers) {
+  return numbers.reduce((sum, num) => {
+    const number = parseInt(num);
+    return sum + number;
+  }, 0);
+}
+
 export default App;
