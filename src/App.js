@@ -14,6 +14,21 @@ class StringCalculator {
   isEmpty(input) {
     return input.trim() === "";
   }
+  parseInput(input) {
+    const customDelimiterMatch = input.match(/^\/\/(.)\n(.*)$/);
+
+    if (customDelimiterMatch) {
+      return {
+        delimiters: [customDelimiterMatch[1], ",", ":"],
+        numbers: customDelimiterMatch[2],
+      };
+    }
+
+    return {
+      delimiters: [",", ":"],
+      numbers: input,
+    };
+  }
   
   add(input) {
     if (this.isEmpty(input)) return 0;
