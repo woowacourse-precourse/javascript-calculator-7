@@ -1,5 +1,4 @@
 export const ERROR_MESSAGES = {
-  DEFAULT_ERROR: "[ERROR] 코드 실행 중에 에러가 발생했습니다.",
   NO_VALID_DIVIDER: "[ERROR] 올바른 구분자가 존재하지 않습니다.",
   CUSTOM_DIVIDER_NOT_USED: "[ERROR] 커스텀 구분자가 사용되지 않았습니다.",
   NO_NUMBERS_INPUT: "[ERROR] 숫자가 입력되지 않았습니다.",

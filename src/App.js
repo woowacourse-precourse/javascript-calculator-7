@@ -8,7 +8,7 @@ class App {
       const answer = Calculator.calculate(input);
       Console.print(`결과 : ${answer}`);
     } catch (error) {
-      Console.error(ERROR_MESSAGES.DEFAULT_ERROR);
+      throw new Error(error.message);
     }
   }
 }
