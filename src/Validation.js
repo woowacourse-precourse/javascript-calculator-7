@@ -20,7 +20,7 @@ export default class Validation {
   static checkInvalidDelimiter(userInput) {
     const invalidDelimiter = userInput
       .split(/[,:]/)
-      .some((num) => /[^0-9\s,:\n]/.test(num));
+      .some((num) => /[^0-9\s,:]/.test(num));
 
     if (invalidDelimiter) {
       throw new Error(ERROR_MESSAGE.INVALID_DELIMITER);
