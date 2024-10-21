@@ -14,7 +14,7 @@ class Calculator {
    * @returns {number}
    */
   calculate(value) {
-    return calculateTotal(this.#delimiter.splitByDelimiters(value).map(Number));
+    return calculateTotal(this.#delimiter.delimite(value).map(Number));
   }
 }
 

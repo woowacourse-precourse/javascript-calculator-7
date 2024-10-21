@@ -127,10 +127,17 @@ class Delimiter {
    * @param {string} value
    * @returns {Array<string>}
    */
-  splitByDelimiters(value) {
-    return filterEmpty(
-      this.#delimite(this.#getDelimiterRegEx(value), this.#selectDelimiterValue(value)),
-    );
+  #splitByDelimiters(value) {
+    return this.#delimite(this.#getDelimiterRegEx(value), this.#selectDelimiterValue(value));
+  }
+
+  /**
+   *
+   * @param {string} value
+   * @returns {Array<string>}
+   */
+  delimite(value) {
+    return filterEmpty(this.#splitByDelimiters(value));
   }
 }
 
