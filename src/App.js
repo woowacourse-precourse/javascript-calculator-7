@@ -16,8 +16,9 @@ class App {
 
       if (INPUT.startsWith("//") && INPUT.includes("\\n")) {
         const NEW_LINE_INDEX = INPUT.indexOf("\\n");
-        customDelimiter = INPUT.slice(1, NEW_LINE_INDEX);
-
+        customDelimiter = INPUT.slice(2, NEW_LINE_INDEX);
+        console.log(customDelimiter);
+        console.log(numbers);
         if (customDelimiter.length > 1) {
           throw new Error("커스텀 구분자는 한 글자 이상이면 안됩니다.");
         }
@@ -27,13 +28,13 @@ class App {
         if (!isNaN(Number(customDelimiter))) {
           throw new Error("숫자는 구분자로 사용할 수 없습니다.");
         }
-        numbers = INPUT.slice(NEW_LINE_INDEX + 1).split(customDelimiter);
+        numbers = INPUT.slice(NEW_LINE_INDEX + 2).split(customDelimiter);
       } else {
         numbers = INPUT.split(delimiter);
       }
       const NUMBER_ARRAY = numbers.map((num) => {
         const PARSED_NUM = Number(num);
-        if (isNaN(Number(PARSED_NUM))) {
+        if (isNaN(PARSED_NUM)) {
           throw new Error("숫자가 아닌 문자열은 사용할 수 없습니다.");
         }
         if (PARSED_NUM < 0) {
