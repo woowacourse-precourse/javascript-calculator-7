@@ -90,7 +90,14 @@ class App {
     
     // 숫자 검증 실행
     validateExtractedNumbers(numbers);
+
+    // 숫자 배열의 합을 계산하는 함수
+    const sumNumbers = (numbers) => {
+              return numbers.reduce((acc, val) => acc + parseInt(val), 0);
+          };
+      
     }
+    
 
     
 
