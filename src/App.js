@@ -25,7 +25,15 @@ class App {
     }
 
     splitInput(input) {
-        return input.split(/[,:]/).map((item) => item.trim());
+        const checkSpecialPattern = /\/\/([^\n]+)\\n/;
+
+        if (input.match(checkSpecialPattern)) {
+            const delimiter = input.match(checkSpecialPattern)[1];
+            input = input.split("\\n").slice(1)[0];
+            return input.split(delimiter);
+        } else {
+            return input.split(/[,:]/).map((item) => item.trim());
+        }
     }
 }
 
