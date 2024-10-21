@@ -8,7 +8,11 @@ export function validateInput(input){
 }
 
 export function validateNumbers(numbers){
-    if(numbers.some(num => isNaN(num) || Number(num) < 0)){
+    const negativeNumbers = numbers.filter(num => Number(num) < 0);
+    if(negativeNumbers.length > 0){
+        throw new Error(`${ERROR_MESSAGES.NEGATIVE_NUMBER}: ${negativeNumbers.join(', ')}`);
+    }
+    if(numbers.some(num => isNaN(num))){
         throw new Error(ERROR_MESSAGES.INVALID_INPUT);
     }
 }
