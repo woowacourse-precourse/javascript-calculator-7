@@ -8,7 +8,9 @@ class InputView {
   }
 
   static async readInput() {
-    return Console.readLineAsync(INPUT_QUERY);
+    const input = await Console.readLineAsync(INPUT_QUERY);
+
+    return input.trim();
   }
 }
 
