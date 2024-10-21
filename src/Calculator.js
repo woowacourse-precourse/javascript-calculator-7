@@ -46,7 +46,8 @@ class Calculator {
       return (this.#customSeparator = '');
     }
 
-    const customSeparator = this.#inputText.match(CUSTOM_SEPARATOR_REGEX)[0];
+    const customSeparator =
+      this.#inputText.match(CUSTOM_SEPARATOR_REGEX)?.[0] ?? this.#validate('', ERROR_CASE.invalidCustom);
 
     this.#validate(customSeparator, ERROR_CASE.invalidCustom);
 
