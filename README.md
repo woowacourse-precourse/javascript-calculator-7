@@ -150,6 +150,14 @@ throwError(message) {
 
 ---
 
+## 고민해 볼 사항
+
+-   현재 run() 메서드 내의 변수로 상태를 관리하고 있는데, 클래스의 프로퍼티로 관리하는 것이 더 좋을까?
+-   splitCustomDelimiter() 메서드에서 커스텀 구분자 분리 시 인덱스로 접근하는 것이 과연 안전한가?
+-   sumNumbers(), throwError() 메서드는 과도한 추상화일까?
+
+---
+
 ## 학습 키워드
 
 -   Git, GitHub
