@@ -52,22 +52,26 @@ class App {
 
     return [false];
   }
-  calculate(arr) {}
+  calculate(arr) {
+    return arr.reduce((acc, cur) => acc + cur, 0);
+  }
   async getInput() {
     const inputValue = await Console.readLineAsync("");
+    return inputValue;
+  }
+  async run() {
+    this.inputRequestText();
+    const inputValue = await this.getInput();
     const result = this.verifyInput(inputValue);
     if (result[0]) {
       Console.print(result[1]);
-      // this.calculate(result[1]);
+      const answer = this.calculate(result[1]);
+      Console.print(answer);
     } else {
       throw Error(
         "[ERROR] 양수와 구분자(, 또는 : 또는 커스텀 //x\\n)로 이루어진 문자열을 입력해주세요"
       );
     }
-  }
-  async run() {
-    this.inputRequestText();
-    this.getInput();
   }
 }
 
