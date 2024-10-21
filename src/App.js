@@ -1,6 +1,7 @@
 import { Console } from '@woowacourse/mission-utils';
 import { CALCULATER, ERROR_MESSAGES } from './constants/message.js';
 import { SYMBOL } from './constants/symbol.js';
+import calculate from './calculator.js';
 
 class App {
   async run() {
@@ -70,10 +71,7 @@ class App {
 
     const convertedNumbers = separatedValue.map(Number);
 
-    const calculatedResult = convertedNumbers.reduce(
-      (prefixNumber, nextNumber) => prefixNumber + nextNumber,
-      0,
-    );
+    const calculatedResult = calculate(convertedNumbers);
 
     Console.print(CALCULATER.result(calculatedResult));
   }
