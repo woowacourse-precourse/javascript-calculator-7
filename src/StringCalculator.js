@@ -1,6 +1,6 @@
 import {Console} from "@woowacourse/mission-utils";
 import {getInput} from "./utils/inputHandler.js";
-import {isCustom, sliceString} from "./utils/stringProcessor.js";
+import {isCustom, preprocessing, sliceString} from "./utils/stringProcessor.js";
 
 class StringCalculator {
     sum = 0;
@@ -33,7 +33,7 @@ class StringCalculator {
     }
 
     calculator(param) {
-        const numberArray = this.preprocessing(param);
+        const numberArray = preprocessing(param, this.customSeparator);
         this.sum = numberArray.reduce((a, b) => a + b, 0);
     }
 }
