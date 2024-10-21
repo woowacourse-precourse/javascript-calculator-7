@@ -6,16 +6,18 @@ class Calculator {
   }
 
   calculate(input) {
-    if (input === '') {
-      return this.result;
-    }
     const useCustomDelimiter = this.hasCustomDelimiter(input); //커스텀 구분자 사용 여부 담기
     useCustomDelimiter && this.addCustomDelimiter(input);
-    console.log([...this.delimiter]);
-    // const sliceText = input.slice(this.startIndex);
-    // this.isValidateInput(input);
-    // const numbers = this.parseNumber(input); //추출한 숫자 담기
-    // const result = this.addNums(numbers); //덧셈 결과 담기
+    const calculateText = input.slice(this.startIndex); //구분자를 기준으로 계산할 문자열
+
+    if (calculateText.trim() === '') {
+      return this.result;
+    }
+
+    this.isValidateInput(calculateText);
+    const numbers = this.parseNumber(calculateText); //추출한 숫자 담기
+    const addResult = this.addNums(numbers); //덧셈 결과 담기
+    this.result = addResult;
     return this.result;
   }
 
