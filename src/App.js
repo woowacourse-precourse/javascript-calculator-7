@@ -9,6 +9,9 @@ class App {
 
   async run() {
     const userInput = await Console.readLineAsync('문자열 덧셈을 해보아요:');
+
+    if (userInput === "") return this.print(0);
+
     const result = this.isValidSeperator(userInput);
     this.userInputValue = userInput;
 
@@ -21,7 +24,7 @@ class App {
     // 아무 구분자가 없을 경우
     if (
       this.normalSeperators.every(e => !str.includes(e)) &&
-      this.customSeperators.every(e => !str.includes(e))
+      this.customSeperators.every(e => !str.includes(e)) 
     ) {
       this.printError('구분자("," , ":" , "//", "\\n")를 넣어주세요');
       return
