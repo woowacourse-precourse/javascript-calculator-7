@@ -52,6 +52,9 @@ class App {
         throw new Error('[ERROR] 음수는 허용되지 않습니다.');
       }
     });
+
+    // 덧셈 결과 반환
+    return numArray.reduce((sum, num) => sum + num, 0);
   }
   async run() {
     try {
