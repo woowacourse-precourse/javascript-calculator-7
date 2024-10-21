@@ -20,30 +20,39 @@ async getInput() {
 
 // 숫자 추출: 구분자 분리 + 합 계산 메소드
 extractNumbers(input) {
-// 기본 구분자
-let custom = ',:';  
-let sum = 0; 
 
-// 커스텀 구분자
-if(input.slice(0,2) === "//"){
-  custom=input.slice(2,3);
-  input=input.slice(5);
-}
+  if (!input) {
+    throw new Error('입력값이 없습니다.'); 
 
-// 구분자 분리
-const delimiter = new RegExp(`[${custom},:]+`);
-const result = input.split(delimiter);
-
-// 합 계산
-for (let i = 0; i < result.length; i++) {
-  if (result[i] === "" || isNaN(result[i])) {
-    sum += 0; 
-  } else {
-    sum += Number(result[i]);
   }
-}
+  // 기본 구분자
+  let custom = ',:';  
+  let sum = 0; 
 
-return sum; 
+  // 커스텀 구분자
+  if(input.slice(0,2) === "//"){
+    const customDelimiterEnd = input.indexOf('\\');
+    if (customDelimiterEnd === -1 || input[customDelimiterEnd + 1] !== 'n') {
+       throw new Error('유효하지 않은 커스텀 구분자입니다.');
+    }
+    custom = input.slice(2, customDelimiterEnd);
+    input = input.slice(customDelimiterEnd + 1);
+  }
+
+  // 구분자 분리
+  const delimiter = new RegExp(`[${custom},:]+`);
+  const result = input.split(delimiter);
+
+  // 합 계산
+  for (let i = 0; i < result.length; i++) {
+    if (result[i] === "" || isNaN(result[i])) {
+      sum += 0; 
+    } else {
+      sum += Number(result[i]);
+    }
+  }
+
+  return sum; 
 }
 
 // 출력: 덧셈 결과를 출력하는 메소드
