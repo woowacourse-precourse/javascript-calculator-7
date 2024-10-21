@@ -31,6 +31,9 @@ class App {
 
     // 분리한 숫자들을 합산
     const sum = numberArray.reduce((acc, curr) => acc + curr, 0);
+
+    // 합산 결과를 출력
+    Console.print(`결과 : ${sum}`);
   }
 }
 
