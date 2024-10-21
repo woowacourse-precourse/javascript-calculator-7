@@ -4,3 +4,7 @@ export const MESSAGE = {
 };
 
 export const DEFAULT_DELIMITERS = [',', ':'];
+
+export const REGEX = {
+  CUSTOM: /^\/\/(.)\\n/,
+};

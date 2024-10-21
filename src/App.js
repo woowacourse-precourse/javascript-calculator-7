@@ -1,13 +1,36 @@
 import { Console } from '@woowacourse/mission-utils';
-import { MESSAGE, DEFAULT_DELIMITERS } from './constant.js';
+import { MESSAGE, DEFAULT_DELIMITERS, REGEX } from './constant.js';
 
 class App {
   async getInput() {
     return await Console.readLineAsync(`${MESSAGE.INPUT}`);
   }
 
-  getDelimiters() {
-    return DEFAULT_DELIMITERS;
+  splitInputParts(input) {
+    if (input.startsWith('//')) {
+      const endIndex = input.indexOf('\\n');
+      const customDelimiterPart = input.slice(0, endIndex + 2);
+      const numberPart = input.slice(endIndex + 2);
+
+      return { customDelimiterPart, numberPart };
+    }
+
+    return { customDelimiterPart: null, numberPart: input };
+  }
+
+  getDelimiters(customDelimiterPart) {
+    const delimiters = [...DEFAULT_DELIMITERS];
+
+    if (customDelimiterPart) {
+      const match = customDelimiterPart.match(REGEX.CUSTOM);
+
+      if (match) {
+        const [_, customDelimiter] = match;
+        delimiters.push(customDelimiter);
+      }
+    }
+
+    return delimiters;
   }
 
   createRegex(delimiters) {
@@ -37,8 +60,11 @@ class App {
 
   async run() {
     const input = await this.getInput();
-    const delimiters = this.getDelimiters();
-    const numbers = this.parseInput(input, delimiters);
+
+    const { customDelimiterPart, numberPart } = this.splitInputParts(input);
+    const delimiters = this.getDelimiters(customDelimiterPart);
+    const numbers = this.parseInput(numberPart, delimiters);
+
     const sum = this.calculateSum(numbers);
     this.printResult(sum);
   }
