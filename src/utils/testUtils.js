@@ -16,9 +16,12 @@ export const getLogSpy = () => {
 
 export const expectResults = async (app, outputs) => {
   const logSpy = getLogSpy();
-  for (const output of outputs) {
-    await app.run();
-    expect(logSpy).toHaveBeenCalledWith(expect.stringContaining(output));
-    logSpy.mockClear();
-  }
+  const runTests = outputs.map((output) => {
+    return async () => {
+      await app.run();
+      expect(logSpy).toHaveBeenCalledWith(expect.stringContaining(output));
+      logSpy.mockClear();
+    };
+  });
+  await Promise.all(runTests);
 };
