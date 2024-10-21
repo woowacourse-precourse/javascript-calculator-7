@@ -75,13 +75,16 @@ class App {
       for (let i = 0; i < CUSTOM_DELIMITER.length; i++) {
         let num = CUSTOM_DELIMITER[i];
 
+        if (num.includes(':') || num.includes(',')) {
+          const SEPARATED_BY_COLONS_AND_COMMA = num.split(/[,|:]/);
 
-        num = parseFloat(num);
-        if (num <= 0) {
-          throw new Error('[ERROR] 양수가 아닙니다.');
+          for (let i = 0; i < SEPARATED_BY_COLONS_AND_COMMA.length; i++) {
+            let splitTwiceNum = SEPARATED_BY_COLONS_AND_COMMA[i];
+            sum += VALIDATE_NUMBER(splitTwiceNum);
+          }
+        } else {
+          sum += VALIDATE_NUMBER(num);
         }
-
-        sum += num;
       }
     } else {
       const CUSTOM_DELIMITER = USERINFO.split(/[,|:]/);
