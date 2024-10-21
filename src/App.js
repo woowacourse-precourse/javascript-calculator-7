@@ -98,7 +98,7 @@ class App {
 
     let sum = 0;
     if (validationResult === VALIDATION_DEFAULT) {
-      const numArr = this.convertToNumberArray(input, /[,:]/);
+      const numArr = this.convertToNumberArray(input, new RegExp(/[,:]/));
       sum = this.calculateSum(numArr);
     } else if (validationResult === VALIDATION_CUSTOM) {
       if (input[2] !== '\\') {
