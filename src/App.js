@@ -42,6 +42,16 @@ class App {
         throw new Error(`[ERROR] 잘못된 값이 포함되어 있습니다.`);
       }
     });
+
+    // 숫자 배열로 변환
+    const numArray = numberArray.map(Number);
+
+    // 예외 3: 음수 입력 처리
+    numArray.forEach((num) => {
+      if (num < 0) {
+        throw new Error('[ERROR] 음수는 허용되지 않습니다.');
+      }
+    });
   }
   async run() {
     try {
