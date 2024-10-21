@@ -3,15 +3,18 @@ import { MissionUtils } from "@woowacourse/mission-utils";
 function returnCustomSum(inputText) {
   // custom 구분자가 있을 경우의 계산
   const [SAPARATOR, NUMBER_PART] = inputText
-  const CAL_NUM = NUMBER_PART.replace(new RegExp(SAPARATOR, 'g'), ' ')
+  
+  // const CAL_NUM = NUMBER_PART.replace(new RegExp(SAPARATOR, 'g'), ' ')
   let RETURN_ANS = 0
   let SEMI_ANS = ''
-  for (let i = 0; i < CAL_NUM.length; i++) {
-    if (CAL_NUM[i] != ' ') {
-      SEMI_ANS += CAL_NUM[i]
+  for (let i = 0; i < NUMBER_PART.length; i++) {
+    // SAPARATOR 두 글자인 경우 ;\처럼 두 글자씩 확인
+    if (NUMBER_PART.slice(i, i + SAPARATOR.length) === SAPARATOR) {
+      RETURN_ANS += parseInt(SEMI_ANS);
+      SEMI_ANS = '';
+      i += SAPARATOR.length - 1;  // 구분자 길이만큼 인덱스 이동
     } else {
-      RETURN_ANS += parseInt(SEMI_ANS)
-      SEMI_ANS = ''
+      SEMI_ANS += NUMBER_PART[i];
     }
   }
   RETURN_ANS += parseInt(SEMI_ANS)
@@ -52,8 +55,8 @@ function checkInput(inputText) {
     // 구분자 판별 후 판별 여부에 따라 리턴값 결정
     try {
       for (let i = 0; i < inputText.length; i++) {
-        // if (inputText[i] === '\\' && inputText[i + 1] === 'n') {
-        if (inputText[i] === '\n') {
+        if (inputText[i] === '\\' && inputText[i + 1] === 'n') {
+        // if (inputText[i] === '\n') {
           // \n의 위치를 파악했다면 N_START_IDX에 넣자
           // 이 값을 바탕으로 커스텀 구분자를 확인할 수 있다
           N_START_IDX = i
@@ -68,12 +71,17 @@ function checkInput(inputText) {
       // 구분자 파악해서 계산 가능한 입력값을 받았는지 확인
       const SAPARATOR = inputText.slice(2, N_START_IDX)
       const NUMBER_PART = inputText.slice(N_START_IDX + 2)
+      // console.log(SAPARATOR)
+      // console.log(NUMBER_PART)
       // 구분자 메타문자 변경
       const ES_SAPARATOR = SAPARATOR.replace(/[.*+?^${}()|[\]\\]/g, '\\$&')
       // 숫자가 구분자에 의해 올바르게 구분되고 있는지 확인. 동적으로 사용해야 하므로 new RegExp 사용해 객체 생성
       const CUSTOM_PATTERN = new RegExp(`^\\d+(${ES_SAPARATOR}\\d+)*$`)
       // return CUSTOM_PATTERN.test(NUMBER_PART)
+      // console.log(ES_SAPARATOR)
+      // console.log(CUSTOM_PATTERN)
       if (CUSTOM_PATTERN.test(NUMBER_PART)) {
+        // console.log(SAPARATOR, NUMBER_PART)
         return [SAPARATOR, NUMBER_PART]
       } else {
         return false
@@ -104,7 +112,7 @@ class App {
     // 1. STRING_INPUT 값을 확인하고, error 여부를 판단하여 throw
     // 2. index.js 파일의 try catch문 작동
     const CHECK_INPUT = checkInput(STRING_INPUT)
-    
+    // console.log(CHECK_INPUT)
     if (!CHECK_INPUT) {
       throw new Error("[ERROR]")
     } else {
