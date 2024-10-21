@@ -26,6 +26,12 @@ class App {
     if (str.startsWith('//')) {
       // '\n'으로 나누기
       const splitedStr = str.split('\\n');
+
+      // //와 \n 사이 구분자가 없을 경우 예외 처리(에러코드: 3)
+      if (splitedStr.length < 2 || splitedStr[0].length <= 2) {
+        throw new Error('[ERROR] 커스텀 구분자가 올바르지 않습니다.');
+      }
+
       // '//' 다음의 문자를 구분자로 사용
       customSeprator = splitedStr[0].substring(2);
       // 실제 숫자 문자열
@@ -41,7 +47,7 @@ class App {
       if (curr < 0) {
         throw new Error('[ERROR] 음수가 포함되어 있습니다.');
       }
-      // 숫자가 아닌 값을 전달할 경우 예외처리(에러코드: 2)
+      // 숫자가 아닌 값을 전달할 경우 예외 처리(에러코드: 2)
       if (isNaN(curr)) {
         throw new Error('[ERROR] 숫자가 아닌 값이 포함되어 있습니다.');
       }
