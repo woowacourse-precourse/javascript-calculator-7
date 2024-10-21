@@ -38,6 +38,14 @@ class App {
     return splitInputBySeparators;
   }
 
+  extractAndSplitByDefaultSeparator(input) {
+    const splitInputBySeparators = this.splitInputBySeparators(
+      input,
+      this.defaultSeparators
+    );
+    return splitInputBySeparators;
+  }
+
   splitInputBySeparators(input, separator) {
     const pattern = `[${separator}${this.defaultSeparators}]`;
     return input.split(new RegExp(pattern));
