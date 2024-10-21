@@ -14,8 +14,15 @@ class App {
       throw new Error('[ERROR] 입력값이 없습니다.');
     }
 
+    const customDelimiterMatch = line.match(/^\/\/(.+)\\n/);
     let delimiters = [',', ':'];
     let numbersString = line;
+
+    if (customDelimiterMatch) {
+      const delimiterPart = customDelimiterMatch[1];
+      delimiters.push(delimiterPart);
+      numbersString = line.substring(customDelimiterMatch[0].length);
+    }
 
     const regex = new RegExp(`${delimiters.join('|')}`);
 
