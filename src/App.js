@@ -5,8 +5,6 @@ class App {
         const stringCalculator = new StringCalculator()
         await stringCalculator.start()
     }
-
-
 }
 
 export default App;
