@@ -12,7 +12,12 @@ const LOG_MESSAGE = Object.freeze({
   RESULT_MESSAGE: "결과 : ",
 })
 
+const TAG = Object.freeze({
+  ERROR_TAG: "[ERROR]",
+});
+
 export {
   ERROR_MESSAGE, 
-  LOG_MESSAGE
+  LOG_MESSAGE,
+  TAG
 };
