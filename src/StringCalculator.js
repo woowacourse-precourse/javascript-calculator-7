@@ -24,8 +24,12 @@ class StringCalculator {
   #validateAndParseNumber(num) {
     const parsedNumber = Number(num);
 
-    if (Number.isNaN(parsedNumber) || parsedNumber < 0) {
-      throw new Error("문자열의 형식이 잘못됐습니다.");
+    if (Number.isNaN(parsedNumber)) {
+      throw new Error("잘못된 문자열 형식입니다.");
+    }
+
+    if (parsedNumber < 0) {
+      throw new Error("음수는 허용하지 않습니다.");
     }
 
     return parsedNumber;
