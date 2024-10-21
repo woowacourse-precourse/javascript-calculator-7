@@ -10,10 +10,11 @@ export async function getInput() {
 
 // 일반 메시지를 출력하는 메서드
 export function printMessage(msg) {
-    Console.print(msg);
+    Console.log(msg);
 }
 
 // 에러 메시지를 출력하는 메서드
 export function printErrorMsg(msg) {
-    Console.print("[ERROR] " + msg);
+    console.error("[ERROR] " + msg);
+    //throw new Error("프로그램을 종료합니다.");
 }
