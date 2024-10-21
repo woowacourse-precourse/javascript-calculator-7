@@ -20,7 +20,7 @@ class App {
       } else if (isNaN(Number(char))) { // 숫자가 아닌 경우
         this.handleNotNumber(char, strArr);
       } else { // 숫자인 경우
-        this.handleNumber(char);
+        this.handleNumber(char, strArr);
       }
     }
 
@@ -58,12 +58,15 @@ class App {
     }
   }
 
-  handleNumber(char) {
+  handleNumber(char, strArr) {
     if (char === '0') {
       throw new Error('[ERROR] 입력값은 구분자와 양수로 구성되어야 합니다.');
     }
 
     this.number.push(char);
+    if (this.cursor === strArr.length - 1) {
+      this.sum += Number(this.number.join(''));
+    }
     this.cursor++;
   }
 }
