@@ -38,7 +38,7 @@ class App {
       if (user_line === '') return 0;
 
       const numbers = this.parse_string(user_line);
-      Console.print(`결과: ${numbers}`);
+      Console.print(`결과: ${numbers.reduce((sum, num) => sum + num, 0)}`);
     } catch (error) {
       Console.print(error);
     }
