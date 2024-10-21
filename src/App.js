@@ -9,7 +9,21 @@ class App {
     if (input === "") {
       answer = 0;
     }else{
+      function extractCustomDelimiter(input) {
+        const DELIMITER_MATCH = input.match(/\/\/(.+?)\\n/);
+        if (DELIMITER_MATCH) {
+          return DELIMITER_MATCH[1];
+        }
+        return null;
+      }
+
+      let customDelimiter = extractCustomDelimiter(input);
       let delimiters = [',', ':'];
+      
+      if (customDelimiter) {
+        input = input.split("\\n")[1];
+        delimiters.push(customDelimiter);
+      }
 
       const REGEX = new RegExp(`[${delimiters.join('')}]`);
       const NUMBERS = input.split(REGEX).map(Number);
