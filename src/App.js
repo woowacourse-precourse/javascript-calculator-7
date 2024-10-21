@@ -4,14 +4,17 @@ class App {
   // 전체 실행 흐름
   async run() {
     Console.print("덧셈할 문자열을 입력해 주세요."); // 시작
-
     const INPUT = await Console.readLineAsync(""); // 사용자 입력
+
     // 빈 문자열일 경우 결과를 0으로 출력
     if (INPUT.trim() === "") {
       Console.print("결과 : 0"); // 결과
       return; // 함수 종료
     }
+
     const NUMBERS = this.parseInput(INPUT); // 구분자 처리
+
+    this.validateNumbers(NUMBERS); // 숫자 유효성 검사
 
     const SUM = this.calculateSum(NUMBERS); // 더하기
 
@@ -31,6 +34,7 @@ class App {
       : INPUT;
     return this.extractNumbers(numbersString, SEPARATORS);
   }
+
   // 커스텀 구분자 처리하기
   getCustomSeparator(INPUT) {
     if (INPUT.startsWith("//") && INPUT.includes("\\n")) {
@@ -45,6 +49,13 @@ class App {
       return Number(num.trim());
     });
     return NUMBERS;
+  }
+
+  // 숫자 검사하기
+  validateNumbers(NUMBERS) {
+    if (NUMBERS.some((num) => isNaN(num) || num < 0)) {
+      throw new Error("[ERROR]");
+    }
   }
 
   // 숫자 합 구하기
