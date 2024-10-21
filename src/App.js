@@ -7,10 +7,13 @@ class App {
     const reg = input.match(/\/\/(.*?)\\n(.*)/);
     const result = reg ? reg[2].split(new RegExp(`[,:${reg[1]}]`)) : input.split(/[,:]/);
 
-    result.map((value) => {
+    const sum = result.map((value) => {
       const num = Number(value);
       if (isNaN(num) || num <= 0) throw new Error("[ERROR]");
-    });
+      return num;
+    }).reduce((prev, now) => prev + now, 0);
+
+    Console.print("결과 : " + sum);
   }
 }
 
