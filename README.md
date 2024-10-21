@@ -139,3 +139,10 @@ throwError(message) {
 -   [ERROR] 접두어를 붙인 에러 메시지를 출력하고 에러를 발생시킴
 
 ---
+
+## 학습 키워드
+
+-   Git, GitHub
+-   async/await, promise
+-   클래스
+-   정규표현식
