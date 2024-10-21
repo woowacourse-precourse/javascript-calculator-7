@@ -7,6 +7,9 @@ class App { //하나의 메소드는 하나의 역할
     // 변환이 먼전가? 커스텀 구분이 먼전가
     async run() { //풀이 결과 반환 담당, 메소드명만 봐도 무슨역할인지 알 수 있게
         const input = await this.input()
+        if (input === "") {
+            return this.resultOutput()
+        }
         const argument = this.isCustom(input) ? this.sliceString(input) : input
         this.calculator(argument)
         this.resultOutput()
