@@ -8,7 +8,7 @@ class Calculator {
 
   constructor(input) {
     this.#inputText = input;
-    this.#numbers = 0;
+    // this.#numbers = 0;
     this.#result = 0;
   }
 
@@ -29,12 +29,12 @@ class Calculator {
       ? this.#inputText.slice(this.#inputText.indexOf(CUSTOM_DESIGNATORS.end) + 2)
       : this.#inputText;
 
-    this.#numbers = splitTarget.split(separatorsRegex).map(Number);
+    this.#numbers = splitTarget.split(separatorsRegex).map((char) => (char.length ? Number(char) : ''));
   }
 
   #calculateSum() {
-    const nonPositiveNumbers = this.#numbers.filter((number) => Math.sign(number) < 1);
-    const invalidFormats = this.#numbers.filter((number) => Number.isNaN(number));
+    const nonPositiveNumbers = this.#numbers.filter((number) => typeof number !== 'string' && Math.sign(number) < 1);
+    const invalidFormats = this.#numbers.filter((number) => typeof number !== 'number' || Number.isNaN(number));
     if (nonPositiveNumbers.length) throw new Error(ERROR_MESSAGE.positiveNum);
     else if (invalidFormats.length) throw new Error(ERROR_MESSAGE.invalidFormat);
 
