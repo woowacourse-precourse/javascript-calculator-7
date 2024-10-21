@@ -63,7 +63,7 @@ class StringCalculatorUtils {
   }
 
   makeError(comment) {
-    throw new Error(`[ERROR]:${comment}`);
+    throw new Error(`[ERROR]: ${comment}`);
   }
 }
 
