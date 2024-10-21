@@ -8,6 +8,8 @@ class App {
     const [separators, numberString] = this.getSeparatorAndNumber(input);
     const regex = this.changeToRegex(separators);
     const numbers = this.getNumberCutWithSeparator(regex, numberString);
+    const sum = this.calculateSum(numbers);
+    return this.printAnswer(sum);
   }
 
   getString() {
@@ -37,7 +39,9 @@ class App {
   calculateSum(arr) {
     return arr.reduce((acc, cur) => acc + +cur, 0);
   }
-  printAnswer() {}
+  printAnswer(sum) {
+    Console.print(`결과 : ${sum}`);
+  }
   printError() {}
   validate() {}
 }
