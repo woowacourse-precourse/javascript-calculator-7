@@ -57,6 +57,17 @@ class App {
     const pattern = `[${separator}${this.defaultSeparators}]`;
     return input.split(new RegExp(pattern));
   }
+
+  convertToNumber(str) {
+    const number = Number(str);
+    if (isNaN(number)) {
+      throw new Error("[ERROR] 구분자와 숫자가 아닌 값은 포함될 수 없습니다.");
+    }
+    if (number < 0) {
+      throw new Error("[ERROR] 음수는 허용되지 않습니다.");
+    }
+    return number;
+  }
 }
 
 export default App;
