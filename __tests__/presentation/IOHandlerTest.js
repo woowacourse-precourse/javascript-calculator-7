@@ -28,9 +28,8 @@ describe('IOHandler 테스트', () => {
         { input: 'sadfa', expected: 'sadfa' },
       ];
 
-      const ioHandler = new IOHandler();
-
       for (const { input, expected } of testCases) {
+        const ioHandler = new IOHandler();
         mockReadLineAsync(input);
         const result = await ioHandler.getInput();
         expect(result).toBe(expected);
@@ -47,9 +46,9 @@ describe('IOHandler 테스트', () => {
       ];
 
       const printSpy = jest.spyOn(MissionUtils.Console, 'print');
-      const ioHandler = new IOHandler();
 
       testCases.forEach(({ input, expected }) => {
+        const ioHandler = new IOHandler();
         ioHandler.displayResult(input);
         expect(printSpy).toHaveBeenCalledWith(expected);
         printSpy.mockClear();

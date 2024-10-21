@@ -15,9 +15,8 @@ describe('hasCustomDelimiter 메서드 테스트', () => {
       { input: 'sadfa', expected: false },
     ];
 
-    const inputSeparator = new InputSeparator();
-
     testCases.forEach(({ input, expected }) => {
+      const inputSeparator = new InputSeparator();
       const result = inputSeparator.hasCustomDelimiter(input);
       expect(result).toBe(expected);
     });
@@ -38,9 +37,8 @@ describe('hasCustomDelimiter 메서드 테스트', () => {
         { input: 'sadfa', expected: null },
       ];
 
-      const inputSeparator = new InputSeparator();
-
       testCases.forEach(({ input, expected }) => {
+        const inputSeparator = new InputSeparator();
         inputSeparator.getCustomDelimiter(input);
         const result = inputSeparator.getCustomDelimiter(input);
         expect(result).toBe(expected);
