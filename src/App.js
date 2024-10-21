@@ -1,6 +1,8 @@
 import { Console } from "@woowacourse/mission-utils";
+import { checkHasCustom, escapeRegExp, hasDuplicate } from "./utils.js";
 
 const ERROR_MESSAGE = "[ERROR] 잘못된 입력 값 형식입니다.";
+const DELIMITER = [",", ":"];
 
 class App {
   async run() {
@@ -9,30 +11,16 @@ class App {
         "덧셈할 문자열을 입력해 주세요.\n"
       );
 
-      const checkHasCustom = (string) => {
-        if (string.startsWith("//") && string.includes("\\n")) {
-          const DELIMITER = string.slice(2, string.indexOf("\\n"));
-          return DELIMITER;
-        }
-        return null;
-      };
-
-      const escapeRegExp = (string) => {
-        return string.replace(/[.*+?^${}()|[\]\\]/g, "\\$&");
-      };
-
       const customDelimiter = checkHasCustom(input);
-      if (
-        input.includes(`${customDelimiter}${customDelimiter}`) ||
-        input.includes(",,") ||
-        input.includes(";;")
-      ) {
+      DELIMITER.push(customDelimiter && customDelimiter);
+
+      if (hasDuplicate(input, DELIMITER)) {
         throw new Error(ERROR_MESSAGE);
       }
-      const regexString = customDelimiter
-        ? `${escapeRegExp(customDelimiter)}|,|:`
-        : ",|:";
+
+      const regexString = DELIMITER.join("|");
       const regex = new RegExp(regexString, "g");
+
       const numbersWithMark = customDelimiter
         ? input.split("\\n")[1].replace(regex, "!")
         : input.replace(regex, "!");
