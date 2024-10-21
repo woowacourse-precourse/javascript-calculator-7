@@ -3,7 +3,7 @@ export const separatorSplit = (input) => {
     return [];
   }
 
-  const basicSeparator = /[;:]/; // 기본 구분자 ; 또는 :
+  const basicSeparator = /[,:]/; // 기본 구분자 , 또는 :
   let customSeparator = "";
 
   const customRegex = /\/\/([^\\n]+)(?=\\n)/;
