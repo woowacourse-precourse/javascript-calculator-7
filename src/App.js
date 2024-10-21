@@ -50,7 +50,7 @@ class App {
       processedStr = str.split((/,|:/));
     } else {
       // 커스텀 구분자의 끝인 "\n"의 위치까지 slice한 후 커스텀 구분자를 기본 구분자인 쉼표(,)로 치환한 후 숫자를 추출한다.
-      processedStr = str.slice(str.indexOf("\\n") + 2).replace(this.customDelim, ",").split((/,|:/));
+      processedStr = str.slice(str.indexOf("\\n") + 2).replaceAll(this.customDelim, ",").split((/,|:/));
     }
 
     // + 단항연산자를 이용해서 문자열 -> 숫자 변환을 한다
@@ -84,6 +84,7 @@ class App {
       //입력 값이 올바르다면 숫자 추출 후 덧셈 진행
       result = this.addAll(this.splitDelim(inputStr));
 
+      //덧셈 결과 출력
       Console.print('결과 : ' + result);
     } catch (err) {
       Console.print(err.message);
