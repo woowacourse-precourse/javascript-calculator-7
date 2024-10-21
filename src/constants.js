@@ -12,3 +12,5 @@ export const ERROR_MESSAGE = {
   duplicatedCustom: '[ERROR] 커스텀 구분자 지정은 한 번만 가능합니다.',
   invalidCustom: '[ERROR] 커스텀 구분자는 특수기호로만 지정 가능합니다.',
 };
+
+export const DESCRIPTION = '[NOTICE] ","와 ":"는 기본 구분자이기에 구분자 지정 없이 바로 사용 가능합니다!';

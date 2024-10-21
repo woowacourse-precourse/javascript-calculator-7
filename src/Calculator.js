@@ -4,6 +4,7 @@ import {
   CUSTOM_SEPARATOR_REGEX,
   ERROR_MESSAGE,
   INVALID_CUSTOM_SEPARATOR_REGEX,
+  DESCRIPTION,
 } from './constants.js';
 
 class Calculator {
@@ -11,6 +12,7 @@ class Calculator {
   #customSeparator;
   #numbers;
   #result;
+  #userDescription;
 
   constructor(input) {
     this.#inputText = input;
@@ -59,10 +61,16 @@ class Calculator {
 
     this.#splitTextToNumber();
     this.#result = this.#calculateSum();
+
+    if (DEFAULT_SEPARATORS.includes(this.#customSeparator)) this.#userDescription = DESCRIPTION;
   }
 
   get result() {
     return this.#result;
+  }
+
+  get userDescription() {
+    return this.#userDescription;
   }
 }
 

@@ -17,7 +17,9 @@ class App {
   }
 
   #printCalculationResult() {
-    Console.print(`결과 : ${this.#calculator.result}`);
+    const description = this.#calculator.userDescription;
+
+    Console.print(`결과 : ${this.#calculator.result}${description ? '\n' + description : ''}`);
   }
 }
 
