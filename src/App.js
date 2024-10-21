@@ -7,15 +7,14 @@ class App {
                 "덧셈할 문자열을 입력해 주세요.\n"
             );
 
-            str = str.replace("\\n", "\n");
-
-            let dividerExp = /[,:]/;
-            let strNumbers = str;
-
             if (str === "") {
                 await Console.print(`결과: 0`);
-                return;
+                return 0;
             }
+
+            str = str.replace("\\n", "\n");
+            let dividerExp = /[,:]/;
+            let strNumbers = str;
 
             if (str.startsWith("//") && str.indexOf("\n") !== -1) {
                 const divider = str.slice(2, str.indexOf("\n"));
@@ -38,8 +37,9 @@ class App {
 
             const SUM = numbers.reduce((SUM, NUM) => SUM + NUM, 0);
             await Console.print(`결과: ${SUM}`);
+            return SUM;
         } catch (error) {
-            console.error("[ERROR]: ", error.message);
+            console.error("[ERROR] : ", error.message);
         }
     }
 }
