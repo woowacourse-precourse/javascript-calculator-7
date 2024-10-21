@@ -72,7 +72,20 @@ class App {
     const stringToSeparate = input.slice(
       customDelimiterSuffixIndex + CUSTOM_DELIMITER.SUFFIX_LENGTH
     );
-    return this.separatingStrings(stringToSeparate, customDelimiter);
+
+    return this.validateSpecialCharactersInString(
+      stringToSeparate,
+      customDelimiter
+    );
+  }
+
+  validateSpecialCharactersInString(string, separator) {
+    const invalidSpecialCharRegex = new RegExp(
+      `^[${separator}ㄱ-ㅎ가-힣a-zA-Z0-9]+$`
+    );
+    const isValid = invalidSpecialCharRegex.test(string);
+    if (isValid) return this.this.separatingStrings(string, separator);
+    if (!isValid) throw new Error(ERROR_MESSAGE.INVALID_SPECIAL_CHAR_MESSAGE);
   }
 
   hasSeparator(input, separator) {
