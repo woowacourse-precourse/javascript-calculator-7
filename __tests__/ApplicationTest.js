@@ -33,7 +33,7 @@ describe("문자열 계산기", () => {
   });
 
   test("예외 테스트", async () => {
-    const inputs = ["-1,2,3"];
+    const inputs = ["-1,2,3","ㅇ,2,3","1,a,3","//;\n1;-2;3"];
     mockQuestions(inputs);
 
     const app = new App();
