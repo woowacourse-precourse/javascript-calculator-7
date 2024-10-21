@@ -29,7 +29,6 @@ class App {
             numbers = input.split(/[,|:]/);
         }
 
-        // 숫자가 아닌 값 또는 음수 처리
         const numberList = numbers.map((num) => {
             const parsedNum = Number(num);
             if (isNaN(parsedNum) || parsedNum < 0) {
