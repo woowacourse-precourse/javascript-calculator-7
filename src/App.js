@@ -8,7 +8,14 @@ class App {
 
     if (input === "") {
       answer = 0;
-    } 
+    }else{
+      let delimiters = [',', ':'];
+
+      const REGEX = new RegExp(`[${delimiters.join('')}]`);
+      const NUMBERS = input.split(REGEX).map(Number);
+
+      answer = NUMBERS.reduce((acc, cur) => acc + cur, 0);
+    }
 
     Console.print(`결과 : ${answer}`);
   }
