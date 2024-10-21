@@ -13,20 +13,20 @@ class App {
 
     let pushedCustomStr = []
     let customSeparator = [];
-    let startCustomIndex = 0;
+    let startCustomSeparatorIndex = 0;
 
-    for (let i = 0; i < USERINFO.length - 1; i++) {
-      const CURRENT_SLICED_STRING = USERINFO.slice(i, i + 1);
-      const NEXT_SLICED_STRING = USERINFO.slice(i + 1, i + 2);
+    for (let i = 0; i < STRING_TO_ADD.length - 1; i++) {
+      const CURRENT_SLICED_STRING = STRING_TO_ADD.slice(i, i + 1);
+      const NEXT_SLICED_STRING = STRING_TO_ADD.slice(i + 1, i + 2);
 
       if (CURRENT_SLICED_STRING === '/' && NEXT_SLICED_STRING === '/') {
         pushedCustomStr.push(1);
-        startCustomIndex = i + 2;
+        startCustomSeparatorIndex = i + 2;
       } else if (CURRENT_SLICED_STRING === '\\' && NEXT_SLICED_STRING === 'n') {
         if (pushedCustomStr[pushedCustomStr.length - 1] === 1) {
           pushedCustomStr.pop();
-          customSeparator.push(USERINFO.substring(startCustomIndex, i));
-  
+          customSeparator.push(STRING_TO_ADD.substring(startCustomSeparatorIndex, i));
+
           if (pushedCustomStr.length > 1) {
             throw new Error('[ERROR] 잘못된 문자열입니다.');
           }
