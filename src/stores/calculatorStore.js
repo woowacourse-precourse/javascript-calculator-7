@@ -36,12 +36,33 @@ class CalculatorStore {
   // 결과값 계산
   calculateResult() {
     const input = this.state.input;
-    let nums = [];
 
+    // 0이 포함되어 있는 지 확인
+    this.checkZero(input);
+
+    // 숫자 추출
+    const nums = this.extractNums(input);
+
+    // 음수가 포함되어 있는 지 확인
+    this.checkMinus(nums);
+
+    this.state.result = nums.reduce((acc, cur) => (acc += cur), 0);
+    this.notify();
+  }
+
+  checkZero(input) {
     if (input.includes('0')) {
       throw new Error('[ERROR] 0는 허용되지 않습니다.');
     }
+  }
 
+  checkMinus(nums) {
+    if (nums.some((num) => num < 0)) {
+      throw new Error('[ERROR] 음수는 허용되지 않습니다.');
+    }
+  }
+
+  extractNums(input) {
     const delimiters = [',', ':'];
     let numbers = input;
 
@@ -62,25 +83,24 @@ class CalculatorStore {
       numbers = numbers.split(delimiter).join(',');
     }
 
+    return this.parseNumbers(numbers);
+  }
+
+  parseNumbers(numbers) {
     if ([...numbers].every((number) => number === ',')) {
-      nums = [0];
-    } else {
-      nums = numbers.split(',').map((number) => {
-        const num = Number(number);
-        if (isNaN(num)) {
-          throw new Error('[ERROR] 잘못된 입력입니다.');
-        }
-
-        return num;
-      });
+      return [0];
     }
 
-    if (nums.some((num) => num < 0)) {
-      throw new Error('[ERROR] 음수는 허용되지 않습니다.');
-    }
+    const parseNums = numbers.split(',').map((number) => {
+      const num = Number(number);
+      if (isNaN(num)) {
+        throw new Error('[ERROR] 잘못된 입력입니다.');
+      }
 
-    this.state.result = nums.reduce((acc, cur) => (acc += cur), 0);
-    this.notify();
+      return num;
+    });
+
+    return parseNums;
   }
 
   // 리스너 알림
