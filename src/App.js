@@ -13,10 +13,17 @@ class App {
       Console.print(error.message);
       throw error;
     }
-
   }
- 
+  calculate(input) {
+    //빈 문자열인지 검사
+    if (input === "") return 0;
+
+    //구분자 배열 생성
+    let delimiterArray = [',', ':'];
+
+    const nums = input.split(new RegExp(`[${delimiterArray.join('')}]`)).map(Number);
+
+    return nums.reduce((sum, nums) => sum + nums, 0);
+  }
 }
-
-
 export default App;
