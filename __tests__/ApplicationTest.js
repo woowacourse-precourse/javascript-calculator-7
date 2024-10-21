@@ -1,7 +1,7 @@
 import App from '../src/App.js';
 import { MissionUtils } from '@woowacourse/mission-utils';
 
-export const mockQuestions = (inputs) => {
+export const mockQuestions = inputs => {
   MissionUtils.Console.readLineAsync = jest.fn();
 
   MissionUtils.Console.readLineAsync.mockImplementation(() => {
@@ -27,7 +27,7 @@ describe('문자열 계산기', () => {
     const app = new App();
     await app.run();
 
-    outputs.forEach((output) => {
+    outputs.forEach(output => {
       expect(logSpy).toHaveBeenCalledWith(expect.stringContaining(output));
     });
   });
@@ -42,7 +42,7 @@ describe('문자열 계산기', () => {
     const app = new App();
     await app.run();
 
-    outputs.forEach((output) => {
+    outputs.forEach(output => {
       expect(logSpy).toHaveBeenCalledWith(expect.stringContaining(output));
     });
   });
@@ -84,7 +84,7 @@ describe('문자열 계산기', () => {
     const app = new App();
     await app.run();
 
-    outputs.forEach((output) => {
+    outputs.forEach(output => {
       expect(logSpy).toHaveBeenCalledWith(expect.stringContaining(output));
     });
   });

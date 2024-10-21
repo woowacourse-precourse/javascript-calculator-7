@@ -20,7 +20,7 @@ class NumberConverter extends IConverter {
   }
 
   convertAndValidate(values) {
-    const numbers = values.map((number) => {
+    const numbers = values.map(number => {
       const num = NumberConverter.convertToNumber(number);
       NumberConverter.validate(num);
 
