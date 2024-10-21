@@ -9,8 +9,8 @@ class FilterMiddleware {
   next(context, next) {
     const { expression, delimiter } = context;
     const delimiterRegex = this.makeRegularExpressionWithDelimiter(delimiter);
-    context.result = expression.split(delimiterRegex).map(Number).reduce((sum, num) => sum + num,
-      0);
+    const numbers = expression.split(delimiterRegex).map(Number);
+    context.result = numbers.reduce((acc, num) => acc + num, 0);
     next();
   }
 }
