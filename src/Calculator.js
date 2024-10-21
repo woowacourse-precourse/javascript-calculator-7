@@ -19,14 +19,35 @@ class Calculator {
     this.#result = 0;
   }
 
+  #validate(target, type) {
+    switch (type) {
+      case 'customPosition':
+        if (CUSTOM_SEPARATOR_REGEX.test(target)) throw new Error(ERROR_MESSAGE.customPosition);
+        break;
+      case 'invalidCustom':
+        if (INVALID_CUSTOM_SEPARATOR_REGEX.test(target)) throw new Error(ERROR_MESSAGE.invalidCustom);
+        break;
+      case 'duplicatedCustom':
+        if (CUSTOM_SEPARATOR_REGEX.test(target)) throw new Error(ERROR_MESSAGE.duplicatedCustom);
+        break;
+      case 'positiveNum':
+        if (target.length) throw new Error(ERROR_MESSAGE.positiveNum);
+        break;
+      case 'invalidFormat':
+        if (target.length) throw new Error(ERROR_MESSAGE.invalidFormat);
+        break;
+    }
+  }
+
   #findCustomSeparator() {
     if (!this.#inputText.startsWith(CUSTOM_DESIGNATORS.start)) {
-      if (CUSTOM_SEPARATOR_REGEX.test(this.#inputText)) throw new Error(ERROR_MESSAGE.customPosition);
+      this.#validate(this.#inputText, 'customPosition');
       return (this.#customSeparator = '');
     }
 
     const customSeparator = this.#inputText.match(CUSTOM_SEPARATOR_REGEX)[0];
-    if (INVALID_CUSTOM_SEPARATOR_REGEX.test(customSeparator)) throw new Error(ERROR_MESSAGE.invalidCustom);
+
+    this.#validate(customSeparator, 'invalidCustom');
 
     return customSeparator;
   }
@@ -34,7 +55,7 @@ class Calculator {
   #splitTextToNumber() {
     this.#customSeparator = this.#findCustomSeparator();
     const separatorsRegex = new RegExp(
-      `${DEFAULT_SEPARATORS.join('|')}${this.#customSeparator && '|' + this.#customSeparator}`,
+      `${DEFAULT_SEPARATORS.join('|')}${this.#customSeparator && '|\\' + this.#customSeparator}`,
       'g'
     );
 
@@ -42,7 +63,7 @@ class Calculator {
       ? this.#inputText.slice(this.#inputText.indexOf(CUSTOM_DESIGNATORS.end) + 2)
       : this.#inputText;
 
-    if (CUSTOM_SEPARATOR_REGEX.test(splitTarget)) throw new Error(ERROR_MESSAGE.duplicatedCustom);
+    this.#validate(splitTarget, 'duplicatedCustom');
 
     this.#numbers = splitTarget.split(separatorsRegex).map((char) => (char.length ? Number(char) : ''));
   }
@@ -50,10 +71,14 @@ class Calculator {
   #calculateSum() {
     const nonPositiveNumbers = this.#numbers.filter((number) => typeof number !== 'string' && Math.sign(number) < 1);
     const invalidFormats = this.#numbers.filter((number) => typeof number !== 'number' || Number.isNaN(number));
-    if (nonPositiveNumbers.length) throw new Error(ERROR_MESSAGE.positiveNum);
-    else if (invalidFormats.length) throw new Error(ERROR_MESSAGE.invalidFormat);
+    this.#validate(nonPositiveNumbers, 'positiveNum');
+    this.#validate(invalidFormats, 'invalidFormat');
 
     return this.#numbers.reduce((acc, cur) => acc + cur, 0);
+  }
+
+  #setDescription() {
+    if (DEFAULT_SEPARATORS.includes(this.#customSeparator)) this.#userDescription = DESCRIPTION;
   }
 
   calculateStringSum() {
@@ -61,8 +86,7 @@ class Calculator {
 
     this.#splitTextToNumber();
     this.#result = this.#calculateSum();
-
-    if (DEFAULT_SEPARATORS.includes(this.#customSeparator)) this.#userDescription = DESCRIPTION;
+    this.#setDescription();
   }
 
   get result() {
