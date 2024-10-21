@@ -23,8 +23,8 @@ extractNumbers(input) {
 
   if (!input) {
     throw new Error('입력값이 없습니다.'); 
-
   }
+
   // 기본 구분자
   let custom = ',:';  
   let sum = 0; 
@@ -36,7 +36,7 @@ extractNumbers(input) {
        throw new Error('유효하지 않은 커스텀 구분자입니다.');
     }
     custom = input.slice(2, customDelimiterEnd);
-    input = input.slice(customDelimiterEnd + 1);
+    input = input.slice(customDelimiterEnd + 2);
   }
 
   // 구분자 분리
@@ -45,10 +45,16 @@ extractNumbers(input) {
 
   // 합 계산
   for (let i = 0; i < result.length; i++) {
-    if (result[i] === "" || isNaN(result[i])) {
+    const current = result[i].trim();
+
+    if (current === "") {
       sum += 0; 
+    } else if (isNaN(current)){
+      throw new Error('숫자만 입력 가능합니다.');
+    } else if (current < 0){
+      throw new Error('양수만 입력 가능합니다.');
     } else {
-      sum += Number(result[i]);
+      sum += Number(current);
     }
   }
 
