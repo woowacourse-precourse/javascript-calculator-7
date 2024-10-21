@@ -18,10 +18,13 @@ class App {
 
     // 2. 커스텀 구분자 파악하기
     if(strInput.startsWith("//")) {
+      // '\\n'을 실제 '\n'으로 변환
+      const parsedInput = strInput.replace("\\n", "\n");
+
       // 입력 문자열이 //로 시작하면 \n 이전까지의 문자를 커스텀 구분자로 설정
-      const customDelimiterEnd = strInput.indexOf("\n"); 
-      delimiter = [strInput.substring(2, customDelimiterEnd)]; // 커스텀 구분자를 배열로 저장 
-      numbers = strInput.substring(customDelimiterEnd + 1); // \n 이후 숫자만 남기기
+      const customDelimiterEnd = parsedInput.indexOf("\n"); 
+      delimiter = [parsedInput.substring(2, customDelimiterEnd)]; // 커스텀 구분자를 배열로 저장 
+      numbers = parsedInput.substring(customDelimiterEnd + 1); // \n 이후 숫자만 남기기
     }
 
     // 3. 커스텀 구분자 / 기본 구분자 문자열 분리하기
