@@ -8,18 +8,18 @@ class App {
   async run() {
     try {
       Console.print('덧셈할 문자열을 입력해주세요.');
-      const INPUT_DATA = await Console.readLineAsync("");
+      const inputData = await Console.readLineAsync("");
 
       // 커스텀 구분자 추출 및 제거
-      const [EXTRACT_DATA, SEPARATORS] = this.extractSeparator(INPUT_DATA, this.defaultSeparator); 
+      const [extractData, separators] = this.extractSeparator(inputData, this.defaultSeparator); 
 
       // 구분자를 기준으로 분리
-      const SPLIT_DATA = this.splitString(EXTRACT_DATA, SEPARATORS);    
+      const splitData = this.splitString(extractData, separators);    
 
       // 분리된 숫자들의 합
-      const SUM = SPLIT_DATA.reduce((acc, number) => acc + number, 0);
+      const sum = splitData.reduce((acc, number) => acc + number, 0);
 
-      Console.print(`결과 : ${SUM}`);
+      Console.print(`결과 : ${sum}`);
     } catch (error) {
       Console.print(`[ERROR] ${error.message}`);
       throw new Error(error.message);  // 예외 발생 시 Promise가 reject되도록 수정
