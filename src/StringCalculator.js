@@ -12,12 +12,12 @@ class StringCalculator {
       if (numbers.startsWith("//")) {
         const delimiterEndIndex = numbers.indexOf("\n");
         if (delimiterEndIndex === -1) {
-            throw new Error("[ERROR] 잘못된 입력입니다.");
+            throw new Error("[ERROR] 입력 형식이 올바르지 않습니다.");
         }
 
         const customDelimiter = numbers.substring(2, delimiterEndIndex);
         if(customDelimiter.length === 0) {
-            throw new Error("[ERROR] 잘못된 구분자입니다.");
+            throw new Error("[ERROR] 커스텀 구분자가 올바르지 않습니다.");
         }
 
         delimiters = new RegExp(`[${customDelimiter}]`);
