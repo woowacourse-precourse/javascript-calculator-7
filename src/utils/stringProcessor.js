@@ -15,7 +15,6 @@ export function sliceString(param) {
 
 export function preprocessing(param, customSeparator) {
     const defaultSeparator = /[:,]/g;
-    const argument = customSeparator ? new RegExp(`(${customSeparator}|:|,)`, 'g') : defaultSeparator;
-    console.log(param.split(argument))
+    const argument = customSeparator ? new RegExp(`${customSeparator}|:|,`, 'g') : defaultSeparator;
     return param.split(argument);
 }
