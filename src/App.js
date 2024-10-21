@@ -9,13 +9,18 @@ class App {
     let result = 0;
 
     // 사용자 입력값을 받는다.
-    const input = await Console.readLineAsync('덧셈할 문자열을 입력해 주세요.\n');
-    if(input.replace(' ', '').length > 0) {
-      result = caculateNumberOfString(input);
+    try {
+      const input = await Console.readLineAsync('덧셈할 문자열을 입력해 주세요.\n');
+      if(input.replace(' ', '').length > 0) {
+        result = caculateNumberOfString(input);
+      }
+      
+      // 결과 출력
+      Console.print(`결과 : ${result}`);
+    } catch (error) {
+      throw error;
     }
 
-     // 결과 출력
-     Console.print(`결과 : ${result}`);
   }
 }  
 
