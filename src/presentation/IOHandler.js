@@ -1,13 +1,14 @@
 import { MissionUtils } from '@woowacourse/mission-utils';
+import { INPUT_MESSAGE, OUTPUT_MESSAGE } from '../constant/MESSAGE.js';
 
 const Console = MissionUtils.Console;
 
 export default class IOHandler {
   async getInput() {
-    const input = await Console.readLineAsync('덧셈할 문자열을 입력해 주세요.\n');
+    const input = await Console.readLineAsync(INPUT_MESSAGE.INPUT_GUIDE);
     return input;
   }
   displayResult(result) {
-    Console.print(`결과 : ${result}`);
+    Console.print(OUTPUT_MESSAGE.RESULT(result));
   }
 }
