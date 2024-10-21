@@ -15,6 +15,9 @@ class App {
   }
 
   calculateSum(str) {
+    // 빈 문자열 입력시 0을 반환
+    if (!str) return 0;
+
     let numbers;
     // 기본 구분자
     let customSeprator = ',|:';
