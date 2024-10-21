@@ -1,10 +1,14 @@
 class Calculator {
-  getSumOf(numbers) {
-    return numbers.reduce((sum, number) => sum + number, 0);
+  constructor(userInputNumbers) {
+    this.userInputNumbers = [...userInputNumbers];
   }
 
-  isPositive(numbers) {
-    return numbers.every((number) => number > 0);
+  sum() {
+    return this.userInputNumbers.reduce((sum, number) => sum + number, 0);
+  }
+
+  isPositive() {
+    return this.userInputNumbers.every((number) => number > 0);
   }
 }
 
