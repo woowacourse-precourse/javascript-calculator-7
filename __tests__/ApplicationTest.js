@@ -54,7 +54,7 @@ describe("문자열 계산기", () => {
     const app = new App();
 
     await expect(app.run()).rejects.toThrow(
-      "ERROR: 배열의 요소에 0 혹은 음수가 있습니다."
+      "[ERROR]: 배열의 요소에 0 혹은 음수가 있습니다."
     );
   });
 
@@ -65,7 +65,7 @@ describe("문자열 계산기", () => {
     const app = new App();
 
     await expect(app.run()).rejects.toThrow(
-      "ERROR: 배열의 요소에 0 혹은 음수가 있습니다."
+      "[ERROR]: 배열의 요소에 0 혹은 음수가 있습니다."
     );
   });
 });

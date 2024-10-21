@@ -35,7 +35,7 @@ class App {
         Console.print(add(array));
       } else {
         // "\n"이 없는 경우
-        throw new Error(JSON.stringify("ERROR: //는 있는데 \n는 없습니다."));
+        throw new Error(JSON.stringify("[ERROR]: //는 있는데 \n는 없습니다."));
       }
     } else {
       const array = input.split(BASIC_REGEXP);
