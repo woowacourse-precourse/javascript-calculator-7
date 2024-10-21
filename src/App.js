@@ -1,46 +1,51 @@
-import { MissionUtils } from "@woowacourse/mission-utils";
+import { Console } from "@woowacourse/mission-utils";
 
 class App {
   async run() {
     try {
-      const input = await MissionUtils.Console.readLineAsync('덧셈할 문자열을 입력해 주세요.\n');
-      const result = this.calculate(input);
-      MissionUtils.Console.print(`결과 : ${result}`);
-    } catch (error) {
-      MissionUtils.Console.print(error.message);
-      return;
-    }
-  }
+      let inputNumbers;
 
-  calculate(input) {
-    if (input === "") {
-      return 0;  // 공백 문자열 처리
-    }
+      const input = await Console.readLineAsync("덧셈할 문자열을 입력해 주세요\n");
 
-    const numbers = this.extractNumbers(input);
-    this.validateNumbers(numbers);  // 음수 값 유효성 검사 추가
-    return numbers.reduce((sum, num) => sum + num, 0);  // 숫자의 합 반환
-  }
+      if (input.length <= 1 && !isNaN(input)) {
+        this.printResult(Number(input));
+        return;
+      }
 
-  extractNumbers(numbersString) {
-    const delimiter = /[,:]/;  // 쉼표와 콜론 구분자
+      const customSeparator = input.match(/\/\/(.)\n/);
 
-    const numbers = numbersString.split(delimiter).map((num) => {
-      const parsed = Number(num);
-      if (isNaN(parsed)) {  // 숫자로 변환되지 않는 경우 예외 처리
+      if (customSeparator) {
+        inputNumbers = input.split('\n')[1].split(customSeparator[1]); // 구분자 기준으로 분리
+      } else if (input.match(/[,|:]/)) {
+        inputNumbers = input.split(/[,|:]/);
+      } else {
         throw new Error("[ERROR]");
       }
-      return parsed;
-    });
 
-    return numbers;
+      inputNumbers = inputNumbers.map((num) => {
+        const number = Number(num);
+        if (isNaN(number)) {
+          throw new Error("[ERROR]");
+        }
+        if (number < 0) {
+          throw new Error("[ERROR]");
+        }
+        return number;
+      });
+
+      const sum = inputNumbers.reduce((accumulator, currentValue) => {
+        return accumulator + currentValue;
+      });
+
+      this.printResult(sum);
+    } catch (error) {
+      Console.print(error.message);
+      throw error;
+    }
   }
 
-  validateNumbers(numbers) {
-    const negatives = numbers.filter((num) => num < 0);
-    if (negatives.length > 0) {
-      throw new Error("[ERROR]" + negatives.join(', '));
-    }
+  printResult(result) {
+    Console.print("결과 : " + result);
   }
 }
 
