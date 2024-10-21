@@ -13,7 +13,7 @@ class CalculatorController {
     const input = await this.#io.readLineAsync("덧셈할 문자열을 입력해 주세요.");
     const parser = new InputParser();
     const numbers = parser.parse(input);
-    const result = this.service.calculate(new CalculatorDTO(input));
+    const result = this.service.calculate(new CalculatorDTO(numbers));
     this.printResult(result);
   }
 
