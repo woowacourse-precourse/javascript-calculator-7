@@ -37,6 +37,13 @@ class App {
     });
 
     const convertedNumbers = separatedValue.map(Number);
+
+    const calculatedResult = convertedNumbers.reduce(
+      (prefixNumber, nextNumber) => prefixNumber + nextNumber,
+      0,
+    );
+
+    Console.print(calculatedResult);
   }
 }
 
