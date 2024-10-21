@@ -1,5 +1,5 @@
 import { MissionUtils } from "@woowacourse/mission-utils";
-import Calculator from "./Calculator";
+import Calculator from "./Calculator.js";
 
 class App {
   async run() {
