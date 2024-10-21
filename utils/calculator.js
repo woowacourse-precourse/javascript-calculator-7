@@ -1,4 +1,4 @@
-import printErrorMsg from './inout.js';
+import { printErrorMsg } from './inout.js'; 
   
   // 숫자를 추출한 배열을 더하는 메서드
   function SumNumbers(str) {
@@ -13,12 +13,14 @@ import printErrorMsg from './inout.js';
   }
   
   function checkCustomString(str){
-    const endSplit = str.indexOf('\n');
+    const endSplit = str.indexOf('\\n');
     const splitString = str.charAt(endSplit-1); // 커스텀 구분자
-    console.log("구분자 : "+splitString);
+    
+    //console.log("구분자 : "+splitString);
   
-    const afterString = str.substring(endSplit+1); // 구분자 이후의 문자
-    console.log("처리할 문자열 : "+afterString);
+    const afterString = str.substring(endSplit+2); // 구분자 이후의 문자
+    
+    //console.log("처리할 문자열 : "+afterString);
   
     const validStringRegex = new RegExp(`^\\d+(${splitString}\\d+)*$`); // 숫자로 구분자를 0개이상 포함한 문자열
     
@@ -28,7 +30,7 @@ import printErrorMsg from './inout.js';
       return false;
     }
    
-    return true;
+    return afterString;
   }
   
   
@@ -37,18 +39,21 @@ import printErrorMsg from './inout.js';
     const standardCaseRegex = /^\d[0-9,:]*\d$/;
     
     // 커스텀 정규표현식 - //와 \n 사이에 숫자가 아닌 문자 한 개만 존재하고 해당 문자와 숫자로 이루어진 패턴
-    const customCaseRegex = /^\/\/([^\d\s])\n\d+(?:\1\d+)*$/; // [^\d\s]는 규칙에 해당되는 문자를 저장(캡처)
-  
-    if (standardCaseRegex.test(str)) {
+    const customCaseRegex = /^\/\/([^\d\s])\\n\d+(?:\1\d+)*$/; // [^\d\s]는 규칙에 해당되는 문자를 저장(캡처)
+        
+    const transStr = str.replace("\n", "\\n");
+    console.log(transStr);
+
+    if (standardCaseRegex.test(transStr)) {
       //console.log("[지정 구분자]");
   
-      console.log("합계 : "+ SumNumbers(str));  // 숫자 배열의 합 출력
+      console.log("합계 : "+ SumNumbers(transStr));  // 숫자 배열의 합 출력
     } 
-    else if (customCaseRegex.test(str)) {
+    else if (customCaseRegex.test(transStr)) {
       //console.log("[커스텀 구분자]");
   
-      if(checkCustomString(str)) {
-        console.log("합계 : "+ SumNumbers(str));  // 숫자 배열의 합 출력
+      if(checkCustomString(transStr)) {
+        console.log("합계 : "+ SumNumbers(transStr));  // 숫자 배열의 합 출력
       }
     } 
     else {
