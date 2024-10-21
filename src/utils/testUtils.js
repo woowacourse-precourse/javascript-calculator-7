@@ -16,12 +16,10 @@ export const getLogSpy = () => {
 
 export const expectResults = async (app, outputs) => {
   const logSpy = getLogSpy();
-  const promiseArray = outputs.map((output) => {
-    return async () => {
-      await app.run();
-      expect(logSpy).toHaveBeenCalledWith(expect.stringContaining(output));
-      logSpy.mockClear();
-    };
+  const promiseArray = outputs.map(async (output) => {
+    await app.run();
+    await expect(logSpy).toHaveBeenCalledWith(expect.stringContaining(output));
+    logSpy.mockClear();
   });
   await Promise.all(promiseArray);
 };
@@ -29,9 +27,11 @@ export const expectResults = async (app, outputs) => {
 export const expectToThrow = async (app, inputs) => {
   const promiseArray = [];
   for (let i = 0; i < inputs.length; i += 1) {
-    promiseArray.push(async () => {
-      await expect(app.run()).rejects.toThrow('[ERROR]');
-    });
+    promiseArray.push(
+      (async () => {
+        expect(app.run()).rejects.toThrow('[ERROR]');
+      })(),
+    );
   }
   await Promise.all(promiseArray);
 };
