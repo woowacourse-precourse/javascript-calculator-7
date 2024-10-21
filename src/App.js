@@ -13,6 +13,7 @@ class App {
     const input = await this.ioProcessor.processInput();
     const numbers = this.stringParser.parseString(input);
     const result = this.StringCalculator.calculate(numbers);
+    this.ioProcessor.processOutput(result);
   }
 }
 
