@@ -1,6 +1,10 @@
 import '@woowacourse/mission-utils';
 import { Console } from '@woowacourse/mission-utils';
 
+function escapeRegExp(string) {
+  return string.replace(/[.*+?^${}()|[\]\\]/g, '\\$&');
+}
+
 class App {
   async run() {
     let input = await Console.readLineAsync('덧셈할 문자열을 입력해 주세요.\n');
@@ -19,7 +23,7 @@ class App {
       if (customInput.length < 2) {
         throw new Error('[ERROR] 유효하지 않은 커스텀 구분자입니다.');
       }
-      let customDelimiter = customInput[0].slice(2);
+      let customDelimiter = escapeRegExp(customInput[0].slice(2));
       delimiter = new RegExp(customDelimiter);
       parsedInput = customInput[1];
     }
@@ -27,7 +31,7 @@ class App {
     const splitNumbers = parsedInput.split(delimiter);
 
     const numbers = splitNumbers.map(num => {
-      if (isNaN(num)) {
+      if (isNaN(num) || num.trim() === '') {
         throw new Error('[ERROR] 문자열이 포함되어 있습니다.');
       }
       const number = Number(num);
