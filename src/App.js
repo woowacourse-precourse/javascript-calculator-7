@@ -5,25 +5,19 @@ import outputView from "./OutputView.js";
 
 class App {
   async run() {
-    const inputString = await this.getInputData();
-    const numbers = this.parseString(inputString);
-    const result = this.calculateSum(numbers);
+    const inputString = await this.getStringInput();
+    const numbers = this.parseInputToNumber(inputString);
+    const result = sumNumbers(numbers);
     outputView(result);
   }
 
-  async getInputData() {
-    const string = await InputView.readString();
-    return string;
+  getStringInput() {
+    return InputView.readString();
   }
 
-  parseString(input) {
+  parseInputToNumber(input) {
     const parser = new DelimiterParser();
-    const numbers = parser.splitString(input);
-    return numbers;
-  }
-
-  calculateSum(numbers) {
-    return sumNumbers(numbers);
+    return parser.splitInputToNumbers(input);
   }
 }
 

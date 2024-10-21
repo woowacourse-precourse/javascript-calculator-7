@@ -1,8 +1,10 @@
 import { ERROR } from "./utils/messages.js";
 
 class DelimiterParser {
+  static DEFAULT_DELIMITERS = [",", ":"];
+
   constructor() {
-    this.delimiters = [",", ":"];
+    this.delimiters = [...DelimiterParser.DEFAULT_DELIMITERS];
   }
 
   checkDelimiterHasNumber(customDelimiter) {
@@ -30,7 +32,7 @@ class DelimiterParser {
     }
   }
 
-  getCustomDelimiter(input) {
+  getCustomDelimiters(input) {
     input = input.replace("\\n", "\n").trim();
     let delimiters = [...this.delimiters];
     while (input.startsWith("//")) {
@@ -49,8 +51,8 @@ class DelimiterParser {
     return [input, delimiters];
   }
 
-  splitString(input) {
-    const [parseInput, delimiters] = this.getCustomDelimiter(input);
+  splitInputToNumbers(input) {
+    const [parseInput, delimiters] = this.getCustomDelimiters(input);
 
     const delimiterRegex = new RegExp(`(${delimiters.join("|")})`);
     const numbers = parseInput
