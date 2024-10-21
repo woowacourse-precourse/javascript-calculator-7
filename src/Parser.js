@@ -18,7 +18,7 @@ class Parser {
     }
 
     if (mainString.trim() === '') {
-      throw new Error('[ERROR] 빈 문자열을 입력할 수 없습니다.');
+      return { separators, mainString: '0' };
     }
 
     return { separators, mainString };
