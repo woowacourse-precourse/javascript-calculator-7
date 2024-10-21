@@ -8,16 +8,21 @@ class App {
   }
 
   async run() {
-    const input = await Console.readLineAsync("덧셈할 문자열을 입력해 주세요.\n");
     try {
+      const input = await Console.readLineAsync(
+        "덧셈할 문자열을 입력해 주세요.\n"
+      );
       const result = this.calculate(input);
       Console.print(`결과 : ${result}`);
     } catch (error) {
       Console.print(error.message);
+      throw error;
     }
   }
 
   calculate(input) {
+    if (!input) return 0;
+
     const { delimiter, numbers } = this.parseInput(input);
     const parsedNumbers = this.splitAndParse(numbers, delimiter);
     this.validateNumbers(parsedNumbers);
@@ -35,14 +40,16 @@ class App {
   }
 
   escapeDelimiter(delimiter) {
-    return delimiter.replace(/[.*+?^${}()|[\]\\]/g, '\\$&');
+    return delimiter.replace(/[.*+?^${}()|[\]\\]/g, "\\$&");
   }
 
   splitAndParse(numbers, delimiter) {
     return numbers.split(new RegExp(delimiter)).map((num) => {
       const parsed = parseInt(num.trim(), 10);
       if (isNaN(parsed)) {
-        throw new Error(`${this.ERROR_PREFIX} 유효하지 않은 입력값입니다: ${num}`);
+        throw new Error(
+          `${this.ERROR_PREFIX} 유효하지 않은 입력값입니다: ${num}`
+        );
       }
       return parsed;
     });
