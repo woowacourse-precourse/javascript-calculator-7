@@ -1,9 +1,10 @@
 ## 🔢 [WOOWACOURSE 1주차] 문자열 덧셈 계산기
 
-**✨관련 노션 링크**
-[🎁 이번주 배운 점](https://harvest-wool-819.notion.site/5944ae0b49eb4c53b9fd6929dd1287cb?pvs=4)  
-[🐞 Trouble Shooting](https://harvest-wool-819.notion.site/Trouble-Shooting-14ed12ab062a4d1d9786c2971c94fb51?pvs=4)  
-[💻 이번주 백준](https://harvest-wool-819.notion.site/0b48f633bac04694a83863833618ede7?pvs=4)
+### ✨관련 노션 링크
+
+- [🎁 이번주 배운 점](https://harvest-wool-819.notion.site/5944ae0b49eb4c53b9fd6929dd1287cb?pvs=4)  
+- [🐞 Trouble Shooting](https://harvest-wool-819.notion.site/Trouble-Shooting-14ed12ab062a4d1d9786c2971c94fb51?pvs=4)  
+- [💻 이번주 백준](https://harvest-wool-819.notion.site/0b48f633bac04694a83863833618ede7?pvs=4)
 
 
 <br>
