@@ -1,28 +1,20 @@
-import readline from 'readline';
+import { Console } from '@woowacourse/mission-utils';
+
+
 
 class App {
-    constructor() {
-        this.RL = readline.createInterface({
-            input: process.stdin,
-            output: process.stdout,
-        });
-    }
-
     async run() {
-        this.RL.question('덧셈할 문자열을 입력해주세요: ', (line) => {
-            try {
-                const result = this.calculate(line);
-                console.log(`결과: ${result}`);
-            } catch (error) {
-                console.error(error.message);
-            } finally {
-                this.RL.close();
-            }
-        });
+        const line = await Console.readLineAsync('덧셈할 문자열을 입력해주세요: '); // 비동기적으로 문자열 입력 받기
+        try {
+            const result = this.calculate(line);
+            Console.print(`결과: ${result}`); // 결과 출력
+        } catch (error) {
+            console.error(error.message); // 오류 메시지 출력
+        }
     }
 
     calculate(input) {
-        if (!input) return 0;
+        if (!input) return 0; // 빈 문자열일 경우 0 반환
 
         let delimiter = /,|:/; // 기본 구분자 (쉼표, 콜론)
 
