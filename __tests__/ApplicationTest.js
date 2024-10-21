@@ -4,10 +4,7 @@ import { MissionUtils } from "@woowacourse/mission-utils";
 const mockQuestions = (inputs) => {
   MissionUtils.Console.readLineAsync = jest.fn();
 
-  MissionUtils.Console.readLineAsync.mockImplementation(() => {
-    const input = inputs.shift();
-    return Promise.resolve(input);
-  });
+  MissionUtils.Console.readLineAsync.mockImplementation(() => Promise.resolve(inputs.shift()));
 };
 
 const getLogSpy = () => {
@@ -76,5 +73,4 @@ describe("문자열 계산기", () => {
       expect(logSpy).toHaveBeenCalledWith(expect.stringContaining(output));
     });
   });
-
 });

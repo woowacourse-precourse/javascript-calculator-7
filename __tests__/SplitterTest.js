@@ -1,5 +1,5 @@
 import Splitter from "../src/Splitter";
-import { ErrorMessages } from '../src/Constant';
+import { ErrorMessages } from "../src/Constant";
 
 describe("Splitter 테스트", () => {
   test("splitInput : 매개변수로 빈 문자열이 오는 경우", () => {
@@ -23,7 +23,7 @@ describe("Splitter 테스트", () => {
     expect(result).toEqual(output);
   });
 
-  test("plitInput : 모든 입력부에 값이 입력된 경우", () => {
+  test("splitInput : 모든 입력부에 값이 입력된 경우", () => {
     const input = "//;\\n1,2,3";
     const output = ["//;", "1,2,3"];
     const result = Splitter.splitInput(input);
@@ -62,6 +62,4 @@ describe("Splitter 테스트", () => {
 
     expect(result).toEqual(output);
   });
-})
-
-
+});
