@@ -11,7 +11,7 @@ class App {
     return input;
   }
 
-  stringSplitDelimiter(inputString) {
+  stringSplitDelimiter(input) {
     let str = [];
 
     // 커스텀 구분자 사용 시
