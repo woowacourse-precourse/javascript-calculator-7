@@ -5,10 +5,11 @@ class App {
     Console.print('덧셈할 문자열을 입력해 주세요.');
     const input = await Console.readLineAsync('');
 
-    //에러케이스 1: 빈 문자열
+    //빈 문자열 => 0 //에러케이스가 아님
     if (!input) {
-      throw new Error('[ERROR] 문자열을 입력해주세요.');
+      this.printResult(0);
     }
+
     //쉼표 또는 콜론
     else if (/,|:/.test(input)) {
       const result = this.calculateSum(input.split(/,|:/));
@@ -23,6 +24,7 @@ class App {
 
       //분리할 문자열
       const str = input.replace(/\/\/.*?\\n/, '');
+
       const result = this.calculateSum(str.split(customChar));
       this.printResult(result);
     }
@@ -32,12 +34,12 @@ class App {
       throw new Error('[ERROR] 지원되지 않는 문자열 포맷입니다.');
     }
   }
-  //합산 함수
+  //합산 함수 : input이 숫자로 변환된 지점
   calculateSum(numbers) {
-    //에러케이스 3: 유효하지 않은 숫자
+    //에러케이스 3: 유효하지 않은 숫자 또는 문자
     const invalidNumbers = numbers.filter((n) => isNaN(Number(n)));
     if (invalidNumbers.length > 0) {
-      throw new Error('[ERROR] 유효하지 않은 숫자가 포함되어 있습니다.');
+      throw new Error('[ERROR] 유효하지 않은 숫자 또는 문자가 포함되어 있습니다.');
     }
     //에러케이스 4: 음수
     const negativeNumbers = numbers.map(Number).filter((n) => n < 0);
