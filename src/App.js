@@ -24,6 +24,11 @@ class App {
 
     // 커스텀 구분자
     if (str.startsWith('//')) {
+      // //은 있지만 \n이 없는 경우 예외 처리(에러코드: 5)
+      if (!str.includes('\\n')) {
+        throw new Error('[ERROR] 커스텀 구분자가 올바르지 않습니다.');
+      }
+
       // '\n'으로 나누기
       const splitedStr = str.split('\\n');
 
