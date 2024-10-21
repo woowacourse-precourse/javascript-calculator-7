@@ -22,7 +22,7 @@ class App {
     const sortedDelimetersArray = delimetersArray.sort(
       (a, b) => b.length - a.length
     );
-    console.log("🚩 sorted delimeters :", sortedDelimetersArray);
+
     const delimetersPatternArray = sortedDelimetersArray.map((delimeter) => {
       if (/[.*+?^${}()|[\]\\]/.test(delimeter)) {
         let delimeterWithEscape = "";
@@ -37,41 +37,39 @@ class App {
       }
       return delimeter;
     });
-    console.log(
-      "🚩 delimeters pattern Array with escape :",
-      delimetersPatternArray
-    );
 
     return delimetersPatternArray.join("|");
   }
 
-  //parse user input using both custom delimiters and default delimiters
   parseInput(userInput) {
+    const PATTERN_OFFSET = 2;
     let input = userInput;
     let delimetersArray = [",", ":"];
 
     while (input.startsWith("//")) {
       if (input.includes("\\n")) {
-        const customDelimeter = input.slice(2, input.indexOf("\\n"));
+        const customDelimeter = input.slice(
+          PATTERN_OFFSET,
+          input.indexOf("\\n")
+        );
         if (customDelimeter === ".") {
           throw new Error(
             "[ERROR] : (.)은 커스텀 구분자로 사용할 수 없습니다."
           );
         }
         delimetersArray.push(customDelimeter);
-        input = input.slice(input.indexOf("\\n") + 2);
+        input = input.slice(input.indexOf("\\n") + PATTERN_OFFSET);
       } else {
         throw new Error("[ERROR] : 커스텀 구분자 지정 패턴이 잘못되었습니다.");
       }
     }
-    console.log("🚩 all delimeters :", delimetersArray);
+
     const delimetersRegExpPattern =
       this.createDelimetersRegExpPattern(delimetersArray);
 
     const delimetersRegExp = new RegExp(delimetersRegExpPattern);
     const parsedInput = input.split(delimetersRegExp);
 
-    // check user input 2 (after parsing)
     parsedInput.forEach((el) => {
       if (isNaN(Number(el))) {
         throw new Error(
@@ -89,13 +87,10 @@ class App {
   }
 
   async run() {
-    //get user input
     const userInput = await Console.readLineAsync(
       "덧셈할 문자열을 입력해 주세요.\n"
     );
-    Console.print(`🚩 raw input : ${userInput}`);
 
-    // check user input
     if (/^[^\d,:]/.test(userInput)) {
       if (!userInput.startsWith("//") || !userInput.includes("\\n")) {
         throw new Error(
@@ -105,11 +100,7 @@ class App {
     }
 
     if (userInput) {
-      //parse user input
       const parsedInput = this.parseInput(userInput);
-      console.log("🚩 parsed input :", parsedInput);
-
-      //sum numbers
       const output = this.addStrNumsArray(parsedInput);
       Console.print(`결과 : ${output}`);
     } else {
