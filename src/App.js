@@ -5,7 +5,7 @@ class App {
     try {
       // 1. 사용자 입력받기
       // 1-1. 사용자에게 문자열 입력받기
-      const INPUT = await Console.readLineAsync(
+      let INPUT = await Console.readLineAsync(
         "덧셈할 문자열을 입력해주세요.\n"
       );
 
@@ -57,6 +57,7 @@ class App {
       Console.print(`결과 : ${SUM}`);
     } catch (error) {
       Console.print(error.message);
+      throw error;
     }
   }
 }
