@@ -76,6 +76,7 @@ class App {
       Console.print(`결과 : ${result}`);
     } catch (e) {
       Console.print(e.message);
+      throw e;
     }
   }
 }
