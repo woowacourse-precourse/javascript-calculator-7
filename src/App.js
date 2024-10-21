@@ -47,6 +47,8 @@ class App {
       this.sum += Number(this.number.join(''));
       this.number = [];
       this.cursor++;
+    } else {
+      throw new Error('[ERROR] 구분자 외의 문자가 포함되어 있습니다.');
     }
   }
 
