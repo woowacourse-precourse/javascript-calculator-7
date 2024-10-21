@@ -19,4 +19,5 @@ export const ERROR_MESSAGE = {
   DEFAULT_SEPARATOR_INCLUDE_CUSTOM_SEPARATOR:
     "커스텀 구분자는 기본 구분자와 같을 수 없습니다.",
   CUSTOM_SEPARATOR_IS_NUMBER: "커스텀 구분자는 숫자일 수 없습니다.",
+  PRIVATE_CONSTRUCTOR: "static 함수를 사용하세요.",
 };

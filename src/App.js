@@ -1,10 +1,7 @@
-import { Console } from "@woowacourse/mission-utils";
 import Validator from "./Validator.js";
-import {
-  INPUT_QUERY,
-  OUTPUT_PREFIX,
-  INITIAL_SEPARATOR_LIST,
-} from "./constants.js";
+import { INITIAL_SEPARATOR_LIST } from "./constants.js";
+import OutputView from "./OutputView.js";
+import InputView from "./InputView.js";
 
 class App {
   #input;
@@ -13,19 +10,20 @@ class App {
 
   async run() {
     await this.#readInput();
-
-    const validator = new Validator(this.#input, this.#separatorList);
-    validator.parse();
-
-    this.#generateInputNumberList();
+    this.#validate();
+    this.#getInputNumberList();
     this.#printResult();
   }
 
   async #readInput() {
-    this.#input = await Console.readLineAsync(INPUT_QUERY);
+    this.#input = await InputView.readInput();
   }
 
-  #generateInputNumberList() {
+  #validate() {
+    new Validator(this.#input, this.#separatorList).parse();
+  }
+
+  #getInputNumberList() {
     this.#inputNumberList = this.#input.match(/[0-9]+/g).map(Number);
   }
 
@@ -34,11 +32,7 @@ class App {
   }
 
   #printResult() {
-    Console.print(this.#getFormattedResult());
-  }
-
-  #getFormattedResult() {
-    return `${OUTPUT_PREFIX}${this.#getTotalSum()}`;
+    OutputView.printMessage(this.#getTotalSum());
   }
 }
 
