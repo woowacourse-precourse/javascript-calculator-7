@@ -34,7 +34,7 @@ class Delimiter {
   /**
    *
    * @param {string} value
-   * @returns {string}
+   * @returns {string | null}
    */
   getCustomDelimiter(value) {
     return findCapturedValue(this.#customDelimiterRegEx, value);
