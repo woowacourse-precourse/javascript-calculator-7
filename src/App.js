@@ -46,11 +46,12 @@ class App {
           return input;
       };    
 
-      
+
     // 사용자로부터 입력을 받는 비동기 함수
     async function getUserInput() {
       return await Console.readLineAsync("덧셈할 숫자를 입력해 주세요.\n");
     }
+
     // 사용자 입력을 받고 검증 실행
     const userInput = await getUserInput();
     
@@ -65,6 +66,17 @@ class App {
     const customDelimiter = getCustomDelimiter(userInput, customDelimiterRegex);
     const formula = userInput.replace(customDelimiterRegex, "");
 
+
+     // 수식에서 숫자를 추출하는 함수
+     function extractNumbers(string, delimiter) {
+      return string
+          .split(delimiter)
+          .map((s) => s.trim()) // 공백 제거
+          .filter((s) => s !== ""); // 빈 문자열 제거
+  }
+
+    // 추출된 숫자 배열 생성
+    const numbers = extractNumbers(formula, customDelimiter || /,|:/);
     }
 
     
