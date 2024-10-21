@@ -47,13 +47,13 @@ import { printErrorMsg } from './inout.js';
     if (standardCaseRegex.test(transStr)) {
       //console.log("[지정 구분자]");
   
-      console.log("합계 : "+ SumNumbers(transStr));  // 숫자 배열의 합 출력
+      console.log("결과 : "+ SumNumbers(transStr));  // 숫자 배열의 합 출력
     } 
     else if (customCaseRegex.test(transStr)) {
       //console.log("[커스텀 구분자]");
   
       if(checkCustomString(transStr)) {
-        console.log("합계 : "+ SumNumbers(transStr));  // 숫자 배열의 합 출력
+        console.log("결과 : "+ SumNumbers(transStr));  // 숫자 배열의 합 출력
       }
     } 
     else {
