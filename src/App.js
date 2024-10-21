@@ -5,20 +5,18 @@ class App {
   defaultDelimeterValidation = /[^,\d:]/gi;
 
   isCustomDelimeterUsed(input) {
-    return input.startsWith("//") && input.includes("\\n");
+    return input.startsWith("//") && input.includes("\n");
   }
 
   replaceDelimeter(input, delimeter) {
-    let inputString = input;
     if (delimeter) {
-      inputString = input.replaceAll(delimeter, " ");
+      return input.replaceAll(delimeter, ",");
     }
-
-    return inputString.replaceAll(this.defaultDelimeter, " ");
+    return input.replaceAll(this.defaultDelimeter, ",");
   }
 
   addNumbers(inputString) {
-    return inputString.split(" ").reduce((acc, cur) => acc + Number(cur), 0);
+    return inputString.split(",").reduce((acc, cur) => acc + Number(cur), 0);
   }
 
   getAnswer(input) {
@@ -26,25 +24,22 @@ class App {
       throw new Error("입력값이 없습니다.");
     }
 
-    let answer,
-      inputString = input;
+    let inputString = input;
+    inputString = inputString.replace("\\\\n", "\n").replace("\\n", "\n");
 
     if (this.isCustomDelimeterUsed(inputString)) {
-      if (inputString.includes("\\n")) {
-        inputString = inputString.replace(/\\\\/g, "\\");
-      }
-      const delimeter = inputString.split("\\n")[0].slice(2);
-      const numbers = inputString.split("\\n")[1];
+      const [delimeterPart, numbers] = inputString.split("\n");
+      const delimeter = delimeterPart.slice(2);
 
-      inputString = this.replaceDelimeter(numbers, delimeter);
+      inputString = this.replaceDelimeter(numbers, delimeter); // 구분자를 ,로 변경
     }
 
-    if (input.match(this.defaultDelimeterValidation)) {
+    if (inputString.match(this.defaultDelimeterValidation)) {
       throw new Error("유효하지 않은 입력입니다.");
     }
 
-    inputString = this.replaceDelimeter(inputString);
-    answer = this.addNumbers(inputString);
+    inputString = this.replaceDelimeter(inputString); // 기본 구분자 처리
+    const answer = this.addNumbers(inputString);
     Console.print(`결과 : ${answer}`);
   }
 
@@ -52,14 +47,14 @@ class App {
     let endFlag = false;
 
     while (true) {
-      endFlag = false;
       try {
         const userInput = await Console.readLineAsync(
           "덧셈할 문자열을 입력해 주세요.\n"
         );
         this.getAnswer(userInput);
       } catch (err) {
-        throw new Error(`[ERROR]: ${err.message}`);
+        endFlag = true;
+        Console.print(`[ERROR] ${err.message}`);
       }
 
       if (endFlag) {
