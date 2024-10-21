@@ -43,9 +43,9 @@ class App {
 
     // 일반 방식 이나 틀린 방식.
     input = input.replaceAll(",", ":");
-    Console.print(input);
+
     const arr = input.split(":").map((e) => +e);
-    Console.print(arr);
+
     if (this.isAllNumber(arr)) {
       return [true, arr];
     }
@@ -59,14 +59,16 @@ class App {
     const inputValue = await Console.readLineAsync("");
     return inputValue;
   }
+  printResult(answer) {
+    Console.print(`결과 : ${answer}`);
+  }
   async run() {
     this.inputRequestText();
     const inputValue = await this.getInput();
     const result = this.verifyInput(inputValue);
     if (result[0]) {
-      Console.print(result[1]);
       const answer = this.calculate(result[1]);
-      Console.print(answer);
+      this.printResult(answer);
     } else {
       throw Error(
         "[ERROR] 양수와 구분자(, 또는 : 또는 커스텀 //x\\n)로 이루어진 문자열을 입력해주세요"
