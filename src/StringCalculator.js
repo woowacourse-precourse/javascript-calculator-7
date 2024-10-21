@@ -5,8 +5,8 @@ import {checkForErrors} from "./utils/errorHandler.js";
 import {RESULT_MESSAGE} from "./constants/message.js";
 
 class StringCalculator {
-    sum = 0;
-    customSeparator = null;
+    #sum = 0;
+    #customSeparator = null;
 
     async start() {
         const input = await getInput(Console)
@@ -14,19 +14,19 @@ class StringCalculator {
             return this.getOutput(); // 빈 문자열의 경우 결과 출력
         }
         const {customSeparator, slicedString} = parseInput(input);
-        this.customSeparator = customSeparator;
+        this.#customSeparator = customSeparator;
         this.calculator(slicedString);
         this.getOutput();
     }
 
     getOutput() {
-        Console.print(RESULT_MESSAGE + this.sum);
+        Console.print(RESULT_MESSAGE + this.#sum);
     }
 
     calculator(param) {
-        const numberArray = preprocessing(param, this.customSeparator);
+        const numberArray = preprocessing(param, this.#customSeparator);
         numberArray.forEach(elem => checkForErrors(elem)); // 에러 체크
-        this.sum = numberArray.reduce((a, b) => Number(a) + Number(b), 0);
+        this.#sum = numberArray.reduce((a, b) => Number(a) + Number(b), 0);
     }
 }
 
