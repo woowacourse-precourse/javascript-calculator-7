@@ -8,12 +8,14 @@ class Calculator {
 
   constructor(input) {
     this.#inputText = input;
-    // this.#numbers = 0;
     this.#result = 0;
   }
 
   #findCustomSeparator() {
-    if (!this.#inputText.startsWith(CUSTOM_DESIGNATORS.start)) return (this.#customSeparator = '');
+    if (!this.#inputText.startsWith(CUSTOM_DESIGNATORS.start)) {
+      if (CUSTOM_SEPARATOR_REGEX.test(this.#inputText)) throw new Error(ERROR_MESSAGE.customPosition);
+      return (this.#customSeparator = '');
+    }
 
     return this.#inputText.match(CUSTOM_SEPARATOR_REGEX)[0];
   }
