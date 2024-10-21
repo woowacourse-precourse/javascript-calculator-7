@@ -1,5 +1,15 @@
 import { Console } from '@woowacourse/mission-utils';
-import { ERROR } from './constants.js';
+import {
+  ERROR,
+  formulaTest,
+  separatorTest,
+  checkSeparator,
+  customSeparateTest,
+  customN_TEst,
+  checkNumber,
+  negativeNumberTest,
+} from './Error.js';
+import { CUSTOM_EXPRESS, DEFAULT_SEPARATOR } from './constants.js';
 
 class App {
   async run() {
@@ -7,34 +17,21 @@ class App {
       await Console.readLineAsync('덧셈할 문자열을 입력해 주세요.\n')
     ).trim();
 
-    const CUSTOM_EXPRESS = /\/\/(.+)\\/;
-    const DEFAULT_SEPARATOR = /[,:]/;
-    const FORMULA = /(\d+([\W_][?!\W_]))*\d+$/;
-
     function userInputCustom(userInput) {
       const inputSplit = userInput.split('n');
+      const inputFormula = inputSplit[1];
 
-      const userInputCustomFormula = inputSplit[1];
+      formulaTest(inputFormula);
 
-      // ERROR
-      if (!FORMULA.test(userInputCustomFormula)) {
-        throw new Error(ERROR.FORMULA_ERROR);
-      }
+      const inputCustom = inputSplit[0];
+      customSeparateTest(inputCustom);
 
-      const userInputCustomExpress = inputSplit[0];
+      const deleteSlash = inputCustom.replace('//', '');
+      const inputSeparator = deleteSlash.slice(0, deleteSlash.length - 1);
 
-      const deleteSlash = userInputCustomExpress.replace('//', '');
-      const userInputCustomSeparator = deleteSlash.slice(
-        0,
-        deleteSlash.length - 1
-      );
+      separatorTest(inputSeparator);
 
-      // ERROR
-      if (/\d+/.test(userInputCustomSeparator)) {
-        throw new Error(ERROR.CUSTOM_SEPERATOR_ERROR);
-      }
-
-      return { userInputCustomFormula, userInputCustomSeparator };
+      return { inputFormula, inputSeparator };
     }
 
     function userInputNumber(userInput) {
@@ -42,42 +39,28 @@ class App {
         !CUSTOM_EXPRESS.test(userInput) &&
         DEFAULT_SEPARATOR.test(userInput)
       ) {
-        if (!FORMULA.test(userInput)) {
-          throw new Error(ERROR.FORMULA_ERROR);
-        }
+        formulaTest(userInput);
 
         const inputNumber = userInput.split(DEFAULT_SEPARATOR);
-        checkSeparator(inputNumber);
 
         return inputNumber;
       } else if (userInput.includes('n') && CUSTOM_EXPRESS.test(userInput)) {
-        const { userInputCustomSeparator, userInputCustomFormula } =
-          userInputCustom(userInput);
-        const combinedSeparator = new RegExp(`[,:${userInputCustomSeparator}]`);
+        const { inputFormula, inputSeparator } = userInputCustom(userInput);
+        const combinedSeparator = new RegExp(`[,:${inputSeparator}]`);
 
-        if (!FORMULA.test(userInputCustomFormula)) {
-          throw new Error(ERROR.FORMULA_ERROR);
-        }
-
-        const inputNumber = userInputCustomFormula.split(combinedSeparator);
+        const inputNumber = inputFormula.split(combinedSeparator);
         checkSeparator(inputNumber);
 
         return inputNumber;
-      } else if (!userInput.includes('n')) {
-        throw new Error(ERROR.CUSTOM_SEPERATE_N_ERROR);
-      } else if (!CUSTOM_EXPRESS.test(userInput)) {
-        throw new Error(ERROR.CUSTOM_SEPERATE_ERROR);
+      } else if (userInput) {
+        customN_TEst(userInput);
       } else {
-        throw new Error('[ERROR]');
+        throw new Error(ERROR.ALL_ERROR);
       }
     }
 
     function sumCaculator(inputNumber) {
-      inputNumber.forEach((number) => {
-        if (/[^0-9\s-]/.test(number)) {
-          throw new Error(ERROR.SEPARATOR_ERROR);
-        }
-      });
+      checkNumber(inputNumber);
 
       let sum = 0;
 
@@ -86,31 +69,20 @@ class App {
           inputNumber[i].trim() === '' ? '0' : inputNumber[i].trim();
 
         let num = parseInt(currentNumber, 10);
+        negativeNumberTest(num);
 
-        if (num < 0) {
-          throw new Error(ERROR.NEGATIVE_NUMBER_ERROR);
-        }
         sum += num;
       }
-
       return sum;
     }
 
     try {
-      let inputNumbers = userInputNumber(userInput);
-      let result = sumCaculator(inputNumbers);
+      const numbers = userInputNumber(userInput);
+      const result = sumCaculator(numbers);
 
       Console.print('결과 : ' + result);
     } catch (error) {
-      throw new Error(error.message);
-    }
-
-    function checkSeparator(inputArray) {
-      inputArray.forEach((symbol) => {
-        if (symbol === '') {
-          throw new Error(ERROR.SEPARATOR_ERROR);
-        }
-      });
+      throw new Error(ERROR.ALL_ERROR);
     }
   }
 }
