@@ -12,6 +12,10 @@ class App {
       return; // 함수 종료
     }
     const NUMBERS = this.parseInput(INPUT); // 구분자 처리
+
+    const SUM = this.calculateSum(NUMBERS); // 더하기
+
+    Console.print(`결과 : ${SUM}`); // 결과
   }
 
   // 구분자 처리하기
@@ -41,6 +45,11 @@ class App {
       return Number(num.trim());
     });
     return NUMBERS;
+  }
+
+  // 숫자 합 구하기
+  calculateSum(NUMBERS) {
+    return NUMBERS.reduce((SUM, num) => SUM + num, 0);
   }
 }
 
