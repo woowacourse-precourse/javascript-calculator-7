@@ -17,9 +17,11 @@ class App {
       } else if (input.startsWith("//") && input.includes("\\n")) {
         const { customSeparator, numberPart } = trimCustom(input);
         numbers = numberPart.split(customSeparator);
+
         result = calculate(numbers);
       } else {
         numbers = input.split(defaultSeparator);
+
         result = calculate(numbers);
       }
       Console.print(`결과: ${result}`);
@@ -37,16 +39,11 @@ function trimCustom(str) {
 }
 
 function calculate(numbers) {
-  return numbers.reduce((sum, num) => {
-    const number = Number(num);
-
-    // 숫자가 아닌 경우 에러 발생
-    if (isNaN(number)) {
-      throw new Error(`[ERROR] Invalid input: ${num}`);
-    }
-
-    return sum + number;
-  }, 0);
+  const invalidInputs = numbers.filter((num) => isNaN(Number(num))); // 숫자가 아닌 값
+  if (invalidInputs.length > 0) {
+    throw new Error(`[ERROR] Invalid input: ${invalidInputs.join(", ")}`);
+  }
+  return numbers.reduce((sum, num) => sum + Number(num), 0);
 }
 
 export default App;
