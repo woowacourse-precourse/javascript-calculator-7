@@ -101,7 +101,7 @@ class App {
 
     if (isNaN(num)) {
       // 숫자가 아닌 값일 경우 에러 출력
-      throw new Error(`[ERROR] 선언되지 않은 문자입니다: ${char}`);
+      throw new Error(`[ERROR] 선언되지 않은 문자입니다. : ${char}`);
     }
 
     if (num < 0) {
