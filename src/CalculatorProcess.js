@@ -6,8 +6,13 @@ class CalculatorProcess {
   inputString = '';
 
   async getString() {
-    const INPUT = await Console.readLineAsync('덧셈할 문자열을 입력해 주세요.');
-    this.inputString = INPUT;
+    let initInput =
+      await Console.readLineAsync('덧셈할 문자열을 입력해 주세요.');
+    if (initInput === '') {
+      // 어떠한 입력도 없는 경우
+      initInput = '0';
+    }
+    this.inputString = initInput;
   }
 
   doParsing() {
