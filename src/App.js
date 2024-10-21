@@ -1,6 +1,6 @@
 import { Console } from '@woowacourse/mission-utils';
 import { MESSAGE, DEFAULT_DELIMITERS, REGEX } from './constant.js';
-
+import Validator from './Validator.js';
 class App {
   async getInput() {
     return await Console.readLineAsync(`${MESSAGE.INPUT}`);
@@ -59,14 +59,22 @@ class App {
   }
 
   async run() {
-    const input = await this.getInput();
+    try {
+      const validator = new Validator();
+      const input = await this.getInput();
 
-    const { customDelimiterPart, numberPart } = this.splitInputParts(input);
-    const delimiters = this.getDelimiters(customDelimiterPart);
-    const numbers = this.parseInput(numberPart, delimiters);
+      validator.validateInputFormat(input);
 
-    const sum = this.calculateSum(numbers);
-    this.printResult(sum);
+      const { customDelimiterPart, numberPart } = this.splitInputParts(input);
+      const delimiters = this.getDelimiters(customDelimiterPart);
+      const numbers = this.parseInput(numberPart, delimiters);
+
+      const sum = this.calculateSum(numbers);
+      this.printResult(sum);
+    } catch (error) {
+      Console.print(error.message);
+      throw error;
+    }
   }
 }
 
