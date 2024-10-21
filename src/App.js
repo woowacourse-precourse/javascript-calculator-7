@@ -18,17 +18,17 @@ class App {
       if (num) {
         const value = parseInt(num);
         if (isNaN(value)) {
-          MissionUtils.Console.print("[ERROR] 잘못된 입력입니다.");
+          throw new Error("[ERROR] 잘못된 입력입니다.");
         }
         if (value < 0) {
-          MissionUtils.Console.print("[ERROR] 음수는 허용되지 않습니다.");
+          throw new Error("[ERROR] 음수는 허용되지 않습니다.");
         }
         resultNumber.push(value);
       }
     });
     MissionUtils.Console.print(resultNumber);
     const sum = resultNumber.reduce((sum, cur) => sum + cur, 0);
-    MissionUtils.Console.print(sum);
+    MissionUtils.Console.print(`결과 : ${sum}`);
   }
 }
 
