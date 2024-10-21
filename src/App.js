@@ -37,6 +37,7 @@ function getSeparatorAndData(input) {
     inputData = input.substring(newlineIndex + 2);
 
     validateCustomSeparator(customSeparator);
+    validateActualInput(inputData);
   } else {
     customSeparator = new RegExp(`[${DEFAULT_SEPARATOR.join("")}]`);
     inputData = input;
@@ -64,6 +65,13 @@ function sumNumbers(numbers, customSeparator) {
 function validateCustomSeparator(customSeparator) {
   if (DEFAULT_SEPARATOR.includes(customSeparator)) {
     throw new Error(ERROR_MESSAGES.INVALID_CUSTOM_SEPERATOR);
+  }
+}
+
+// 구분자 뒤에 데이터가 없는 경우 예외 처리
+function validateActualInput(inputData) {
+  if (!inputData) {
+    throw new Error(ERROR_MESSAGES.INVALID_FORMAT);
   }
 }
 
