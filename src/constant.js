@@ -5,10 +5,16 @@ const DEFAULT_DELIMITER = [",", ":"];
 const CUSTOM_DELIMITER_START = "//";
 const CUSTOM_DELIMITER_END = "\\n";
 
+const ERROR = "[ERROR]: ";
+const ERROR_MESSAGE = {
+  INVALID_INPUT: ERROR + "숫자 또는 구분자 이외의 값이 포함되어 있습니다.",
+};
+
 export {
   INPUT_MESSAGE,
   OUTPUT_MESSAGE,
   DEFAULT_DELIMITER,
   CUSTOM_DELIMITER_START,
   CUSTOM_DELIMITER_END,
+  ERROR_MESSAGE,
 };

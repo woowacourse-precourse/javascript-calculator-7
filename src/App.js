@@ -12,7 +12,12 @@ class App {
   async run() {
     const input = await this.ioProcessor.processInput();
     const numbers = this.stringParser.parseString(input);
-    const result = this.StringCalculator.calculate(numbers);
+    try {
+      const result = this.StringCalculator.calculate(numbers);
+    } catch (error) {
+      this.ioProcessor.processErrorOutput(error.message);
+      return;
+    }
     this.ioProcessor.processOutput(result);
   }
 }
