@@ -32,6 +32,9 @@ class App {
 
       numbers = numbers.slice(endIndex + 2);
     }
+
+    // 구분자에 따른 숫자 추출
+    const numberArray = numbers.split(delimiter);
   }
   async run() {
     try {
