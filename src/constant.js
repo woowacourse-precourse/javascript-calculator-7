@@ -9,6 +9,7 @@ const ERROR = "[ERROR]: ";
 const ERROR_MESSAGE = {
   INVALID_INPUT: ERROR + "숫자 또는 구분자 이외의 값이 포함되어 있습니다.",
   INVALID_DELIMITER: ERROR + "구분자 명령문이 잘못되었습니다.",
+  NUMBER_OUT_OF_RANGE: ERROR + "너무 큰 숫자가 포함되어 있습니다.",
 };
 
 export {
