@@ -29,7 +29,7 @@ class App {
                 throw new Error("[ERROR] 커스텀 구분자 형식이 올바르지 않습니다.");
             }
             custom_split_text = new RegExp(parts[0].slice(2));
-            input = parts.slice(1).join('\n');
+            input = parts.slice(1).join('\\n');
         }
 
 
