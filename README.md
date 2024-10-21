@@ -50,7 +50,7 @@ async getUserInput() {
         const userInput = await Console.readLineAsync("덧셈할 문자열을 입력해 주세요.\n");
         return userInput;
     } catch (error) {
-        this.throwError("입력값을 받아오는 데 실패했습니다.");
+        App.throwError("입력값을 받아오는 데 실패했습니다.");
     }
 }
 ```
@@ -63,7 +63,7 @@ async getUserInput() {
 
 ```javascript
 splitCustomDelimiter(input) {
-    if (!this.checkCustomDelimiter(input)) {
+    if (!App.checkCustomDelimiter(input)) {
         return [undefined, input];
     } else {
         return [input[2], input.slice(5)];
@@ -80,7 +80,7 @@ splitCustomDelimiter(input) {
 ### checkCustomDelimiter() 메서드
 
 ```javascript
-checkCustomDelimiter(input) {
+static checkCustomDelimiter(input) {
     const regex = /^\/\/([^0-9])\\n/;
     return regex.test(input);
 }
@@ -89,6 +89,7 @@ checkCustomDelimiter(input) {
 -   정규표현식을 사용해 커스텀 구분자가 존재하는지 확인
 -   커스텀 구분자는 숫자가 아닌 문자 하나로 제한하며, 문자열의 시작부분에 위치
 -   커스텀 구분자를 분리할 수 있는 형식이면 true, 아니면 false 반환
+-
 
 ### validateInput() 메서드
 
@@ -96,7 +97,7 @@ checkCustomDelimiter(input) {
 validateInput(inputBody, delimiters) {
     const regex = new RegExp(`^^(0|[1-9][0-9]*)([${delimiters}](0|[1-9][0-9]*))*$`);
     if (inputBody && !regex.test(inputBody)) {
-        this.throwError("입력값이 유효하지 않습니다.");
+        App.throwError("입력값이 유효하지 않습니다.");
     }
 }
 ```
@@ -131,7 +132,7 @@ sumNumbers(numbers) {
 ### throwError() 메서드
 
 ```javascript
-throwError(message) {
+static throwError(message) {
     throw new Error(`[ERROR] ${message}`);
 }
 ```
