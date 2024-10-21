@@ -14,13 +14,12 @@ class App {
       if(input.replace(' ', '').length > 0) {
         result = caculateNumberOfString(input);
       }
-      
+
       // 결과 출력
       Console.print(`결과 : ${result}`);
     } catch (error) {
       throw error;
     }
-
   }
 }  
 
@@ -29,10 +28,10 @@ function caculateNumberOfString(str) {
     let seperators = ',:';
 
     // 커스텀 구분자 추출
-    const customSeperators = getCustomSeperators(str);
+    const customSeperator = getCustomSeperator(str);
 
-    if(customSeperators.length > 0) {
-      seperators += customSeperators;
+    if(customSeperator.length > 0) {
+      seperators += customSeperator;
       // 커스텀 구분자 설정을 제외한 문자열 추출
       str = str.substring(str.indexOf(END_CUSTOM_SEPERATOR_SETTING)+2);
     }
@@ -47,16 +46,14 @@ function caculateNumberOfString(str) {
     return getSumAllNumber(arr);
 }
 
-function getCustomSeperators(input) {
+function getCustomSeperator(input) {
   let customSeperator = '';
   if(input.startsWith(START_CUSTOM_SEPERATOR_SETTING)) {
     if(input.includes(END_CUSTOM_SEPERATOR_SETTING)){
       // 구분자 추출
-      customSeperator = input.slice(2, input.indexOf(END_CUSTOM_SEPERATOR_SETTING));
-
-      // 숫자 혹은 문자열인지 확인
-      if(customSeperator.match(/^[0-9]$/) || customSeperator.length > 1) {
-        throw new Error(getErrorMessage("커스텀 구분자의 형식이 잘못되었습니다."));
+      customSeperator = input[2];
+      if(customSeperator.match(/^[0-9]$/)) {
+        throw new Error(getErrorMessage("커스텀 구분자에는 숫자가 사용될 수 없습니다."));
       }
     } else {
       throw new Error(getErrorMessage("커스텀 구분자 설정 패턴이 잘못되었습니다.(//와 \\n 사이에 커스텀 구분자를 입력해주세요.)"));
