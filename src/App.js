@@ -34,7 +34,7 @@ class App {
     const sum = numberList.reduce((total, num) => {
       const parseNumber = parseInt(num,10);
       if(isNaN(parseNumber) || parseNumber<0){
-        throw new Error("[Error] 잘못된 입력입니다. 숫자는 0 이상의 값이어야 합니다.")
+        throw new Error("[ERROR] 잘못된 입력입니다. 숫자는 0 이상의 값이어야 합니다.")
       }
       return total + parseNumber;
     }, 0);
