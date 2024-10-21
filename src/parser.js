@@ -1,5 +1,7 @@
-import { ERROR_MESSAGE } from "./constants/error.js";
+import { ERROR_MESSAGE } from "./error.js";
 import {
+  isNegativeNumber,
+  isNotNumber,
   isCustomSeparator,
   isDuplicateCustomSeparator,
 } from "./utils/validateInput.js";
@@ -23,5 +25,11 @@ export const userInputParser = (input) => {
     ? customInputParser(input)
     : regularInputParser(input);
 
-  return parsedInputArray;
+  if (isNotNumber(parsedInputArray)) {
+    throw new Error(ERROR_MESSAGE.NOT_NUMBER);
+  } else if (isNegativeNumber(parsedInputArray)) {
+    throw new Error(ERROR_MESSAGE.NEGATIVE_NUMBER);
+  }
+
+  return parsedInput;
 };
