@@ -50,6 +50,19 @@ class App {
   static getNumbers(INPUT, SEPARATORS) {
     const NUMBERS_PART = SEPARATORS.length > 2 ? INPUT.split('\n')[1] : INPUT;
 
+    const REGEX = new RegExp(`[${SEPARATORS.join('')}]`);
+
+    const NUMBERS = NUMBERS_PART.split(REGEX);
+
+    if (NUMBERS.some((number) => number === '')) {
+      throw new Error('[ERROR] 구분자 사이에 숫자가 없습니다.');
+    }
+
+    if (NUMBERS.some((number) => Number.isNaN(Number(number)))) {
+      throw new Error('[ERROR] 숫자가 아닌 값이 포함되어 있습니다.');
+    }
+
+    return NUMBERS;
   }
 }
 
