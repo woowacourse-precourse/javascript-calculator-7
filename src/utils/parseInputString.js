@@ -44,6 +44,10 @@ export const getNumbers = (input) => {
   let strings = [];
   let numbers = [];
 
+  if (!input) {
+    throw new Error(ERROR_MESSAGE.EMPTY_VALUE);
+  }
+
   if (input.startsWith("//")) {
     const { separator: customSeparator, newNumberString } =
       getCustomSeparator(input);
@@ -58,6 +62,10 @@ export const getNumbers = (input) => {
 
     return number;
   });
+
+  if (numbers.length === 0) {
+    throw new Error(ERROR_MESSAGE.NO_NUMBERS);
+  }
 
   return numbers;
 };
