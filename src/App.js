@@ -2,8 +2,9 @@ import { Console } from "@woowacourse/mission-utils";
 
 class App {
   async run() {
-    const DEFAULT_SEPARATORS = [",", ":"];
-    const regex = new RegExp(DEFAULT_SEPARATORS.join("|")); // 정규 표현식: /,|:/
+    const DEFAULT = [",", ":"];
+    const defaultSeparator = new RegExp(DEFAULT.join("|")); // 정규 표현식: /,|:/
+    let numbers = [];
     let result;
 
     const input = await Console.readLineAsync(
@@ -12,13 +13,19 @@ class App {
 
     if (input === "") {
       result = 0;
+    } else if (input.startsWith("//") && input.includes("\\n")) {
+      const { customSeparator, numberPart } = trimCustom(input);
+      numbers = numberPart.split(customSeparator);
     } else {
-      const numbers = input.split(regex);
-      // numbers 배열을 사용하여 추가 작업 수행
+      numbers = input.split(defaultSeparator);
     }
-
-    Console.print(result);
   }
 }
 
+function trimCustom(str) {
+  const customParts = str.split("//")[1];
+  const [customSeparator, numberPart] = customParts.split("\\n"); // [0]: 커스텀 구분자 [1]: 문자열 부분
+
+  return { customSeparator, numberPart };
+}
 export default App;
