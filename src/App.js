@@ -32,7 +32,25 @@ class App {
       // 3. 구분자 기준으로 문자열을 나눠 숫자를 배열에 저장하기
       const SEPARATOR_REGEX = new RegExp(`[${SEPARATOR.join("")}]`);
       const NUMBERS = INPUT.split(SEPARATOR_REGEX).map(Number);
-    } catch (error) {}
+
+      // 4. 유효성 검사하기
+      for (const NUM of NUMBERS) {
+        // 4-1. 숫자가 아닌 값인 경우 에러 출력
+        if (isNaN(NUM)) {
+          throw new ERROR(
+            "[ERROR] 입력값이나 구분자를 확인해주세요. 숫자만 입력 가능합니다."
+          );
+        }
+        // 4-2. 음수인 경우 에러 출력
+        if (NUM < 0) {
+          throw new ERROR(
+            "[ERROR] 음수는 입력할 수 없습니다. 양수를 입력해주세요."
+          );
+        }
+      }
+    } catch (error) {
+      Console.print(error.message);
+    }
   }
 }
 
