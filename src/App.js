@@ -36,7 +36,7 @@ class App {
     Console.readLineAsync("덧셈할 문자열을 입력해 주세요\n ")
       .then(input => {
         const result = this.extractAndSum(input); // 입력 문자열에서 숫자를 추출하고 합산
-        Console.print(`결과: ${result}`); // 결과 출력
+        Console.print(result); // 결과 출력
       })
       //5. 에러메시지출력
       .catch(error => {
