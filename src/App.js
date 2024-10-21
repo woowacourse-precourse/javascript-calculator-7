@@ -4,7 +4,7 @@ import {
   EXTRA_NUMBERS_MESSAGE,
   CUSTOM_DELIMITER,
   ERROR_MESSAGE,
-} from "./message";
+} from "./message.js";
 class App {
   async run() {
     const input = await Console.readLineAsync(RUN_MESSAGES.INPUT);
@@ -42,12 +42,14 @@ class App {
       const isCustomDelimiterAtStart = input.indexOf(
         EXTRA_NUMBERS_MESSAGE.CUSTOM_DELIMITER_PREFIX
       );
-      return isCustomDelimiterAtStart
-        ? [NaN]
-        : this.splitUsingCustomDelimiterAndConvertToNumbers(
-            input,
-            EXTRA_NUMBERS_MESSAGE.CUSTOM_DELIMITER_SUFFIX
-          );
+
+      if (isCustomDelimiterAtStart)
+        throw new Error(ERROR_MESSAGE.CUSTOM_DELIMITER_POSITION);
+      if (!isCustomDelimiterAtStart)
+        return this.splitUsingCustomDelimiterAndConvertToNumbers(
+          input,
+          EXTRA_NUMBERS_MESSAGE.CUSTOM_DELIMITER_SUFFIX
+        );
     }
     if (hasCommaAndSemicolon)
       return this.separatingStrings(input, [
