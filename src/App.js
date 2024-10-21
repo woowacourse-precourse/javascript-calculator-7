@@ -35,6 +35,32 @@ class App {
     return sum;
   }
 
+  // [feat] 2.2 문자열에서 구분자를 추출하고 숫자들을 배열로 반환
+  splitNumbers(input){
+    // 기본 구분자 , 와 :
+    let delimiters = /[,:]/;
+    let numberString = input;
+
+    // [feat] 2.2.1 커스텀 구분자가 있을 경우 delimiters 수정
+    if(input.startsWith("//")){
+      const delimiterEndIndex = input.indexOf("\n");
+      if(delimiterEndIndex === -1){
+        throw new Error("[ERROR] 잘못된 구분자 형식입니다.");
+      }
+      const customDelimiter = input.substring(2,delimiterEndIndex);
+      
+      // 커스텀 구분자를 추가
+      delimiters = new RegExp(`[,:${customDelimiter}]`);
+
+      // 커스텀 구분자 설정 제외한 숫자 부분
+      numberString = input.substring(delimiterEndIndex+1);
+    }
+
+    // [feat] 2.2.2 구분자에 따라 숫자들을 나누고 리스트로 반환
+    const numberList = numberString.split(delimiters);
+
+    return numberList;
+  }
 }
 
 export default App;
