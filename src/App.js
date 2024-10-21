@@ -50,7 +50,6 @@ class App {
         }
 
         const inputNumber = userInput.split(DEFAULT_SEPARATOR);
-        checkSeparator(inputNumber);
 
         return inputNumber;
       } else if (userInput.includes('n') && CUSTOM_EXPRESS.test(userInput)) {
@@ -63,7 +62,6 @@ class App {
         }
 
         const inputNumber = userInputCustomFormula.split(combinedSeparator);
-        checkSeparator(inputNumber);
 
         return inputNumber;
       } else if (!userInput.includes('n')) {
