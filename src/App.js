@@ -30,22 +30,27 @@ class App {
     Console.print(`결과 :${sum}`)
   }
 
-  errorCalculator() { // 오류창 띄우는 함수
-    if (/\d/.test(userInput) === false) { // 숫자 포함 되지 않을 때 에러
-      Console.print(`[ERROR]`);
+  errorCalculator(inputSplited) { // 오류창 띄우는 함수
+    if (/\d/.test(inputSplited) === false) { // 숫자 포함 되지 않을 때 에러
+      Console.print('[ERROR]');
       throw new Error('ERROR');
-    } else if (userInput.indexOf('//') != -1 === true) { // '//'으로 시작하지 않을 때 에러
-      Console.print(`[ERROR]`);
+    } if (userInput.indexOf('//') != -1 === true) { // '//'으로 시작하지 않을 때 에러
+      Console.print('[ERROR]');
       throw new Error('ERROR');
-    } else if (isNaN(string) || string < 0) { // 음수 입력했을 때
-      Console.print(`[ERROR]`);
+    } if (isNaN(inputSplited) || inputSplited < 0) { // 음수 입력했을 때
+      Console.print('[ERROR]');
       throw new Error('ERROR');
     }
   }
 
   async run() {
-    await this.startCalculator();
-    await this.resultCalculator();
+    const userInput = await this.startCalculator();
+
+    const inputSplited = this.workingCalculator(userInput);
+
+    this.errorCalculator(inputSplited);
+
+    this.addNumber(inputSplited);
   }
 };
 
