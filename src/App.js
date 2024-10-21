@@ -17,27 +17,20 @@ class App {
       const newSeparator = userInput.slice(2, end);
 
       // 사용자의 의도를 해치는 경우 에러 발생
-      if (banSeparators.includes(newSeparator)) {
-        throwError(ERROR_MESSAGES.INVALID_SEPARATOR);
-      };
-      if (newSeparator.trim() != '' && !isNaN(newSeparator)) {
-        throwError(ERROR_MESSAGES.NUMERIC_SEPARATOR);
-      }
+      if (banSeparators.includes(newSeparator)) throwError(ERROR_MESSAGES.INVALID_SEPARATOR);
+      if (newSeparator.trim() != '' && !isNaN(newSeparator)) throwError(ERROR_MESSAGES.NUMERIC_SEPARATOR);
+      if (/\d/.test(newSeparator) && isNaN(newSeparator)) throwError(ERROR_MESSAGES.NUMERIC_SEPARATOR);
 
       separators.push(newSeparator);
       userInput = userInput.slice(end + 2);
     }
 
-    if (isNaN(userInput[0])) {
-      throwError(ERROR_MESSAGES.INVALID_START);
-    }
+    if (isNaN(userInput[0])) throwError(ERROR_MESSAGES.INVALID_START);
     
-    if (isNaN(userInput[userInput.length-1])) {
-      throwError(ERROR_MESSAGES.INVALID_END);
-    }
+    if (isNaN(userInput[userInput.length-1])) throwError(ERROR_MESSAGES.INVALID_END);
 
     userInput.split(/\d+/).forEach((sep) => {
-      if (sep && !separators.includes(sep)) {
+      if (sep && sep != '.' && !separators.includes(sep)) {
         throwError(ERROR_MESSAGES.MULTIPLE_SEPARATORS);
       }
     });

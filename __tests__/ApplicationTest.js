@@ -57,6 +57,21 @@ describe("문자열 계산기", () => {
     });
   });
 
+  test("공백(띄어쓰기)을 구분자로 사용한 경우", async () => {
+    const inputs = ["// \\n1 2 3"];
+    mockQuestions(inputs);
+
+    const logSpy = getLogSpy();
+    const outputs = ["결과 : 6"];
+
+    const app = new App();
+    await app.run();
+
+    outputs.forEach((output) => {
+      expect(logSpy).toHaveBeenCalledWith(expect.stringContaining(output));
+    });
+  });
+
   test("잘못된 구분자 사용 시 에러", async () => {
     const inputs = ["//.\\n1.2"];
     mockQuestions(inputs);
@@ -64,6 +79,39 @@ describe("문자열 계산기", () => {
     const app = new App();
 
     await expect(app.run()).rejects.toThrow(`[ERROR]: ${ERROR_MESSAGES.INVALID_SEPARATOR}`);
+  });
+
+  test("소수가 입력된 경우", async () => {
+    const inputs = ["1,2.3"];
+    mockQuestions(inputs);
+
+    const logSpy = getLogSpy();
+    const outputs = ["결과 : 3.3"];
+
+    const app = new App();
+    await app.run();
+
+    outputs.forEach((output) => {
+      expect(logSpy).toHaveBeenCalledWith(expect.stringContaining(output));
+    });
+  });
+
+  test("빈칸을 구분자 사용 시 에러", async () => {
+    const inputs = ["//\\n123"];
+    mockQuestions(inputs);
+
+    const app = new App();
+
+    await expect(app.run()).rejects.toThrow(`[ERROR]: ${ERROR_MESSAGES.INVALID_SEPARATOR}`);
+  });
+
+  test("구분자에 숫자가 있는 경우 에러", async () => {
+    const inputs = ["//a1b\\n1a1b1"];
+    mockQuestions(inputs);
+
+    const app = new App();
+
+    await expect(app.run()).rejects.toThrow(`[ERROR]: ${ERROR_MESSAGES.NUMERIC_SEPARATOR}`);
   });
 
   test("숫자가 구분자로 사용될 때 에러", async () => {
@@ -130,5 +178,21 @@ describe("문자열 계산기", () => {
     const app = new App();
 
     await expect(app.run()).rejects.toThrow(`[ERROR]: ${ERROR_MESSAGES.MULTIPLE_SEPARATORS}`);
+  });
+
+
+  test("지정해놓은 연속된 구분자 사용", async () => {
+    const inputs = ["//,,\\n1,,2"];
+    mockQuestions(inputs);
+
+    const logSpy = getLogSpy();
+    const outputs = ["결과 : 3"];
+
+    const app = new App();
+    await app.run();
+
+    outputs.forEach((output) => {
+      expect(logSpy).toHaveBeenCalledWith(expect.stringContaining(output));
+    });
   });
 });
