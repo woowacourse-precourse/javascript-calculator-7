@@ -1,18 +1,20 @@
+// 최대 허용 숫자 크기 설정
+const MAX_LIMIT = Number.MAX_SAFE_INTEGER;
+
 // --- 에러 메시지 상수 ---
 const ERROR_MESSAGES = {
-  INVALID_CHARACTER: '구분자가 아닌 문자',
-  NON_POSITIVE_NUMBER: '양수가 아닌 숫자',
+  INVALID_CHARACTER: '구분자가 아닌 문자는 입력할 수 없습니다.',
+  NON_POSITIVE_NUMBER: '양수가 아닌 숫자는 입력할 수 없습니다.',
   INVALID_CHARACTER_AND_NON_POSITIVE_NUMBER:
-    '구분자가 아닌 문자와 양수가 아닌 숫자',
+    '구분자가 아닌 문자와 양수가 아닌 숫자는 입력할 수 없습니다.',
+  NUMBER_TOO_LARGE: `입력한 숫자가 너무 큽니다. 더 작은 숫자를 입력해 주세요.`,
 };
 
 const DEFAULT_DELIMITER = /,|:/;
 
 // --- 에러 처리 함수 ---
 export function throwError(errorCode) {
-  throw new Error(
-    `[ERROR] : ${ERROR_MESSAGES[errorCode]}는 입력할 수 없습니다.`,
-  );
+  throw new Error(`[ERROR] : ${ERROR_MESSAGES[errorCode]}`);
 }
 
 // 문자 포함 검증
@@ -35,7 +37,14 @@ function validateInput(input) {
   const hasNonNumeric = input.map(Number).some((char) => isNonNumeric(char));
   const hasZero = input.some((char) => isZero(char));
   const hasNegative = input.some((char) => isNegative(char));
+  const hasTooLarge = input.some((char) => Number(char) > MAX_LIMIT);
+
   // 문자와 0 또는 음수가 동시에 입력된 경우
+
+  // 입력된 숫자가 최대 허용 크기를 초과하면 에러를 발생시킴
+  if (hasTooLarge) {
+    throwError('NUMBER_TOO_LARGE');
+  }
 
   // 잘못된 구분자와 0,음수 입력 에러
   if (hasNonNumeric && (hasZero || hasNegative)) {
