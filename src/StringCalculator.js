@@ -14,7 +14,7 @@ class StringCalculator {
         }
         const argument = isCustom(input) ? sliceString(input).slicedString : input;
         this.calculator(argument);
-        this.resultOutput();
+        this.getOutput();
     }
 
     getOutput() {
