@@ -11,6 +11,20 @@ class App {
       Console.print("결과 : 0"); // 결과
       return; // 함수 종료
     }
+    const NUMBERS = this.parseInput(INPUT); // 구분자 처리
+  }
+  // 구분자 처리하기
+  parseInput(INPUT) {
+    const BASE_SEPARATORS = ",:"; // 기본 구분자
+    const CUSTOM_SEPARATOR = this.getCustomSeparator(INPUT);
+    const SEPARATORS = CUSTOM_SEPARATOR
+      ? `${BASE_SEPARATORS}${CUSTOM_SEPARATOR}`
+      : BASE_SEPARATORS;
+
+    const numbersString = CUSTOM_SEPARATOR
+      ? INPUT.substring(5 + CUSTOM_SEPARATOR.length)
+      : INPUT;
+    return this.extractNumbers(numbersString, SEPARATORS);
   }
   // 커스텀 구분자 처리하기
   getCustomSeparator(INPUT) {
