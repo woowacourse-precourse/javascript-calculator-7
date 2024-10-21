@@ -4,8 +4,9 @@ export function extractNumbers(input, distinct) {
 
     for (let i = 0; i < input.length; i++) {
         let currentChar = input[i];
+        
         if (distinct.includes(currentChar)) {
-            if (number.length !== 0) {
+            if (number.length > 0) {
                 sum += setNumber(number);
                 number = [];
             }
@@ -16,6 +17,7 @@ export function extractNumbers(input, distinct) {
             }
         }
     }
+
     return sum;
 }
 
@@ -24,10 +26,8 @@ function setNumber(number) {
     let realNumber = number.map(Number);
 
     if (realNumber.length > 1) {
-        realNumber.reverse();
-        realNumber.forEach((item, index) => {
-            item = item * 10 ** index;
-            currentNumber += item;
+        realNumber.reverse().forEach((item, index) => {
+            currentNumber += item * 10 ** index;
         });
     } else {
         currentNumber = realNumber[0];
@@ -36,10 +36,11 @@ function setNumber(number) {
     return currentNumber;
 }
 
-export function awareCustomSeprator(input, distinct) {
+export function awareCustomSeparator(input, distinct) {
     let removeFront = input.substr(2);
-    let seperate = removeFront.split('\\n');
-    distinct.push(seperate[0]);
-    input = seperate[1];
+    let separate = removeFront.split('\\n');
+    distinct.push(separate[0]);
+    input = separate[1];
+
     return [distinct, input];
 }

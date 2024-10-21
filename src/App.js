@@ -1,5 +1,5 @@
 import { Console } from '@woowacourse/mission-utils';
-import { awareCustomSeprator, extractNumbers } from './calculator.js';
+import { awareCustomSeparator,extractNumbers } from './calculator.js';
 
 class App {
     async run() {
@@ -13,7 +13,7 @@ class App {
             if (!input.startsWith('//') || input.slice(3, 5) !== '\\n') {
                 this.throwError('커스텀 구분자 인식 형식을 따라야 합니다.');
             }
-            [distinct, input] = awareCustomSeprator(input, distinct);
+            [distinct, input] = awareCustomSeparator(input, distinct);
             if (distinct[distinct.length - 1].length > 1) {
                 this.throwError('커스텀 구분자는 두 문자를 초과할 수 없습니다.');
             }
