@@ -1,5 +1,4 @@
 import { CORRECT_CUSTOM_SEPARATOR, ERROR_MESSAGE } from "../constants.js";
-import { createDelimiterCombinationList } from "../utils.js";
 
 class CommonValidator {
   #target;
@@ -27,10 +26,10 @@ class CommonValidator {
       };
     }
 
-    if (this.#isIncludesMixedSeparator()) {
+    if (this.#isInvalidSeparatorLength()) {
       return {
         success: false,
-        errorMessage: ERROR_MESSAGE.UNACCEPTABLE_INPUT,
+        errorMessage: ERROR_MESSAGE.INVALID_SEPARATOR_LENGTH,
       };
     }
 
@@ -64,12 +63,10 @@ class CommonValidator {
     );
   }
 
-  #isIncludesMixedSeparator() {
-    const combinations = createDelimiterCombinationList(this.#separatorList);
+  #isInvalidSeparatorLength() {
+    const separatorListFromInput = this.#target.split(/\d/).filter(Boolean);
 
-    return combinations.some((combination) =>
-      this.#target.includes(combination)
-    );
+    return separatorListFromInput.some((separator) => separator.length !== 1);
   }
 
   #isStartsWithSeparator() {
