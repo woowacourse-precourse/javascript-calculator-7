@@ -4,6 +4,7 @@ import { print } from "./utils/print.js";
 import { calculateSum } from "./utils/calculateSum.js";
 import { handleError } from "./utils/errorHandler.js";
 
+
 class App{
   async run() {
     try {
