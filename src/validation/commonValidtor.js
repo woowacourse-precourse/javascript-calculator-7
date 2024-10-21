@@ -1,4 +1,4 @@
-import { CORRECT_CUSTOM_SEPARATOR } from "../constants.js";
+import { CORRECT_CUSTOM_SEPARATOR, ERROR_MESSAGE } from "../constants.js";
 import { createDelimiterCombinationList } from "../utils.js";
 
 class CommonValidator {
@@ -28,7 +28,7 @@ class CommonValidator {
     ) {
       return {
         success: false,
-        errorMessage: "Only separators and numbers can be entered",
+        errorMessage: ERROR_MESSAGE.UNACCEPTABLE_INPUT,
       };
     }
 
@@ -41,7 +41,7 @@ class CommonValidator {
     if (isIncludesMixedSeparator) {
       return {
         success: false,
-        errorMessage: "Only separators and numbers can be entered",
+        errorMessage: ERROR_MESSAGE.UNACCEPTABLE_INPUT,
       };
     }
 
@@ -52,7 +52,7 @@ class CommonValidator {
     if (isStartsWithSeparator) {
       return {
         success: false,
-        errorMessage: "can't start with Separator",
+        errorMessage: ERROR_MESSAGE.START_WITH_SEPARATOR,
       };
     }
 
@@ -63,7 +63,7 @@ class CommonValidator {
     if (isEndsWithSeparator) {
       return {
         success: false,
-        errorMessage: "can't end with Separator",
+        errorMessage: ERROR_MESSAGE.END_WITH_SEPARATOR,
       };
     }
 

@@ -1,4 +1,4 @@
-import { CORRECT_CUSTOM_SEPARATOR } from "../constants.js";
+import { CORRECT_CUSTOM_SEPARATOR, ERROR_MESSAGE } from "../constants.js";
 
 class CustomSeparatorValidator {
   #target;
@@ -26,7 +26,7 @@ class CustomSeparatorValidator {
     if (customSeparatorSuffix !== CORRECT_CUSTOM_SEPARATOR_PREFIX_INDEX) {
       return {
         success: false,
-        errorMessage: "Custom Separator Length must be 1",
+        errorMessage: ERROR_MESSAGE.INVALID_SEPARATOR_LENGTH,
       };
     }
 
@@ -35,14 +35,14 @@ class CustomSeparatorValidator {
     if (this.#separatorList.includes(customSeparator)) {
       return {
         success: false,
-        errorMessage: "Custom Separator can't be initial separator",
+        errorMessage: ERROR_MESSAGE.DEFAULT_SEPARATOR_INCLUDE_CUSTOM_SEPARATOR,
       };
     }
 
     if (Number.isInteger(Number(customSeparator))) {
       return {
         success: false,
-        errorMessage: "Custom Separator can't be number",
+        errorMessage: ERROR_MESSAGE.CUSTOM_SEPARATOR_IS_NUMBER,
       };
     }
 
