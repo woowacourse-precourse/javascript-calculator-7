@@ -38,14 +38,38 @@ class CommonValidator {
       this.#target.includes(combination)
     );
 
-    return isIncludesMixedSeparator
-      ? {
-          success: false,
-          errorMessage: "Only separators and numbers can be entered",
-        }
-      : {
-          success: true,
-        };
+    if (isIncludesMixedSeparator) {
+      return {
+        success: false,
+        errorMessage: "Only separators and numbers can be entered",
+      };
+    }
+
+    const isStartsWithSeparator = this.#separatorList.some((separator) =>
+      this.#target.startsWith(separator)
+    );
+
+    if (isStartsWithSeparator) {
+      return {
+        success: false,
+        errorMessage: "can't start with Separator",
+      };
+    }
+
+    const isEndsWithSeparator = this.#separatorList.some((separator) =>
+      this.#target.endsWith(separator)
+    );
+
+    if (isEndsWithSeparator) {
+      return {
+        success: false,
+        errorMessage: "can't end with Separator",
+      };
+    }
+
+    return {
+      success: true,
+    };
   }
 }
 
