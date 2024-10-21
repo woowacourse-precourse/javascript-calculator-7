@@ -20,6 +20,10 @@ class App{
 
       SEPARATOR=new RegExp(`[${custom_separator},|:]`);
       NUMBERS=DATA.substring(custom_index_end+2).split(SEPARATOR).map(Number);
+    // 4. 예외 처리 1 : 빈 문자열 입력시 출력값
+    }else if (DATA===""){
+      Console.print("0");
+      return ;
     }
   }
 }
