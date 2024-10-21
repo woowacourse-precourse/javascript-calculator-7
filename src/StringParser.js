@@ -1,5 +1,9 @@
 import DelimiterHandler from "./DelimiterHandler.js";
-import { DEFAULT_DELIMITER, CUSTOM_DELIMITER_END } from "./constant.js";
+import {
+  DEFAULT_DELIMITER,
+  CUSTOM_DELIMITER_START,
+  CUSTOM_DELIMITER_END,
+} from "./constant.js";
 
 /**
  * 문자열을 구분자로 나누는 클래스
@@ -19,7 +23,7 @@ class StringParser {
     const delimiter = this.delimiter.extractDelimiter(input);
     let newString = input;
 
-    if (delimiter.length !== DEFAULT_DELIMITER.length) {
+    if (input.startsWith(CUSTOM_DELIMITER_START)) {
       const newStringIndex =
         input.indexOf(CUSTOM_DELIMITER_END) + CUSTOM_DELIMITER_END.length;
       newString = input.substring(newStringIndex, input.length);
