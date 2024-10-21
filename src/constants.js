@@ -16,8 +16,13 @@ const TAG = Object.freeze({
   ERROR_TAG: "[ERROR]",
 });
 
+const REGEX = Object.freeze({
+  CUSTOM_DELIMITER_PATTERN: /^\/\/(.+)\\n/
+});
+
 export {
   ERROR_MESSAGE, 
   LOG_MESSAGE,
-  TAG
+  TAG,
+  REGEX,
 };

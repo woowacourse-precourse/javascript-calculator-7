@@ -1,7 +1,7 @@
 import { Console } from '@woowacourse/mission-utils';
 import { validateEmptyInput, validateNegativeNumbers, validateInvalidNumbers } from './validators.js';
 import { printMessage } from './utils.js';
-import { LOG_MESSAGE } from './constants.js';
+import { LOG_MESSAGE, REGEX } from './constants.js';
 
 class Calculator {
   constructor() {
@@ -17,8 +17,7 @@ class Calculator {
   }
 
   getCustomDelimiter(input) {
-    const customDelimiterPattern = /^\/\/(.+)\\n/;
-    return input.match(customDelimiterPattern);
+    return input.match(REGEX.CUSTOM_DELIMITER_PATTERN);
   }
 
   splitByDelimiter(input, customDelimiter) {
