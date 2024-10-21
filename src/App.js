@@ -2,6 +2,8 @@ import { Console } from '@woowacourse/mission-utils';
 
 class App {
   parse_string = (input) => {
+    if (input === '') return [0];
+
     let numbers;
     let delimiter = [',', ':'];
 
@@ -35,10 +37,9 @@ class App {
       const user_line = await Console.readLineAsync(
         '덧셈할 문자열을 입력해주세요.\n'
       );
-      if (user_line === '') return 0;
 
       const numbers = this.parse_string(user_line);
-      Console.print(`결과: ${numbers.reduce((sum, num) => sum + num, 0)}`);
+      Console.print(`결과 : ${numbers.reduce((sum, num) => sum + num, 0)}`);
     } catch (error) {
       Console.print(error);
     }
