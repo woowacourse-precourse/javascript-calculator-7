@@ -8,7 +8,8 @@ class App {
       const sum = this.sumNumbers(numbers);
       Console.print(`결과 : ${sum}`);
     } catch (error) {
-      Console.print(`[ERROR] ${error.message}`);
+      Console.print(`${error.message}`);
+      throw error;
     }
   }
 
@@ -42,10 +43,10 @@ class App {
   validateNumbers(numbers) {
     for (const number of numbers) {
       if (number < 0) {
-        throw new Error('음수는 허용되지 않습니다.');
+        throw new Error('[ERROR] 음수는 허용되지 않습니다.');
       }
       if (isNaN(number)) {
-        throw new Error('잘못된 값이 입력되었습니다.');
+        throw new Error('[ERROR] 잘못된 값이 입력되었습니다.');
       }
     }
   }
