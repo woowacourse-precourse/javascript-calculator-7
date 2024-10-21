@@ -7,6 +7,10 @@ class App {
         '덧셈할 문자열을 입력해 주세요.\n',
       );
 
+      if (input.includes('0')) {
+        throw new Error('[ERROR] 0는 허용되지 않습니다.');
+      }
+
       let nums = [];
       if (input.length === 0) {
         nums.push(0);
@@ -31,15 +35,24 @@ class App {
           numbers = numbers.split(delimiter).join(',');
         }
 
-        nums = numbers.split(',').map((number) => parseInt(number, 0));
+        if ([...numbers].every((number) => number === ',')) {
+          nums = [0];
+        } else {
+          nums = numbers.split(',').map((number) => {
+            const num = Number(number);
+            if (isNaN(num)) {
+              throw new Error('[ERROR] 잘못된 입력입니다.');
+            }
+
+            return num;
+          });
+        }
       }
 
       if (nums.some((num) => isNaN(num))) {
         throw new Error('[ERROR] 잘못된 입력입니다.');
       } else if (nums.some((num) => num < 0)) {
         throw new Error('[ERROR] 음수는 허용되지 않습니다.');
-      } else if (nums.some((num) => num === 0)) {
-        throw new Error('[ERROR] 0는 허용되지 않습니다.');
       }
 
       const sum = nums.reduce((acc, cur) => (acc += cur), 0);
