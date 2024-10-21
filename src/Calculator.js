@@ -1,6 +1,6 @@
 import { Console } from '@woowacourse/mission-utils';
 import { validateEmptyInput, validateNegativeNumbers, validateInvalidNumbers } from './validators.js';
-import { printMessage } from './utils.js';
+import { printMessage, escapeRegexSpecialChars } from './utils.js';
 import { LOG_MESSAGE, REGEX, DEFAULT_DELIMITERS } from './constants.js';
 
 class Calculator {
@@ -29,9 +29,7 @@ class Calculator {
       this.defaultDelimiters.push(customDelimiterValue);
     }
 
-    const escapedDelimiters = this.defaultDelimiters.map(d =>
-      d.replace(/[.*+?^${}()|[\]\\]/g, '\\$&')
-    );
+    const escapedDelimiters = escapeRegexSpecialChars(this.defaultDelimiters);
 
     const regex = new RegExp(escapedDelimiters.join('|'), 'g');
     return remainingInput.split(regex);

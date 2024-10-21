@@ -8,7 +8,12 @@ const throwError = (message) => {
   throw new Error(errorMessage);
 };
 
+const escapeRegexSpecialChars = (delimiters) => {
+  return delimiters.map(d => d.replace(/[.*+?^${}()|[\]\\]/g, '\\$&'));
+};
+
 export {
   printMessage,
   throwError,
+  escapeRegexSpecialChars,
 };
