@@ -57,6 +57,10 @@ class App {
   }
 
   handleNumber(char) {
+    if (char === '0') {
+      throw new Error('[ERROR] 입력값은 구분자와 양수로 구성되어야 합니다.');
+    }
+
     this.number.push(char);
     this.cursor++;
   }
