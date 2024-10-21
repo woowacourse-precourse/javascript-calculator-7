@@ -12,11 +12,11 @@ class App {
           resolve(); // 성공적으로 실행되면 resolve 호출
         } catch (error) {
           Console.print(`[ERROR] ${error.message}`);
-          reject(error); // 에러 발생 시 reject 호출
+          reject(); // 에러 발생 시 reject 호출
         }
       }).catch((error) => {
         Console.print(`[ERROR] ${error.message}`);
-        reject(error);
+        reject();
       });
     });
   }
