@@ -5,14 +5,16 @@ class App {
     Console.print("덧셈할 문자열을 입력해 주세요.");
   }
   isAllNumber(arr) {
-    return arr.every((v) => !isNaN(arr));
+    return arr.every((v) => !isNaN(v));
   }
   verifyInput(input) {
     // 커스텀 방식일 때 최소 길이.
     if (input.length >= 5) {
       const front = input.slice(0, 2);
       const rear = input.slice(3, 5);
-      const isCustom = front === "//" && rear === "\n";
+
+      const isCustom = front === "//" && rear === "\\n";
+
       if (isCustom && isNaN(input[2])) {
         // 커스텀
         const div = input[2];
@@ -21,38 +23,42 @@ class App {
           .split(div)
           .map((e) => +e);
         if (this.isAllNumber(arr)) {
-          Console.print("올바름", arr);
-          return true;
+          return [true, arr];
         } else {
           // 잘못된 입력.
-          return false;
+          return [false];
         }
       } else {
         // 일반 방식.
         input = input.replaceAll(",", ":");
         const arr = input.split(":").map((e) => +e);
         if (this.isAllNumber(arr)) {
-          Console.print("올바름", arr);
-          return true;
+          return [true, arr];
         }
         // 잘 못 입 력.
-        return false;
+        return [false];
       }
       // 일반 방식 또는 틀린 방식
     }
+
     // 일반 방식 이나 틀린 방식.
     input = input.replaceAll(",", ":");
+    Console.print(input);
     const arr = input.split(":").map((e) => +e);
+    Console.print(arr);
     if (this.isAllNumber(arr)) {
-      Console.print("올바름");
-      return true;
+      return [true, arr];
     }
-    return false;
+
+    return [false];
   }
   async getInput() {
     const inputValue = await Console.readLineAsync("");
-    if (this.verifyInput(inputValue)) {
-      Console.print("올바른 입력!!");
+    const result = this.verifyInput(inputValue);
+    if (result[0]) {
+      Console.print("올바른 식");
+    } else {
+      throw Error("[ERROR] 올바른 문자열을 입력해주세요");
     }
   }
   async run() {
