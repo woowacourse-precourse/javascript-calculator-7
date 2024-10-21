@@ -52,7 +52,8 @@ function checkInput(inputText) {
     // 구분자 판별 후 판별 여부에 따라 리턴값 결정
     try {
       for (let i = 0; i < inputText.length; i++) {
-        if (inputText[i] === '\\' && inputText[i + 1] === 'n') {
+        // if (inputText[i] === '\\' && inputText[i + 1] === 'n') {
+        if (inputText[i] === '\n') {
           // \n의 위치를 파악했다면 N_START_IDX에 넣자
           // 이 값을 바탕으로 커스텀 구분자를 확인할 수 있다
           N_START_IDX = i
