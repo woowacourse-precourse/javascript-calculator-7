@@ -1,19 +1,27 @@
+import { ERROR } from "./utils/messages.js";
+
 class DelimiterParser {
-  constructor() {
+  constructor(input) {
+    this.validate(input);
     this.delimiters = [",", ":"];
   }
 
+  validate(input) {
+    this.checkCustomDelimiter(input);
+  }
+
+  checkCustomDelimiter(input) {}
+
+  getCustomDelimiter(input) {}
+
   parseAndSplit(input) {
-    let delimiters = [...this.delimiters];
     input = input.replace("\\n", "\n").trim();
+    let delimiters = [...this.delimiters];
     while (input.startsWith("//")) {
       const delimiterEndIndex = input.indexOf("\n");
       const customDelimiter = input.substring(2, delimiterEndIndex);
       delimiters.push(this.escapeRegExp(customDelimiter));
       input = input.substring(delimiterEndIndex + 1);
-      if (delimiterEndIndex === -1) {
-        throw new Error("[Error]");
-      }
     }
 
     const delimiterRegex = new RegExp(`(${delimiters.join("|")})`);

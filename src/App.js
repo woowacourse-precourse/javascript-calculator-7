@@ -1,12 +1,14 @@
 import InputView from "./InputView.js";
 import DelimiterParser from "./DelimiterParser.js";
-import Calculator from "./Calculator.js";
+import sumNumbers from "./Calculator.js";
+import outputView from "./OutputView.js";
 
 class App {
   async run() {
     const inputString = await this.getInputData();
     const numbers = this.splitString(inputString);
-    const result = this.CalculateNumber(numbers);
+    const result = this.calculateSum(numbers);
+    outputView(result);
   }
 
   async getInputData() {
@@ -14,16 +16,14 @@ class App {
     return string;
   }
 
-  splitString(string) {
+  splitString(input) {
     const parser = new DelimiterParser();
-    const numbers = parser.parseAndSplit(string);
+    const numbers = parser.parseAndSplit(input);
     return numbers;
   }
 
-  CalculateNumber(numbers) {
-    const calculate = new Calculator();
-    const result = calculate.add(numbers);
-    return result;
+  calculateSum(numbers) {
+    return sumNumbers(numbers);
   }
 }
 
