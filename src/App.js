@@ -7,9 +7,9 @@ import {
 import {
   isValidCharSeparator,
   isValidCustomEndIndex,
-  isValidIsNumbers,
+  isValidIsOperands,
   isValidVaildSeparator,
-  isValidNumberRange,
+  isValidOperandRange,
 } from './validation.js';
 
 class App {
@@ -35,15 +35,15 @@ class App {
   }
 
   calculateResult() {
-    const numbers = this.splitInput();
+    const operands = this.splitInput();
 
-    if (numbers.length === 1 && numbers[0] === EMPTY_STRING) {
+    if (operands.length === 1 && operands[0] === EMPTY_STRING) {
       this.sum = 0;
       return;
     }
 
-    this.validateNumbers(numbers);
-    this.sum = numbers.reduce((acc, cur) => acc + Number(cur), 0);
+    this.validateOperands(operands);
+    this.sum = operands.reduce((acc, cur) => acc + Number(cur), 0);
   }
 
   splitInput() {
@@ -68,14 +68,14 @@ class App {
     }
   }
 
-  validateNumbers(Input) {
-    if (!isValidIsNumbers(Input)) {
+  validateOperands(Input) {
+    if (!isValidIsOperands(Input)) {
       throw new Error(ERROR_MESSAGE.INVALID_NUMBER);
     }
     if (!isValidVaildSeparator(Input)) {
       throw new Error(ERROR_MESSAGE.INVALID_SEPARATOR);
     }
-    if (!isValidNumberRange(Input)) {
+    if (!isValidOperandRange(Input)) {
       throw new Error(ERROR_MESSAGE.INVALID_RANGE);
     }
   }

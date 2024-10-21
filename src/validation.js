@@ -6,14 +6,14 @@ export function isValidCustomEndIndex(endIndex) {
   return endIndex !== -1;
 }
 
-export function isValidIsNumbers(input) {
-  return input.every((number) => !isNaN(parseInt(number)));
+export function isValidIsOperands(input) {
+  return input.every((operand) => !isNaN(parseInt(operand)));
 }
 
 export function isValidVaildSeparator(input) {
-  return input.every((number) => !Number.isNaN(Number(number)));
+  return input.every((operand) => !Number.isNaN(Number(operand)));
 }
 
-export function isValidNumberRange(input) {
-  return input.every((number) => 0 < Number(number));
+export function isValidOperandRange(input) {
+  return input.every((operand) => 0 < Number(operand));
 }
