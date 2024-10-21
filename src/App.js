@@ -1,11 +1,11 @@
 import { Console } from '@woowacourse/mission-utils';
 import { validateLine, validateCustomPart, validateLinePart } from './utils/stringValidator.js';
 import {
-  checkIsNormal,
+  checkIsDefaultString,
   sumString,
   divideCustom,
   addCustomSeparator,
-} from './utils/main.js';
+} from './utils/stringParser.js';
 import { DEFAULT_SEPARATORS } from './constants.js';
 
 class App {
@@ -15,7 +15,7 @@ class App {
     const line = await Console.readLineAsync('덧셈할 문자열을 입력해 주세요.');
     validateLine(line);
     
-    if (checkIsNormal(line)) return Console.print(`결과 : ${sumString(line, separators)}`);
+    if (checkIsDefaultString(line)) return Console.print(`결과 : ${sumString(line, separators)}`);
 
     const [customPart, linePart] = divideCustom(line);
     validateCustomPart(customPart);
