@@ -15,11 +15,12 @@ class App {
         }
 
         if (STR.startsWith("//") && STR.indexOf("\n") !== -1) {
-            DIVIDER = new RegExp(`[${STR[2]}]`);
+            const DIVIDER = STR.slice(2, STR.indexOf("\n"));
+            DIVIDER_EXP = new RegExp(`[${DIVIDER}]`);
             STR_NUMBERS = STR.slice(STR.indexOf("\n") + 1);
         }
 
-        const NUMBERS = STR_NUMBERS.split(DIVIDER).map((NUM) => {
+        const NUMBERS = STR_NUMBERS.split(DIVIDER_EXP).map((NUM) => {
             const PARSE_NUM = Number(NUM);
             if (isNaN(PARSE_NUM)) {
                 throw new Error("[ERROR]");
