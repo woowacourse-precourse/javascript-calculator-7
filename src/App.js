@@ -13,6 +13,7 @@ class App {
       Console.print(`결과 : ${result}`);
     } catch (error) {
       Console.print(ERROR_MESSAGE.INVALID_INPUT);
+      process.exit(1); 
     }
   } 
 }
