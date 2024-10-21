@@ -22,7 +22,7 @@ class App {
 
       Console.print(`결과 : ${RESULT}`);
     } catch(error) {
-      console.print(error.message);
+      Console.print(error.message);
     }
   }
 
