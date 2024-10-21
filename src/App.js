@@ -26,10 +26,13 @@ class App {
     const isCustom = input.match(CUSTOM_SEPARATOR_PATTERN);
     if (isCustom) {
       this.separators.push(isCustom[1]);
-      const regex = new RegExp(`[${this.separators}]`);
-      if (regex.test(input) && input.match(regex).some((el) => el === "")) {
-        throw new Error("[ERROR] 연속된 구분자는 허용되지 않습니다.");
-      }
+    }
+    const regex = new RegExp(`[${this.separators}]`);
+    if(!regex.test(input)){
+      throw new Error("[ERROR] 최소한 하나의 구분자를 포함해야 하습니다.");
+    }
+    if (input.match(regex).some((el) => el === "")) {
+      throw new Error("[ERROR] 연속된 구분자는 허용되지 않습니다.");
     }
   }
 
