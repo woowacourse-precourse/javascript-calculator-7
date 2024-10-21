@@ -1,4 +1,4 @@
-import { ERROR_MESSAGES } from "../constants.js";
+import { DEFAULT_DIVIDERS, ERROR_MESSAGES } from "../constants.js";
 
 class InputParser {
   parse(input) {
@@ -16,7 +16,7 @@ class InputParser {
       return this.parseCustomDivider(input);
     }
 
-    const defaultDividers = [",", ":"];
+    const defaultDividers = DEFAULT_DIVIDERS;
     if (defaultDividers.some((div) => input.includes(div))) {
       return { divider: defaultDividers, numberString: input };
     }

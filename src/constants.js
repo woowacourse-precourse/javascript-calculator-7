@@ -5,3 +5,10 @@ export const ERROR_MESSAGES = {
   NEGATIVE_NUMBER: "[ERROR] 음수는 허용되지 않습니다.",
   INVALID_INPUT: "[ERROR] 유효하지 않은 입력입니다.",
 };
+
+export const IO_MESSAGES = {
+  INPUT: "덧셈할 문자열을 입력해 주세요.",
+  RESULT: "결과 : ",
+};
+
+export const DEFAULT_DIVIDERS = [",", ":"];
