@@ -25,6 +25,9 @@ class App {
     } else {
       numbers = input.split(/[,|:]/);
     }
+
+    // 분리한 문자를 숫자로 변환
+    const numberArray = numbers.map(Number);
   }
 }
 
