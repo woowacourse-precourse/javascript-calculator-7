@@ -18,6 +18,11 @@ class App {
     const expression = str.substring(endOfCustomDelimiter + 1);
     return { customDelimiter, expression };
   }
+
+  calculateSum(expression, delimiters) {
+    const regExpOfDelimiter = new RegExp(delimiters.join('|'));
+    const numbers = expression.split(regExpOfDelimiter);
+  }
 }
 
 export default App;
