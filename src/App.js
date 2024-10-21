@@ -27,8 +27,11 @@ class App {
 
   static getCustomSeparator(INPUT) {
     if (INPUT.startsWith('//')) {
-      const CUSTOM_SEPARATOR = INPUT[2];
-      return CUSTOM_SEPARATOR;
+      if (INPUT.includes('\n')) {
+        const CUSTOM_SEPARATOR = INPUT[2];
+        return CUSTOM_SEPARATOR;
+      }
+      throw new Error('[ERROR] 커스텀 구분자가 잘못되었습니다.');
     }
 
     return false;
