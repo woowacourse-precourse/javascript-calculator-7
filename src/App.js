@@ -15,6 +15,10 @@ class App {
       throw error;
     }
   }
+  // 빈 문자열 입력시 0 반환
+  calculateSum(input) {
+    if (input === "") return 0;
+  }
 }
 
 export default App;
