@@ -73,6 +73,10 @@ class App {
       const result = inputCustomNumbers.split(delimiter);
       getSum(result);
     }
+
+    if (input.startsWith('//') && input.substring(3, 5) != '\\n') {
+      throw new Error('[ERROR] 구분자는 문자열이 아닌 문자만 가능합니다.');
+    }
   }
 }
 export default App;
