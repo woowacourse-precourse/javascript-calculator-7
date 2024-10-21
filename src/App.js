@@ -50,7 +50,11 @@ class App {
     }
   }
 
+  // 커스텀 구분자만 포함하는지 검증하는 함수
   validateCustomDelimiters(input, delimiter) {
+
+    const invalidParts = input.split(delimiter).filter((part) => isNaN(part));
+    return invalidParts.length === 0; // 모든 파트가 숫자면 true 반환
 
   }
 
