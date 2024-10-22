@@ -35,7 +35,7 @@ class InputParser {// 입력을 숫자 배열로 나누는 클래스
 class SumCalculator {// 합계를 계산하는 클래스
     calculate(numberArray) {
         if (numberArray.some(part => !/^\d+$/.test(part))) {//숫자 외 문자 확인
-            throw new Error("[ERROR] 양수 외의 문자가 있습니다.");
+            throw new Error("[ERROR] 양의 정수 외의 문자가 있습니다.");
         }
 
         return numberArray.reduce((acc, current) => {
