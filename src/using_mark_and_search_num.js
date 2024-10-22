@@ -46,17 +46,18 @@ export function search_num(user_input, customMark_lastIndex = 0, custom_mark = 0
                     search_num_array.push((num_Oneline).toString());
                     num_Oneline = '';
                     
-            }
-                    
+            }else{
+                    if(isNaN(user_input[i]) !== true )
+                        num_Oneline += user_input[i];
+            }        
 
             
-            num_Oneline += user_input[i];
             if(i == (user_input.length - 1))
                 search_num_array.push((num_Oneline).toString());
             
         }
     }
     
-
+    console.log(search_num_array);
     return search_num_array;
 }

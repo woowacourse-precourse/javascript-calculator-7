@@ -7,7 +7,10 @@ import { Sum_string_num } from "./Sum_stringNum.js";
 class App {
   async run() {
     // input 받기 끝
-    let userInput = '4;5;6';
+    
+    console.log(isNaN('3'));
+
+    let userInput = '//쿄쿄\n 21쿄쿄322쿄쿄11';
     let customMk = '';
     let last_indexOfCusMark;
     let Str_num_array = [];
