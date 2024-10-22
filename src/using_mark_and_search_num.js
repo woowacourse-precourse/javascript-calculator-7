@@ -5,7 +5,7 @@ export function search_num(user_input, customMark_lastIndex = 0, custom_mark = 0
     let num_Oneline = '';
     let search_num_array = [];
 
-    // ///{}\n 3{}555{}65{}22  i = 5부터 시작 7 { 9 16 17 3번째 {} 
+    
     if(user_input[0] === '/' && user_input[1] === '/'){
 
         for(let i = customMark_lastIndex + 1; i < user_input.length; i++){
@@ -17,11 +17,11 @@ export function search_num(user_input, customMark_lastIndex = 0, custom_mark = 0
                         throw new Error("중간에 구분자를 잘못 입력하셨습니다.");    
                     }
                     else{
-                        count_custom_mark += 1; // 2
+                        count_custom_mark += 1; 
                     }
     
                 }
-                i = j; // i = 9
+                i = j; 
                 search_num_array.push((num_Oneline).toString());
                 num_Oneline = '';
             }
