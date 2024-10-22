@@ -17,53 +17,8 @@ const getLogSpy = () => {
 };
 
 describe("문자열 계산기", () => {
-    test("빈 문자열 입력", async () => {
-        const inputs = [""];
-        mockQuestions(inputs);
-
-        const logSpy = getLogSpy();
-        const outputs = ["결과 : 0"];
-
-        const app = new App();
-        await app.run();
-
-        outputs.forEach((output) => {
-            expect(logSpy).toHaveBeenCalledWith(expect.stringContaining(output));
-        });
-    });
-
-    test("쉼표 구분자 사용", async () => {
-        const inputs = ["1,2"];
-        mockQuestions(inputs);
-
-        const logSpy = getLogSpy();
-        const outputs = ["결과 : 3"];
-
-        const app = new App();
-        await app.run();
-
-        outputs.forEach((output) => {
-            expect(logSpy).toHaveBeenCalledWith(expect.stringContaining(output));
-        });
-    });
-
-    test("콜론 구분자 사용", async () => {
-        const inputs = ["1:2"];
-        mockQuestions(inputs);
-
-        const logSpy = getLogSpy();
-        const outputs = ["결과 : 3"];
-
-        const app = new App();
-        await app.run();
-
-        outputs.forEach((output) => {
-            expect(logSpy).toHaveBeenCalledWith(expect.stringContaining(output));
-        });
-    });
-
-    test("쉼표 구분자 연속 사용", async () => {
-        const inputs = ["1,2,3"];
+    test("커스텀 구분자(공백) 사용", async () => {
+        const inputs = ["// \\n1 2 3"];
         mockQuestions(inputs);
 
         const logSpy = getLogSpy();
@@ -77,8 +32,8 @@ describe("문자열 계산기", () => {
         });
     });
 
-    test("콜론 구분자 연속 사용", async () => {
-        const inputs = ["1:2:3"];
+    test("커스텀 구분자(느낌표) 사용", async () => {
+        const inputs = ["//!\\n1!2!3"];
         mockQuestions(inputs);
 
         const logSpy = getLogSpy();
@@ -92,8 +47,8 @@ describe("문자열 계산기", () => {
         });
     });
 
-    test("쉼표 구분자 및 콜론 구분자 동시 사용", async () => {
-        const inputs = ["1,2:3"];
+    test("커스텀 구분자(알파벳) 사용", async () => {
+        const inputs = ["//a\\n1a2a3"];
         mockQuestions(inputs);
 
         const logSpy = getLogSpy();
@@ -107,12 +62,12 @@ describe("문자열 계산기", () => {
         });
     });
 
-    test("커스텀 구분자 사용", async () => {
-        const inputs = ["//;\\n1"];
+    test("커스텀 구분자(한글) 사용", async () => {
+        const inputs = ["//가\\n1가2가3"];
         mockQuestions(inputs);
 
         const logSpy = getLogSpy();
-        const outputs = ["결과 : 1"];
+        const outputs = ["결과 : 6"];
 
         const app = new App();
         await app.run();
@@ -122,18 +77,57 @@ describe("문자열 계산기", () => {
         });
     });
 
-    test("기본 및 커스텀 구분자 혼합 사용", async () => {
-        const inputs = ["//;\\n1,2:3;4"];
+    test("커스텀 구분자가 숫자인 경우", async () => {
+        const inputs = ["//0\n10203"];
         mockQuestions(inputs);
 
-        const logSpy = getLogSpy();
-        const outputs = ["결과 : 10"];
+        const app = new App();
+
+        await expect(app.run()).rejects.toThrow("[ERROR]");
+    });
+
+    test("커스텀 구분자가 단일 문자가 아닌 경우", async () => {
+        const inputs = ["//;;\n1;;2"];
+        mockQuestions(inputs);
 
         const app = new App();
-        await app.run();
 
-        outputs.forEach((output) => {
-            expect(logSpy).toHaveBeenCalledWith(expect.stringContaining(output));
-        });
+        await expect(app.run()).rejects.toThrow("[ERROR]");
+    });
+
+    test("커스텀 구분자 없이 지정 문자열만 있는 경우", async () => {
+        const inputs = ["//\n1,2"];
+        mockQuestions(inputs);
+
+        const app = new App();
+
+        await expect(app.run()).rejects.toThrow("[ERROR]");
+    });
+
+    test("커스텀 구분자 지정 이후 구분자로 시작하는 경우", async () => {
+        const inputs = ["//;\n;1;2"];
+        mockQuestions(inputs);
+
+        const app = new App();
+
+        await expect(app.run()).rejects.toThrow("[ERROR]");
+    });
+
+    test("커스텀 구분자 지정 이후 구분자로 끝나는 경우", async () => {
+        const inputs = ["//;\n1;2;"];
+        mockQuestions(inputs);
+
+        const app = new App();
+
+        await expect(app.run()).rejects.toThrow("[ERROR]");
+    });
+
+    test("커스텀 구분자가 연속되어 사용된 경우", async () => {
+        const inputs = ["//;\n1;;2"];
+        mockQuestions(inputs);
+
+        const app = new App();
+
+        await expect(app.run()).rejects.toThrow("[ERROR]");
     });
 });
