@@ -15,44 +15,6 @@ export class StringAdder {
         this.seperator = "";
     }
 
-    // 구분자 판단, 계산기 선택
-    // getSeperator(input) {
-    //     console.log(input[0])
-    //     if (input.length == 0){ // 입력이 없을 경우 결과 값 0
-    //         this.type = CalculatorType.basic;
-    //         return;
-    //     }
-    //     // if (Number(input[0]) != Number.Nan) { // 기본계산기
-    //     if (!isNaN(Number(input[0]))) { 
-    //         return;
-    //     }
-    //     let idx = 0;
-    //     let isFindSeperator = false;
-    //     while (idx<input.length){
-    //         if ((idx == 0 || idx==1) && input[idx]!='/'){
-    //             break;
-    //         }
-    //         while (idx>=2 && idx < input.length && input[idx]!='\n'){
-    //             console.log(input[idx])
-    //             this.seperator += input[idx]; 
-    //             idx++;
-    //         }
-    //         if (idx < input.length && input[idx]=='\n'){
-    //             isFindSeperator = true;
-    //             break;
-    //         }
-    //         idx++;
-    //     }
-    //     if (isFindSeperator){
-    //         this.type = CalculatorType.custom;
-    //         this.input = input.substr(idx+1, input.length - idx);    
-    //         console.log(this.seperator);
-    //     }else{
-    //         this.type = CalculatorType.error;
-    //     }
-    //     return;
-    // }
-
     getSeperator(input) {
         // 입력이 빈 문자열인 경우
         if (input.length == 0) {
