@@ -3,6 +3,7 @@ class StringParser {
         this.value = value;
         this.result = [];
     }
+
     isNumber(str) {
         if (str.includes('-')) return false;
         if (str.includes('.')) return false;
@@ -10,11 +11,13 @@ class StringParser {
         if (isNaN(num)) return false;
         return num;
     }
+
     parse() {
         if (typeof this.value !== 'string') return 'error';
         if (this.value.startsWith('//')) return this.customParse();
         else return this.basicParse();
     }
+
     customParse() {
         const indexOfEnd = this.value.indexOf('\\n');
         if (indexOfEnd === -1) return 'error';
@@ -29,6 +32,7 @@ class StringParser {
         }
         return this.result;
     }
+
     basicParse() {
         const splitByComma = this.value.split(',');
 
