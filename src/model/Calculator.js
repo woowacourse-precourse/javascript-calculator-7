@@ -13,10 +13,10 @@ class Calculator {
   _value = '';
 
   /**
-   * @param {string | undefined} input
+   * @param {string} input
    */
   constructor(input) {
-    if (input) this.init(input);
+    this.init(input);
   }
 
   /**
@@ -42,12 +42,14 @@ class Calculator {
   init(input) {
     const prefixMatch = input.startsWith(CUSTOM_SEPARATOR_START);
     const splitText = input.split(CUSTOM_SEPARATOR_END);
+
     if (prefixMatch && splitText.length === 2) {
       const customSeparator = splitText[0].replace(CUSTOM_SEPARATOR_START, '');
       this.setSeparators([...DEFAULT_SEPARATORS, customSeparator]);
       this.setValue(splitText[1]);
       return;
     }
+
     this.setSeparators([...DEFAULT_SEPARATORS]);
     this.setValue(input);
     return;
@@ -85,9 +87,11 @@ class Calculator {
    */
   compute() {
     const values = this.getValues();
+
     if (!values.every(this.validator)) {
       throw new Error(ERROR_MESSAGE.INVALID_INPUT);
     }
+
     return values.reduce(this.add);
   }
 }
