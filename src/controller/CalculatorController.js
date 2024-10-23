@@ -4,7 +4,7 @@ import Calculator from '../model/Calculator.js';
 
 class CalculatorController {
   /**
-   * @param {string} input 
+   * @param {string} input
    * @returns {number}
    */
   process(input) {

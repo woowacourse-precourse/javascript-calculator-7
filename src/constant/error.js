@@ -1,10 +1,10 @@
-const ERROR_PREFIX = '[ERROR]';
+export const ERROR_PREFIX = '[ERROR]';
 
 /**
- * @param {string} message 
+ * @param {string} message
  * @returns {string}
  */
-function getErrorMessage(message) {
+export function getErrorMessage(message) {
   return [ERROR_PREFIX, message].join(' ');
 }
 

@@ -2,7 +2,7 @@ import { Console } from '@woowacourse/mission-utils';
 
 class Output {
   /**
-   * @param {number} result 
+   * @param {number} result
    * @returns {void}
    */
   static printResult(result) {

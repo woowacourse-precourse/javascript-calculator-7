@@ -13,7 +13,7 @@ class Calculator {
   _value = '';
 
   /**
-   * @param {string | undefined} input 
+   * @param {string | undefined} input
    */
   constructor(input) {
     if (input) this.init(input);
@@ -46,11 +46,11 @@ class Calculator {
       const customSeparator = splitText[0].replace(CUSTOM_SEPARATOR_START, '');
       this.setSeparators([...DEFAULT_SEPARATORS, customSeparator]);
       this.setValue(splitText[1]);
-      return
+      return;
     }
     this.setSeparators([...DEFAULT_SEPARATORS]);
     this.setValue(input);
-    return
+    return;
   }
 
   /**
