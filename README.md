@@ -1,6 +1,6 @@
 # 문자열 덧셈 계산기 (우아한테크코스 1차 과제)
 
-### 노션 정리 : [개발 관련 일지]([https://www.notion.so/126221c9c51380a4b1cbdb7473dac00f](https://almond-drip-5f0.notion.site/1-126221c9c51381a0bf51e3cbf2953a07?pvs=4))
+### 노션 정리 : [개발 관련 일지](https://almond-drip-5f0.notion.site/1-126221c9c51381a0bf51e3cbf2953a07?pvs=4)
 
 <hr>
 
