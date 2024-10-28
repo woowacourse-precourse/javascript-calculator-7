@@ -12,3 +12,10 @@ export const getAttempts = async () => {
   const attempts = await Console.readLineAsync(PROMPT_MESSAGES.INPUT_ATTEMPTS);
   return attempts;
 };
+
+export const displayRaceProgress = (cars) => {
+  cars.forEach((car) => {
+    Console.print(`${car.name} : ${car.distance}`);
+  });
+  Console.print(`\n`);
+};
