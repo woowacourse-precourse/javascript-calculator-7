@@ -13,6 +13,10 @@ export const getAttempts = async () => {
   return attempts;
 };
 
+export const announceWinners = (winner) => {
+  Console.print(`최종 우승자 : ${winner}`);
+};
+
 export const displayRaceProgress = (cars) => {
   cars.forEach((car) => {
     Console.print(`${car.name} : ${car.distance}`);

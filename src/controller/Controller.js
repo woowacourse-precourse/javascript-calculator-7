@@ -1,7 +1,12 @@
 import Car from '../model/model.js';
 import { DELIMITER } from '../constants/constant.js';
 import { Random } from '@woowacourse/mission-utils';
-import { getAttempts, getCarNames, displayRaceProgress } from '../view/view.js';
+import {
+  getAttempts,
+  getCarNames,
+  announceWinners,
+  displayRaceProgress,
+} from '../view/view.js';
 import { validateAttempts, validCarName } from '../utils/validator.js';
 
 class Controller {
@@ -21,6 +26,9 @@ class Controller {
       this.startCarRace(this.cars);
       displayRaceProgress(this.cars);
     }
+
+    const result = this.getWinners(this.cars);
+    announceWinners(result.join(','));
   }
 
   createCars(splittedNames) {
@@ -33,6 +41,14 @@ class Controller {
       car.race(number);
     });
     return cars;
+  }
+
+  getWinners(cars) {
+    const maxScore = Math.max(...cars.map((car) => car.distance.length));
+
+    return cars
+      .filter((car) => car.distance.length === maxScore)
+      .map((car) => car.name);
   }
 }
 
