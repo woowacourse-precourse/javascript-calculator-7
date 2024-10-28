@@ -1,5 +1,6 @@
+import Car from '../model/model.js';
 import { DELIMITER } from '../constants/constant.js';
-import { getCarNames } from '../view/view.js';
+import { getAttempts, getCarNames } from '../view/view.js';
 import { validCarName } from '../utils/validator.js';
 
 class Controller {
@@ -10,8 +11,13 @@ class Controller {
   async execute() {
     const enteredCarNames = await getCarNames();
     const splittedNames = enteredCarNames.split(DELIMITER);
-    console.log('splittedNames', splittedNames);
     validCarName(splittedNames);
+    this.cars = this.createCars(splittedNames);
+    const attempts = await getAttempts();
+  }
+
+  createCars(splittedNames) {
+    return splittedNames.map((name) => new Car(name));
   }
 }
 
