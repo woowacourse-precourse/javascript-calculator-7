@@ -1,7 +1,7 @@
 import Car from '../model/model.js';
 import { DELIMITER } from '../constants/constant.js';
 import { getAttempts, getCarNames } from '../view/view.js';
-import { validCarName } from '../utils/validator.js';
+import { validateAttempts, validCarName } from '../utils/validator.js';
 
 class Controller {
   constructor() {
@@ -14,6 +14,7 @@ class Controller {
     validCarName(splittedNames);
     this.cars = this.createCars(splittedNames);
     const attempts = await getAttempts();
+    validateAttempts(attempts);
   }
 
   createCars(splittedNames) {

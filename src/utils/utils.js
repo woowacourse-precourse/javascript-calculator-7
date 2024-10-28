@@ -12,4 +12,10 @@ export const utils = {
     const regex = /\s/;
     return regex.test(name);
   },
+  isNumberType(number) {
+    return !isNaN(number);
+  },
+  isNegativeNumber(number) {
+    return number < 0;
+  },
 };

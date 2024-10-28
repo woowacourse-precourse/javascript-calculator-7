@@ -14,3 +14,15 @@ export const validCarName = (splittedNames) => {
     }
   });
 };
+
+export const validateAttempts = (attempts) => {
+  if (!attempts) {
+    throw new Error(ERROR_MESSAGES.EMPTY_ATTEMPTS);
+  }
+  if (!utils.isNumberType(attempts)) {
+    throw new Error(ERROR_MESSAGES.INVALID_ATTEMPTS);
+  }
+  if (utils.isNegativeNumber(attempts)) {
+    throw new Error(ERROR_MESSAGES.NEGATIVE_NUMBER);
+  }
+};
